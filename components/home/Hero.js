@@ -85,7 +85,7 @@ const HeroSection = () => {
       
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col-reverse md:flex-row items-center py-12 md:py-24">
-          <div className="md:w-1/2 text-white z-10 space-y-6 mt-8 md:mt-0">
+          <div className="md:w-1/2 text-white z-10 space-y-6 mt-8 md:mt-0 text-center md:text-left w-full">
             <div className="animate-fade-in">
               {/* Social proof banner */}
               <div className="bg-black/40 backdrop-blur-sm rounded-lg py-2 px-4 inline-block mb-4">
@@ -106,7 +106,7 @@ const HeroSection = () => {
               {/* Key benefits */}
               <ul className="mt-4 space-y-2">
                 {slides[currentSlide].benefits.map((benefit, index) => (
-                  <li key={index} className="flex items-center">
+                  <li key={index} className="flex items-center justify-center md:justify-start">
                     <svg className="h-5 w-5 text-green-300 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
@@ -117,7 +117,7 @@ const HeroSection = () => {
               
               {/* Same-Day Banner - Only show for products that offer it */}
               {(currentSlide === 1 || currentSlide === 3 || currentSlide === 4) && (
-                <div className="bg-white text-black font-bold py-2 px-4 rounded-lg mt-4 inline-block animate-pulse">
+                <div className="bg-white text-black font-bold py-2 px-4 rounded-lg mt-4 inline-block animate-pulse mx-auto md:mx-0">
                   <span className="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
@@ -127,7 +127,7 @@ const HeroSection = () => {
                 </div>
               )}
               
-              <div className="mt-6 flex flex-col sm:flex-row gap-4">
+              <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <Link href="/quote" className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-black shadow-sm hover:bg-gray-900 transition transform hover:scale-105 duration-200">
                   {slides[currentSlide].cta}
                 </Link>
@@ -149,7 +149,7 @@ const HeroSection = () => {
             </div>
             
             {/* USP Pills */}
-            <div className="flex flex-wrap gap-2 mt-8 animate-fade-in-delayed">
+            <div className="flex flex-wrap gap-2 mt-8 animate-fade-in-delayed justify-center md:justify-start">
               <span className="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm">🇮🇳 Made in India</span>
               {(currentSlide === 1 || currentSlide === 3 || currentSlide === 4) ? (
                 <span className="bg-black text-white px-3 py-1 rounded-full text-sm font-bold">⚡ SAME-DAY PRINTING</span>
@@ -163,7 +163,7 @@ const HeroSection = () => {
           </div>
           
           {/* Stylized product visualization */}
-          <div className="md:w-1/2 z-10 flex items-center justify-center overflow-visible">
+          <div className="md:w-1/2 z-10 flex items-center justify-center overflow-visible w-full">
             <div className="relative transform scale-110 md:scale-130">
               <div className="h-64 w-64 md:h-80 md:w-80 bg-white rounded-lg shadow-xl flex items-center justify-center">
                 <div className="text-lg text-gray-500">{slides[currentSlide].imageSrc}</div>
