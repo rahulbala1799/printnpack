@@ -43,11 +43,11 @@ const ServiceCard = ({ icon: Icon, title, description, color, index }) => {
         
         <motion.div 
           whileHover={{ x: 5 }}
-          className="inline-block"
+          className="inline-block sm:mx-auto sm:w-full sm:text-center md:text-left md:w-auto"
         >
           <Link 
             href={`/services#${title.toLowerCase().replace(/\s+/g, '-')}`} 
-            className={`font-semibold flex items-center gap-1 group ${color.includes('blue') ? 'text-blue-600' : color.includes('green') ? 'text-green-600' : color.includes('amber') ? 'text-amber-600' : color.includes('red') ? 'text-red-600' : 'text-purple-600'}`}
+            className={`font-semibold flex items-center gap-1 group sm:inline-flex sm:justify-center ${color.includes('blue') ? 'text-blue-600' : color.includes('green') ? 'text-green-600' : color.includes('amber') ? 'text-amber-600' : color.includes('red') ? 'text-red-600' : 'text-purple-600'}`}
           >
             Learn More
             <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
