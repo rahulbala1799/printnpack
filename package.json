@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "bash ./use-node-18.sh && npm install",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -10,11 +11,12 @@
     "postinstall": "next telemetry disable"
   },
   "dependencies": {
-    "framer-motion": "^11.2.11",
+    "framer-motion": "^11.18.2",
     "next": "13.4.19",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.5.0",
+    "react-intersection-observer": "^9.16.0"
   },
   "devDependencies": {
     "@types/node": "18.18.0",
