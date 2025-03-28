@@ -68,6 +68,8 @@ const MobileProductViewer = () => {
 
   // Extract gradient colors from the color string
   function getGradientColors(colorString) {
+    if (!colorString) return 'rgb(120, 120, 255) 0%, rgb(80, 80, 200) 100%';
+    
     const colors = colorString.split(' ');
     const fromColor = colors[0] ? colors[0].replace('from-', '').replace('-500', '120, 120, 255').replace('-400', '150, 150, 255') : '120, 120, 255';
     const toColor = colors[2] ? colors[2].replace('to-', '').replace('-600', '80, 80, 200').replace('-500', '100, 100, 220') : '80, 80, 200';
