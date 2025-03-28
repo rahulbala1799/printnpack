@@ -77,57 +77,36 @@ const HeroSection = () => {
   return (
     <div className="relative w-full overflow-hidden">
       {/* Urgent offer banner */}
-      <div className="bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-white py-3 px-4 text-center font-bold text-base sm:text-lg shadow-lg relative overflow-hidden">
-        {/* Animated background elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 opacity-20 bg-[radial-gradient(white,_transparent_60%)]"></div>
-          <div className="absolute top-0 left-0 w-full h-full">
-            {[...Array(5)].map((_, i) => (
-              <div 
-                key={i}
-                className="absolute rounded-full bg-white/30"
-                style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  width: `${Math.random() * 30 + 10}px`,
-                  height: `${Math.random() * 30 + 10}px`,
-                  animationDelay: `${Math.random() * 2}s`,
-                  animation: 'pulse 4s infinite'
-                }}
-              ></div>
-            ))}
-          </div>
-        </div>
-
+      <div className="bg-black text-yellow-400 py-3 px-4 text-center font-bold text-base sm:text-lg shadow-lg relative">
         {/* Content */}
         <div className="relative flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
           <span className="flex items-center">
             <span className="inline-block animate-pulse mr-2">🔥</span>
-            <span className="font-extrabold text-yellow-300 underline decoration-2 decoration-yellow-300 underline-offset-2">FLASH SALE:</span>
+            <span className="font-extrabold text-yellow-400 underline decoration-2 decoration-yellow-400 underline-offset-2">FLASH SALE:</span>
           </span>
           
-          <span className="font-bold px-2 py-0.5 bg-white/30 rounded">15% OFF ALL ORDERS TODAY</span>
+          <span className="font-bold px-2 py-0.5 bg-yellow-400/20 rounded text-yellow-300">15% OFF ALL ORDERS TODAY</span>
           
           <span className="flex items-center gap-2">
-            <span className="hidden sm:inline">•</span>
-            <span className="font-semibold">ENDS IN:</span>
-            <span className="bg-black/50 backdrop-blur-sm rounded px-2 py-1 text-white font-mono tracking-tight">
+            <span className="hidden sm:inline text-yellow-400">•</span>
+            <span className="font-semibold text-yellow-400">ENDS IN:</span>
+            <span className="bg-yellow-600/30 backdrop-blur-sm rounded px-2 py-1 text-yellow-300 font-mono tracking-tight">
               {hours}h {minutes}m {seconds}s
             </span>
           </span>
           
           {/* Mobile contact button */}
           <span className="sm:hidden mt-1">
-            <Link href="/contact" className="inline-block bg-white/30 hover:bg-white/40 text-white font-bold py-1 px-3 rounded-lg transition-colors duration-200">
+            <Link href="/contact" className="inline-block bg-yellow-600 hover:bg-yellow-500 text-black font-bold py-1 px-3 rounded-lg transition-colors duration-200">
               CONTACT US
             </Link>
           </span>
           
           <span className="hidden sm:flex items-center">
-            <span className="mx-2">•</span>
+            <span className="mx-2 text-yellow-400">•</span>
             <Link href="/contact" className="whitespace-nowrap relative inline-block group">
-              <span className="font-bold tracking-wider relative z-10 group-hover:text-yellow-300 transition-colors duration-300">CONTACT US</span>
-              <span className="absolute bottom-0 left-0 w-full h-1 bg-white/50 group-hover:bg-yellow-300 transition-colors duration-300"></span>
+              <span className="font-bold tracking-wider relative z-10 text-yellow-400 group-hover:text-yellow-300 transition-colors duration-300">CONTACT US</span>
+              <span className="absolute bottom-0 left-0 w-full h-1 bg-yellow-600/50 group-hover:bg-yellow-500 transition-colors duration-300"></span>
             </Link>
             <span className="inline-block animate-pulse ml-1">🔥</span>
           </span>
