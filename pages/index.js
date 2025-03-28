@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../components/layout/Layout';
-import Hero from '../components/home/Hero';
+import HeroSection from '../components/home/Hero';
 import FeaturedProducts from '../components/home/FeaturedProducts';
 import Services from '../components/home/Services';
 import AboutUs from '../components/home/AboutUs';
@@ -15,7 +15,7 @@ export default function Home() {
         <meta name="description" content="Print N Pack provides high-quality packaging solutions for businesses across India. From custom designs to eco-friendly options, we've got you covered." />
       </Head>
       
-      <Hero />
+      <HeroSection />
       <FeaturedProducts />
       <Services />
       <AboutUs />
