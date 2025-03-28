@@ -12,7 +12,7 @@ const HeroSection = () => {
       product: "Pizza Box",
       color: "from-red-600 to-red-900",
       benefits: ["Elevates your product presentation", "Boosts perceived value", "Enhances customer experience"],
-      imageSrc: "/images/hero/pizza-box.svg"
+      imageSrc: "/images/hero/pizza-box.png"
     },
     {
       title: "Paper Bags That Close More Sales",
@@ -21,7 +21,7 @@ const HeroSection = () => {
       product: "Paper Bag",
       color: "from-green-600 to-green-900",
       benefits: ["Increases repeat purchases", "Strengthens brand perception", "Eco-friendly marketing tool"],
-      imageSrc: "/images/hero/paper-bag.svg"
+      imageSrc: "/images/hero/paper-bag.png"
     },
     {
       title: "Sustainable Burger Boxes Customers Love",
@@ -30,7 +30,7 @@ const HeroSection = () => {
       product: "Bagasse Box",
       color: "from-amber-500 to-amber-700",
       benefits: ["Improves customer perception", "Supports your green initiatives", "Creates Instagram-worthy presentations"],
-      imageSrc: "/images/hero/burger-box.svg"
+      imageSrc: "/images/hero/burger-box.png"
     },
     {
       title: "Marketing Materials That Generate Leads",
@@ -39,7 +39,7 @@ const HeroSection = () => {
       product: "Leaflet",
       color: "from-blue-500 to-blue-800",
       benefits: ["Increases response rates", "Drives store traffic", "Boosts campaign ROI"],
-      imageSrc: "/images/hero/leaflet.svg"
+      imageSrc: "/images/hero/leaflet.png"
     },
     {
       title: "Premium Napkins That Elevate Your Brand",
@@ -48,7 +48,7 @@ const HeroSection = () => {
       product: "Napkin",
       color: "from-purple-500 to-purple-800",
       benefits: ["Improves customer experience", "Reinforces brand identity", "Low cost, high impact marketing"],
-      imageSrc: "/images/hero/napkin.svg"
+      imageSrc: "/images/hero/napkin.png"
     }
   ];
 
@@ -167,7 +167,7 @@ const HeroSection = () => {
           <div className="md:w-1/2 z-10 flex items-center justify-center overflow-visible w-full">
             <div className="relative transform scale-110 md:scale-130">
               <div className="h-64 w-64 md:h-80 md:w-80 bg-white rounded-lg shadow-xl flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center p-6">
+                <div className="absolute inset-0 flex items-center justify-center p-4">
                   <div className="relative h-full w-full">
                     <Image
                       src={slides[currentSlide].imageSrc}
