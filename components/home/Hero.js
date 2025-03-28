@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import PromoBanner from './PromoBanner';
 
 const HeroSection = () => {
   const slides = [
@@ -64,9 +63,6 @@ const HeroSection = () => {
 
   return (
     <div className="relative w-full overflow-hidden">
-      {/* New Customer Offer Banner */}
-      <PromoBanner />
-      
       {/* Gradient background that changes with slides */}
       <div className={`absolute inset-0 bg-gradient-to-r ${slides[currentSlide].color} opacity-90 transition-all duration-1000 ease-in-out`} />
       
