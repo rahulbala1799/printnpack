@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react';
-import { FaLeaf, FaClock, FaBoxOpen, FaCheck, FaTruck, FaRecycle, FaMedal, FaRegClock, FaCube, FaHandshake } from 'react-icons/fa';
+import { FaLeaf, FaClock, FaBoxOpen, FaCheck, FaTruck, FaRecycle, FaMedal, FaRegClock, FaCube, FaHandshake, FaBox } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 const USPCards = ({ data }) => {
@@ -77,66 +77,100 @@ const USPCards = ({ data }) => {
   const displayData = data || defaultUspData;
 
   return (
-    <section ref={sectionRef} className="relative py-16 overflow-hidden">
-      {/* Background with particles effect */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-gray-100">
-        <div className="absolute inset-0 bg-particles opacity-10"></div>
-      </div>
+    <section ref={sectionRef} className="relative py-10 overflow-hidden bg-gradient-to-b from-white to-gray-50">
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-r from-blue-700 to-blue-900 opacity-5 transform -skew-y-2"></div>
       
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose PrintNPack?</h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
-          <p className="mt-2 text-xl text-gray-600 max-w-3xl mx-auto">
-            Our unique advantages set us apart from the competition
-          </p>
+      {/* Subtle pattern overlay */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+      
+      <div className="container mx-auto px-4 relative z-10 max-w-6xl">
+        <div className="flex items-center justify-center mb-8">
+          <motion.div
+            initial={{ rotate: 0 }}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+            className="hidden md:block absolute left-10 opacity-5"
+          >
+            <FaBox className="text-9xl text-blue-700" />
+          </motion.div>
+          
+          <div className="text-center relative">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Why Choose <span className="text-blue-700">Print<span className="text-blue-900">N</span>Pack</span>?</h2>
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <div className="h-1 w-10 bg-blue-700"></div>
+              <FaBox className="text-xl text-blue-700" />
+              <div className="h-1 w-36 bg-gradient-to-r from-blue-700 to-blue-500"></div>
+            </div>
+            <p className="text-lg text-gray-600 max-w-2xl">
+              Our unique advantages set us apart from the competition
+            </p>
+          </div>
+          
+          <motion.div
+            initial={{ rotate: 0 }}
+            animate={{ rotate: -360 }}
+            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+            className="hidden md:block absolute right-10 opacity-5"
+          >
+            <FaBox className="text-9xl text-blue-700" />
+          </motion.div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mt-8">
+        <div className="flex flex-wrap justify-center gap-6 mt-4">
           {displayData.map((usp, index) => (
             <motion.div 
               key={index}
-              className="relative bg-white rounded-xl shadow-lg overflow-hidden"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              className="relative bg-white rounded-xl shadow-md overflow-hidden flex-1 min-w-[250px] max-w-[400px] border border-gray-100"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ 
-                duration: 0.5, 
+                duration: 0.4, 
                 delay: index * 0.1,
                 ease: [0.43, 0.13, 0.23, 0.96] 
               }}
               whileHover={{ 
-                y: -8,
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)" 
+                y: -5,
+                boxShadow: "0 15px 30px -10px rgba(0, 0, 0, 0.15)",
+                scale: 1.02
               }}
             >
-              {/* Top gradient bar */}
-              <div className={`h-2 bg-gradient-to-r ${typeof usp.color === 'string' ? usp.color : 'from-blue-500 to-blue-700'}`}></div>
+              {/* Side accent bar with logo mark */}
+              <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-700 via-blue-500 to-blue-700"></div>
               
-              <div className="p-6 relative">
-                {/* Icon and title */}
-                <div className="flex flex-col items-center mt-6 mb-4">
+              <div className="pl-4 pr-3 py-4 flex items-start gap-3">
+                {/* Icon with pulse effect */}
+                <div className="relative flex-shrink-0">
+                  <div className={`h-12 w-12 rounded-full bg-gradient-to-br ${typeof usp.color === 'string' ? usp.color : 'from-blue-500 to-blue-700'} flex items-center justify-center opacity-90`}>
+                    <motion.div
+                      whileHover={{ scale: 1.2, rotate: 10 }}
+                      className="text-white"
+                    >
+                      {usp.icon}
+                    </motion.div>
+                  </div>
                   <motion.div 
-                    className="mb-6"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    {usp.icon}
-                  </motion.div>
-                  <h3 className="text-xl font-bold text-gray-800 text-center mb-2">{usp.title}</h3>
+                    className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full bg-blue-700"
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
                 </div>
                 
-                {/* Stat */}
-                <div className="flex justify-center my-4">
-                  <div className={`text-center px-4 py-2 rounded-lg bg-gradient-to-r ${usp.color} text-white`}>
-                    <div className="text-3xl font-bold count-up">
+                {/* Content */}
+                <div className="flex-1">
+                  <div className="flex justify-between items-start">
+                    <h3 className="text-lg font-bold text-gray-800 mb-2">{usp.title}</h3>
+                    <div className={`px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${usp.color}`}>
                       {usp.stat}
                     </div>
-                    <div className="text-sm opacity-90">{usp.statLabel}</div>
+                  </div>
+                  
+                  <p className="text-sm text-gray-600 mb-2">{usp.description}</p>
+                  
+                  <div className="text-xs text-gray-500 flex items-center gap-1">
+                    <FaBox className="text-blue-700" />
+                    <span>{usp.statLabel}</span>
                   </div>
                 </div>
-                
-                {/* Description */}
-                <p className="text-gray-600 text-center px-4 mb-6">{usp.description}</p>
               </div>
             </motion.div>
           ))}
