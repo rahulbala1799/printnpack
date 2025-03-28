@@ -10,6 +10,7 @@ import Head from 'next/head';
 import MobileProductViewer from '../components/home/MobileProductViewer';
 import PromoBanner from '../components/home/PromoBanner';
 import TestimonialSlider from '../components/home/TestimonialSlider';
+import PrintingTimes from '../components/home/PrintingTimes';
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
       <ProductShowcase />
       <USPCards />
       <MobileProductViewer />
+      <PrintingTimes />
       <TestimonialSlider />
       <Services />
       <AboutUs />
