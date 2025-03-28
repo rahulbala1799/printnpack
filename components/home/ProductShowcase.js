@@ -50,7 +50,7 @@ const ProductShowcase = () => {
       name: 'Wide Format Printing',
       description: 'Eye-catching large format prints for banners, posters, and promotional displays.',
       features: ['High resolution', 'Weather-resistant', 'Indoor & outdoor options'],
-      imageSrc: '/images/hero/napkin.png',
+      imageSrc: '/images/hero/wide-format.png',
       textColor: 'text-indigo-600'
     }
   ];
