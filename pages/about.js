@@ -9,27 +9,27 @@ const AboutPage = () => {
   // Team members data
   const teamMembers = [
     {
-      name: 'Rajesh Kumar',
+      name: 'James Murphy',
       position: 'CEO & Founder',
-      bio: 'Rajesh has over 20 years of experience in the packaging industry and founded PrintNPack with a vision to create sustainable packaging solutions.',
+      bio: 'With over 20 years of experience in the packaging industry, James founded PrintNPack to revolutionize food packaging in Ireland with a focus on quality and sustainability.',
       imageSrc: '/images/team/placeholder.svg'
     },
     {
-      name: 'Priya Sharma',
+      name: 'Sarah O\'Connor',
       position: 'Creative Director',
-      bio: 'With a background in design, Priya leads our creative team to develop innovative and eye-catching packaging designs for our clients.',
+      bio: 'Sarah brings extensive design expertise to create innovative packaging solutions that help Irish businesses stand out while maintaining product integrity and brand identity.',
       imageSrc: '/images/team/placeholder.svg'
     },
     {
-      name: 'Amit Patel',
+      name: 'Michael Byrne',
       position: 'Operations Manager',
-      bio: 'Amit ensures that all production processes run smoothly and efficiently, maintaining our high standards of quality and timely delivery.',
+      bio: 'Michael oversees our Dublin facility, ensuring efficient production and our unique weekly delivery system operates smoothly to meet our clients\' tight deadlines.',
       imageSrc: '/images/team/placeholder.svg'
     },
     {
-      name: 'Sunita Reddy',
-      position: 'Sustainability Officer',
-      bio: 'Sunita oversees our eco-friendly initiatives and ensures that our production processes and materials meet the highest environmental standards.',
+      name: 'Emma Ryan',
+      position: 'Sustainability Lead',
+      bio: 'Emma champions our eco-friendly initiatives, sourcing sustainable materials and developing packaging solutions that minimize environmental impact without compromising performance.',
       imageSrc: '/images/team/placeholder.svg'
     }
   ];
@@ -71,10 +71,14 @@ const AboutPage = () => {
   return (
     <Layout>
       <Head>
-        <title>About Us - PrintNPack Packaging Solutions</title>
+        <title>About PrintNPack | Custom Pizza Boxes & Paper Bags in Ireland</title>
         <meta 
           name="description" 
-          content="Learn about PrintNPack's journey, our commitment to sustainable packaging, and the team behind our innovative solutions." 
+          content="PrintNPack offers premium printed pizza boxes, paper bags & burger boxes in Ireland with low MOQs, fast lead times & weekly deliveries. Affordable food packaging solutions." 
+        />
+        <meta
+          name="keywords"
+          content="pizza boxes Ireland, printed paper bags, burger boxes, food packaging Dublin, low MOQ packaging, fast turnaround packaging, weekly printed packaging delivery, Irish packaging manufacturer"
         />
       </Head>
 
@@ -92,35 +96,44 @@ const AboutPage = () => {
         </div>
       </div>
 
-      {/* Our Story Section */}
+      {/* About PrintNPack Section */}
       <div className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 mb-8 md:mb-0 md:pr-12">
-              <div className="relative w-full h-96 rounded-lg overflow-hidden shadow-xl">
-                <Image
-                  src="/images/about/history.svg"
-                  alt="PrintNPack Company History"
-                  fill
-                  className="object-cover"
-                />
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">About PrintNPack</h2>
+            <div className="w-20 h-1 bg-blue-600 mb-6"></div>
+            
+            <p className="text-gray-700 text-lg mb-6">
+              PrintNPack is Ireland's premier packaging specialist, delivering high-quality <strong>printed pizza boxes</strong>, <strong>custom paper bags</strong>, and <strong>burger boxes</strong> with industry-leading turnaround times. Based in Dublin, we've revolutionized the Irish packaging industry by offering <strong>low minimum order quantities</strong> that make professional packaging accessible to businesses of all sizes.
+            </p>
+            
+            <p className="text-gray-700 text-lg mb-6">
+              What sets us apart is our unique <strong>weekly printed packaging delivery service</strong> – a first in Ireland. This innovative approach allows our clients to maintain minimal inventory while ensuring they never run out of essential packaging supplies. From family-owned restaurants to national chains, businesses across Ireland rely on our <strong>fast lead times</strong> and competitive pricing.
+            </p>
+            
+            <p className="text-gray-700 text-lg mb-6">
+              Our manufacturing facility combines cutting-edge digital printing technology with sustainable materials, allowing us to produce <strong>eco-friendly food packaging</strong> that performs as well as it looks. We've optimized our production processes to offer some of the <strong>most affordable custom packaging in Ireland</strong> without compromising on quality.
+            </p>
+            
+            <p className="text-gray-700 text-lg mb-6">
+              Whether you need <strong>branded pizza boxes</strong> delivered next week, <strong>custom printed paper bags</strong> for your business, or a reliable partner for all your <strong>food packaging solutions</strong>, PrintNPack delivers superior products, exceptional value, and unmatched convenience.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+              <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
+                <h3 className="text-xl font-bold text-blue-800 mb-2">Low MOQ</h3>
+                <p className="text-gray-700">Custom printed packaging accessible to businesses of all sizes with low minimum order quantities.</p>
               </div>
-            </div>
-            <div className="md:w-1/2">
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">Our Story</h2>
-              <div className="w-20 h-1 bg-blue-600 mb-6"></div>
-              <p className="text-gray-600 mb-4">
-                Founded in 2010, PrintNPack began as a small family-owned business with a vision to revolutionize the packaging industry in Ireland. What started as a modest operation has now grown into one of the leading packaging solution providers in the country.
-              </p>
-              <p className="text-gray-600 mb-4">
-                Our journey began when our founder, Rajesh Kumar, recognized the need for high-quality, sustainable packaging solutions in the Irish market. With an initial focus on food packaging, we quickly expanded our product range to serve various industries.
-              </p>
-              <p className="text-gray-600 mb-4">
-                Today, PrintNPack operates a state-of-the-art manufacturing facility in Dublin, equipped with the latest technology to produce innovative packaging solutions. Our team of experienced professionals works tirelessly to deliver products that meet the highest standards of quality and sustainability.
-              </p>
-              <p className="text-gray-600">
-                We take pride in our ability to combine traditional craftsmanship with modern technology, creating packaging solutions that not only protect products but also enhance brand value and customer experience.
-              </p>
+              
+              <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
+                <h3 className="text-xl font-bold text-blue-800 mb-2">Fast Turnaround</h3>
+                <p className="text-gray-700">Industry-leading production times with our unique weekly delivery service for printed packaging.</p>
+              </div>
+              
+              <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
+                <h3 className="text-xl font-bold text-blue-800 mb-2">Irish Made</h3>
+                <p className="text-gray-700">Proudly manufacturing quality food packaging solutions in Ireland for Irish businesses.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -223,20 +236,20 @@ const AboutPage = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="text-4xl font-bold mb-2">12+</div>
-              <div className="text-xl">Years of Experience</div>
+              <div className="text-4xl font-bold mb-2">7 Days</div>
+              <div className="text-xl">Average Lead Time</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold mb-2">500+</div>
-              <div className="text-xl">Happy Clients</div>
+              <div className="text-4xl font-bold mb-2">1,000+</div>
+              <div className="text-xl">Irish Businesses Served</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold mb-2">50M+</div>
-              <div className="text-xl">Products Delivered</div>
+              <div className="text-4xl font-bold mb-2">52</div>
+              <div className="text-xl">Weekly Deliveries Per Year</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold mb-2">100+</div>
-              <div className="text-xl">Team Members</div>
+              <div className="text-4xl font-bold mb-2">100</div>
+              <div className="text-xl">MOQ for Custom Printing</div>
             </div>
           </div>
         </div>
@@ -246,18 +259,30 @@ const AboutPage = () => {
       <div className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">Ready to Elevate Your Packaging?</h2>
+            <h2 className="text-3xl font-bold text-gray-800 mb-6">Need Custom Pizza Boxes or Paper Bags Fast?</h2>
             <p className="text-xl text-gray-600 mb-8">
-              Partner with PrintNPack for innovative, sustainable, and high-quality packaging solutions tailored to your needs.
+              Join over 1,000 Irish businesses that rely on PrintNPack's weekly delivery service for high-quality printed packaging with low minimum orders and industry-leading turnaround times.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <Link href="/contact" className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-md text-lg font-medium transition-colors">
-                Contact Us
-              </Link>
-              <Link href="/products" className="border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 px-6 rounded-md text-lg font-medium transition-colors">
-                Explore Products
-              </Link>
+            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+              <div className="bg-gray-100 px-6 py-3 rounded-lg text-center">
+                <span className="block text-2xl font-bold text-blue-600">7 Day</span>
+                <span className="text-gray-700">Standard Delivery</span>
+              </div>
+              <div className="bg-gray-100 px-6 py-3 rounded-lg text-center">
+                <span className="block text-2xl font-bold text-blue-600">100 Units</span>
+                <span className="text-gray-700">Minimum Order</span>
+              </div>
+              <div className="bg-gray-100 px-6 py-3 rounded-lg text-center">
+                <span className="block text-2xl font-bold text-blue-600">Weekly</span>
+                <span className="text-gray-700">Delivery Schedule</span>
+              </div>
             </div>
+            <Link 
+              href="/contact" 
+              className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-lg transition duration-300"
+            >
+              Request a Quote
+            </Link>
           </div>
         </div>
       </div>
