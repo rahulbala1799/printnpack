@@ -165,9 +165,9 @@ const HeroSection = () => {
           
           {/* Stylized product visualization */}
           <div className="md:w-1/2 z-10 flex items-center justify-center overflow-visible w-full">
-            <div className="relative transform scale-110 md:scale-130">
-              <div className="h-64 w-64 md:h-80 md:w-80 bg-white rounded-lg shadow-xl flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center p-4">
+            <div className="relative transform scale-110 md:scale-150">
+              <div className="h-72 w-72 md:h-96 md:w-96 flex items-center justify-center relative">
+                <div className="absolute inset-0 flex items-center justify-center">
                   <div className="relative h-full w-full">
                     <Image
                       src={slides[currentSlide].imageSrc}
@@ -175,7 +175,7 @@ const HeroSection = () => {
                       fill
                       className="object-contain"
                       priority={currentSlide === 0}
-                      sizes="(max-width: 768px) 256px, 320px"
+                      sizes="(max-width: 768px) 288px, 384px"
                     />
                   </div>
                 </div>
