@@ -77,8 +77,54 @@ const HeroSection = () => {
   return (
     <div className="relative w-full overflow-hidden">
       {/* Urgent offer banner */}
-      <div className="bg-red-600 text-white py-2 px-4 text-center font-bold text-sm animate-pulse">
-        🔥 FLASH SALE: 15% OFF ALL ORDERS TODAY • ENDS IN: {hours}h {minutes}m {seconds}s • ORDER NOW 🔥
+      <div className="bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-white py-3 px-4 text-center font-bold text-base sm:text-lg shadow-lg relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0 opacity-20 bg-[radial-gradient(white,_transparent_60%)]"></div>
+          <div className="absolute top-0 left-0 w-full h-full">
+            {[...Array(5)].map((_, i) => (
+              <div 
+                key={i}
+                className="absolute rounded-full bg-white/30"
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  width: `${Math.random() * 30 + 10}px`,
+                  height: `${Math.random() * 30 + 10}px`,
+                  animationDelay: `${Math.random() * 2}s`,
+                  animation: 'pulse 4s infinite'
+                }}
+              ></div>
+            ))}
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="relative flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
+          <span className="flex items-center">
+            <span className="inline-block animate-pulse mr-2">🔥</span>
+            <span className="font-extrabold text-yellow-300 underline decoration-2 decoration-yellow-300 underline-offset-2">FLASH SALE:</span>
+          </span>
+          
+          <span className="font-bold px-2 py-0.5 bg-white/20 rounded">15% OFF ALL ORDERS TODAY</span>
+          
+          <span className="flex items-center gap-2">
+            <span className="hidden sm:inline">•</span>
+            <span>ENDS IN:</span>
+            <span className="bg-black/30 backdrop-blur-sm rounded px-2 py-1 text-white font-mono tracking-tight">
+              {hours}h {minutes}m {seconds}s
+            </span>
+          </span>
+          
+          <span className="hidden sm:flex items-center">
+            <span className="mx-2">•</span>
+            <span className="whitespace-nowrap relative inline-block group">
+              <span className="font-bold tracking-wider relative z-10 group-hover:text-yellow-300 transition-colors duration-300">ORDER NOW</span>
+              <span className="absolute bottom-0 left-0 w-full h-1 bg-white/30 group-hover:bg-yellow-300 transition-colors duration-300"></span>
+            </span>
+            <span className="inline-block animate-pulse ml-1">🔥</span>
+          </span>
+        </div>
       </div>
       
       {/* Gradient background that changes with slides */}
