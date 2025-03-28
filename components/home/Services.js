@@ -9,7 +9,7 @@ const ServiceCard = ({ icon: Icon, title, description, color, index }) => {
   
   return (
     <motion.div 
-      className="bg-white rounded-xl shadow-lg overflow-hidden relative group"
+      className="bg-white rounded-xl shadow-lg overflow-hidden relative group text-center md:text-left"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.1 }}
@@ -26,9 +26,9 @@ const ServiceCard = ({ icon: Icon, title, description, color, index }) => {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 p-6 sm:text-center md:text-left">
+      <div className="relative z-10 p-6 flex flex-col items-center md:items-start">
         <motion.div 
-          className={`mb-4 bg-opacity-20 rounded-full w-16 h-16 flex items-center justify-center mx-auto md:mx-0 ${color.includes('blue') ? 'bg-blue-100' : color.includes('green') ? 'bg-green-100' : color.includes('amber') ? 'bg-amber-100' : color.includes('red') ? 'bg-red-100' : 'bg-purple-100'}`}
+          className={`mb-4 bg-opacity-20 rounded-full w-16 h-16 flex items-center justify-center ${color.includes('blue') ? 'bg-blue-100' : color.includes('green') ? 'bg-green-100' : color.includes('amber') ? 'bg-amber-100' : color.includes('red') ? 'bg-red-100' : 'bg-purple-100'}`}
           animate={{ 
             rotate: isHovered ? [0, 10, -10, 10, 0] : 0,
             scale: isHovered ? 1.1 : 1
@@ -38,16 +38,16 @@ const ServiceCard = ({ icon: Icon, title, description, color, index }) => {
           <Icon size={28} className={`${color.includes('blue') ? 'text-blue-600' : color.includes('green') ? 'text-green-600' : color.includes('amber') ? 'text-amber-600' : color.includes('red') ? 'text-red-600' : 'text-purple-600'}`} />
         </motion.div>
         
-        <h3 className="text-xl font-bold mb-3 text-gray-900">{title}</h3>
-        <p className="text-gray-600 mb-5">{description}</p>
+        <h3 className="text-xl font-bold mb-3 text-gray-900 w-full">{title}</h3>
+        <p className="text-gray-600 mb-5 w-full">{description}</p>
         
         <motion.div 
           whileHover={{ x: 5 }}
-          className="inline-block sm:mx-auto sm:w-full sm:text-center md:text-left md:w-auto"
+          className="flex justify-center md:justify-start w-full"
         >
           <Link 
             href={`/services#${title.toLowerCase().replace(/\s+/g, '-')}`} 
-            className={`font-semibold flex items-center gap-1 group sm:inline-flex sm:justify-center ${color.includes('blue') ? 'text-blue-600' : color.includes('green') ? 'text-green-600' : color.includes('amber') ? 'text-amber-600' : color.includes('red') ? 'text-red-600' : 'text-purple-600'}`}
+            className={`font-semibold inline-flex items-center gap-1 group ${color.includes('blue') ? 'text-blue-600' : color.includes('green') ? 'text-green-600' : color.includes('amber') ? 'text-amber-600' : color.includes('red') ? 'text-red-600' : 'text-purple-600'}`}
           >
             Learn More
             <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
