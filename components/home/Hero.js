@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const HeroSection = () => {
   const slides = [
@@ -11,7 +12,7 @@ const HeroSection = () => {
       product: "Pizza Box",
       color: "from-red-600 to-red-900",
       benefits: ["Elevates your product presentation", "Boosts perceived value", "Enhances customer experience"],
-      imageSrc: "Pizza Box Image" // Replace with actual image path in production
+      imageSrc: "/images/hero/pizza-box.svg"
     },
     {
       title: "Paper Bags That Close More Sales",
@@ -20,7 +21,7 @@ const HeroSection = () => {
       product: "Paper Bag",
       color: "from-green-600 to-green-900",
       benefits: ["Increases repeat purchases", "Strengthens brand perception", "Eco-friendly marketing tool"],
-      imageSrc: "Paper Bag Image" // Replace with actual image path in production
+      imageSrc: "/images/hero/paper-bag.svg"
     },
     {
       title: "Sustainable Burger Boxes Customers Love",
@@ -29,7 +30,7 @@ const HeroSection = () => {
       product: "Bagasse Box",
       color: "from-amber-500 to-amber-700",
       benefits: ["Improves customer perception", "Supports your green initiatives", "Creates Instagram-worthy presentations"],
-      imageSrc: "Burger Box Image" // Replace with actual image path in production
+      imageSrc: "/images/hero/burger-box.svg"
     },
     {
       title: "Marketing Materials That Generate Leads",
@@ -38,7 +39,7 @@ const HeroSection = () => {
       product: "Leaflet",
       color: "from-blue-500 to-blue-800",
       benefits: ["Increases response rates", "Drives store traffic", "Boosts campaign ROI"],
-      imageSrc: "Leaflet Image" // Replace with actual image path in production
+      imageSrc: "/images/hero/leaflet.svg"
     },
     {
       title: "Premium Napkins That Elevate Your Brand",
@@ -47,7 +48,7 @@ const HeroSection = () => {
       product: "Napkin",
       color: "from-purple-500 to-purple-800",
       benefits: ["Improves customer experience", "Reinforces brand identity", "Low cost, high impact marketing"],
-      imageSrc: "Napkin Image" // Replace with actual image path in production
+      imageSrc: "/images/hero/napkin.svg"
     }
   ];
 
@@ -165,8 +166,19 @@ const HeroSection = () => {
           {/* Stylized product visualization */}
           <div className="md:w-1/2 z-10 flex items-center justify-center overflow-visible w-full">
             <div className="relative transform scale-110 md:scale-130">
-              <div className="h-64 w-64 md:h-80 md:w-80 bg-white rounded-lg shadow-xl flex items-center justify-center">
-                <div className="text-lg text-gray-500">{slides[currentSlide].imageSrc}</div>
+              <div className="h-64 w-64 md:h-80 md:w-80 bg-white rounded-lg shadow-xl flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 flex items-center justify-center p-6">
+                  <div className="relative h-full w-full">
+                    <Image
+                      src={slides[currentSlide].imageSrc}
+                      alt={slides[currentSlide].product}
+                      fill
+                      className="object-contain"
+                      priority={currentSlide === 0}
+                      sizes="(max-width: 768px) 256px, 320px"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
