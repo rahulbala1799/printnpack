@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react';
-import { FaLeaf, FaClock, FaBoxOpen, FaCheck, FaTruck, FaRecycle, FaMedal, FaRegClock, FaCube, FaHandshake, FaBox, FaPrint } from 'react-icons/fa';
+import { RiTimerFlashLine, RiLeafLine, RiAwardLine, RiNumbersLine, RiRulerLine, RiPaintBrushLine, RiBox3Line } from 'react-icons/ri';
 import { motion } from 'framer-motion';
 
 const USPCards = ({ data }) => {
@@ -33,7 +33,7 @@ const USPCards = ({ data }) => {
   const defaultUspData = [
     {
       id: 'custom-design',
-      icon: <FaPrint className="text-4xl text-green-600 icon-hover" />,
+      icon: <RiBox3Line className="text-4xl text-green-600 icon-hover" />,
       title: 'Custom Design Service',
       description: 'Professional design team to create unique packaging that represents your brand and stands out.',
       stat: '100%',
@@ -43,7 +43,7 @@ const USPCards = ({ data }) => {
     },
     {
       id: 'exclusive',
-      icon: <FaLeaf className="text-4xl text-blue-600 icon-hover" />,
+      icon: <RiLeafLine className="text-4xl text-blue-600 icon-hover" />,
       title: 'Eco-Friendly Materials',
       description: 'Sustainable packaging options that reduce environmental impact without compromising on quality.',
       stat: '100%',
@@ -53,7 +53,7 @@ const USPCards = ({ data }) => {
     },
     {
       id: 'low-moq',
-      icon: <FaBoxOpen className="text-4xl text-amber-600 icon-hover" />,
+      icon: <RiRulerLine className="text-4xl text-amber-600 icon-hover" />,
       title: 'Low Minimum Orders',
       description: 'Custom packaging accessible to businesses of all sizes with minimums starting at just 100 units.',
       stat: '100',
@@ -63,7 +63,7 @@ const USPCards = ({ data }) => {
     },
     {
       id: 'fast-delivery',
-      icon: <FaTruck className="text-4xl text-purple-600 icon-hover" />,
+      icon: <RiTimerFlashLine className="text-4xl text-purple-600 icon-hover" />,
       title: 'Weekly Delivery Service',
       description: 'Our unique weekly printing and delivery system ensures you never run out of essential packaging.',
       stat: '52',
@@ -91,14 +91,14 @@ const USPCards = ({ data }) => {
             transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
             className="hidden md:block absolute left-10 opacity-5"
           >
-            <FaBox className="text-9xl text-blue-700" />
+            <RiBox3Line className="text-9xl text-blue-700" />
           </motion.div>
           
           <div className="text-center relative">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Why Choose <span className="text-blue-700">Print<span className="text-blue-900">N</span>Pack</span>?</h2>
             <div className="flex items-center justify-center gap-2 mb-4">
               <div className="h-1 w-10 bg-blue-700"></div>
-              <FaBox className="text-xl text-blue-700" />
+              <RiBox3Line className="text-xl text-blue-700" />
               <div className="h-1 w-36 bg-gradient-to-r from-blue-700 to-blue-500"></div>
             </div>
             <p className="text-lg text-gray-600 max-w-2xl">
@@ -112,7 +112,7 @@ const USPCards = ({ data }) => {
             transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
             className="hidden md:block absolute right-10 opacity-5"
           >
-            <FaBox className="text-9xl text-blue-700" />
+            <RiBox3Line className="text-9xl text-blue-700" />
           </motion.div>
         </div>
         
@@ -173,7 +173,7 @@ const USPCards = ({ data }) => {
                   </div>
                   
                   <div className="text-xs text-gray-500 flex items-center gap-1 justify-center mt-auto">
-                    <FaBox className="text-blue-700" />
+                    <RiBox3Line className="text-blue-700" />
                     <span>{usp.statLabel}</span>
                   </div>
                 </div>

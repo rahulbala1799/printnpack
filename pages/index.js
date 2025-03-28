@@ -18,37 +18,45 @@ import {
   FaHandshake,
   FaPrint
 } from 'react-icons/fa';
+import { 
+  RiTimerFlashLine, 
+  RiLeafLine, 
+  RiAwardLine, 
+  RiNumbersLine, 
+  RiRulerLine, 
+  RiPaintBrushLine
+} from 'react-icons/ri';
 
 export default function Home() {
-  // USP data with enhanced icon setup
+  // USP data with simpler, consistent packaging-themed icons
   const uspData = [
     {
-      icon: <FaTruck className="text-4xl text-blue-600 icon-hover" />,
+      icon: <RiTimerFlashLine className="text-4xl text-blue-600 icon-hover" />,
       title: "Fast Delivery",
       description: "Industry-leading turnaround times with our unique weekly delivery system"
     },
     {
-      icon: <FaRecycle className="text-4xl text-green-600 icon-hover" />,
+      icon: <RiLeafLine className="text-4xl text-green-600 icon-hover" />,
       title: "Eco-Friendly",
       description: "Sustainable materials and production methods for environmentally conscious packaging"
     },
     {
-      icon: <FaMedal className="text-4xl text-amber-600 icon-hover" />,
+      icon: <RiAwardLine className="text-4xl text-amber-600 icon-hover" />,
       title: "Premium Quality",
       description: "High-quality materials and precision printing for exceptional results"
     },
     {
-      icon: <FaRegClock className="text-4xl text-purple-600 icon-hover" />,
+      icon: <RiNumbersLine className="text-4xl text-purple-600 icon-hover" />,
       title: "Low MOQ",
       description: "Minimum orders as low as 100 units, making custom packaging accessible to all"
     },
     {
-      icon: <FaCube className="text-4xl text-red-600 icon-hover" />,
+      icon: <RiRulerLine className="text-4xl text-red-600 icon-hover" />,
       title: "Custom Sizes",
       description: "Tailored dimensions to perfectly fit your specific product requirements"
     },
     {
-      icon: <FaPrint className="text-4xl text-blue-800 icon-hover" />,
+      icon: <RiPaintBrushLine className="text-4xl text-blue-800 icon-hover" />,
       title: "Custom Design Service",
       description: "Professional design team to create unique packaging that represents your brand"
     }
