@@ -118,7 +118,7 @@ const MobileProductViewer = () => {
           </p>
         </div>
         
-        <div className="relative h-[400px] rounded-xl overflow-hidden shadow-xl">
+        <div className="relative h-[520px] rounded-xl overflow-hidden shadow-xl">
           <motion.div 
             className="absolute inset-0" 
             style={{ background }}
@@ -138,25 +138,26 @@ const MobileProductViewer = () => {
               exit={{ opacity: 0, x: exitX }}
               transition={{ duration: 0.3 }}
             >
-              <div className="bg-white/20 backdrop-blur-sm p-4 rounded-full mb-6">
-                <div className="relative h-40 w-40 drop-shadow-2xl">
+              <div className="bg-white/20 backdrop-blur-sm p-2 rounded-3xl mb-4 w-[80%] flex items-center justify-center">
+                <div className="relative h-64 w-64 drop-shadow-2xl">
                   <Image
                     src={products[currentIndex].image}
                     alt={products[currentIndex].name}
                     fill
                     className="object-contain"
+                    priority
                   />
                 </div>
               </div>
               
               <motion.div
-                className="text-center text-white"
+                className="text-center text-white mt-2"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
-                <h3 className="text-2xl font-bold mb-2">{products[currentIndex].name}</h3>
-                <p className="text-white/90 mb-6">{products[currentIndex].description}</p>
+                <h3 className="text-2xl font-bold mb-1">{products[currentIndex].name}</h3>
+                <p className="text-white/90 mb-4 px-4 text-sm">{products[currentIndex].description}</p>
                 
                 <Link
                   href="/products"
@@ -189,7 +190,7 @@ const MobileProductViewer = () => {
           </AnimatePresence>
           
           {/* Indicator dots */}
-          <div className="absolute bottom-6 left-0 right-0 flex justify-center space-x-2">
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
             {products.map((_, index) => (
               <button
                 key={index}
