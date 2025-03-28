@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import PromoBanner from './PromoBanner';
 
 const HeroSection = () => {
   const slides = [
@@ -53,7 +54,6 @@ const HeroSection = () => {
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [countdown, setCountdown] = useState(23 * 60 * 60 + 59 * 60 + 59); // 23h 59m 59s
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -62,43 +62,10 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, [slides.length]);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCountdown(prev => prev > 0 ? prev - 1 : 0);
-    }, 1000);
-    
-    return () => clearInterval(timer);
-  }, []);
-
-  const hours = Math.floor(countdown / 3600);
-  const minutes = Math.floor((countdown % 3600) / 60);
-  const seconds = countdown % 60;
-
   return (
     <div className="relative w-full overflow-hidden">
-      {/* Black overlay for the flash sale banner */}
-      <div style={{
-        backgroundColor: "black", 
-        width: "100%", 
-        position: "relative",
-        zIndex: 9999,
-        opacity: 1,
-        margin: 0,
-        padding: 0
-      }}>
-        <div style={{
-          backgroundColor: "black", 
-          color: "#FACC15",
-          padding: "16px 10px",
-          textAlign: "center",
-          fontWeight: "bold",
-          fontSize: "18px",
-          width: "100%",
-          opacity: 1
-        }}>
-          🔥 FLASH SALE: 15% OFF ALL ORDERS TODAY • ENDS IN: {hours}h {minutes}m {seconds}s • <Link href="/contact" style={{color: "#FACC15", textDecoration: "underline"}}>CONTACT US</Link> 🔥
-        </div>
-      </div>
+      {/* New Customer Offer Banner */}
+      <PromoBanner />
       
       {/* Gradient background that changes with slides */}
       <div className={`absolute inset-0 bg-gradient-to-r ${slides[currentSlide].color} opacity-90 transition-all duration-1000 ease-in-out`} />
