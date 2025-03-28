@@ -1,9 +1,25 @@
 import React from 'react';
+import Layout from '../components/layout/Layout';
+import Hero from '../components/home/Hero';
+import FeaturedProducts from '../components/home/FeaturedProducts';
+import Services from '../components/home/Services';
+import AboutUs from '../components/home/AboutUs';
+import CTA from '../components/home/CTA';
+import Head from 'next/head';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-4xl font-bold">Print N Pack</h1>
-    </main>
+    <Layout>
+      <Head>
+        <title>Print N Pack - Premium Packaging Solutions</title>
+        <meta name="description" content="Print N Pack provides high-quality packaging solutions for businesses across India. From custom designs to eco-friendly options, we've got you covered." />
+      </Head>
+      
+      <Hero />
+      <FeaturedProducts />
+      <Services />
+      <AboutUs />
+      <CTA />
+    </Layout>
   );
 } 
