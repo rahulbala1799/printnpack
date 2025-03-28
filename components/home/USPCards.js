@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react';
-import { FaLeaf, FaClock, FaBoxOpen, FaCheck, FaTruck, FaRecycle, FaMedal, FaRegClock, FaCube, FaHandshake, FaBox } from 'react-icons/fa';
+import { FaLeaf, FaClock, FaBoxOpen, FaCheck, FaTruck, FaRecycle, FaMedal, FaRegClock, FaCube, FaHandshake, FaBox, FaPrint } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 const USPCards = ({ data }) => {
@@ -32,12 +32,12 @@ const USPCards = ({ data }) => {
   // Use data from props if provided, otherwise use default data
   const defaultUspData = [
     {
-      id: 'irish-made',
-      icon: <FaHandshake className="text-4xl text-green-600 icon-hover" />,
-      title: 'Proudly Irish-Owned & Operated',
-      description: 'Supporting the local economy with Irish-made packaging solutions for businesses across the country.',
+      id: 'custom-design',
+      icon: <FaPrint className="text-4xl text-green-600 icon-hover" />,
+      title: 'Custom Design Service',
+      description: 'Professional design team to create unique packaging that represents your brand and stands out.',
       stat: '100%',
-      statLabel: 'Irish production',
+      statLabel: 'customizable',
       color: 'from-green-500 to-green-700',
       delay: 0
     },
@@ -116,11 +116,17 @@ const USPCards = ({ data }) => {
           </motion.div>
         </div>
         
-        <div className="flex flex-wrap justify-center gap-6 mt-4">
+        <div className="flex flex-wrap justify-center gap-4 mt-4">
           {displayData.map((usp, index) => (
             <motion.div 
               key={index}
-              className="relative bg-white rounded-xl shadow-md overflow-hidden flex-1 min-w-[250px] max-w-[400px] border border-gray-100"
+              className="relative bg-white rounded-xl shadow-md overflow-hidden border border-gray-100
+                        flex-1 
+                        min-w-[160px] max-w-[400px]
+                        sm:min-w-[180px]
+                        md:min-w-[200px]
+                        lg:flex-auto lg:w-[calc(50%-1rem)]
+                        xl:w-[calc(25%-1rem)]"
               initial={{ opacity: 0, y: 20 }}
               animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ 
@@ -137,10 +143,10 @@ const USPCards = ({ data }) => {
               {/* Side accent bar with logo mark */}
               <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-700 via-blue-500 to-blue-700"></div>
               
-              <div className="pl-4 pr-3 py-4 flex items-start gap-3">
+              <div className="px-4 py-4 flex flex-col items-center sm:items-start sm:flex-row sm:gap-3">
                 {/* Icon with pulse effect */}
-                <div className="relative flex-shrink-0">
-                  <div className={`h-12 w-12 rounded-full bg-gradient-to-br ${typeof usp.color === 'string' ? usp.color : 'from-blue-500 to-blue-700'} flex items-center justify-center opacity-90`}>
+                <div className="relative flex-shrink-0 mb-3 sm:mb-0">
+                  <div className={`h-14 w-14 rounded-xl bg-gradient-to-br ${typeof usp.color === 'string' ? usp.color : 'from-blue-500 to-blue-700'} flex items-center justify-center opacity-90`}>
                     <motion.div
                       whileHover={{ scale: 1.2, rotate: 10 }}
                       className="text-white"
@@ -156,17 +162,17 @@ const USPCards = ({ data }) => {
                 </div>
                 
                 {/* Content */}
-                <div className="flex-1">
-                  <div className="flex justify-between items-start">
+                <div className="flex-1 text-center sm:text-left">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
                     <h3 className="text-lg font-bold text-gray-800 mb-2">{usp.title}</h3>
-                    <div className={`px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${usp.color}`}>
+                    <div className={`px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${usp.color} mx-auto sm:mx-0 mb-2 sm:mb-0 inline-block`}>
                       {usp.stat}
                     </div>
                   </div>
                   
                   <p className="text-sm text-gray-600 mb-2">{usp.description}</p>
                   
-                  <div className="text-xs text-gray-500 flex items-center gap-1">
+                  <div className="text-xs text-gray-500 flex items-center gap-1 justify-center sm:justify-start">
                     <FaBox className="text-blue-700" />
                     <span>{usp.statLabel}</span>
                   </div>
