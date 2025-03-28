@@ -9,7 +9,6 @@ import CTA from '../components/home/CTA';
 import Head from 'next/head';
 import MobileProductViewer from '../components/home/MobileProductViewer';
 import PromoBanner from '../components/home/PromoBanner';
-import TestimonialSlider from '../components/home/TestimonialSlider';
 import PrintingTimes from '../components/home/PrintingTimes';
 
 export default function Home() {
@@ -26,7 +25,6 @@ export default function Home() {
       <USPCards />
       <MobileProductViewer />
       <PrintingTimes />
-      <TestimonialSlider />
       <Services />
       <AboutUs />
       <CTA />
