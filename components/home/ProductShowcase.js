@@ -152,126 +152,84 @@ const ProductShowcase = () => {
           ))}
         </div>
         
-        {/* Mobile Netflix-style Carousel (hidden on desktop) */}
-        <div className="md:hidden mb-4">
-          <div className="relative bg-black py-6 rounded-xl">
-            {/* Carousel container */}
-            <div className="overflow-x-auto no-scrollbar pl-4 -mx-4">
-              <div className="flex pb-8 pt-2 gap-4">
-                {products[activeTab].map((product) => (
-                  <motion.div
-                    key={product.id}
-                    className={`relative flex-shrink-0 rounded-xl shadow-lg overflow-hidden w-72 h-96 cursor-pointer`}
-                    whileTap={{ scale: 0.98 }}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.9 }}
-                    transition={{ 
-                      delay: (product.id % 4) * 0.1,
-                      duration: 0.4 
-                    }}
-                    style={{
-                      // Perspective effect for Netflix-style cards
-                      transform: "perspective(800px) rotateY(0deg)",
-                      transformStyle: "preserve-3d"
-                    }}
-                  >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${product.color} opacity-95`}></div>
-                    
-                    {/* Dark overlay for better contrast */}
-                    <div className="absolute inset-0 bg-black/40"></div>
-                    
-                    {/* Reflection effect */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent"></div>
-                    
-                    {/* Content container with better spacing */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-between p-6 text-white">
-                      <div className="w-full flex justify-between items-start">
-                        <div className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-xs font-medium">
-                          Premium
-                        </div>
-                        <motion.div 
-                          className="h-10 w-10 rounded-full flex items-center justify-center bg-white/10 backdrop-blur-sm"
-                          whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.2)" }}
-                        >
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                            <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
-                          </svg>
-                        </motion.div>
-                      </div>
-                      
-                      <div className="relative h-40 w-40 my-4">
-                        <Image
-                          src={product.image}
-                          alt={product.name}
-                          fill
-                          className="object-contain drop-shadow-xl"
-                        />
-                      </div>
-                      
-                      <div className="text-center w-full mt-auto">
-                        <h3 className="text-2xl font-bold mb-2">{product.name}</h3>
-                        <p className="text-white/70 text-sm mb-4 line-clamp-2">
-                          Premium quality {product.name.toLowerCase()} for your business needs
-                        </p>
-                        <Link 
-                          href="/products" 
-                          className="block w-full py-2.5 text-center bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg text-white text-sm font-medium transition-all"
-                        >
-                          View Details
-                        </Link>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-            
-            {/* Scrollbar indicator */}
-            <div className="flex justify-center gap-1.5 mt-2">
-              {products[activeTab].map((_, index) => (
-                <div 
-                  key={index} 
-                  className={`h-1.5 rounded-full transition-all ${
-                    index === 0 ? 'w-6 bg-blue-600' : 'w-1.5 bg-gray-400'
-                  }`}
-                ></div>
+        {/* Mobile Products Grid - Elegant Card Design */}
+        <div className="md:hidden mb-8">
+          <div className="px-2">
+            <div className="grid grid-cols-2 gap-4">
+              {products[activeTab].map((product, index) => (
+                <motion.div
+                  key={product.id}
+                  className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl overflow-hidden shadow-lg"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ 
+                    opacity: isVisible ? 1 : 0, 
+                    y: isVisible ? 0 : 20,
+                    transition: {
+                      delay: index * 0.1,
+                      duration: 0.4
+                    }
+                  }}
+                  whileHover={{ 
+                    y: -5,
+                    boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1)"
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {/* Decorative accent corner */}
+                  <div className={`absolute top-0 right-0 w-16 h-16 -mr-8 -mt-8 rounded-full bg-gradient-to-br ${product.color} opacity-80 blur-lg`}></div>
+                  
+                  {/* Product Image */}
+                  <div className="relative h-32 w-full flex items-center justify-center p-4 bg-gradient-to-b from-black/40 to-transparent">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      width={80}
+                      height={80}
+                      className="object-contain drop-shadow-xl"
+                    />
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="p-3 bg-black/20 backdrop-blur-sm">
+                    <h3 className="text-white font-bold text-sm mb-1 line-clamp-1">{product.name}</h3>
+                    <Link 
+                      href="/products" 
+                      className="inline-block mt-1 px-3 py-1 bg-white/10 hover:bg-white/20 rounded-md text-white text-xs font-medium transition-all"
+                    >
+                      View
+                    </Link>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>
-          
-          {/* Swipe Indicator - only visible inside black background on mobile */}
-          <div className="mt-2 mb-2 text-center">
-            <motion.div 
-              className="inline-flex items-center text-white text-sm"
+
+          {/* "View All" button with highlight effect */}
+          <div className="text-center mt-6">
+            <motion.div
+              className="relative inline-block"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-              <span>Swipe to browse more products</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg blur-md opacity-70"></div>
+              <Link 
+                href="/products" 
+                className="relative inline-flex items-center justify-center bg-gray-900 text-white py-3 px-6 rounded-lg text-sm font-medium border border-blue-500/30"
+              >
+                <span>Browse All Products</span>
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </Link>
             </motion.div>
           </div>
         </div>
         
-        {/* Empty div to replace the previous swipe indicator that was outside the black box */}
+        {/* Empty div to replace the previous swipe indicator */}
         <div className="mt-4 text-center md:hidden"></div>
-        
-        {/* View all products button */}
-        <div className="mt-10 text-center">
-          <Link 
-            href="/products" 
-            className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-md text-lg font-medium transition-colors"
-          >
-            <span>View All Products</span>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-            </svg>
-          </Link>
-        </div>
       </div>
     </section>
   );
