@@ -121,11 +121,11 @@ const USPCards = ({ data }) => {
             <motion.div 
               key={index}
               className="relative bg-white rounded-xl shadow-md overflow-hidden border border-gray-100
-                        flex-1 
-                        min-w-[160px] max-w-[400px]
-                        sm:min-w-[180px]
-                        md:min-w-[200px]
-                        lg:flex-auto lg:w-[calc(50%-1rem)]
+                        w-[calc(50%-0.5rem)] 
+                        aspect-square
+                        sm:w-[calc(50%-0.75rem)]
+                        md:w-[calc(33.333%-1rem)]
+                        lg:w-[calc(33.333%-1rem)]
                         xl:w-[calc(25%-1rem)]"
               initial={{ opacity: 0, y: 20 }}
               animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -143,10 +143,10 @@ const USPCards = ({ data }) => {
               {/* Side accent bar with logo mark */}
               <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-700 via-blue-500 to-blue-700"></div>
               
-              <div className="px-4 py-4 flex flex-col items-center sm:items-start sm:flex-row sm:gap-3">
+              <div className="h-full p-4 flex flex-col">
                 {/* Icon with pulse effect */}
-                <div className="relative flex-shrink-0 mb-3 sm:mb-0">
-                  <div className={`h-14 w-14 rounded-xl bg-gradient-to-br ${typeof usp.color === 'string' ? usp.color : 'from-blue-500 to-blue-700'} flex items-center justify-center opacity-90`}>
+                <div className="relative mx-auto mb-4">
+                  <div className={`h-16 w-16 rounded-xl bg-gradient-to-br ${typeof usp.color === 'string' ? usp.color : 'from-blue-500 to-blue-700'} flex items-center justify-center opacity-90`}>
                     <motion.div
                       whileHover={{ scale: 1.2, rotate: 10 }}
                       className="text-white"
@@ -155,24 +155,24 @@ const USPCards = ({ data }) => {
                     </motion.div>
                   </div>
                   <motion.div 
-                    className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full bg-blue-700"
+                    className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-blue-700"
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   />
                 </div>
                 
                 {/* Content */}
-                <div className="flex-1 text-center sm:text-left">
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
-                    <h3 className="text-lg font-bold text-gray-800 mb-2">{usp.title}</h3>
-                    <div className={`px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${usp.color} mx-auto sm:mx-0 mb-2 sm:mb-0 inline-block`}>
+                <div className="flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-base font-bold text-gray-800 mb-2 text-center">{usp.title}</h3>
+                    <div className={`px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${usp.color} mx-auto mb-3 inline-block`}>
                       {usp.stat}
                     </div>
+                    
+                    <p className="text-xs text-gray-600 mb-4 text-center leading-tight line-clamp-3">{usp.description}</p>
                   </div>
                   
-                  <p className="text-sm text-gray-600 mb-2">{usp.description}</p>
-                  
-                  <div className="text-xs text-gray-500 flex items-center gap-1 justify-center sm:justify-start">
+                  <div className="text-xs text-gray-500 flex items-center gap-1 justify-center mt-auto">
                     <FaBox className="text-blue-700" />
                     <span>{usp.statLabel}</span>
                   </div>
