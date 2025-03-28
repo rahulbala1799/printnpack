@@ -440,10 +440,10 @@ body {
 
 @layer utilities {
   .animate-sweep-shine {
-    animation: sweep-shine 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation: sweep-shine 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
   
   .animate-pulse-gradient {
-    animation: pulse-gradient 8s ease-in-out infinite;
+    animation: pulse-gradient 12s ease-in-out infinite;
   }
 } 

@@ -84,9 +84,9 @@ const HeroSection = () => {
         {/* Moving particles overlay */}
         <div className="absolute inset-0 bg-particles opacity-20"></div>
         
-        {/* Enhanced sheen/sweep effect - visible on all devices */}
+        {/* Subtle sheen/sweep effect - reduced intensity */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -inset-full w-[200%] h-[200%] bg-gradient-to-r from-transparent via-white to-transparent opacity-40 animate-sweep-shine"></div>
+          <div className="absolute -inset-full w-[200%] h-[200%] bg-gradient-to-r from-transparent via-white to-transparent opacity-20 animate-sweep-shine"></div>
         </div>
       </div>
       
