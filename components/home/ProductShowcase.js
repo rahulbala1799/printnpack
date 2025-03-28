@@ -154,10 +154,7 @@ const ProductShowcase = () => {
         
         {/* Mobile Netflix-style Carousel (hidden on desktop) */}
         <div className="md:hidden mb-4">
-          <div className="relative">
-            {/* Left gradient fade */}
-            <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-            
+          <div className="relative bg-black py-6 rounded-xl">
             {/* Carousel container */}
             <div className="overflow-x-auto no-scrollbar pl-4 -mx-4">
               <div className="flex pb-8 pt-2 gap-4">
@@ -178,10 +175,13 @@ const ProductShowcase = () => {
                       transformStyle: "preserve-3d"
                     }}
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${product.color} opacity-90`}></div>
+                    <div className={`absolute inset-0 bg-gradient-to-br ${product.color} opacity-95`}></div>
+                    
+                    {/* Dark overlay for better contrast */}
+                    <div className="absolute inset-0 bg-black/40"></div>
                     
                     {/* Reflection effect */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent"></div>
                     
                     {/* Content container with better spacing */}
                     <div className="absolute inset-0 flex flex-col items-center justify-between p-6 text-white">
@@ -227,38 +227,38 @@ const ProductShowcase = () => {
               </div>
             </div>
             
-            {/* Right gradient fade */}
-            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
-            
             {/* Scrollbar indicator */}
             <div className="flex justify-center gap-1.5 mt-2">
               {products[activeTab].map((_, index) => (
                 <div 
                   key={index} 
                   className={`h-1.5 rounded-full transition-all ${
-                    index === 0 ? 'w-6 bg-blue-600' : 'w-1.5 bg-gray-300'
+                    index === 0 ? 'w-6 bg-blue-600' : 'w-1.5 bg-gray-400'
                   }`}
                 ></div>
               ))}
             </div>
           </div>
+          
+          {/* Swipe Indicator - only visible inside black background on mobile */}
+          <div className="mt-2 mb-2 text-center">
+            <motion.div 
+              className="inline-flex items-center text-white text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <span>Swipe to browse more products</span>
+            </motion.div>
+          </div>
         </div>
         
-        {/* Swipe Indicator - only visible on mobile */}
-        <div className="mt-4 text-center md:hidden">
-          <motion.div 
-            className="inline-flex items-center text-gray-500 text-sm"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-              <circle cx="12" cy="12" r="3"></circle>
-            </svg>
-            <span>Swipe to browse more products</span>
-          </motion.div>
-        </div>
+        {/* Empty div to replace the previous swipe indicator that was outside the black box */}
+        <div className="mt-4 text-center md:hidden"></div>
         
         {/* View all products button */}
         <div className="mt-10 text-center">

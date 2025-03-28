@@ -7,7 +7,6 @@ import Services from '../components/home/Services';
 import AboutUs from '../components/home/AboutUs';
 import CTA from '../components/home/CTA';
 import Head from 'next/head';
-import MobileProductViewer from '../components/home/MobileProductViewer';
 import PromoBanner from '../components/home/PromoBanner';
 import PrintingTimes from '../components/home/PrintingTimes';
 import { 
@@ -67,7 +66,6 @@ export default function Home() {
       <PromoBanner />
       <ProductShowcase />
       <USPCards data={uspData} />
-      <MobileProductViewer />
       <PrintingTimes />
       <Services />
       <AboutUs />
