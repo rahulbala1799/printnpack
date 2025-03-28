@@ -96,8 +96,8 @@ const ContactPage = () => {
                   <FaPhone className="text-blue-300 mr-4 mt-1" />
                   <div>
                     <h3 className="font-semibold mb-1">Phone</h3>
-                    <p>+91 9843 141 313</p>
-                    <p>+91 44 2345 6789</p>
+                    <p>+353 1 234 5678</p>
+                    <p>+353 1 987 6543</p>
                   </div>
                 </div>
                 
@@ -105,8 +105,8 @@ const ContactPage = () => {
                   <FaEnvelope className="text-blue-300 mr-4 mt-1" />
                   <div>
                     <h3 className="font-semibold mb-1">Email</h3>
-                    <p>sales@printnpack.com</p>
-                    <p>support@printnpack.com</p>
+                    <p>info@printnpack.ie</p>
+                    <p>sales@printnpack.ie</p>
                   </div>
                 </div>
                 

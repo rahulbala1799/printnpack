@@ -56,11 +56,11 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <FaPhone className="mr-2" />
-                <span>+91 9843 141 313</span>
+                <span>+353 1 234 5678</span>
               </li>
               <li className="flex items-center">
                 <FaEnvelope className="mr-2" />
-                <span>printnpack@gmail.com</span>
+                <span>info@printnpack.ie</span>
               </li>
             </ul>
           </div>

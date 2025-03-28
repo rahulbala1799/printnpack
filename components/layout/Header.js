@@ -99,26 +99,26 @@ const Header = () => {
         </div>
         
         {/* Top Bar with Glass effect */}
-        <div className="relative backdrop-blur-sm bg-white/5">
+        <div className="relative backdrop-blur-sm bg-blue-900/90 md:bg-white/5">
           <div className="container mx-auto px-4 py-3 flex justify-between items-center">
             <div className="hidden md:flex items-center space-x-4 text-white">
               <div className="flex items-center">
                 <FaPhone className="mr-2" />
-                <span>+91 9843 141 313</span>
+                <span>+353 1 234 5678</span>
               </div>
               <div className="flex items-center">
                 <FaEnvelope className="mr-2" />
-                <span>printnpack@gmail.com</span>
+                <span>info@printnpack.ie</span>
               </div>
             </div>
             <div className="flex items-center space-x-2 md:space-x-4">
-              <a href="tel:+919843141313" className="text-white md:hidden flex items-center">
+              <a href="tel:+35312345678" className="text-white md:hidden flex items-center">
                 <FaPhone className="text-lg" />
               </a>
-              <a href="mailto:printnpack@gmail.com" className="text-white md:hidden flex items-center">
+              <a href="mailto:info@printnpack.ie" className="text-white md:hidden flex items-center">
                 <FaEnvelope className="text-lg" />
               </a>
-              <Link href="/contact" className="bg-white/20 backdrop-blur-md hover:bg-white/30 text-white px-4 py-2 rounded-lg transition-colors shadow-glow">
+              <Link href="/contact" className="bg-blue-800/80 md:bg-white/20 backdrop-blur-md hover:bg-white/30 text-white px-4 py-2 rounded-lg transition-colors shadow-glow">
                 Contact Us
               </Link>
             </div>
@@ -208,11 +208,11 @@ const Header = () => {
           <div className="space-y-4">
             <div className={`flex items-center opacity-0 ${isOpen ? 'animate-slide-in-left' : ''}`} style={{ animationDelay: '0.35s' }}>
               <FaPhone className="text-blue-200 mr-3" />
-              <a href="tel:+919843141313" className="text-white hover:text-blue-200">+91 9843 141 313</a>
+              <a href="tel:+35312345678" className="text-white hover:text-blue-200">+353 1 234 5678</a>
             </div>
             <div className={`flex items-center opacity-0 ${isOpen ? 'animate-slide-in-left' : ''}`} style={{ animationDelay: '0.4s' }}>
               <FaEnvelope className="text-blue-200 mr-3" />
-              <a href="mailto:printnpack@gmail.com" className="text-white hover:text-blue-200 break-all">printnpack@gmail.com</a>
+              <a href="mailto:info@printnpack.ie" className="text-white hover:text-blue-200 break-all">info@printnpack.ie</a>
             </div>
             <Link 
               href="/contact" 

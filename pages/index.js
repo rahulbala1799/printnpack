@@ -7,6 +7,9 @@ import Services from '../components/home/Services';
 import AboutUs from '../components/home/AboutUs';
 import CTA from '../components/home/CTA';
 import Head from 'next/head';
+import MobileProductViewer from '../components/home/MobileProductViewer';
+import PromoBanner from '../components/home/PromoBanner';
+import TestimonialSlider from '../components/home/TestimonialSlider';
 
 export default function Home() {
   return (
@@ -17,8 +20,11 @@ export default function Home() {
       </Head>
       
       <HeroSection />
-      <USPCards />
+      <PromoBanner />
       <ProductShowcase />
+      <USPCards />
+      <MobileProductViewer />
+      <TestimonialSlider />
       <Services />
       <AboutUs />
       <CTA />
