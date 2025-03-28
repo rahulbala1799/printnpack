@@ -10,7 +10,6 @@ const HeroSection = () => {
       subtitle: "Locally sourced packaging that enhances your brand value & customer experience",
       cta: "Get Your Custom Quote Today",
       product: "Pizza Box",
-      color: "from-red-600 to-red-900",
       benefits: ["Elevates your product presentation", "Boosts perceived value", "Enhances customer experience"],
       imageSrc: "/images/hero/pizza-box.png"
     },
@@ -19,7 +18,6 @@ const HeroSection = () => {
       subtitle: "SAME-DAY PRINTING available - Irish-made bags that turn customers into loyal fans",
       cta: "Request Free Samples Now",
       product: "Paper Bag",
-      color: "from-green-600 to-green-900",
       benefits: ["Increases repeat purchases", "Strengthens brand perception", "Eco-friendly marketing tool"],
       imageSrc: "/images/hero/paper-bag.png"
     },
@@ -28,7 +26,6 @@ const HeroSection = () => {
       subtitle: "Stand out from competitors with premium eco-friendly packaging",
       cta: "Elevate Your Packaging Today",
       product: "Bagasse Box",
-      color: "from-amber-500 to-amber-700",
       benefits: ["Improves customer perception", "Supports your green initiatives", "Creates Instagram-worthy presentations"],
       imageSrc: "/images/hero/burger-box.png"
     },
@@ -37,7 +34,6 @@ const HeroSection = () => {
       subtitle: "SAME-DAY PRINTING available - Convert prospects into customers with high-impact designs",
       cta: "Boost Your Marketing Now",
       product: "Leaflet",
-      color: "from-blue-500 to-blue-800",
       benefits: ["Increases response rates", "Drives store traffic", "Boosts campaign ROI"],
       imageSrc: "/images/hero/leaflet.png"
     },
@@ -46,13 +42,13 @@ const HeroSection = () => {
       subtitle: "SAME-DAY PRINTING available - Turn everyday items into powerful marketing tools",
       cta: "Enhance Your Brand Today",
       product: "Napkin",
-      color: "from-purple-500 to-purple-800",
       benefits: ["Improves customer experience", "Reinforces brand identity", "Low cost, high impact marketing"],
       imageSrc: "/images/hero/napkin.png"
     }
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -60,11 +56,40 @@ const HeroSection = () => {
     }, 5000);
     return () => clearInterval(interval);
   }, [slides.length]);
+  
+  // Track mouse position for gradient effect
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      // Calculate mouse position as percentage of screen width/height
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      setMousePosition({ x, y });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+  
+  // Calculate dynamic gradient position based on mouse movement
+  const gradientStyle = {
+    backgroundImage: `
+      radial-gradient(
+        circle at ${mousePosition.x}% ${Math.min(mousePosition.y, 30)}%, 
+        rgba(37, 99, 235, 0.9) 0%, 
+        rgba(30, 58, 138, 0.95) 50%, 
+        rgba(23, 37, 84, 1) 100%
+      )
+    `,
+    backgroundSize: '200% 200%',
+  };
 
   return (
     <div className="relative w-full overflow-hidden">
-      {/* Gradient background that changes with slides */}
-      <div className={`absolute inset-0 bg-gradient-to-r ${slides[currentSlide].color} opacity-90 transition-all duration-1000 ease-in-out`} />
+      {/* Blue gradient background with particles */}
+      <div className="absolute inset-0 animate-gradient-slow" style={gradientStyle}>
+        {/* Moving particles overlay */}
+        <div className="absolute inset-0 bg-particles opacity-20"></div>
+      </div>
       
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col-reverse md:flex-row items-center py-12 md:py-24">
@@ -114,7 +139,7 @@ const HeroSection = () => {
                 <Link href="/quote" className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-black shadow-sm hover:bg-gray-900 transition transform hover:scale-105 duration-200">
                   {slides[currentSlide].cta}
                 </Link>
-                <a href="tel:+919843141313" className="inline-flex items-center justify-center px-5 py-3 border border-white text-base font-medium rounded-md text-white hover:bg-white hover:text-gray-900 transition transform hover:scale-105 duration-200">
+                <a href="tel:+919843141313" className="inline-flex items-center justify-center px-5 py-3 border border-white text-base font-medium rounded-md text-white hover:bg-white/10 transition transform hover:scale-105 duration-200">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                   </svg>
