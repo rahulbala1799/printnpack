@@ -106,22 +106,29 @@ const HeroSection = () => {
             <span className="font-extrabold text-yellow-300 underline decoration-2 decoration-yellow-300 underline-offset-2">FLASH SALE:</span>
           </span>
           
-          <span className="font-bold px-2 py-0.5 bg-white/20 rounded">15% OFF ALL ORDERS TODAY</span>
+          <span className="font-bold px-2 py-0.5 bg-white/30 rounded">15% OFF ALL ORDERS TODAY</span>
           
           <span className="flex items-center gap-2">
             <span className="hidden sm:inline">•</span>
-            <span>ENDS IN:</span>
-            <span className="bg-black/30 backdrop-blur-sm rounded px-2 py-1 text-white font-mono tracking-tight">
+            <span className="font-semibold">ENDS IN:</span>
+            <span className="bg-black/50 backdrop-blur-sm rounded px-2 py-1 text-white font-mono tracking-tight">
               {hours}h {minutes}m {seconds}s
             </span>
           </span>
           
+          {/* Mobile contact button */}
+          <span className="sm:hidden mt-1">
+            <Link href="/contact" className="inline-block bg-white/30 hover:bg-white/40 text-white font-bold py-1 px-3 rounded-lg transition-colors duration-200">
+              CONTACT US
+            </Link>
+          </span>
+          
           <span className="hidden sm:flex items-center">
             <span className="mx-2">•</span>
-            <span className="whitespace-nowrap relative inline-block group">
-              <span className="font-bold tracking-wider relative z-10 group-hover:text-yellow-300 transition-colors duration-300">ORDER NOW</span>
-              <span className="absolute bottom-0 left-0 w-full h-1 bg-white/30 group-hover:bg-yellow-300 transition-colors duration-300"></span>
-            </span>
+            <Link href="/contact" className="whitespace-nowrap relative inline-block group">
+              <span className="font-bold tracking-wider relative z-10 group-hover:text-yellow-300 transition-colors duration-300">CONTACT US</span>
+              <span className="absolute bottom-0 left-0 w-full h-1 bg-white/50 group-hover:bg-yellow-300 transition-colors duration-300"></span>
+            </Link>
             <span className="inline-block animate-pulse ml-1">🔥</span>
           </span>
         </div>
