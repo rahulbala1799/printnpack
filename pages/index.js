@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '../components/layout/Layout';
 import HeroSection from '../components/home/Hero';
 import ProductShowcase from '../components/home/ProductShowcase';
-import FeaturedProducts from '../components/home/FeaturedProducts';
+import USPCards from '../components/home/USPCards';
 import Services from '../components/home/Services';
 import AboutUs from '../components/home/AboutUs';
 import CTA from '../components/home/CTA';
@@ -17,8 +17,8 @@ export default function Home() {
       </Head>
       
       <HeroSection />
+      <USPCards />
       <ProductShowcase />
-      <FeaturedProducts />
       <Services />
       <AboutUs />
       <CTA />
