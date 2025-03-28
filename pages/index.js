@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '../components/layout/Layout';
 import HeroSection from '../components/home/Hero';
+import ProductShowcase from '../components/home/ProductShowcase';
 import FeaturedProducts from '../components/home/FeaturedProducts';
 import Services from '../components/home/Services';
 import AboutUs from '../components/home/AboutUs';
@@ -16,6 +17,7 @@ export default function Home() {
       </Head>
       
       <HeroSection />
+      <ProductShowcase />
       <FeaturedProducts />
       <Services />
       <AboutUs />
