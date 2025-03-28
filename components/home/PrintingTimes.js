@@ -187,9 +187,9 @@ const PrintingTimes = () => {
                 {/* Top color band */}
                 <div className={`h-2 bg-gradient-to-r ${item.color}`}></div>
                 
-                <div className="p-6">
-                  {/* Icon with animated background pulse */}
-                  <div className="relative mb-4 inline-block">
+                <div className="p-6 text-center md:text-left">
+                  {/* Icon with animated background pulse - centered on mobile */}
+                  <div className="relative mb-4 inline-block mx-auto md:mx-0 flex justify-center md:justify-start w-full">
                     <div className={`h-16 w-16 rounded-full bg-gradient-to-r ${item.color} bg-opacity-20 flex items-center justify-center`}>
                       <span className="text-3xl">{item.icon}</span>
                     </div>
@@ -211,17 +211,17 @@ const PrintingTimes = () => {
                     )}
                   </div>
                   
-                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                  <h3 className="text-xl font-bold mb-2 text-center md:text-left">{item.title}</h3>
                   
                   {/* Delivery time with gradient text */}
-                  <div className={`text-3xl font-extrabold mb-3 bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}>
+                  <div className={`text-3xl font-extrabold mb-3 bg-gradient-to-r ${item.color} bg-clip-text text-transparent text-center md:text-left`}>
                     {item.time}
                   </div>
                   
-                  <p className="text-gray-600 mb-4">{item.description}</p>
+                  <p className="text-gray-600 mb-4 text-center md:text-left">{item.description}</p>
                   
                   {/* Footer with availability info */}
-                  <div className="mt-auto pt-4 border-t border-gray-100 flex items-center text-sm text-gray-500">
+                  <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-center md:justify-start text-sm text-gray-500">
                     <span className="inline-block h-2 w-2 rounded-full bg-green-500 mr-2"></span>
                     Available for all volumes
                   </div>

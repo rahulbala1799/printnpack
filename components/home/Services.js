@@ -26,9 +26,9 @@ const ServiceCard = ({ icon: Icon, title, description, color, index }) => {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 p-6">
+      <div className="relative z-10 p-6 sm:text-center md:text-left">
         <motion.div 
-          className={`mb-4 bg-opacity-20 rounded-full w-16 h-16 flex items-center justify-center ${color.includes('blue') ? 'bg-blue-100' : color.includes('green') ? 'bg-green-100' : color.includes('amber') ? 'bg-amber-100' : color.includes('red') ? 'bg-red-100' : 'bg-purple-100'}`}
+          className={`mb-4 bg-opacity-20 rounded-full w-16 h-16 flex items-center justify-center mx-auto md:mx-0 ${color.includes('blue') ? 'bg-blue-100' : color.includes('green') ? 'bg-green-100' : color.includes('amber') ? 'bg-amber-100' : color.includes('red') ? 'bg-red-100' : 'bg-purple-100'}`}
           animate={{ 
             rotate: isHovered ? [0, 10, -10, 10, 0] : 0,
             scale: isHovered ? 1.1 : 1
