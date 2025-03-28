@@ -44,6 +44,14 @@ const ProductShowcase = () => {
       features: ['Multiple ply options', 'Custom printing', 'Eco-friendly options'],
       imageSrc: '/images/hero/napkin.png',
       textColor: 'text-purple-600'
+    },
+    {
+      id: 'wide-format-printing',
+      name: 'Wide Format Printing',
+      description: 'Eye-catching large format prints for banners, posters, and promotional displays.',
+      features: ['High resolution', 'Weather-resistant', 'Indoor & outdoor options'],
+      imageSrc: '/images/hero/napkin.png',
+      textColor: 'text-indigo-600'
     }
   ];
 
@@ -76,13 +84,13 @@ const ProductShowcase = () => {
                     </div>
                   )}
                 </div>
-                <h3 className={`text-lg sm:text-xl font-bold ${product.textColor}`}>{product.name}</h3>
-                <p className="mt-2 text-sm sm:text-base text-gray-600">{product.description}</p>
+                <h3 className={`text-lg sm:text-xl font-bold ${product.textColor} text-center`}>{product.name}</h3>
+                <p className="mt-2 text-sm sm:text-base text-gray-600 text-center">{product.description}</p>
                 
                 <ul className="mt-3 sm:mt-4 space-y-1 sm:space-y-2">
                   {product.features.map((feature, index) => (
-                    <li key={index} className="flex items-start md:items-center">
-                      <svg className={`h-4 w-4 sm:h-5 sm:w-5 ${product.textColor} mr-1 sm:mr-2 mt-0.5 md:mt-0 flex-shrink-0`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <li key={index} className="flex items-start justify-center md:justify-start">
+                      <svg className={`h-4 w-4 sm:h-5 sm:w-5 ${product.textColor} mr-1 sm:mr-2 mt-0.5 flex-shrink-0`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                       <span className="text-sm sm:text-base text-gray-700">{feature}</span>
@@ -90,7 +98,7 @@ const ProductShowcase = () => {
                   ))}
                 </ul>
                 
-                <div className="mt-5 sm:mt-6 flex justify-center md:justify-start space-x-3 sm:space-x-4">
+                <div className="mt-5 sm:mt-6 flex justify-center space-x-3 sm:space-x-4">
                   <Link href={`/products/${product.id}`} className={`flex-1 text-center py-2 px-3 sm:px-4 border border-transparent rounded-md shadow-sm text-xs sm:text-sm font-medium text-white bg-gray-900 hover:bg-gray-800 transition-colors duration-200`}>
                     Learn More
                   </Link>
