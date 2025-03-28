@@ -13,7 +13,7 @@ export default function Home() {
     <Layout>
       <Head>
         <title>Print N Pack - Premium Packaging Solutions</title>
-        <meta name="description" content="Print N Pack provides high-quality packaging solutions for businesses across India. From custom designs to eco-friendly options, we've got you covered." />
+        <meta name="description" content="Print N Pack provides high-quality packaging solutions for businesses across Ireland. From custom designs to eco-friendly options, we've got you covered." />
       </Head>
       
       <HeroSection />

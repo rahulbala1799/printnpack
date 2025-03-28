@@ -87,8 +87,8 @@ const ContactPage = () => {
                   <FaMapMarkerAlt className="text-blue-300 mr-4 mt-1" />
                   <div>
                     <h3 className="font-semibold mb-1">Our Office</h3>
-                    <p>123 Packaging Street, Chennai</p>
-                    <p>Tamil Nadu, India 600001</p>
+                    <p>123 Packaging Street, Dublin</p>
+                    <p>County Dublin, Ireland D01 AB12</p>
                   </div>
                 </div>
                 

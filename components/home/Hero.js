@@ -92,7 +92,7 @@ const HeroSection = () => {
               <div className="bg-black/40 backdrop-blur-sm rounded-lg py-2 px-4 inline-block mb-4">
                 <div className="flex items-center space-x-1">
                   <span className="text-yellow-400">★★★★★</span>
-                  <span className="text-white text-sm font-medium">Trusted by Indian and Global Businesses</span>
+                  <span className="text-white text-sm font-medium">Trusted by Irish and European Businesses</span>
                 </div>
               </div>
               
@@ -151,7 +151,7 @@ const HeroSection = () => {
             
             {/* USP Pills */}
             <div className="flex flex-wrap gap-2 mt-8 animate-fade-in-delayed justify-center md:justify-start">
-              <span className="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm">🇮🇳 Made in India</span>
+              <span className="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm">🇮🇪 Made in Ireland</span>
               {(currentSlide === 1 || currentSlide === 3 || currentSlide === 4) ? (
                 <span className="bg-black text-white px-3 py-1 rounded-full text-sm font-bold">⚡ SAME-DAY PRINTING</span>
               ) : (

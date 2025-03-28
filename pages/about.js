@@ -110,13 +110,13 @@ const AboutPage = () => {
               <h2 className="text-3xl font-bold text-gray-800 mb-4">Our Story</h2>
               <div className="w-20 h-1 bg-blue-600 mb-6"></div>
               <p className="text-gray-600 mb-4">
-                Founded in 2010, PrintNPack began as a small family-owned business with a vision to revolutionize the packaging industry in India. What started as a modest operation has now grown into one of the leading packaging solution providers in the country.
+                Founded in 2010, PrintNPack began as a small family-owned business with a vision to revolutionize the packaging industry in Ireland. What started as a modest operation has now grown into one of the leading packaging solution providers in the country.
               </p>
               <p className="text-gray-600 mb-4">
-                Our journey began when our founder, Rajesh Kumar, recognized the need for high-quality, sustainable packaging solutions in the Indian market. With an initial focus on food packaging, we quickly expanded our product range to serve various industries.
+                Our journey began when our founder, Rajesh Kumar, recognized the need for high-quality, sustainable packaging solutions in the Irish market. With an initial focus on food packaging, we quickly expanded our product range to serve various industries.
               </p>
               <p className="text-gray-600 mb-4">
-                Today, PrintNPack operates a state-of-the-art manufacturing facility in Chennai, equipped with the latest technology to produce innovative packaging solutions. Our team of experienced professionals works tirelessly to deliver products that meet the highest standards of quality and sustainability.
+                Today, PrintNPack operates a state-of-the-art manufacturing facility in Dublin, equipped with the latest technology to produce innovative packaging solutions. Our team of experienced professionals works tirelessly to deliver products that meet the highest standards of quality and sustainability.
               </p>
               <p className="text-gray-600">
                 We take pride in our ability to combine traditional craftsmanship with modern technology, creating packaging solutions that not only protect products but also enhance brand value and customer experience.
@@ -148,7 +148,7 @@ const AboutPage = () => {
             <div className="bg-white rounded-lg shadow-md p-8">
               <h3 className="text-2xl font-bold text-blue-700 mb-4">Our Vision</h3>
               <p className="text-gray-600 mb-4">
-                To become the leading provider of sustainable packaging solutions in India and beyond, recognized for our innovation, quality, and commitment to environmental stewardship.
+                To become the leading provider of sustainable packaging solutions in Ireland and beyond, recognized for our innovation, quality, and commitment to environmental stewardship.
               </p>
               <p className="text-gray-600">
                 We envision a future where all packaging is designed with both performance and planet in mind, and we are dedicated to making this vision a reality through continuous improvement and technological advancement.

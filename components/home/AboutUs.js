@@ -46,9 +46,9 @@ const AboutUs = () => {
           
           <div className="md:w-1/2">
             <h2 className="text-3xl font-bold text-blue-900 mb-4">About PrintNPack</h2>
-            <p className="text-gray-600 mb-6">
-              With over 15 years of experience in the packaging industry, PrintNPack has established itself as a 
-              leader in providing innovative and sustainable packaging solutions for businesses across India.
+            <p className="text-lg text-gray-600 mb-6">
+              PrintNPack was founded in 2010 with a vision to become a 
+              leader in providing innovative and sustainable packaging solutions for businesses across Ireland.
             </p>
             <p className="text-gray-600 mb-6">
               Our state-of-the-art facility in Chennai combined with our expert team allows us to deliver 
