@@ -1,7 +1,95 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { FaPhone, FaEnvelope, FaBars, FaTimes, FaChevronRight, FaHome, FaInfoCircle, FaBoxOpen, FaTools, FaPhoneAlt } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { 
+  FaPhone, 
+  FaEnvelope, 
+  FaBars, 
+  FaTimes, 
+  FaChevronRight, 
+  FaHome, 
+  FaInfoCircle, 
+  FaBoxOpen, 
+  FaTools, 
+  FaPhoneAlt,
+  FaPrint,
+  FaTruck,
+  FaRecycle,
+  FaShoppingBag,
+  FaPizzaSlice,
+  FaLeaf
+} from 'react-icons/fa';
+import { BsFillDropletFill } from 'react-icons/bs';
+import { IoColorPaletteSharp } from 'react-icons/io5';
+
+// Logo Component with CMYK colored drops
+const Logo = ({ scrolled }) => {
+  // CMYK colors - darker, more vibrant versions
+  const cyanColor = "#00CCCC";
+  const magentaColor = "#CC00CC";
+  const yellowColor = "#CCCC00";
+  const keyColor = "#000000";
+  
+  const dropVariants = {
+    hover: {
+      y: [0, -5, 0],
+      transition: {
+        duration: 1.2,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+  
+  return (
+    <motion.div 
+      className="flex items-center gap-2"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      whileHover="hover"
+    >
+      <div className="relative">
+        <div className="flex">
+          <motion.div
+            variants={dropVariants}
+            className="relative z-10"
+            transition={{ delay: 0 }}
+          >
+            <BsFillDropletFill className="text-2xl" style={{ color: cyanColor }} />
+          </motion.div>
+          <motion.div
+            variants={dropVariants}
+            className="relative z-20 -ml-1 mt-1"
+            transition={{ delay: 0.1 }}
+          >
+            <BsFillDropletFill className="text-2xl" style={{ color: magentaColor }} />
+          </motion.div>
+          <motion.div
+            variants={dropVariants}
+            className="relative z-30 -ml-1"
+            transition={{ delay: 0.2 }}
+          >
+            <BsFillDropletFill className="text-2xl" style={{ color: yellowColor }} />
+          </motion.div>
+          <motion.div
+            variants={dropVariants}
+            className="relative z-40 -ml-1 mt-1"
+            transition={{ delay: 0.3 }}
+          >
+            <BsFillDropletFill className="text-2xl" style={{ color: keyColor }} />
+          </motion.div>
+        </div>
+      </div>
+      <div className={`font-extrabold transition-all duration-300 ${scrolled ? 'text-xl' : 'text-2xl'}`}>
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-900">Print</span>
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-blue-600">N</span>
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-900">Pack</span>
+      </div>
+    </motion.div>
+  );
+};
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -128,9 +216,7 @@ const Header = () => {
         {/* Main Navigation with Glass effect */}
         <div className={`relative backdrop-blur-md bg-white/90 py-4 transition-all duration-300 shadow-md ${scrolled ? 'py-2' : ''}`}>
           <div className="container mx-auto px-4 flex justify-between items-center">
-            <div className="text-2xl font-bold text-blue-900">
-              <span className="text-gradient">PrintNPack</span>
-            </div>
+            <Logo scrolled={scrolled} />
             
             {/* Desktop Navigation */}
             <nav className="hidden md:block">
@@ -173,7 +259,17 @@ const Header = () => {
         }`}
       >
         <div className="flex justify-between items-center p-6 border-b border-white/20">
-          <div className="text-xl font-bold text-white">PrintNPack</div>
+          <div className="flex items-center gap-2">
+            <div className="flex">
+              <BsFillDropletFill className="text-xl" style={{ color: "#00CCCC" }} />
+              <BsFillDropletFill className="text-xl -ml-1 mt-0.5" style={{ color: "#CC00CC" }} />
+              <BsFillDropletFill className="text-xl -ml-1" style={{ color: "#CCCC00" }} />
+              <BsFillDropletFill className="text-xl -ml-1 mt-0.5" style={{ color: "#000000" }} />
+            </div>
+            <div className="text-xl font-bold text-white">
+              <span className="text-gradient-white">PrintNPack</span>
+            </div>
+          </div>
           <button
             aria-label="Close Menu"
             className="p-2 text-white focus:outline-none"
