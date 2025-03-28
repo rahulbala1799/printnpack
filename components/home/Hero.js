@@ -76,40 +76,27 @@ const HeroSection = () => {
 
   return (
     <div className="relative w-full overflow-hidden">
-      {/* Urgent offer banner */}
-      <div style={{backgroundColor: "black"}} className="text-yellow-400 py-3 px-4 text-center font-bold text-base sm:text-lg shadow-lg z-50">
-        {/* Content */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
-          <span className="flex items-center">
-            <span className="inline-block animate-pulse mr-2">🔥</span>
-            <span style={{color: "#FACC15"}} className="font-extrabold underline decoration-2 underline-offset-2">FLASH SALE:</span>
-          </span>
-          
-          <span style={{backgroundColor: "#78350F", color: "#FCD34D"}} className="font-bold px-2 py-0.5 rounded">15% OFF ALL ORDERS TODAY</span>
-          
-          <span className="flex items-center gap-2">
-            <span style={{color: "#FACC15"}} className="hidden sm:inline">•</span>
-            <span style={{color: "#FACC15"}} className="font-semibold">ENDS IN:</span>
-            <span style={{backgroundColor: "#78350F", color: "#FCD34D"}} className="rounded px-2 py-1 font-mono tracking-tight">
-              {hours}h {minutes}m {seconds}s
-            </span>
-          </span>
-          
-          {/* Mobile contact button */}
-          <span className="sm:hidden mt-1">
-            <Link href="/contact" style={{backgroundColor: "#EAB308", color: "black"}} className="inline-block font-bold py-1 px-3 rounded-lg transition-colors duration-200 hover:bg-yellow-400">
-              CONTACT US
-            </Link>
-          </span>
-          
-          <span className="hidden sm:flex items-center">
-            <span style={{color: "#FACC15"}} className="mx-2">•</span>
-            <Link href="/contact" className="whitespace-nowrap relative inline-block group">
-              <span style={{color: "#FACC15"}} className="font-bold tracking-wider relative z-10 group-hover:text-yellow-300 transition-colors duration-300">CONTACT US</span>
-              <span style={{backgroundColor: "#CA8A04"}} className="absolute bottom-0 left-0 w-full h-1 group-hover:bg-yellow-500 transition-colors duration-300"></span>
-            </Link>
-            <span className="inline-block animate-pulse ml-1">🔥</span>
-          </span>
+      {/* Black overlay for the flash sale banner */}
+      <div style={{
+        backgroundColor: "black", 
+        width: "100%", 
+        position: "relative",
+        zIndex: 9999,
+        opacity: 1,
+        margin: 0,
+        padding: 0
+      }}>
+        <div style={{
+          backgroundColor: "black", 
+          color: "#FACC15",
+          padding: "16px 10px",
+          textAlign: "center",
+          fontWeight: "bold",
+          fontSize: "18px",
+          width: "100%",
+          opacity: 1
+        }}>
+          🔥 FLASH SALE: 15% OFF ALL ORDERS TODAY • ENDS IN: {hours}h {minutes}m {seconds}s • <Link href="/contact" style={{color: "#FACC15", textDecoration: "underline"}}>CONTACT US</Link> 🔥
         </div>
       </div>
       
