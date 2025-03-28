@@ -25,28 +25,12 @@ import {
 import { BsFillDropletFill, BsBox } from 'react-icons/bs';
 import { IoColorPaletteSharp } from 'react-icons/io5';
 
-// Logo Component with CMYK colored drops and box icon
+// Logo Component with package box icon
 const Logo = ({ scrolled }) => {
-  // CMYK colors - darker, more vibrant versions
-  const cyanColor = "#00CCCC";
-  const magentaColor = "#CC00CC";
-  const yellowColor = "#CCCC00";
-  const keyColor = "#000000";
-  
-  const dropVariants = {
-    hover: {
-      y: [0, -5, 0],
-      transition: {
-        duration: 1.2,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
-  
   const boxVariants = {
     hover: {
       rotateY: [0, 15, 0, -15, 0],
+      scale: [1, 1.1, 1],
       transition: {
         duration: 2,
         repeat: Infinity,
@@ -57,56 +41,21 @@ const Logo = ({ scrolled }) => {
   
   return (
     <motion.div 
-      className="flex items-center gap-2"
+      className="flex items-center gap-3"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
       whileHover="hover"
     >
-      <div className="flex items-center">
-        <div className="relative mr-1">
-          <div className="flex">
-            <motion.div
-              variants={dropVariants}
-              className="relative z-10"
-              transition={{ delay: 0 }}
-            >
-              <BsFillDropletFill className="text-2xl" style={{ color: cyanColor }} />
-            </motion.div>
-            <motion.div
-              variants={dropVariants}
-              className="relative z-20 -ml-1 mt-1"
-              transition={{ delay: 0.1 }}
-            >
-              <BsFillDropletFill className="text-2xl" style={{ color: magentaColor }} />
-            </motion.div>
-            <motion.div
-              variants={dropVariants}
-              className="relative z-30 -ml-1"
-              transition={{ delay: 0.2 }}
-            >
-              <BsFillDropletFill className="text-2xl" style={{ color: yellowColor }} />
-            </motion.div>
-            <motion.div
-              variants={dropVariants}
-              className="relative z-40 -ml-1 mt-1"
-              transition={{ delay: 0.3 }}
-            >
-              <BsFillDropletFill className="text-2xl" style={{ color: keyColor }} />
-            </motion.div>
-          </div>
-        </div>
-        
-        {/* Box icon for packaging */}
-        <motion.div
-          variants={boxVariants}
-          className="relative mr-2"
-          transition={{ delay: 0.2 }}
-          style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
-        >
-          <FaBox className="text-2xl text-blue-700" />
-        </motion.div>
-      </div>
+      {/* Box icon for packaging */}
+      <motion.div
+        variants={boxVariants}
+        className="relative"
+        transition={{ delay: 0.2 }}
+        style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
+      >
+        <FaBox className="text-3xl text-blue-700" />
+      </motion.div>
       
       <div className={`font-extrabold transition-all duration-300 ${scrolled ? 'text-xl' : 'text-2xl'}`}>
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-900">Print</span>
@@ -285,16 +234,8 @@ const Header = () => {
         }`}
       >
         <div className="flex justify-between items-center p-6 border-b border-white/20">
-          <div className="flex items-center gap-2">
-            <div className="flex items-center">
-              <div className="flex mr-1">
-                <BsFillDropletFill className="text-xl" style={{ color: "#00CCCC" }} />
-                <BsFillDropletFill className="text-xl -ml-1 mt-0.5" style={{ color: "#CC00CC" }} />
-                <BsFillDropletFill className="text-xl -ml-1" style={{ color: "#CCCC00" }} />
-                <BsFillDropletFill className="text-xl -ml-1 mt-0.5" style={{ color: "#000000" }} />
-              </div>
-              <FaBox className="text-xl text-white mr-2" />
-            </div>
+          <div className="flex items-center gap-3">
+            <FaBox className="text-2xl text-white" />
             <div className="text-xl font-bold text-white">
               <span className="text-gradient-white">PrintNPack</span>
             </div>
