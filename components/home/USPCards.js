@@ -1,8 +1,9 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react';
-import { FaLeaf, FaClock, FaBoxOpen, FaCheck } from 'react-icons/fa';
+import { FaLeaf, FaClock, FaBoxOpen, FaCheck, FaTruck, FaRecycle, FaMedal, FaRegClock, FaCube, FaHandshake } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
-const USPCards = () => {
+const USPCards = ({ data }) => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   
@@ -28,25 +29,13 @@ const USPCards = () => {
     };
   }, []);
 
-  const uspData = [
+  // Use data from props if provided, otherwise use default data
+  const defaultUspData = [
     {
       id: 'irish-made',
-      icon: (
-        <div className="relative">
-          <div className="h-16 w-16 rounded-full bg-green-500/20 flex items-center justify-center">
-            <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-green-500">
-              <rect x="4" y="4" width="40" height="40" rx="4" fill="currentColor" />
-              <rect x="4" y="4" width="13.33" height="40" fill="white" />
-              <rect x="30.67" y="4" width="13.33" height="40" fill="#FF7900" />
-            </svg>
-          </div>
-          <div className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-white flex items-center justify-center animate-pulse">
-            <span className="text-green-600 text-xs">🍀</span>
-          </div>
-        </div>
-      ),
-      title: 'Proudly Irish-Sourced & Printed',
-      description: 'All our packaging materials are locally sourced and printed here in Ireland, ensuring superior quality control, faster turnaround, and supporting the local economy.',
+      icon: <FaHandshake className="text-4xl text-green-600 icon-hover" />,
+      title: 'Proudly Irish-Owned & Operated',
+      description: 'Supporting the local economy with Irish-made packaging solutions for businesses across the country.',
       stat: '100%',
       statLabel: 'Irish production',
       color: 'from-green-500 to-green-700',
@@ -54,18 +43,9 @@ const USPCards = () => {
     },
     {
       id: 'exclusive',
-      icon: (
-        <div className="relative">
-          <div className="h-16 w-16 rounded-full bg-blue-500/20 flex items-center justify-center">
-            <FaLeaf className="h-8 w-8 text-blue-500" />
-          </div>
-          <div className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-white flex items-center justify-center">
-            <FaCheck className="h-3 w-3 text-blue-600" />
-          </div>
-        </div>
-      ),
-      title: 'Exclusive Printing Technologies',
-      description: 'We\'re the only printer worldwide offering specialized printing on eco-friendly materials like bagasse burger boxes and other sustainable packaging solutions.',
+      icon: <FaLeaf className="text-4xl text-blue-600 icon-hover" />,
+      title: 'Eco-Friendly Materials',
+      description: 'Sustainable packaging options that reduce environmental impact without compromising on quality.',
       stat: '100%',
       statLabel: 'biodegradable options',
       color: 'from-blue-500 to-blue-700',
@@ -73,43 +53,28 @@ const USPCards = () => {
     },
     {
       id: 'low-moq',
-      icon: (
-        <div className="relative">
-          <div className="h-16 w-16 rounded-full bg-amber-500/20 flex items-center justify-center">
-            <FaBoxOpen className="h-8 w-8 text-amber-500" />
-          </div>
-          <div className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-white flex items-center justify-center">
-            <span className="text-amber-600 text-xs font-bold">500</span>
-          </div>
-        </div>
-      ),
-      title: 'Industry-Leading Low MOQs',
-      description: 'We believe quality packaging should be accessible to businesses of all sizes, with minimum orders starting at just 500 pieces.',
-      stat: '500',
-      statLabel: 'piece minimum',
+      icon: <FaBoxOpen className="text-4xl text-amber-600 icon-hover" />,
+      title: 'Low Minimum Orders',
+      description: 'Custom packaging accessible to businesses of all sizes with minimums starting at just 100 units.',
+      stat: '100',
+      statLabel: 'unit minimum',
       color: 'from-amber-500 to-amber-700',
       delay: 200
     },
     {
       id: 'fast-delivery',
-      icon: (
-        <div className="relative">
-          <div className="h-16 w-16 rounded-full bg-purple-500/20 flex items-center justify-center">
-            <FaClock className="h-8 w-8 text-purple-500" />
-          </div>
-          <div className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-white flex items-center justify-center animate-spin-slow">
-            <span className="text-purple-600 text-xs font-bold">10×</span>
-          </div>
-        </div>
-      ),
-      title: 'Lightning-Fast Delivery',
-      description: 'While the industry standard is 8-12 weeks, we proudly deliver your custom packaging in just 8-12 days without compromising on quality.',
-      stat: '10×',
-      statLabel: 'faster than industry standard',
+      icon: <FaTruck className="text-4xl text-purple-600 icon-hover" />,
+      title: 'Weekly Delivery Service',
+      description: 'Our unique weekly printing and delivery system ensures you never run out of essential packaging.',
+      stat: '52',
+      statLabel: 'deliveries per year',
       color: 'from-purple-500 to-purple-700',
       delay: 300
     }
   ];
+  
+  // Use the data prop if provided, otherwise use the default data
+  const displayData = data || defaultUspData;
 
   return (
     <section ref={sectionRef} className="relative py-16 overflow-hidden">
@@ -120,35 +85,44 @@ const USPCards = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900">Why Choose PrintNPack?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose PrintNPack?</h2>
+          <div className="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
           <p className="mt-2 text-xl text-gray-600 max-w-3xl mx-auto">
             Our unique advantages set us apart from the competition
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-          {uspData.map((usp, index) => (
-            <div 
-              key={usp.id}
-              className={`relative bg-white bg-opacity-70 backdrop-blur-md rounded-xl shadow-lg overflow-hidden transform transition-all duration-500 hover:-translate-y-2 hover:shadow-xl ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ 
-                transitionDelay: `${usp.delay}ms`,
-                borderTop: '3px solid',
-                borderImage: `linear-gradient(to right, rgb(var(--${usp.id}-color-start)), rgb(var(--${usp.id}-color-end))) 1`
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mt-8">
+          {displayData.map((usp, index) => (
+            <motion.div 
+              key={index}
+              className="relative bg-white rounded-xl shadow-lg overflow-hidden"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ 
+                duration: 0.5, 
+                delay: index * 0.1,
+                ease: [0.43, 0.13, 0.23, 0.96] 
+              }}
+              whileHover={{ 
+                y: -8,
+                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)" 
               }}
             >
-              {/* Subtle gradient background */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${usp.color} opacity-5`}></div>
+              {/* Top gradient bar */}
+              <div className={`h-2 bg-gradient-to-r ${typeof usp.color === 'string' ? usp.color : 'from-blue-500 to-blue-700'}`}></div>
               
               <div className="p-6 relative">
                 {/* Icon and title */}
-                <div className="flex flex-col items-center mb-4">
-                  <div className="mb-4 transform transition-transform duration-700 hover:scale-110">
+                <div className="flex flex-col items-center mt-6 mb-4">
+                  <motion.div 
+                    className="mb-6"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
                     {usp.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-800 text-center">{usp.title}</h3>
+                  </motion.div>
+                  <h3 className="text-xl font-bold text-gray-800 text-center mb-2">{usp.title}</h3>
                 </div>
                 
                 {/* Stat */}
@@ -162,9 +136,9 @@ const USPCards = () => {
                 </div>
                 
                 {/* Description */}
-                <p className="text-gray-600 text-center">{usp.description}</p>
+                <p className="text-gray-600 text-center px-4 mb-6">{usp.description}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
