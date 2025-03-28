@@ -70,23 +70,17 @@ const HeroSection = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
   
-  // Calculate dynamic gradient position based on mouse movement with darker blues
+  // Store mouse position as CSS variables to be used by the animation
   const gradientStyle = {
-    backgroundImage: `
-      radial-gradient(
-        circle at ${mousePosition.x}% ${Math.min(mousePosition.y, 30)}%, 
-        rgba(30, 64, 175, 0.95) 0%, 
-        rgba(23, 37, 84, 0.98) 50%, 
-        rgba(15, 23, 42, 1) 100%
-      )
-    `,
+    '--mouse-x': `${mousePosition.x}%`,
+    '--mouse-y': `${Math.min(mousePosition.y, 30)}%`,
     backgroundSize: '200% 200%',
   };
 
   return (
     <div className="relative w-full overflow-hidden">
       {/* Blue gradient background with particles and sheen effect */}
-      <div className="absolute inset-0 animate-gradient-slow" style={gradientStyle}>
+      <div className="absolute inset-0 animate-pulse-gradient" style={gradientStyle}>
         {/* Moving particles overlay */}
         <div className="absolute inset-0 bg-particles opacity-20"></div>
         
