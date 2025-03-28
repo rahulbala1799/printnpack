@@ -154,7 +154,7 @@ const PromoBanner = () => {
                 <span className="text-yellow-300">15% OFF</span> Your First Order!
               </motion.h3>
               <p className="text-sm md:text-base opacity-90">
-                Use code <span className="bg-white text-purple-900 px-2 py-0.5 rounded font-mono font-bold">NEWCUSTOMER15</span> at checkout
+                Contact us today to claim this exclusive offer
               </p>
             </div>
           </div>
@@ -207,7 +207,7 @@ const PromoBanner = () => {
                 whileHover={{ scale: 1.05 }} 
                 whileTap={{ scale: 0.95 }}
               >
-                <Link href="/quote" passHref>
+                <Link href="/contact" passHref>
                   <motion.button 
                     className="bg-yellow-400 text-black font-bold py-2 px-4 rounded hover:bg-yellow-300 transition-all flex items-center shadow-lg"
                     animate={{ 
@@ -217,7 +217,7 @@ const PromoBanner = () => {
                     }}
                     transition={{ duration: 0.5 }}
                   >
-                    Claim Now <FaArrowRight className="ml-2" />
+                    Contact Us <FaArrowRight className="ml-2" />
                   </motion.button>
                 </Link>
               </motion.div>
@@ -231,7 +231,7 @@ const PromoBanner = () => {
             whileHover={{ scale: 1.05 }} 
             whileTap={{ scale: 0.95 }}
           >
-            <Link href="/quote" passHref>
+            <Link href="/contact" passHref>
               <motion.button 
                 className="bg-yellow-400 text-black font-bold py-2 px-4 rounded hover:bg-yellow-300 transition-all flex items-center shadow-lg"
                 animate={{ 
@@ -241,7 +241,7 @@ const PromoBanner = () => {
                 }}
                 transition={{ duration: 0.5 }}
               >
-                Claim 15% Discount <FaArrowRight className="ml-2" />
+                Contact Us <FaArrowRight className="ml-2" />
               </motion.button>
             </Link>
           </motion.div>
