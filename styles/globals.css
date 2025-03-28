@@ -367,4 +367,35 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+/* Starburst background effect for promotional banner */
+.bg-starburst {
+  background-image: radial-gradient(circle at center, transparent 0%, transparent 50%, black 100%),
+                    repeating-conic-gradient(from 0deg, rgba(234, 179, 8, 0.1) 0deg 10deg, rgba(234, 179, 8, 0.05) 10deg 20deg);
+  background-size: 100% 100%, 50px 50px;
+  background-position: center;
+  animation: rotate-starburst 60s linear infinite;
+}
+
+@keyframes rotate-starburst {
+  0% {
+    background-position: center, 0% 0%;
+  }
+  100% {
+    background-position: center, 100% 100%;
+  }
+}
+
+/* Enhanced glow effects */
+.glow-text {
+  text-shadow: 0 0 5px rgba(234, 179, 8, 0.8), 0 0 10px rgba(234, 179, 8, 0.4);
+}
+
+.glow-box {
+  box-shadow: 0 0 10px rgba(234, 179, 8, 0.8), 0 0 20px rgba(234, 179, 8, 0.4), 0 0 30px rgba(234, 179, 8, 0.2);
+}
+
+.glow-box-intense {
+  box-shadow: 0 0 15px rgba(234, 179, 8, 0.9), 0 0 30px rgba(234, 179, 8, 0.6), 0 0 45px rgba(234, 179, 8, 0.3);
 } 
