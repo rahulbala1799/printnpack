@@ -85,10 +85,15 @@ const HeroSection = () => {
 
   return (
     <div className="relative w-full overflow-hidden">
-      {/* Blue gradient background with particles */}
+      {/* Blue gradient background with particles and sheen effect */}
       <div className="absolute inset-0 animate-gradient-slow" style={gradientStyle}>
         {/* Moving particles overlay */}
         <div className="absolute inset-0 bg-particles opacity-20"></div>
+        
+        {/* Mobile sheen/sweep effect */}
+        <div className="absolute inset-0 overflow-hidden md:hidden">
+          <div className="absolute -inset-full w-[200%] h-[200%] bg-gradient-to-r from-transparent via-white to-transparent opacity-10 animate-sweep-shine"></div>
+        </div>
       </div>
       
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
