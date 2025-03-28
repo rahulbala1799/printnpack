@@ -174,30 +174,44 @@ const ProductShowcase = () => {
                     boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1)"
                   }}
                   whileTap={{ scale: 0.98 }}
+                  variants={{
+                    hover: {
+                      "& .product-image": {
+                        scale: 1.35,
+                        filter: "brightness(1.2)",
+                        transition: { duration: 0.3 }
+                      }
+                    }
+                  }}
                 >
                   {/* Decorative accent corner */}
                   <div className={`absolute top-0 right-0 w-16 h-16 -mr-8 -mt-8 rounded-full bg-gradient-to-br ${product.color} opacity-80 blur-lg`}></div>
                   
-                  {/* Product Image */}
-                  <div className="relative h-32 w-full flex items-center justify-center p-4 bg-gradient-to-b from-black/40 to-transparent">
+                  {/* Product Image - Larger size */}
+                  <div className="relative h-36 w-full flex items-center justify-center p-2 bg-gradient-to-b from-black/40 to-transparent">
                     <Image
                       src={product.image}
                       alt={product.name}
-                      width={80}
-                      height={80}
-                      className="object-contain drop-shadow-xl"
+                      width={100}
+                      height={100}
+                      className="object-contain drop-shadow-xl scale-125 product-image transition-all"
                     />
                   </div>
                   
-                  {/* Content */}
-                  <div className="p-3 bg-black/20 backdrop-blur-sm">
-                    <h3 className="text-white font-bold text-sm mb-1 line-clamp-1">{product.name}</h3>
-                    <Link 
-                      href="/products" 
-                      className="inline-block mt-1 px-3 py-1 bg-white/10 hover:bg-white/20 rounded-md text-white text-xs font-medium transition-all"
-                    >
-                      View
-                    </Link>
+                  {/* Content - Compact layout */}
+                  <div className="p-2 bg-black/30 backdrop-blur-sm">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-white font-bold text-sm line-clamp-1">{product.name}</h3>
+                      <Link 
+                        href="/products" 
+                        className="flex items-center justify-center h-6 w-6 bg-white/15 hover:bg-white/25 rounded-full text-white text-xs transition-all"
+                        aria-label={`View ${product.name}`}
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                      </Link>
+                    </div>
                   </div>
                 </motion.div>
               ))}
