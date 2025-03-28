@@ -77,36 +77,36 @@ const HeroSection = () => {
   return (
     <div className="relative w-full overflow-hidden">
       {/* Urgent offer banner */}
-      <div className="bg-black text-yellow-400 py-3 px-4 text-center font-bold text-base sm:text-lg shadow-lg relative">
+      <div style={{backgroundColor: "black"}} className="text-yellow-400 py-3 px-4 text-center font-bold text-base sm:text-lg shadow-lg z-50">
         {/* Content */}
-        <div className="relative flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
           <span className="flex items-center">
             <span className="inline-block animate-pulse mr-2">🔥</span>
-            <span className="font-extrabold text-yellow-400 underline decoration-2 decoration-yellow-400 underline-offset-2">FLASH SALE:</span>
+            <span style={{color: "#FACC15"}} className="font-extrabold underline decoration-2 underline-offset-2">FLASH SALE:</span>
           </span>
           
-          <span className="font-bold px-2 py-0.5 bg-yellow-900 rounded text-yellow-300">15% OFF ALL ORDERS TODAY</span>
+          <span style={{backgroundColor: "#78350F", color: "#FCD34D"}} className="font-bold px-2 py-0.5 rounded">15% OFF ALL ORDERS TODAY</span>
           
           <span className="flex items-center gap-2">
-            <span className="hidden sm:inline text-yellow-400">•</span>
-            <span className="font-semibold text-yellow-400">ENDS IN:</span>
-            <span className="bg-yellow-900 rounded px-2 py-1 text-yellow-300 font-mono tracking-tight">
+            <span style={{color: "#FACC15"}} className="hidden sm:inline">•</span>
+            <span style={{color: "#FACC15"}} className="font-semibold">ENDS IN:</span>
+            <span style={{backgroundColor: "#78350F", color: "#FCD34D"}} className="rounded px-2 py-1 font-mono tracking-tight">
               {hours}h {minutes}m {seconds}s
             </span>
           </span>
           
           {/* Mobile contact button */}
           <span className="sm:hidden mt-1">
-            <Link href="/contact" className="inline-block bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-1 px-3 rounded-lg transition-colors duration-200">
+            <Link href="/contact" style={{backgroundColor: "#EAB308", color: "black"}} className="inline-block font-bold py-1 px-3 rounded-lg transition-colors duration-200 hover:bg-yellow-400">
               CONTACT US
             </Link>
           </span>
           
           <span className="hidden sm:flex items-center">
-            <span className="mx-2 text-yellow-400">•</span>
+            <span style={{color: "#FACC15"}} className="mx-2">•</span>
             <Link href="/contact" className="whitespace-nowrap relative inline-block group">
-              <span className="font-bold tracking-wider relative z-10 text-yellow-400 group-hover:text-yellow-300 transition-colors duration-300">CONTACT US</span>
-              <span className="absolute bottom-0 left-0 w-full h-1 bg-yellow-600 group-hover:bg-yellow-500 transition-colors duration-300"></span>
+              <span style={{color: "#FACC15"}} className="font-bold tracking-wider relative z-10 group-hover:text-yellow-300 transition-colors duration-300">CONTACT US</span>
+              <span style={{backgroundColor: "#CA8A04"}} className="absolute bottom-0 left-0 w-full h-1 group-hover:bg-yellow-500 transition-colors duration-300"></span>
             </Link>
             <span className="inline-block animate-pulse ml-1">🔥</span>
           </span>
