@@ -120,9 +120,9 @@ const PromoBanner = () => {
       </div>
 
       <div className="max-w-7xl mx-auto">
-        {/* New Customer Badge */}
+        {/* New Customer Badge - Repositioned for mobile */}
         <motion.div 
-          className="absolute top-0 right-0 md:right-4 bg-yellow-400 text-black font-bold py-1 px-3 rounded-b-lg shadow-lg transform -translate-y-0"
+          className="absolute top-0 right-0 md:right-4 bg-yellow-400 text-black font-bold py-1 px-3 rounded-b-lg shadow-lg transform -translate-y-0 hidden md:block"
           initial={{ y: -40 }}
           animate={{ y: 0 }}
           transition={{ 
@@ -133,6 +133,18 @@ const PromoBanner = () => {
         >
           New Customer Offer!
         </motion.div>
+        
+        {/* Mobile Badge - Inline at the top */}
+        <div className="w-full flex justify-center mb-2 md:hidden">
+          <motion.div 
+            className="bg-yellow-400 text-black font-bold py-1 px-3 rounded-lg shadow-lg text-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            New Customer Offer!
+          </motion.div>
+        </div>
 
         <div className="flex flex-col md:flex-row items-center justify-between relative z-10">
           {/* Offer Message */}
