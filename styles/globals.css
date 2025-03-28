@@ -400,7 +400,7 @@ body {
   box-shadow: 0 0 15px rgba(234, 179, 8, 0.9), 0 0 30px rgba(234, 179, 8, 0.6), 0 0 45px rgba(234, 179, 8, 0.3);
 }
 
-/* Add the sweep shine animation definition */
+/* Enhanced prominent sweep shine animation */
 @keyframes sweep-shine {
   0% {
     transform: translateX(-100%) skewX(-30deg);
@@ -412,6 +412,6 @@ body {
 
 @layer utilities {
   .animate-sweep-shine {
-    animation: sweep-shine 8s ease-in-out infinite;
+    animation: sweep-shine 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
 } 
