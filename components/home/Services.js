@@ -109,35 +109,35 @@ const services = [
     title: "Packaging Solutions",
     description: "Comprehensive packaging solutions tailored to your product specifications and brand requirements.",
     color: "from-blue-500 to-blue-700",
-    imageSrc: "/images/products/pizza-box.png"
+    imageSrc: "/images/ifa/heroh/pizza.png"
   },
   {
     icon: FaPrint,
     title: "Custom Printing",
     description: "High-quality printing services to make your packaging stand out with your unique brand identity.",
     color: "from-purple-500 to-purple-700",
-    imageSrc: "/images/products/paper-bag.png"
+    imageSrc: "/images/ifa/heroh/bag.png"
   },
   {
     icon: FaLeaf,
     title: "Eco-Friendly Options",
     description: "Sustainable packaging alternatives that reduce environmental impact without compromising quality.",
     color: "from-green-500 to-green-700",
-    imageSrc: "/images/products/burger-box.png"
+    imageSrc: "/images/ifa/heroh/burger.png"
   },
   {
     icon: FaShippingFast,
     title: "Bulk Orders",
     description: "Efficient handling of large volume orders with competitive pricing and timely delivery.",
     color: "from-red-500 to-red-700",
-    imageSrc: "/images/products/napkin.png"
+    imageSrc: "/images/ifa/heroh/napkin.png"
   },
   {
     icon: FaPencilRuler,
     title: "Custom Design",
     description: "Expert design services to create packaging that perfectly fits your product and enhances brand appeal.",
     color: "from-amber-500 to-amber-700",
-    imageSrc: "/images/products/a4-leaflet.png"
+    imageSrc: "/images/ifa/heroh/leaflet.png"
   }
 ];
 

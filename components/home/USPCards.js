@@ -88,7 +88,7 @@ const USPCards = ({ data }) => {
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute -right-20 top-1/4 w-64 h-64 opacity-5">
           <Image 
-            src="/images/hero/pizza-box.png" 
+            src="/images/ifa/heroh/pizza.png" 
             alt="Pizza Box" 
             width={300} 
             height={300}
@@ -98,7 +98,7 @@ const USPCards = ({ data }) => {
         </div>
         <div className="absolute -left-20 bottom-1/4 w-64 h-64 opacity-5">
           <Image 
-            src="/images/hero/paper-bag.png" 
+            src="/images/ifa/heroh/bag.png" 
             alt="Paper Bag" 
             width={300} 
             height={300}
@@ -108,7 +108,7 @@ const USPCards = ({ data }) => {
         </div>
         <div className="absolute bottom-0 right-1/4 w-80 h-80 opacity-5">
           <Image 
-            src="/images/hero/burger-box.png" 
+            src="/images/ifa/heroh/burger.png" 
             alt="Burger Box" 
             width={350} 
             height={350}

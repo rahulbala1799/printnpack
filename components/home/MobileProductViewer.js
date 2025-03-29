@@ -22,35 +22,35 @@ const MobileProductViewer = () => {
       id: 1,
       name: "Pizza Boxes",
       description: "Custom designed pizza boxes with your branding. Heat retention and eco-friendly options available.",
-      image: "/images/hero/pizza-box.png",
+      image: "/images/ifa/heroh/pizza.png",
       color: "from-red-500 to-red-600"
     },
     {
       id: 2,
       name: "Paper Bags",
       description: "Branded paper bags for retail and takeaway. Fully customizable with multiple sizes available.",
-      image: "/images/hero/paper-bag.png",
+      image: "/images/ifa/heroh/bag.png",
       color: "from-amber-400 to-amber-600"
     },
     {
       id: 3,
       name: "Burger Boxes",
       description: "Eco-friendly burger boxes perfect for delivery. Grease-resistant with ventilation options.",
-      image: "/images/hero/burger-box.png",
+      image: "/images/ifa/heroh/burger.png",
       color: "from-green-500 to-green-600"
     },
     {
       id: 4,
       name: "Banners & Posters",
       description: "High-quality wide format printing for indoor and outdoor promotions with vibrant colors and sharp details.",
-      image: "/images/hero/wide-format.png",
+      image: "/images/ifa/heroh/wide.png",
       color: "from-blue-500 to-blue-600"
     },
     {
       id: 5,
       name: "Leaflets & Flyers",
       description: "Professional A3, A4, A5 and A6 leaflets for effective marketing campaigns and promotional materials.",
-      image: "/images/hero/leaflet.png",
+      image: "/images/ifa/heroh/leaflet.png",
       color: "from-purple-500 to-purple-600"
     }
   ];
