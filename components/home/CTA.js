@@ -5,43 +5,10 @@ import Image from 'next/image';
 const CTA = () => {
   return (
     <section className="py-16 bg-blue-900 text-white relative overflow-hidden">
-      {/* Background product images with new photos */}
+      {/* Simple background pattern instead of images */}
       <div className="absolute inset-0 z-0 opacity-10">
-        {/* Right side decorative image */}
-        <div className="absolute -right-20 -bottom-10 w-96 h-96">
-          <Image 
-            src="/images/ifa/heroh/8.png" 
-            alt="Product Showcase" 
-            width={400} 
-            height={400}
-            className="object-contain opacity-60"
-            unoptimized={process.env.NODE_ENV === 'production'}
-          />
-        </div>
-        {/* Left side decorative image */}
-        <div className="absolute -left-20 top-0 w-80 h-80">
-          <Image 
-            src="/images/ifa/heroh/9.png" 
-            alt="Product Showcase" 
-            width={350} 
-            height={350}
-            className="object-contain opacity-60"
-            unoptimized={process.env.NODE_ENV === 'production'}
-          />
-        </div>
-        {/* Center decorative image */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full flex items-center justify-center">
-          <div className="w-64 h-64 md:w-96 md:h-96 relative">
-            <Image 
-              src="/images/ifa/heroh/logos/logo.png" 
-              alt="PrintNPack Logo" 
-              width={350} 
-              height={350}
-              className="object-contain opacity-20"
-              unoptimized={process.env.NODE_ENV === 'production'}
-            />
-          </div>
-        </div>
+        <div className="absolute inset-0 bg-grid-pattern opacity-50"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-800 to-blue-950"></div>
       </div>
       
       {/* Additional decorative elements */}
@@ -75,47 +42,34 @@ const CTA = () => {
             </div>
           </div>
           
-          {/* Right image showcase */}
+          {/* Right content card instead of images */}
           <div className="md:w-1/2 md:pl-8">
-            <div className="relative">
-              {/* Main image */}
-              <div className="rounded-xl overflow-hidden shadow-2xl transform hover:scale-102 transition-transform duration-500 relative">
-                <Image 
-                  src="/images/ifa/heroh/5 2.png" 
-                  alt="Premium Packaging Solutions" 
-                  width={600} 
-                  height={400}
-                  className="w-full h-auto"
-                  unoptimized={process.env.NODE_ENV === 'production'}
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                  <div className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full inline-block mb-2">
-                    Premium Quality
-                  </div>
-                  <h3 className="text-white text-xl font-bold">Award-Winning Packaging Solutions</h3>
+            <div className="relative bg-blue-800 rounded-xl p-6 shadow-2xl">
+              <div className="bg-blue-700/50 rounded-lg p-5">
+                <div className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full inline-block mb-3">
+                  Premium Quality
                 </div>
-              </div>
-              
-              {/* Small floating images */}
-              <div className="absolute -bottom-6 -right-6 w-24 h-24 rounded-lg overflow-hidden shadow-xl border-4 border-blue-800 hidden md:block">
-                <Image 
-                  src="/images/ifa/heroh/6 2.png" 
-                  alt="Product Detail" 
-                  width={100} 
-                  height={100}
-                  className="w-full h-full object-cover"
-                  unoptimized={process.env.NODE_ENV === 'production'}
-                />
-              </div>
-              <div className="absolute -top-6 -left-6 w-24 h-24 rounded-lg overflow-hidden shadow-xl border-4 border-blue-800 hidden md:block">
-                <Image 
-                  src="/images/ifa/heroh/7.png" 
-                  alt="Product Detail" 
-                  width={100} 
-                  height={100}
-                  className="w-full h-full object-cover"
-                  unoptimized={process.env.NODE_ENV === 'production'}
-                />
+                <h3 className="text-white text-xl font-bold mb-4">Award-Winning Packaging Solutions</h3>
+                <ul className="space-y-2 mb-6">
+                  <li className="flex items-start text-white">
+                    <svg className="h-5 w-5 text-blue-300 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span>Eco-friendly materials</span>
+                  </li>
+                  <li className="flex items-start text-white">
+                    <svg className="h-5 w-5 text-blue-300 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span>Custom branding solutions</span>
+                  </li>
+                  <li className="flex items-start text-white">
+                    <svg className="h-5 w-5 text-blue-300 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span>Fast turnaround times</span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

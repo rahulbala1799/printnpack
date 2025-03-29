@@ -199,55 +199,19 @@ const AboutUs = () => {
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-green-100 rounded-full -ml-64 -mb-64 opacity-20 animate-blob animation-delay-2000"></div>
       <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-purple-100 rounded-full opacity-20 animate-blob animation-delay-4000"></div>
       
-      {/* Product image background collage with new photos */}
+      {/* Decorative background patterns instead of images */}
       <div className="hidden md:block absolute inset-0 pointer-events-none z-0">
-        {/* Top right product image */}
-        <div className="absolute top-10 right-10 w-64 h-64 opacity-10">
-          <Image
-            src="/images/ifa/heroh/1.png"
-            alt="Product Showcase"
-            width={250}
-            height={250}
-            className="object-contain"
-            unoptimized={process.env.NODE_ENV === 'production'}
-          />
-        </div>
+        {/* Top right decorative element */}
+        <div className="absolute top-10 right-10 w-64 h-64 bg-blue-100 rounded-full opacity-20"></div>
         
-        {/* Bottom left product image */}
-        <div className="absolute bottom-10 left-10 w-64 h-64 opacity-10">
-          <Image
-            src="/images/ifa/heroh/2.png"
-            alt="Product Showcase"
-            width={250}
-            height={250}
-            className="object-contain"
-            unoptimized={process.env.NODE_ENV === 'production'}
-          />
-        </div>
+        {/* Bottom left decorative element */}
+        <div className="absolute bottom-10 left-10 w-64 h-64 bg-green-100 rounded-full opacity-20"></div>
         
-        {/* Middle right product image */}
-        <div className="absolute top-1/3 right-1/4 w-48 h-48 opacity-10">
-          <Image
-            src="/images/ifa/heroh/3.png"
-            alt="Product Showcase"
-            width={180}
-            height={180}
-            className="object-contain"
-            unoptimized={process.env.NODE_ENV === 'production'}
-          />
-        </div>
+        {/* Middle right decorative element */}
+        <div className="absolute top-1/3 right-1/4 w-48 h-48 bg-purple-100 rounded-full opacity-15"></div>
         
-        {/* Middle left product image */}
-        <div className="absolute top-2/3 left-1/5 w-48 h-48 opacity-10">
-          <Image
-            src="/images/ifa/heroh/4.png"
-            alt="Product Showcase"
-            width={180}
-            height={180}
-            className="object-contain"
-            unoptimized={process.env.NODE_ENV === 'production'}
-          />
-        </div>
+        {/* Middle left decorative element */}
+        <div className="absolute top-2/3 left-1/5 w-48 h-48 bg-yellow-100 rounded-full opacity-15"></div>
       </div>
       
       {/* Added prominent product showcase */}
@@ -266,14 +230,9 @@ const AboutUs = () => {
               }}
               className="rounded-xl overflow-hidden shadow-xl"
             >
-              <Image
-                src="/images/ifa/heroh/5.png"
-                alt="Premium Packaging Showcase"
-                width={600}
-                height={400}
-                className="w-full h-auto object-cover"
-                unoptimized={process.env.NODE_ENV === 'production'}
-              />
+              <div className="w-full h-80 bg-gradient-to-r from-blue-100 to-blue-300 rounded-lg flex items-center justify-center">
+                <div className="text-blue-800 text-xl font-semibold">Premium Packaging Solutions</div>
+              </div>
             </motion.div>
           </div>
           
@@ -298,24 +257,14 @@ const AboutUs = () => {
               </p>
               <div className="flex flex-wrap -mx-2">
                 <div className="w-1/2 px-2 mb-4">
-                  <Image
-                    src="/images/ifa/heroh/6.png"
-                    alt="Premium Materials"
-                    width={200}
-                    height={200}
-                    className="rounded-lg shadow-md w-full h-auto"
-                    unoptimized={process.env.NODE_ENV === 'production'}
-                  />
+                  <div className="w-full h-32 bg-gradient-to-r from-green-100 to-green-300 rounded-lg flex items-center justify-center">
+                    <div className="text-green-800 text-sm font-medium">Eco-Friendly</div>
+                  </div>
                 </div>
                 <div className="w-1/2 px-2 mb-4">
-                  <Image
-                    src="/images/ifa/heroh/7.png"
-                    alt="Premium Materials"
-                    width={200}
-                    height={200}
-                    className="rounded-lg shadow-md w-full h-auto"
-                    unoptimized={process.env.NODE_ENV === 'production'}
-                  />
+                  <div className="w-full h-32 bg-gradient-to-r from-amber-100 to-amber-300 rounded-lg flex items-center justify-center">
+                    <div className="text-amber-800 text-sm font-medium">Premium Quality</div>
+                  </div>
                 </div>
               </div>
               <Link 

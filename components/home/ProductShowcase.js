@@ -54,24 +54,24 @@ const ProductShowcase = () => {
 
   const products = {
     food: [
-      { id: 1, name: 'Pizza Boxes', image: '/images/ifa/heroh/pizza.png', color: 'from-red-400 to-red-600' },
-      { id: 2, name: 'Burger Boxes', image: '/images/ifa/heroh/burger.png', color: 'from-yellow-400 to-yellow-600' },
-      { id: 3, name: 'Napkins', image: '/images/ifa/heroh/napkin.png', color: 'from-green-400 to-green-600' },
-      { id: 4, name: 'Paper Bags', image: '/images/ifa/heroh/bag.png', color: 'from-blue-400 to-blue-600' }
+      { id: 1, name: 'Pizza Boxes', image: '/images/products/pizza-box.png', color: 'from-red-400 to-red-600' },
+      { id: 2, name: 'Burger Boxes', image: '/images/products/burger-box.png', color: 'from-yellow-400 to-yellow-600' },
+      { id: 3, name: 'Napkins', image: '/images/products/napkin.png', color: 'from-green-400 to-green-600' },
+      { id: 4, name: 'Paper Bags', image: '/images/products/paper-bag.png', color: 'from-blue-400 to-blue-600' }
     ],
     wideFormat: [
-      { id: 5, name: 'Banners', image: '/images/ifa/heroh/wide.png', color: 'from-purple-400 to-purple-600' },
-      { id: 6, name: 'Roll Up Banners', image: '/images/ifa/heroh/1.png', color: 'from-pink-400 to-pink-600' },
-      { id: 7, name: 'Posters', image: '/images/ifa/heroh/2.png', color: 'from-indigo-400 to-indigo-600' },
-      { id: 8, name: 'Vinyl Stickers', image: '/images/ifa/heroh/3.png', color: 'from-cyan-400 to-cyan-600' },
-      { id: 9, name: 'Foamex Boards', image: '/images/ifa/heroh/4.png', color: 'from-blue-500 to-blue-700' },
-      { id: 10, name: 'Corriboards', image: '/images/ifa/heroh/5.png', color: 'from-teal-400 to-teal-600' }
+      { id: 5, name: 'Banners', image: '/images/products/banner.png', color: 'from-purple-400 to-purple-600' },
+      { id: 6, name: 'Roll Up Banners', image: '/images/products/rollup-banner.png', color: 'from-pink-400 to-pink-600' },
+      { id: 7, name: 'Posters', image: '/images/products/poster.png', color: 'from-indigo-400 to-indigo-600' },
+      { id: 8, name: 'Vinyl Stickers', image: '/images/products/vinyl-sticker.png', color: 'from-cyan-400 to-cyan-600' },
+      { id: 9, name: 'Foamex Boards', image: '/images/products/foamex.png', color: 'from-blue-500 to-blue-700' },
+      { id: 10, name: 'Corriboards', image: '/images/products/corriboard.png', color: 'from-teal-400 to-teal-600' }
     ],
     leafletsFlyers: [
-      { id: 11, name: 'A3 Leaflets', image: '/images/ifa/heroh/leaflet.png', color: 'from-blue-500 to-blue-700' },
-      { id: 12, name: 'A4 Leaflets', image: '/images/ifa/heroh/6.png', color: 'from-green-500 to-green-700' },
-      { id: 13, name: 'A5 Leaflets', image: '/images/ifa/heroh/7.png', color: 'from-yellow-500 to-yellow-700' },
-      { id: 14, name: 'A6 Leaflets', image: '/images/ifa/heroh/8.png', color: 'from-orange-400 to-orange-600' }
+      { id: 11, name: 'A3 Leaflets', image: '/images/products/a3-leaflet.png', color: 'from-blue-500 to-blue-700' },
+      { id: 12, name: 'A4 Leaflets', image: '/images/products/a4-leaflet.png', color: 'from-green-500 to-green-700' },
+      { id: 13, name: 'A5 Leaflets', image: '/images/products/a5-leaflet.png', color: 'from-yellow-500 to-yellow-700' },
+      { id: 14, name: 'A6 Leaflets', image: '/images/products/a6-leaflet.png', color: 'from-orange-400 to-orange-600' }
     ]
   };
 

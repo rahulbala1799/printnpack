@@ -126,54 +126,13 @@ const PrintingTimes = () => {
 
   return (
     <section id="printing-times-section" className="py-16 bg-gray-50 overflow-hidden relative">
-      {/* Background product images - purely decorative using new images */}
+      {/* Simple decorative background patterns instead of images */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Top right decorative image */}
-        <div className="absolute -right-10 top-10 opacity-5 hidden md:block">
-          <Image 
-            src="/images/ifa/heroh/1.png" 
-            alt="Product decoration" 
-            width={200} 
-            height={200}
-            className="object-contain"
-            unoptimized={process.env.NODE_ENV === 'production'}
-          />
-        </div>
-        
-        {/* Bottom left decorative image */}
-        <div className="absolute -left-10 bottom-20 opacity-5 hidden md:block">
-          <Image 
-            src="/images/ifa/heroh/2.png" 
-            alt="Product decoration" 
-            width={180} 
-            height={180}
-            className="object-contain transform -rotate-12"
-            unoptimized={process.env.NODE_ENV === 'production'}
-          />
-        </div>
-        
-        {/* Center right decorative image */}
-        <div className="absolute right-1/3 bottom-0 opacity-5 hidden md:block">
-          <Image 
-            src="/images/ifa/heroh/3.png" 
-            alt="Product decoration" 
-            width={150} 
-            height={150}
-            className="object-contain"
-            unoptimized={process.env.NODE_ENV === 'production'}
-          />
-        </div>
-        
-        {/* Top left decorative image - added */}
-        <div className="absolute left-1/3 top-10 opacity-5 hidden md:block">
-          <Image 
-            src="/images/ifa/heroh/4.png" 
-            alt="Product decoration" 
-            width={180} 
-            height={180}
-            className="object-contain"
-            unoptimized={process.env.NODE_ENV === 'production'}
-          />
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full -translate-x-1/4 -translate-y-1/4 opacity-20"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gray-200 rounded-full translate-x-1/4 translate-y-1/4 opacity-10"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full">
+          <div className="w-full h-full bg-grid-pattern opacity-10"></div>
         </div>
       </div>
       
