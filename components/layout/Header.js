@@ -40,29 +40,31 @@ const Logo = ({ scrolled }) => {
   };
   
   return (
-    <motion.div 
-      className="flex items-center gap-3"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      whileHover="hover"
-    >
-      {/* Box icon for packaging */}
-      <motion.div
-        variants={boxVariants}
-        className="relative"
-        transition={{ delay: 0.2 }}
-        style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
+    <Link href="/" aria-label="Home page">
+      <motion.div 
+        className="flex items-center gap-3 cursor-pointer"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        whileHover="hover"
       >
-        <FaBox className="text-3xl text-blue-700" />
+        {/* Box icon for packaging */}
+        <motion.div
+          variants={boxVariants}
+          className="relative"
+          transition={{ delay: 0.2 }}
+          style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
+        >
+          <FaBox className="text-3xl text-blue-700" />
+        </motion.div>
+        
+        <div className={`font-extrabold transition-all duration-300 ${scrolled ? 'text-xl' : 'text-2xl'}`}>
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-900">Print</span>
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-blue-600">N</span>
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-900">Pack</span>
+        </div>
       </motion.div>
-      
-      <div className={`font-extrabold transition-all duration-300 ${scrolled ? 'text-xl' : 'text-2xl'}`}>
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-900">Print</span>
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-blue-600">N</span>
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-900">Pack</span>
-      </div>
-    </motion.div>
+    </Link>
   );
 };
 
