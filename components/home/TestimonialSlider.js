@@ -142,6 +142,7 @@ const TestimonialSlider = () => {
                         alt={testimonials[currentIndex].name} 
                         fill
                         className="object-cover"
+                        unoptimized={true}
                       />
                     ) : (
                       <div className="h-full w-full flex items-center justify-center text-blue-500 font-bold text-2xl">
@@ -157,6 +158,7 @@ const TestimonialSlider = () => {
                         alt="Company logo" 
                         fill
                         className="object-contain"
+                        unoptimized={true}
                       />
                     </div>
                   ) : null}

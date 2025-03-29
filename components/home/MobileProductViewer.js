@@ -22,35 +22,35 @@ const MobileProductViewer = () => {
       id: 1,
       name: "Pizza Boxes",
       description: "Custom designed pizza boxes with your branding. Heat retention and eco-friendly options available.",
-      image: "/images/hero/pizza-box.png",
+      image: "/images/ifa/heroh/pizza.png",
       color: "from-red-500 to-red-600"
     },
     {
       id: 2,
       name: "Paper Bags",
       description: "Branded paper bags for retail and takeaway. Fully customizable with multiple sizes available.",
-      image: "/images/hero/paper-bag.png",
+      image: "/images/ifa/heroh/bag.png",
       color: "from-amber-400 to-amber-600"
     },
     {
       id: 3,
       name: "Burger Boxes",
       description: "Eco-friendly burger boxes perfect for delivery. Grease-resistant with ventilation options.",
-      image: "/images/hero/burger-box.png",
+      image: "/images/ifa/heroh/burger.png",
       color: "from-green-500 to-green-600"
     },
     {
       id: 4,
       name: "Banners & Posters",
       description: "High-quality wide format printing for indoor and outdoor promotions with vibrant colors and sharp details.",
-      image: "/images/hero/wide-format.png",
+      image: "/images/ifa/heroh/wide.png",
       color: "from-blue-500 to-blue-600"
     },
     {
       id: 5,
       name: "Leaflets & Flyers",
       description: "Professional A3, A4, A5 and A6 leaflets for effective marketing campaigns and promotional materials.",
-      image: "/images/hero/leaflet.png",
+      image: "/images/ifa/heroh/leaflet.png",
       color: "from-purple-500 to-purple-600"
     }
   ];
@@ -66,43 +66,62 @@ const MobileProductViewer = () => {
     ]
   );
 
-  // Extract gradient colors from the color string
+  // Extract gradient colors from the color string - completely rewritten to avoid errors
   function getGradientColors(colorString) {
-    if (!colorString) return 'rgb(120, 120, 255) 0%, rgb(80, 80, 200) 100%';
+    // Default gradient
+    const DEFAULT_GRADIENT = 'rgb(120, 120, 255) 0%, rgb(80, 80, 200) 100%';
     
     try {
+      // Safety check - if colorString is undefined or empty, return default
+      if (!colorString || typeof colorString !== 'string') {
+        return DEFAULT_GRADIENT;
+      }
+      
+      // Predefined color mappings for reliability
+      const colorMap = {
+        'red': {from: '239, 68, 68', to: '220, 38, 38'},
+        'amber': {from: '245, 158, 11', to: '217, 119, 6'},
+        'green': {from: '34, 197, 94', to: '22, 163, 74'},
+        'blue': {from: '59, 130, 246', to: '37, 99, 235'},
+        'purple': {from: '168, 85, 247', to: '126, 34, 206'},
+      };
+      
+      // Extract color name from the string
+      let colorName = '';
+      Object.keys(colorMap).forEach(name => {
+        if (colorString.includes(name)) {
+          colorName = name;
+        }
+      });
+      
+      // If we found a matching color in our map, use it
+      if (colorName && colorMap[colorName]) {
+        return `rgb(${colorMap[colorName].from}) 0%, rgb(${colorMap[colorName].to}) 100%`;
+      }
+      
+      // Fallback to the original parsing logic but with stronger error handling
       const colors = colorString.split(' ');
       let fromColor = '120, 120, 255'; // Default blue
       let toColor = '80, 80, 200';     // Default dark blue
       
-      // Safe replacement for fromColor
-      if (colors[0]) {
+      // Safe replacement for fromColor - only if colors[0] exists
+      if (colors[0] && typeof colors[0] === 'string') {
         fromColor = colors[0].replace('from-', '');
         if (fromColor.includes('-500')) fromColor = '120, 120, 255';
         else if (fromColor.includes('-400')) fromColor = '150, 150, 255';
-        else if (fromColor.includes('red')) fromColor = '239, 68, 68';
-        else if (fromColor.includes('amber')) fromColor = '245, 158, 11';
-        else if (fromColor.includes('green')) fromColor = '34, 197, 94';
-        else if (fromColor.includes('blue')) fromColor = '59, 130, 246';
-        else if (fromColor.includes('purple')) fromColor = '168, 85, 247';
       }
       
-      // Safe replacement for toColor
-      if (colors.length > 2 && colors[2]) {
+      // Safe replacement for toColor - only if colors[2] exists
+      if (colors.length > 2 && colors[2] && typeof colors[2] === 'string') {
         toColor = colors[2].replace('to-', '');
         if (toColor.includes('-600')) toColor = '80, 80, 200';
         else if (toColor.includes('-500')) toColor = '100, 100, 220';
-        else if (toColor.includes('red')) toColor = '220, 38, 38';
-        else if (toColor.includes('amber')) toColor = '217, 119, 6';
-        else if (toColor.includes('green')) toColor = '22, 163, 74';
-        else if (toColor.includes('blue')) toColor = '37, 99, 235';
-        else if (toColor.includes('purple')) toColor = '126, 34, 206';
       }
       
       return `rgb(${fromColor}) 0%, rgb(${toColor}) 100%`;
     } catch (error) {
       console.error('Error in gradient parsing:', error);
-      return 'rgb(120, 120, 255) 0%, rgb(80, 80, 200) 100%';
+      return DEFAULT_GRADIENT;
     }
   }
 

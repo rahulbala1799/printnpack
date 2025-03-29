@@ -11,7 +11,7 @@ const HeroSection = () => {
       cta: "Get Your Custom Quote Today",
       product: "Pizza Box",
       benefits: ["Elevates your product presentation", "Boosts perceived value", "Enhances customer experience"],
-      imageSrc: "/images/hero/pizza-box.png"
+      imageSrc: "/images/ifa/heroh/pizza.png"
     },
     {
       title: "Paper Bags That Close More Sales",
@@ -19,7 +19,7 @@ const HeroSection = () => {
       cta: "Request Free Samples Now",
       product: "Paper Bag",
       benefits: ["Increases repeat purchases", "Strengthens brand perception", "Eco-friendly marketing tool"],
-      imageSrc: "/images/hero/paper-bag.png"
+      imageSrc: "/images/ifa/heroh/bag.png"
     },
     {
       title: "Sustainable Burger Boxes Customers Love",
@@ -27,7 +27,7 @@ const HeroSection = () => {
       cta: "Elevate Your Packaging Today",
       product: "Bagasse Box",
       benefits: ["Improves customer perception", "Supports your green initiatives", "Creates Instagram-worthy presentations"],
-      imageSrc: "/images/hero/burger-box.png"
+      imageSrc: "/images/ifa/heroh/burger.png"
     },
     {
       title: "Marketing Materials That Generate Leads",
@@ -35,7 +35,7 @@ const HeroSection = () => {
       cta: "Boost Your Marketing Now",
       product: "Leaflet",
       benefits: ["Increases response rates", "Drives store traffic", "Boosts campaign ROI"],
-      imageSrc: "/images/hero/leaflet.png"
+      imageSrc: "/images/ifa/heroh/leaflet.png"
     },
     {
       title: "Premium Napkins That Elevate Your Brand",
@@ -43,7 +43,7 @@ const HeroSection = () => {
       cta: "Enhance Your Brand Today",
       product: "Napkin",
       benefits: ["Improves customer experience", "Reinforces brand identity", "Low cost, high impact marketing"],
-      imageSrc: "/images/hero/napkin.png"
+      imageSrc: "/images/ifa/heroh/napkin.png"
     }
   ];
 

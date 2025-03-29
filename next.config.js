@@ -9,27 +9,25 @@ const nextConfig = {
   // Enable minification for better performance
   swcMinify: true,
   
-  // Disable image optimization entirely to prevent ECONNRESET errors
+  // Configure image optimization to work correctly on Vercel
   images: {
-    unoptimized: true,
-    // Add default domains for image sources
-    domains: ['localhost'],
-    // Higher quality defaults
+    unoptimized: true, // Completely disable image optimization for all environments
+    domains: ['localhost', 'printnpack.vercel.app', 'vercel.app'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   
-  // Enable experimental features that help with stability
-  experimental: {
-    // These features can help with local development issues
-    scrollRestoration: true,
-    legacyBrowsers: false,
-  },
+  // Remove experimental features that might cause stability issues
   
-  // Set higher timeout for fetch operations (30 seconds)
+  // Fix httpAgentOptions to only include allowed properties
   httpAgentOptions: {
     keepAlive: true,
-    timeout: 30000,
   },
   
   // Adjust compiler options
