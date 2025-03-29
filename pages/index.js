@@ -9,6 +9,11 @@ import CTA from '../components/home/CTA';
 import Head from 'next/head';
 import PromoBanner from '../components/home/PromoBanner';
 import PrintingTimes from '../components/home/PrintingTimes';
+import DecorativeImages from '../components/home/DecorativeImages';
+import FloatingImages from '../components/home/FloatingImages';
+import SectionDivider from '../components/home/SectionDivider';
+import ImageGallery from '../components/home/ImageGallery';
+import DesignServices from '../components/home/DesignServices';
 import { 
   FaTruck, 
   FaRecycle, 
@@ -70,14 +75,48 @@ export default function Home() {
         <meta name="keywords" content="packaging ireland, pizza boxes, paper bags, food packaging, low moq, fast delivery" />
       </Head>
       
-      <HeroSection />
+      <div className="relative">
+        <FloatingImages position="top-right" size="lg" />
+        <HeroSection />
+      </div>
+      
+      <DecorativeImages position="header" />
       <PromoBanner />
-      <ProductShowcase />
+      
+      <SectionDivider variant="default" />
+      <div className="relative">
+        <FloatingImages position="center-left" size="md" />
+        <ProductShowcase />
+      </div>
+      
+      <SectionDivider variant="blue" />
       <USPCards data={uspData} />
-      <PrintingTimes />
-      <Services />
+      
+      <div className="relative">
+        <DecorativeImages position="section1" />
+        <PrintingTimes />
+      </div>
+      
+      <SectionDivider variant="dark" />
+      <ImageGallery />
+      
+      <SectionDivider variant="default" />
+      <DesignServices />
+      
+      <SectionDivider variant="blue" />
+      <div className="relative">
+        <FloatingImages position="bottom-right" size="md" />
+        <Services />
+      </div>
+      
+      <DecorativeImages position="section2" />
       <AboutUs />
-      <CTA />
+      
+      <div className="relative">
+        <FloatingImages position="bottom-left" size="sm" />
+        <DecorativeImages position="footer" />
+        <CTA />
+      </div>
     </Layout>
   );
 } 

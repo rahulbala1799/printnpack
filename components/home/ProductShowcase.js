@@ -189,24 +189,24 @@ const ProductShowcase = () => {
                   <div className={`absolute top-0 right-0 w-16 h-16 -mr-8 -mt-8 rounded-full bg-gradient-to-br ${product.color} opacity-80 blur-lg`}></div>
                   
                   {/* Product Image - Larger size */}
-                  <div className="relative h-36 w-full flex items-center justify-center p-2 bg-gradient-to-b from-black/40 to-transparent">
+                  <div className="relative h-32 w-full flex items-center justify-center p-2 bg-gradient-to-b from-black/40 to-transparent">
                     <Image
                       src={product.image}
                       alt={product.name}
-                      width={100}
-                      height={100}
+                      width={110}
+                      height={110}
                       className="object-contain drop-shadow-xl scale-125 product-image transition-all"
                       unoptimized={true}
                     />
                   </div>
                   
                   {/* Content - Compact layout */}
-                  <div className="p-2 bg-black/30 backdrop-blur-sm">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-white font-bold text-sm line-clamp-1">{product.name}</h3>
+                  <div className="p-3 bg-black/30 backdrop-blur-sm">
+                    <div className="flex flex-col items-center justify-center">
+                      <h3 className="text-white font-bold text-sm text-center mb-2 drop-shadow-sm">{product.name}</h3>
                       <Link 
                         href="/products" 
-                        className="flex items-center justify-center h-6 w-6 bg-white/15 hover:bg-white/25 rounded-full text-white text-xs transition-all"
+                        className="flex items-center justify-center h-7 w-7 bg-white/20 hover:bg-white/30 rounded-full text-white text-xs transition-all"
                         aria-label={`View ${product.name}`}
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
