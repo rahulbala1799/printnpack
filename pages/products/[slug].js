@@ -38,11 +38,40 @@ const ProductDetail = ({ product, relatedProducts }) => {
     );
   }
 
+  // Create structured data for product
+  const structuredData = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": product.name,
+    "description": product.description,
+    "image": product.images[0],
+    "brand": {
+      "@type": "Brand",
+      "name": "PrintNPack"
+    },
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "EUR",
+      "price": product.price.replace(/[^\d.-]/g, ''),
+      "availability": "https://schema.org/InStock"
+    }
+  };
+
   return (
     <Layout>
       <Head>
-        <title>{product.name} - PrintNPack</title>
-        <meta name="description" content={product.description} />
+        <title>{`${product.name} - Premium Packaging Solutions | PrintNPack`}</title>
+        <meta name="description" content={`${product.description} Explore our high-quality ${product.name} with custom branding options, multiple sizes, and fast delivery. Perfect for restaurants and retail businesses.`} />
+        <meta name="keywords" content={`${product.name}, packaging solutions, food packaging, retail packaging, custom packaging, sustainable packaging, branded packaging`} />
+        <meta property="og:title" content={`${product.name} - PrintNPack`} />
+        <meta property="og:description" content={product.description} />
+        <meta property="og:image" content={product.images[0]} />
+        <meta property="og:type" content="product" />
+        <meta property="og:url" content={`https://printnpack.com/products/${product.id}`} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
       </Head>
 
       {/* Breadcrumbs */}
@@ -58,85 +87,155 @@ const ProductDetail = ({ product, relatedProducts }) => {
         </div>
       </div>
 
-      {/* Product Hero */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Product Images */}
-          <div className="relative">
-            <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm h-96 relative mb-6">
-              <Image 
-                src={product.images[0]}
-                alt={product.name}
-                fill
-                className="object-contain"
-              />
-            </div>
+      {/* Product Hero - Redesigned for impact */}
+      <div className="bg-gradient-to-b from-gray-50 to-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-center text-center mb-12">
+            <span className="bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-medium mb-4">
+              {product.category}
+            </span>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight max-w-4xl">{product.name}</h1>
+            <p className="text-xl text-gray-700 mb-6 max-w-3xl">{product.description}</p>
             
-            {/* Thumbnail gallery */}
-            <div className="flex space-x-4">
-              {product.images.map((image, index) => (
-                <div key={index} className="w-24 h-24 border border-gray-200 rounded-md p-2 cursor-pointer hover:border-blue-500">
-                  <div className="relative w-full h-full">
-                    <Image 
-                      src={image}
-                      alt={`${product.name} view ${index + 1}`}
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
-              ))}
+            <div className="flex flex-wrap justify-center gap-4 mt-2">
+              <Link href="/contact" className="bg-blue-600 hover:bg-blue-700 text-white py-4 px-8 rounded-lg font-medium text-center transition-colors transform hover:scale-105 inline-flex items-center">
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                </svg>
+                Request a Quote
+              </Link>
+              <Link href="/contact?subject=Sample Request" className="bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-50 py-4 px-8 rounded-lg font-medium text-center transition-colors transform hover:scale-105 inline-flex items-center">
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                </svg>
+                Get Free Samples
+              </Link>
             </div>
           </div>
           
-          {/* Product Info */}
-          <div>
-            <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium mb-4">
-              {product.category}
-            </span>
-            
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">{product.name}</h1>
-            
-            <p className="text-xl text-gray-700 mb-6">{product.description}</p>
-            
-            <div className="mb-8">
-              <h2 className="text-lg font-semibold mb-3">Key Features:</h2>
-              <ul className="space-y-2">
-                {product.features.map((feature, index) => (
-                  <li key={index} className="flex items-start">
-                    <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+          {/* Product showcase with visual impact */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            {/* Left column - Main product image */}
+            <div className="lg:col-span-7 relative">
+              <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-lg h-[500px] relative overflow-hidden group">
+                <div className="absolute top-4 right-4 z-10 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  Popular Choice
+                </div>
+                <Image 
+                  src={product.images[0]}
+                  alt={product.name}
+                  fill
+                  className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+                />
+                
+                {/* Product highlight badges */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 flex justify-center gap-3">
+                  <div className="bg-gray-100 px-3 py-1 rounded-full text-sm font-medium text-gray-700 flex items-center">
+                    <svg className="w-4 h-4 mr-1 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span>{feature}</span>
-                  </li>
+                    Premium Quality
+                  </div>
+                  <div className="bg-gray-100 px-3 py-1 rounded-full text-sm font-medium text-gray-700 flex items-center">
+                    <svg className="w-4 h-4 mr-1 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
+                    </svg>
+                    Quick Delivery
+                  </div>
+                  <div className="bg-gray-100 px-3 py-1 rounded-full text-sm font-medium text-gray-700 flex items-center">
+                    <svg className="w-4 h-4 mr-1 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                    </svg>
+                    Customer Favorite
+                  </div>
+                </div>
+              </div>
+              
+              {/* Image gallery thumbnails */}
+              <div className="flex gap-3 mt-4 justify-center">
+                {product.images.map((image, index) => (
+                  <div key={index} className="w-20 h-20 border-2 border-gray-200 rounded-lg p-2 cursor-pointer hover:border-blue-500 transition-colors">
+                    <div className="relative w-full h-full">
+                      <Image 
+                        src={image}
+                        alt={`${product.name} view ${index + 1}`}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  </div>
                 ))}
-              </ul>
-            </div>
-            
-            <div className="border-t border-b border-gray-200 py-4 mb-6">
-              <div className="flex flex-wrap gap-y-2">
-                <div className="w-full md:w-1/2 flex items-center">
-                  <span className="text-gray-600 mr-2">Price:</span>
-                  <span className="font-semibold">{product.price}</span>
-                </div>
-                <div className="w-full md:w-1/2 flex items-center">
-                  <span className="text-gray-600 mr-2">Min. Order:</span>
-                  <span className="font-semibold">{product.moq} units</span>
-                </div>
-                <div className="w-full md:w-1/2 flex items-center">
-                  <span className="text-gray-600 mr-2">Lead Time:</span>
-                  <span className="font-semibold">{product.leadTime}</span>
-                </div>
               </div>
             </div>
             
-            <div className="flex space-x-4">
-              <Link href="/contact" className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-medium text-center transition-colors">
-                Request a Quote
-              </Link>
-              <Link href="/contact?subject=Sample Request" className="flex-1 border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 px-6 rounded-lg font-medium text-center transition-colors">
-                Get Samples
-              </Link>
+            {/* Right column - Value proposition */}
+            <div className="lg:col-span-5">
+              <div className="bg-white rounded-xl border border-gray-200 shadow-lg p-6">
+                <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b pb-4">Why Our {product.name} Stand Out</h2>
+                
+                <div className="space-y-6">
+                  {/* Feature highlights with icons */}
+                  {product.features.map((feature, index) => (
+                    <div key={index} className="flex items-start">
+                      <div className="flex-shrink-0 h-10 w-10 rounded-md bg-blue-100 flex items-center justify-center mr-4">
+                        <svg className="h-6 w-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-base font-medium text-gray-900">{feature}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Social proof */}
+                <div className="mt-8 pt-6 border-t border-gray-200">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-semibold">Trusted by Businesses</h3>
+                    <div className="flex">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <svg key={star} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <div className="flex items-start">
+                      <div className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-blue-100 text-blue-600 mr-4">
+                        <span className="text-lg font-bold">P</span>
+                      </div>
+                      <div>
+                        <p className="italic text-gray-600 text-sm">"These pizza boxes have been a game-changer for our delivery business. The quality is exceptional, and our customers notice the difference."</p>
+                        <p className="mt-2 font-medium text-sm">— Pizza Palace, London</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Order details and CTA */}
+                <div className="mt-8 bg-gray-50 p-4 rounded-lg">
+                  <div className="flex justify-between mb-2">
+                    <span className="text-gray-600">Starting Price:</span>
+                    <span className="font-bold text-blue-600">{product.price}</span>
+                  </div>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-gray-600">Minimum Order:</span>
+                    <span className="font-semibold">{product.moq} units</span>
+                  </div>
+                  <div className="flex justify-between mb-4">
+                    <span className="text-gray-600">Lead Time:</span>
+                    <span className="font-semibold">{product.leadTime}</span>
+                  </div>
+                  
+                  <Link href="/contact" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium text-center transition-colors block">
+                    Get Your Custom Quote Today
+                  </Link>
+                  <p className="text-xs text-center text-gray-500 mt-2">No obligation • Free consultation</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -159,6 +258,11 @@ const ProductDetail = ({ product, relatedProducts }) => {
               <button className="px-6 py-3 text-gray-500 hover:text-gray-700">
                 Shipping
               </button>
+              {product.weeklyDelivery && (
+                <button className="px-6 py-3 text-gray-500 hover:text-gray-700">
+                  Weekly Delivery
+                </button>
+              )}
             </div>
           </div>
           
@@ -178,6 +282,273 @@ const ProductDetail = ({ product, relatedProducts }) => {
                   ))}
                 </tbody>
               </table>
+            </div>
+            
+            {/* Product Variants Section */}
+            {product.variants && product.variants.length > 0 && (
+              <div className="mt-16">
+                <div className="text-center mb-12">
+                  <h3 className="text-3xl font-bold mb-4">Choose Your Perfect Solution</h3>
+                  <p className="text-gray-600 max-w-3xl mx-auto">
+                    Select from our range of premium options to find the ideal packaging solution for your specific business needs.
+                  </p>
+                </div>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  {product.variants.map((variant, index) => (
+                    <div key={index} className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                      <div className="flex flex-col h-full">
+                        <div className="relative">
+                          <div className="h-64 relative bg-gray-50">
+                            <Image
+                              src={variant.imageSrc}
+                              alt={variant.name}
+                              fill
+                              className="object-contain p-4"
+                            />
+                          </div>
+                          {/* Option label */}
+                          <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                            {index === 0 ? 'Best Seller' : 'Popular Choice'}
+                          </div>
+                        </div>
+                        
+                        <div className="p-6 flex-grow flex flex-col">
+                          <h4 className="text-xl font-bold mb-2">{variant.name}</h4>
+                          <p className="text-gray-600 mb-4">{variant.description}</p>
+                          
+                          <div className="flex-grow">
+                            <div className="border-t border-gray-100 pt-4 mb-4">
+                              <h5 className="font-semibold text-gray-900 mb-3">Key Advantages:</h5>
+                              <ul className="space-y-2">
+                                {variant.features.map((feature, featureIdx) => (
+                                  <li key={featureIdx} className="flex items-start text-sm">
+                                    <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                    </svg>
+                                    <span className="text-gray-700">{feature}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+                          
+                          <div className="mt-auto">
+                            <div className="flex flex-col sm:flex-row gap-3 mt-6">
+                              <Link 
+                                href={`/contact?product=${encodeURIComponent(variant.name)}`}
+                                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium text-center transition-colors"
+                              >
+                                Request Quote
+                              </Link>
+                              <Link 
+                                href={`/contact?product=${encodeURIComponent(variant.name)}&subject=Sample Request`}
+                                className="flex-1 border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 px-4 rounded-lg font-medium text-center transition-colors"
+                              >
+                                Get Samples
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Custom solutions banner */}
+                <div className="mt-12 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-8 text-white shadow-lg">
+                  <div className="flex flex-col md:flex-row md:items-center">
+                    <div className="md:flex-1">
+                      <h3 className="text-2xl font-bold mb-2">Need a Custom Solution?</h3>
+                      <p className="mb-4 md:mb-0 text-blue-100">
+                        We can tailor our products to your exact specifications. Contact our team to discuss your unique requirements.
+                      </p>
+                    </div>
+                    <div className="md:ml-8">
+                      <Link 
+                        href="/contact?subject=Custom Solution"
+                        className="inline-block bg-white text-blue-600 hover:bg-blue-50 py-3 px-6 rounded-lg font-medium text-center transition-colors"
+                      >
+                        Get Custom Solution
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            {/* Weekly Delivery Service Section - Redesigned */}
+            {product.weeklyDelivery && (
+              <div className="mt-16 mb-20 overflow-hidden">
+                {/* Header with wave design */}
+                <div className="relative bg-blue-600 py-8 rounded-t-2xl">
+                  <div className="absolute top-0 left-0 w-full overflow-hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-12 text-blue-500 opacity-20">
+                      <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
+                    </svg>
+                  </div>
+                  <div className="container mx-auto px-4 relative z-10">
+                    <div className="flex flex-col md:flex-row items-center">
+                      <div className="mb-6 md:mb-0 md:mr-8">
+                        <div className="h-20 w-20 rounded-full bg-white flex items-center justify-center shadow-lg">
+                          <svg className="h-10 w-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="text-center md:text-left">
+                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">Weekly Delivery Service</h2>
+                        <p className="text-blue-100 max-w-3xl">Never worry about running out of packaging again</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Main content */}
+                <div className="bg-gradient-to-b from-blue-500 to-blue-600 text-white p-6 md:p-10">
+                  <div className="container mx-auto">
+                    <div className="md:ml-28 mb-8">
+                      <p className="text-lg leading-relaxed">
+                        {product.weeklyDelivery}
+                      </p>
+                    </div>
+                    
+                    {/* Benefits grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 my-10">
+                      <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 transform transition-transform hover:scale-105 hover:shadow-xl">
+                        <div className="bg-white/20 w-16 h-16 rounded-lg mb-6 p-3 shadow-inner">
+                          <svg className="h-full w-full text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                          </svg>
+                        </div>
+                        <h3 className="text-xl font-bold mb-3">Inventory Management</h3>
+                        <p className="text-blue-100">
+                          Never run out of essential packaging supplies. Our system ensures you always have what you need.
+                        </p>
+                      </div>
+                      
+                      <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 transform transition-transform hover:scale-105 hover:shadow-xl">
+                        <div className="bg-white/20 w-16 h-16 rounded-lg mb-6 p-3 shadow-inner">
+                          <svg className="h-full w-full text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                        </div>
+                        <h3 className="text-xl font-bold mb-3">Time Savings</h3>
+                        <p className="text-blue-100">
+                          Automated scheduling saves you time and hassle. Spend less time ordering and more time on your business.
+                        </p>
+                      </div>
+                      
+                      <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 transform transition-transform hover:scale-105 hover:shadow-xl">
+                        <div className="bg-white/20 w-16 h-16 rounded-lg mb-6 p-3 shadow-inner">
+                          <svg className="h-full w-full text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2" />
+                          </svg>
+                        </div>
+                        <h3 className="text-xl font-bold mb-3">Storage Optimization</h3>
+                        <p className="text-blue-100">
+                          Reduce storage space needs with regular deliveries. Optimize your valuable workspace for operations.
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* CTA */}
+                    <div className="text-center mt-10 mb-6">
+                      <Link 
+                        href="/contact?subject=Weekly Delivery Service" 
+                        className="inline-block bg-white text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-full font-bold text-lg shadow-lg transform transition-transform hover:scale-105 hover:shadow-xl"
+                      >
+                        Schedule Your Weekly Deliveries
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Bottom wave */}
+                <div className="bg-blue-600 h-16 relative rounded-b-2xl">
+                  <div className="absolute bottom-0 left-0 w-full overflow-hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-12 text-gray-50">
+                      <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            {/* Application Examples */}
+            <div className="mt-12">
+              <h3 className="text-2xl font-bold mb-6">Common Applications</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-gray-50 p-5 rounded-lg text-center">
+                  <div className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-4">
+                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                  </div>
+                  <h4 className="font-semibold mb-2">Restaurants</h4>
+                  <p className="text-sm text-gray-600">Perfect for takeout and delivery services</p>
+                </div>
+                <div className="bg-gray-50 p-5 rounded-lg text-center">
+                  <div className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-4">
+                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                  </div>
+                  <h4 className="font-semibold mb-2">Retail Stores</h4>
+                  <p className="text-sm text-gray-600">Enhance customer experience with branded packaging</p>
+                </div>
+                <div className="bg-gray-50 p-5 rounded-lg text-center">
+                  <div className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-4">
+                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                  </div>
+                  <h4 className="font-semibold mb-2">Food Production</h4>
+                  <p className="text-sm text-gray-600">Store and display food products safely and hygienically</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Technical Diagram Section */}
+            <div className="mt-12">
+              <h3 className="text-2xl font-bold mb-6">Technical Information</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="bg-white rounded-lg border border-gray-200 p-6">
+                  <h4 className="font-semibold mb-4">Material Composition</h4>
+                  <div className="flex space-x-2 mb-4">
+                    {['Durability', 'Eco-Friendly', 'Food Safe'].map((tag, i) => (
+                      <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-sm text-gray-600 mb-4">
+                    Our products are manufactured using premium materials that ensure durability,
+                    reliability, and food safety while minimizing environmental impact.
+                  </p>
+                  <h5 className="font-medium text-sm mb-2">Certification Standards:</h5>
+                  <ul className="text-sm text-gray-600 space-y-1">
+                    <li>• ISO 9001 Certified Manufacturing</li>
+                    <li>• FDA Food-Safe Materials</li>
+                    <li>• Sustainable Forestry Certified (for paper products)</li>
+                  </ul>
+                </div>
+                <div className="bg-white rounded-lg border border-gray-200 p-6">
+                  <h4 className="font-semibold mb-4">Size & Dimensions</h4>
+                  <div className="relative h-48 mb-4 bg-gray-50">
+                    <Image
+                      src="/images/product-dimensions.svg"
+                      alt="Product dimensions diagram"
+                      fill
+                      className="object-contain p-2"
+                    />
+                  </div>
+                  <p className="text-sm text-gray-600">
+                    Precise dimensions ensure a perfect fit for your products. All measurements
+                    follow industry standards and can be customized to your specific requirements.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
