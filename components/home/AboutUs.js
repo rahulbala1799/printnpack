@@ -209,6 +209,7 @@ const AboutUs = () => {
             width={250}
             height={250}
             className="object-contain"
+            unoptimized={process.env.NODE_ENV === 'production'}
           />
         </div>
         
@@ -220,6 +221,7 @@ const AboutUs = () => {
             width={250}
             height={250}
             className="object-contain"
+            unoptimized={process.env.NODE_ENV === 'production'}
           />
         </div>
         
@@ -231,6 +233,7 @@ const AboutUs = () => {
             width={180}
             height={180}
             className="object-contain"
+            unoptimized={process.env.NODE_ENV === 'production'}
           />
         </div>
         
@@ -242,6 +245,7 @@ const AboutUs = () => {
             width={180}
             height={180}
             className="object-contain"
+            unoptimized={process.env.NODE_ENV === 'production'}
           />
         </div>
       </div>
@@ -268,6 +272,7 @@ const AboutUs = () => {
                 width={600}
                 height={400}
                 className="w-full h-auto object-cover"
+                unoptimized={process.env.NODE_ENV === 'production'}
               />
             </motion.div>
           </div>
@@ -299,6 +304,7 @@ const AboutUs = () => {
                     width={200}
                     height={200}
                     className="rounded-lg shadow-md w-full h-auto"
+                    unoptimized={process.env.NODE_ENV === 'production'}
                   />
                 </div>
                 <div className="w-1/2 px-2 mb-4">
@@ -308,6 +314,7 @@ const AboutUs = () => {
                     width={200}
                     height={200}
                     className="rounded-lg shadow-md w-full h-auto"
+                    unoptimized={process.env.NODE_ENV === 'production'}
                   />
                 </div>
               </div>

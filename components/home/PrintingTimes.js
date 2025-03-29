@@ -136,6 +136,7 @@ const PrintingTimes = () => {
             width={200} 
             height={200}
             className="object-contain"
+            unoptimized={process.env.NODE_ENV === 'production'}
           />
         </div>
         
@@ -147,6 +148,7 @@ const PrintingTimes = () => {
             width={180} 
             height={180}
             className="object-contain transform -rotate-12"
+            unoptimized={process.env.NODE_ENV === 'production'}
           />
         </div>
         
@@ -158,6 +160,7 @@ const PrintingTimes = () => {
             width={150} 
             height={150}
             className="object-contain"
+            unoptimized={process.env.NODE_ENV === 'production'}
           />
         </div>
         
@@ -169,6 +172,7 @@ const PrintingTimes = () => {
             width={180} 
             height={180}
             className="object-contain"
+            unoptimized={process.env.NODE_ENV === 'production'}
           />
         </div>
       </div>

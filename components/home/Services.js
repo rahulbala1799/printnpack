@@ -68,6 +68,7 @@ const ServiceCard = ({ icon: Icon, title, description, color, index, imageSrc })
                 width={128}
                 height={128}
                 className="object-contain"
+                unoptimized={process.env.NODE_ENV === 'production'}
               />
             </div>
           </div>
@@ -171,6 +172,7 @@ const Services = () => {
                   alt="Premium Packaging Service"
                   fill
                   className="object-cover transform hover:scale-105 transition-transform duration-700"
+                  unoptimized={process.env.NODE_ENV === 'production'}
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-900/50 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-6 md:p-8">

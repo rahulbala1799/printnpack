@@ -70,10 +70,40 @@ const MobileProductViewer = () => {
   function getGradientColors(colorString) {
     if (!colorString) return 'rgb(120, 120, 255) 0%, rgb(80, 80, 200) 100%';
     
-    const colors = colorString.split(' ');
-    const fromColor = colors[0] ? colors[0].replace('from-', '').replace('-500', '120, 120, 255').replace('-400', '150, 150, 255') : '120, 120, 255';
-    const toColor = colors[2] ? colors[2].replace('to-', '').replace('-600', '80, 80, 200').replace('-500', '100, 100, 220') : '80, 80, 200';
-    return `rgb(${fromColor}) 0%, rgb(${toColor}) 100%`;
+    try {
+      const colors = colorString.split(' ');
+      let fromColor = '120, 120, 255'; // Default blue
+      let toColor = '80, 80, 200';     // Default dark blue
+      
+      // Safe replacement for fromColor
+      if (colors[0]) {
+        fromColor = colors[0].replace('from-', '');
+        if (fromColor.includes('-500')) fromColor = '120, 120, 255';
+        else if (fromColor.includes('-400')) fromColor = '150, 150, 255';
+        else if (fromColor.includes('red')) fromColor = '239, 68, 68';
+        else if (fromColor.includes('amber')) fromColor = '245, 158, 11';
+        else if (fromColor.includes('green')) fromColor = '34, 197, 94';
+        else if (fromColor.includes('blue')) fromColor = '59, 130, 246';
+        else if (fromColor.includes('purple')) fromColor = '168, 85, 247';
+      }
+      
+      // Safe replacement for toColor
+      if (colors.length > 2 && colors[2]) {
+        toColor = colors[2].replace('to-', '');
+        if (toColor.includes('-600')) toColor = '80, 80, 200';
+        else if (toColor.includes('-500')) toColor = '100, 100, 220';
+        else if (toColor.includes('red')) toColor = '220, 38, 38';
+        else if (toColor.includes('amber')) toColor = '217, 119, 6';
+        else if (toColor.includes('green')) toColor = '22, 163, 74';
+        else if (toColor.includes('blue')) toColor = '37, 99, 235';
+        else if (toColor.includes('purple')) toColor = '126, 34, 206';
+      }
+      
+      return `rgb(${fromColor}) 0%, rgb(${toColor}) 100%`;
+    } catch (error) {
+      console.error('Error in gradient parsing:', error);
+      return 'rgb(120, 120, 255) 0%, rgb(80, 80, 200) 100%';
+    }
   }
 
   const handleDragEnd = (_, info) => {
@@ -148,6 +178,7 @@ const MobileProductViewer = () => {
                     fill
                     className="object-contain"
                     priority
+                    unoptimized={process.env.NODE_ENV === 'production'}
                   />
                 </div>
               </div>

@@ -171,6 +171,7 @@ const HeroSection = () => {
                       className="object-contain"
                       priority={currentSlide === 0}
                       sizes="(max-width: 768px) 288px, 384px"
+                      unoptimized={process.env.NODE_ENV === 'production'}
                     />
                   </div>
                 </div>

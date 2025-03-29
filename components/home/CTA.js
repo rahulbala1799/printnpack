@@ -15,6 +15,7 @@ const CTA = () => {
             width={400} 
             height={400}
             className="object-contain opacity-60"
+            unoptimized={process.env.NODE_ENV === 'production'}
           />
         </div>
         {/* Left side decorative image */}
@@ -25,6 +26,7 @@ const CTA = () => {
             width={350} 
             height={350}
             className="object-contain opacity-60"
+            unoptimized={process.env.NODE_ENV === 'production'}
           />
         </div>
         {/* Center decorative image */}
@@ -36,6 +38,7 @@ const CTA = () => {
               width={350} 
               height={350}
               className="object-contain opacity-20"
+              unoptimized={process.env.NODE_ENV === 'production'}
             />
           </div>
         </div>
@@ -83,6 +86,7 @@ const CTA = () => {
                   width={600} 
                   height={400}
                   className="w-full h-auto"
+                  unoptimized={process.env.NODE_ENV === 'production'}
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
                   <div className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full inline-block mb-2">
@@ -100,6 +104,7 @@ const CTA = () => {
                   width={100} 
                   height={100}
                   className="w-full h-full object-cover"
+                  unoptimized={process.env.NODE_ENV === 'production'}
                 />
               </div>
               <div className="absolute -top-6 -left-6 w-24 h-24 rounded-lg overflow-hidden shadow-xl border-4 border-blue-800 hidden md:block">
@@ -109,6 +114,7 @@ const CTA = () => {
                   width={100} 
                   height={100}
                   className="w-full h-full object-cover"
+                  unoptimized={process.env.NODE_ENV === 'production'}
                 />
               </div>
             </div>
