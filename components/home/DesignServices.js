@@ -271,7 +271,7 @@ const DesignServices = () => {
                 <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-white p-6 transition-all duration-500">
                   {/* Animated circle behind image */}
                   <motion.div
-                    className="absolute w-40 h-40 rounded-full border-2 opacity-50"
+                    className="absolute w-48 h-48 rounded-full border-2 opacity-50"
                     style={{ borderColor: service.accentColor }}
                     animate={hoveredService === service.id ? {
                       scale: [1, 1.2, 1],
@@ -281,7 +281,7 @@ const DesignServices = () => {
                   ></motion.div>
                   
                   <motion.div 
-                    className="relative h-40 w-40 mb-6 transition-transform duration-700 z-20"
+                    className="relative h-52 w-52 mb-6 transition-transform duration-700 z-20"
                     animate={hoveredService === service.id ? { 
                       scale: 1.1,
                       y: -10
@@ -297,45 +297,48 @@ const DesignServices = () => {
                       className="object-contain drop-shadow-xl"
                       style={{ 
                         filter: hoveredService === service.id ? 
-                          `drop-shadow(0 0 8px ${service.accentColor}) brightness(1.1) contrast(1.1)` : 
+                          `drop-shadow(0 0 12px ${service.accentColor}) brightness(1.2) contrast(1.1)` : 
                           'brightness(1.05) contrast(1.05)' 
                       }}
                     />
                   </motion.div>
                   
-                  <h3 className="text-2xl font-bold relative mb-4 z-20">
-                    <span className="relative">
-                      {service.title}
-                      <motion.span 
-                        className="absolute -bottom-1 left-0 h-0.5 transform origin-left transition-all duration-300"
-                        style={{ background: service.accentColor }}
-                        animate={hoveredService === service.id ? { width: '100%' } : { width: '0%' }}
-                      ></motion.span>
-                    </span>
-                  </h3>
-                  
-                  <p className="text-center text-white/90 mb-5 max-w-xs z-20">{service.description}</p>
-                  
-                  <motion.div
-                    animate={hoveredService === service.id ? { y: 0, opacity: 1 } : { y: 10, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="z-20"
-                  >
-                    <Link 
-                      href="/services" 
-                      className="px-6 py-2.5 rounded-full backdrop-blur-sm border transition-all duration-300 text-sm font-medium flex items-center"
-                      style={{ 
-                        borderColor: service.accentColor,
-                        backgroundColor: 'rgba(0,0,0,0.3)',
-                        boxShadow: hoveredService === service.id ? `0 0 10px ${service.accentColor}` : 'none'
-                      }}
+                  {/* Text overlay for better contrast */}
+                  <div className="bg-black/60 backdrop-blur-sm p-3 rounded-lg max-w-[90%] w-full">
+                    <h3 className="text-2xl font-bold relative mb-3 z-20 text-center">
+                      <span className="relative">
+                        {service.title}
+                        <motion.span 
+                          className="absolute -bottom-1 left-1/2 h-0.5 transform -translate-x-1/2 origin-center transition-all duration-300"
+                          style={{ background: service.accentColor }}
+                          animate={hoveredService === service.id ? { width: '80%' } : { width: '0%' }}
+                        ></motion.span>
+                      </span>
+                    </h3>
+                    
+                    <p className="text-center text-white mb-4 max-w-xs mx-auto z-20">{service.description}</p>
+                    
+                    <motion.div
+                      animate={hoveredService === service.id ? { y: 0, opacity: 1 } : { y: 10, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="z-20 flex justify-center"
                     >
-                      <span>Learn More</span>
-                      <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                      </svg>
-                    </Link>
-                  </motion.div>
+                      <Link 
+                        href="/services" 
+                        className="px-6 py-2.5 rounded-full backdrop-blur-sm border transition-all duration-300 text-sm font-medium flex items-center"
+                        style={{ 
+                          borderColor: service.accentColor,
+                          backgroundColor: 'rgba(0,0,0,0.5)',
+                          boxShadow: hoveredService === service.id ? `0 0 10px ${service.accentColor}` : 'none'
+                        }}
+                      >
+                        <span>Learn More</span>
+                        <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                      </Link>
+                    </motion.div>
+                  </div>
                 </div>
               </motion.div>
             </motion.div>
