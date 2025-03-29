@@ -199,13 +199,13 @@ const AboutUs = () => {
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-green-100 rounded-full -ml-64 -mb-64 opacity-20 animate-blob animation-delay-2000"></div>
       <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-purple-100 rounded-full opacity-20 animate-blob animation-delay-4000"></div>
       
-      {/* Product image background collage */}
+      {/* Product image background collage with new photos */}
       <div className="hidden md:block absolute inset-0 pointer-events-none z-0">
         {/* Top right product image */}
-        <div className="absolute top-0 right-0 w-64 h-64 opacity-10">
+        <div className="absolute top-10 right-10 w-64 h-64 opacity-10">
           <Image
-            src="/images/hero/pizza-box.png"
-            alt="Pizza Box"
+            src="/images/ifa/heroh/1.png"
+            alt="Product Showcase"
             width={250}
             height={250}
             className="object-contain"
@@ -213,10 +213,10 @@ const AboutUs = () => {
         </div>
         
         {/* Bottom left product image */}
-        <div className="absolute bottom-0 left-0 w-64 h-64 opacity-10">
+        <div className="absolute bottom-10 left-10 w-64 h-64 opacity-10">
           <Image
-            src="/images/hero/burger-box.png"
-            alt="Burger Box"
+            src="/images/ifa/heroh/2.png"
+            alt="Product Showcase"
             width={250}
             height={250}
             className="object-contain"
@@ -226,8 +226,8 @@ const AboutUs = () => {
         {/* Middle right product image */}
         <div className="absolute top-1/3 right-1/4 w-48 h-48 opacity-10">
           <Image
-            src="/images/hero/napkin.png"
-            alt="Napkin"
+            src="/images/ifa/heroh/3.png"
+            alt="Product Showcase"
             width={180}
             height={180}
             className="object-contain"
@@ -235,14 +235,90 @@ const AboutUs = () => {
         </div>
         
         {/* Middle left product image */}
-        <div className="absolute top-2/3 left-1/5 w-40 h-40 opacity-10">
+        <div className="absolute top-2/3 left-1/5 w-48 h-48 opacity-10">
           <Image
-            src="/images/hero/paper-bag.png"
-            alt="Paper Bag"
-            width={160}
-            height={160}
+            src="/images/ifa/heroh/4.png"
+            alt="Product Showcase"
+            width={180}
+            height={180}
             className="object-contain"
           />
+        </div>
+      </div>
+      
+      {/* Added prominent product showcase */}
+      <div className="container mx-auto px-4 relative z-10 mb-16">
+        <div className="flex flex-wrap justify-center items-center -mx-4">
+          <div className="w-full md:w-1/2 px-4 mb-8 md:mb-0">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={controls}
+              variants={{
+                visible: { 
+                  opacity: 1, 
+                  x: 0,
+                  transition: { duration: 0.8, delay: 0.3 }
+                }
+              }}
+              className="rounded-xl overflow-hidden shadow-xl"
+            >
+              <Image
+                src="/images/ifa/heroh/5.png"
+                alt="Premium Packaging Showcase"
+                width={600}
+                height={400}
+                className="w-full h-auto object-cover"
+              />
+            </motion.div>
+          </div>
+          
+          <div className="w-full md:w-1/2 px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={controls}
+              variants={{
+                visible: { 
+                  opacity: 1, 
+                  y: 0,
+                  transition: { duration: 0.6, delay: 0.5 }
+                }
+              }}
+              className="bg-white p-6 rounded-xl shadow-lg border border-gray-100"
+            >
+              <h3 className="text-2xl font-bold text-blue-800 mb-4">Premium Quality Materials</h3>
+              <p className="text-gray-700 mb-6">
+                Our packaging solutions are crafted from the highest quality materials, ensuring durability, 
+                presentation excellence, and environmental responsibility for your products. 
+                Experience the difference that premium packaging makes in customer perception.
+              </p>
+              <div className="flex flex-wrap -mx-2">
+                <div className="w-1/2 px-2 mb-4">
+                  <Image
+                    src="/images/ifa/heroh/6.png"
+                    alt="Premium Materials"
+                    width={200}
+                    height={200}
+                    className="rounded-lg shadow-md w-full h-auto"
+                  />
+                </div>
+                <div className="w-1/2 px-2 mb-4">
+                  <Image
+                    src="/images/ifa/heroh/7.png"
+                    alt="Premium Materials"
+                    width={200}
+                    height={200}
+                    className="rounded-lg shadow-md w-full h-auto"
+                  />
+                </div>
+              </div>
+              <Link 
+                href="/products" 
+                className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300"
+              >
+                Explore Our Products
+              </Link>
+            </motion.div>
+          </div>
         </div>
       </div>
       

@@ -126,12 +126,12 @@ const PrintingTimes = () => {
 
   return (
     <section id="printing-times-section" className="py-16 bg-gray-50 overflow-hidden relative">
-      {/* Background product images - purely decorative */}
+      {/* Background product images - purely decorative using new images */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Pizza box image */}
+        {/* Top right decorative image */}
         <div className="absolute -right-10 top-10 opacity-5 hidden md:block">
           <Image 
-            src="/images/hero/pizza-box.png" 
+            src="/images/ifa/heroh/1.png" 
             alt="Product decoration" 
             width={200} 
             height={200}
@@ -139,10 +139,10 @@ const PrintingTimes = () => {
           />
         </div>
         
-        {/* Paper bag image */}
+        {/* Bottom left decorative image */}
         <div className="absolute -left-10 bottom-20 opacity-5 hidden md:block">
           <Image 
-            src="/images/hero/paper-bag.png" 
+            src="/images/ifa/heroh/2.png" 
             alt="Product decoration" 
             width={180} 
             height={180}
@@ -150,13 +150,24 @@ const PrintingTimes = () => {
           />
         </div>
         
-        {/* Burger box image */}
+        {/* Center right decorative image */}
         <div className="absolute right-1/3 bottom-0 opacity-5 hidden md:block">
           <Image 
-            src="/images/hero/burger-box.png" 
+            src="/images/ifa/heroh/3.png" 
             alt="Product decoration" 
             width={150} 
             height={150}
+            className="object-contain"
+          />
+        </div>
+        
+        {/* Top left decorative image - added */}
+        <div className="absolute left-1/3 top-10 opacity-5 hidden md:block">
+          <Image 
+            src="/images/ifa/heroh/4.png" 
+            alt="Product decoration" 
+            width={180} 
+            height={180}
             className="object-contain"
           />
         </div>

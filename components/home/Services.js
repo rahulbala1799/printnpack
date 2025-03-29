@@ -108,35 +108,35 @@ const Services = () => {
       title: "Packaging Solutions",
       description: "Comprehensive packaging solutions tailored to your product specifications and brand requirements.",
       color: "from-blue-500 to-blue-700",
-      imageSrc: "/images/hero/pizza-box.png"
+      imageSrc: "/images/ifa/heroh/pizza.png"
     },
     {
       icon: FaPrint,
       title: "Custom Printing",
       description: "High-quality printing services to make your packaging stand out with your unique brand identity.",
       color: "from-purple-500 to-purple-700",
-      imageSrc: "/images/hero/paper-bag.png"
+      imageSrc: "/images/ifa/heroh/bag.png"
     },
     {
       icon: FaLeaf,
       title: "Eco-Friendly Options",
       description: "Sustainable packaging alternatives that reduce environmental impact without compromising quality.",
       color: "from-green-500 to-green-700",
-      imageSrc: "/images/hero/burger-box.png"
+      imageSrc: "/images/ifa/heroh/burger.png"
     },
     {
       icon: FaShippingFast,
       title: "Bulk Orders",
       description: "Efficient handling of large volume orders with competitive pricing and timely delivery.",
       color: "from-red-500 to-red-700",
-      imageSrc: "/images/hero/napkin.png"
+      imageSrc: "/images/ifa/heroh/napkin.png"
     },
     {
       icon: FaPencilRuler,
       title: "Custom Design",
       description: "Expert design services to create packaging that perfectly fits your product and enhances brand appeal.",
       color: "from-amber-500 to-amber-700",
-      imageSrc: "/images/hero/leaflet.png"
+      imageSrc: "/images/ifa/heroh/leaflet.png"
     },
   ];
 
@@ -154,6 +154,80 @@ const Services = () => {
             We offer a comprehensive range of packaging and printing services to meet all your business needs.
             From concept to delivery, we ensure quality at every step.
           </p>
+        </motion.div>
+        
+        {/* Featured Service Showcase */}
+        <motion.div 
+          className="bg-white rounded-xl shadow-xl overflow-hidden mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <div className="flex flex-col md:flex-row">
+            <div className="md:w-1/2 relative">
+              <div className="h-64 md:h-full w-full relative overflow-hidden">
+                <Image 
+                  src="/images/ifa/heroh/wide.png"
+                  alt="Premium Packaging Service"
+                  fill
+                  className="object-cover transform hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-900/50 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 p-6 md:p-8">
+                  <div className="bg-white/90 backdrop-blur-sm px-4 py-3 rounded-lg inline-block mb-2">
+                    <span className="text-blue-800 font-bold">Featured Service</span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 drop-shadow-lg">Complete Packaging Solutions</h3>
+                </div>
+              </div>
+            </div>
+            <div className="md:w-1/2 p-6 md:p-8">
+              <div className="mb-6">
+                <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                  <FaBox className="text-2xl text-blue-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">End-to-End Packaging Excellence</h3>
+                <p className="text-gray-700 mb-4">
+                  Our comprehensive packaging service takes care of every aspect of your packaging needs, from initial design to final delivery.
+                  We handle material selection, structural design, graphics, printing, finishing, and logistics integration.
+                </p>
+                
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  <div className="flex items-start">
+                    <div className="rounded-full bg-green-100 p-2 mr-2">
+                      <FaLeaf className="text-green-600" />
+                    </div>
+                    <span className="text-sm text-gray-700">Eco-Friendly Materials</span>
+                  </div>
+                  <div className="flex items-start">
+                    <div className="rounded-full bg-amber-100 p-2 mr-2">
+                      <FaPrint className="text-amber-600" />
+                    </div>
+                    <span className="text-sm text-gray-700">Custom Branding</span>
+                  </div>
+                  <div className="flex items-start">
+                    <div className="rounded-full bg-purple-100 p-2 mr-2">
+                      <FaPencilRuler className="text-purple-600" />
+                    </div>
+                    <span className="text-sm text-gray-700">Expert Design</span>
+                  </div>
+                  <div className="flex items-start">
+                    <div className="rounded-full bg-red-100 p-2 mr-2">
+                      <FaShippingFast className="text-red-600" />
+                    </div>
+                    <span className="text-sm text-gray-700">Fast Production</span>
+                  </div>
+                </div>
+              </div>
+              
+              <Link 
+                href="/services" 
+                className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-all duration-300 hover:shadow-lg"
+              >
+                Learn More About Our Services
+              </Link>
+            </div>
+          </div>
         </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
