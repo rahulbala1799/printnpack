@@ -72,6 +72,25 @@ const ProductDetail = ({ product, relatedProducts }) => {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        <style jsx global>{`
+          /* Custom scrollbar styling */
+          .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+          }
+          .hide-scrollbar::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+          }
+          
+          /* Image zoom animation */
+          @keyframes zoomIn {
+            from { transform: scale(1); }
+            to { transform: scale(1.2); }
+          }
+          .zoom-animation {
+            animation: zoomIn 0.3s ease-out forwards;
+          }
+        `}</style>
       </Head>
 
       {/* Breadcrumbs */}
@@ -87,7 +106,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
         </div>
       </div>
 
-      {/* Product Hero - Redesigned for impact */}
+      {/* Product Hero - Redesigned */}
       <div className="bg-gradient-to-b from-gray-50 to-white py-16">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center text-center mb-12">
@@ -113,58 +132,153 @@ const ProductDetail = ({ product, relatedProducts }) => {
             </div>
           </div>
           
-          {/* Product showcase with visual impact */}
+          {/* Product showcase with visual impact - REDESIGNED GALLERY */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Left column - Main product image */}
+            {/* Left column - Main product gallery - COMPLETELY REDESIGNED */}
             <div className="lg:col-span-7 relative">
-              <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-lg h-[500px] relative overflow-hidden group">
-                <div className="absolute top-4 right-4 z-10 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                  Popular Choice
+              {/* Main large image display */}
+              <div className="relative overflow-hidden rounded-xl shadow-xl border border-gray-200 bg-white">
+                <div className="aspect-[4/3] relative">
+                  {product.images.map((image, idx) => (
+                    <div 
+                      key={idx} 
+                      id={`gallery-main-${idx}`}
+                      className="absolute inset-0 transition-opacity duration-500 ease-in-out"
+                      style={{ 
+                        opacity: idx === 0 ? 1 : 0,
+                        pointerEvents: idx === 0 ? 'auto' : 'none' 
+                      }}
+                    >
+                      <Image 
+                        src={image}
+                        alt={`${product.name} view ${idx + 1}`}
+                        fill
+                        className="object-contain p-6"
+                      />
+                      
+                      {/* Image navigation arrows */}
+                      <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 hover:opacity-100 transition-opacity">
+                        <button 
+                          onClick={(e) => {
+                            e.preventDefault();
+                            const prevIdx = (idx - 1 + product.images.length) % product.images.length;
+                            document.querySelector(`#gallery-main-${idx}`).style.opacity = 0;
+                            document.querySelector(`#gallery-main-${idx}`).style.pointerEvents = 'none';
+                            document.querySelector(`#gallery-main-${prevIdx}`).style.opacity = 1;
+                            document.querySelector(`#gallery-main-${prevIdx}`).style.pointerEvents = 'auto';
+                            document.querySelector(`#gallery-thumb-${prevIdx}`).scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                          }}
+                          className="bg-white/80 backdrop-blur-sm rounded-full p-2 shadow-lg hover:bg-white transition-colors"
+                          aria-label="Previous image"
+                        >
+                          <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                          </svg>
+                        </button>
+                        <button 
+                          onClick={(e) => {
+                            e.preventDefault();
+                            const nextIdx = (idx + 1) % product.images.length;
+                            document.querySelector(`#gallery-main-${idx}`).style.opacity = 0;
+                            document.querySelector(`#gallery-main-${idx}`).style.pointerEvents = 'none';
+                            document.querySelector(`#gallery-main-${nextIdx}`).style.opacity = 1;
+                            document.querySelector(`#gallery-main-${nextIdx}`).style.pointerEvents = 'auto';
+                            document.querySelector(`#gallery-thumb-${nextIdx}`).scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                          }}
+                          className="bg-white/80 backdrop-blur-sm rounded-full p-2 shadow-lg hover:bg-white transition-colors"
+                          aria-label="Next image"
+                        >
+                          <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      </div>
+                      
+                      {/* Bottom zoom indicator */}
+                      <div className="absolute bottom-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-medium text-gray-800 shadow-lg flex items-center">
+                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                        </svg>
+                        Click to zoom
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <Image 
-                  src={product.images[0]}
-                  alt={product.name}
-                  fill
-                  className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
-                />
                 
-                {/* Product highlight badges */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 flex justify-center gap-3">
-                  <div className="bg-gray-100 px-3 py-1 rounded-full text-sm font-medium text-gray-700 flex items-center">
-                    <svg className="w-4 h-4 mr-1 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    Premium Quality
-                  </div>
-                  <div className="bg-gray-100 px-3 py-1 rounded-full text-sm font-medium text-gray-700 flex items-center">
-                    <svg className="w-4 h-4 mr-1 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
-                    </svg>
-                    Quick Delivery
-                  </div>
-                  <div className="bg-gray-100 px-3 py-1 rounded-full text-sm font-medium text-gray-700 flex items-center">
-                    <svg className="w-4 h-4 mr-1 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-                    </svg>
-                    Customer Favorite
-                  </div>
+                {/* The overlay badge */}
+                <div className="absolute top-4 right-4 z-10 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  Premium Quality
                 </div>
               </div>
               
-              {/* Image gallery thumbnails */}
-              <div className="flex gap-3 mt-4 justify-center">
-                {product.images.map((image, index) => (
-                  <div key={index} className="w-20 h-20 border-2 border-gray-200 rounded-lg p-2 cursor-pointer hover:border-blue-500 transition-colors">
-                    <div className="relative w-full h-full">
-                      <Image 
-                        src={image}
-                        alt={`${product.name} view ${index + 1}`}
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
+              {/* New enlarged thumbnail gallery */}
+              <div className="mt-6 relative">
+                <div className="overflow-x-auto pb-2 hide-scrollbar">
+                  <div className="flex gap-4 px-1">
+                    {product.images.map((image, index) => (
+                      <button
+                        key={index}
+                        id={`gallery-thumb-${index}`}
+                        onClick={(e) => {
+                          // Hide all main images
+                          product.images.forEach((_, idx) => {
+                            document.querySelector(`#gallery-main-${idx}`).style.opacity = 0;
+                            document.querySelector(`#gallery-main-${idx}`).style.pointerEvents = 'none';
+                          });
+                          // Show current image
+                          document.querySelector(`#gallery-main-${index}`).style.opacity = 1;
+                          document.querySelector(`#gallery-main-${index}`).style.pointerEvents = 'auto';
+                        }}
+                        className={`relative flex-shrink-0 border-2 rounded-lg overflow-hidden transition-all h-24 w-24 md:h-28 md:w-28 focus:outline-none hover:shadow-md ${index === 0 ? 'border-blue-500' : 'border-gray-200 hover:border-blue-300'}`}
+                      >
+                        <div className="absolute inset-0">
+                          <Image 
+                            src={image}
+                            alt={`${product.name} thumbnail ${index + 1}`}
+                            fill
+                            className="object-contain p-2"
+                          />
+                        </div>
+                      </button>
+                    ))}
                   </div>
-                ))}
+                </div>
+                
+                {/* Gallery controls */}
+                <div className="absolute -top-3 right-0 flex space-x-1">
+                  <button className="bg-white rounded-full p-1 shadow-md hover:bg-gray-100 border border-gray-200">
+                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                    </svg>
+                  </button>
+                  <button className="bg-white rounded-full p-1 shadow-md hover:bg-gray-100 border border-gray-200">
+                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              
+              {/* Product highlight badges - MOVED BELOW GALLERY */}
+              <div className="mt-6 flex flex-wrap justify-center gap-3">
+                <div className="bg-gray-100 px-4 py-2 rounded-full text-sm font-medium text-gray-700 flex items-center">
+                  <svg className="w-4 h-4 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  Premium Quality
+                </div>
+                <div className="bg-gray-100 px-4 py-2 rounded-full text-sm font-medium text-gray-700 flex items-center">
+                  <svg className="w-4 h-4 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
+                  </svg>
+                  Fast Shipping
+                </div>
+                <div className="bg-gray-100 px-4 py-2 rounded-full text-sm font-medium text-gray-700 flex items-center">
+                  <svg className="w-4 h-4 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                  </svg>
+                  Customer Favorite
+                </div>
               </div>
             </div>
             
