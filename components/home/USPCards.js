@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { RiTimerFlashLine, RiLeafLine, RiAwardLine, RiNumbersLine, RiRulerLine, RiPaintBrushLine, RiBox3Line } from 'react-icons/ri';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const USPCards = ({ data }) => {
   const sectionRef = useRef(null);
@@ -82,6 +83,37 @@ const USPCards = ({ data }) => {
       
       {/* Subtle pattern overlay */}
       <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+      
+      {/* Product image background elements */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="absolute -right-20 top-1/4 w-64 h-64 opacity-5">
+          <Image 
+            src="/images/hero/pizza-box.png" 
+            alt="Pizza Box" 
+            width={300} 
+            height={300}
+            className="object-contain transform rotate-12"
+          />
+        </div>
+        <div className="absolute -left-20 bottom-1/4 w-64 h-64 opacity-5">
+          <Image 
+            src="/images/hero/paper-bag.png" 
+            alt="Paper Bag" 
+            width={300} 
+            height={300}
+            className="object-contain transform -rotate-12"
+          />
+        </div>
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 opacity-5">
+          <Image 
+            src="/images/hero/burger-box.png" 
+            alt="Burger Box" 
+            width={350} 
+            height={350}
+            className="object-contain"
+          />
+        </div>
+      </div>
       
       <div className="container mx-auto px-4 relative z-10 max-w-6xl">
         <div className="flex items-center justify-center mb-8">

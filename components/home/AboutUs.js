@@ -12,6 +12,7 @@ import {
   FaHamburger,
   FaRecycle
 } from 'react-icons/fa';
+import Image from 'next/image';
 
 // Card with 3D hover effect
 const FeatureCard = ({ icon: Icon, title, description, color, delay }) => {
@@ -197,6 +198,53 @@ const AboutUs = () => {
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100 rounded-full -mr-64 -mt-64 opacity-20 animate-blob"></div>
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-green-100 rounded-full -ml-64 -mb-64 opacity-20 animate-blob animation-delay-2000"></div>
       <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-purple-100 rounded-full opacity-20 animate-blob animation-delay-4000"></div>
+      
+      {/* Product image background collage */}
+      <div className="hidden md:block absolute inset-0 pointer-events-none z-0">
+        {/* Top right product image */}
+        <div className="absolute top-0 right-0 w-64 h-64 opacity-10">
+          <Image
+            src="/images/hero/pizza-box.png"
+            alt="Pizza Box"
+            width={250}
+            height={250}
+            className="object-contain"
+          />
+        </div>
+        
+        {/* Bottom left product image */}
+        <div className="absolute bottom-0 left-0 w-64 h-64 opacity-10">
+          <Image
+            src="/images/hero/burger-box.png"
+            alt="Burger Box"
+            width={250}
+            height={250}
+            className="object-contain"
+          />
+        </div>
+        
+        {/* Middle right product image */}
+        <div className="absolute top-1/3 right-1/4 w-48 h-48 opacity-10">
+          <Image
+            src="/images/hero/napkin.png"
+            alt="Napkin"
+            width={180}
+            height={180}
+            className="object-contain"
+          />
+        </div>
+        
+        {/* Middle left product image */}
+        <div className="absolute top-2/3 left-1/5 w-40 h-40 opacity-10">
+          <Image
+            src="/images/hero/paper-bag.png"
+            alt="Paper Bag"
+            width={160}
+            height={160}
+            className="object-contain"
+          />
+        </div>
+      </div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div ref={ref} className="text-center mb-12">

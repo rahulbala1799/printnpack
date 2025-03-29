@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const PrintingTimes = () => {
   const [activeTab, setActiveTab] = useState('packaging');
@@ -124,8 +125,44 @@ const PrintingTimes = () => {
   const initialScale = isMounted ? 0.9 : 1;
 
   return (
-    <section id="printing-times-section" className="py-16 bg-gray-50 overflow-hidden">
-      <div className="container mx-auto px-4">
+    <section id="printing-times-section" className="py-16 bg-gray-50 overflow-hidden relative">
+      {/* Background product images - purely decorative */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        {/* Pizza box image */}
+        <div className="absolute -right-10 top-10 opacity-5 hidden md:block">
+          <Image 
+            src="/images/hero/pizza-box.png" 
+            alt="Product decoration" 
+            width={200} 
+            height={200}
+            className="object-contain"
+          />
+        </div>
+        
+        {/* Paper bag image */}
+        <div className="absolute -left-10 bottom-20 opacity-5 hidden md:block">
+          <Image 
+            src="/images/hero/paper-bag.png" 
+            alt="Product decoration" 
+            width={180} 
+            height={180}
+            className="object-contain transform -rotate-12"
+          />
+        </div>
+        
+        {/* Burger box image */}
+        <div className="absolute right-1/3 bottom-0 opacity-5 hidden md:block">
+          <Image 
+            src="/images/hero/burger-box.png" 
+            alt="Product decoration" 
+            width={150} 
+            height={150}
+            className="object-contain"
+          />
+        </div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div 
           className="text-center mb-12"
           initial={{ opacity: initialOpacity, y: initialY }}
