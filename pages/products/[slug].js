@@ -971,18 +971,14 @@ const ProductDetail = ({ product, relatedProducts }) => {
                       { size: '5.5mm', desc: 'Enhanced durability' },
                       { size: '10mm', desc: 'Premium rigid display panels' }
                     ].map((item, i) => (
-                      <div key={i} className={`flex flex-wrap items-center p-4 rounded-lg ${item.highlight ? 'bg-white/20 border border-white/30' : 'bg-white/10'}`}>
-                        <div className="w-12 h-12 bg-white rounded-full flex-shrink-0 flex items-center justify-center mr-4">
-                          <span className="text-xl font-bold text-indigo-700">{item.size}</span>
+                      <div key={i} className={`p-4 rounded-lg ${item.highlight ? 'bg-white/20 border border-white/30' : 'bg-white/10'}`}>
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-lg sm:text-xl font-bold bg-white/20 text-white px-3 py-1 rounded">{item.size}</span>
+                          {item.highlight && (
+                            <span className="bg-yellow-400 text-indigo-900 text-xs font-bold px-3 py-1.5 rounded-full">BEST SELLER</span>
+                          )}
                         </div>
-                        <div className="flex-grow min-w-0 my-1">
-                          <p className="font-medium text-sm sm:text-base truncate">{item.desc}</p>
-                        </div>
-                        {item.highlight && (
-                          <div className="w-full sm:w-auto mt-2 sm:mt-0 sm:ml-auto">
-                            <span className="inline-block bg-yellow-400 text-indigo-900 text-xs font-bold px-3 py-1.5 rounded-full">BEST SELLER</span>
-                          </div>
-                        )}
+                        <p className="font-medium text-sm sm:text-base text-white/90">{item.desc}</p>
                       </div>
                     ))}
                   </div>
