@@ -1167,12 +1167,13 @@ const products = [
       }
     ],
     images: [
-      '/css-placeholder-image',
-      '/css-placeholder-image',
-      '/css-placeholder-image',
-      '/css-placeholder-image'
+      '/images/products/correx/correx-main.jpg',
+      '/images/products/correx/correx-closeup.jpg',
+      '/images/products/correx/correx-signage.jpg',
+      '/images/products/correx/correx-election-signs.jpg',
+      '/images/products/correx/correx-yard-signs.jpg'
     ],
-    imageSrc: '/css-placeholder-image',
+    imageSrc: '/images/products/correx/correx-main.jpg',
     price: 'Starting at €15 per board',
     quoteRequired: false,
     leadTime: '1-3 business days standard',

@@ -3060,7 +3060,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 {/* Application 1 */}
                 <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
                   <div className="h-40 overflow-hidden">
-                    <img src="/images/products/correx/placeholder1.jpg" alt="Real Estate Sign" className="w-full h-full object-cover" />
+                    <img src="/images/products/correx/correx-signage.jpg" alt="Real Estate Sign" className="w-full h-full object-cover" />
                   </div>
                   <div className="p-6">
                     <h3 className="font-bold text-lg mb-2">Real Estate Signs</h3>
@@ -3075,7 +3075,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 {/* Application 2 */}
                 <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
                   <div className="h-40 overflow-hidden">
-                    <img src="/images/products/correx/placeholder2.jpg" alt="Construction Site" className="w-full h-full object-cover" />
+                    <img src="/images/products/correx/correx-main.jpg" alt="Construction Site" className="w-full h-full object-cover" />
                   </div>
                   <div className="p-6">
                     <h3 className="font-bold text-lg mb-2">Construction Sites</h3>
@@ -3090,7 +3090,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 {/* Application 3 */}
                 <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
                   <div className="h-40 overflow-hidden">
-                    <img src="/images/products/correx/placeholder3.jpg" alt="Event Directional Signs" className="w-full h-full object-cover" />
+                    <img src="/images/products/correx/correx-closeup.jpg" alt="Event Directional Signs" className="w-full h-full object-cover" />
                   </div>
                   <div className="p-6">
                     <h3 className="font-bold text-lg mb-2">Event Signage</h3>
@@ -3105,7 +3105,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 {/* Application 4 */}
                 <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
                   <div className="h-40 overflow-hidden">
-                    <img src="/images/products/correx/placeholder4.jpg" alt="Election Campaign" className="w-full h-full object-cover" />
+                    <img src="/images/products/correx/correx-election-signs.jpg" alt="Election Campaign" className="w-full h-full object-cover" />
                   </div>
                   <div className="p-6">
                     <h3 className="font-bold text-lg mb-2">Election Campaigns</h3>
@@ -3120,7 +3120,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 {/* Application 5 */}
                 <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
                   <div className="h-40 overflow-hidden">
-                    <img src="/images/products/correx/placeholder5.jpg" alt="Retail Display" className="w-full h-full object-cover" />
+                    <img src="/images/products/correx/correx-yard-signs.jpg" alt="Retail Display" className="w-full h-full object-cover" />
                   </div>
                   <div className="p-6">
                     <h3 className="font-bold text-lg mb-2">Retail Displays</h3>
@@ -3135,7 +3135,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 {/* Application 6 */}
                 <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
                   <div className="h-40 overflow-hidden">
-                    <img src="/images/products/correx/placeholder6.jpg" alt="Agricultural Marker" className="w-full h-full object-cover" />
+                    <img src="/images/products/correx/correx-signage.jpg" alt="Agricultural Marker" className="w-full h-full object-cover" />
                   </div>
                   <div className="p-6">
                     <h3 className="font-bold text-lg mb-2">Agricultural Markers</h3>
