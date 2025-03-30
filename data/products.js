@@ -1199,6 +1199,125 @@ const products = [
       }
     ]
   },
+  {
+    id: 'vinyl-stickers',
+    name: 'Vinyl Stickers',
+    category: 'Wide Format',
+    description: 'Premium vinyl stickers and decals for business branding, promotions, and creative applications in any size or shape.',
+    features: [
+      'High-quality vinyl materials with professional adhesives',
+      'Custom shapes and sizes available with precision cutting',
+      'Indoor and outdoor durable options with UV-resistant inks',
+      'Gloss, matte, metallic, holographic, and transparent finishes',
+      'Kiss-cut, die-cut, and sheet options for any application',
+      'Waterproof and weather-resistant material options'
+    ],
+    detailedDescription: 'Our premium vinyl stickers provide endless possibilities for branding, promotion, and creative applications. Created using the highest quality vinyl materials and professional-grade adhesives, these stickers deliver outstanding durability and visual impact whether used indoors or outdoors.\n\nWe offer complete customization options including precision contour cutting for any shape, size, or design. Choose from multiple finishes including glossy, matte, metallic, holographic, and transparent to achieve your desired look and feel. Each sticker is printed using UV-resistant inks that resist fading, ensuring your graphics remain vibrant for years.\n\nOur vinyl stickers are available as individual cut pieces, convenient sheets, or bulk rolls depending on your needs. For outdoor or challenging environments, we offer specialized materials with enhanced weather resistance, temperature tolerance, and waterproof properties. Whatever your application—from product labeling and packaging to vehicle decoration, window displays, or promotional giveaways—our vinyl stickers deliver professional results that make your brand stick.',
+    specifications: [
+      { name: 'Material Options', value: 'Standard vinyl, premium outdoor vinyl, metallic vinyl, transparent vinyl, holographic vinyl' },
+      { name: 'Thickness Range', value: '80-120 microns depending on material choice' },
+      { name: 'Size Range', value: 'From 20mm diameter to 1m x 1m, custom sizes available' },
+      { name: 'Cutting Options', value: 'Kiss-cut (on backing), die-cut (individual), sheet format, contour cut' },
+      { name: 'Finish Options', value: 'Gloss, matte, metallic, holographic, transparent' },
+      { name: 'Adhesive Types', value: 'Standard permanent, removable, extra-strong, repositionable' },
+      { name: 'Print Technology', value: 'High-resolution digital printing up to 1440dpi with UV-resistant inks' },
+      { name: 'Weather Resistance', value: 'Indoor: 5+ years, Outdoor: 2-5 years depending on material choice and conditions' },
+      { name: 'Minimum Order', value: 'No minimum for standard orders, volume discounts available' },
+      { name: 'Production Time', value: '2-5 working days standard, rush service available' }
+    ],
+    applications: [
+      'Product labeling and packaging',
+      'Branding and logo stickers',
+      'Promotional giveaways and marketing campaigns',
+      'Vehicle and window graphics',
+      'Retail displays and point-of-sale',
+      'Equipment identification and safety labels',
+      'Events and exhibitions',
+      'Personal and creative projects'
+    ],
+    models: [
+      {
+        name: 'Standard Indoor Vinyl Stickers',
+        description: 'Perfect for indoor applications and short-term outdoor use',
+        features: [
+          'High-quality 80-micron vinyl',
+          'Vibrant full-color printing',
+          'Available in gloss or matte finish',
+          'Suitable for smooth, clean surfaces',
+          'Expected lifespan of 3+ years indoors, 1-2 years outdoors'
+        ],
+        recommendedFor: 'Indoor branding, product labels, short-term promotions, merchandise stickers'
+      },
+      {
+        name: 'Premium Outdoor Vinyl Stickers',
+        description: 'Extra durable stickers designed for challenging outdoor environments',
+        features: [
+          'Heavy-duty 100-micron vinyl with UV-protective laminate',
+          'Waterproof, weather-resistant, and fade-resistant',
+          'Enhanced adhesive for strong bonding',
+          'Maintains color vibrancy for 3-5 years outdoors',
+          'Available in gloss or matte finish'
+        ],
+        recommendedFor: 'Vehicle graphics, outdoor equipment, extended outdoor exposure, harsh environments'
+      },
+      {
+        name: 'Specialty Vinyl Stickers',
+        description: 'Eye-catching special effect finishes for premium applications',
+        features: [
+          'Available in metallic, holographic, transparent, or fluorescent finishes',
+          'Unique visual properties that catch attention',
+          'Precision contour-cut to any custom shape',
+          'Professional-grade adhesives for different surfaces',
+          'Indoor and selective outdoor applications'
+        ],
+        recommendedFor: 'Premium product branding, high-end packaging, special promotions, creative applications'
+      },
+      {
+        name: 'Kiss-Cut Sticker Sheets',
+        description: 'Multiple stickers on a single backing sheet for convenient distribution',
+        features: [
+          'Custom arrangements of multiple stickers per sheet',
+          'Individual stickers cut through vinyl but not backing',
+          'Easy peel-and-apply functionality',
+          'Available in A4, A3, or custom sheet sizes',
+          'Ideal for sticker packs and organized distribution'
+        ],
+        recommendedFor: 'Promotional packs, product kits, retail sales, trade show giveaways, organized application'
+      }
+    ],
+    images: [
+      '/images/placeholders/vinyl-stickers/vinyl-stickers-main.jpg',
+      '/images/placeholders/vinyl-stickers/vinyl-stickers-custom-shapes.jpg',
+      '/images/placeholders/vinyl-stickers/vinyl-stickers-sheet.jpg',
+      '/images/placeholders/vinyl-stickers/vinyl-stickers-application.jpg'
+    ],
+    imageSrc: '/images/placeholders/vinyl-stickers/vinyl-stickers-main.jpg',
+    price: 'Starting at €0.50 per sticker',
+    quoteRequired: false,
+    leadTime: '2-5 business days standard',
+    faq: [
+      {
+        question: 'What\'s the difference between kiss-cut and die-cut stickers?',
+        answer: 'Kiss-cut stickers are cut through the vinyl layer but not through the backing paper, allowing multiple stickers to remain on a single sheet until needed. Die-cut stickers are cut completely through both the vinyl and backing paper, resulting in individual stickers. Kiss-cut is ideal for sticker sheets and easier handling, while die-cut is perfect for individual stickers for immediate application.'
+      },
+      {
+        question: 'How long will vinyl stickers last outdoors?',
+        answer: 'Our standard vinyl stickers typically last 1-2 years outdoors, while our premium outdoor vinyl stickers with UV lamination can last 3-5 years. Factors affecting lifespan include direct sunlight exposure, weather conditions, surface type, and pollution levels. For maximum durability in challenging outdoor environments, we recommend our premium outdoor vinyl with lamination.'
+      },
+      {
+        question: 'What surfaces can vinyl stickers be applied to?',
+        answer: 'Vinyl stickers adhere well to most clean, smooth surfaces including glass, metal, plastic, wood (sealed), walls (painted/smooth), and vehicles. For rough or textured surfaces, specialized high-tack adhesives may be required. For surfaces that will be exposed to water, heat, or chemicals, our premium vinyl options are recommended. We don\'t recommend application to silicone, highly textured surfaces, or surfaces with peeling paint.'
+      },
+      {
+        question: 'Do you offer waterproof vinyl stickers?',
+        answer: 'Yes, our vinyl stickers are inherently water-resistant, but for fully waterproof applications we recommend our premium outdoor vinyl stickers with lamination. These are suitable for bathrooms, kitchen appliances, water bottles, equipment exposed to rain, and even marine applications. The lamination layer provides an extra barrier against moisture penetration and helps prevent edge lifting in wet conditions.'
+      },
+      {
+        question: 'Can I get custom shapes or sizes for my vinyl stickers?',
+        answer: 'Absolutely! We can create vinyl stickers in virtually any shape or size through precision contour cutting. Simply provide your design, and we\'ll cut exactly to the outline you want. There\'s no extra charge for custom shapes within the same area pricing. For complex designs with very intricate details, our design team can advise on slight modifications if needed to ensure clean cutting and durability.'
+      }
+    ]
+  }
 ];
 
 // Helper function to get a product by its ID/slug
