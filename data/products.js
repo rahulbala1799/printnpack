@@ -909,7 +909,7 @@ const products = [
       'Available laminated or unlaminated for different finishes',
       'Options for printing on both sides, or laminating both sides'
     ],
-    detailedDescription: 'Our Foamex PVC Boards are ideal for indoor signage, exhibitions, point of sale displays and more. Made from lightweight yet rigid expanded PVC, these versatile boards offer excellent print quality combined with durability. Choose from multiple thickness options to suit your specific application, with 5mm being our most popular choice for general signage. We can cut to any custom size up to our maximum dimensions, or choose from standard template sizes. Enhance your boards with optional additions like pre-drilled mounting holes, metal hanging systems, or protective lamination in matt or gloss finish.',
+    detailedDescription: 'Our Foamex PVC Boards are ideal for indoor signage, exhibitions, point of sale displays and more. Made from lightweight yet rigid expanded PVC, these versatile boards offer excellent print quality combined with durability. We apply high-quality printed vinyl to the Foamex boards rather than direct UV printing, ensuring vibrant colors and consistent results. Choose from multiple thickness options to suit your specific application, with 5mm being our most popular choice for general signage. We can cut to any custom size up to our maximum dimensions, or choose from standard template sizes. Enhance your boards with optional additions like pre-drilled mounting holes, metal hanging systems, or protective lamination in matt or gloss finish.',
     price: 'From £19.99',
     specifications: [
       {
@@ -927,6 +927,10 @@ const products = [
       {
         name: 'Standard Sizes',
         value: 'A0, A1, A2, 60x90cm, 70x100cm, and custom sizes'
+      },
+      {
+        name: 'Print Method',
+        value: 'High-quality vinyl print applied to Foamex board'
       },
       {
         name: 'Print Quality',
