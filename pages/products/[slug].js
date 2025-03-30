@@ -3281,6 +3281,47 @@ const ProductDetail = ({ product, relatedProducts }) => {
           </div>
         </div>
       )}
+      {/* Product Image Gallery - for Foamex boards */}
+      {product?.id === 'foamex-boards' && (
+        <div className="py-12 bg-gray-100">
+          <div className="container mx-auto px-4">
+            <div className="mb-8 text-center max-w-3xl mx-auto">
+              <h2 className="text-3xl font-bold mb-4">Product Gallery</h2>
+              <p className="text-gray-600 text-lg">Explore our high-quality Foamex PVC board solutions for a variety of applications.</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {product.images && product.images.map((image, index) => (
+                <div key={index} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all transform hover:scale-105 duration-300">
+                  <div className="h-64 relative">
+                    <img 
+                      src={image} 
+                      alt={`Foamex PVC Board - Image ${index + 1}`} 
+                      className="w-full h-full object-contain p-4" 
+                    />
+                  </div>
+                  <div className="p-4 border-t border-gray-100">
+                    <h3 className="font-semibold text-lg text-gray-800">
+                      {index === 0 && "Premium 3mm Foamex Board Display"}
+                      {index === 1 && "Photo Printing on Foamex Board"}
+                      {index === 2 && "Commercial Foamex Applications"}
+                      {index === 3 && "Foamex Signage Solutions"}
+                      {index === 4 && "Retail Display Signboards"}
+                    </h3>
+                    <p className="text-gray-600 text-sm mt-1">
+                      {index === 0 && "Professional 3mm Foamex boards perfect for indoor displays"}
+                      {index === 1 && "High-definition photo prints on premium Foamex material"}
+                      {index === 2 && "Versatile Foamex applications for business signage"}
+                      {index === 3 && "Custom-sized signage solutions for any indoor environment"}
+                      {index === 4 && "Retail-ready Foamex boards with professional finish"}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 };

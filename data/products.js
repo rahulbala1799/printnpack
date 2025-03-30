@@ -1051,14 +1051,13 @@ const products = [
         recommended: 'Recommended for premium signage and self-standing displays'
       }
     ],
-    imageSrc: '/images/placeholders/foamex/foamex-main.jpg',
+    imageSrc: '/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif',
     images: [
-      '/images/placeholders/foamex/foamex-main.jpg',
-      '/images/placeholders/foamex/foamex-3mm-sample.jpg',
-      '/images/placeholders/foamex/foamex-5mm-display.jpg',
-      '/images/placeholders/foamex/foamex-retail-signage.jpg',
-      '/images/placeholders/foamex/foamex-exhibition-display.jpg',
-      '/images/placeholders/foamex/foamex-mounting-options.jpg'
+      '/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif',
+      '/ifa/product/foamex/foam-board-photo-prints-1000x1000.webp',
+      '/ifa/product/foamex/foam-board-printing-1000x1000.webp',
+      '/ifa/product/foamex/sign-boards-1000x1000.webp',
+      '/ifa/product/foamex/sign-boards-1000x1000 (1).webp.crdownload'
     ],
     faq: [
       {
