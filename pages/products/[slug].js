@@ -2291,6 +2291,593 @@ const ProductDetail = ({ product, relatedProducts }) => {
           </div>
         </div>
       </div>
+      
+      {/* Special hero banner for Premium Linen Feel Napkins */}
+      {product && product.id === 'premium-linen-feel-napkins' && (
+        <div className="bg-gradient-to-br from-slate-50 via-white to-slate-100 py-16 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-full h-full opacity-10">
+            <div className="absolute top-0 left-0 w-full h-full bg-repeat" style={{ backgroundImage: 'url(/images/pattern-light.svg)', backgroundSize: '200px' }}></div>
+          </div>
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="flex flex-col lg:flex-row items-center gap-12">
+              <div className="lg:w-1/2">
+                <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">Elevate Your Dining Experience</h2>
+                <p className="text-lg text-slate-700 mb-8">Our Premium Linen Feel Napkins combine the luxury of cloth with the convenience of disposable products. Experience the difference that superior absorbency and elegant presentation make.</p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                  <div className="bg-white rounded-lg p-5 shadow-sm border border-slate-100 transform transition hover:shadow-md hover:-translate-y-1">
+                    <div className="flex items-start mb-2">
+                      <span className="bg-blue-100 text-blue-600 p-2 rounded-full mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
+                      <h3 className="font-bold text-slate-800">Premium Texture</h3>
+                    </div>
+                    <p className="text-slate-600 ml-11">Cloth-like feel for upscale dining experiences</p>
+                  </div>
+                  
+                  <div className="bg-white rounded-lg p-5 shadow-sm border border-slate-100 transform transition hover:shadow-md hover:-translate-y-1">
+                    <div className="flex items-start mb-2">
+                      <span className="bg-blue-100 text-blue-600 p-2 rounded-full mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                        </svg>
+                      </span>
+                      <h3 className="font-bold text-slate-800">3x Absorbency</h3>
+                    </div>
+                    <p className="text-slate-600 ml-11">Absorbs up to three times more than paper napkins</p>
+                  </div>
+                  
+                  <div className="bg-white rounded-lg p-5 shadow-sm border border-slate-100 transform transition hover:shadow-md hover:-translate-y-1">
+                    <div className="flex items-start mb-2">
+                      <span className="bg-blue-100 text-blue-600 p-2 rounded-full mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                      </span>
+                      <h3 className="font-bold text-slate-800">Perfect Fold</h3>
+                    </div>
+                    <p className="text-slate-600 ml-11">Pre-folded to 20cm × 10cm for elegant place settings</p>
+                  </div>
+                  
+                  <div className="bg-white rounded-lg p-5 shadow-sm border border-slate-100 transform transition hover:shadow-md hover:-translate-y-1">
+                    <div className="flex items-start mb-2">
+                      <span className="bg-blue-100 text-blue-600 p-2 rounded-full mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                        </svg>
+                      </span>
+                      <h3 className="font-bold text-slate-800">Cutlery Option</h3>
+                    </div>
+                    <p className="text-slate-600 ml-11">Special pocket fold for silverware presentation</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="lg:w-1/2 relative">
+                <div className="bg-gradient-to-br from-blue-600/10 to-slate-100 rounded-2xl p-8 shadow-lg">
+                  <div id="napkin-folding-demo" className="aspect-square w-full relative">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <img 
+                        src="/images/placeholders/napkins/airlaid-main.jpg" 
+                        alt="Premium Linen Feel Napkin" 
+                        className="object-cover rounded-lg shadow-lg transform transition-all duration-700 ease-in-out"
+                        id="napkin-state-image"
+                      />
+                    </div>
+                    <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-3 z-10">
+                      <button 
+                        className="bg-white px-4 py-2 rounded-lg shadow-sm text-slate-800 font-medium hover:bg-blue-50 transform transition active:scale-95 border border-slate-200"
+                        id="fold-button-1"
+                      >
+                        Step 1
+                      </button>
+                      <button 
+                        className="bg-white px-4 py-2 rounded-lg shadow-sm text-slate-800 font-medium hover:bg-blue-50 transform transition active:scale-95 border border-slate-200"
+                        id="fold-button-2"
+                      >
+                        Step 2
+                      </button>
+                      <button 
+                        className="bg-white px-4 py-2 rounded-lg shadow-sm text-slate-800 font-medium hover:bg-blue-50 transform transition active:scale-95 border border-slate-200"
+                        id="fold-button-3"
+                      >
+                        Step 3
+                      </button>
+                      <button 
+                        className="bg-white px-4 py-2 rounded-lg shadow-sm text-slate-800 font-medium hover:bg-blue-50 transform transition active:scale-95 border border-slate-200"
+                        id="fold-button-reset"
+                      >
+                        Reset
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <script dangerouslySetInnerHTML={{
+            __html: `
+              // Interactive napkin folding demonstration
+              document.addEventListener('DOMContentLoaded', function() {
+                const napkinImage = document.getElementById('napkin-state-image');
+                const foldButton1 = document.getElementById('fold-button-1');
+                const foldButton2 = document.getElementById('fold-button-2');
+                const foldButton3 = document.getElementById('fold-button-3');
+                const resetButton = document.getElementById('fold-button-reset');
+                
+                // Image paths for different folding states
+                const napkinStates = {
+                  'unfolded': '/images/placeholders/napkins/airlaid-main.jpg',
+                  'fold1': '/images/placeholders/napkins/airlaid-fold-1.jpg',
+                  'fold2': '/images/placeholders/napkins/airlaid-fold-2.jpg',
+                  'fold3': '/images/placeholders/napkins/airlaid-cutlery-pocket.jpg'
+                };
+                
+                // Set initial state
+                let currentState = 'unfolded';
+                
+                // Highlight active button
+                function highlightButton(activeButton) {
+                  [foldButton1, foldButton2, foldButton3, resetButton].forEach(btn => {
+                    btn.classList.remove('bg-blue-100', 'text-blue-700');
+                    btn.classList.add('bg-white', 'text-slate-800');
+                  });
+                  
+                  if (activeButton) {
+                    activeButton.classList.remove('bg-white', 'text-slate-800');
+                    activeButton.classList.add('bg-blue-100', 'text-blue-700');
+                  }
+                }
+                
+                // Create event handlers with both click and touch support
+                function handleStep1() {
+                  currentState = 'fold1';
+                  napkinImage.style.transform = 'rotate(-90deg)';
+                  napkinImage.src = napkinStates.fold1;
+                  highlightButton(foldButton1);
+                }
+                
+                function handleStep2() {
+                  currentState = 'fold2';
+                  napkinImage.style.transform = 'rotate(0deg) scale(0.9)';
+                  napkinImage.src = napkinStates.fold2;
+                  highlightButton(foldButton2);
+                }
+                
+                function handleStep3() {
+                  currentState = 'fold3';
+                  napkinImage.style.transform = 'rotate(0deg) scale(1)';
+                  napkinImage.src = napkinStates.fold3;
+                  highlightButton(foldButton3);
+                }
+                
+                function handleReset() {
+                  currentState = 'unfolded';
+                  napkinImage.style.transform = 'rotate(0deg) scale(1)';
+                  napkinImage.src = napkinStates.unfolded;
+                  highlightButton(null);
+                }
+                
+                // Add event listeners for both click and touch
+                if (foldButton1) {
+                  foldButton1.addEventListener('click', handleStep1);
+                  foldButton1.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    handleStep1();
+                  }, { passive: false });
+                }
+                
+                if (foldButton2) {
+                  foldButton2.addEventListener('click', handleStep2);
+                  foldButton2.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    handleStep2();
+                  }, { passive: false });
+                }
+                
+                if (foldButton3) {
+                  foldButton3.addEventListener('click', handleStep3);
+                  foldButton3.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    handleStep3();
+                  }, { passive: false });
+                }
+                
+                if (resetButton) {
+                  resetButton.addEventListener('click', handleReset);
+                  resetButton.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    handleReset();
+                  }, { passive: false });
+                }
+                
+                // Auto demonstrate folding on load after a delay
+                setTimeout(() => {
+                  handleStep1();
+                  
+                  setTimeout(() => {
+                    handleStep2();
+                    
+                    setTimeout(() => {
+                      handleStep3();
+                      
+                      setTimeout(() => {
+                        handleReset();
+                      }, 2000);
+                    }, 2000);
+                  }, 2000);
+                }, 1000);
+                
+                console.log('Napkin folding demo initialized');
+              });
+            `
+          }} />
+        </div>
+      )}
+      
+      {/* Napkin Texture Comparison for Premium Linen Feel Napkins */}
+      {product && product.id === 'premium-linen-feel-napkins' && (
+        <div className="py-16 bg-slate-50 mt-16">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Feel the Difference</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-white rounded-xl overflow-hidden shadow-md transform transition hover:shadow-lg hover:-translate-y-1">
+                <div className="h-48 bg-cover bg-center" style={{ backgroundImage: 'url(/images/placeholders/napkins/standard-napkin.jpg)' }}></div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2">Standard Paper Napkin</h3>
+                  <ul className="space-y-2 mb-4 text-slate-700">
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-red-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                      </svg>
+                      <span>Rough texture</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-red-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                      </svg>
+                      <span>Limited absorbency</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-red-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                      </svg>
+                      <span>Falls apart when wet</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-red-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                      </svg>
+                      <span>Budget appearance</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-xl overflow-hidden shadow-lg ring-2 ring-blue-500 transform transition scale-105 relative z-10">
+                <div className="absolute top-4 right-4">
+                  <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">RECOMMENDED</span>
+                </div>
+                <div className="h-48 bg-cover bg-center" style={{ backgroundImage: 'url(/images/placeholders/napkins/airlaid-texture-detail.jpg)' }}></div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2">Premium Linen Feel Napkin</h3>
+                  <ul className="space-y-2 mb-4 text-slate-700">
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span>Cloth-like texture</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span>3x more absorbent</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span>Maintains structure when wet</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span>Premium presentation</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-xl overflow-hidden shadow-md transform transition hover:shadow-lg hover:-translate-y-1">
+                <div className="h-48 bg-cover bg-center" style={{ backgroundImage: 'url(/images/placeholders/napkins/linen-napkin.jpg)' }}></div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2">Cloth Linen Napkin</h3>
+                  <ul className="space-y-2 mb-4 text-slate-700">
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span>Premium texture</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span>Excellent absorbency</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-red-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                      </svg>
+                      <span>High laundry costs</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-red-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                      </svg>
+                      <span>Storage & logistics complexity</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-12 text-center">
+              <p className="text-lg text-slate-700 max-w-3xl mx-auto mb-6">
+                Our Premium Linen Feel Napkins offer the perfect balance of quality and convenience. 
+                Get the luxurious feel of cloth napkins without the hassle and expense of laundering.
+              </p>
+              <a href="#inquiry" className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transform transition hover:scale-105 shadow-md">
+                Request Sample Pack
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Custom Napkin Calculator for Premium Linen Feel Napkins */}
+      {product && product.id === 'premium-linen-feel-napkins' && (
+        <div className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">Napkin Quantity Calculator</h2>
+              <p className="text-lg text-slate-700 text-center mb-10">Determine exactly how many napkins you need for your establishment or event.</p>
+              
+              <div className="bg-slate-50 rounded-xl shadow-lg p-8 border border-slate-200">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-6">
+                    <div>
+                      <label htmlFor="establishment-type" className="block text-sm font-medium text-slate-700 mb-1">Type of Establishment</label>
+                      <select 
+                        id="establishment-type" 
+                        className="w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                        onChange={e => {
+                          const customFactorInput = document.getElementById('custom-factor');
+                          if (e.target.value === 'custom') {
+                            customFactorInput.classList.remove('hidden');
+                          } else {
+                            customFactorInput.classList.add('hidden');
+                          }
+                        }}
+                      >
+                        <option value="restaurant">Restaurant (4 napkins per seat per day)</option>
+                        <option value="cafe">Café (2 napkins per seat per day)</option>
+                        <option value="bar">Bar (3 napkins per seat per day)</option>
+                        <option value="event">Event/Wedding (2 napkins per guest)</option>
+                        <option value="hotel">Hotel (5 napkins per room per day)</option>
+                        <option value="custom">Custom Usage</option>
+                      </select>
+                    </div>
+                    
+                    <div id="custom-factor" className="hidden">
+                      <label htmlFor="napkins-per-unit" className="block text-sm font-medium text-slate-700 mb-1">Napkins per Person/Seat</label>
+                      <input 
+                        type="number" 
+                        id="napkins-per-unit" 
+                        className="w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" 
+                        min="1" 
+                        defaultValue="3"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label htmlFor="capacity" className="block text-sm font-medium text-slate-700 mb-1">Number of Seats/Guests/Rooms</label>
+                      <input 
+                        type="number" 
+                        id="capacity" 
+                        className="w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" 
+                        min="1"
+                        placeholder="e.g., 50"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label htmlFor="duration" className="block text-sm font-medium text-slate-700 mb-1">Duration (days)</label>
+                      <input 
+                        type="number" 
+                        id="duration" 
+                        className="w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" 
+                        min="1" 
+                        defaultValue="7"
+                        placeholder="e.g., 7 for one week"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label htmlFor="buffer" className="block text-sm font-medium text-slate-700 mb-1">Safety Buffer (%)</label>
+                      <input 
+                        type="number" 
+                        id="buffer" 
+                        className="w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" 
+                        min="0" 
+                        max="100" 
+                        defaultValue="10"
+                      />
+                    </div>
+                    
+                    <button 
+                      id="calculate-napkins" 
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transform transition hover:scale-105 shadow-md"
+                    >
+                      Calculate
+                    </button>
+                  </div>
+                  
+                  <div className="bg-white rounded-lg shadow-md p-6 border border-slate-200 h-min">
+                    <h3 className="text-xl font-bold mb-4 text-slate-800">Your Estimate</h3>
+                    
+                    <div className="mb-6">
+                      <div className="text-sm text-slate-500 mb-1">Recommended Quantity</div>
+                      <div className="text-3xl font-bold text-blue-600" id="result-quantity">—</div>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-4 mb-6">
+                      <div>
+                        <div className="text-sm text-slate-500 mb-1">Daily Usage</div>
+                        <div className="text-xl font-semibold" id="result-daily">—</div>
+                      </div>
+                      <div>
+                        <div className="text-sm text-slate-500 mb-1">Packages</div>
+                        <div className="text-xl font-semibold" id="result-packages">—</div>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-blue-50 rounded-lg p-4 text-sm text-blue-800">
+                      <p className="mb-2">
+                        <strong>Recommendation:</strong> <span id="result-recommendation">Enter your details to calculate napkin quantity.</span>
+                      </p>
+                      <p id="result-cutlery-tip" className="hidden">
+                        <strong>Pro Tip:</strong> Consider our cutlery pocket napkins to enhance your table presentation.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <script dangerouslySetInnerHTML={{
+            __html: `
+              document.addEventListener('DOMContentLoaded', function() {
+                const calculateButton = document.getElementById('calculate-napkins');
+                const typeSelect = document.getElementById('establishment-type');
+                const customFactorInput = document.getElementById('napkins-per-unit');
+                const capacityInput = document.getElementById('capacity');
+                const durationInput = document.getElementById('duration');
+                const bufferInput = document.getElementById('buffer');
+                
+                const resultQuantity = document.getElementById('result-quantity');
+                const resultDaily = document.getElementById('result-daily');
+                const resultPackages = document.getElementById('result-packages');
+                const resultRecommendation = document.getElementById('result-recommendation');
+                const resultCutleryTip = document.getElementById('result-cutlery-tip');
+                
+                // Mapping of establishment types to napkin usage factors
+                const usageFactors = {
+                  'restaurant': 4,
+                  'cafe': 2,
+                  'bar': 3,
+                  'event': 2,
+                  'hotel': 5,
+                  'custom': 3
+                };
+                
+                // Standard package size
+                const packageSize = 100;
+                
+                function calculateNapkins() {
+                  // Get input values
+                  const establishmentType = typeSelect.value;
+                  let napkinsPerUnit = usageFactors[establishmentType];
+                  
+                  if (establishmentType === 'custom') {
+                    napkinsPerUnit = parseInt(customFactorInput.value) || 3;
+                  }
+                  
+                  const capacity = parseInt(capacityInput.value) || 0;
+                  const duration = parseInt(durationInput.value) || 7;
+                  const buffer = parseInt(bufferInput.value) || 10;
+                  
+                  if (capacity <= 0) {
+                    alert('Please enter a valid number of seats/guests/rooms.');
+                    return;
+                  }
+                  
+                  // Calculate daily usage
+                  const dailyUsage = capacity * napkinsPerUnit;
+                  
+                  // Calculate total with buffer
+                  const totalWithoutBuffer = dailyUsage * duration;
+                  const totalWithBuffer = Math.ceil(totalWithoutBuffer * (1 + buffer / 100));
+                  
+                  // Calculate packages needed
+                  const packagesNeeded = Math.ceil(totalWithBuffer / packageSize);
+                  const actualQuantity = packagesNeeded * packageSize;
+                  
+                  // Update results
+                  resultDaily.textContent = dailyUsage.toLocaleString();
+                  resultQuantity.textContent = actualQuantity.toLocaleString();
+                  resultPackages.textContent = packagesNeeded.toLocaleString();
+                  
+                  // Set recommendation
+                  if (capacity > 50) {
+                    resultRecommendation.textContent = 'Based on your volume, we recommend setting up a regular delivery schedule.';
+                    resultCutleryTip.classList.remove('hidden');
+                  } else {
+                    resultRecommendation.textContent = 'For your needs, a single order with a ${buffer}% buffer should be sufficient.';
+                    resultCutleryTip.classList.remove('hidden');
+                  }
+                  
+                  // Analytics event
+                  try {
+                    if (window.dataLayer) {
+                      window.dataLayer.push({
+                        event: 'napkinCalculation',
+                        napkinCalculatorData: {
+                          establishmentType,
+                          capacity,
+                          duration,
+                          result: actualQuantity
+                        }
+                      });
+                    }
+                  } catch (e) {
+                    console.error('Analytics error:', e);
+                  }
+                }
+                
+                if (calculateButton) {
+                  calculateButton.addEventListener('click', calculateNapkins);
+                  calculateButton.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    calculateNapkins();
+                  }, { passive: false });
+                }
+                
+                // Also calculate on Enter key in inputs
+                const allInputs = [capacityInput, durationInput, bufferInput, customFactorInput];
+                allInputs.forEach(input => {
+                  if (input) {
+                    input.addEventListener('keyup', function(e) {
+                      if (e.key === 'Enter') {
+                        calculateNapkins();
+                      }
+                    });
+                  }
+                });
+                
+                console.log('Napkin calculator initialized');
+              });
+            `
+          }} />
+        </div>
+      )}
     </Layout>
   );
 };
