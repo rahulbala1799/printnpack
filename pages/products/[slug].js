@@ -524,38 +524,127 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 </div>
                 
                 {/* Applications & Benefits */}
-                <div className="bg-gray-50 rounded-xl p-6 mb-8">
-                  <h4 className="text-lg font-bold mb-4">Perfect For These Applications</h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
-                    {product.applications.map((application, idx) => (
-                      <div key={idx} className="bg-white rounded-lg p-3 shadow-sm">
-                        <p className="text-sm font-medium text-gray-800">{application}</p>
-                      </div>
-                    ))}
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8 mb-10 border border-blue-100 shadow-md">
+                  <h4 className="text-2xl font-bold mb-6 text-center text-blue-800 border-b border-blue-200 pb-3">Perfect For These Applications</h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    {product.applications && product.applications.map((application, idx) => {
+                      // Define icons for common applications
+                      let icon = (
+                        <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      );
+                      
+                      // Match icons to common application types
+                      if (application.toLowerCase().includes('trade show') || application.toLowerCase().includes('exhibition')) {
+                        icon = (
+                          <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                          </svg>
+                        );
+                      } else if (application.toLowerCase().includes('retail') || application.toLowerCase().includes('store')) {
+                        icon = (
+                          <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                          </svg>
+                        );
+                      } else if (application.toLowerCase().includes('conference') || application.toLowerCase().includes('event')) {
+                        icon = (
+                          <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                          </svg>
+                        );
+                      } else if (application.toLowerCase().includes('corporate') || application.toLowerCase().includes('reception')) {
+                        icon = (
+                          <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                          </svg>
+                        );
+                      } else if (application.toLowerCase().includes('sales') || application.toLowerCase().includes('pitch')) {
+                        icon = (
+                          <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                          </svg>
+                        );
+                      } else if (application.toLowerCase().includes('lecture') || application.toLowerCase().includes('training')) {
+                        icon = (
+                          <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                        );
+                      } else if (application.toLowerCase().includes('pop-up') || application.toLowerCase().includes('temporary')) {
+                        icon = (
+                          <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                        );
+                      } else if (application.toLowerCase().includes('product') || application.toLowerCase().includes('launch')) {
+                        icon = (
+                          <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+                          </svg>
+                        );
+                      }
+                      
+                      return (
+                        <div key={idx} className="bg-white rounded-lg p-5 shadow-md transform transition-all duration-300 hover:scale-105 hover:shadow-lg border border-blue-200 flex items-center">
+                          <div className="flex-shrink-0 h-12 w-12 rounded-lg bg-blue-100 flex items-center justify-center mr-4 text-blue-600">
+                            {icon}
+                          </div>
+                          <div>
+                            <p className="text-lg font-medium text-gray-800">{application}</p>
+                            <div className="mt-1 w-12 h-1 bg-blue-500 rounded-full"></div>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
                 
                 {/* FAQ Section */}
-                <div className="mb-8">
-                  <h4 className="text-lg font-bold mb-4">Frequently Asked Questions</h4>
-                  <div className="space-y-4">
-                    {product.faq.map((item, idx) => (
-                      <div key={idx} className="border border-gray-200 rounded-lg overflow-hidden">
+                <div className="mb-12 bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+                  <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-5">
+                    <h4 className="text-xl font-bold text-white flex items-center">
+                      <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      Frequently Asked Questions
+                    </h4>
+                  </div>
+                  
+                  <div className="divide-y divide-gray-200">
+                    {product.faq && product.faq.map((item, idx) => (
+                      <div key={idx} className="hover:bg-blue-50 transition-colors duration-150">
                         <details className="group">
-                          <summary className="flex justify-between items-center font-medium cursor-pointer p-4 bg-white">
-                            <span>{item.question}</span>
-                            <span className="transition group-open:rotate-180">
-                              <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <summary className="flex justify-between items-center font-medium cursor-pointer px-8 py-4">
+                            <span className="text-gray-800 text-lg flex items-center">
+                              <span className="bg-blue-100 text-blue-600 w-8 h-8 rounded-full flex items-center justify-center mr-3 font-semibold text-sm">{idx + 1}</span>
+                              {item.question}
+                            </span>
+                            <span className="transition-transform duration-300 group-open:rotate-180">
+                              <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                               </svg>
                             </span>
                           </summary>
-                          <div className="p-4 border-t border-gray-200 bg-gray-50">
-                            <p className="text-gray-700">{item.answer}</p>
+                          <div className="px-8 pb-6 pt-2">
+                            <div className="ml-11">
+                              <div className="h-0.5 w-12 bg-blue-200 mb-3"></div>
+                              <p className="text-gray-700 leading-relaxed">{item.answer}</p>
+                            </div>
                           </div>
                         </details>
                       </div>
                     ))}
+                  </div>
+                  
+                  <div className="bg-blue-50 px-8 py-5 border-t border-blue-100">
+                    <p className="text-blue-800 flex items-center text-sm">
+                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      Have more questions? <a href="/contact" className="ml-1 font-medium underline">Contact our support team</a>
+                    </p>
                   </div>
                 </div>
               </div>
