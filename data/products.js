@@ -1085,9 +1085,9 @@ const products = [
   },
   {
     id: 'correx-boards',
-    name: 'Correx Fluted Boards',
+    name: 'Correx / Corriboard Fluted Boards',
     category: 'Wide Format',
-    description: 'Weather-resistant corrugated polypropylene boards for durable outdoor signage, ideal for elections, construction, real estate, and temporary displays.',
+    description: 'Weather-resistant corrugated polypropylene boards (commonly known as Corriboard in Ireland) for durable outdoor signage, ideal for elections, construction, real estate, and temporary displays.',
     features: [
       'Ultra-lightweight yet highly durable material',
       'Waterproof and weather-resistant construction',
@@ -1096,7 +1096,7 @@ const products = [
       'Cost-effective for large quantity orders',
       'Easy installation with multiple mounting options'
     ],
-    detailedDescription: 'Correx (also known as Corriboard or corrugated plastic) is the perfect solution for cost-effective outdoor signage and displays that need to withstand challenging weather conditions. This twin-wall fluted polypropylene material offers excellent durability, waterproof properties, and UV resistance at a fraction of the cost of other outdoor signage options.\n\nOur Correx boards are direct-printed using UV-stable inks that bond with the plastic surface, creating weather-resistant graphics that won\'t fade, crack, or peel even with extended outdoor exposure. The corrugated structure provides surprising strength despite its lightweight nature, making it perfect for site boards, election signs, estate agent boards, and outdoor event signage.\n\nAvailable in thicknesses from 2mm (ideal for smaller temporary signs) to 8mm (for maximum durability), Correx can be cut to any shape or size and installed using various methods including cable ties, screws, nails, or stake mounts. We can provide pre-drilled holes, H-stakes, or wire frame mounts to create complete ready-to-deploy signage systems for your specific application.',
+    detailedDescription: 'Correx/Corriboard (widely known as Corriboard throughout Ireland) is the perfect solution for cost-effective outdoor signage and displays that need to withstand challenging weather conditions. This twin-wall fluted polypropylene material offers excellent durability, waterproof properties, and UV resistance at a fraction of the cost of other outdoor signage options.\n\nOur Corriboard sheets are direct-printed using UV-stable inks that bond with the plastic surface, creating weather-resistant graphics that won\'t fade, crack, or peel even with extended outdoor exposure. The corrugated structure provides surprising strength despite its lightweight nature, making it perfect for site boards, election signs, estate agent boards, and outdoor event signage.\n\nAvailable in thicknesses from 2mm (ideal for smaller temporary signs) to 8mm (for maximum durability), Corriboard can be cut to any shape or size and installed using various methods including cable ties, screws, nails, or stake mounts. We can provide pre-drilled holes, H-stakes, or wire frame mounts to create complete ready-to-deploy signage systems for your specific application.',
     specifications: [
       { name: 'Material', value: 'Twin-wall fluted polypropylene (Correx/Corriboard)' },
       { name: 'Thickness Options', value: '2mm, 3mm, 4mm, 5mm, 8mm (standard is 4mm)' },

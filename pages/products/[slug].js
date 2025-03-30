@@ -2955,12 +2955,12 @@ const ProductDetail = ({ product, relatedProducts }) => {
           </div>
         </div>
       )}
-      {/* Correx Thickness Comparison */}
+      {/* Corriboard Thickness Comparison */}
       {product && product.id === 'correx-boards' && (
         <div className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-3">Thickness Comparison</h2>
+              <h2 className="text-3xl font-bold text-center mb-3">Corriboard Thickness Comparison</h2>
               <p className="text-lg text-slate-600 text-center mb-12 max-w-3xl mx-auto">Choose the right thickness for your application based on durability needs and installation environment.</p>
               
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -3048,13 +3048,13 @@ const ProductDetail = ({ product, relatedProducts }) => {
           </div>
         </div>
       )}
-      {/* Correx Applications Showcase */}
+      {/* Corriboard Applications Showcase */}
       {product && product.id === 'correx-boards' && (
         <div className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
               <h2 className="text-3xl font-bold text-center mb-3">Real-World Applications</h2>
-              <p className="text-lg text-slate-600 text-center mb-12 max-w-3xl mx-auto">From construction sites to retail displays, explore the versatility of Correx boards.</p>
+              <p className="text-lg text-slate-600 text-center mb-12 max-w-3xl mx-auto">From construction sites to retail displays, explore the versatility of Corriboard signage.</p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {/* Application 1 */}
@@ -3152,13 +3152,13 @@ const ProductDetail = ({ product, relatedProducts }) => {
         </div>
       )}
 
-      {/* Correx Mounting Options */}
+      {/* Corriboard Mounting Options */}
       {product && product.id === 'correx-boards' && (
         <div className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
               <h2 className="text-3xl font-bold text-center mb-3">Installation Methods</h2>
-              <p className="text-lg text-slate-600 text-center mb-12 max-w-3xl mx-auto">Multiple ways to mount your Correx boards for any environment.</p>
+              <p className="text-lg text-slate-600 text-center mb-12 max-w-3xl mx-auto">Multiple ways to mount your Corriboard signage for any environment.</p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {/* Method 1 */}
