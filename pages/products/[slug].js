@@ -3454,6 +3454,139 @@ const ProductDetail = ({ product, relatedProducts }) => {
           </div>
         </div>
       )}
+      {/* Replace the failing Size & Dimensions section with custom one for vinyl stickers */}
+      {product && product.id === 'vinyl-stickers' && (
+        <div className="py-12 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <h3 className="text-2xl font-bold mb-8 text-center">Size & Dimensions</h3>
+            
+            <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                {/* Left side - Interactive diagram */}
+                <div className="relative bg-gradient-to-br from-blue-50 to-indigo-50 p-8 flex items-center justify-center min-h-[400px]">
+                  <div className="relative w-full max-w-md aspect-square">
+                    <div className="absolute w-full h-full flex items-center justify-center">
+                      <div className="relative w-[80%] h-[80%] rounded-xl overflow-hidden shadow-2xl transition-all duration-500 transform hover:scale-105">
+                        <Image 
+                          src="/ifa/product/vinylstk/Window_Sticker_2_01041803202404.png.webp"
+                          alt="Vinyl sticker dimensions example" 
+                          fill 
+                          className="object-cover"
+                        />
+                      </div>
+                      
+                      {/* Dimension lines and labels */}
+                      <div className="absolute top-0 left-[10%] right-[10%] flex justify-between items-center">
+                        <div className="h-8 border-l-2 border-t-2 border-blue-500 w-2"></div>
+                        <div className="bg-blue-600 text-white text-xs font-bold py-1 px-2 rounded">Width</div>
+                        <div className="h-8 border-r-2 border-t-2 border-blue-500 w-2"></div>
+                      </div>
+                      
+                      <div className="absolute bottom-0 left-[10%] right-[10%] flex justify-between items-center">
+                        <div className="h-8 border-l-2 border-b-2 border-blue-500 w-2"></div>
+                        <div className="bg-blue-600 text-white text-xs font-bold py-1 px-2 rounded">Width</div>
+                        <div className="h-8 border-r-2 border-b-2 border-blue-500 w-2"></div>
+                      </div>
+                      
+                      <div className="absolute left-0 top-[10%] bottom-[10%] flex flex-col justify-between items-center">
+                        <div className="w-8 border-t-2 border-l-2 border-blue-500 h-2"></div>
+                        <div className="bg-blue-600 text-white text-xs font-bold py-1 px-2 rounded rotate-[-90deg]">Height</div>
+                        <div className="w-8 border-b-2 border-l-2 border-blue-500 h-2"></div>
+                      </div>
+                      
+                      <div className="absolute right-0 top-[10%] bottom-[10%] flex flex-col justify-between items-center">
+                        <div className="w-8 border-t-2 border-r-2 border-blue-500 h-2"></div>
+                        <div className="bg-blue-600 text-white text-xs font-bold py-1 px-2 rounded rotate-90">Height</div>
+                        <div className="w-8 border-b-2 border-r-2 border-blue-500 h-2"></div>
+                      </div>
+                    </div>
+                    
+                    {/* Size indicators */}
+                    <div className="absolute -bottom-4 -right-4 bg-yellow-500 text-yellow-900 px-3 py-1 rounded-full text-sm font-bold shadow-lg transform rotate-3">
+                      Custom shapes & sizes!
+                    </div>
+                    
+                    <div className="absolute -top-2 -left-2 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                      From 20mm to 1m+
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Right side - Size information */}
+                <div className="p-8 flex flex-col justify-center">
+                  <h4 className="text-xl font-bold mb-4 text-gray-800">Flexible Dimensions for Every Need</h4>
+                  <p className="text-gray-600 mb-6">
+                    Our vinyl stickers can be produced in virtually any size to perfectly fit your application requirements:
+                  </p>
+                  
+                  <div className="space-y-4">
+                    <div className="flex items-start">
+                      <div className="bg-blue-100 p-2 rounded-full mr-4 mt-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h5 className="font-semibold text-gray-800">Micro to Massive</h5>
+                        <p className="text-gray-600 text-sm">From tiny 20mm diameter labels to large format stickers up to 1.5m width</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="bg-blue-100 p-2 rounded-full mr-4 mt-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h5 className="font-semibold text-gray-800">Any Shape Possible</h5>
+                        <p className="text-gray-600 text-sm">Precision contour cutting allows for any custom shape - logos, letters, complex designs</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="bg-blue-100 p-2 rounded-full mr-4 mt-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                          <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h5 className="font-semibold text-gray-800">Standard or Custom</h5>
+                        <p className="text-gray-600 text-sm">Choose from popular standard sizes or specify exact dimensions for your project</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="bg-blue-100 p-2 rounded-full mr-4 mt-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h5 className="font-semibold text-gray-800">Quantity Options</h5>
+                        <p className="text-gray-600 text-sm">From single pieces to large volume production with significant quantity discounts</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-8 flex justify-center lg:justify-start">
+                    <a href="#request-quote" className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+                      <span>Get custom dimensions quote</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <p className="text-center text-gray-500 italic mt-4">
+              Precise dimensions ensure a perfect fit for your applications. All measurements follow industry standards and can be customized to your specific requirements.
+            </p>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 };
