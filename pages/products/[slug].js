@@ -2830,7 +2830,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
                     resultRecommendation.textContent = 'Based on your volume, we recommend setting up a regular delivery schedule.';
                     resultCutleryTip.classList.remove('hidden');
                   } else {
-                    resultRecommendation.textContent = 'For your needs, a single order with a ${buffer}% buffer should be sufficient.';
+                    resultRecommendation.textContent = `For your needs, a single order with a ${buffer}% buffer should be sufficient.`;
                     resultCutleryTip.classList.remove('hidden');
                   }
                   
