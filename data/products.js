@@ -1286,12 +1286,13 @@ const products = [
       }
     ],
     images: [
-      '/css-placeholder-image',
-      '/css-placeholder-image',
-      '/css-placeholder-image',
-      '/css-placeholder-image'
+      '/ifa/product/vinylstk/Window_Sticker_2_01041803202404.png.webp',
+      '/ifa/product/vinylstk/Window_Sticker_3_01042303202404.png.webp',
+      '/ifa/product/vinylstk/Transperent_Sticker_low_03281303202404.png.webp',
+      '/ifa/product/vinylstk/carstk.webp',
+      '/ifa/product/vinylstk/Vinyl-Decals-_-Stickers.jpg'
     ],
-    imageSrc: '/css-placeholder-image',
+    imageSrc: '/ifa/product/vinylstk/Window_Sticker_2_01041803202404.png.webp',
     price: 'Starting at €0.50 per sticker',
     quoteRequired: false,
     leadTime: '2-5 business days standard',

@@ -173,7 +173,118 @@ const ProductDetail = ({ product, relatedProducts }) => {
         </div>
       </div>
       
-      {/* Move vinyl stickers showcase to appear right after breadcrumbs */}
+      {/* Hero section for Vinyl Stickers */}
+      {product && product.id === 'vinyl-stickers' && (
+        <div className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-purple-800 to-indigo-900 border-b border-gray-200">
+          <div className="absolute inset-0 opacity-20 mix-blend-overlay">
+            <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <defs>
+                <pattern id="grid" width="8" height="8" patternUnits="userSpaceOnUse">
+                  <path d="M 8 0 L 0 0 0 8" fill="none" stroke="white" strokeWidth="0.5" opacity="0.5" />
+                </pattern>
+              </defs>
+              <rect width="100" height="100" fill="url(#grid)" />
+            </svg>
+          </div>
+          
+          <div className="container mx-auto px-4 py-16 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="text-white space-y-6">
+                <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+                  Premium Vinyl Stickers
+                </h1>
+                <p className="text-xl text-blue-100">
+                  Transform your ideas into eye-catching stickers cut into virtually any shape imaginable.
+                </p>
+                
+                <div className="flex flex-wrap gap-3 mt-6">
+                  {['Custom Shapes', 'Waterproof', 'Indoor & Outdoor', 'High-Resolution', 'Quick Turnaround'].map((tag, i) => (
+                    <span key={i} className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                
+                <div className="flex flex-wrap gap-4 pt-6">
+                  <a href="#request-quote" className="bg-white hover:bg-gray-100 text-blue-800 font-semibold py-3 px-6 rounded-lg shadow-lg transition transform hover:-translate-y-1">
+                    Request a Quote
+                  </a>
+                  <a href="#samples" className="bg-transparent hover:bg-white/10 border border-white/30 text-white font-semibold py-3 px-6 rounded-lg transition transform hover:-translate-y-1">
+                    Get Free Samples
+                  </a>
+                </div>
+              </div>
+              
+              <div className="relative">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-4">
+                    <div className="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition duration-500 h-48 relative">
+                      <Image 
+                        src="/ifa/product/vinylstk/Window_Sticker_2_01041803202404.png.webp"
+                        alt="Storefront window vinyl sticker" 
+                        fill 
+                        className="object-cover hover:opacity-90"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    </div>
+                    <div className="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition duration-500 h-48 relative">
+                      <Image 
+                        src="/ifa/product/vinylstk/Vinyl-Decals-_-Stickers.jpg"
+                        alt="Custom shape vinyl stickers" 
+                        fill 
+                        className="object-cover hover:opacity-90"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-4 mt-8">
+                    <div className="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition duration-500 h-48 relative">
+                      <Image 
+                        src="/ifa/product/vinylstk/carstk.webp"
+                        alt="Vehicle vinyl decal" 
+                        fill 
+                        className="object-cover hover:opacity-90"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    </div>
+                    <div className="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition duration-500 h-48 relative">
+                      <Image 
+                        src="/ifa/product/vinylstk/Transperent_Sticker_low_03281303202404.png.webp"
+                        alt="Transparent vinyl sticker" 
+                        fill 
+                        className="object-cover hover:opacity-90"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="absolute -top-4 -right-4 bg-gradient-to-r from-amber-500 to-yellow-500 text-white py-2 px-6 rounded-lg shadow-xl transform rotate-3 z-20 font-bold text-sm">
+                  Customer Favorite
+                </div>
+                
+                <div className="absolute -bottom-2 -left-2 flex items-center gap-2 z-20">
+                  <div className="bg-white/90 backdrop-blur shadow-lg rounded-full px-3 py-1 text-sm font-medium text-indigo-800 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 text-amber-500" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    Premium Quality
+                  </div>
+                  <div className="bg-white/90 backdrop-blur shadow-lg rounded-full px-3 py-1 text-sm font-medium text-indigo-800 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                      <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1v-1M3 4h8a1 1 0 011 1v5m0 0l-3-3m3 3h5.5a1 1 0 011 1v5a1 1 0 01-1 1h-1.05a2.5 2.5 0 00-4.9 0H10" />
+                    </svg>
+                    Fast Shipping
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Move vinyl stickers showcase to appear right after hero section */}
       {product && product.id === 'vinyl-stickers' && (
         <div className="bg-gray-50 py-12 border-b border-gray-200">
           <div className="container mx-auto px-4">
