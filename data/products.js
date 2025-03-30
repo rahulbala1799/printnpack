@@ -748,12 +748,14 @@ const products = [
       }
     ],
     images: [
-      '/css-placeholder-image',
-      '/css-placeholder-image',
-      '/css-placeholder-image',
-      '/css-placeholder-image'
+      '/ifa/product/banner/20221019_184306722822_e66498_Promo-banner.webp',
+      '/ifa/product/banner/20221019_184310980133_d01bb8_Real-Estate.webp',
+      '/ifa/product/banner/20221019_184301869688_fcc9a6_Automobiles.webp',
+      '/ifa/product/banner/1666183881.webp',
+      '/ifa/product/banner/pvc-banner-media-500x500.webp',
+      '/ifa/product/banner/1649557756.webp'
     ],
-    imageSrc: '/css-placeholder-image',
+    imageSrc: '/ifa/product/banner/20221019_184306722822_e66498_Promo-banner.webp',
     price: 'Request for Quote',
     quoteRequired: true,
     leadTime: '3-5 business days standard (rush service available)',
