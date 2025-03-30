@@ -971,14 +971,18 @@ const ProductDetail = ({ product, relatedProducts }) => {
                       { size: '5.5mm', desc: 'Enhanced durability' },
                       { size: '10mm', desc: 'Premium rigid display panels' }
                     ].map((item, i) => (
-                      <div key={i} className={`flex items-center p-3 rounded-lg ${item.highlight ? 'bg-white/20 border border-white/30' : 'bg-white/10'}`}>
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mr-4">
+                      <div key={i} className={`flex flex-wrap items-center p-4 rounded-lg ${item.highlight ? 'bg-white/20 border border-white/30' : 'bg-white/10'}`}>
+                        <div className="w-12 h-12 bg-white rounded-full flex-shrink-0 flex items-center justify-center mr-4">
                           <span className="text-xl font-bold text-indigo-700">{item.size}</span>
                         </div>
-                        <div>
-                          <p className="font-medium">{item.desc}</p>
+                        <div className="flex-grow min-w-0 my-1">
+                          <p className="font-medium text-sm sm:text-base truncate">{item.desc}</p>
                         </div>
-                        {item.highlight && <span className="ml-auto bg-yellow-400 text-indigo-900 text-xs font-bold px-2 py-1 rounded-full">BEST SELLER</span>}
+                        {item.highlight && (
+                          <div className="w-full sm:w-auto mt-2 sm:mt-0 sm:ml-auto">
+                            <span className="inline-block bg-yellow-400 text-indigo-900 text-xs font-bold px-3 py-1.5 rounded-full">BEST SELLER</span>
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
