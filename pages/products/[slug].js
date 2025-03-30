@@ -1967,6 +1967,304 @@ const ProductDetail = ({ product, relatedProducts }) => {
           </div>
         </div>
       </div>
+
+      {/* Vinyl Stickers Shape Showcase */}
+      {product.id === 'vinyl-stickers' && (
+        <div className="relative bg-gradient-to-br from-cyan-800 via-blue-600 to-indigo-800 overflow-hidden">
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute inset-0" style={{ 
+              backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+              backgroundSize: "60px 60px"
+            }}></div>
+          </div>
+          
+          <div className="container mx-auto px-4 py-16 md:py-24">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+              <div className="md:col-span-3 text-white space-y-6 relative z-10">
+                <div className="inline-block bg-cyan-500 px-4 py-1 rounded-full mb-2 font-semibold text-sm uppercase tracking-wide">Premium Vinyl Solutions</div>
+                <h2 className="text-4xl md:text-5xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-cyan-100 to-white">Custom Vinyl Stickers</h2>
+                <p className="text-xl text-blue-100">High-quality vinyl stickers and decals for business branding, promotions, and creative applications in any size or shape.</p>
+                
+                <p className="text-md text-blue-200">Transform your ideas into eye-catching stickers cut into virtually any shape imaginable.</p>
+              </div>
+              
+              <div className="md:col-span-2 relative h-64 md:h-80 rounded-xl overflow-hidden shadow-2xl">
+                <div className="absolute inset-0 bg-gradient-to-br from-black/40 to-transparent z-10"></div>
+                <Image 
+                  src="/images/placeholders/vinyl-stickers/vinyl-stickers-main.jpg"
+                  alt="Custom Vinyl Stickers"
+                  fill
+                  className="object-cover"
+                  priority={true}
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.parentNode.classList.add('bg-gray-100');
+                    e.target.parentNode.innerHTML += '<div class="flex items-center justify-center h-full text-gray-500">Image loading error</div>';
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Add interactive shape showcase after the product hero section */}
+      {product.id === 'vinyl-stickers' && (
+        <div className="bg-gray-50 py-12 border-b border-gray-200">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl font-bold mb-4 text-gray-900">Unlimited Shape Possibilities</h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Our vinyl stickers can be <span className="font-semibold text-cyan-700">kiss-cut into any shape</span> you can imagine. 
+                From simple geometrics to complex custom designs - if you can dream it, we can cut it!
+              </p>
+            </div>
+
+            <div className="relative" id="vinyl-sticker-shape-showcase">
+              <div className="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-200 p-6 mb-8">
+                <div className="flex flex-col lg:flex-row gap-8">
+                  <div className="lg:w-1/2">
+                    <div className="bg-gradient-to-br from-cyan-50 to-blue-50 p-6 rounded-lg border border-blue-100 mb-4">
+                      <h3 className="text-xl font-bold text-gray-800 mb-3">Interactive Shape Showcase</h3>
+                      <p className="text-gray-600 mb-4">Click on any shape to see how vinyl stickers can be precision cut to match your design requirements.</p>
+                      
+                      <div className="relative h-80 bg-white rounded-lg border-2 border-dashed border-blue-300 flex items-center justify-center overflow-hidden" id="shape-display-area">
+                        {/* Default shape display */}
+                        <div className="text-center text-gray-400 absolute inset-0 flex items-center justify-center" id="default-message">
+                          <p>Click a shape to preview<br />↓</p>
+                        </div>
+                        
+                        {/* Shape will be displayed here by JavaScript */}
+                        <div id="shape-preview" className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-500">
+                          <div id="shape-container" className="relative">
+                            <div id="shape-element" className="bg-gradient-to-br from-cyan-500 to-blue-600 transition-all duration-500 shadow-lg"></div>
+                            <div id="shape-label" className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 bg-white px-3 py-1 rounded-full text-sm font-medium shadow-md border border-gray-200 text-gray-700"></div>
+                          </div>
+                        </div>
+                        
+                        {/* Highlight flash effect */}
+                        <div id="shape-flash" className="absolute inset-0 bg-cyan-400 opacity-0 pointer-events-none"></div>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-4 rounded-lg border border-amber-100 flex items-center">
+                      <div className="text-amber-500 mr-3">
+                        <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="text-amber-800 font-semibold">What is kiss-cutting?</h4>
+                        <p className="text-amber-700 text-sm">A precision cutting method that cuts through the vinyl layer but not the backing paper, allowing for easy peeling of complex shapes.</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="lg:w-1/2">
+                    <div className="border border-gray-200 rounded-lg overflow-hidden">
+                      <div className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-6 py-3">
+                        <h3 className="font-bold">Select a Shape</h3>
+                      </div>
+                      
+                      <div className="p-5 bg-white">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                          {/* Shape options will be arranged in a grid */}
+                          <button id="shape-circle" className="shape-option bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-lg p-4 transition-colors flex flex-col items-center justify-center h-28">
+                            <div className="w-12 h-12 bg-blue-500 rounded-full mb-2"></div>
+                            <span className="text-sm font-medium text-gray-700">Circle</span>
+                          </button>
+                          
+                          <button id="shape-star" className="shape-option bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-lg p-4 transition-colors flex flex-col items-center justify-center h-28">
+                            <div className="w-12 h-12 relative mb-2">
+                              <svg viewBox="0 0 24 24" className="w-full h-full text-blue-500" fill="currentColor">
+                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                              </svg>
+                            </div>
+                            <span className="text-sm font-medium text-gray-700">Star</span>
+                          </button>
+                          
+                          <button id="shape-heart" className="shape-option bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-lg p-4 transition-colors flex flex-col items-center justify-center h-28">
+                            <div className="w-12 h-12 relative mb-2">
+                              <svg viewBox="0 0 24 24" className="w-full h-full text-blue-500" fill="currentColor">
+                                <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
+                              </svg>
+                            </div>
+                            <span className="text-sm font-medium text-gray-700">Heart</span>
+                          </button>
+                          
+                          <button id="shape-hexagon" className="shape-option bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-lg p-4 transition-colors flex flex-col items-center justify-center h-28">
+                            <div className="w-12 h-12 relative mb-2">
+                              <svg viewBox="0 0 24 24" className="w-full h-full text-blue-500" fill="currentColor">
+                                <path d="M21,16.5C21,16.88 20.79,17.21 20.47,17.38L12.57,21.82C12.41,21.94 12.21,22 12,22C11.79,22 11.59,21.94 11.43,21.82L3.53,17.38C3.21,17.21 3,16.88 3,16.5V7.5C3,7.12 3.21,6.79 3.53,6.62L11.43,2.18C11.59,2.06 11.79,2 12,2C12.21,2 12.41,2.06 12.57,2.18L20.47,6.62C20.79,6.79 21,7.12 21,7.5V16.5Z" />
+                              </svg>
+                            </div>
+                            <span className="text-sm font-medium text-gray-700">Hexagon</span>
+                          </button>
+                          
+                          <button id="shape-custom" className="shape-option bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-lg p-4 transition-colors flex flex-col items-center justify-center h-28">
+                            <div className="w-12 h-12 relative mb-2">
+                              <svg viewBox="0 0 24 24" className="w-full h-full text-blue-500" fill="currentColor">
+                                <path d="M15,4A8,8 0 0,1 23,12A8,8 0 0,1 15,20C13.5,20 12.1,19.5 10.9,18.7L3.7,21L6,13.8C5.2,12.6 4.7,11.2 4.7,9.7C4.7,5.7 8.1,2.3 12.1,2.3C13.6,2.3 15,2.7 16.2,3.6C15.4,3.2 14.4,3 13.5,3C9.5,3 6.2,6.3 6.2,10.3C6.2,11.5 6.5,12.7 7.1,13.7L5.3,19.4L11,17.6C12,18.2 13.2,18.5 14.4,18.5C18.4,18.5 21.7,15.2 21.7,11.2C21.7,10.3 21.5,9.3 21.1,8.5C22,9.7 22.4,11.1 22.4,12.6C22.5,16.6 19.1,20 15,20" />
+                              </svg>
+                            </div>
+                            <span className="text-sm font-medium text-gray-700">Custom Shape</span>
+                          </button>
+                          
+                          <button id="shape-logo" className="shape-option bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-lg p-4 transition-colors flex flex-col items-center justify-center h-28">
+                            <div className="w-12 h-12 relative mb-2">
+                              <svg viewBox="0 0 24 24" className="w-full h-full text-blue-500" fill="currentColor">
+                                <path d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z" />
+                              </svg>
+                            </div>
+                            <span className="text-sm font-medium text-gray-700">Logo</span>
+                          </button>
+                        </div>
+                        
+                        <div className="mt-6 p-3 bg-cyan-50 rounded-lg border border-cyan-100">
+                          <p className="text-sm text-cyan-800">
+                            <span className="font-semibold">Custom shapes available:</span> Our cutting technology allows us to create precise contours matching your exact design specifications, from simple to highly complex shapes.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Size range highlight */}
+              <div className="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl shadow-xl p-6 text-white">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                  <div>
+                    <h3 className="text-2xl font-bold mb-4">Versatile Size Options</h3>
+                    <p className="mb-6">
+                      Our vinyl stickers can be produced in virtually any size, from tiny labels to massive displays:
+                    </p>
+                    <ul className="space-y-2">
+                      <li className="flex items-center">
+                        <svg className="w-5 h-5 mr-2 text-purple-300" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Small stickers from 20mm diameter
+                      </li>
+                      <li className="flex items-center">
+                        <svg className="w-5 h-5 mr-2 text-purple-300" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Standard sizes: 1m x 1m to 6m x 1.5m
+                      </li>
+                      <li className="flex items-center">
+                        <svg className="w-5 h-5 mr-2 text-purple-300" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Large format up to 1.5m width x 50m length
+                      </li>
+                      <li className="flex items-center">
+                        <svg className="w-5 h-5 mr-2 text-purple-300" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Custom dimensions to fit your exact needs
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="relative h-48 md:h-64">
+                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-indigo-900/50 to-transparent"></div>
+                    <div className="flex justify-between items-end absolute inset-0">
+                      <div className="h-12 w-12 bg-white/20 rounded-lg backdrop-blur-sm flex items-center justify-center border border-white/30">
+                        <span className="text-xs font-bold">20mm</span>
+                      </div>
+                      <div className="h-full w-3/4 bg-white/20 rounded-lg backdrop-blur-sm flex items-center justify-center border border-white/30">
+                        <span className="text-xl font-bold">Up to 50m</span>
+                      </div>
+                    </div>
+                    <div className="absolute -top-4 right-0 bg-yellow-400 text-yellow-800 px-3 py-1 rounded-full text-sm font-bold shadow-lg transform rotate-3">
+                      Any Size Possible!
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <script dangerouslySetInnerHTML={{ __html: `
+              // Interactive shape showcase logic
+              document.addEventListener('DOMContentLoaded', function() {
+                const shapeOptions = document.querySelectorAll('.shape-option');
+                const shapePreview = document.getElementById('shape-preview');
+                const shapeElement = document.getElementById('shape-element');
+                const shapeLabel = document.getElementById('shape-label');
+                const defaultMessage = document.getElementById('default-message');
+                const shapeFlash = document.getElementById('shape-flash');
+                
+                // Shape definitions
+                const shapes = {
+                  'shape-circle': {
+                    style: 'width: 180px; height: 180px; border-radius: 50%;',
+                    label: 'Perfect Circle Stickers'
+                  },
+                  'shape-star': {
+                    style: 'width: 180px; height: 180px; clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);',
+                    label: 'Star Shaped Stickers'
+                  },
+                  'shape-heart': {
+                    style: 'width: 180px; height: 180px; clip-path: path("M180,60 A30,30,0,0,1,120,60 A30,30,0,0,1,60,60 Q60,120,120,180 Q180,120,180,60Z");',
+                    label: 'Heart Shaped Stickers'
+                  },
+                  'shape-hexagon': {
+                    style: 'width: 180px; height: 180px; clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);',
+                    label: 'Hexagon Stickers'
+                  },
+                  'shape-custom': {
+                    style: 'width: 180px; height: 180px; clip-path: path("M90,10 C130,30,170,50,160,90 C150,130,130,150,90,150 C50,150,30,130,20,90 C10,50,50,30,90,10Z");',
+                    label: 'Custom Shape Stickers'
+                  },
+                  'shape-logo': {
+                    style: 'width: 180px; height: 180px; clip-path: path("M90,20 L20,50 L20,110 L90,150 L160,110 L160,50 Z M50,60 L90,80 L130,60 L130,100 L90,120 L50,100 Z");',
+                    label: 'Logo Shaped Stickers'
+                  }
+                };
+                
+                // Show flash effect
+                function showFlash() {
+                  shapeFlash.style.opacity = '0.5';
+                  setTimeout(() => {
+                    shapeFlash.style.opacity = '0';
+                  }, 150);
+                }
+                
+                // Handle shape selection
+                shapeOptions.forEach(option => {
+                  option.addEventListener('click', function() {
+                    const shapeId = this.id;
+                    const shapeConfig = shapes[shapeId];
+                    
+                    // Hide default message
+                    defaultMessage.style.opacity = '0';
+                    
+                    // Apply shape style
+                    shapeElement.setAttribute('style', shapeConfig.style);
+                    shapeLabel.textContent = shapeConfig.label;
+                    
+                    // Show shape with animation
+                    shapePreview.style.opacity = '1';
+                    
+                    // Highlight flash effect
+                    showFlash();
+                    
+                    // Highlight selected button
+                    shapeOptions.forEach(btn => btn.classList.remove('ring-2', 'ring-blue-500'));
+                    this.classList.add('ring-2', 'ring-blue-500');
+                  });
+                });
+                
+                // Randomly select a shape on page load after a short delay
+                setTimeout(() => {
+                  const randomIndex = Math.floor(Math.random() * shapeOptions.length);
+                  shapeOptions[randomIndex].click();
+                }, 1000);
+              });
+            `}} />
+          </div>
+        </div>
+      )}
     </Layout>
   );
 };
