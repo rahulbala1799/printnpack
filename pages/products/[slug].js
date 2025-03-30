@@ -1162,57 +1162,55 @@ const ProductDetail = ({ product, relatedProducts }) => {
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  
-  {/* Related Products */}
-  {relatedProducts && relatedProducts.length > 0 && (
-    <div className="container mx-auto px-4 py-12">
-      <h2 className="text-2xl font-bold mb-8">Related Products</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {relatedProducts && relatedProducts.length > 0 && relatedProducts.map(relatedProduct => (
-          <div key={relatedProduct.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
-            <div className="h-48 relative bg-gray-50">
-              {relatedProduct.imageSrc.includes('css-placeholder-image') ? (
-                <div className="absolute inset-0 css-placeholder banner"></div>
-              ) : (
-                <Image
-                  src={relatedProduct.imageSrc}
-                  alt={relatedProduct.name}
-                  fill
-                  className="object-contain p-4"
-                />
-              )}
-            </div>
-            <div className="p-4">
-              <h3 className="font-semibold mb-2">{relatedProduct.name}</h3>
-              <p className="text-sm text-gray-600 mb-3 line-clamp-2">{relatedProduct.description}</p>
-              <Link 
-                href={`/products/${relatedProduct.id}`}
-                className="text-blue-600 text-sm font-medium hover:text-blue-800"
-              >
-                View Details
-              </Link>
-            </div>
+      
+      {/* Related Products */}
+      {relatedProducts && relatedProducts.length > 0 && (
+        <div className="container mx-auto px-4 py-12">
+          <h2 className="text-2xl font-bold mb-8">Related Products</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {relatedProducts.map(relatedProduct => (
+              <div key={relatedProduct.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                <div className="h-48 relative bg-gray-50">
+                  {relatedProduct.imageSrc.includes('css-placeholder-image') ? (
+                    <div className="absolute inset-0 css-placeholder banner"></div>
+                  ) : (
+                    <Image
+                      src={relatedProduct.imageSrc}
+                      alt={relatedProduct.name}
+                      fill
+                      className="object-contain p-4"
+                    />
+                  )}
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold mb-2">{relatedProduct.name}</h3>
+                  <p className="text-sm text-gray-600 mb-3 line-clamp-2">{relatedProduct.description}</p>
+                  <Link 
+                    href={`/products/${relatedProduct.id}`}
+                    className="text-blue-600 text-sm font-medium hover:text-blue-800"
+                  >
+                    View Details
+                  </Link>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+      )}
+      
+      {/* Call to Action */}
+      <div className="bg-blue-600 text-white py-12">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">Need Custom {product.name}?</h2>
+          <p className="text-lg mb-8 max-w-2xl mx-auto">
+            Contact our team today to discuss your specific requirements and get a customized quote.
+          </p>
+          <Link href="/contact" className="inline-block bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-colors">
+            Contact Us
+          </Link>
+        </div>
       </div>
-    </div>
-  )}
-  
-  {/* Call to Action */}
-  <div className="bg-blue-600 text-white py-12">
-    <div className="container mx-auto px-4 text-center">
-      <h2 className="text-2xl md:text-3xl font-bold mb-4">Need Custom {product.name}?</h2>
-      <p className="text-lg mb-8 max-w-2xl mx-auto">
-        Contact our team today to discuss your specific requirements and get a customized quote.
-      </p>
-      <Link href="/contact" className="inline-block bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-colors">
-        Contact Us
-      </Link>
-    </div>
-  </div>
-</Layout>
+    </Layout>
   );
 };
 
