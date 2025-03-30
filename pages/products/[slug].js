@@ -983,7 +983,12 @@ const ProductDetail = ({ product, relatedProducts }) => {
                     ))}
                   </div>
                   <div className="mt-6">
-                    <button className="bg-white text-indigo-700 hover:bg-indigo-50 px-6 py-3 rounded-lg font-medium transition-colors">
+                    <button 
+                      onClick={() => {
+                        document.getElementById('thickness-guide-modal').classList.remove('hidden');
+                      }}
+                      className="bg-white text-indigo-700 hover:bg-indigo-50 px-6 py-3 rounded-lg font-medium transition-colors"
+                    >
                       View Thickness Guide
                     </button>
                   </div>
@@ -1614,6 +1619,154 @@ const ProductDetail = ({ product, relatedProducts }) => {
           <Link href="/contact" className="inline-block bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-colors">
             Contact Us
           </Link>
+        </div>
+      </div>
+      
+      {/* Thickness Guide Modal */}
+      <div id="thickness-guide-modal" className="fixed inset-0 z-50 hidden overflow-y-auto">
+        <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+          <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+            <div className="absolute inset-0 bg-gray-900 opacity-75"></div>
+          </div>
+          
+          <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+          
+          <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full sm:p-6">
+            <div className="absolute top-0 right-0 pt-4 pr-4">
+              <button 
+                type="button" 
+                className="text-gray-400 hover:text-gray-500 focus:outline-none"
+                onClick={() => {
+                  document.getElementById('thickness-guide-modal').classList.add('hidden');
+                }}
+              >
+                <span className="sr-only">Close</span>
+                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div>
+              <div className="mt-3 text-center sm:mt-0 sm:text-left">
+                <h3 className="text-2xl leading-6 font-bold text-gray-900 mb-4 pb-2 border-b">
+                  Foamex PVC Board Thickness Guide
+                </h3>
+                
+                <div className="mt-6">
+                  <p className="text-sm text-gray-500 mb-6">
+                    Choosing the right thickness is crucial for your specific application. This guide provides honest insights about each option to help you make the best decision.
+                  </p>
+                  
+                  <div className="grid grid-cols-1 gap-6">
+                    <div className="bg-gray-50 p-5 rounded-lg border border-gray-200">
+                      <div className="flex items-center mb-3">
+                        <div className="bg-blue-100 text-blue-800 font-bold rounded-lg px-3 py-1 mr-3">3mm</div>
+                        <h4 className="text-lg font-semibold text-gray-900">Lightweight & Economical</h4>
+                      </div>
+                      
+                      <div className="space-y-3 text-gray-700">
+                        <p><span className="font-medium">Best for:</span> Temporary indoor displays, short-term promotions, small to medium-sized signs</p>
+                        <p><span className="font-medium">Honest assessment:</span> This is our thinnest option and is somewhat flexible/flimsy. For best results, we recommend mounting it to a rigid surface using strong double-sided tape or adhesive. It's lightweight enough that tape mounting works very well.</p>
+                        <p><span className="font-medium">Weight:</span> Approximately 1.8kg per square meter</p>
+                        <p><span className="font-medium">Ideal environments:</span> Indoor use only, away from high-traffic areas where it might get bumped or bent</p>
+                        <div className="flex items-center mt-2 text-sm text-amber-700">
+                          <svg className="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z" clipRule="evenodd" />
+                          </svg>
+                          <span>Not recommended for self-standing applications without proper support</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-indigo-50 p-5 rounded-lg border border-indigo-200">
+                      <div className="flex items-center mb-3">
+                        <div className="bg-indigo-100 text-indigo-800 font-bold rounded-lg px-3 py-1 mr-3">5mm</div>
+                        <h4 className="text-lg font-semibold text-gray-900">Most Popular</h4>
+                        <span className="ml-auto bg-yellow-400 text-gray-900 text-xs font-bold px-2 py-1 rounded-full">BEST SELLER</span>
+                      </div>
+                      
+                      <div className="space-y-3 text-gray-700">
+                        <p><span className="font-medium">Best for:</span> General signage, medium-term displays, exhibition panels, information boards</p>
+                        <p><span className="font-medium">Honest assessment:</span> This offers a good balance between rigidity and economy. It's firm enough to stand on its own for medium-sized displays but may still benefit from support for larger sizes. Our most versatile and popular option.</p>
+                        <p><span className="font-medium">Weight:</span> Approximately 3kg per square meter</p>
+                        <p><span className="font-medium">Ideal environments:</span> Indoor use in retail environments, offices, exhibitions</p>
+                        <div className="flex items-center mt-2 text-sm text-green-700">
+                          <svg className="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                          </svg>
+                          <span>Best all-around choice for most applications</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-purple-50 p-5 rounded-lg border border-purple-200">
+                      <div className="flex items-center mb-3">
+                        <div className="bg-purple-100 text-purple-800 font-bold rounded-lg px-3 py-1 mr-3">5.5mm</div>
+                        <h4 className="text-lg font-semibold text-gray-900">Enhanced Durability</h4>
+                      </div>
+                      
+                      <div className="space-y-3 text-gray-700">
+                        <p><span className="font-medium">Best for:</span> Premium displays, larger format signs, long-term installations</p>
+                        <p><span className="font-medium">Honest assessment:</span> The extra 0.5mm makes a noticeable difference in rigidity compared to standard 5mm boards. Offers enhanced durability while maintaining a relatively lightweight profile. Good for vertical displays and more premium applications.</p>
+                        <p><span className="font-medium">Weight:</span> Approximately 3.3kg per square meter</p>
+                        <p><span className="font-medium">Ideal environments:</span> Indoor retail environments, corporate settings, premium exhibitions</p>
+                        <div className="flex items-center mt-2 text-sm text-purple-700">
+                          <svg className="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                          </svg>
+                          <span>Good balance of durability and weight</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-blue-50 p-5 rounded-lg border border-blue-200">
+                      <div className="flex items-center mb-3">
+                        <div className="bg-blue-100 text-blue-800 font-bold rounded-lg px-3 py-1 mr-3">10mm</div>
+                        <h4 className="text-lg font-semibold text-gray-900">Premium Rigid Display</h4>
+                      </div>
+                      
+                      <div className="space-y-3 text-gray-700">
+                        <p><span className="font-medium">Best for:</span> Free-standing displays, premium signage, long-term installations, larger format applications</p>
+                        <p><span className="font-medium">Honest assessment:</span> This is our most substantial option and is definitely not flimsy. It's quite rigid and may be too heavy for certain adhesive mounting applications. The additional weight makes it very stable for self-standing displays but requires more robust mounting hardware when wall-mounted.</p>
+                        <p><span className="font-medium">Weight:</span> Approximately 6kg per square meter (an 8ft × 4ft sheet weighs around 17.5kg)</p>
+                        <p><span className="font-medium">Ideal environments:</span> Indoor premium retail environments, exhibitions, long-term installations</p>
+                        <div className="flex items-center mt-2 text-sm text-amber-700">
+                          <svg className="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z" clipRule="evenodd" />
+                          </svg>
+                          <span>Too heavy for standard adhesive mounting - requires mechanical fixings</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-8 bg-gray-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 mb-2">Selection Tips</h4>
+                    <ul className="list-disc pl-5 space-y-2 text-gray-700">
+                      <li>For temporary displays or cost-sensitive projects, 3mm is adequate but will need proper support</li>
+                      <li>For general signage and medium-term use, 5mm provides the best value and versatility</li>
+                      <li>For premium appearance or self-standing applications, choose 5.5mm or 10mm</li>
+                      <li>Consider the mounting method: lighter boards (3mm, 5mm) work well with adhesives, while heavier boards (5.5mm, 10mm) may require mechanical fixings</li>
+                      <li>Larger sizes benefit from thicker boards to maintain structural integrity</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-5 sm:mt-6">
+              <button 
+                type="button"
+                className="w-full inline-flex justify-center rounded-lg border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 sm:w-auto"
+                onClick={() => {
+                  document.getElementById('thickness-guide-modal').classList.add('hidden');
+                }}
+              >
+                Close Guide
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </Layout>
