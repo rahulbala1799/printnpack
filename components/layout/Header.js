@@ -20,10 +20,13 @@ import {
   FaPizzaSlice,
   FaLeaf,
   FaCube,
-  FaBox
+  FaBox,
+  FaSearch
 } from 'react-icons/fa';
 import { BsFillDropletFill, BsBox } from 'react-icons/bs';
 import { IoColorPaletteSharp } from 'react-icons/io5';
+import SearchBar from '../search/SearchBar';
+import MobileSearch from '../search/MobileSearch';
 
 // Logo Component with package box icon
 const Logo = ({ scrolled }) => {
@@ -72,6 +75,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   // Track mouse position for gradient effect
   useEffect(() => {
@@ -152,6 +156,9 @@ const Header = () => {
 
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'shadow-md' : ''}`}>
+      {/* Mobile search overlay */}
+      <MobileSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      
       {/* Animated Background with Glass Effect */}
       <div className="relative">
         {/* Animated gradient background */}
@@ -183,6 +190,14 @@ const Header = () => {
               <a href="mailto:info@printnpack.ie" className="text-white md:hidden flex items-center">
                 <FaEnvelope className="text-lg" />
               </a>
+              {/* Mobile search button */}
+              <button 
+                onClick={() => setIsSearchOpen(true)}
+                className="text-white md:hidden flex items-center p-2"
+                aria-label="Search products"
+              >
+                <FaSearch className="text-lg" />
+              </button>
               <Link href="/contact" className="bg-blue-800/80 md:bg-white/20 backdrop-blur-md hover:bg-white/30 text-white px-4 py-2 rounded-lg transition-colors shadow-glow">
                 Contact Us
               </Link>
@@ -195,21 +210,29 @@ const Header = () => {
           <div className="container mx-auto px-4 flex justify-between items-center">
             <Logo scrolled={scrolled} />
             
-            {/* Desktop Navigation */}
-            <nav className="hidden md:block">
-              <ul className="flex space-x-6">
-                {menuItems.map((item) => (
-                  <li key={item.path}>
-                    <Link 
-                      href={item.path} 
-                      className="text-blue-900 hover:text-blue-700 transition-colors relative nav-link"
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+            {/* Desktop Search and Navigation */}
+            <div className="hidden md:flex items-center space-x-6">
+              {/* Desktop Search */}
+              <div className="mr-4">
+                <SearchBar />
+              </div>
+              
+              {/* Desktop Navigation */}
+              <nav>
+                <ul className="flex space-x-6">
+                  {menuItems.map((item) => (
+                    <li key={item.path}>
+                      <Link 
+                        href={item.path} 
+                        className="text-blue-900 hover:text-blue-700 transition-colors relative nav-link"
+                      >
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div>
             
             {/* Mobile Nav Hamburger Button */}
             <button
@@ -228,7 +251,7 @@ const Header = () => {
         </div>
       </div>
       
-      {/* Mobile Navigation Drawer */}
+      {/* Mobile Navigation Drawer - add search link at the top */}
       <div 
         id="navMenu"
         className={`fixed top-0 right-0 h-full w-80 bg-gradient-to-b from-blue-900 to-blue-800 backdrop-blur-lg shadow-2xl transform transition-transform duration-300 ease-in-out z-50 ${
@@ -253,6 +276,22 @@ const Header = () => {
         
         <nav className="px-4 py-6">
           <ul className="space-y-4">
+            {/* Add Search as the first item */}
+            <li className={`opacity-0 ${isOpen ? 'animate-slide-in-right' : ''} mobile-menu-item-0`}>
+              <button 
+                onClick={() => {
+                  setIsOpen(false);
+                  setTimeout(() => setIsSearchOpen(true), 300);
+                }} 
+                className="flex w-full items-center p-3 rounded-lg text-white hover:bg-white/10 transition-colors group"
+              >
+                <span className="mr-3 text-blue-200"><FaSearch /></span>
+                <span className="font-medium">Search</span>
+                <FaChevronRight className="ml-auto opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all text-blue-200" />
+              </button>
+            </li>
+            
+            {/* Existing menu items */}
             {menuItems.map((item, index) => (
               <li 
                 key={item.path} 
