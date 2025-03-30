@@ -497,6 +497,171 @@ const products = [
     moq: 250,
     leadTime: '7-10 business days'
   },
+  {
+    id: 'wide-format-products',
+    name: 'Wide Format Products',
+    category: 'Promotional',
+    description: 'High-impact large format printing for banners, posters, and displays to make your brand stand out.',
+    features: [
+      'High-resolution printing',
+      'Indoor and outdoor options',
+      'Variety of materials and finishes',
+      'Common and custom sizes available',
+      'Weather-resistant options',
+      'Request for quote service'
+    ],
+    detailedDescription: 'Our wide format printing services deliver eye-catching visuals perfect for trade shows, retail environments, and marketing campaigns. We offer a comprehensive range of large format print products from banners and posters to window graphics and exhibition displays. Using state-of-the-art printing technology and premium materials, we ensure vivid colors, sharp details, and durable finishes suitable for both indoor and outdoor applications. Each product can be fully customized with your branding, and our design team is available to help create impactful visuals that amplify your message.',
+    specifications: [
+      { name: 'Materials', value: 'Vinyl, fabric, paper, mesh, canvas, foam board, corrugated plastic' },
+      { name: 'Standard Sizes', value: 'A1 (594mm × 841mm), A0 (841mm × 1189mm), 24"×36", 36"×48", 4\'×8\', 2\'×6\', Custom sizes available' },
+      { name: 'Printing', value: 'High-resolution UV, latex, or solvent printing up to 1440dpi' },
+      { name: 'Finishing Options', value: 'Lamination (gloss, matte, satin), grommets, pole pockets, hemming, mounting' },
+      { name: 'Indoor Products', value: 'Posters, foam boards, standees, roll-up banners, wall graphics, backlit displays' },
+      { name: 'Outdoor Products', value: 'Vinyl banners, mesh banners, flags, A-frames, yard signs, vehicle graphics' },
+      { name: 'Exhibition Products', value: 'Pop-up displays, backdrop walls, counter displays, hanging banners, floor graphics' },
+      { name: 'Turnaround Time', value: 'Standard 3-5 business days, rush options available' },
+    ],
+    images: [
+      '/css-placeholder-image',
+      '/css-placeholder-image'
+    ],
+    imageSrc: '/css-placeholder-image',
+    price: 'Request for Quote',
+    quoteRequired: true,
+    leadTime: 'Varies by product and quantity'
+  },
+  {
+    id: 'roll-up-banner-stands',
+    name: 'Roll-Up Banner Stands',
+    category: 'Wide Format',
+    description: 'Professional roll-up banner stands that create instant impact for exhibitions, retail displays, and presentations.',
+    features: [
+      'Premium quality portable display system',
+      'Available in multiple sizes and styles',
+      'Lightweight aluminum cassette mechanism',
+      'High-resolution graphics printing',
+      'Includes carry case for easy transportation',
+      'Quick 60-second setup with no tools required'
+    ],
+    detailedDescription: 'Our roll-up banner stands provide the perfect portable marketing solution for businesses that need to make an impact at trade shows, retail environments, or promotional events. Each stand features a premium quality aluminum cassette base with an integrated roller mechanism that protects your graphics when not in use and allows for effortless setup in under 60 seconds. The high-resolution printed graphics are produced on anti-curl, anti-glare material that ensures your message looks professional from every angle.\n\nEvery roll-up banner comes complete with a padded carry case for easy transportation and storage between events. The lightweight yet stable design makes these stands ideal for frequent use, with the graphic panel easily retracted into the base to prevent damage. Choose from our economy, standard, or premium models depending on your usage requirements and budget, with each option providing excellent value and visual impact.',
+    specifications: [
+      { name: 'Standard Sizes', value: '85cm × 200cm (standard), 80cm × 200cm (economy), 100cm × 200cm (wide), Desktop (A4/A3)' },
+      { name: 'Base Material', value: 'Aluminum cassette with protective end caps' },
+      { name: 'Pole System', value: 'Telescopic aluminum support pole (premium), Single aluminum pole (standard), Two-part pole (economy)' },
+      { name: 'Graphic Material', value: 'Anti-curl, anti-glare banner film with UV-resistant inks' },
+      { name: 'Print Resolution', value: 'Up to 1440dpi for photographic quality' },
+      { name: 'Setup Time', value: 'Under 60 seconds, no tools required' },
+      { name: 'Included Accessories', value: 'Padded carry case, assembly instructions' },
+      { name: 'Weight', value: '2.5kg - 4kg depending on model and size' },
+      { name: 'Warranty', value: '1-year warranty on hardware (premium models feature extended 5-year warranty)' },
+      { name: 'Production Time', value: '2-3 business days standard (rush service available)' },
+    ],
+    applications: [
+      'Trade show and exhibition displays',
+      'Retail point-of-sale promotions',
+      'Conference and event signage',
+      'Corporate reception areas',
+      'Sales presentations and pitches',
+      'Lecture and training backgrounds',
+      'Pop-up shops and temporary displays',
+      'Product launches and demonstrations'
+    ],
+    models: [
+      {
+        name: 'Economy Roll-Up',
+        description: 'Cost-effective solution for short-term or infrequent use',
+        features: [
+          'Lightweight aluminum base',
+          'Two-part supporting pole',
+          'Standard 80cm × 200cm graphic area',
+          'Basic carry bag included'
+        ],
+        recommendedFor: 'One-time events, budget-conscious campaigns, indoor use only'
+      },
+      {
+        name: 'Standard Roll-Up',
+        description: 'Our most popular model, balancing quality and value',
+        features: [
+          'Medium-weight aluminum cassette',
+          'Single supporting pole with internal bungee',
+          '85cm × 200cm graphic area',
+          'Padded carry case included',
+          'Adjustable feet for stability'
+        ],
+        recommendedFor: 'Regular exhibitors, retail environments, promotional campaigns'
+      },
+      {
+        name: 'Premium Roll-Up',
+        description: 'Professional-grade display for frequent or long-term use',
+        features: [
+          'Heavy-duty aluminum cassette with chrome end caps',
+          'Telescopic pole for adjustable height',
+          '85cm or 100cm width options',
+          'Premium padded carry case',
+          'Tensioning system for perfect graphic display',
+          '5-year hardware warranty'
+        ],
+        recommendedFor: 'Corporate environments, frequent exhibitors, premium brands'
+      },
+      {
+        name: 'Desktop Roll-Up',
+        description: 'Compact counter-top display for reception areas and point-of-sale',
+        features: [
+          'A4 or A3 size options',
+          'Miniature aluminum cassette',
+          'Lightweight supporting pole',
+          'Protective sleeve included'
+        ],
+        recommendedFor: 'Counter displays, product information, reception desks'
+      }
+    ],
+    images: [
+      '/css-placeholder-image',
+      '/css-placeholder-image',
+      '/css-placeholder-image',
+      '/css-placeholder-image'
+    ],
+    imageSrc: '/css-placeholder-image',
+    price: 'Request for Quote',
+    quoteRequired: true,
+    leadTime: '2-3 business days standard',
+    faq: [
+      {
+        question: 'How long do the graphics last?',
+        answer: 'Our roll-up banner graphics are printed with UV-resistant inks on premium anti-curl material. With proper care, indoor displays typically last 3-5 years without significant fading or deterioration.'
+      },
+      {
+        question: 'Can I replace just the graphic on my existing stand?',
+        answer: 'Yes, we can produce replacement graphics for most standard roll-up banner stands. Simply provide the exact dimensions of your existing hardware, and we\'ll create a new graphic panel that fits perfectly.'
+      },
+      {
+        question: 'Are your roll-up banners suitable for outdoor use?',
+        answer: 'Our standard roll-up banners are designed for indoor use. For outdoor applications, we recommend our outdoor banner displays that feature weather-resistant materials and sturdier bases.'
+      },
+      {
+        question: 'What file format do you need for printing?',
+        answer: 'For best results, please provide high-resolution PDF, AI, or EPS files with fonts converted to outlines. Images should be at least 150dpi at final print size. We also accept PSD, TIFF, and JPEG files.'
+      },
+      {
+        question: 'Do you offer design services if I don\'t have artwork?',
+        answer: 'Yes, our professional design team can create impactful banner designs for you. Just let us know your requirements, branding guidelines, and key messages, and we\'ll develop eye-catching visuals that achieve your objectives.'
+      }
+    ],
+    testimonials: [
+      {
+        quote: 'The premium roll-up banners we ordered were outstanding quality and made a real impression at our annual conference. Setup was literally under a minute!',
+        author: 'Marketing Director, Tech Solutions Ltd'
+      },
+      {
+        quote: 'We use the desktop roll-ups at our reception desk to highlight our services. They look professional and have helped increase our upselling opportunities.',
+        author: 'Office Manager, Wellness Clinic'
+      },
+      {
+        quote: 'For our exhibition program, we ordered 15 standard roll-ups and have been impressed with their durability. Two years of regular use and they still look brand new.',
+        author: 'Events Coordinator, Manufacturing Association'
+      }
+    ]
+  },
 ];
 
 // Helper function to get a product by its ID/slug

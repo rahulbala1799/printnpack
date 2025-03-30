@@ -90,6 +90,52 @@ const ProductDetail = ({ product, relatedProducts }) => {
           .zoom-animation {
             animation: zoomIn 0.3s ease-out forwards;
           }
+          
+          /* Mobile gallery styles */
+          @media (max-width: 640px) {
+            .thumbnail-container {
+              display: flex;
+              justify-content: center;
+              flex-wrap: nowrap;
+              overflow-x: auto;
+              -webkit-overflow-scrolling: touch;
+              scroll-snap-type: x mandatory;
+              padding: 0.5rem 0;
+            }
+            
+            .thumbnail-item {
+              scroll-snap-align: center;
+              flex: 0 0 auto;
+            }
+          }
+          
+          /* CSS Placeholder Images */
+          .css-placeholder {
+            background: linear-gradient(135deg, #3182ce 25%, #4299e1 25%, #4299e1 50%, #3182ce 50%, #3182ce 75%, #4299e1 75%);
+            background-size: 40px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+          }
+          
+          .css-placeholder.banner {
+            background: linear-gradient(45deg, #2c5282 25%, #2b6cb0 25%, #2b6cb0 50%, #2c5282 50%, #2c5282 75%, #2b6cb0 75%);
+            background-size: 60px 60px;
+          }
+          
+          .css-placeholder.poster {
+            background: linear-gradient(45deg, #3182ce 25%, #4299e1 25%, #4299e1 50%, #3182ce 50%, #3182ce 75%, #4299e1 75%);
+            background-size: 20px 20px;
+          }
+          
+          .css-placeholder::after {
+            content: 'Wide Format Print';
+            font-size: 1.2rem;
+          }
         `}</style>
       </Head>
 
@@ -149,12 +195,16 @@ const ProductDetail = ({ product, relatedProducts }) => {
                         pointerEvents: idx === 0 ? 'auto' : 'none' 
                       }}
                     >
-                      <Image 
-                        src={image}
-                        alt={`${product.name} view ${idx + 1}`}
-                        fill
-                        className="object-contain p-6"
-                      />
+                      {image.includes('css-placeholder-image') ? (
+                        <div className={`absolute inset-0 css-placeholder ${idx % 2 === 0 ? 'banner' : 'poster'}`}></div>
+                      ) : (
+                        <Image 
+                          src={image}
+                          alt={`${product.name} view ${idx + 1}`}
+                          fill
+                          className="object-contain p-6"
+                        />
+                      )}
                       
                       {/* Image navigation arrows */}
                       <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 hover:opacity-100 transition-opacity">
@@ -213,8 +263,8 @@ const ProductDetail = ({ product, relatedProducts }) => {
               
               {/* New enlarged thumbnail gallery */}
               <div className="mt-6 relative">
-                <div className="overflow-x-auto pb-2 hide-scrollbar">
-                  <div className="flex gap-4 px-1">
+                <div className="overflow-x-auto pb-2 hide-scrollbar thumbnail-container">
+                  <div className="flex justify-center md:justify-start gap-4 px-1 w-full">
                     {product.images.map((image, index) => (
                       <button
                         key={index}
@@ -222,22 +272,44 @@ const ProductDetail = ({ product, relatedProducts }) => {
                         onClick={(e) => {
                           // Hide all main images
                           product.images.forEach((_, idx) => {
-                            document.querySelector(`#gallery-main-${idx}`).style.opacity = 0;
-                            document.querySelector(`#gallery-main-${idx}`).style.pointerEvents = 'none';
+                            const mainEl = document.querySelector(`#gallery-main-${idx}`);
+                            if (mainEl) {
+                              mainEl.style.opacity = 0;
+                              mainEl.style.pointerEvents = 'none';
+                            }
+                            
+                            // Reset all thumbnail borders
+                            const thumbEl = document.querySelector(`#gallery-thumb-${idx}`);
+                            if (thumbEl) {
+                              thumbEl.classList.remove('border-blue-500');
+                              thumbEl.classList.add('border-gray-200');
+                            }
                           });
+                          
                           // Show current image
-                          document.querySelector(`#gallery-main-${index}`).style.opacity = 1;
-                          document.querySelector(`#gallery-main-${index}`).style.pointerEvents = 'auto';
+                          const currentMain = document.querySelector(`#gallery-main-${index}`);
+                          if (currentMain) {
+                            currentMain.style.opacity = 1;
+                            currentMain.style.pointerEvents = 'auto';
+                          }
+                          
+                          // Highlight current thumbnail
+                          e.currentTarget.classList.remove('border-gray-200');
+                          e.currentTarget.classList.add('border-blue-500');
                         }}
-                        className={`relative flex-shrink-0 border-2 rounded-lg overflow-hidden transition-all h-24 w-24 md:h-28 md:w-28 focus:outline-none hover:shadow-md ${index === 0 ? 'border-blue-500' : 'border-gray-200 hover:border-blue-300'}`}
+                        className={`relative flex-shrink-0 border-2 rounded-lg overflow-hidden transition-all h-28 w-28 md:h-32 md:w-32 focus:outline-none hover:shadow-md thumbnail-item ${index === 0 ? 'border-blue-500' : 'border-gray-200 hover:border-blue-300'}`}
                       >
                         <div className="absolute inset-0">
-                          <Image 
-                            src={image}
-                            alt={`${product.name} thumbnail ${index + 1}`}
-                            fill
-                            className="object-contain p-2"
-                          />
+                          {image.includes('css-placeholder-image') ? (
+                            <div className={`absolute inset-0 css-placeholder ${index % 2 === 0 ? 'banner' : 'poster'}`}></div>
+                          ) : (
+                            <Image 
+                              src={image}
+                              alt={`${product.name} thumbnail ${index + 1}`}
+                              fill
+                              className="object-contain p-2"
+                            />
+                          )}
                         </div>
                       </button>
                     ))}
@@ -337,7 +409,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
                   </div>
                   <div className="flex justify-between mb-2">
                     <span className="text-gray-600">Minimum Order:</span>
-                    <span className="font-semibold">{product.moq} units</span>
+                    <span className="font-semibold">{product.moq ? `${product.moq} units` : 'Contact for details'}</span>
                   </div>
                   <div className="flex justify-between mb-4">
                     <span className="text-gray-600">Lead Time:</span>
@@ -345,7 +417,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
                   </div>
                   
                   <Link href="/contact" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium text-center transition-colors block">
-                    Get Your Custom Quote Today
+                    {product.quoteRequired ? 'Request Your Custom Quote' : 'Get Your Custom Quote Today'}
                   </Link>
                   <p className="text-xs text-center text-gray-500 mt-2">No obligation • Free consultation</p>
                 </div>
@@ -383,6 +455,173 @@ const ProductDetail = ({ product, relatedProducts }) => {
           <div className="prose max-w-none">
             <h2 className="text-2xl font-bold mb-4">Product Description</h2>
             <p className="mb-6">{product.detailedDescription}</p>
+            
+            {/* Wide Format Size Selector - Only for wide format products */}
+            {product.id === 'wide-format-products' && (
+              <div className="mb-10 border border-gray-200 rounded-lg p-6 bg-white shadow-md">
+                <h3 className="text-xl font-bold mb-4">Common Formats & Sizes</h3>
+                <p className="mb-4">Browse our most popular sizes for wide format printing or request a custom size for your specific needs.</p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+                  {[
+                    { name: 'Standard Poster A1', size: '594mm × 841mm', usage: 'Ideal for indoor promotional displays' },
+                    { name: 'Standard Poster A0', size: '841mm × 1189mm', usage: 'Perfect for high-visibility areas' },
+                    { name: 'Medium Banner', size: '24" × 36" (60cm × 91cm)', usage: 'Trade shows and retail displays' },
+                    { name: 'Large Banner', size: '36" × 48" (91cm × 122cm)', usage: 'Exhibition and event signage' },
+                    { name: 'X-Banner Stand', size: '31.5" × 71" (80cm × 180cm)', usage: 'Portable marketing display' },
+                    { name: 'Billboard Poster', size: '48" × 72" (122cm × 183cm)', usage: 'High-impact outdoor advertising' },
+                    { name: 'Roll-Up Banner', size: '33.5" × 79" (85cm × 200cm)', usage: 'Conferences and presentations' },
+                    { name: 'Vinyl Banner', size: '4\' × 8\' (122cm × 244cm)', usage: 'Outdoor events and storefronts' },
+                    { name: 'Custom Size', size: 'Your specifications', usage: 'Tailored to your exact requirements' },
+                  ].map((format, index) => (
+                    <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                      <h4 className="font-bold text-md">{format.name}</h4>
+                      <p className="text-sm text-gray-600 mt-1">{format.size}</p>
+                      <p className="text-xs text-gray-500 mt-1">{format.usage}</p>
+                      <Link 
+                        href={`/contact?product=Wide Format - ${format.name}&subject=Wide Format Quote Request`}
+                        className="mt-3 text-blue-600 text-sm font-medium hover:text-blue-800 inline-flex items-center"
+                      >
+                        Request Quote
+                        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="mt-8 bg-blue-50 p-4 rounded-lg border border-blue-100">
+                  <div className="flex items-start">
+                    <svg className="w-6 h-6 text-blue-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div>
+                      <h4 className="font-semibold mb-1">Need a different size?</h4>
+                      <p className="text-sm text-gray-700">We can accommodate virtually any size for your project. Contact our team for custom dimensions.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            {/* Roll-Up Banner Product Models - Only for roll-up banner products */}
+            {product.id === 'roll-up-banner-stands' && (
+              <div className="mb-10">
+                <h3 className="text-xl font-bold mb-6">Choose Your Perfect Roll-Up Banner Stand</h3>
+                
+                {/* Banner Stand Models */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                  {product.models.map((model, index) => (
+                    <div key={index} className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+                      <div className="p-5 bg-white">
+                        <div className="flex items-start justify-between">
+                          <h4 className="text-lg font-bold text-blue-800">{model.name}</h4>
+                          {index === 1 && (
+                            <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded-full uppercase font-semibold">Most Popular</span>
+                          )}
+                        </div>
+                        <p className="text-gray-700 mt-2">{model.description}</p>
+                        
+                        <ul className="mt-4 space-y-2">
+                          {model.features.map((feature, idx) => (
+                            <li key={idx} className="flex items-start">
+                              <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                              </svg>
+                              <span className="text-sm">{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        
+                        <div className="mt-4 pt-4 border-t border-gray-100">
+                          <p className="text-sm text-gray-600"><span className="font-medium">Recommended for:</span> {model.recommendedFor}</p>
+                        </div>
+                        
+                        <Link 
+                          href={`/contact?product=Roll-Up Banner - ${model.name}&subject=Roll-Up Banner Quote Request`}
+                          className="mt-5 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium text-center transition-colors block"
+                        >
+                          Request Personalized Quote
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Applications & Benefits */}
+                <div className="bg-gray-50 rounded-xl p-6 mb-8">
+                  <h4 className="text-lg font-bold mb-4">Perfect For These Applications</h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                    {product.applications.map((application, idx) => (
+                      <div key={idx} className="bg-white rounded-lg p-3 shadow-sm">
+                        <p className="text-sm font-medium text-gray-800">{application}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* FAQ Section */}
+                <div className="mb-8">
+                  <h4 className="text-lg font-bold mb-4">Frequently Asked Questions</h4>
+                  <div className="space-y-4">
+                    {product.faq.map((item, idx) => (
+                      <div key={idx} className="border border-gray-200 rounded-lg overflow-hidden">
+                        <details className="group">
+                          <summary className="flex justify-between items-center font-medium cursor-pointer p-4 bg-white">
+                            <span>{item.question}</span>
+                            <span className="transition group-open:rotate-180">
+                              <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                              </svg>
+                            </span>
+                          </summary>
+                          <div className="p-4 border-t border-gray-200 bg-gray-50">
+                            <p className="text-gray-700">{item.answer}</p>
+                          </div>
+                        </details>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Testimonials */}
+                <div className="mb-8">
+                  <h4 className="text-lg font-bold mb-4">What Our Customers Say</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {product.testimonials.map((testimonial, idx) => (
+                      <div key={idx} className="bg-white rounded-lg p-5 shadow-sm border border-gray-100">
+                        <div className="flex mb-3">
+                          {[...Array(5)].map((_, i) => (
+                            <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                          ))}
+                        </div>
+                        <p className="text-gray-700 italic mb-3">"{testimonial.quote}"</p>
+                        <p className="text-sm font-medium text-gray-900">{testimonial.author}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Call To Action Section */}
+                <div className="bg-blue-600 rounded-xl p-6 text-white">
+                  <div className="md:flex items-center justify-between">
+                    <div className="mb-4 md:mb-0 md:mr-8">
+                      <h4 className="text-xl font-bold mb-2">Ready to make an impact with your next display?</h4>
+                      <p className="text-blue-100">Request your personalized quote today and receive expert advice on the best option for your needs.</p>
+                    </div>
+                    <Link 
+                      href="/contact?product=Roll-Up Banner Stands&subject=Roll-Up Banner Quote Request"
+                      className="block w-full md:w-auto bg-white hover:bg-gray-100 text-blue-600 font-bold py-3 px-6 rounded-lg text-center transition-colors"
+                    >
+                      Get Your Quote Now
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
             
             <h3 className="text-xl font-bold mb-3">Technical Specifications</h3>
             <div className="bg-white rounded-lg border border-gray-200 overflow-hidden mb-8">
@@ -675,12 +914,16 @@ const ProductDetail = ({ product, relatedProducts }) => {
           {relatedProducts.map(relatedProduct => (
             <div key={relatedProduct.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
               <div className="h-48 relative bg-gray-50">
-                <Image
-                  src={relatedProduct.imageSrc}
-                  alt={relatedProduct.name}
-                  fill
-                  className="object-contain p-4"
-                />
+                {relatedProduct.imageSrc.includes('css-placeholder-image') ? (
+                  <div className="absolute inset-0 css-placeholder banner"></div>
+                ) : (
+                  <Image
+                    src={relatedProduct.imageSrc}
+                    alt={relatedProduct.name}
+                    fill
+                    className="object-contain p-4"
+                  />
+                )}
               </div>
               <div className="p-4">
                 <h3 className="font-semibold mb-2">{relatedProduct.name}</h3>

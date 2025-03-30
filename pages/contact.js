@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import Layout from '../components/layout/Layout';
 import Head from 'next/head';
-import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock, FaWhatsapp } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock, FaWhatsapp, FaComment, FaArrowRight, FaHeadset } from 'react-icons/fa';
+import Link from 'next/link';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    company: '',
     message: '',
     productInterest: 'General Inquiry'
   });
@@ -44,7 +44,6 @@ const ContactPage = () => {
       name: '',
       email: '',
       phone: '',
-      company: '',
       message: '',
       productInterest: 'General Inquiry'
     });
@@ -56,7 +55,7 @@ const ContactPage = () => {
         <title>Contact Us - PrintNPack Packaging Solutions</title>
         <meta 
           name="description" 
-          content="Get in touch with PrintNPack for all your packaging needs. Request a quote, order samples, or speak to our packaging experts." 
+          content="Get in touch with PrintNPack for all your packaging needs. Chat with us, call us, or send a WhatsApp message for immediate assistance." 
         />
       </Head>
 
@@ -65,22 +64,81 @@ const ContactPage = () => {
         <div className="absolute inset-0 bg-particles opacity-20"></div>
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">We're Here to Help</h1>
             <p className="text-xl mb-8">
-              Get in touch with our team for custom packaging solutions
+              Get fast answers and personalized packaging solutions 
             </p>
             <div className="w-24 h-1 bg-white mx-auto rounded"></div>
           </div>
         </div>
       </div>
 
+      {/* Quick Contact Options - NEW SECTION */}
+      <div className="bg-white py-12">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-10">Get In Touch <span className="text-blue-600">Instantly</span></h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {/* Live Chat Option */}
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow">
+              <div className="bg-blue-600 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                <FaComment className="text-white text-2xl" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Live Chat</h3>
+              <p className="text-gray-600 mb-5">Chat with our packaging experts right now for immediate assistance</p>
+              <button 
+                onClick={() => alert('Live chat would open here')} 
+                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors inline-flex items-center"
+              >
+                Start Chat Now
+                <FaArrowRight className="ml-2" />
+              </button>
+            </div>
+            
+            {/* WhatsApp Option */}
+            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow">
+              <div className="bg-green-500 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                <FaWhatsapp className="text-white text-2xl" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">WhatsApp</h3>
+              <p className="text-gray-600 mb-5">Message us on WhatsApp for a quick response to your packaging needs</p>
+              <a 
+                href="https://wa.me/353123456789" 
+                target="_blank"
+                rel="noopener noreferrer" 
+                className="bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-6 rounded-lg transition-colors inline-flex items-center"
+              >
+                WhatsApp Us
+                <FaArrowRight className="ml-2" />
+              </a>
+            </div>
+            
+            {/* Call Option */}
+            <div className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow">
+              <div className="bg-amber-500 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                <FaPhone className="text-white text-2xl" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Call Us</h3>
+              <p className="text-gray-600 mb-5">Speak directly with our team for personalized advice and quotes</p>
+              <a 
+                href="tel:+35312345678" 
+                className="bg-amber-500 hover:bg-amber-600 text-white font-medium py-3 px-6 rounded-lg transition-colors inline-flex items-center"
+              >
+                +353 1 234 5678
+                <FaArrowRight className="ml-2" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Contact Information & Form */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-12 bg-gray-50">
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="md:flex">
             {/* Contact Information */}
             <div className="w-full md:w-1/3 bg-gradient-to-b from-blue-800 to-blue-900 p-8 text-white">
-              <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
+              <h2 className="text-2xl font-bold mb-6">Contact Details</h2>
               
               <div className="space-y-6">
                 <div className="flex items-start">
@@ -97,7 +155,6 @@ const ContactPage = () => {
                   <div>
                     <h3 className="font-semibold mb-1">Phone</h3>
                     <p>+353 1 234 5678</p>
-                    <p>+353 1 987 6543</p>
                   </div>
                 </div>
                 
@@ -106,7 +163,6 @@ const ContactPage = () => {
                   <div>
                     <h3 className="font-semibold mb-1">Email</h3>
                     <p>info@printnpack.ie</p>
-                    <p>sales@printnpack.ie</p>
                   </div>
                 </div>
                 
@@ -119,11 +175,20 @@ const ContactPage = () => {
                     <p>Sunday: Closed</p>
                   </div>
                 </div>
+
+                <div className="flex items-start">
+                  <FaHeadset className="text-blue-300 mr-4 mt-1" />
+                  <div>
+                    <h3 className="font-semibold mb-1">Customer Support</h3>
+                    <p>24/7 Live Chat Support Available</p>
+                    <p>WhatsApp: +353 87 654 3210</p>
+                  </div>
+                </div>
               </div>
               
               {/* Connect Socials */}
               <div className="mt-12">
-                <h3 className="text-xl font-semibold mb-4">Connect With Us</h3>
+                <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
                 <div className="flex space-x-4">
                   <a href="#" className="bg-white/10 hover:bg-white/20 p-3 rounded-full transition-colors">
                     <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -147,70 +212,60 @@ const ContactPage = () => {
               </div>
             </div>
             
-            {/* Contact Form */}
+            {/* Simplified Contact Form */}
             <div className="w-full md:w-2/3 p-8">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">Send Us a Message</h2>
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">Send Us a Message</h2>
+              <p className="text-gray-600 mb-6">Or use our quick contact options above for faster responses</p>
               
               {formStatus.submitted && formStatus.success ? (
                 <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded relative mb-6" role="alert">
                   <p>{formStatus.message}</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                      <label htmlFor="name" className="block text-gray-700 font-medium mb-2">Your Name *</label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="email" className="block text-gray-700 font-medium mb-2">Email Address *</label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="phone" className="block text-gray-700 font-medium mb-2">Phone Number</label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="company" className="block text-gray-700 font-medium mb-2">Company Name</label>
-                      <input
-                        type="text"
-                        id="company"
-                        name="company"
-                        value={formData.company}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
-                    </div>
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div>
+                    <label htmlFor="name" className="block text-gray-700 font-medium mb-1">Your Name *</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      required
+                      placeholder="John Smith"
+                    />
                   </div>
                   
-                  <div className="mb-6">
-                    <label htmlFor="productInterest" className="block text-gray-700 font-medium mb-2">Product Interest</label>
+                  <div>
+                    <label htmlFor="email" className="block text-gray-700 font-medium mb-1">Email Address *</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      required
+                      placeholder="your.email@example.com"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="phone" className="block text-gray-700 font-medium mb-1">Phone Number</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="+353 87 123 4567"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="productInterest" className="block text-gray-700 font-medium mb-1">What can we help you with?</label>
                     <select
                       id="productInterest"
                       name="productInterest"
@@ -219,52 +274,35 @@ const ContactPage = () => {
                       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
                       <option value="General Inquiry">General Inquiry</option>
+                      <option value="Request a Quote">Request a Quote</option>
                       <option value="Pizza Boxes">Pizza Boxes</option>
                       <option value="Paper Bags">Paper Bags</option>
-                      <option value="Burger Boxes">Burger Boxes</option>
-                      <option value="Marketing Materials">Marketing Materials</option>
-                      <option value="Napkins">Napkins</option>
-                      <option value="Corrugated Boxes">Corrugated Boxes</option>
+                      <option value="Wide Format Products">Wide Format Products</option>
+                      <option value="Roll-Up Banners">Roll-Up Banners</option>
                       <option value="Custom Packaging">Custom Packaging</option>
                     </select>
                   </div>
                   
-                  <div className="mb-6">
-                    <label htmlFor="message" className="block text-gray-700 font-medium mb-2">Your Message *</label>
+                  <div>
+                    <label htmlFor="message" className="block text-gray-700 font-medium mb-1">Your Message *</label>
                     <textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleInputChange}
-                      rows="4"
+                      rows="3"
                       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       required
+                      placeholder="Tell us what you need and we'll get back to you as soon as possible"
                     ></textarea>
                   </div>
                   
-                  <div className="flex items-center mb-6">
-                    <input
-                      id="privacy"
-                      type="checkbox"
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                      required
-                    />
-                    <label htmlFor="privacy" className="ml-2 block text-sm text-gray-700">
-                      I agree to the <a href="#" className="text-blue-600 hover:underline">privacy policy</a> and consent to being contacted.
-                    </label>
-                  </div>
-                  
-                  <div>
-                    <button
-                      type="submit"
-                      className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-md text-lg font-medium transition-colors inline-flex items-center"
-                    >
-                      <span>Send Message</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                      </svg>
-                    </button>
-                  </div>
+                  <button
+                    type="submit"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition-colors"
+                  >
+                    Send Message
+                  </button>
                 </form>
               )}
             </div>
