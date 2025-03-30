@@ -4,9 +4,9 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   
-  // Disable image optimization completely
+  // Enable image optimization 
   images: {
-    unoptimized: true,
+    unoptimized: false,
     domains: ['localhost'],
     remotePatterns: [
       {
