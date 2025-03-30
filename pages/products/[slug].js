@@ -192,8 +192,8 @@ const ProductDetail = ({ product, relatedProducts }) => {
             <div className="md:hidden mb-8">
               <div className="relative h-80 rounded-xl overflow-hidden shadow-2xl mx-auto max-w-sm">
                 <Image 
-                  src="/ifa/product/vinylstk/Transperent_Sticker_low_03281303202404.png.webp"
-                  alt="Premium vinyl sticker example" 
+                  src="/ifa/product/vinylstk/Window_Sticker_3_01042303202404.png.webp"
+                  alt="Window vinyl sticker application" 
                   fill 
                   className="object-cover"
                   priority
