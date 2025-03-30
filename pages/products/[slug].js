@@ -1558,18 +1558,201 @@ const ProductDetail = ({ product, relatedProducts }) => {
           </div>
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <h4 className="font-semibold mb-4">Size & Dimensions</h4>
-            <div className="relative h-48 mb-4 bg-gray-50">
-              <Image
-                src="/images/product-dimensions.svg"
-                alt="Product dimensions diagram"
-                fill
-                className="object-contain p-2"
-              />
-            </div>
-            <p className="text-sm text-gray-600">
-              Precise dimensions ensure a perfect fit for your products. All measurements
-              follow industry standards and can be customized to your specific requirements.
-            </p>
+            {product.id === 'foamex-boards' ? (
+              <div className="mb-4">
+                <div className="flex justify-between items-center mb-4">
+                  <h5 className="text-sm font-medium">Select a size to visualize:</h5>
+                  <select 
+                    id="foamex-size-selector" 
+                    className="rounded-md border-gray-300 shadow-sm text-sm focus:border-blue-500 focus:ring-blue-500"
+                    defaultValue="a1"
+                  >
+                    <option value="a0">A0 (841mm × 1189mm)</option>
+                    <option value="a1">A1 (594mm × 841mm)</option>
+                    <option value="a2">A2 (420mm × 594mm)</option>
+                    <option value="60x90">60cm × 90cm</option>
+                    <option value="70x100">70cm × 100cm</option>
+                    <option value="custom">Custom Size</option>
+                  </select>
+                </div>
+                
+                <div className="relative h-80 bg-gray-50 border border-gray-200 rounded-md overflow-hidden mb-4">
+                  <div id="foamex-dimension-display" className="absolute inset-0 flex items-center justify-center">
+                    <div id="size-visualization" className="relative">
+                      {/* Size visualization will be rendered here by JS */}
+                      <div id="size-container" className="relative bg-blue-100 border-2 border-blue-500 transition-all duration-300">
+                        <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                          <span id="width-label" className="bg-white text-xs font-medium px-2 py-1 rounded border border-gray-300 shadow-sm">594mm</span>
+                        </div>
+                        <div className="absolute -left-12 top-1/2 transform -translate-y-1/2 whitespace-nowrap rotate-90">
+                          <span id="height-label" className="bg-white text-xs font-medium px-2 py-1 rounded border border-gray-300 shadow-sm">841mm</span>
+                        </div>
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span id="size-name" className="text-lg font-bold text-blue-800 bg-white bg-opacity-70 px-3 py-1 rounded">A1</span>
+                        </div>
+                      </div>
+                      <div id="human-silhouette" className="absolute bottom-0 right-4" style={{height: '170px', width: '60px'}}>
+                        <svg viewBox="0 0 24 60" fill="currentColor" className="h-full text-gray-400">
+                          <path d="M12,5 a5,5 0 1,0 0,0.1 M7,14 h10 l1.5,17 h-4 l-1,15 h-3 l-1,-15 h-4 Z" />
+                        </svg>
+                        <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                          <span className="bg-white text-xs font-medium px-2 py-1 rounded border border-gray-300 shadow-sm">Person (170cm)</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div id="custom-size-controls" className="grid grid-cols-2 gap-4 mb-4 hidden">
+                  <div>
+                    <label htmlFor="custom-width" className="block text-sm font-medium text-gray-700 mb-1">Width (mm)</label>
+                    <input
+                      type="number"
+                      id="custom-width"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                      placeholder="Width in mm"
+                      min="100"
+                      max="2440"
+                      defaultValue="594"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="custom-height" className="block text-sm font-medium text-gray-700 mb-1">Height (mm)</label>
+                    <input
+                      type="number"
+                      id="custom-height"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                      placeholder="Height in mm"
+                      min="100"
+                      max="1220"
+                      defaultValue="841"
+                    />
+                  </div>
+                </div>
+                
+                <div className="text-sm text-gray-600 mt-3">
+                  <p className="mb-2">Visualize the actual size of our Foamex PVC boards with this interactive tool. The human figure (170cm) provides scale reference.</p>
+                  <p>All boards can be cut to custom sizes up to a maximum of 8ft × 4ft (2440mm × 1220mm).</p>
+                </div>
+                
+                <script dangerouslySetInnerHTML={{ __html: `
+                  // Size visualization logic
+                  document.addEventListener('DOMContentLoaded', function() {
+                    const sizeSelector = document.getElementById('foamex-size-selector');
+                    const customControls = document.getElementById('custom-size-controls');
+                    const sizeContainer = document.getElementById('size-container');
+                    const widthLabel = document.getElementById('width-label');
+                    const heightLabel = document.getElementById('height-label');
+                    const sizeName = document.getElementById('size-name');
+                    const customWidth = document.getElementById('custom-width');
+                    const customHeight = document.getElementById('custom-height');
+                    
+                    // Scale factor (pixels per mm) - will adjust based on container size
+                    let scaleFactor = 0.25;
+                    
+                    // Size presets
+                    const sizes = {
+                      'a0': { width: 841, height: 1189, name: 'A0' },
+                      'a1': { width: 594, height: 841, name: 'A1' },
+                      'a2': { width: 420, height: 594, name: 'A2' },
+                      '60x90': { width: 600, height: 900, name: '60×90cm' },
+                      '70x100': { width: 700, height: 1000, name: '70×100cm' },
+                      'custom': { width: 594, height: 841, name: 'Custom' }
+                    };
+                    
+                    // Calculate appropriate scale factor based on container size
+                    function calculateScaleFactor(width, height) {
+                      const container = document.getElementById('foamex-dimension-display');
+                      const containerWidth = container.clientWidth - 100; // leave margin
+                      const containerHeight = container.clientHeight - 100;
+                      
+                      const widthScale = containerWidth / width;
+                      const heightScale = containerHeight / height;
+                      
+                      // Use the smaller scale factor to ensure the entire board fits
+                      return Math.min(widthScale, heightScale);
+                    }
+                    
+                    // Update the visualization
+                    function updateVisualization(width, height, name) {
+                      // Calculate new scale factor
+                      scaleFactor = calculateScaleFactor(width, height);
+                      
+                      // Update the container size
+                      sizeContainer.style.width = \`\${width * scaleFactor}px\`;
+                      sizeContainer.style.height = \`\${height * scaleFactor}px\`;
+                      
+                      // Update labels
+                      widthLabel.textContent = \`\${width}mm\`;
+                      heightLabel.textContent = \`\${height}mm\`;
+                      sizeName.textContent = name;
+                    }
+                    
+                    // Handle size selection change
+                    sizeSelector.addEventListener('change', function() {
+                      const selectedSize = sizes[this.value];
+                      
+                      // Show/hide custom controls
+                      if (this.value === 'custom') {
+                        customControls.classList.remove('hidden');
+                        // Initialize custom inputs with current values
+                        customWidth.value = selectedSize.width;
+                        customHeight.value = selectedSize.height;
+                      } else {
+                        customControls.classList.add('hidden');
+                        updateVisualization(selectedSize.width, selectedSize.height, selectedSize.name);
+                      }
+                    });
+                    
+                    // Handle custom size inputs
+                    function handleCustomSizeChange() {
+                      const width = parseInt(customWidth.value, 10) || 594;
+                      const height = parseInt(customHeight.value, 10) || 841;
+                      
+                      // Enforce max dimensions
+                      const constrainedWidth = Math.min(width, 2440);
+                      const constrainedHeight = Math.min(height, 1220);
+                      
+                      // Update visualization
+                      updateVisualization(constrainedWidth, constrainedHeight, 'Custom');
+                    }
+                    
+                    customWidth.addEventListener('input', handleCustomSizeChange);
+                    customHeight.addEventListener('input', handleCustomSizeChange);
+                    
+                    // Initialize with default size (A1)
+                    const defaultSize = sizes['a1'];
+                    updateVisualization(defaultSize.width, defaultSize.height, defaultSize.name);
+                    
+                    // Handle window resize
+                    window.addEventListener('resize', function() {
+                      const currentSize = sizeSelector.value;
+                      if (currentSize === 'custom') {
+                        handleCustomSizeChange();
+                      } else {
+                        const selectedSize = sizes[currentSize];
+                        updateVisualization(selectedSize.width, selectedSize.height, selectedSize.name);
+                      }
+                    });
+                  });
+                `}} />
+              </div>
+            ) : (
+              <>
+                <div className="relative h-48 mb-4 bg-gray-50">
+                  <Image
+                    src="/images/product-dimensions.svg"
+                    alt="Product dimensions diagram"
+                    fill
+                    className="object-contain p-2"
+                  />
+                </div>
+                <p className="text-sm text-gray-600">
+                  Precise dimensions ensure a perfect fit for your products. All measurements
+                  follow industry standards and can be customized to your specific requirements.
+                </p>
+              </>
+            )}
           </div>
         </div>
       </div>
