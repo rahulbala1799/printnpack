@@ -2878,6 +2878,409 @@ const ProductDetail = ({ product, relatedProducts }) => {
           }} />
         </div>
       )}
+      
+      {/* Special hero banner for Correx Boards */}
+      {product && product.id === 'correx-boards' && (
+        <div className="bg-gradient-to-r from-blue-50 to-slate-100 py-16 relative overflow-hidden">
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0 bg-repeat" style={{ backgroundImage: 'url(/images/pattern-light.svg)', backgroundSize: '120px' }}></div>
+          </div>
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+              <div className="lg:w-1/2">
+                <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">Durable Outdoor Signage Solutions</h2>
+                <p className="text-lg text-slate-700 mb-8">Correx Fluted Boards provide weather-resistant, lightweight, and cost-effective signage for any outdoor application.</p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+                  <div className="bg-white rounded-lg p-4 shadow-sm border border-slate-100 hover:shadow-md transition">
+                    <div className="text-blue-600 mb-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                      </svg>
+                    </div>
+                    <h3 className="font-bold text-slate-800">Weather-Resistant</h3>
+                    <p className="text-slate-600 text-sm">Waterproof and UV-resistant for outdoor durability</p>
+                  </div>
+                  
+                  <div className="bg-white rounded-lg p-4 shadow-sm border border-slate-100 hover:shadow-md transition">
+                    <div className="text-blue-600 mb-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <h3 className="font-bold text-slate-800">Lightweight</h3>
+                    <p className="text-slate-600 text-sm">Easy to transport, install and relocate</p>
+                  </div>
+                  
+                  <div className="bg-white rounded-lg p-4 shadow-sm border border-slate-100 hover:shadow-md transition">
+                    <div className="text-blue-600 mb-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <h3 className="font-bold text-slate-800">Quick Production</h3>
+                    <p className="text-slate-600 text-sm">Fast 1-3 day turnaround on standard orders</p>
+                  </div>
+                  
+                  <div className="bg-white rounded-lg p-4 shadow-sm border border-slate-100 hover:shadow-md transition">
+                    <div className="text-blue-600 mb-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <h3 className="font-bold text-slate-800">Cost-Effective</h3>
+                    <p className="text-slate-600 text-sm">Affordable for both small and large quantities</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="lg:w-2/5">
+                <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                  <div className="relative aspect-square">
+                    <img 
+                      src="/images/placeholders/correx/correx-main.jpg" 
+                      alt="Correx Fluted Board" 
+                      className="object-cover w-full h-full"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent flex items-end">
+                      <div className="p-6 text-white">
+                        <div className="font-bold text-xl mb-1">Multiple Thickness Options</div>
+                        <p className="text-sm text-white/90">2mm, 3mm, 4mm, 5mm, and 8mm available</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Correx Thickness Comparison */}
+      {product && product.id === 'correx-boards' && (
+        <div className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-3">Thickness Comparison</h2>
+              <p className="text-lg text-slate-600 text-center mb-12 max-w-3xl mx-auto">Choose the right thickness for your application based on durability needs and installation environment.</p>
+              
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                {/* 2mm */}
+                <div className="relative group">
+                  <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 h-full flex flex-col items-center text-center transition group-hover:border-blue-300 group-hover:shadow-md">
+                    <div className="w-full bg-white rounded border border-slate-200 flex justify-center items-center mb-3 relative" style={{height: "80px"}}>
+                      <div className="absolute h-[2mm] w-20 bg-blue-500 rounded-sm"></div>
+                    </div>
+                    <h3 className="font-bold">2mm</h3>
+                    <p className="text-xs text-slate-500 mt-1">Ultra-lightweight</p>
+                    <div className="mt-2 text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded">Short-term use</div>
+                  </div>
+                </div>
+                
+                {/* 3mm */}
+                <div className="relative group">
+                  <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 h-full flex flex-col items-center text-center transition group-hover:border-blue-300 group-hover:shadow-md">
+                    <div className="w-full bg-white rounded border border-slate-200 flex justify-center items-center mb-3 relative" style={{height: "80px"}}>
+                      <div className="absolute h-[3mm] w-20 bg-blue-500 rounded-sm"></div>
+                    </div>
+                    <h3 className="font-bold">3mm</h3>
+                    <p className="text-xs text-slate-500 mt-1">Economical option</p>
+                    <div className="mt-2 text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded">Indoor/sheltered use</div>
+                  </div>
+                </div>
+                
+                {/* 4mm */}
+                <div className="relative group">
+                  <div className="bg-slate-50 p-4 rounded-lg border border-blue-300 shadow-md h-full flex flex-col items-center text-center">
+                    <div className="absolute -top-2 -right-2 bg-blue-600 text-white text-xs px-2 py-1 rounded-full">Popular</div>
+                    <div className="w-full bg-white rounded border border-slate-200 flex justify-center items-center mb-3 relative" style={{height: "80px"}}>
+                      <div className="absolute h-[4mm] w-20 bg-blue-500 rounded-sm"></div>
+                    </div>
+                    <h3 className="font-bold">4mm</h3>
+                    <p className="text-xs text-slate-500 mt-1">Standard strength</p>
+                    <div className="mt-2 text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Most versatile</div>
+                  </div>
+                </div>
+                
+                {/* 5mm */}
+                <div className="relative group">
+                  <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 h-full flex flex-col items-center text-center transition group-hover:border-blue-300 group-hover:shadow-md">
+                    <div className="w-full bg-white rounded border border-slate-200 flex justify-center items-center mb-3 relative" style={{height: "80px"}}>
+                      <div className="absolute h-[5mm] w-20 bg-blue-500 rounded-sm"></div>
+                    </div>
+                    <h3 className="font-bold">5mm</h3>
+                    <p className="text-xs text-slate-500 mt-1">Enhanced rigidity</p>
+                    <div className="mt-2 text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded">Outdoor durability</div>
+                  </div>
+                </div>
+                
+                {/* 8mm */}
+                <div className="relative group">
+                  <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 h-full flex flex-col items-center text-center transition group-hover:border-blue-300 group-hover:shadow-md">
+                    <div className="w-full bg-white rounded border border-slate-200 flex justify-center items-center mb-3 relative" style={{height: "80px"}}>
+                      <div className="absolute h-[8mm] w-20 bg-blue-500 rounded-sm"></div>
+                    </div>
+                    <h3 className="font-bold">8mm</h3>
+                    <p className="text-xs text-slate-500 mt-1">Maximum strength</p>
+                    <div className="mt-2 text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded">Long-term exterior</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-10 bg-blue-50 rounded-lg p-6 border border-blue-100">
+                <h3 className="font-bold text-lg mb-3">Need help choosing?</h3>
+                <p className="text-slate-700 mb-4">Our recommendation depends on your specific application:</p>
+                <ul className="space-y-2 text-sm text-slate-700">
+                  <li className="flex items-start">
+                    <span className="text-blue-500 mr-2">•</span>
+                    <span><strong>2-3mm:</strong> Indoor displays, temporary signage, high-volume campaigns</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-500 mr-2">•</span>
+                    <span><strong>4mm:</strong> General outdoor signage, real estate boards, election signs (our most popular option)</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-500 mr-2">•</span>
+                    <span><strong>5mm-8mm:</strong> Large format displays, exposed locations, premium installations</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Correx Applications Showcase */}
+      {product && product.id === 'correx-boards' && (
+        <div className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-3">Real-World Applications</h2>
+              <p className="text-lg text-slate-600 text-center mb-12 max-w-3xl mx-auto">From construction sites to retail displays, explore the versatility of Correx boards.</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* Application 1 */}
+                <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                  <div className="h-40 overflow-hidden">
+                    <img src="/images/products/correx/placeholder1.jpg" alt="Real Estate Sign" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-bold text-lg mb-2">Real Estate Signs</h3>
+                    <p className="text-slate-600 text-sm mb-4">Weatherproof signage for property sales, open houses, and directional information.</p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-xs px-3 py-1 bg-blue-100 text-blue-800 rounded-full">4-5mm thickness</span>
+                      <span className="text-xs px-3 py-1 bg-gray-100 text-gray-800 rounded-full">Ground stakes</span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Application 2 */}
+                <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                  <div className="h-40 overflow-hidden">
+                    <img src="/images/products/correx/placeholder2.jpg" alt="Construction Site" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-bold text-lg mb-2">Construction Sites</h3>
+                    <p className="text-slate-600 text-sm mb-4">Safety information, warning signs, and directional guidance for workers and visitors.</p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-xs px-3 py-1 bg-blue-100 text-blue-800 rounded-full">4-8mm thickness</span>
+                      <span className="text-xs px-3 py-1 bg-gray-100 text-gray-800 rounded-full">Fence mounting</span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Application 3 */}
+                <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                  <div className="h-40 overflow-hidden">
+                    <img src="/images/products/correx/placeholder3.jpg" alt="Event Directional Signs" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-bold text-lg mb-2">Event Signage</h3>
+                    <p className="text-slate-600 text-sm mb-4">Directional signs, information boards, and promotional displays for events and exhibitions.</p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-xs px-3 py-1 bg-blue-100 text-blue-800 rounded-full">3-5mm thickness</span>
+                      <span className="text-xs px-3 py-1 bg-gray-100 text-gray-800 rounded-full">Freestanding</span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Application 4 */}
+                <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                  <div className="h-40 overflow-hidden">
+                    <img src="/images/products/correx/placeholder4.jpg" alt="Election Campaign" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-bold text-lg mb-2">Election Campaigns</h3>
+                    <p className="text-slate-600 text-sm mb-4">Candidate promotion, polling station directions, and campaign information displays.</p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-xs px-3 py-1 bg-blue-100 text-blue-800 rounded-full">3-4mm thickness</span>
+                      <span className="text-xs px-3 py-1 bg-gray-100 text-gray-800 rounded-full">Stakes & wall mounting</span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Application 5 */}
+                <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                  <div className="h-40 overflow-hidden">
+                    <img src="/images/products/correx/placeholder5.jpg" alt="Retail Display" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-bold text-lg mb-2">Retail Displays</h3>
+                    <p className="text-slate-600 text-sm mb-4">Point-of-sale displays, product information, and promotional signage for retail environments.</p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-xs px-3 py-1 bg-blue-100 text-blue-800 rounded-full">5mm thickness</span>
+                      <span className="text-xs px-3 py-1 bg-gray-100 text-gray-800 rounded-full">Freestanding</span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Application 6 */}
+                <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                  <div className="h-40 overflow-hidden">
+                    <img src="/images/products/correx/placeholder6.jpg" alt="Agricultural Marker" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-bold text-lg mb-2">Agricultural Markers</h3>
+                    <p className="text-slate-600 text-sm mb-4">Field markers, crop identification, and farm safety signage for agricultural settings.</p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-xs px-3 py-1 bg-blue-100 text-blue-800 rounded-full">3-5mm thickness</span>
+                      <span className="text-xs px-3 py-1 bg-gray-100 text-gray-800 rounded-full">Ground stakes</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Correx Mounting Options */}
+      {product && product.id === 'correx-boards' && (
+        <div className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-3">Installation Methods</h2>
+              <p className="text-lg text-slate-600 text-center mb-12 max-w-3xl mx-auto">Multiple ways to mount your Correx boards for any environment.</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {/* Method 1 */}
+                <div className="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:border-blue-300 hover:shadow-md transition">
+                  <div className="bg-blue-100 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 17l-4 4m0 0l-4-4m4 4V3" />
+                    </svg>
+                  </div>
+                  <h3 className="font-bold text-lg mb-2">Ground Stakes</h3>
+                  <p className="text-slate-600 text-sm mb-3">Metal H-stakes or wire frames for quick installation into soft ground.</p>
+                  <ul className="text-xs space-y-1 text-slate-700">
+                    <li className="flex items-start">
+                      <span className="text-blue-500 mr-1">•</span>
+                      <span>No tools required</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-blue-500 mr-1">•</span>
+                      <span>Best for lawn display</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-blue-500 mr-1">•</span>
+                      <span>Easily repositionable</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                {/* Method 2 */}
+                <div className="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:border-blue-300 hover:shadow-md transition">
+                  <div className="bg-blue-100 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                    </svg>
+                  </div>
+                  <h3 className="font-bold text-lg mb-2">Fence Mounting</h3>
+                  <p className="text-slate-600 text-sm mb-3">Secure to fences, posts, and railings using cable ties through pre-drilled holes.</p>
+                  <ul className="text-xs space-y-1 text-slate-700">
+                    <li className="flex items-start">
+                      <span className="text-blue-500 mr-1">•</span>
+                      <span>Wind resistant</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-blue-500 mr-1">•</span>
+                      <span>Construction sites</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-blue-500 mr-1">•</span>
+                      <span>Temporary events</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                {/* Method 3 */}
+                <div className="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:border-blue-300 hover:shadow-md transition">
+                  <div className="bg-blue-100 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                  </div>
+                  <h3 className="font-bold text-lg mb-2">Wall Mounting</h3>
+                  <p className="text-slate-600 text-sm mb-3">Attach to walls using screws with washers or strong double-sided tape.</p>
+                  <ul className="text-xs space-y-1 text-slate-700">
+                    <li className="flex items-start">
+                      <span className="text-blue-500 mr-1">•</span>
+                      <span>Most secure option</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-blue-500 mr-1">•</span>
+                      <span>Indoor/outdoor use</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-blue-500 mr-1">•</span>
+                      <span>Permanent display</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                {/* Method 4 */}
+                <div className="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:border-blue-300 hover:shadow-md transition">
+                  <div className="bg-blue-100 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                  </div>
+                  <h3 className="font-bold text-lg mb-2">Freestanding</h3>
+                  <p className="text-slate-600 text-sm mb-3">Create self-supporting displays with thicker boards or supporting feet.</p>
+                  <ul className="text-xs space-y-1 text-slate-700">
+                    <li className="flex items-start">
+                      <span className="text-blue-500 mr-1">•</span>
+                      <span>No hardware needed</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-blue-500 mr-1">•</span>
+                      <span>Point-of-sale displays</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-blue-500 mr-1">•</span>
+                      <span>Exhibition stands</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="mt-12 bg-blue-50 p-6 rounded-lg border border-blue-100">
+                <div className="flex flex-col md:flex-row items-center">
+                  <div className="md:w-1/4 flex justify-center mb-6 md:mb-0">
+                    <div className="bg-white p-3 rounded-full w-16 h-16 flex items-center justify-center shadow-sm">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="md:w-3/4">
+                    <h3 className="font-bold text-lg mb-2 text-center md:text-left">Installation Assistance</h3>
+                    <p className="text-slate-700">Not sure which mounting option is best for your application? We can provide pre-drilled holes, eyelets, stake slots, or custom installation hardware to meet your specific needs. Just let us know your environment and requirements when ordering.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 };
