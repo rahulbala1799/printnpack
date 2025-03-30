@@ -397,35 +397,59 @@ const ProductDetail = ({ product, relatedProducts }) => {
                   }
                   
                   // Handle shape selection
+                  function handleShapeSelection(shapeId) {
+                    const shapeConfig = shapes[shapeId];
+                    if (!shapeConfig) return;
+                    
+                    console.log('Selecting shape:', shapeId);
+                    
+                    // Hide default message
+                    defaultMessage.style.opacity = '0';
+                    
+                    // Apply shape style
+                    shapeElement.setAttribute('style', shapeConfig.style);
+                    shapeLabel.textContent = shapeConfig.label;
+                    
+                    // Show shape with animation
+                    shapePreview.style.opacity = '1';
+                    
+                    // Highlight flash effect
+                    showFlash();
+                    
+                    // Highlight selected button
+                    shapeOptions.forEach(btn => btn.classList.remove('ring-2', 'ring-blue-500'));
+                    document.getElementById(shapeId).classList.add('ring-2', 'ring-blue-500');
+                  }
+                  
+                  // Add both click and touch events to all shape options
                   shapeOptions.forEach(option => {
-                    option.addEventListener('click', function() {
-                      const shapeId = this.id;
-                      const shapeConfig = shapes[shapeId];
-                      
-                      // Hide default message
-                      defaultMessage.style.opacity = '0';
-                      
-                      // Apply shape style
-                      shapeElement.setAttribute('style', shapeConfig.style);
-                      shapeLabel.textContent = shapeConfig.label;
-                      
-                      // Show shape with animation
-                      shapePreview.style.opacity = '1';
-                      
-                      // Highlight flash effect
-                      showFlash();
-                      
-                      // Highlight selected button
-                      shapeOptions.forEach(btn => btn.classList.remove('ring-2', 'ring-blue-500'));
-                      this.classList.add('ring-2', 'ring-blue-500');
+                    // Click event for desktop
+                    option.addEventListener('click', function(e) {
+                      e.preventDefault();
+                      handleShapeSelection(this.id);
                     });
+                    
+                    // Touch events for mobile
+                    option.addEventListener('touchstart', function(e) {
+                      e.preventDefault();
+                      handleShapeSelection(this.id);
+                    }, {passive: false});
                   });
                   
                   // Randomly select a shape on page load after a short delay
                   setTimeout(() => {
-                    const randomIndex = Math.floor(Math.random() * shapeOptions.length);
-                    shapeOptions[randomIndex].click();
+                    try {
+                      const randomIndex = Math.floor(Math.random() * shapeOptions.length);
+                      if (shapeOptions[randomIndex]) {
+                        console.log('Auto-selecting shape at index:', randomIndex);
+                        handleShapeSelection(shapeOptions[randomIndex].id);
+                      }
+                    } catch (err) {
+                      console.error('Error auto-selecting shape:', err);
+                    }
                   }, 1000);
+                  
+                  console.log('Shape showcase script loaded');
                 });
               `
             }} />
