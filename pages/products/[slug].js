@@ -152,6 +152,14 @@ const ProductDetail = ({ product, relatedProducts }) => {
         `}</style>
       </Head>
 
+      {/* Debug info - will only show in development */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="bg-yellow-100 p-2 text-xs">
+          <div><strong>Debug:</strong> Product ID: {product?.id}</div>
+          <div>Shape showcase should show: {product?.id === 'vinyl-stickers' ? 'YES' : 'NO'}</div>
+        </div>
+      )}
+
       {/* Breadcrumbs */}
       <div className="bg-gray-100 py-3 border-b border-gray-200">
         <div className="container mx-auto px-4">
@@ -160,13 +168,13 @@ const ProductDetail = ({ product, relatedProducts }) => {
             <span className="mx-2">/</span>
             <Link href="/products" className="hover:text-blue-600">Products</Link>
             <span className="mx-2">/</span>
-            <span className="text-gray-900 font-medium">{product.name}</span>
+            <span className="text-gray-900 font-medium">{product?.name}</span>
           </div>
         </div>
       </div>
       
       {/* Special Hero Banner for Roll-Up Banner Stands */}
-      {product.id === 'roll-up-banner-stands' && (
+      {product?.id === 'roll-up-banner-stands' && (
         <div className="relative bg-gradient-to-r from-blue-900 to-blue-700 overflow-hidden">
           <div className="container mx-auto px-4 py-16 md:py-24">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
@@ -226,7 +234,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
       )}
 
       {/* Special Hero Banner for Foamex PVC Boards */}
-      {product.id === 'foamex-boards' && (
+      {product?.id === 'foamex-boards' && (
         <div className="relative bg-gradient-to-br from-purple-800 via-blue-700 to-blue-900 overflow-hidden">
           <div className="absolute inset-0 opacity-30">
             <div className="absolute inset-0" style={{ 
@@ -342,6 +350,38 @@ const ProductDetail = ({ product, relatedProducts }) => {
                     <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   <span className="text-sm font-medium">High-Quality Vinyl Application</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Vinyl Stickers Shape Showcase - add more explicit condition */}
+      {product && product.id === 'vinyl-stickers' && (
+        <div className="relative bg-gradient-to-br from-cyan-800 via-blue-600 to-indigo-800 overflow-hidden">
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute inset-0" style={{ 
+              backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+              backgroundSize: "60px 60px"
+            }}></div>
+          </div>
+          
+          <div className="container mx-auto px-4 py-16 md:py-24">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+              <div className="md:col-span-3 text-white space-y-6 relative z-10">
+                <div className="inline-block bg-cyan-500 px-4 py-1 rounded-full mb-2 font-semibold text-sm uppercase tracking-wide">Premium Vinyl Solutions</div>
+                <h2 className="text-4xl md:text-5xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-cyan-100 to-white">Custom Vinyl Stickers</h2>
+                <p className="text-xl text-blue-100">High-quality vinyl stickers and decals for business branding, promotions, and creative applications in any size or shape.</p>
+                
+                <p className="text-md text-blue-200">Transform your ideas into eye-catching stickers cut into virtually any shape imaginable.</p>
+              </div>
+              
+              <div className="md:col-span-2 relative h-64 md:h-80 rounded-xl overflow-hidden shadow-2xl">
+                <div className="absolute inset-0 bg-gradient-to-br from-black/40 to-transparent z-10"></div>
+                {/* Replace image with CSS placeholder */}
+                <div className="absolute inset-0 css-placeholder banner flex items-center justify-center">
+                  <span className="text-xl font-bold text-white">Custom Vinyl Stickers</span>
                 </div>
               </div>
             </div>
@@ -1968,40 +2008,8 @@ const ProductDetail = ({ product, relatedProducts }) => {
         </div>
       </div>
 
-      {/* Vinyl Stickers Shape Showcase */}
-      {product.id === 'vinyl-stickers' && (
-        <div className="relative bg-gradient-to-br from-cyan-800 via-blue-600 to-indigo-800 overflow-hidden">
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute inset-0" style={{ 
-              backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
-              backgroundSize: "60px 60px"
-            }}></div>
-          </div>
-          
-          <div className="container mx-auto px-4 py-16 md:py-24">
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
-              <div className="md:col-span-3 text-white space-y-6 relative z-10">
-                <div className="inline-block bg-cyan-500 px-4 py-1 rounded-full mb-2 font-semibold text-sm uppercase tracking-wide">Premium Vinyl Solutions</div>
-                <h2 className="text-4xl md:text-5xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-cyan-100 to-white">Custom Vinyl Stickers</h2>
-                <p className="text-xl text-blue-100">High-quality vinyl stickers and decals for business branding, promotions, and creative applications in any size or shape.</p>
-                
-                <p className="text-md text-blue-200">Transform your ideas into eye-catching stickers cut into virtually any shape imaginable.</p>
-              </div>
-              
-              <div className="md:col-span-2 relative h-64 md:h-80 rounded-xl overflow-hidden shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-black/40 to-transparent z-10"></div>
-                {/* Replace image with CSS placeholder */}
-                <div className="absolute inset-0 css-placeholder banner flex items-center justify-center">
-                  <span className="text-xl font-bold text-white">Custom Vinyl Stickers</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Add interactive shape showcase after the product hero section */}
-      {product.id === 'vinyl-stickers' && (
+      {/* Add interactive shape showcase after the product hero section - add more explicit condition */}
+      {product && product.id === 'vinyl-stickers' && (
         <div className="bg-gray-50 py-12 border-b border-gray-200">
           <div className="container mx-auto px-4">
             <div className="text-center mb-10">
