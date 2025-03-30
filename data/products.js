@@ -616,12 +616,14 @@ const products = [
       }
     ],
     images: [
-      '/css-placeholder-image',
-      '/css-placeholder-image',
-      '/css-placeholder-image',
-      '/css-placeholder-image'
+      '/images/ifa/heroh/rollup/1.png',
+      '/images/ifa/heroh/rollup/2.png',
+      '/images/ifa/heroh/rollup/3.png',
+      '/images/ifa/heroh/rollup/4.png',
+      '/images/ifa/heroh/rollup/5.png',
+      '/images/ifa/heroh/rollup/6.png'
     ],
-    imageSrc: '/css-placeholder-image',
+    imageSrc: '/images/ifa/heroh/rollup/1.png',
     price: 'Request for Quote',
     quoteRequired: true,
     leadTime: '2-3 business days standard',

@@ -151,6 +151,58 @@ const ProductDetail = ({ product, relatedProducts }) => {
           </div>
         </div>
       </div>
+      
+      {/* Special Hero Banner for Roll-Up Banner Stands */}
+      {product.id === 'roll-up-banner-stands' && (
+        <div className="relative bg-gradient-to-r from-blue-900 to-blue-700 overflow-hidden">
+          <div className="container mx-auto px-4 py-16 md:py-24">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+              <div className="text-white space-y-6 relative z-10">
+                <h2 className="text-4xl md:text-5xl font-bold leading-tight">Professional Roll-Up Banner Stands</h2>
+                <p className="text-xl text-blue-100">Make a lasting impression at your next exhibition or event with our premium quality portable display systems.</p>
+                <div className="flex flex-wrap gap-4 mt-8">
+                  {[
+                    'Quick 60-second setup',
+                    'High-resolution graphics',
+                    'Lightweight & portable',
+                    'Multiple sizes available',
+                    'Includes carry case'
+                  ].map((feature, i) => (
+                    <span key={i} className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-white flex items-center">
+                      <svg className="w-4 h-4 mr-2 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="relative h-80 md:h-96 flex justify-center overflow-hidden rounded-xl shadow-2xl">
+                <div className="absolute inset-0 flex">
+                  <Image 
+                    src="/images/ifa/heroh/rollup/3.png"
+                    alt="Professional Roll-Up Banner"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-blue-900/70 to-transparent"></div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute inset-0 opacity-10">
+            <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="M0,0 L100,0 L100,100 L0,100 Z" fill="url(#mesh-gradient)" />
+            </svg>
+            <defs>
+              <pattern id="mesh-gradient" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                <rect x="0" y="0" width="100%" height="100%" fill="none" />
+                <path d="M0 20 L40 20 M20 0 L20 40" stroke="currentColor" strokeWidth="1" />
+              </pattern>
+            </defs>
+          </div>
+        </div>
+      )}
 
       {/* Product Hero - Redesigned */}
       <div className="bg-gradient-to-b from-gray-50 to-white py-16">
@@ -650,190 +702,242 @@ const ProductDetail = ({ product, relatedProducts }) => {
               </div>
             )}
             
-            <h3 className="text-2xl font-bold mb-6 text-blue-800">Technical Specifications</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-              {product.specifications.map((spec, index) => {
-                // Define icons for common specification types
-                let icon = (
-                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                );
+            {/* Technical Specifications */}
+            <div className="py-16 bg-gray-50">
+              <div className="container mx-auto px-4">
+                <div className="mb-12 text-center max-w-3xl mx-auto">
+                  <h2 className="text-3xl font-bold mb-4">Technical Specifications</h2>
+                  <p className="text-gray-600 text-lg">Detailed specifications and requirements for our high-quality {product.name}.</p>
+                </div>
                 
-                // Match icons to common specification types
-                if (spec.name.toLowerCase().includes('size') || spec.name.toLowerCase().includes('dimension')) {
-                  icon = (
-                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-                    </svg>
-                  );
-                } else if (spec.name.toLowerCase().includes('material')) {
-                  icon = (
-                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm8-12V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2v-14z" />
-                    </svg>
-                  );
-                } else if (spec.name.toLowerCase().includes('weight')) {
-                  icon = (
-                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
-                    </svg>
-                  );
-                } else if (spec.name.toLowerCase().includes('color')) {
-                  icon = (
-                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                    </svg>
-                  );
-                } else if (spec.name.toLowerCase().includes('print') || spec.name.toLowerCase().includes('resolution')) {
-                  icon = (
-                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2v-14z" />
-                    </svg>
-                  );
-                } else if (spec.name.toLowerCase().includes('time') || spec.name.toLowerCase().includes('setup')) {
-                  icon = (
-                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  );
-                } else if (spec.name.toLowerCase().includes('accessory') || spec.name.toLowerCase().includes('included')) {
-                  icon = (
-                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2v-10z" />
-                    </svg>
-                  );
-                } else if (spec.name.toLowerCase().includes('warranty')) {
-                  icon = (
-                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                  );
-                } else if (spec.name.toLowerCase().includes('production') || spec.name.toLowerCase().includes('delivery')) {
-                  icon = (
-                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
-                    </svg>
-                  );
-                } else if (spec.name.toLowerCase().includes('pole') || spec.name.toLowerCase().includes('system')) {
-                  icon = (
-                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-                    </svg>
-                  );
-                }
-                
-                return (
-                  <div key={index} className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden transform transition-all duration-300 hover:shadow-lg hover:border-blue-300">
-                    <div className="p-5">
-                      <div className="flex items-center mb-3">
-                        <div className="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-3">
-                          {icon}
-                        </div>
-                        <h4 className="font-bold text-gray-800">{spec.name}</h4>
+                <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200">
+                    {product.specifications.slice(0, 3).map((spec, index) => (
+                      <div key={index} className="p-6">
+                        <h3 className="font-medium text-gray-900 mb-2">{spec.name}</h3>
+                        <p className="text-gray-600">{spec.value}</p>
                       </div>
-                      <div className="ml-13 pl-3 border-l-2 border-blue-200">
-                        <p className="text-gray-700">{spec.value}</p>
-                      </div>
-                    </div>
+                    ))}
                   </div>
-                );
-              })}
-            </div>
-            
-            {/* Product Variants Section */}
-            {product.variants && product.variants.length > 0 && (
-              <div className="mt-16">
-                <div className="text-center mb-12">
-                  <h3 className="text-3xl font-bold mb-4">Choose Your Perfect Solution</h3>
-                  <p className="text-gray-600 max-w-3xl mx-auto">
-                    Select from our range of premium options to find the ideal packaging solution for your specific business needs.
-                  </p>
-                </div>
-                
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  {product.variants.map((variant, index) => (
-                    <div key={index} className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                      <div className="flex flex-col h-full">
-                        <div className="relative">
-                          <div className="h-64 relative bg-gray-50">
-                            <Image
-                              src={variant.imageSrc}
-                              alt={variant.name}
-                              fill
-                              className="object-contain p-4"
-                            />
+                  
+                  <div className="border-t border-gray-200 px-6 py-4 bg-gray-50">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {product.specifications.slice(3).map((spec, index) => (
+                        <div key={index} className="flex">
+                          <div className="text-blue-600 mr-3">
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
+                            </svg>
                           </div>
-                          {/* Option label */}
-                          <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                            {index === 0 ? 'Best Seller' : 'Popular Choice'}
+                          <div>
+                            <span className="block text-sm font-medium text-gray-700">{spec.name}</span>
+                            <span className="block text-sm text-gray-500">{spec.value}</span>
                           </div>
                         </div>
-                        
-                        <div className="p-6 flex-grow flex flex-col">
-                          <h4 className="text-xl font-bold mb-2">{variant.name}</h4>
-                          <p className="text-gray-600 mb-4">{variant.description}</p>
-                          
-                          <div className="flex-grow">
-                            <div className="border-t border-gray-100 pt-4 mb-4">
-                              <h5 className="font-semibold text-gray-900 mb-3">Key Advantages:</h5>
-                              <ul className="space-y-2">
-                                {variant.features.map((feature, featureIdx) => (
-                                  <li key={featureIdx} className="flex items-start text-sm">
-                                    <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                    </svg>
-                                    <span className="text-gray-700">{feature}</span>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          </div>
-                          
-                          <div className="mt-auto">
-                            <div className="flex flex-col sm:flex-row gap-3 mt-6">
-                              <Link 
-                                href={`/contact?product=${encodeURIComponent(variant.name)}`}
-                                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium text-center transition-colors"
-                              >
-                                Request Quote
-                              </Link>
-                              <Link 
-                                href={`/contact?product=${encodeURIComponent(variant.name)}&subject=Sample Request`}
-                                className="flex-1 border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 px-4 rounded-lg font-medium text-center transition-colors"
-                              >
-                                Get Samples
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                
-                {/* Custom solutions banner */}
-                <div className="mt-12 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-8 text-white shadow-lg">
-                  <div className="flex flex-col md:flex-row md:items-center">
-                    <div className="md:flex-1">
-                      <h3 className="text-2xl font-bold mb-2">Need a Custom Solution?</h3>
-                      <p className="mb-4 md:mb-0 text-blue-100">
-                        We can tailor our products to your exact specifications. Contact our team to discuss your unique requirements.
-                      </p>
-                    </div>
-                    <div className="md:ml-8">
-                      <Link 
-                        href="/contact?subject=Custom Solution"
-                        className="inline-block bg-white text-blue-600 hover:bg-blue-50 py-3 px-6 rounded-lg font-medium text-center transition-colors"
-                      >
-                        Get Custom Solution
-                      </Link>
+                      ))}
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+            
+            {/* Special Visual Showcase for Roll-Up Banner Stands */}
+            {product.id === 'roll-up-banner-stands' && (
+              <div className="py-16 bg-white">
+                <div className="container mx-auto px-4">
+                  <div className="mb-12 text-center max-w-3xl mx-auto">
+                    <h2 className="text-3xl font-bold mb-4">Make an Impact with Roll-Up Banners</h2>
+                    <p className="text-gray-600 text-lg">Our premium roll-up banner stands offer exceptional quality and versatility for any promotional event.</p>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div className="bg-gray-50 rounded-xl overflow-hidden shadow-lg relative group">
+                      <div className="aspect-[4/3] relative overflow-hidden">
+                        <Image
+                          src="/images/ifa/heroh/rollup/1.png"
+                          alt="Premium Roll-Up Banner"
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                        <div className="p-6 text-white">
+                          <h3 className="text-xl font-bold mb-2">Premium Quality Hardware</h3>
+                          <p>Durable aluminum cassette with stable base design for professional presentations.</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-gray-50 rounded-xl overflow-hidden shadow-lg relative group">
+                      <div className="aspect-[4/3] relative overflow-hidden">
+                        <Image
+                          src="/images/ifa/heroh/rollup/4.png"
+                          alt="Versatile Roll-Up Banner"
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                        <div className="p-6 text-white">
+                          <h3 className="text-xl font-bold mb-2">High-Resolution Graphics</h3>
+                          <p>Crystal-clear printing with vibrant colors that catch attention from every angle.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="bg-gray-50 rounded-xl overflow-hidden shadow-lg relative group">
+                      <div className="aspect-square relative overflow-hidden">
+                        <Image
+                          src="/images/ifa/heroh/rollup/2.png"
+                          alt="Easy Setup Roll-Up Banner"
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                        <div className="p-6 text-white">
+                          <h3 className="text-xl font-bold mb-2">Quick 60-Second Setup</h3>
+                          <p>No tools required - simple and fast assembly for busy events.</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-gray-50 rounded-xl overflow-hidden shadow-lg relative group">
+                      <div className="aspect-square relative overflow-hidden">
+                        <Image
+                          src="/images/ifa/heroh/rollup/5.png"
+                          alt="Portable Roll-Up Banner"
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                        <div className="p-6 text-white">
+                          <h3 className="text-xl font-bold mb-2">Lightweight & Portable</h3>
+                          <p>Includes padded carry case for easy transportation between events.</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-gray-50 rounded-xl overflow-hidden shadow-lg relative group">
+                      <div className="aspect-square relative overflow-hidden">
+                        <Image
+                          src="/images/ifa/heroh/rollup/6.png"
+                          alt="Multiple Sizes Roll-Up Banner"
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                        <div className="p-6 text-white">
+                          <h3 className="text-xl font-bold mb-2">Multiple Size Options</h3>
+                          <p>Available in standard, economy, wide and desktop variants to suit your needs.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-12 text-center">
+                    <Link href="/contact" className="inline-block bg-blue-600 hover:bg-blue-700 text-white py-4 px-8 rounded-lg font-medium text-center transition-colors transform hover:scale-105">
+                      Request Your Custom Roll-Up Banner Today
+                    </Link>
+                  </div>
+                </div>
+              </div>
             )}
+            
+            {/* Product Variants */}
+            <div className="mt-16">
+              <div className="text-center mb-12">
+                <h3 className="text-3xl font-bold mb-4">Choose Your Perfect Solution</h3>
+                <p className="text-gray-600 max-w-3xl mx-auto">
+                  Select from our range of premium options to find the ideal packaging solution for your specific business needs.
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {product.variants.map((variant, index) => (
+                  <div key={index} className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div className="flex flex-col h-full">
+                      <div className="relative">
+                        <div className="h-64 relative bg-gray-50">
+                          <Image
+                            src={variant.imageSrc}
+                            alt={variant.name}
+                            fill
+                            className="object-contain p-4"
+                          />
+                        </div>
+                        {/* Option label */}
+                        <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                          {index === 0 ? 'Best Seller' : 'Popular Choice'}
+                        </div>
+                      </div>
+                      
+                      <div className="p-6 flex-grow flex flex-col">
+                        <h4 className="text-xl font-bold mb-2">{variant.name}</h4>
+                        <p className="text-gray-600 mb-4">{variant.description}</p>
+                        
+                        <div className="flex-grow">
+                          <div className="border-t border-gray-100 pt-4 mb-4">
+                            <h5 className="font-semibold text-gray-900 mb-3">Key Advantages:</h5>
+                            <ul className="space-y-2">
+                              {variant.features.map((feature, featureIdx) => (
+                                <li key={featureIdx} className="flex items-start text-sm">
+                                  <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                  </svg>
+                                  <span className="text-gray-700">{feature}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                        
+                        <div className="mt-auto">
+                          <div className="flex flex-col sm:flex-row gap-3 mt-6">
+                            <Link 
+                              href={`/contact?product=${encodeURIComponent(variant.name)}`}
+                              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium text-center transition-colors"
+                            >
+                              Request Quote
+                            </Link>
+                            <Link 
+                              href={`/contact?product=${encodeURIComponent(variant.name)}&subject=Sample Request`}
+                              className="flex-1 border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 px-4 rounded-lg font-medium text-center transition-colors"
+                            >
+                              Get Samples
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              {/* Custom solutions banner */}
+              <div className="mt-12 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-8 text-white shadow-lg">
+                <div className="flex flex-col md:flex-row md:items-center">
+                  <div className="md:flex-1">
+                    <h3 className="text-2xl font-bold mb-2">Need a Custom Solution?</h3>
+                    <p className="mb-4 md:mb-0 text-blue-100">
+                      We can tailor our products to your exact specifications. Contact our team to discuss your unique requirements.
+                    </p>
+                  </div>
+                  <div className="md:ml-8">
+                    <Link 
+                      href="/contact?subject=Custom Solution"
+                      className="inline-block bg-white text-blue-600 hover:bg-blue-50 py-3 px-6 rounded-lg font-medium text-center transition-colors"
+                    >
+                      Get Custom Solution
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
             
             {/* Weekly Delivery Service Section - Redesigned */}
             {product.weeklyDelivery && (
