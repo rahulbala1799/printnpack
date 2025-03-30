@@ -212,6 +212,128 @@ const ProductDetail = ({ product, relatedProducts }) => {
         </div>
       )}
 
+      {/* Special Hero Banner for Foamex PVC Boards */}
+      {product.id === 'foamex-boards' && (
+        <div className="relative bg-gradient-to-br from-purple-800 via-blue-700 to-blue-900 overflow-hidden">
+          <div className="absolute inset-0 opacity-30">
+            <div className="absolute inset-0" style={{ 
+              backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+              backgroundSize: "60px 60px"
+            }}></div>
+          </div>
+          
+          <div className="container mx-auto px-4 py-16 md:py-24">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+              <div className="md:col-span-3 text-white space-y-6 relative z-10">
+                <div className="inline-block bg-blue-500 px-4 py-1 rounded-full mb-2 font-semibold text-sm uppercase tracking-wide">Premium Indoor Signage</div>
+                <h2 className="text-4xl md:text-5xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-white">Foamex PVC Boards</h2>
+                <p className="text-xl text-blue-100">Lightweight yet durable rigid PVC foam sheets perfect for stunning high-impact visual displays.</p>
+                
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                  {product.models.map((model, i) => (
+                    <div key={i} className="bg-white/10 backdrop-blur-sm rounded-lg p-4 transform transition-all hover:scale-105 hover:bg-white/20 cursor-pointer border border-white/20">
+                      <span className="text-xl font-bold text-white">{model.name}</span>
+                      <p className="text-xs text-blue-200 mt-1">{model.features[0]}</p>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="flex flex-wrap gap-3 mt-8">
+                  <button className="bg-white text-blue-800 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+                    Request a Quote
+                  </button>
+                  <button className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors">
+                    View Size Options
+                  </button>
+                </div>
+              </div>
+              
+              <div className="md:col-span-2 relative">
+                <div className="relative h-80 md:h-[500px] perspective">
+                  {/* 3D foamex board display */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative w-full h-full transform rotate-y-10 rotate-x-5 rotate-z-0">
+                      <div className="absolute top-0 left-0 w-4/5 h-4/5 bg-blue-200 rounded-lg shadow-2xl transform translate-x-5 translate-y-5 rotate-z-2">
+                        <div className="absolute inset-0 m-2 bg-white rounded-md">
+                          <div className="absolute inset-0 m-3 bg-gradient-to-br from-purple-500 to-blue-600 rounded flex items-center justify-center">
+                            <div className="text-white text-center p-6">
+                              <div className="text-2xl font-bold">3mm</div>
+                              <div className="text-sm">Lightweight</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="absolute top-10 left-10 w-4/5 h-4/5 bg-purple-200 rounded-lg shadow-2xl transform -translate-x-5 translate-y-5 rotate-z-5">
+                        <div className="absolute inset-0 m-2 bg-white rounded-md">
+                          <div className="absolute inset-0 m-4 bg-gradient-to-br from-indigo-500 to-purple-600 rounded flex items-center justify-center">
+                            <div className="text-white text-center p-6">
+                              <div className="text-2xl font-bold">5mm</div>
+                              <div className="text-sm">Most Popular</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="absolute top-20 left-20 w-4/5 h-4/5 bg-indigo-200 rounded-lg shadow-2xl transform translate-x-2 translate-y-2 rotate-z--3">
+                        <div className="absolute inset-0 m-2 bg-white rounded-md">
+                          <div className="absolute inset-0 m-5 bg-gradient-to-br from-blue-500 to-indigo-600 rounded flex items-center justify-center">
+                            <div className="text-white text-center p-6">
+                              <div className="text-2xl font-bold">10mm</div>
+                              <div className="text-sm">Premium</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Decorative elements */}
+                  <div className="absolute top-[-30px] right-[-30px] w-40 h-40 bg-yellow-500 rounded-full filter blur-3xl opacity-20"></div>
+                  <div className="absolute bottom-[-50px] left-[-20px] w-60 h-60 bg-pink-500 rounded-full filter blur-3xl opacity-20"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Bottom highlights bar */}
+          <div className="relative z-10 bg-gradient-to-r from-purple-900/90 via-blue-900/90 to-purple-900/90 backdrop-blur-sm border-t border-white/10">
+            <div className="container mx-auto py-4 px-4">
+              <div className="flex flex-wrap justify-between items-center gap-4">
+                <div className="flex items-center text-white">
+                  <svg className="w-6 h-6 mr-2 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <span className="text-sm font-medium">Premium Quality</span>
+                </div>
+                
+                <div className="flex items-center text-white">
+                  <svg className="w-6 h-6 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm font-medium">Custom Sizes Available</span>
+                </div>
+                
+                <div className="flex items-center text-white">
+                  <svg className="w-6 h-6 mr-2 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                    <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1v-5h2a2 2 0 011.664.89l.83 1.25A1 1 0 0016.33 12H17a1 1 0 001-1v-1a1 1 0 00-1-1h-1.05a2.5 2.5 0 01-4.9 0H3V5a1 1 0 00-1-1h.5M10 5a1 1 0 011 1v3H9V6a1 1 0 011-1z" />
+                  </svg>
+                  <span className="text-sm font-medium">Fast 2-3 Day Production</span>
+                </div>
+                
+                <div className="flex items-center text-white">
+                  <svg className="w-6 h-6 mr-2 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm font-medium">1440dpi High-Definition Printing</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Product Hero - Redesigned */}
       <div className="bg-gradient-to-b from-gray-50 to-white py-16">
         <div className="container mx-auto px-4">
@@ -824,6 +946,237 @@ const ProductDetail = ({ product, relatedProducts }) => {
                   </div>
                 </div>
               )}
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Special Visual Showcase for Foamex PVC Boards */}
+      {product.id === 'foamex-boards' && (
+        <div className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="mb-12 text-center max-w-3xl mx-auto">
+              <h2 className="text-3xl font-bold mb-4">Premium Foamex PVC Board Options</h2>
+              <p className="text-gray-600 text-lg">Versatile, durable and perfect for creating eye-catching displays for any indoor application.</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+              <div className="bg-gradient-to-br from-purple-600 to-indigo-700 rounded-xl overflow-hidden shadow-lg relative group text-white">
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold mb-4">Multiple Thickness Options</h3>
+                  <div className="space-y-4">
+                    {[
+                      { size: '3mm', desc: 'Lightweight and economical' },
+                      { size: '5mm', desc: 'Most popular option', highlight: true },
+                      { size: '5.5mm', desc: 'Enhanced durability' },
+                      { size: '10mm', desc: 'Premium rigid display panels' }
+                    ].map((item, i) => (
+                      <div key={i} className={`flex items-center p-3 rounded-lg ${item.highlight ? 'bg-white/20 border border-white/30' : 'bg-white/10'}`}>
+                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mr-4">
+                          <span className="text-xl font-bold text-indigo-700">{item.size}</span>
+                        </div>
+                        <div>
+                          <p className="font-medium">{item.desc}</p>
+                        </div>
+                        {item.highlight && <span className="ml-auto bg-yellow-400 text-indigo-900 text-xs font-bold px-2 py-1 rounded-full">BEST SELLER</span>}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-6">
+                    <button className="bg-white text-indigo-700 hover:bg-indigo-50 px-6 py-3 rounded-lg font-medium transition-colors">
+                      View Thickness Guide
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200">
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Finishing Options</h3>
+                  <div className="space-y-4">
+                    <div className="flex p-4 border border-gray-100 rounded-lg">
+                      <div className="flex-shrink-0 mr-4">
+                        <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-900">Standard Unlaminated</h4>
+                        <p className="text-sm text-gray-600">Perfect for indoor use with vibrant color reproduction</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex p-4 border border-gray-100 rounded-lg">
+                      <div className="flex-shrink-0 mr-4">
+                        <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                          <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-900">Matt Laminated</h4>
+                        <p className="text-sm text-gray-600">Anti-glare finish with added protection against scratches</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex p-4 border border-gray-100 rounded-lg">
+                      <div className="flex-shrink-0 mr-4">
+                        <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                          <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-900">Gloss Laminated</h4>
+                        <p className="text-sm text-gray-600">High-shine finish for vibrant colors and maximum impact</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex p-4 border border-gray-100 rounded-lg">
+                      <div className="flex-shrink-0 mr-4">
+                        <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center">
+                          <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-900">Double-Sided Printing</h4>
+                        <p className="text-sm text-gray-600">Different designs on each side for maximum visibility</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mb-16 bg-gray-50 rounded-xl overflow-hidden shadow-md">
+              <div className="p-8">
+                <h3 className="text-2xl font-bold mb-6 text-center text-gray-900">Available Size Options</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="bg-white p-6 rounded-lg shadow border border-gray-200">
+                    <h4 className="font-bold text-lg mb-4 text-gray-900">Standard Template Sizes</h4>
+                    <ul className="space-y-2">
+                      {['A0 (841mm × 1189mm)', 'A1 (594mm × 841mm)', 'A2 (420mm × 594mm)', '60cm × 90cm', '70cm × 100cm'].map((size, i) => (
+                        <li key={i} className="flex items-center text-gray-700">
+                          <svg className="w-5 h-5 mr-2 text-indigo-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                          </svg>
+                          {size}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div className="bg-white p-6 rounded-lg shadow border border-gray-200">
+                    <h4 className="font-bold text-lg mb-4 text-gray-900">Maximum Size</h4>
+                    <div className="flex justify-center mb-4">
+                      <div className="relative w-48 h-24 bg-indigo-100 rounded-lg border-2 border-indigo-300 flex items-center justify-center overflow-hidden">
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="text-center">
+                            <div className="font-bold text-indigo-800">8ft × 4ft</div>
+                            <div className="text-xs text-indigo-700">(2440mm × 1220mm)</div>
+                          </div>
+                        </div>
+                        <div className="absolute top-0 left-0 right-0 h-2 bg-indigo-500"></div>
+                        <div className="absolute bottom-0 left-0 right-0 h-2 bg-indigo-500"></div>
+                        <div className="absolute left-0 top-0 bottom-0 w-2 bg-indigo-500"></div>
+                        <div className="absolute right-0 top-0 bottom-0 w-2 bg-indigo-500"></div>
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-600 text-center">Our largest available size for maximum impact. Perfect for exhibition backgrounds and large displays.</p>
+                  </div>
+                  
+                  <div className="bg-white p-6 rounded-lg shadow border border-gray-200">
+                    <h4 className="font-bold text-lg mb-4 text-gray-900">Custom Sizing</h4>
+                    <div className="flex items-center justify-center mb-4">
+                      <svg className="w-20 h-20 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                      </svg>
+                    </div>
+                    <p className="text-sm text-gray-600 text-center">Need a specific size? We offer custom cutting to your exact specifications with no minimum order quantity.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl overflow-hidden shadow-lg relative group border border-indigo-100">
+                <div className="p-8">
+                  <div className="flex items-center justify-center mb-6">
+                    <svg className="w-16 h-16 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold mb-3 text-center text-gray-900">Durable & Long-Lasting</h3>
+                  <p className="text-gray-600 text-center mb-4">Our Foamex boards are designed for longevity, maintaining their appearance over time in indoor environments.</p>
+                  <ul className="space-y-2">
+                    {['Resistant to warping', 'Waterproof material', 'Impact resistant', 'UV stable inks'].map((feature, i) => (
+                      <li key={i} className="flex items-center text-gray-700 text-sm">
+                        <svg className="w-4 h-4 mr-2 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl overflow-hidden shadow-lg relative group border border-purple-100">
+                <div className="p-8">
+                  <div className="flex items-center justify-center mb-6">
+                    <svg className="w-16 h-16 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold mb-3 text-center text-gray-900">Vibrant High-Def Printing</h3>
+                  <p className="text-gray-600 text-center mb-4">Ultra-sharp 1440dpi resolution ensures your graphics look stunning from any distance.</p>
+                  <ul className="space-y-2">
+                    {['True color reproduction', 'Sharp text and fine details', 'Anti-fade technology', 'Consistent quality'].map((feature, i) => (
+                      <li key={i} className="flex items-center text-gray-700 text-sm">
+                        <svg className="w-4 h-4 mr-2 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl overflow-hidden shadow-lg relative group border border-green-100">
+                <div className="p-8">
+                  <div className="flex items-center justify-center mb-6">
+                    <svg className="w-16 h-16 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold mb-3 text-center text-gray-900">Fast Production</h3>
+                  <p className="text-gray-600 text-center mb-4">Quick turnaround times with production in just 2-3 working days for standard orders.</p>
+                  <ul className="space-y-2">
+                    {['2-3 day standard production', 'Next day express available', 'Free digital proofing', 'Bulk order discounts'].map((feature, i) => (
+                      <li key={i} className="flex items-center text-gray-700 text-sm">
+                        <svg className="w-4 h-4 mr-2 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-12 text-center">
+              <Link href="/contact" className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white py-4 px-8 rounded-lg font-medium text-center transition-colors transform hover:scale-105">
+                Request Your Custom Foamex Board Quote
+              </Link>
             </div>
           </div>
         </div>

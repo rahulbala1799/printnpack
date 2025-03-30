@@ -898,116 +898,184 @@ const products = [
   {
     id: 'foamex-boards',
     name: 'Foamex PVC Boards',
-    category: 'Wide Format',
-    description: 'Professional grade PVC foam board signage that combines lightweight durability with high-quality print finish for indoor displays.',
+    category: 'Board Prints & Displays',
+    description: 'Professional PVC foam board printing for durable indoor signage and displays.',
     features: [
-      'Premium rigid yet lightweight PVC foam material',
-      'Thickness options from 3mm to 10mm',
-      'Direct UV printing for vibrant, durable results',
-      'Custom cut-to-shape capabilities',
-      'Suitable for indoor and sheltered outdoor use',
-      'Ready-to-install with multiple fixing options'
+      'Available in 3mm, 5mm, 5.5mm and 10mm thickness options',
+      'Maximum size of 8ft x 4ft (2440mm x 1220mm)',
+      'Custom sizes available - just ask!',
+      'Choose from template sizes like A0 or 60cm x 90cm',
+      'Options for holes or metal hangers for easy mounting',
+      'Available laminated or unlaminated for different finishes',
+      'Options for printing on both sides, or laminating both sides'
     ],
-    detailedDescription: 'Foamex (PVC foam board) offers the perfect balance of quality, durability, and value for professional indoor signage and displays. This versatile, lightweight material provides a smooth, flat surface that showcases your graphics with exceptional clarity and color vibrancy.\n\nWe direct-print onto Foamex using state-of-the-art UV flatbed printing technology, creating a finish that is scratch-resistant and long-lasting without requiring additional lamination. The rigid yet lightweight nature of Foamex makes it ideal for wall-mounted displays, exhibition graphics, point-of-sale signage, and interior wayfinding systems.\n\nAvailable in thicknesses from 3mm (ideal for temporary displays) to 10mm (for maximum durability), Foamex can be precisely cut to any shape or size, including custom contours and rounded corners. We can also provide various finishing options including drill holes, standoffs for floating wall displays, or freestanding mounts for counter displays, giving you a complete, ready-to-install signage solution.',
+    detailedDescription: 'Our Foamex PVC Boards are ideal for indoor signage, exhibitions, point of sale displays and more. Made from lightweight yet rigid expanded PVC, these versatile boards offer excellent print quality combined with durability. Choose from multiple thickness options to suit your specific application, with 5mm being our most popular choice for general signage. We can cut to any custom size up to our maximum dimensions, or choose from standard template sizes. Enhance your boards with optional additions like pre-drilled mounting holes, metal hanging systems, or protective lamination in matt or gloss finish.',
+    price: 'From £19.99',
     specifications: [
-      { name: 'Material', value: 'Expanded PVC foam board (Foamex/Forex)' },
-      { name: 'Thickness Options', value: '3mm, 5mm, 10mm (other thicknesses available on request)' },
-      { name: 'Standard Sizes', value: 'A0, A1, A2, A3, 2\'×3\', 4\'×2\', 4\'×8\', Custom sizes up to 2440mm × 1220mm' },
-      { name: 'Print Technology', value: 'Direct UV flatbed printing with light-fast inks' },
-      { name: 'Resolution', value: 'Up to 1200dpi for photographic quality reproduction' },
-      { name: 'Color Profile', value: 'Full CMYK + White ink capability for colored boards' },
-      { name: 'Finishing Options', value: 'Cut to shape, rounded corners, drill holes, standoffs, edge capping' },
-      { name: 'Durability', value: '2-3 years indoor, 6-12 months in sheltered outdoor environments' },
-      { name: 'Fire Rating', value: 'Available with Class 1 fire rating (FR grade) on request' },
-      { name: 'Minimum Order', value: 'No minimum - single board printing available' },
-      { name: 'Turnaround Time', value: '2-3 business days standard (express service available)' }
+      {
+        name: 'Material',
+        value: 'Expanded PVC Foam Board (Foamex/Forex)'
+      },
+      {
+        name: 'Thickness Options',
+        value: '3mm, 5mm, 5.5mm, 10mm'
+      },
+      {
+        name: 'Maximum Size',
+        value: '8ft x 4ft (2440mm x 1220mm)'
+      },
+      {
+        name: 'Standard Sizes',
+        value: 'A0, A1, A2, 60x90cm, 70x100cm, and custom sizes'
+      },
+      {
+        name: 'Print Quality',
+        value: '1440dpi High-Definition'
+      },
+      {
+        name: 'Finishing Options',
+        value: 'Unlaminated, Matt Laminated, Gloss Laminated'
+      },
+      {
+        name: 'Mounting Options',
+        value: 'Drilled Holes, Metal Hangers, Self-Standing'
+      },
+      {
+        name: 'Recommended Use',
+        value: 'Indoor Displays, POS, Exhibitions, Retail Signage'
+      }
+    ],
+    sizeOptions: [
+      {
+        size: 'A0',
+        dimensions: '841mm x 1189mm',
+        idealFor: 'Large posters and exhibition graphics'
+      },
+      {
+        size: 'A1',
+        dimensions: '594mm x 841mm',
+        idealFor: 'Medium posters and retail displays'
+      },
+      {
+        size: 'A2',
+        dimensions: '420mm x 594mm',
+        idealFor: 'Counter displays and small signs'
+      },
+      {
+        size: '60cm x 90cm',
+        dimensions: '600mm x 900mm',
+        idealFor: 'Popular standard size for displays'
+      },
+      {
+        size: '70cm x 100cm',
+        dimensions: '700mm x 1000mm',
+        idealFor: 'Large format signage'
+      },
+      {
+        size: 'Custom',
+        dimensions: 'Up to 2440mm x 1220mm',
+        idealFor: 'Precisely sized to your requirements'
+      }
+    ],
+    finishingOptions: [
+      {
+        name: 'Unlaminated',
+        description: 'Standard finish perfect for most indoor applications'
+      },
+      {
+        name: 'Matt Laminated',
+        description: 'Anti-glare finish with added durability against scratches'
+      },
+      {
+        name: 'Gloss Laminated',
+        description: 'High-shine finish for vibrant colors and stronger visual impact'
+      },
+      {
+        name: 'Double-Sided Printing',
+        description: 'Different designs on each side for maximum visibility'
+      }
     ],
     applications: [
-      'Exhibition and trade show displays',
-      'Interior signage and wayfinding',
-      'Retail point-of-sale displays',
-      'Museum and gallery information boards',
-      'Office branding and corporate signage',
-      'Menu boards and price displays',
-      'Promotional displays and standees',
-      'Architectural presentation boards'
+      'Retail displays and POS materials',
+      'Exhibition stand graphics',
+      'Interior signage',
+      'Wayfinding signs',
+      'Menu boards for restaurants',
+      'Information displays',
+      'Shop window displays',
+      'Photo mounting'
     ],
     models: [
       {
-        name: '3mm Foamex',
-        description: 'Lightweight option ideal for temporary indoor displays',
+        name: '3mm',
         features: [
-          'Slimmest and most economical option',
-          'Easy to cut and install',
-          'Suitable for short to medium-term use',
-          'Ideal for mounting with double-sided tape or adhesive'
+          'Lightweight and economical',
+          'Ideal for temporary displays',
+          'Easy to cut and modify',
+          'Perfect for short-term signage'
         ],
-        recommendedFor: 'Temporary exhibitions, short-term promotions, smaller format displays, budget-conscious projects'
+        recommended: 'Recommended for temporary displays and short-term promotions'
       },
       {
-        name: '5mm Foamex',
-        description: 'Our most popular thickness balancing durability and cost',
+        name: '5mm',
         features: [
-          'Excellent rigidity-to-weight ratio',
-          'Resistant to warping and bending',
-          'Suitable for most indoor applications',
-          'Multiple mounting options including standoffs'
+          'Our most popular thickness',
+          'Excellent balance of rigidity and weight',
+          'Stays flat and stable',
+          'Great all-round option'
         ],
-        recommendedFor: 'Medium to long-term displays, retail environments, exhibition panels, wall-mounted signage'
+        recommended: 'Recommended for most general purpose signage applications'
       },
       {
-        name: '10mm Foamex',
-        description: 'Maximum durability for premium displays and long-term use',
+        name: '5.5mm',
         features: [
-          'Superior rigidity for larger format displays',
-          'Enhanced resistance to impact and damage',
-          'Premium feel with substantial edge profile',
-          'Self-standing capability for some designs'
+          'Enhanced durability',
+          'Extra rigidity for larger displays',
+          'Very stable in vertical displays',
+          'Premium appearance'
         ],
-        recommendedFor: 'Premium displays, long-term installations, freestanding displays, environments with high traffic or handling'
+        recommended: 'Recommended for premium displays and larger format graphics'
       },
       {
-        name: 'Custom Shaped Foamex',
-        description: 'Precision-cut to your unique design for maximum visual impact',
+        name: '10mm',
         features: [
-          'Available in all thickness options',
-          'Computer-controlled cutting for precise results',
-          'Complex shapes and contours possible',
-          'Ideal for branded displays and creative installations'
+          'Maximum rigidity and durability',
+          'Excellent for free-standing displays',
+          'Premium heavyweight feel',
+          'Ideal for long-term installations'
         ],
-        recommendedFor: 'Brand mascots, logo-shaped signage, creative retail displays, museum exhibits, architectural features'
+        recommended: 'Recommended for premium signage and self-standing displays'
       }
     ],
+    imageSrc: '/images/placeholders/foamex/foamex-main.jpg',
     images: [
-      '/css-placeholder-image',
-      '/css-placeholder-image',
-      '/css-placeholder-image',
-      '/css-placeholder-image'
+      '/images/placeholders/foamex/foamex-main.jpg',
+      '/images/placeholders/foamex/foamex-3mm-sample.jpg',
+      '/images/placeholders/foamex/foamex-5mm-display.jpg',
+      '/images/placeholders/foamex/foamex-retail-signage.jpg',
+      '/images/placeholders/foamex/foamex-exhibition-display.jpg',
+      '/images/placeholders/foamex/foamex-mounting-options.jpg'
     ],
-    imageSrc: '/css-placeholder-image',
-    price: 'Starting at €25 per board',
-    quoteRequired: false,
-    leadTime: '2-3 business days standard',
     faq: [
       {
-        question: 'Is Foamex suitable for outdoor use?',
-        answer: 'Foamex is primarily designed for indoor use but can withstand short-term outdoor placement in sheltered conditions. For permanent outdoor installation, we recommend our Dibond aluminum composite or Correx fluted polypropylene options which offer superior weather resistance. If you need Foamex for outdoor use, the 10mm thickness with edge sealing will provide the best durability.'
+        question: 'How long will my Foamex board last?',
+        answer: 'Foamex PVC boards are designed for indoor use and can last for many years in normal indoor conditions. They are resistant to warping and fading when used indoors away from direct sunlight.'
       },
       {
-        question: 'How do I mount Foamex boards to walls?',
-        answer: 'There are several methods for mounting Foamex: 1) Double-sided foam tape or Velcro for temporary or lightweight installations; 2) Mirror plates or stand-off fixings for a more permanent, professional finish; 3) Panel clips specifically designed for PVC boards; 4) Construction adhesive for permanent bonding to flat surfaces. We can pre-drill mounting holes or supply appropriate fixings for your specific installation needs.'
+        question: 'Can I use Foamex boards outdoors?',
+        answer: 'Foamex boards are primarily designed for indoor use. For short-term outdoor events (1-2 days) they can be used, but for permanent outdoor signage we recommend our weatherproof alternatives like Dibond or Correx boards.'
       },
       {
-        question: 'What thickness of Foamex should I choose?',
-        answer: 'The ideal thickness depends on size and application: 3mm is suitable for smaller displays (up to A2) or temporary installations; 5mm is our most versatile option, providing good rigidity for most medium-sized boards (up to 4\'×2\'); 10mm is recommended for larger boards, freestanding displays, or installations requiring maximum durability. For specific advice on your project, our team is happy to recommend the most suitable option.'
+        question: 'What is the difference between the thickness options?',
+        answer: '3mm is our lightest option, perfect for temporary displays and smaller signs. 5mm is our most popular all-purpose thickness, offering a good balance of weight and rigidity. 5.5mm provides enhanced durability for premium displays, while 10mm offers maximum rigidity ideal for free-standing displays.'
       },
       {
-        question: 'Can Foamex be used for creating 3D or raised lettering?',
-        answer: 'Yes, Foamex is excellent for creating dimensional signage. We can produce layered or stacked lettering by cutting multiple pieces and bonding them together, or create raised elements on a flat background. The material cuts cleanly with precise edges and can be shaped into virtually any design. For more complex 3D requirements, we can combine different thicknesses to create depth and visual interest.'
+        question: 'How are Foamex boards mounted?',
+        answer: 'Foamex boards can be mounted in several ways: with double-sided tape for lightweight applications, with pre-drilled holes for screw mounting, with specialized hanging systems, or simply leaned against a wall for temporary displays. We can add pre-drilled holes or metal hanging systems to your order on request.'
       },
       {
-        question: 'How does Foamex compare to other sign materials?',
-        answer: 'Foamex offers an excellent balance of quality and value. Compared to corrugated plastic (Correx), it provides a smoother finish and more professional appearance. Compared to aluminum composite (Dibond), it\'s more economical but less weather-resistant. Foamex is lighter than acrylic but more durable than foam board with paper faces. It\'s ideal when you need a professional finish for indoor use without the premium cost of materials like acrylic or aluminum.'
+        question: 'Do you offer design services for Foamex boards?',
+        answer: 'Yes, our in-house design team can help create professional designs for your Foamex boards. Contact us for a design consultation and quote.'
       }
     ]
   },
