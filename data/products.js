@@ -662,6 +662,469 @@ const products = [
       }
     ]
   },
+  {
+    id: 'vinyl-banners',
+    name: 'Vinyl Banners',
+    category: 'Wide Format',
+    description: 'High-impact vinyl banners for indoor and outdoor advertising that command attention and withstand the elements.',
+    features: [
+      'Premium quality 440gsm/510gsm vinyl material',
+      'Vibrant, fade-resistant UV printing',
+      'Indoor and outdoor durable options',
+      'Custom sizes up to 5m wide',
+      'Reinforced hems and eyelets standard',
+      'Wind-slits option for outdoor longevity'
+    ],
+    detailedDescription: 'Our premium vinyl banners deliver maximum visual impact for your advertising and promotional campaigns, whether indoors or outdoors. Printed on high-quality, weather-resistant materials using state-of-the-art UV printing technology, these banners produce vibrant colors and sharp details that capture attention from a distance.\n\nEach banner is crafted with reinforced edges and robust metal eyelets placed approximately every 50cm to ensure secure installation and longevity even in challenging conditions. For outdoor applications, we recommend our wind-slit option that allows air to pass through the banner, reducing wind pressure and extending the banner\'s lifespan. Available in standard sizes or completely customized to your exact specifications, our vinyl banners provide a cost-effective, high-impact marketing solution for events, storefronts, construction sites, and promotional campaigns.',
+    specifications: [
+      { name: 'Standard Materials', value: '440gsm PVC vinyl (standard), 510gsm PVC vinyl (premium/outdoor)' },
+      { name: 'Common Sizes', value: '2\'×4\', 3\'×6\', 4\'×8\', 5\'×10\', 2\'×6\', Custom sizes up to 5m wide' },
+      { name: 'Finishing Options', value: 'Hemmed edges, reinforced eyelets, pole pockets, rope/bungee cords, wind slits' },
+      { name: 'Print Technology', value: 'UV-resistant, eco-solvent or latex printing with up to 1440dpi resolution' },
+      { name: 'Weather Resistance', value: 'Waterproof, UV-resistant, -20°C to +70°C temperature tolerance' },
+      { name: 'Expected Lifespan', value: '2-3 years outdoor, 5+ years indoor with proper care and installation' },
+      { name: 'Turnaround Time', value: '24-48 hour rush service available, standard 3-5 business days' },
+      { name: 'Minimum Order', value: 'No minimum - single banner printing available' },
+      { name: 'Color Options', value: 'Full CMYK color printing, unlimited colors at no extra cost' },
+      { name: 'Design Service', value: 'Professional design assistance available (additional fee may apply)' }
+    ],
+    applications: [
+      'Retail storefronts and grand openings',
+      'Trade shows and exhibition displays',
+      'Sporting events and tournaments',
+      'Construction site branding and information',
+      'Outdoor advertising campaigns',
+      'Festival and event promotion',
+      'Election campaigns and political advertising',
+      'Educational institutions and campus events'
+    ],
+    models: [
+      {
+        name: 'Standard Indoor Vinyl',
+        description: 'Cost-effective solution for interior displays and short-term promotions',
+        features: [
+          '440gsm smooth PVC vinyl',
+          'Hemmed edges with eyelets every 50cm',
+          'Full-color, high-resolution printing',
+          'Matte or gloss finish options'
+        ],
+        recommendedFor: 'Indoor events, retail displays, short-term promotions, trade shows'
+      },
+      {
+        name: 'Premium Outdoor Vinyl',
+        description: 'Heavy-duty option designed to withstand challenging weather conditions',
+        features: [
+          '510gsm reinforced PVC vinyl',
+          'Double-stitched hems for extra durability',
+          'Wind slits available for high-wind areas',
+          'UV-resistant inks for vibrant, fade-resistant colors',
+          'Reinforced corner patches for high-stress points'
+        ],
+        recommendedFor: 'Long-term outdoor advertising, construction sites, sports facilities, building wraps'
+      },
+      {
+        name: 'Mesh Vinyl Banner',
+        description: 'Specialized perforated vinyl allowing wind to pass through naturally',
+        features: [
+          '270gsm-350gsm mesh PVC material with 20-40% air flow',
+          'Perfect for windy locations without requiring wind slits',
+          'Reduced wind load on mounting structures',
+          'UV-resistant printing with approximately 80% color density'
+        ],
+        recommendedFor: 'Fence wraps, building facades, scaffolding covers, exposed locations with high wind'
+      },
+      {
+        name: 'Double-Sided Vinyl Banner',
+        description: 'Two-sided printing for maximum visibility from multiple viewing angles',
+        features: [
+          '650gsm blackout vinyl material',
+          'Block-out layer prevents image show-through',
+          'Different or identical designs on each side',
+          'Premium edge finishing with heavy-duty eyelets'
+        ],
+        recommendedFor: 'Street lamp posts, hanging displays, trade show booth dividers, retail environments'
+      }
+    ],
+    images: [
+      '/css-placeholder-image',
+      '/css-placeholder-image',
+      '/css-placeholder-image',
+      '/css-placeholder-image'
+    ],
+    imageSrc: '/css-placeholder-image',
+    price: 'Request for Quote',
+    quoteRequired: true,
+    leadTime: '3-5 business days standard (rush service available)',
+    faq: [
+      {
+        question: 'How long will my vinyl banner last outdoors?',
+        answer: 'With proper installation and care, our premium outdoor vinyl banners typically last 2-3 years in outdoor conditions. Factors affecting lifespan include exposure to direct sunlight, extreme weather conditions, and installation method. Indoor banners can last 5+ years.'
+      },
+      {
+        question: 'What size banner do I need?',
+        answer: 'The ideal size depends on viewing distance and location. For close viewing (under 10m), smaller banners (2\'×4\', 3\'×6\') work well. For medium distances (10-30m), consider 4\'×8\' or 5\'×10\'. For long-distance visibility (30m+), we recommend larger custom sizes and emphasizing fewer, larger words in your design.'
+      },
+      {
+        question: 'What are wind slits and do I need them?',
+        answer: 'Wind slits are small curved cuts in the vinyl that allow wind to pass through, reducing pressure on the banner and its mounting points. We recommend wind slits for any outdoor banner larger than 3\'×6\' or for any installation in open or elevated areas prone to wind. Alternatively, our mesh banners provide natural wind flow without requiring slits.'
+      },
+      {
+        question: 'How should I install my banner?',
+        answer: 'For best results, secure banners evenly through all provided eyelets using bungee cords, zip ties, or rope. Ensure tension is even across the banner without excessive stretching. For long-term installations, we recommend checking tension periodically and adjusting as needed. We can provide installation hardware and advice for your specific situation.'
+      },
+      {
+        question: 'Can I design my own banner or will you help me?',
+        answer: 'Both options are available! You can submit print-ready artwork following our specifications, or our professional design team can create custom designs for you. We offer everything from simple text layouts to complete creative concepts with graphics and branding. Design services are charged separately based on complexity.'
+      }
+    ]
+  },
+  {
+    id: 'posters',
+    name: 'Professional Posters',
+    category: 'Wide Format',
+    description: 'High-definition posters with stunning color reproduction for marketing campaigns, events, and retail environments.',
+    features: [
+      'Premium 170gsm-200gsm paper options',
+      'Photo-quality printing up to 1440dpi',
+      'Standard and custom sizes available',
+      'Multiple finish options (matte, gloss, satin)',
+      'Fast turnaround times with rush service',
+      'Lamination options for durability'
+    ],
+    detailedDescription: 'Make a bold visual statement with our professional, high-definition posters, perfect for promotions, events, retail displays, and interior décor. Using state-of-the-art printing technology, we deliver stunning color reproduction and exceptional image clarity that brings your visuals to life with remarkable detail.\n\nOur posters are printed on premium heavyweight papers with options for gloss, matte, or satin finishes to suit your specific application. Whether you need standard sizes like A0 and A1 or custom dimensions for your unique space, our posters provide a cost-effective way to create maximum visual impact.\n\nFor installations requiring extra durability, we offer lamination services in gloss or matte finishes, providing protection against handling, moisture, and UV fading. This is especially valuable for posters in high-traffic areas or for longer-term displays. From design assistance to lightning-fast turnaround times, we provide a complete solution for your poster printing needs.',
+    specifications: [
+      { name: 'Paper Types', value: '170gsm silk/satin, 200gsm gloss, 170gsm matte, 190gsm photo satin' },
+      { name: 'Standard Sizes', value: 'A0 (841mm × 1189mm), A1 (594mm × 841mm), A2 (420mm × 594mm), 24"×36", 36"×48", Custom sizes available' },
+      { name: 'Print Resolution', value: 'Up to 1440dpi for photographic quality reproduction' },
+      { name: 'Finishing Options', value: 'Lamination (gloss/matte), mounting to foam board or correx, edge sealing, encapsulation' },
+      { name: 'Color Profile', value: 'Full CMYK with ICC color management for accurate color reproduction' },
+      { name: 'Minimum Order', value: 'No minimum - single poster printing available' },
+      { name: 'Turnaround Time', value: 'Same day service available, standard 24-48 hours' },
+      { name: 'Custom Shapes', value: 'Cut-to-shape options available for unique designs' },
+      { name: 'Indoor Lifespan', value: '6-12 months unlaminated, 2+ years with lamination' },
+      { name: 'Design Template', value: 'Free artwork templates available for all standard sizes' }
+    ],
+    applications: [
+      'Retail promotional displays',
+      'Corporate event signage',
+      'Exhibition and conference information',
+      'Restaurant and bar menus',
+      'Educational displays and presentations',
+      'Movie and entertainment promotions',
+      'Art reproductions and gallery displays',
+      'Wayfinding and informational signage'
+    ],
+    models: [
+      {
+        name: 'Standard Paper Posters',
+        description: 'Cost-effective solution for short-term promotional displays',
+        features: [
+          '170gsm silk/satin or matte paper',
+          'Vibrant color reproduction',
+          'Available in all standard and custom sizes',
+          'Unlaminated for economical printing'
+        ],
+        recommendedFor: 'Short-term promotions, event announcements, indoor retail displays, temporary information'
+      },
+      {
+        name: 'Premium Photo Posters',
+        description: 'High-impact visual display with superior image quality',
+        features: [
+          '190-200gsm photo-grade paper',
+          'Enhanced color gamut for photographic reproduction',
+          'Satin or gloss finish options',
+          'Superior detail resolution for close viewing'
+        ],
+        recommendedFor: 'Fashion displays, product showcases, art reproductions, premium brand advertising'
+      },
+      {
+        name: 'Laminated Posters',
+        description: 'Durable finish providing protection and enhanced appearance',
+        features: [
+          'Gloss, matte or satin lamination options',
+          'Protection against handling, moisture, and UV damage',
+          'Wipe-clean surface ideal for high-traffic areas',
+          'Extended lifespan of 2+ years indoor'
+        ],
+        recommendedFor: 'Long-term displays, educational environments, restaurants, information boards'
+      },
+      {
+        name: 'Mounted Posters',
+        description: 'Ready-to-display solution with rigid backing',
+        features: [
+          'Mounted on 5mm foam board or 3mm/5mm Correx',
+          'No need for additional framing',
+          'Professional edge finish options',
+          'Includes hanging options (adhesive hooks or drill holes)'
+        ],
+        recommendedFor: 'Exhibition displays, information points, boardroom presentations, semi-permanent installations'
+      }
+    ],
+    images: [
+      '/css-placeholder-image',
+      '/css-placeholder-image',
+      '/css-placeholder-image',
+      '/css-placeholder-image'
+    ],
+    imageSrc: '/css-placeholder-image',
+    price: 'Starting at €20 per poster',
+    quoteRequired: false,
+    leadTime: '24-48 hours standard (same day available)',
+    faq: [
+      {
+        question: 'What resolution should my artwork be for poster printing?',
+        answer: 'For optimum print quality, we recommend a minimum resolution of 150dpi at the final print size. For example, an A1 poster (594mm × 841mm) should have a resolution of at least 3508 × 4961 pixels. For the sharpest results, especially with photographic content, 300dpi is ideal.'
+      },
+      {
+        question: 'What file formats do you accept for poster printing?',
+        answer: 'We accept PDF (preferred), JPEG, TIFF, PNG, AI, and PSD files. PDF files should be created with fonts embedded and in CMYK color mode. When sending native design files (AI, PSD), please convert text to outlines/paths or include all fonts used in the design.'
+      },
+      {
+        question: 'How should I prepare my artwork for poster printing?',
+        answer: 'Set up your document at the exact size you want to print with 3mm bleed on all sides. Use CMYK color mode (not RGB) for most accurate color reproduction. Keep important text and elements at least 5mm from the edge. For templates and detailed specifications, please download our artwork guide or contact our design team.'
+      },
+      {
+        question: 'Do I need to laminate my posters?',
+        answer: 'Lamination is recommended if your posters will be displayed for more than a few weeks, will be handled frequently, or will be in areas with high humidity or direct sunlight. Lamination provides protection against tearing, moisture, UV fading, and fingerprints, extending the life of your posters significantly.'
+      },
+      {
+        question: 'What poster size should I choose?',
+        answer: 'The ideal size depends on viewing distance and location. A1 (594mm × 841mm) is our most popular size, providing good visibility from up to 10 meters away. For greater impact at medium distances, consider A0 (841mm × 1189mm). For close inspection of detailed information, A2 (420mm × 594mm) may be sufficient. We\'re happy to advise on the best size for your specific needs.'
+      }
+    ]
+  },
+  {
+    id: 'foamex-boards',
+    name: 'Foamex PVC Boards',
+    category: 'Wide Format',
+    description: 'Professional grade PVC foam board signage that combines lightweight durability with high-quality print finish for indoor displays.',
+    features: [
+      'Premium rigid yet lightweight PVC foam material',
+      'Thickness options from 3mm to 10mm',
+      'Direct UV printing for vibrant, durable results',
+      'Custom cut-to-shape capabilities',
+      'Suitable for indoor and sheltered outdoor use',
+      'Ready-to-install with multiple fixing options'
+    ],
+    detailedDescription: 'Foamex (PVC foam board) offers the perfect balance of quality, durability, and value for professional indoor signage and displays. This versatile, lightweight material provides a smooth, flat surface that showcases your graphics with exceptional clarity and color vibrancy.\n\nWe direct-print onto Foamex using state-of-the-art UV flatbed printing technology, creating a finish that is scratch-resistant and long-lasting without requiring additional lamination. The rigid yet lightweight nature of Foamex makes it ideal for wall-mounted displays, exhibition graphics, point-of-sale signage, and interior wayfinding systems.\n\nAvailable in thicknesses from 3mm (ideal for temporary displays) to 10mm (for maximum durability), Foamex can be precisely cut to any shape or size, including custom contours and rounded corners. We can also provide various finishing options including drill holes, standoffs for floating wall displays, or freestanding mounts for counter displays, giving you a complete, ready-to-install signage solution.',
+    specifications: [
+      { name: 'Material', value: 'Expanded PVC foam board (Foamex/Forex)' },
+      { name: 'Thickness Options', value: '3mm, 5mm, 10mm (other thicknesses available on request)' },
+      { name: 'Standard Sizes', value: 'A0, A1, A2, A3, 2\'×3\', 4\'×2\', 4\'×8\', Custom sizes up to 2440mm × 1220mm' },
+      { name: 'Print Technology', value: 'Direct UV flatbed printing with light-fast inks' },
+      { name: 'Resolution', value: 'Up to 1200dpi for photographic quality reproduction' },
+      { name: 'Color Profile', value: 'Full CMYK + White ink capability for colored boards' },
+      { name: 'Finishing Options', value: 'Cut to shape, rounded corners, drill holes, standoffs, edge capping' },
+      { name: 'Durability', value: '2-3 years indoor, 6-12 months in sheltered outdoor environments' },
+      { name: 'Fire Rating', value: 'Available with Class 1 fire rating (FR grade) on request' },
+      { name: 'Minimum Order', value: 'No minimum - single board printing available' },
+      { name: 'Turnaround Time', value: '2-3 business days standard (express service available)' }
+    ],
+    applications: [
+      'Exhibition and trade show displays',
+      'Interior signage and wayfinding',
+      'Retail point-of-sale displays',
+      'Museum and gallery information boards',
+      'Office branding and corporate signage',
+      'Menu boards and price displays',
+      'Promotional displays and standees',
+      'Architectural presentation boards'
+    ],
+    models: [
+      {
+        name: '3mm Foamex',
+        description: 'Lightweight option ideal for temporary indoor displays',
+        features: [
+          'Slimmest and most economical option',
+          'Easy to cut and install',
+          'Suitable for short to medium-term use',
+          'Ideal for mounting with double-sided tape or adhesive'
+        ],
+        recommendedFor: 'Temporary exhibitions, short-term promotions, smaller format displays, budget-conscious projects'
+      },
+      {
+        name: '5mm Foamex',
+        description: 'Our most popular thickness balancing durability and cost',
+        features: [
+          'Excellent rigidity-to-weight ratio',
+          'Resistant to warping and bending',
+          'Suitable for most indoor applications',
+          'Multiple mounting options including standoffs'
+        ],
+        recommendedFor: 'Medium to long-term displays, retail environments, exhibition panels, wall-mounted signage'
+      },
+      {
+        name: '10mm Foamex',
+        description: 'Maximum durability for premium displays and long-term use',
+        features: [
+          'Superior rigidity for larger format displays',
+          'Enhanced resistance to impact and damage',
+          'Premium feel with substantial edge profile',
+          'Self-standing capability for some designs'
+        ],
+        recommendedFor: 'Premium displays, long-term installations, freestanding displays, environments with high traffic or handling'
+      },
+      {
+        name: 'Custom Shaped Foamex',
+        description: 'Precision-cut to your unique design for maximum visual impact',
+        features: [
+          'Available in all thickness options',
+          'Computer-controlled cutting for precise results',
+          'Complex shapes and contours possible',
+          'Ideal for branded displays and creative installations'
+        ],
+        recommendedFor: 'Brand mascots, logo-shaped signage, creative retail displays, museum exhibits, architectural features'
+      }
+    ],
+    images: [
+      '/css-placeholder-image',
+      '/css-placeholder-image',
+      '/css-placeholder-image',
+      '/css-placeholder-image'
+    ],
+    imageSrc: '/css-placeholder-image',
+    price: 'Starting at €25 per board',
+    quoteRequired: false,
+    leadTime: '2-3 business days standard',
+    faq: [
+      {
+        question: 'Is Foamex suitable for outdoor use?',
+        answer: 'Foamex is primarily designed for indoor use but can withstand short-term outdoor placement in sheltered conditions. For permanent outdoor installation, we recommend our Dibond aluminum composite or Correx fluted polypropylene options which offer superior weather resistance. If you need Foamex for outdoor use, the 10mm thickness with edge sealing will provide the best durability.'
+      },
+      {
+        question: 'How do I mount Foamex boards to walls?',
+        answer: 'There are several methods for mounting Foamex: 1) Double-sided foam tape or Velcro for temporary or lightweight installations; 2) Mirror plates or stand-off fixings for a more permanent, professional finish; 3) Panel clips specifically designed for PVC boards; 4) Construction adhesive for permanent bonding to flat surfaces. We can pre-drill mounting holes or supply appropriate fixings for your specific installation needs.'
+      },
+      {
+        question: 'What thickness of Foamex should I choose?',
+        answer: 'The ideal thickness depends on size and application: 3mm is suitable for smaller displays (up to A2) or temporary installations; 5mm is our most versatile option, providing good rigidity for most medium-sized boards (up to 4\'×2\'); 10mm is recommended for larger boards, freestanding displays, or installations requiring maximum durability. For specific advice on your project, our team is happy to recommend the most suitable option.'
+      },
+      {
+        question: 'Can Foamex be used for creating 3D or raised lettering?',
+        answer: 'Yes, Foamex is excellent for creating dimensional signage. We can produce layered or stacked lettering by cutting multiple pieces and bonding them together, or create raised elements on a flat background. The material cuts cleanly with precise edges and can be shaped into virtually any design. For more complex 3D requirements, we can combine different thicknesses to create depth and visual interest.'
+      },
+      {
+        question: 'How does Foamex compare to other sign materials?',
+        answer: 'Foamex offers an excellent balance of quality and value. Compared to corrugated plastic (Correx), it provides a smoother finish and more professional appearance. Compared to aluminum composite (Dibond), it\'s more economical but less weather-resistant. Foamex is lighter than acrylic but more durable than foam board with paper faces. It\'s ideal when you need a professional finish for indoor use without the premium cost of materials like acrylic or aluminum.'
+      }
+    ]
+  },
+  {
+    id: 'correx-boards',
+    name: 'Correx Fluted Boards',
+    category: 'Wide Format',
+    description: 'Weather-resistant corrugated polypropylene boards for durable outdoor signage, ideal for elections, construction, real estate, and temporary displays.',
+    features: [
+      'Ultra-lightweight yet highly durable material',
+      'Waterproof and weather-resistant construction',
+      'Available in 2mm to 8mm thicknesses',
+      'Direct UV printing for outdoor durability',
+      'Cost-effective for large quantity orders',
+      'Easy installation with multiple mounting options'
+    ],
+    detailedDescription: 'Correx (also known as Corriboard or corrugated plastic) is the perfect solution for cost-effective outdoor signage and displays that need to withstand challenging weather conditions. This twin-wall fluted polypropylene material offers excellent durability, waterproof properties, and UV resistance at a fraction of the cost of other outdoor signage options.\n\nOur Correx boards are direct-printed using UV-stable inks that bond with the plastic surface, creating weather-resistant graphics that won\'t fade, crack, or peel even with extended outdoor exposure. The corrugated structure provides surprising strength despite its lightweight nature, making it perfect for site boards, election signs, estate agent boards, and outdoor event signage.\n\nAvailable in thicknesses from 2mm (ideal for smaller temporary signs) to 8mm (for maximum durability), Correx can be cut to any shape or size and installed using various methods including cable ties, screws, nails, or stake mounts. We can provide pre-drilled holes, H-stakes, or wire frame mounts to create complete ready-to-deploy signage systems for your specific application.',
+    specifications: [
+      { name: 'Material', value: 'Twin-wall fluted polypropylene (Correx/Corriboard)' },
+      { name: 'Thickness Options', value: '2mm, 3mm, 4mm, 5mm, 8mm (standard is 4mm)' },
+      { name: 'Standard Sizes', value: 'A0, A1, A2, 600mm×450mm, 800mm×600mm, 1220mm×813mm, Custom sizes up to 2440mm×1220mm' },
+      { name: 'Print Technology', value: 'Direct UV flatbed printing with outdoor-grade inks' },
+      { name: 'Color Options', value: 'Full-color CMYK printing, white ink available for colored boards' },
+      { name: 'Board Colors', value: 'White standard, also available in black, yellow, blue (min. quantities apply)' },
+      { name: 'Weather Resistance', value: 'Waterproof, UV-resistant, -20°C to +80°C temperature tolerance' },
+      { name: 'Expected Outdoor Lifespan', value: '6-24 months depending on conditions and thickness' },
+      { name: 'Finishing Options', value: 'Cut to shape, rounded corners, drill holes, stake slots, eyelets' },
+      { name: 'Minimum Order', value: 'No minimum for standard white boards, MOQ 10 for colored boards' },
+      { name: 'Bulk Discounts', value: 'Significant price breaks at 10, 25, 50, 100+ units' }
+    ],
+    applications: [
+      'Election and political campaign signs',
+      'Construction site safety information',
+      'Real estate and property signage',
+      'Outdoor event directional signage',
+      'Temporary parking and traffic management',
+      'Retail pavement and promotional signs',
+      'Agricultural field markers',
+      'Festival and event announcements'
+    ],
+    models: [
+      {
+        name: 'Standard 4mm Correx',
+        description: 'Our most popular option balancing durability and value',
+        features: [
+          'Versatile 4mm twin-wall fluted polypropylene',
+          'Ideal for most outdoor applications',
+          'Full-color UV printing on white substrate',
+          'Pre-drilled corner holes included if requested'
+        ],
+        recommendedFor: 'Election signs, real estate boards, construction site information, outdoor events'
+      },
+      {
+        name: 'Lightweight 2mm/3mm Correx',
+        description: 'Economical option for short-term or high-volume needs',
+        features: [
+          'Ultra-lightweight 2mm or 3mm construction',
+          'Most economical option for large quantities',
+          'Suitable for sheltered outdoor or indoor use',
+          'Ideal for cable-tie or adhesive mounting'
+        ],
+        recommendedFor: 'Indoor displays, short-term promotions, lightweight ceiling-hung signs, high-volume campaigns'
+      },
+      {
+        name: 'Heavy-Duty 5mm/8mm Correx',
+        description: 'Maximum durability for long-term outdoor installations',
+        features: [
+          'Enhanced rigidity and wind resistance',
+          'Superior performance in exposed locations',
+          'Reinforced edge options available',
+          'Suitable for larger format applications'
+        ],
+        recommendedFor: 'Long-term outdoor signage, exposed locations, larger format displays, premium property signs'
+      },
+      {
+        name: 'Staked Correx System',
+        description: 'Complete ready-to-install lawn and ground signage',
+        features: [
+          'Includes metal H-stakes or wire frames',
+          'Pre-cut stake slots for easy assembly',
+          'Available in all thickness options',
+          'Double or single-sided printing options'
+        ],
+        recommendedFor: 'Election campaigns, real estate yard signs, directional signage, event announcements'
+      }
+    ],
+    images: [
+      '/css-placeholder-image',
+      '/css-placeholder-image',
+      '/css-placeholder-image',
+      '/css-placeholder-image'
+    ],
+    imageSrc: '/css-placeholder-image',
+    price: 'Starting at €15 per board',
+    quoteRequired: false,
+    leadTime: '1-3 business days standard',
+    faq: [
+      {
+        question: 'How long will Correx signs last outdoors?',
+        answer: 'With our UV-stable direct printing, Correx signs typically last 6-24 months in full outdoor conditions, depending on thickness and environmental factors. Standard 4mm signs maintain good appearance for about 12 months in average conditions. The 8mm heavy-duty option can last 18-24 months. The material itself is highly durable; it\'s usually the print that shows weathering first in the form of gradual fading from intense UV exposure.'
+      },
+      {
+        question: 'What\'s the best way to install Correx signs?',
+        answer: 'There are several effective methods: 1) H-stakes or wire frames for lawn/ground installation; 2) Cable ties through pre-drilled holes for fence or post mounting; 3) Screws with washers for wall mounting; 4) Strong double-sided tape or hook-and-loop fasteners for temporary indoor use. We can pre-drill holes, add eyelets, or include stake slots to facilitate your preferred mounting method. For election campaigns and real estate applications, we offer complete sign systems with appropriate hardware.'
+      },
+      {
+        question: 'Can I print on both sides of the Correx board?',
+        answer: 'Yes, double-sided printing is available on all Correx boards. For standard applications, we use opaque white board with separate prints on each side. For premium double-sided signs, we use a heavier board (minimum 4mm recommended) to prevent show-through. Double-sided printing is particularly popular for election signs, directional signage, and real estate boards where visibility from multiple directions is important.'
+      },
+      {
+        question: 'What quantity discounts are available for Correx signs?',
+        answer: 'We offer significant price breaks at quantities of 10, 25, 50, and 100+ units of the same design. For election campaigns, political parties, and large real estate agencies, we offer special campaign packages that include various sizes and designs within the same order. For ongoing needs, we can set up custom pricing agreements to ensure you always receive the best value for your signage program.'
+      },
+      {
+        question: 'Is Correx environmentally friendly?',
+        answer: 'Correx is made from polypropylene, which is recyclable (recycling code 5). While it\'s a plastic product, it uses significantly less material than solid plastic alternatives due to its twin-wall fluted structure. For clients with strong environmental priorities, we offer collection and recycling services for used signs (minimum quantities apply), or guidance on local recycling options. For short-term indoor applications where outdoor durability isn\'t required, we also offer eco-friendly alternatives like cardboard display board.'
+      }
+    ]
+  },
 ];
 
 // Helper function to get a product by its ID/slug
