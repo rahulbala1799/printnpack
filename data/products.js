@@ -899,7 +899,7 @@ const products = [
     id: 'foamex-boards',
     name: 'Foamex PVC Boards',
     category: 'Board Prints & Displays',
-    description: 'Professional PVC foam board printing for durable indoor signage and displays.',
+    description: 'Professional PVC foam board printing for durable indoor signage and displays. Also known as Forex, foam board, or expanded PVC.',
     features: [
       'Available in 3mm, 5mm, 5.5mm and 10mm thickness options',
       'Maximum size of 8ft x 4ft (2440mm x 1220mm)',
@@ -909,7 +909,7 @@ const products = [
       'Available laminated or unlaminated for different finishes',
       'Options for printing on both sides, or laminating both sides'
     ],
-    detailedDescription: 'Our Foamex PVC Boards are ideal for indoor signage, exhibitions, point of sale displays and more. Made from lightweight yet rigid expanded PVC, these versatile boards offer excellent print quality combined with durability. We apply high-quality printed vinyl to the Foamex boards rather than direct UV printing, ensuring vibrant colors and consistent results. Choose from multiple thickness options to suit your specific application, with 5mm being our most popular choice for general signage. We can cut to any custom size up to our maximum dimensions, or choose from standard template sizes. Enhance your boards with optional additions like pre-drilled mounting holes, metal hanging systems, or protective lamination in matt or gloss finish.',
+    detailedDescription: 'Our Foamex PVC Boards (also known as Forex or expanded PVC) are ideal for indoor signage, exhibitions, point of sale displays and more. Made from lightweight yet rigid expanded PVC, these versatile boards offer excellent print quality combined with durability. We apply high-quality printed vinyl to the Foamex boards rather than direct UV printing, ensuring vibrant colors and consistent results. Choose from multiple thickness options to suit your specific application, with 5mm being our most popular choice for general signage. We can cut to any custom size up to our maximum dimensions, or choose from standard template sizes. Enhance your boards with optional additions like pre-drilled mounting holes, metal hanging systems, or protective lamination in matt or gloss finish.',
     price: 'From £19.99',
     specifications: [
       {

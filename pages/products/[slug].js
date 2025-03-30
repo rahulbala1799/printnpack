@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../../components/layout/Layout';
 import Head from 'next/head';
@@ -9,6 +9,7 @@ import products, { getProductBySlug, getRelatedProducts } from '../../data/produ
 // Page component
 const ProductDetail = ({ product, relatedProducts }) => {
   const router = useRouter();
+  const [showThicknessGuide, setShowThicknessGuide] = useState(false);
   
   // If the page is not yet generated, this will be displayed initially until getStaticProps() runs
   if (router.isFallback) {
@@ -61,10 +62,22 @@ const ProductDetail = ({ product, relatedProducts }) => {
     <Layout>
       <Head>
         <title>{`${product.name} - Premium Packaging Solutions | PrintNPack`}</title>
-        <meta name="description" content={`${product.description} Explore our high-quality ${product.name} with custom branding options, multiple sizes, and fast delivery. Perfect for restaurants and retail businesses.`} />
-        <meta name="keywords" content={`${product.name}, packaging solutions, food packaging, retail packaging, custom packaging, sustainable packaging, branded packaging`} />
+        <meta name="description" content={
+          product.id === 'foamex-boards' 
+            ? `Professional PVC foam board printing for durable indoor signage and displays. Also known as Forex, foam PVC, foam board, or expanded PVC. Available in multiple thicknesses (3mm, 5mm, 5.5mm, 10mm) with custom sizes and finishes.`
+            : `${product.description} Explore our high-quality ${product.name} with custom branding options, multiple sizes, and fast delivery. Perfect for restaurants and retail businesses.`
+        } />
+        <meta name="keywords" content={
+          product.id === 'foamex-boards'
+            ? `${product.name}, Forex board, PVC foam sheet, Expanded PVC, Foam board, Rigid foam PVC, Display board, Exhibition board, Signage material, Lightweight rigid board, Mounting board, Indoor signage, POS display, Foam PVC sheet, Sign board material, Rigid PVC panel`
+            : `${product.name}, packaging solutions, food packaging, retail packaging, custom packaging, sustainable packaging, branded packaging`
+        } />
         <meta property="og:title" content={`${product.name} - PrintNPack`} />
-        <meta property="og:description" content={product.description} />
+        <meta property="og:description" content={
+          product.id === 'foamex-boards'
+            ? `Professional PVC foam board printing (also known as Forex or expanded PVC) for durable indoor signage and displays. Available in multiple thicknesses with custom sizes and finishes.`
+            : product.description
+        } />
         <meta property="og:image" content={product.images[0]} />
         <meta property="og:type" content="product" />
         <meta property="og:url" content={`https://printnpack.com/products/${product.id}`} />
@@ -228,6 +241,8 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 <div className="inline-block bg-blue-500 px-4 py-1 rounded-full mb-2 font-semibold text-sm uppercase tracking-wide">Premium Indoor Signage</div>
                 <h2 className="text-4xl md:text-5xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-white">Foamex PVC Boards</h2>
                 <p className="text-xl text-blue-100">Lightweight yet durable rigid PVC foam sheets perfect for stunning high-impact visual displays.</p>
+                
+                <p className="text-md text-blue-200">Also known as: Forex, Expanded PVC, Foam PVC, or Display Board</p>
                 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
                   {product.models.map((model, i) => (
