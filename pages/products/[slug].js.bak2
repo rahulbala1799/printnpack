@@ -184,14 +184,6 @@ const ProductDetail = ({ product, relatedProducts }) => {
                     alt="Professional Roll-Up Banner"
                     fill
                     className="object-cover"
-                    priority={true}
-                    onError={(e) => {
-                      // Fallback for image loading errors
-                      console.error('Error loading image:', e);
-                      e.target.style.display = 'none';
-                      e.target.parentNode.classList.add('bg-gray-200');
-                      e.target.parentNode.innerHTML += '<div class="flex items-center justify-center h-full text-gray-500">Image loading error</div>';
-                    }}
                   />
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-blue-900/70 to-transparent"></div>
@@ -263,24 +255,6 @@ const ProductDetail = ({ product, relatedProducts }) => {
                           alt={`${product.name} view ${idx + 1}`}
                           fill
                           className="object-contain p-6"
-                          priority={idx === 0}
-                          onError={(e) => {
-                            console.error(`Error loading image: ${image}`);
-                            e.target.style.display = 'none';
-                            e.target.parentNode.classList.add('bg-gray-100');
-                            const placeholder = document.createElement('div');
-                            placeholder.className = 'absolute inset-0 flex items-center justify-center';
-                            placeholder.innerHTML = `
-                              <div class="text-center p-4">
-                                <svg class="w-12 h-12 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                <p class="mt-2 text-gray-500">Image could not be loaded</p>
-                                <p class="text-xs text-gray-400 mt-1">${image}</p>
-                              </div>
-                            `;
-                            e.target.parentNode.appendChild(placeholder);
-                          }}
                         />
                       )}
                       
@@ -386,18 +360,6 @@ const ProductDetail = ({ product, relatedProducts }) => {
                               alt={`${product.name} thumbnail ${index + 1}`}
                               fill
                               className="object-contain p-2"
-                              onError={(e) => {
-                                console.error(`Error loading thumbnail: ${image}`);
-                                e.target.style.display = 'none';
-                                e.target.parentNode.classList.add('bg-gray-100');
-                                e.target.parentNode.innerHTML += `
-                                  <div class="flex items-center justify-center h-full text-xs text-gray-500">
-                                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                  </div>
-                                `;
-                              }}
                             />
                           )}
                         </div>
@@ -1200,69 +1162,55 @@ const ProductDetail = ({ product, relatedProducts }) => {
           </div>
         </div>
       </div>
-      
-      {/* Related Products */}
-      {relatedProducts && relatedProducts.length > 0 && (
-        <div className="container mx-auto px-4 py-12">
-          <h2 className="text-2xl font-bold mb-8">Related Products</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {relatedProducts.map(relatedProduct => (
-              <div key={relatedProduct.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
-                <div className="h-48 relative bg-gray-50">
-                  {relatedProduct.imageSrc.includes('css-placeholder-image') ? (
-                    <div className="absolute inset-0 css-placeholder banner"></div>
-                  ) : (
-                    <Image
-                      src={relatedProduct.imageSrc}
-                      alt={relatedProduct.name}
-                      fill
-                      className="object-contain p-4"
-                      onError={(e) => {
-                        console.error(`Error loading related product image: ${relatedProduct.imageSrc}`);
-                        e.target.style.display = 'none';
-                        e.target.parentNode.classList.add('bg-gray-100');
-                        e.target.parentNode.innerHTML += `
-                          <div class="flex items-center justify-center h-full text-center">
-                            <div>
-                              <svg class="w-10 h-10 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                              </svg>
-                              <p class="mt-1 text-sm text-gray-500">${relatedProduct.name}</p>
-                            </div>
-                          </div>
-                        `;
-                      }}
-                    />
-                  )}
-                </div>
-                <div className="p-4">
-                  <h3 className="font-semibold mb-2">{relatedProduct.name}</h3>
-                  <p className="text-sm text-gray-600 mb-3 line-clamp-2">{relatedProduct.description}</p>
-                  <Link 
-                    href={`/products/${relatedProduct.id}`}
-                    className="text-blue-600 text-sm font-medium hover:text-blue-800"
-                  >
-                    View Details
-                  </Link>
-                </div>
+    </div>
+  
+    {/* Related Products */}
+    {relatedProducts && relatedProducts.length > 0 && (
+      <div className="container mx-auto px-4 py-12">
+        <h2 className="text-2xl font-bold mb-8">Related Products</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {relatedProducts.map(relatedProduct => (
+            <div key={relatedProduct.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+              <div className="h-48 relative bg-gray-50">
+                {relatedProduct.imageSrc.includes('css-placeholder-image') ? (
+                  <div className="absolute inset-0 css-placeholder banner"></div>
+                ) : (
+                  <Image
+                    src={relatedProduct.imageSrc}
+                    alt={relatedProduct.name}
+                    fill
+                    className="object-contain p-4"
+                  />
+                )}
               </div>
-            ))}
-          </div>
-        </div>
-      )}
-      
-      {/* Call to Action */}
-      <div className="bg-blue-600 text-white py-12">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">Need Custom {product.name}?</h2>
-          <p className="text-lg mb-8 max-w-2xl mx-auto">
-            Contact our team today to discuss your specific requirements and get a customized quote.
-          </p>
-          <Link href="/contact" className="inline-block bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-colors">
-            Contact Us
-          </Link>
+              <div className="p-4">
+                <h3 className="font-semibold mb-2">{relatedProduct.name}</h3>
+                <p className="text-sm text-gray-600 mb-3 line-clamp-2">{relatedProduct.description}</p>
+                <Link 
+                  href={`/products/${relatedProduct.id}`}
+                  className="text-blue-600 text-sm font-medium hover:text-blue-800"
+                >
+                  View Details
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
+    )}
+    
+    {/* Call to Action */}
+    <div className="bg-blue-600 text-white py-12">
+      <div className="container mx-auto px-4 text-center">
+        <h2 className="text-2xl md:text-3xl font-bold mb-4">Need Custom {product.name}?</h2>
+        <p className="text-lg mb-8 max-w-2xl mx-auto">
+          Contact our team today to discuss your specific requirements and get a customized quote.
+        </p>
+        <Link href="/contact" className="inline-block bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-colors">
+          Contact Us
+        </Link>
+      </div>
+    </div>
     </Layout>
   );
 };
