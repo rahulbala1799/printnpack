@@ -579,7 +579,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8 mb-10 border border-blue-100 shadow-md">
                   <h4 className="text-2xl font-bold mb-6 text-center text-blue-800 border-b border-blue-200 pb-3">Perfect For These Applications</h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    {product.applications && product.applications.map((application, idx) => {
+                    {product.applications && product.applications.length > 0 && product.applications.map((application, idx) => {
                       // Define icons for common applications
                       let icon = (
                         <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -623,7 +623,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
             <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8 mb-10 border border-blue-100 shadow-md">
               <h4 className="text-2xl font-bold mb-6 text-center text-blue-800 border-b border-blue-200 pb-3">Perfect For These Applications</h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                {product.applications.map((application, idx) => {
+                {product.applications && product.applications.length > 0 && product.applications.map((application, idx) => {
                   // Define icons for common applications
                   let icon = (
                     <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -899,97 +899,95 @@ const ProductDetail = ({ product, relatedProducts }) => {
       )}
       
       {/* Product Variants */}
-      {product.variants && product.variants.length > 0 && (
-        <div className="mt-16">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold mb-4">Choose Your Perfect Solution</h3>
-            <p className="text-gray-600 max-w-3xl mx-auto">
-              Select from our range of premium options to find the ideal packaging solution for your specific business needs.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {product.variants.map((variant, index) => (
-              <div key={index} className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                <div className="flex flex-col h-full">
-                  <div className="relative">
-                    <div className="h-64 relative bg-gray-50">
-                      <Image
-                        src={variant.imageSrc}
-                        alt={variant.name}
-                        fill
-                        className="object-contain p-4"
-                      />
-                    </div>
-                    {/* Option label */}
-                    <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                      {index === 0 ? 'Best Seller' : 'Popular Choice'}
+      <div className="mt-16">
+        <div className="text-center mb-12">
+          <h3 className="text-3xl font-bold mb-4">Choose Your Perfect Solution</h3>
+          <p className="text-gray-600 max-w-3xl mx-auto">
+            Select from our range of premium options to find the ideal packaging solution for your specific business needs.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {product.variants && product.variants.length > 0 ? product.variants.map((variant, index) => (
+            <div key={index} className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="flex flex-col h-full">
+                <div className="relative">
+                  <div className="h-64 relative bg-gray-50">
+                    <Image
+                      src={variant.imageSrc}
+                      alt={variant.name}
+                      fill
+                      className="object-contain p-4"
+                    />
+                  </div>
+                  {/* Option label */}
+                  <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    {index === 0 ? 'Best Seller' : 'Popular Choice'}
+                  </div>
+                </div>
+                
+                <div className="p-6 flex-grow flex flex-col">
+                  <h4 className="text-xl font-bold mb-2">{variant.name}</h4>
+                  <p className="text-gray-600 mb-4">{variant.description}</p>
+                  
+                  <div className="flex-grow">
+                    <div className="border-t border-gray-100 pt-4 mb-4">
+                      <h5 className="font-semibold text-gray-900 mb-3">Key Advantages:</h5>
+                      <ul className="space-y-2">
+                        {variant.features.map((feature, featureIdx) => (
+                          <li key={featureIdx} className="flex items-start text-sm">
+                            <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            </svg>
+                            <span className="text-gray-700">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                   
-                  <div className="p-6 flex-grow flex flex-col">
-                    <h4 className="text-xl font-bold mb-2">{variant.name}</h4>
-                    <p className="text-gray-600 mb-4">{variant.description}</p>
-                    
-                    <div className="flex-grow">
-                      <div className="border-t border-gray-100 pt-4 mb-4">
-                        <h5 className="font-semibold text-gray-900 mb-3">Key Advantages:</h5>
-                        <ul className="space-y-2">
-                          {variant.features.map((feature, featureIdx) => (
-                            <li key={featureIdx} className="flex items-start text-sm">
-                              <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                              </svg>
-                              <span className="text-gray-700">{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                    
-                    <div className="mt-auto">
-                      <div className="flex flex-col sm:flex-row gap-3 mt-6">
-                        <Link 
-                          href={`/contact?product=${encodeURIComponent(variant.name)}`}
-                          className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium text-center transition-colors"
-                        >
-                          Request Quote
-                        </Link>
-                        <Link 
-                          href={`/contact?product=${encodeURIComponent(variant.name)}&subject=Sample Request`}
-                          className="flex-1 border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 px-4 rounded-lg font-medium text-center transition-colors"
-                        >
-                          Get Samples
-                        </Link>
-                      </div>
+                  <div className="mt-auto">
+                    <div className="flex flex-col sm:flex-row gap-3 mt-6">
+                      <Link 
+                        href={`/contact?product=${encodeURIComponent(variant.name)}`}
+                        className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium text-center transition-colors"
+                      >
+                        Request Quote
+                      </Link>
+                      <Link 
+                        href={`/contact?product=${encodeURIComponent(variant.name)}&subject=Sample Request`}
+                        className="flex-1 border border-blue-600 text-blue-600 hover:bg-blue-50 py-3 px-4 rounded-lg font-medium text-center transition-colors"
+                      >
+                        Get Samples
+                      </Link>
                     </div>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-          
-          {/* Custom solutions banner */}
-          <div className="mt-12 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-8 text-white shadow-lg">
-            <div className="flex flex-col md:flex-row md:items-center">
-              <div className="md:flex-1">
-                <h3 className="text-2xl font-bold mb-2">Need a Custom Solution?</h3>
-                <p className="mb-4 md:mb-0 text-blue-100">
-                  We can tailor our products to your exact specifications. Contact our team to discuss your unique requirements.
-                </p>
-              </div>
-              <div className="md:ml-8">
-                <Link 
-                  href="/contact?subject=Custom Solution"
-                  className="inline-block bg-white text-blue-600 hover:bg-blue-50 py-3 px-6 rounded-lg font-medium text-center transition-colors"
-                >
-                  Get Custom Solution
-                </Link>
-              </div>
+            </div>
+          )) : null}
+        </div>
+        
+        {/* Custom solutions banner */}
+        <div className="mt-12 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-8 text-white shadow-lg">
+          <div className="flex flex-col md:flex-row md:items-center">
+            <div className="md:flex-1">
+              <h3 className="text-2xl font-bold mb-2">Need a Custom Solution?</h3>
+              <p className="mb-4 md:mb-0 text-blue-100">
+                We can tailor our products to your exact specifications. Contact our team to discuss your unique requirements.
+              </p>
+            </div>
+            <div className="md:ml-8">
+              <Link 
+                href="/contact?subject=Custom Solution"
+                className="inline-block bg-white text-blue-600 hover:bg-blue-50 py-3 px-6 rounded-lg font-medium text-center transition-colors"
+              >
+                Get Custom Solution
+              </Link>
             </div>
           </div>
         </div>
-      )}
+      </div>
       
       {/* Weekly Delivery Service Section - Redesigned */}
       {product.weeklyDelivery && (
@@ -1172,7 +1170,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
     <div className="container mx-auto px-4 py-12">
       <h2 className="text-2xl font-bold mb-8">Related Products</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {relatedProducts.map(relatedProduct => (
+        {relatedProducts && relatedProducts.length > 0 && relatedProducts.map(relatedProduct => (
           <div key={relatedProduct.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
             <div className="h-48 relative bg-gray-50">
               {relatedProduct.imageSrc.includes('css-placeholder-image') ? (
