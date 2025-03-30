@@ -1286,12 +1286,12 @@ const products = [
       }
     ],
     images: [
-      '/images/placeholders/vinyl-stickers/vinyl-stickers-main.jpg',
-      '/images/placeholders/vinyl-stickers/vinyl-stickers-custom-shapes.jpg',
-      '/images/placeholders/vinyl-stickers/vinyl-stickers-sheet.jpg',
-      '/images/placeholders/vinyl-stickers/vinyl-stickers-application.jpg'
+      '/css-placeholder-image',
+      '/css-placeholder-image',
+      '/css-placeholder-image',
+      '/css-placeholder-image'
     ],
-    imageSrc: '/images/placeholders/vinyl-stickers/vinyl-stickers-main.jpg',
+    imageSrc: '/css-placeholder-image',
     price: 'Starting at €0.50 per sticker',
     quoteRequired: false,
     leadTime: '2-5 business days standard',

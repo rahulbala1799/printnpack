@@ -1990,18 +1990,10 @@ const ProductDetail = ({ product, relatedProducts }) => {
               
               <div className="md:col-span-2 relative h-64 md:h-80 rounded-xl overflow-hidden shadow-2xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-black/40 to-transparent z-10"></div>
-                <Image 
-                  src="/images/placeholders/vinyl-stickers/vinyl-stickers-main.jpg"
-                  alt="Custom Vinyl Stickers"
-                  fill
-                  className="object-cover"
-                  priority={true}
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.parentNode.classList.add('bg-gray-100');
-                    e.target.parentNode.innerHTML += '<div class="flex items-center justify-center h-full text-gray-500">Image loading error</div>';
-                  }}
-                />
+                {/* Replace image with CSS placeholder */}
+                <div className="absolute inset-0 css-placeholder banner flex items-center justify-center">
+                  <span className="text-xl font-bold text-white">Custom Vinyl Stickers</span>
+                </div>
               </div>
             </div>
           </div>
