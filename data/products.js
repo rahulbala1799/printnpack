@@ -410,7 +410,7 @@ const products = [
   {
     id: 'marketing-materials',
     name: 'Marketing Materials',
-    category: 'Promotional',
+    category: 'Leaflets',
     description: 'High-quality printed materials to promote your business and generate leads.',
     features: [
       'Flyers and leaflets',
@@ -500,7 +500,7 @@ const products = [
   {
     id: 'wide-format-products',
     name: 'Wide Format Products',
-    category: 'Promotional',
+    category: 'Leaflets',
     description: 'High-impact large format printing for banners, posters, and displays to make your brand stand out.',
     features: [
       'High-resolution printing',

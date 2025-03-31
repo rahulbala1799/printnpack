@@ -75,7 +75,7 @@ const groupProductsByCategory = (products) => {
 const mainGroups = [
   { id: 'packaging', name: 'Packaging', categories: ['Food Packaging', 'Retail Packaging', 'Eco-Friendly Packaging', 'Shipping', 'Hospitality Products'] },
   { id: 'wide-format', name: 'Wide Format', categories: ['Wide Format'] },
-  { id: 'promotional', name: 'Promotional', categories: ['Promotional', 'Food Service'] },
+  { id: 'leaflets', name: 'Leaflets and Flyers', categories: ['Leaflets', 'Food Service'] },
 ];
 
 const ProductsPage = () => {
