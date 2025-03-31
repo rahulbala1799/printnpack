@@ -10,7 +10,7 @@ const ProductCard = ({ product }) => {
   return (
     <div className="group bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col">
       <Link href={`/products/${product.id}`} className="block relative h-60 overflow-hidden bg-gray-100">
-        {product.imageSrc.includes('css-placeholder-image') ? (
+        {!product.imageSrc || product.imageSrc.includes('css-placeholder-image') ? (
           <div className="absolute inset-0 css-placeholder banner flex items-center justify-center">
             <span className="sr-only">{product.name}</span>
           </div>
@@ -75,6 +75,7 @@ const groupProductsByCategory = (products) => {
 const mainGroups = [
   { id: 'packaging', name: 'Packaging', categories: ['Food Packaging', 'Retail Packaging', 'Eco-Friendly Packaging', 'Shipping', 'Hospitality Products'] },
   { id: 'wide-format', name: 'Wide Format', categories: ['Wide Format'] },
+  { id: 'marketing', name: 'Marketing', categories: ['Marketing'] },
   { id: 'leaflets', name: 'Leaflets and Flyers', categories: ['Leaflets', 'Food Service'] },
 ];
 

@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import products, { getProductBySlug, getRelatedProducts } from '../../data/products';
+import PaperOptionsExplorer, { PaperComparisonChart } from '../../components/PaperOptionsExplorer';
 
 // Page component
 const ProductDetail = ({ product, relatedProducts }) => {
@@ -409,9 +410,9 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 <div className="relative h-[400px] rounded-xl overflow-hidden shadow-2xl transform rotate-3 z-10 transition-transform duration-500 hover:rotate-0 border-8 border-white">
                   <Image 
                     src="/ifa/product/Poster/PosterPrinting-4.jpg"
-                    alt="Professional poster printing" 
-                    fill 
-                    className="object-cover"
+                    alt="Poster Printing"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
                     <span className="text-white font-semibold">Premium Poster Printing</span>
@@ -422,27 +423,27 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 <div className="absolute top-20 -right-10 w-48 h-64 rounded-lg overflow-hidden shadow-xl transform -rotate-6 z-20 transition-transform duration-500 hover:rotate-0 border-4 border-white">
                   <Image 
                     src="/ifa/product/Poster/1.webp"
-                    alt="Retail poster example" 
-                    fill 
-                    className="object-cover"
+                    alt="A4 Poster"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 
                 <div className="absolute -bottom-10 -left-10 w-48 h-64 rounded-lg overflow-hidden shadow-xl transform rotate-12 z-0 transition-transform duration-500 hover:rotate-0 border-4 border-white">
                   <Image 
                     src="/ifa/product/Poster/2.webp"
-                    alt="Event poster example" 
-                    fill 
-                    className="object-cover"
+                    alt="A3 Poster"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 
                 <div className="absolute top-10 -left-20 w-40 h-56 rounded-lg overflow-hidden shadow-xl transform -rotate-12 transition-transform duration-500 hover:rotate-0 border-4 border-white">
                   <Image 
                     src="/ifa/product/Poster/single_poster.jpg"
-                    alt="Exhibition poster example" 
-                    fill 
-                    className="object-cover"
+                    alt="Single Poster"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 
@@ -486,7 +487,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
             <div className="md:hidden mb-8">
               <div className="relative h-64 rounded-xl overflow-hidden shadow-2xl mx-auto max-w-sm">
                 <Image 
-                  src={product.imageSrc || '/ifa/product/leaflet/leaflet-hero.jpg'}
+                  src={product.imageSrc || '/ifa/product/Leaflet/leaflet-hero.jpg'}
                   alt={`${product.name} printing services`}
                   fill 
                   className="object-cover"
@@ -552,7 +553,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 <div className="relative h-[400px] rounded-xl overflow-hidden shadow-2xl z-10 bg-white p-6">
                   <div className="relative h-full w-full">
                     <Image 
-                      src={product.imageSrc || '/ifa/product/leaflet/leaflet-hero.jpg'}
+                      src={product.imageSrc || '/ifa/product/Leaflet/leaflet-hero.jpg'}
                       alt={`${product.name} printing example`}
                       fill 
                       className="object-contain"
@@ -1675,28 +1676,33 @@ const ProductDetail = ({ product, relatedProducts }) => {
         <div className="container mx-auto px-4 py-12">
           <h2 className="text-2xl font-bold mb-8">Related Products</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {relatedProducts.map(relatedProduct => (
+            {relatedProducts.map((relatedProduct) => (
               <div key={relatedProduct.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
                 <div className="h-48 relative bg-gray-50">
-                  {relatedProduct.imageSrc.includes('css-placeholder-image') ? (
+                  {!relatedProduct.imageSrc || relatedProduct.imageSrc.includes('css-placeholder-image') ? (
                     <div className="absolute inset-0 css-placeholder banner"></div>
                   ) : (
                     <Image
                       src={relatedProduct.imageSrc}
                       alt={relatedProduct.name}
                       fill
-                      className="object-contain p-4"
+                      className="object-contain group-hover:scale-105 transition-transform duration-500"
                     />
                   )}
+                  <div className="absolute top-2 left-2">
+                    <span className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                      {relatedProduct.category}
+                    </span>
+                  </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold mb-2">{relatedProduct.name}</h3>
-                  <p className="text-sm text-gray-600 mb-3 line-clamp-2">{relatedProduct.description}</p>
-                  <Link 
-                    href={`/products/${relatedProduct.id}`}
-                    className="text-blue-600 text-sm font-medium hover:text-blue-800"
-                  >
+                  <h3 className="font-semibold text-gray-900">{relatedProduct.name}</h3>
+                  <p className="mt-1 text-sm text-gray-500 line-clamp-2">{relatedProduct.description}</p>
+                  <Link href={`/products/${relatedProduct.id}`} className="mt-3 inline-flex items-center text-blue-600 hover:text-blue-800">
                     View Details
+                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </Link>
                 </div>
               </div>
@@ -1900,28 +1906,33 @@ const ProductDetail = ({ product, relatedProducts }) => {
         <div className="container mx-auto px-4 py-12">
           <h2 className="text-2xl font-bold mb-8">Related Products</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {relatedProducts.map(relatedProduct => (
+            {relatedProducts.map((relatedProduct) => (
               <div key={relatedProduct.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
                 <div className="h-48 relative bg-gray-50">
-                  {relatedProduct.imageSrc.includes('css-placeholder-image') ? (
+                  {!relatedProduct.imageSrc || relatedProduct.imageSrc.includes('css-placeholder-image') ? (
                     <div className="absolute inset-0 css-placeholder banner"></div>
                   ) : (
                     <Image
                       src={relatedProduct.imageSrc}
                       alt={relatedProduct.name}
                       fill
-                      className="object-contain p-4"
+                      className="object-contain group-hover:scale-105 transition-transform duration-500"
                     />
                   )}
+                  <div className="absolute top-2 left-2">
+                    <span className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                      {relatedProduct.category}
+                    </span>
+                  </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold mb-2">{relatedProduct.name}</h3>
-                  <p className="text-sm text-gray-600 mb-3 line-clamp-2">{relatedProduct.description}</p>
-                  <Link 
-                    href={`/products/${relatedProduct.id}`}
-                    className="text-blue-600 text-sm font-medium hover:text-blue-800"
-                  >
+                  <h3 className="font-semibold text-gray-900">{relatedProduct.name}</h3>
+                  <p className="mt-1 text-sm text-gray-500 line-clamp-2">{relatedProduct.description}</p>
+                  <Link href={`/products/${relatedProduct.id}`} className="mt-3 inline-flex items-center text-blue-600 hover:text-blue-800">
                     View Details
+                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </Link>
                 </div>
               </div>
@@ -2101,21 +2112,34 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 </p>
               </div>
               
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {product.paperOptions && product.paperOptions.map((option, index) => (
-                  <div key={index} className="bg-white rounded-xl overflow-hidden shadow-md border border-gray-200 hover:shadow-lg transition-shadow">
-                    <div className="h-2 bg-gradient-to-r from-blue-500 to-blue-700"></div>
-                    <div className="p-6">
-                      <h3 className="font-bold text-lg text-gray-800 mb-2">{option.name}</h3>
-                      <p className="text-gray-600 text-sm mb-4">{option.description}</p>
-                      <div className="mt-auto">
-                        <p className="text-sm font-medium text-blue-700 mt-3">{option.recommended}</p>
+              {/* Enhanced Paper Options Explorer */}
+              {product.paperWeights && product.paperFinishes && (
+                <PaperOptionsExplorer 
+                  paperWeights={product.paperWeights} 
+                  paperFinishes={product.paperFinishes}
+                  laminationOptions={product.laminationOptions}
+                />
+              )}
+              
+              {/* Legacy implementation - fallback if new structure not available */}
+              {!product.paperWeights && product.paperOptions && (
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {product.paperOptions.map((option, index) => (
+                    <div key={index} className="bg-white rounded-xl overflow-hidden shadow-md border border-gray-200 hover:shadow-lg transition-shadow">
+                      <div className="h-2 bg-gradient-to-r from-blue-500 to-blue-700"></div>
+                      <div className="p-6">
+                        <h3 className="font-bold text-lg text-gray-800 mb-2">{option.name}</h3>
+                        <p className="text-gray-600 text-sm mb-4">{option.description}</p>
+                        <div className="mt-auto">
+                          <p className="text-sm font-medium text-blue-700 mt-3">{option.recommended}</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
               
+              {/* Paper Sample Request Section */}
               <div className="mt-12 bg-blue-50 p-6 rounded-xl">
                 <h3 className="font-bold text-xl text-blue-900 mb-3">Not sure which paper to choose?</h3>
                 <p className="text-blue-800 mb-4">
@@ -2162,10 +2186,10 @@ const ProductDetail = ({ product, relatedProducts }) => {
         <div className="container mx-auto px-4 py-12">
           <h2 className="text-2xl font-bold mb-8">Related Products</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {relatedProducts.map(relatedProduct => (
+            {relatedProducts.map((relatedProduct) => (
               <div key={relatedProduct.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
                 <div className="h-48 relative bg-gray-50">
-                  {relatedProduct.imageSrc.includes('css-placeholder-image') ? (
+                  {!relatedProduct.imageSrc || relatedProduct.imageSrc.includes('css-placeholder-image') ? (
                     <div className="absolute inset-0 css-placeholder banner"></div>
                   ) : (
                     <Image
@@ -2175,15 +2199,20 @@ const ProductDetail = ({ product, relatedProducts }) => {
                       className="object-contain p-4"
                     />
                   )}
+                  <div className="absolute top-2 left-2">
+                    <span className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                      {relatedProduct.category}
+                    </span>
+                  </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold mb-2">{relatedProduct.name}</h3>
-                  <p className="text-sm text-gray-600 mb-3 line-clamp-2">{relatedProduct.description}</p>
-                  <Link 
-                    href={`/products/${relatedProduct.id}`}
-                    className="text-blue-600 text-sm font-medium hover:text-blue-800"
-                  >
+                  <h3 className="font-semibold text-gray-900">{relatedProduct.name}</h3>
+                  <p className="mt-1 text-sm text-gray-500 line-clamp-2">{relatedProduct.description}</p>
+                  <Link href={`/products/${relatedProduct.id}`} className="mt-3 inline-flex items-center text-blue-600 hover:text-blue-800">
                     View Details
+                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </Link>
                 </div>
               </div>
@@ -2191,6 +2220,86 @@ const ProductDetail = ({ product, relatedProducts }) => {
           </div>
         </div>
       </div>
+
+      {product.foldOptions && product.foldOptions.length > 0 && (
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                Available Fold Options
+              </h2>
+              <p className="mt-4 text-lg text-gray-500">
+                Choose the perfect fold style for your leaflet
+              </p>
+            </div>
+            <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {product.foldOptions.map((option, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105"
+                >
+                  <div className="relative h-64">
+                    <Image
+                      src={option.image}
+                      alt={`${product.name} - ${option.name}`}
+                      layout="fill"
+                      objectFit="cover"
+                      className="group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold text-gray-900">
+                      {option.name}
+                    </h3>
+                    <p className="mt-2 text-gray-500">{option.description}</p>
+                    <div className="mt-4">
+                      <span className="text-sm font-medium text-gray-500">
+                        Folded dimensions: {option.dimensions}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-12 bg-blue-50 rounded-lg p-6">
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <svg
+                    className="h-6 w-6 text-blue-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <h3 className="text-lg font-medium text-blue-900">
+                    Pro Tip: Designing for Folded Leaflets
+                  </h3>
+                  <div className="mt-2 text-sm text-blue-700">
+                    <p>
+                      When designing your leaflet, remember to account for the fold lines
+                      in your layout. For best results:
+                    </p>
+                    <ul className="mt-2 list-disc list-inside">
+                      <li>Keep important content away from fold lines</li>
+                      <li>Use the front panel for your main message</li>
+                      <li>Consider the reading order of folded sections</li>
+                      <li>Test your design with a physical mockup</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
     </Layout>
   );
 };
