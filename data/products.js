@@ -1433,20 +1433,27 @@ const products = [
     id: 'leaflets-a6',
     name: 'A6 Leaflets',
     category: 'Leaflets',
-    description: 'Compact A6 leaflets perfect for event promotions and small business marketing.',
+    description: 'Compact A6 leaflets perfect for event promotions, pocket-sized information, and small business marketing. Ideal for businesses seeking cost-effective print materials with maximum portability.',
     features: [
       'Standard A6 size (105 x 148mm)',
       'Multiple fold options available',
-      'High-quality paper stocks',
-      'Full-color printing',
-      'Fast turnaround times'
+      'Premium paper stocks from 90gsm - 350gsm',
+      'Full-color double-sided printing with vibrant results',
+      'Fast turnaround times with delivery in 3-5 business days',
+      'Optional lamination finishes for enhanced durability',
+      'Custom design services available',
+      'Eco-friendly paper options'
     ],
+    detailedDescription: 'A6 Leaflets are our most compact and cost-effective printed marketing material. At just 105 x 148mm, these pocket-sized leaflets are perfect for quick information sharing and high-volume distributions where portability is key.\n\nOur premium A6 leaflets are printed on high-quality paper stocks ranging from 90gsm to 350gsm, with various finishes including uncoated, silk, gloss, and matt. Despite their small size, these versatile leaflets can be folded to create even more compact formats while maximizing your content space.\n\nAll A6 leaflets feature vibrant, full-color printing on both sides, allowing you to maximize your messaging in a small space. Optional lamination (matt or gloss) provides enhanced durability and a premium feel, perfect for items that will be handled frequently or need to withstand environmental conditions.\n\nIdeal for event tickets, appointment cards, discount vouchers, small product info cards, loyalty cards, and promotional handouts, our A6 leaflets help you make an impact while being extremely practical and cost-effective.',
     specifications: [
       { name: 'Size', value: '105 x 148mm (A6)' },
-      { name: 'Paper Weight', value: '130gsm - 300gsm' },
+      { name: 'Paper Weight', value: '90gsm - 350gsm' },
       { name: 'Print Quality', value: 'Full color, double-sided' },
       { name: 'Minimum Order', value: '100' },
-      { name: 'Lead Time', value: '3-5 business days' }
+      { name: 'Lead Time', value: '3-5 business days' },
+      { name: 'Finishes Available', value: 'Matt, Gloss, Silk, Uncoated, Matt Laminated, Gloss Laminated' },
+      { name: 'Lamination Options', value: 'None, Matt, Gloss' },
+      { name: 'Fold Types', value: 'No Fold, Half Fold, Tri-Fold (additional charges may apply)' }
     ],
     images: [
       '/ifa/product/nofold/Reppixel_A4_flyer_printing01-800x533.jpg',
@@ -1457,22 +1464,158 @@ const products = [
     foldOptions: [
       {
         name: 'No Fold',
-        description: 'Perfect for simple, straightforward designs',
+        description: 'Perfect for simple, straightforward designs that fit in a pocket. Ideal for event tickets, loyalty cards, and promotional information.',
         image: '/ifa/product/nofold/Reppixel_A4_flyer_printing01-800x533.jpg',
-        dimensions: '105 x 148mm'
+        dimensions: '105 x 148mm',
+        benefits: [
+          'Maximum uninterrupted space for content',
+          'Pocket-sized convenience',
+          'Ideal for cards and tickets',
+          'Most economical option'
+        ]
       },
       {
         name: 'Half Fold',
-        description: 'Classic fold for easy distribution',
+        description: 'Creates a tiny booklet with 4 distinct page areas. Perfect for mini menus, small product catalogs, and compact brochures.',
         image: '/ifa/product/Bifold/Redpixel-bi-fold-Brochure-A4_900x600_01-800x533.jpg',
-        dimensions: '52.5 x 148mm when folded'
+        dimensions: '52.5 x 148mm when folded',
+        benefits: [
+          'Creates a micro-booklet format',
+          'Four distinct page areas',
+          'Extremely portable',
+          'Perfect for wallet-sized information'
+        ]
       },
       {
         name: 'Tri-Fold',
-        description: 'Maximum content space with professional look',
+        description: 'Our smallest folded format, creating six tiny panels for organized content presentation in an ultra-compact format.',
         image: '/ifa/product/Trifold/Redpixel_3-Fold-Brochure_DL_900x600_03-800x533.jpg',
-        dimensions: '35 x 148mm when folded'
+        dimensions: '35 x 148mm when folded',
+        benefits: [
+          'Ultra-compact final size',
+          'Six distinct panels for organized content',
+          'Creates natural sequence for information flow',
+          'Perfect for pocket reference materials'
+        ]
       }
+    ],
+    paperWeights: [
+      {
+        weight: '90gsm',
+        category: 'Ultra Light',
+        description: 'Ultra-lightweight paper, economical for mass distribution.',
+        best_for: 'Mass mailings, inserts, and temporary promotions',
+        features: ['Most economical', 'Easily recyclable', 'Light and easy to distribute']
+      },
+      {
+        weight: '130gsm',
+        category: 'Light',
+        description: 'Light yet durable paper for standard marketing materials.',
+        best_for: 'Flyers, promotional materials, and handouts',
+        features: ['Good balance of quality and value', 'Standard weight for flyers', 'Cost-effective option']
+      },
+      {
+        weight: '170gsm',
+        category: 'Medium',
+        description: 'Medium-weight paper ideal for professional marketing materials.',
+        best_for: 'Business cards, menus, and promotional materials',
+        features: ['Professional feel', 'Good substance', 'Excellent printability']
+      },
+      {
+        weight: '250gsm',
+        category: 'Heavy',
+        description: 'Premium heavyweight paper for high-quality print materials.',
+        best_for: 'Premium cards, product info, and high-end marketing',
+        features: ['Substantial weight', 'Premium feel', 'Outstanding durability']
+      },
+      {
+        weight: '300gsm',
+        category: 'Premium',
+        description: 'Extra-thick premium paper with luxury feel.',
+        best_for: 'Luxury cards, presentation materials, and premium marketing',
+        features: ['Luxury weight', 'Exceptional quality', 'Maximum durability']
+      },
+      {
+        weight: '350gsm',
+        category: 'Ultra Premium',
+        description: 'Ultra-premium heavyweight paper for maximum impact.',
+        best_for: 'Prestigious marketing materials and premium presentations',
+        features: ['Maximum weight and durability', 'Exceptional quality', 'Luxury presentation']
+      }
+    ],
+    
+    paperFinishes: [
+      {
+        name: 'Uncoated',
+        description: 'Natural feel paper with no coating, perfect for writing on.',
+        benefits: 'Natural feel, can be written on, absorbs ink well, authentic look',
+        best_for: 'Materials that need to be written on, elegant understated designs'
+      },
+      {
+        name: 'Silk',
+        description: 'Smooth paper with a subtle sheen that enhances color vibrancy while maintaining readability.',
+        benefits: 'Subtle sheen, smooth texture, enhanced color reproduction, professional appearance',
+        best_for: 'Business cards, menus, and professional marketing materials'
+      },
+      {
+        name: 'Gloss',
+        description: 'Shiny, reflective finish that makes colors pop dramatically.',
+        benefits: 'Vibrant color reproduction, high-shine surface, crisp image details',
+        best_for: 'Photo-rich designs, product cards, fashion materials'
+      },
+      {
+        name: 'Matt',
+        description: 'Sophisticated non-reflective finish with premium feel.',
+        benefits: 'Non-reflective surface, sophisticated look, reduced glare',
+        best_for: 'High-end cards, art prints, luxury marketing materials'
+      }
+    ],
+    
+    laminationOptions: [
+      {
+        name: 'No Lamination',
+        description: 'Standard print finish with no additional coating.',
+        pros: 'Most economical, eco-friendly, can be written on',
+        cons: 'Less durable, susceptible to moisture damage'
+      },
+      {
+        name: 'Matt Lamination',
+        description: 'Protective coating with non-reflective finish for a sophisticated look.',
+        pros: 'Fingerprint resistant, enhanced durability, premium soft-touch feel',
+        cons: 'Slight additional cost, cannot be written on'
+      },
+      {
+        name: 'Gloss Lamination',
+        description: 'Shiny protective coating that enhances colors and provides excellent protection.',
+        pros: 'Waterproof, highly durable, vibrant color enhancement',
+        cons: 'Can show fingerprints, higher cost, creates glare in bright light'
+      }
+    ],
+    sizeGuide: {
+      description: 'A6 is half the size of A5, making it perfect for pocket-sized marketing materials and information cards.',
+      comparisons: [
+        { size: 'A7', relation: 'A6 is twice as large as A7 (business card size)' },
+        { size: 'A5', relation: 'A6 is half the size of A5' },
+        { size: 'A4', relation: 'A6 is quarter the size of A4' }
+      ],
+      common_uses: [
+        'Event tickets',
+        'Appointment cards',
+        'Discount vouchers',
+        'Loyalty cards',
+        'Product info cards',
+        'Price lists',
+        'Contact information cards'
+      ]
+    },
+    designTips: [
+      'Keep important content at least 3mm from edges to avoid trim issues',
+      'Ensure text is legible (minimum 8pt for body text, 10pt for headings)',
+      'Use fewer words - focus on key information only',
+      'Consider fold lines when designing to avoid cutting off important content',
+      'Use high-resolution images (300dpi or higher) for best print quality',
+      'Design in CMYK color mode for accurate color reproduction',
+      'Include bleed (3mm) if you want images to extend to the edge of the card'
     ],
     price: '€0.05',
     moq: 100,
@@ -1717,14 +1860,18 @@ const products = [
     id: 'leaflets-a4',
     name: 'A4 Leaflets',
     category: 'Leaflets',
-    description: 'Large format A4 leaflets perfect for detailed brochures and catalogs.',
+    description: 'Large format A4 leaflets perfect for detailed brochures, catalogs, and professional marketing materials. Ideal for businesses seeking comprehensive print materials with maximum content space.',
     features: [
       'Standard A4 size (210 x 297mm)',
       'Multiple fold options available',
-      'Premium paper stocks',
-      'Full-color printing',
-      'Fast turnaround times'
+      'Premium paper stocks from 90gsm - 350gsm',
+      'Full-color double-sided printing with vibrant results',
+      'Fast turnaround times with delivery in 3-5 business days',
+      'Optional lamination finishes for enhanced durability',
+      'Custom design services available',
+      'Eco-friendly paper options'
     ],
+    detailedDescription: 'A4 Leaflets are our most versatile and popular printed marketing material. At 210 x 297mm, these standard-sized leaflets offer the perfect balance between content space and practical handling.\n\nOur premium A4 leaflets are printed on high-quality paper stocks ranging from 90gsm to 350gsm, with various finishes including uncoated, silk, gloss, and matt. We offer multiple folding options to help you present your information in the most effective way, from flat sheets for maximum visual impact to tri-folds for organized content presentation.\n\nAll A4 leaflets feature vibrant, full-color printing on both sides, allowing you to maximize your messaging space. Optional lamination (matt or gloss) provides enhanced durability and a premium feel, perfect for items that will be handled frequently or need to withstand environmental conditions.\n\nIdeal for product catalogs, company brochures, event programs, menus, informational handouts, and promotional materials, our A4 leaflets help you make a professional impression while effectively communicating detailed information.',
     specifications: [
       { name: 'Size', value: '210 x 297mm (A4)' },
       { name: 'Paper Weight', value: '90gsm - 350gsm' },
@@ -1732,7 +1879,8 @@ const products = [
       { name: 'Minimum Order', value: '100' },
       { name: 'Lead Time', value: '3-5 business days' },
       { name: 'Finishes Available', value: 'Matt, Gloss, Silk, Uncoated, Matt Laminated, Gloss Laminated' },
-      { name: 'Lamination Options', value: 'None, Matt, Gloss' }
+      { name: 'Lamination Options', value: 'None, Matt, Gloss' },
+      { name: 'Fold Types', value: 'No Fold, Half Fold, Tri-Fold, Z-Fold (additional charges may apply)' }
     ],
     images: [
       '/ifa/product/nofold/Flyer-in-Hand-A4-800x533 A4 size guide.jpg',
@@ -1743,21 +1891,39 @@ const products = [
     foldOptions: [
       {
         name: 'No Fold',
-        description: 'Perfect for detailed brochures and catalogs',
+        description: 'Perfect for detailed brochures, posters, and information sheets. Provides maximum space for content on a single sheet.',
         image: '/ifa/product/nofold/Flyer-in-Hand-A4-800x533 A4 size guide.jpg',
-        dimensions: '210 x 297mm'
+        dimensions: '210 x 297mm',
+        benefits: [
+          'Maximum uninterrupted space for content',
+          'Ideal for information sheets and posters',
+          'Perfect for detailed content and imagery',
+          'Most economical option'
+        ]
       },
       {
         name: 'Half Fold',
-        description: 'Classic fold for easy reading',
+        description: 'Classic fold creating a 4-page booklet at A5 size. Perfect for menus, event programs, and simple brochures.',
         image: '/ifa/product/Bifold/Bifold.png',
-        dimensions: '105 x 297mm when folded'
+        dimensions: '105 x 297mm when folded',
+        benefits: [
+          'Creates a booklet format with clear page breaks',
+          'Four distinct page areas',
+          'Professional presentation',
+          'Perfect for menus and event programs'
+        ]
       },
       {
         name: 'Tri-Fold',
-        description: 'Maximum content space with professional look',
+        description: 'Divides the leaflet into three panels, creating six content areas for organized information presentation.',
         image: '/ifa/product/Trifold/Trifold.png',
-        dimensions: '70 x 297mm when folded'
+        dimensions: '70 x 297mm when folded',
+        benefits: [
+          'Six distinct panels for organized content',
+          'Perfect for step-by-step guides',
+          'Creates natural sequence for information flow',
+          'Folds to a convenient size for distribution'
+        ]
       }
     ],
     paperWeights: [
@@ -1852,22 +2018,58 @@ const products = [
         cons: 'Can show fingerprints, higher cost, creates glare in bright light'
       }
     ],
+    sizeGuide: {
+      description: 'A4 is the most common paper size worldwide, making it perfect for standard marketing materials and informational content.',
+      comparisons: [
+        { size: 'A5', relation: 'A4 is twice as large as A5' },
+        { size: 'A3', relation: 'A4 is half the size of A3' },
+        { size: 'US Letter', relation: 'A4 is slightly taller and narrower than US Letter' }
+      ],
+      common_uses: [
+        'Business brochures',
+        'Product catalogs',
+        'Informational handouts',
+        'Menus',
+        'Event programs',
+        'Promotional materials',
+        'Technical documentation'
+      ]
+    },
+    designTips: [
+      'Keep important content at least 3mm from edges to avoid trim issues',
+      'Ensure text is legible (minimum 9pt for body text, 12pt for headings)',
+      'Consider fold lines when designing to avoid cutting off important content',
+      'Use high-resolution images (300dpi or higher) for best print quality',
+      'Design in CMYK color mode for accurate color reproduction',
+      'Include bleed (3mm) if you want images to extend to the edge of the page',
+      'Consider how your design looks in different folded configurations'
+    ],
     price: '€0.12',
     moq: 100,
-    leadTime: '3-5 business days'
+    leadTime: '3-5 business days',
+    bulkDiscounts: [
+      { quantity: 500, discount: '10%' },
+      { quantity: 1000, discount: '15%' },
+      { quantity: 2500, discount: '20%' },
+      { quantity: 5000, discount: '25%' }
+    ]
   },
   {
     id: 'leaflets-a3',
     name: 'A3 Leaflets',
     category: 'Leaflets',
-    description: 'Large format A3 leaflets perfect for posters and detailed presentations.',
+    description: 'Large format A3 leaflets perfect for posters, detailed presentations, and high-impact marketing materials. Ideal for businesses looking to make a bold visual statement with professional print materials.',
     features: [
       'Standard A3 size (297 x 420mm)',
       'Multiple fold options available',
-      'Premium paper stocks',
-      'Full-color printing',
-      'Fast turnaround times'
+      'Premium paper stocks from 90gsm - 350gsm',
+      'Full-color double-sided printing with vibrant results',
+      'Fast turnaround times with delivery in 3-5 business days',
+      'Optional lamination finishes for enhanced durability',
+      'Custom design services available',
+      'Eco-friendly paper options'
     ],
+    detailedDescription: 'A3 Leaflets are our largest standard leaflet size, providing maximum visual impact and content space for your marketing materials. At 297 x 420mm, these versatile leaflets offer extensive room for product details, service offerings, or promotional messaging when you need to make a big impression.\n\nOur premium A3 leaflets are printed on high-quality paper stocks ranging from 90gsm to 350gsm, with various finishes including uncoated, silk, gloss, and matt. We offer multiple folding options to help you present your information in the most effective way, whether you need a simple poster, a half-fold brochure, or a more complex quarter-fold design.\n\nAll A3 leaflets feature vibrant, full-color printing on both sides, allowing you to maximize your messaging space. Optional lamination (matt or gloss) provides enhanced durability and a premium feel, perfect for display items or materials that need to withstand frequent handling.\n\nIdeal for posters, large format brochures, technical documentation, architectural plans, presentation materials, and exhibition displays, our A3 leaflets help you make a dramatic visual impact while effectively communicating detailed information.',
     specifications: [
       { name: 'Size', value: '297 x 420mm (A3)' },
       { name: 'Paper Weight', value: '90gsm - 350gsm' },
@@ -1875,7 +2077,8 @@ const products = [
       { name: 'Minimum Order', value: '100' },
       { name: 'Lead Time', value: '3-5 business days' },
       { name: 'Finishes Available', value: 'Matt, Gloss, Silk, Uncoated, Matt Laminated, Gloss Laminated' },
-      { name: 'Lamination Options', value: 'None, Matt, Gloss' }
+      { name: 'Lamination Options', value: 'None, Matt, Gloss' },
+      { name: 'Fold Types', value: 'No Fold, Half Fold, Quarter Fold, Z-Fold (additional charges may apply)' }
     ],
     images: [
       '/ifa/product/nofold/Largetrifold.jpg',
@@ -1886,21 +2089,39 @@ const products = [
     foldOptions: [
       {
         name: 'No Fold',
-        description: 'Perfect for posters and large format displays',
+        description: 'Perfect for posters, large format displays, and detailed presentations. Provides maximum space for content on a single sheet.',
         image: '/ifa/product/nofold/Largetrifold.jpg',
-        dimensions: '297 x 420mm'
+        dimensions: '297 x 420mm',
+        benefits: [
+          'Maximum uninterrupted space for content',
+          'Ideal for posters and technical drawings',
+          'Perfect for detailed charts and diagrams',
+          'High visual impact for display purposes'
+        ]
       },
       {
         name: 'Half Fold',
-        description: 'Classic fold for easy reading',
+        description: 'Classic fold for easy reading, creating a 4-page booklet style at A4 size. Excellent for large brochures and presentation materials.',
         image: '/ifa/product/Bifold/Redpixel_3-Fold-Brochure_DL_900x600_01-800x533.jpg',
-        dimensions: '148.5 x 420mm when folded'
+        dimensions: '148.5 x 420mm when folded',
+        benefits: [
+          'Creates natural page breaks for content organization',
+          'Professional large booklet feel',
+          'Perfect for presentation materials and portfolios',
+          'Manageable size while retaining visual impact'
+        ]
       },
       {
         name: 'Quarter Fold',
-        description: 'Maximum content space with professional look',
+        description: 'Divides the leaflet into four sections, providing eight content areas. Ideal for comprehensive information and multi-page presentations.',
         image: '/ifa/product/Trifold/Square Trifold.png',
-        dimensions: '74.25 x 420mm when folded'
+        dimensions: '74.25 x 420mm when folded',
+        benefits: [
+          'Eight distinct panels for organized content',
+          'Perfect for detailed step-by-step guides',
+          'Creates natural sequence for information flow',
+          'Folds down to a convenient size for distribution'
+        ]
       }
     ],
     paperWeights: [
@@ -1994,6 +2215,32 @@ const products = [
         pros: 'Waterproof, highly durable, vibrant color enhancement',
         cons: 'Can show fingerprints, higher cost, creates glare in bright light'
       }
+    ],
+    sizeGuide: {
+      description: 'A3 is twice the size of A4, making it perfect for large format display materials and detailed information presentation.',
+      comparisons: [
+        { size: 'A4', relation: 'A3 is twice as large as A4' },
+        { size: 'A5', relation: 'A3 is four times the size of A5' },
+        { size: 'A2', relation: 'A3 is half the size of A2' }
+      ],
+      common_uses: [
+        'Posters and display materials',
+        'Technical documentation',
+        'Architectural plans',
+        'Conference materials',
+        'Detailed product showcases',
+        'Educational materials',
+        'Exhibition displays'
+      ]
+    },
+    designTips: [
+      'Keep important content at least 5mm from edges to avoid trim issues',
+      'Ensure text is legible when viewed from a distance',
+      'Consider fold lines when designing to avoid cutting off important content',
+      'Use high-resolution images (300dpi or higher) for best print quality',
+      'Design in CMYK color mode for accurate color reproduction',
+      'Include bleed (3mm) if you want images to extend to the edge of the page',
+      'Balance text size with viewing distance - larger format allows for more detail'
     ],
     price: '€0.20',
     moq: 100,
