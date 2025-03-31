@@ -58,17 +58,13 @@ const products = [
       { name: 'Delivery Options', value: 'Weekly scheduled delivery service available' },
     ],
     images: [
-      '/ifa/product/pizzab/1.png',
-      '/ifa/product/pizzab/2.png',
-      '/ifa/product/pizzab/3.png',
-      '/ifa/product/pizzab/4.png',
       '/ifa/product/pizzab/5.png',
       '/ifa/product/pizzab/6.png',
       '/ifa/product/pizzab/7.png',
       '/ifa/product/pizzab/8.png',
       '/ifa/product/pizzab/9.png'
     ],
-    imageSrc: '/ifa/product/pizzab/1.png',
+    imageSrc: '/ifa/product/pizzab/5.png',
     price: 'Starting at €0.35 per unit',
     moq: 250,
     leadTime: '7-10 business days',
