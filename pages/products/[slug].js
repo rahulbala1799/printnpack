@@ -185,23 +185,23 @@ const ProductDetail = ({ product, relatedProducts }) => {
             </svg>
           </div>
           
-          <div className="container mx-auto px-4 py-12 md:py-20 relative z-10">
+          <div className="container mx-auto px-4 py-8 md:py-16 relative z-10">
             {/* Desktop layout - side by side */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <div className="text-white order-2 md:order-1">
-                <span className="inline-block bg-white/20 backdrop-blur-sm text-white px-4 py-1 rounded-full text-sm font-medium mb-6">
+                <span className="inline-block bg-white/20 backdrop-blur-sm text-white px-4 py-1 rounded-full text-sm font-medium mb-4 md:mb-6">
                   {product.category}
                 </span>
-                <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                  Eco-Friendly <span className="text-yellow-300">Pizza Boxes</span><br />With Style & Substance
+                <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
+                  Eco-Friendly <span className="text-yellow-300">Pizza Boxes</span><br className="hidden sm:block" /> With Style
                 </h1>
-                <p className="text-xl text-amber-100 mb-8 max-w-lg">
+                <p className="text-lg md:text-xl text-amber-100 mb-6 md:mb-8 max-w-lg">
                   Premium kraft pizza boxes that keep your delicious creations hot while showcasing your commitment to sustainability.
                 </p>
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                   <a 
                     href="#pizza-box-options" 
-                    className="inline-flex items-center bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-lg font-bold transition-colors"
+                    className="w-full sm:w-auto text-center inline-flex justify-center items-center bg-orange-600 hover:bg-orange-700 text-white px-4 sm:px-6 py-3 rounded-lg font-bold transition-colors"
                   >
                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
@@ -210,7 +210,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
                   </a>
                   <Link 
                     href="/contact?subject=Pizza Box Quote" 
-                    className="inline-flex items-center bg-transparent hover:bg-white/10 text-white border-2 border-white px-6 py-3 rounded-lg font-bold transition-colors"
+                    className="w-full sm:w-auto text-center inline-flex justify-center items-center bg-transparent hover:bg-white/10 text-white border-2 border-white px-4 sm:px-6 py-3 rounded-lg font-bold transition-colors"
                   >
                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -220,22 +220,24 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 </div>
                 
                 {/* Size markers */}
-                <div className="mt-10 flex items-center space-x-3">
-                  <span className="text-sm text-amber-200">Available sizes: </span>
-                  {['7"', '9"', '10"', '12"', '14"'].map((size, idx) => (
-                    <span 
-                      key={idx} 
-                      className="inline-block px-2 py-1 rounded-full text-xs font-bold bg-amber-900 text-amber-300 border border-amber-600"
-                    >
-                      {size}
-                    </span>
-                  ))}
+                <div className="mt-6 md:mt-10">
+                  <span className="text-sm text-amber-200 block mb-2 md:inline md:mr-3">Available sizes: </span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {['7"', '9"', '10"', '12"', '14"'].map((size, idx) => (
+                      <span 
+                        key={idx} 
+                        className="inline-block px-2 py-1 rounded-full text-xs font-bold bg-amber-900 text-amber-300 border border-amber-600"
+                      >
+                        {size}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
               
-              <div className="relative h-96 md:h-auto order-1 md:order-2">
+              <div className="relative h-64 sm:h-80 md:h-auto order-1 md:order-2">
                 {/* Rotating Image with Animation */}
-                <div className="relative aspect-square max-w-xl mx-auto">
+                <div className="relative aspect-square max-w-xs sm:max-w-sm md:max-w-md lg:max-w-xl mx-auto">
                   {product.images.map((img, idx) => (
                     <div 
                       key={idx}
@@ -256,11 +258,11 @@ const ProductDetail = ({ product, relatedProducts }) => {
                       </div>
                       
                       {/* Decorative elements */}
-                      <div className="absolute -top-6 -right-6 w-12 h-12 bg-orange-500 rounded-full opacity-80 animate-pulse"></div>
-                      <div className="absolute -bottom-3 -left-3 w-8 h-8 bg-yellow-400 rounded-full opacity-70 animate-bounce"></div>
+                      <div className="absolute -top-3 -right-3 md:-top-6 md:-right-6 w-8 h-8 md:w-12 md:h-12 bg-orange-500 rounded-full opacity-80 animate-pulse"></div>
+                      <div className="absolute -bottom-2 -left-2 md:-bottom-3 md:-left-3 w-6 h-6 md:w-8 md:h-8 bg-yellow-400 rounded-full opacity-70 animate-bounce"></div>
                       
                       {/* Size indicator */}
-                      <div className="absolute bottom-4 right-4 bg-white text-amber-800 px-3 py-1 rounded-full font-bold shadow-lg transform -rotate-3">
+                      <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 bg-white text-amber-800 px-2 py-0.5 md:px-3 md:py-1 rounded-full font-bold shadow-lg transform -rotate-3 text-xs md:text-sm">
                         {idx === 0 ? '10"' : idx === 1 ? '14"' : idx === 2 ? '7"' : '12"'}
                       </div>
                     </div>
@@ -268,7 +270,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 </div>
                 
                 {/* Image Navigation Dots */}
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1.5">
                   {product.images.map((_, idx) => (
                     <button
                       key={idx}
