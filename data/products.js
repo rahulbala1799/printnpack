@@ -266,7 +266,7 @@ const products = [
       '/images/ifa/heroh/pizza.png'
     ],
     imageSrc: '/images/hero/pizza-box.svg',
-    price: 'Starting at €0.35 per unit',
+    price: 'Starting at €0.50 per unit',
     moq: 250,
     leadTime: '7-10 business days',
     weeklyDelivery: 'Take advantage of our weekly delivery service specifically designed for restaurants. We\'ll establish a regular schedule that ensures you never run out of packaging while minimizing storage requirements. Our account managers will track your usage patterns to recommend optimal order quantities, helping you maintain efficiency and reduce costs. This branded packaging with consistent weekly delivery enhances your professional image and ensures operational consistency.',
@@ -496,39 +496,6 @@ const products = [
     price: 'Starting at €0.50 per unit',
     moq: 250,
     leadTime: '7-10 business days'
-  },
-  {
-    id: 'wide-format-products',
-    name: 'Wide Format Products',
-    category: 'Wide Format',
-    description: 'High-impact large format printing for banners, posters, and displays to make your brand stand out.',
-    features: [
-      'High-resolution printing',
-      'Indoor and outdoor options',
-      'Variety of materials and finishes',
-      'Common and custom sizes available',
-      'Weather-resistant options',
-      'Request for quote service'
-    ],
-    detailedDescription: 'Our wide format printing services deliver eye-catching visuals perfect for trade shows, retail environments, and marketing campaigns. We offer a comprehensive range of large format print products from banners and posters to window graphics and exhibition displays. Using state-of-the-art printing technology and premium materials, we ensure vivid colors, sharp details, and durable finishes suitable for both indoor and outdoor applications. Each product can be fully customized with your branding, and our design team is available to help create impactful visuals that amplify your message.',
-    specifications: [
-      { name: 'Materials', value: 'Vinyl, fabric, paper, mesh, canvas, foam board, corrugated plastic' },
-      { name: 'Standard Sizes', value: 'A1 (594mm × 841mm), A0 (841mm × 1189mm), 24"×36", 36"×48", 4\'×8\', 2\'×6\', Custom sizes available' },
-      { name: 'Printing', value: 'High-resolution UV, latex, or solvent printing up to 1440dpi' },
-      { name: 'Finishing Options', value: 'Lamination (gloss, matte, satin), grommets, pole pockets, hemming, mounting' },
-      { name: 'Indoor Products', value: 'Posters, foam boards, standees, roll-up banners, wall graphics, backlit displays' },
-      { name: 'Outdoor Products', value: 'Vinyl banners, mesh banners, flags, A-frames, yard signs, vehicle graphics' },
-      { name: 'Exhibition Products', value: 'Pop-up displays, backdrop walls, counter displays, hanging banners, floor graphics' },
-      { name: 'Turnaround Time', value: 'Standard 3-5 business days, rush options available' },
-    ],
-    images: [
-      '/css-placeholder-image',
-      '/css-placeholder-image'
-    ],
-    imageSrc: '/css-placeholder-image',
-    price: 'Request for Quote',
-    quoteRequired: true,
-    leadTime: 'Varies by product and quantity'
   },
   {
     id: 'roll-up-banner-stands',
