@@ -1099,6 +1099,75 @@ const ProductDetail = ({ product, relatedProducts }) => {
         </div>
       </div>
       
+      {/* Size Comparison Section for Pizza Boxes */}
+      {product && product.id === 'brown-pizza-boxes' && (
+        <div className="bg-white py-12 border-t border-gray-200">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">Size Comparison</h2>
+              
+              <div className="bg-gray-50 p-4 sm:p-6 rounded-xl shadow-sm overflow-hidden">
+                <div className="flex justify-center items-end space-x-2 sm:space-x-4 h-48 sm:h-64 mb-4 overflow-x-auto no-scrollbar">
+                  {['7', '9', '10', '12', '14'].map((size, idx) => {
+                    const dimensions = {
+                      '7': '7" (18cm)',
+                      '9': '9" (23cm)',
+                      '10': '10" (25cm)',
+                      '12': '12" (30.5cm)',
+                      '14': '14" (35.5cm)'
+                    };
+                    const isActive = idx === 2; // Default to 10" as active
+                    return (
+                      <div key={idx} className="flex flex-col items-center">
+                        <div 
+                          className={`${isActive ? 'bg-orange-50 border-orange-400' : 'bg-gray-100 border-gray-300'} border-2 rounded-lg mb-2 transition-all duration-300 flex items-center justify-center`}
+                          style={{
+                            transform: isActive ? 'translateY(-8px) scale(1.1)' : 'translateY(0) scale(1)',
+                            width: `${Math.min(parseInt(size) * 0.5, 10)}rem`,
+                            height: `${Math.min(parseInt(size) * 0.5, 10)}rem`,
+                            minWidth: '2.5rem',
+                            minHeight: '2.5rem',
+                            maxWidth: '10rem'
+                          }}
+                        >
+                          <span className={`font-bold ${isActive ? 'text-orange-900' : 'text-gray-500'} text-xs sm:text-sm`}>
+                            {size}"
+                          </span>
+                        </div>
+                        <span className="text-xs font-medium text-gray-500">{dimensions[size]}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+                
+                {/* Measurement Scale */}
+                <div className="bg-white h-2 rounded-full relative mb-4 mx-2">
+                  <div className="absolute inset-x-0 bottom-3 flex justify-between px-1">
+                    <span className="text-xs font-medium text-gray-500">7"</span>
+                    <span className="text-xs font-medium text-gray-500">14"</span>
+                  </div>
+                </div>
+                
+                <div className="mt-6 text-center">
+                  <p className="text-gray-600 max-w-3xl mx-auto text-sm sm:text-base">
+                    Our brown pizza boxes come in 5 standard sizes to fit all your pizza offerings, from personal 7" pizzas to large 14" party-size pizzas.
+                  </p>
+                  <a 
+                    href="#pizza-box-options" 
+                    className="inline-flex items-center text-blue-600 hover:text-blue-800 mt-4 font-medium"
+                  >
+                    Explore detailed specifications
+                    <svg className="w-4 h-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      
       {/* Product Details Tabs */}
       <div className="bg-gray-50 py-12">
         <div className="container mx-auto px-4">

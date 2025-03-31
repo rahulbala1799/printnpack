@@ -214,43 +214,7 @@ const PizzaBoxExplorer = () => {
         </div>
       </div>
       
-      {/* Size Comparison */}
-      <div className="bg-gray-50 p-4 sm:p-6 rounded-xl shadow-sm overflow-hidden">
-        <h4 className="text-xl font-bold mb-4 sm:mb-6 text-center text-gray-800">Size Comparison</h4>
-        <div className="flex justify-center items-end space-x-2 sm:space-x-4 h-48 sm:h-64 mb-4 overflow-x-auto no-scrollbar">
-          {boxSizes.map((size) => (
-            <div 
-              key={size.id}
-              className="flex flex-col items-center"
-            >
-              <div 
-                className={`${size.id === activeSize ? size.boxColor : 'bg-gray-100'} ${size.id === activeSize ? size.borderColor : 'border-gray-300'} border-2 rounded-lg mb-2 transition-all duration-300 flex items-center justify-center`}
-                style={{
-                  transform: size.id === activeSize ? 'translateY(-8px) scale(1.1)' : 'translateY(0) scale(1)',
-                  width: `${Math.min(parseInt(size.name) * 0.5, 10)}rem`,
-                  height: `${Math.min(parseInt(size.name) * 0.5, 10)}rem`,
-                  minWidth: '2.5rem',
-                  minHeight: '2.5rem',
-                  maxWidth: '10rem'
-                }}
-              >
-                <span className={`font-bold ${size.id === activeSize ? size.labelColor : 'text-gray-500'} text-xs sm:text-sm`}>
-                  {size.name}
-                </span>
-              </div>
-              <span className="text-xs font-medium text-gray-500">{size.dimension}</span>
-            </div>
-          ))}
-        </div>
-        
-        {/* Measurement Scale */}
-        <div className="bg-white h-2 rounded-full relative mb-4 mx-2">
-          <div className="absolute inset-x-0 bottom-3 flex justify-between px-1">
-            <span className="text-xs font-medium text-gray-500">7"</span>
-            <span className="text-xs font-medium text-gray-500">14"</span>
-          </div>
-        </div>
-      </div>
+      {/* Size Comparison - REMOVED FROM HERE, MOVING TO MAIN PRODUCT PAGE */}
       
       {/* Call to Action */}
       <div className="mt-8 bg-blue-50 rounded-xl p-4 sm:p-6 flex flex-col md:flex-row items-center justify-between">
