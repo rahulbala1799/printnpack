@@ -235,7 +235,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
               
               <div className="relative h-96 md:h-auto order-1 md:order-2">
                 {/* Rotating Image with Animation */}
-                <div className="relative aspect-square max-w-md mx-auto">
+                <div className="relative aspect-square max-w-xl mx-auto">
                   {product.images.map((img, idx) => (
                     <div 
                       key={idx}
@@ -250,7 +250,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
                           src={img} 
                           alt={`${product.name} - Image ${idx + 1}`} 
                           fill
-                          className="object-contain"
+                          className="object-cover"
                           priority={idx === 0}
                         />
                       </div>
