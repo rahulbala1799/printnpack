@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import products, { getProductBySlug, getRelatedProducts } from '../../data/products';
 import PaperOptionsExplorer, { PaperComparisonChart } from '../../components/PaperOptionsExplorer';
+import PizzaBoxExplorer from '../../components/PizzaBoxExplorer';
 
 // Page component
 const ProductDetail = ({ product, relatedProducts }) => {
@@ -2151,6 +2152,83 @@ const ProductDetail = ({ product, relatedProducts }) => {
                   </svg>
                   Request Paper Samples
                 </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Pizza Box Size Explorer Section */}
+      {product && product.id === 'brown-pizza-boxes' && (
+        <div id="pizza-box-options" className="bg-white py-16 border-t border-gray-200">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold mb-4 text-gray-800">Box Size Options</h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  Explore our eco-friendly pizza box sizes to find the perfect fit for your pizzas. All boxes feature 4.5-5cm height for optimal pizza protection.
+                </p>
+              </div>
+              
+              {/* Pizza Box Size Explorer Component */}
+              <PizzaBoxExplorer />
+              
+              {/* Order Information */}
+              <div className="mt-12 bg-blue-50 p-6 rounded-xl">
+                <div className="flex flex-col md:flex-row items-start justify-between">
+                  <div className="md:w-2/3 mb-6 md:mb-0 md:pr-8">
+                    <h3 className="font-bold text-xl text-blue-900 mb-3">Ready to Order?</h3>
+                    <p className="text-blue-800 mb-4">
+                      With a minimum order quantity of just 100 pieces, our brown pizza boxes are perfect for businesses of all sizes.
+                    </p>
+                    <ul className="space-y-2 mb-4 text-blue-800">
+                      <li className="flex items-start">
+                        <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>Quick 7-10 day turnaround time</span>
+                      </li>
+                      <li className="flex items-start">
+                        <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>Custom branding with your logo and colors</span>
+                      </li>
+                      <li className="flex items-start">
+                        <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>Volume discounts available for larger orders</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="md:w-1/3 bg-white p-5 rounded-lg shadow-sm border border-blue-100">
+                    <h4 className="font-bold text-gray-800 mb-4">Quick Specs</h4>
+                    <div className="space-y-3">
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Minimum Order:</span>
+                        <span className="font-medium text-gray-900">100 pieces</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Material:</span>
+                        <span className="font-medium text-gray-900">Recycled Kraft</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Lead Time:</span>
+                        <span className="font-medium text-gray-900">7-10 Days</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Box Height:</span>
+                        <span className="font-medium text-gray-900">4.5-5cm</span>
+                      </div>
+                    </div>
+                    <div className="mt-6">
+                      <Link href="/contact?subject=Pizza Box Quote" className="block w-full bg-orange-600 hover:bg-orange-700 text-white text-center py-3 rounded-lg font-bold transition-colors">
+                        Request Quote
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
