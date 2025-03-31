@@ -87,6 +87,30 @@ const ProductsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const { categories, groupedProducts } = groupProductsByCategory(products);
   
+  // Load saved category from localStorage on initial render
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedGroup = localStorage.getItem('activeProductGroup');
+      const savedCategory = localStorage.getItem('activeProductCategory');
+      
+      if (savedGroup) {
+        setActiveGroup(savedGroup);
+      }
+      
+      if (savedCategory) {
+        setActiveCategory(savedCategory);
+      }
+    }
+  }, []);
+  
+  // Save category selections to localStorage when they change
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('activeProductGroup', activeGroup);
+      localStorage.setItem('activeProductCategory', activeCategory);
+    }
+  }, [activeGroup, activeCategory]);
+  
   // Filter products based on active group, category, and search term
   useEffect(() => {
     let filtered = [];
