@@ -899,20 +899,22 @@ const products = [
   },
   {
     id: 'foamex-boards',
-    name: 'Foamex PVC Boards',
-    category: 'Board Prints & Displays',
-    description: 'Professional PVC foam board printing for durable indoor signage and displays. Also known as Forex, foam board, or expanded PVC.',
+    name: 'Foamex Boards',
+    category: 'Wide Format',
+    imageSrc: '/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif',
+    price: 'Starting at €25 per board',
+    quoteRequired: false,
+    description: 'Premium quality foamex PVC boards that are perfect for indoor signage, exhibitions, and displays. Durable, lightweight, and available in multiple thicknesses.',
     features: [
-      'Available in 3mm, 5mm, 5.5mm and 10mm thickness options',
-      'Maximum size of 8ft x 4ft (2440mm x 1220mm)',
-      'Custom sizes available - just ask!',
-      'Choose from template sizes like A0 or 60cm x 90cm',
-      'Options for holes or metal hangers for easy mounting',
-      'Available laminated or unlaminated for different finishes',
-      'Options for printing on both sides, or laminating both sides'
+      'Lightweight yet durable',
+      'Multiple thicknesses available (3mm, 5mm, 10mm)',
+      'Direct UV printing for vibrant colors',
+      'Suitable for indoor and sheltered outdoor use',
+      'Easy to cut and mount',
+      'Custom sizes available',
+      'High-resolution print quality',
+      'Fast production turnaround'
     ],
-    detailedDescription: 'Our Foamex PVC Boards (also known as Forex or expanded PVC) are ideal for indoor signage, exhibitions, point of sale displays and more. Made from lightweight yet rigid expanded PVC, these versatile boards offer excellent print quality combined with durability. We apply high-quality printed vinyl to the Foamex boards rather than direct UV printing, ensuring vibrant colors and consistent results. Choose from multiple thickness options to suit your specific application, with 5mm being our most popular choice for general signage. We can cut to any custom size up to our maximum dimensions, or choose from standard template sizes. Enhance your boards with optional additions like pre-drilled mounting holes, metal hanging systems, or protective lamination in matt or gloss finish.',
-    price: 'From £19.99',
     specifications: [
       {
         name: 'Material',
@@ -1053,13 +1055,11 @@ const products = [
         recommended: 'Recommended for premium signage and self-standing displays'
       }
     ],
-    imageSrc: '/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif',
     images: [
       '/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif',
-      '/ifa/product/foamex/foam-board-photo-prints-1000x1000.webp',
       '/ifa/product/foamex/foam-board-printing-1000x1000.webp',
-      '/ifa/product/foamex/sign-boards-1000x1000.webp',
-      '/ifa/product/foamex/sign-boards-1000x1000 (1).webp.crdownload'
+      '/ifa/product/foamex/foam-board-photo-prints-1000x1000.webp',
+      '/ifa/product/foamex/sign-boards-1000x1000.webp'
     ],
     faq: [
       {
@@ -1086,7 +1086,7 @@ const products = [
   },
   {
     id: 'correx-boards',
-    name: 'Correx / Corriboard Fluted Boards',
+    name: 'Correx Boards',
     category: 'Wide Format',
     description: 'Weather-resistant corrugated polypropylene boards (commonly known as Corriboard in Ireland) for durable outdoor signage, ideal for elections, construction, real estate, and temporary displays.',
     features: [
@@ -1168,13 +1168,13 @@ const products = [
       }
     ],
     images: [
-      '/images/products/correx/correx-main.jpg',
-      '/images/products/correx/correx-closeup.jpg',
-      '/images/products/correx/correx-signage.jpg',
-      '/images/products/correx/correx-election-signs.jpg',
-      '/images/products/correx/correx-yard-signs.jpg'
+      '/ifa/product/corriboard/4-x-8-corrugated-plastic-sheets.jpg',
+      '/ifa/product/corriboard/corrugated-plastic-signs.jpg',
+      '/ifa/product/corriboard/corrugated-plastic-signs-3.jpg',
+      '/ifa/product/corriboard/coroplast-yard-signs.jpg',
+      '/ifa/product/corriboard/4-x-8-corrugated-plastic-sheets-1.jpg'
     ],
-    imageSrc: '/images/products/correx/correx-main.jpg',
+    imageSrc: '/ifa/product/corriboard/4-x-8-corrugated-plastic-sheets.jpg',
     price: 'Starting at €15 per board',
     quoteRequired: false,
     leadTime: '1-3 business days standard',
