@@ -1428,6 +1428,419 @@ const products = [
         author: 'Purchasing Manager, Restaurant Chain'
       }
     ]
+  },
+  {
+    id: 'leaflets-a6',
+    name: 'A6 Leaflets & Flyers',
+    category: 'Leaflets',
+    description: 'Compact A6 leaflets perfect for promotional handouts, event information, and direct marketing campaigns.',
+    features: [
+      'A6 size (105mm × 148mm)',
+      'Multiple paper stock options',
+      'Full-color double-sided printing',
+      'Various fold options available',
+      'Fast turnaround available',
+      'Eco-friendly paper options'
+    ],
+    detailedDescription: 'Our A6 leaflets are the perfect choice for cost-effective marketing with maximum impact. These compact flyers are ideal for events, promotional offers, and targeted campaigns where a concise message is key. Despite their small size, they deliver big results with eye-catching full-color printing on both sides. Choose from various paper weights and finishes to create a product that perfectly matches your brand quality and message.',
+    specifications: [
+      { name: 'Size', value: 'A6 (105mm × 148mm)' },
+      { name: 'Paper Options', value: '130gsm Gloss, 150gsm Silk, 170gsm Silk, 250gsm Silk, 300gsm Silk, 350gsm Silk' },
+      { name: 'Print', value: 'Full-color CMYK printing on both sides (4/4)' },
+      { name: 'Finishing', value: 'Cut to size, optional folding' },
+      { name: 'Fold Options', value: 'No fold (single sheet)' },
+      { name: 'Quantities', value: 'From 100 to 100,000+' },
+      { name: 'Turnaround', value: '2-3 working days standard (24-hour express available)' },
+      { name: 'Eco Options', value: 'Recycled paper stocks available on request' }
+    ],
+    sizeOptions: [
+      {
+        size: 'A6',
+        dimensions: '105mm × 148mm',
+        idealFor: 'Handouts, vouchers, small promotional flyers',
+        image: '/ifa/product/leaflet/a6-leaflet.jpg',
+        popular: true
+      }
+    ],
+    foldOptions: [
+      {
+        name: 'No Fold',
+        description: 'Single flat sheet',
+        dimensions: '105mm × 148mm folded and flat',
+        image: '/ifa/product/leaflet/a6-no-fold.jpg'
+      }
+    ],
+    paperOptions: [
+      {
+        name: '130gsm Gloss',
+        description: 'Lightweight, economical option with a shiny finish that makes colors pop',
+        recommended: 'Best for large volume, short-term promotions'
+      },
+      {
+        name: '150gsm Silk',
+        description: 'Smooth, mid-weight paper with subtle sheen and professional feel',
+        recommended: 'Good all-rounder for most marketing purposes'
+      },
+      {
+        name: '170gsm Silk',
+        description: 'Premium mid-weight with excellent print quality and durability',
+        recommended: 'Ideal for high-quality marketing materials'
+      },
+      {
+        name: '250gsm Silk',
+        description: 'Thick, premium paper with luxury feel and excellent durability',
+        recommended: 'Perfect for premium products and services'
+      },
+      {
+        name: '300gsm Silk',
+        description: 'Very thick card-like stock with substantial feel',
+        recommended: 'Ideal for luxury brands and high-end marketing'
+      },
+      {
+        name: '350gsm Silk',
+        description: 'Ultra-thick premium board with exceptional quality',
+        recommended: 'For maximum impact and premium brand perception'
+      }
+    ],
+    applications: [
+      'Event invitations and schedules',
+      'Promotional offers and vouchers',
+      'Direct mail campaigns',
+      'Menus for cafes and takeaways',
+      'Product information cards',
+      'Contact and business information',
+      'Limited-time offer flyers',
+      'Local service advertisements'
+    ],
+    images: [
+      '/ifa/product/leaflet/a6-leaflet-1.jpg',
+      '/ifa/product/leaflet/a6-leaflet-2.jpg',
+      '/ifa/product/leaflet/a6-leaflet-stack.jpg',
+      '/ifa/product/leaflet/a6-leaflet-hand.jpg'
+    ],
+    imageSrc: '/ifa/product/leaflet/a6-leaflet-1.jpg',
+    price: 'Starting at €25 for 100',
+    moq: 100,
+    leadTime: '2-3 business days'
+  },
+  {
+    id: 'leaflets-a5',
+    name: 'A5 Leaflets & Flyers',
+    category: 'Leaflets',
+    description: 'Versatile A5 leaflets and flyers with multiple fold options, perfect for detailed promotional content.',
+    features: [
+      'A5 size (148mm × 210mm)',
+      'Multiple paper stock options',
+      'Full-color double-sided printing',
+      'Half-fold option available',
+      'Fast turnaround available',
+      'Eco-friendly paper options'
+    ],
+    detailedDescription: 'Our A5 leaflets provide the perfect balance between compact size and content space. Ideal for more detailed promotions, these versatile flyers allow for comprehensive information while remaining easy to distribute and cost-effective. Available with optional half-fold to create a 4-page brochure format, they\'re perfect for product catalogs, service brochures, and detailed promotional campaigns. Choose from various paper weights to match your desired quality and budget.',
+    specifications: [
+      { name: 'Size', value: 'A5 (148mm × 210mm)' },
+      { name: 'Paper Options', value: '130gsm Gloss, 150gsm Silk, 170gsm Silk, 250gsm Silk, 300gsm Silk, 350gsm Silk' },
+      { name: 'Print', value: 'Full-color CMYK printing on both sides (4/4)' },
+      { name: 'Finishing', value: 'Cut to size, optional folding' },
+      { name: 'Fold Options', value: 'No fold (single sheet), Half fold' },
+      { name: 'Quantities', value: 'From 100 to 100,000+' },
+      { name: 'Turnaround', value: '2-3 working days standard (24-hour express available)' },
+      { name: 'Eco Options', value: 'Recycled paper stocks available on request' }
+    ],
+    sizeOptions: [
+      {
+        size: 'A5',
+        dimensions: '148mm × 210mm',
+        idealFor: 'Flyers, menus, informational handouts',
+        image: '/ifa/product/leaflet/a5-leaflet.jpg',
+        popular: true
+      }
+    ],
+    foldOptions: [
+      {
+        name: 'No Fold',
+        description: 'Single flat sheet',
+        dimensions: '148mm × 210mm folded and flat',
+        image: '/ifa/product/leaflet/a5-no-fold.jpg'
+      },
+      {
+        name: 'Half Fold',
+        description: 'Folded once in the middle to create a 4-page brochure',
+        dimensions: '105mm × 148mm folded, 210mm × 148mm flat',
+        image: '/ifa/product/leaflet/a5-half-fold.jpg'
+      }
+    ],
+    paperOptions: [
+      {
+        name: '130gsm Gloss',
+        description: 'Lightweight, economical option with a shiny finish that makes colors pop',
+        recommended: 'Best for large volume, short-term promotions'
+      },
+      {
+        name: '150gsm Silk',
+        description: 'Smooth, mid-weight paper with subtle sheen and professional feel',
+        recommended: 'Good all-rounder for most marketing purposes'
+      },
+      {
+        name: '170gsm Silk',
+        description: 'Premium mid-weight with excellent print quality and durability',
+        recommended: 'Ideal for high-quality marketing materials'
+      },
+      {
+        name: '250gsm Silk',
+        description: 'Thick, premium paper with luxury feel and excellent durability',
+        recommended: 'Perfect for premium products and services'
+      },
+      {
+        name: '300gsm Silk',
+        description: 'Very thick card-like stock with substantial feel',
+        recommended: 'Ideal for luxury brands and high-end marketing'
+      },
+      {
+        name: '350gsm Silk',
+        description: 'Ultra-thick premium board with exceptional quality',
+        recommended: 'For maximum impact and premium brand perception'
+      }
+    ],
+    applications: [
+      'Product brochures and catalogs',
+      'Service information and price lists',
+      'Detailed promotional campaigns',
+      'Restaurant and café menus',
+      'Event programs and schedules',
+      'Educational materials',
+      'Real estate property details',
+      'Corporate information handouts'
+    ],
+    images: [
+      '/ifa/product/leaflet/a5-leaflet-1.jpg',
+      '/ifa/product/leaflet/a5-leaflet-2.jpg',
+      '/ifa/product/leaflet/a5-leaflet-folded.jpg',
+      '/ifa/product/leaflet/a5-leaflet-stack.jpg'
+    ],
+    imageSrc: '/ifa/product/leaflet/a5-leaflet-1.jpg',
+    price: 'Starting at €35 for 100',
+    moq: 100,
+    leadTime: '2-3 business days'
+  },
+  {
+    id: 'leaflets-a4',
+    name: 'A4 Leaflets & Brochures',
+    category: 'Leaflets',
+    description: 'Professional A4 leaflets with multiple fold options for detailed catalogs, brochures and informational materials.',
+    features: [
+      'A4 size (210mm × 297mm)',
+      'Multiple paper stock options',
+      'Full-color double-sided printing',
+      'Various fold options available',
+      'Fast turnaround available',
+      'Eco-friendly paper options'
+    ],
+    detailedDescription: 'Our A4 leaflets and brochures offer maximum impact for detailed marketing materials. These full-sized documents provide ample space for comprehensive information, large images, and detailed specifications. With multiple folding options including half fold, tri-fold, and Z-fold, they can be transformed into professional brochures, presentation folders, or detailed product catalogs. Perfect for businesses that need to communicate extensive information while maintaining a professional, high-quality appearance.',
+    specifications: [
+      { name: 'Size', value: 'A4 (210mm × 297mm)' },
+      { name: 'Paper Options', value: '130gsm Gloss, 150gsm Silk, 170gsm Silk, 250gsm Silk, 300gsm Silk, 350gsm Silk' },
+      { name: 'Print', value: 'Full-color CMYK printing on both sides (4/4)' },
+      { name: 'Finishing', value: 'Cut to size, optional folding' },
+      { name: 'Fold Options', value: 'No fold (single sheet), Half fold, Tri-fold (letter fold), Z-fold' },
+      { name: 'Quantities', value: 'From 50 to 50,000+' },
+      { name: 'Turnaround', value: '2-3 working days standard (24-hour express available)' },
+      { name: 'Eco Options', value: 'Recycled paper stocks available on request' }
+    ],
+    sizeOptions: [
+      {
+        size: 'A4',
+        dimensions: '210mm × 297mm',
+        idealFor: 'Brochures, detailed catalogs, information sheets',
+        image: '/ifa/product/leaflet/a4-leaflet.jpg',
+        popular: true
+      }
+    ],
+    foldOptions: [
+      {
+        name: 'No Fold',
+        description: 'Single flat sheet',
+        dimensions: '210mm × 297mm folded and flat',
+        image: '/ifa/product/leaflet/a4-no-fold.jpg'
+      },
+      {
+        name: 'Half Fold',
+        description: 'Folded once in the middle to create a 4-page brochure',
+        dimensions: '148mm × 210mm folded, 297mm × 210mm flat',
+        image: '/ifa/product/leaflet/a4-half-fold.jpg'
+      },
+      {
+        name: 'Tri-fold (Letter Fold)',
+        description: 'Folded twice to create 6 panels (3 on each side)',
+        dimensions: '99mm × 210mm folded, 297mm × 210mm flat',
+        image: '/ifa/product/leaflet/a4-tri-fold.jpg'
+      },
+      {
+        name: 'Z-fold',
+        description: 'Accordion-style fold creating 6 panels with equal visibility',
+        dimensions: '99mm × 210mm folded, 297mm × 210mm flat',
+        image: '/ifa/product/leaflet/a4-z-fold.jpg'
+      }
+    ],
+    paperOptions: [
+      {
+        name: '130gsm Gloss',
+        description: 'Lightweight, economical option with a shiny finish that makes colors pop',
+        recommended: 'Best for large volume, short-term promotions'
+      },
+      {
+        name: '150gsm Silk',
+        description: 'Smooth, mid-weight paper with subtle sheen and professional feel',
+        recommended: 'Good all-rounder for most marketing purposes'
+      },
+      {
+        name: '170gsm Silk',
+        description: 'Premium mid-weight with excellent print quality and durability',
+        recommended: 'Ideal for high-quality marketing materials'
+      },
+      {
+        name: '250gsm Silk',
+        description: 'Thick, premium paper with luxury feel and excellent durability',
+        recommended: 'Perfect for premium products and services'
+      },
+      {
+        name: '300gsm Silk',
+        description: 'Very thick card-like stock with substantial feel',
+        recommended: 'Ideal for luxury brands and high-end marketing'
+      },
+      {
+        name: '350gsm Silk',
+        description: 'Ultra-thick premium board with exceptional quality',
+        recommended: 'For maximum impact and premium brand perception'
+      }
+    ],
+    applications: [
+      'Corporate brochures and annual reports',
+      'Detailed product catalogs and specifications',
+      'Educational and instructional materials',
+      'Event programs and conference materials',
+      'Professional service offerings and portfolios',
+      'Real estate brochures and property details',
+      'Healthcare information and patient materials',
+      'Technical documentation and user guides'
+    ],
+    images: [
+      '/ifa/product/leaflet/a4-leaflet-1.jpg',
+      '/ifa/product/leaflet/a4-leaflet-folded.jpg',
+      '/ifa/product/leaflet/a4-leaflet-tri-fold.jpg',
+      '/ifa/product/leaflet/a4-leaflet-stack.jpg'
+    ],
+    imageSrc: '/ifa/product/leaflet/a4-leaflet-1.jpg',
+    price: 'Starting at €45 for 50',
+    moq: 50,
+    leadTime: '2-3 business days'
+  },
+  {
+    id: 'leaflets-a3',
+    name: 'A3 Leaflets & Posters',
+    category: 'Leaflets',
+    description: 'Large format A3 leaflets and folded posters for maximum impact, perfect for detailed information and visual displays.',
+    features: [
+      'A3 size (297mm × 420mm)',
+      'Multiple paper stock options',
+      'Full-color double-sided printing',
+      'Various fold options available',
+      'Fast turnaround available',
+      'Eco-friendly paper options'
+    ],
+    detailedDescription: 'Our A3 leaflets and posters deliver maximum visual impact for promotional and informational displays. This large format provides extensive space for detailed content, high-resolution images, and comprehensive information. Available with multiple folding options, these versatile sheets can be used as eye-catching posters, large informational brochures, or folded down to more manageable sizes for distribution. Ideal for exhibitions, conferences, and detailed technical or educational materials where visual impact and information density are key requirements.',
+    specifications: [
+      { name: 'Size', value: 'A3 (297mm × 420mm)' },
+      { name: 'Paper Options', value: '130gsm Gloss, 150gsm Silk, 170gsm Silk, 250gsm Silk, 300gsm Silk' },
+      { name: 'Print', value: 'Full-color CMYK printing on both sides (4/4)' },
+      { name: 'Finishing', value: 'Cut to size, optional folding' },
+      { name: 'Fold Options', value: 'No fold (flat poster), Half fold, Quarter fold (folded to A5), Roll fold' },
+      { name: 'Quantities', value: 'From 25 to 10,000+' },
+      { name: 'Turnaround', value: '3-5 working days standard (48-hour express available)' },
+      { name: 'Eco Options', value: 'Recycled paper stocks available on request' }
+    ],
+    sizeOptions: [
+      {
+        size: 'A3',
+        dimensions: '297mm × 420mm',
+        idealFor: 'Posters, large brochures, exhibition materials',
+        image: '/ifa/product/leaflet/a3-leaflet.jpg',
+        popular: true
+      }
+    ],
+    foldOptions: [
+      {
+        name: 'No Fold',
+        description: 'Single flat poster sheet',
+        dimensions: '297mm × 420mm folded and flat',
+        image: '/ifa/product/leaflet/a3-no-fold.jpg'
+      },
+      {
+        name: 'Half Fold',
+        description: 'Folded once to A4 size',
+        dimensions: '210mm × 297mm folded, 420mm × 297mm flat',
+        image: '/ifa/product/leaflet/a3-half-fold.jpg'
+      },
+      {
+        name: 'Quarter Fold',
+        description: 'Folded twice to A5 size',
+        dimensions: '148mm × 210mm folded, 420mm × 297mm flat',
+        image: '/ifa/product/leaflet/a3-quarter-fold.jpg'
+      },
+      {
+        name: 'Roll Fold',
+        description: 'Multiple parallel folds creating a compact document that unfolds sequentially',
+        dimensions: 'Variable depending on number of folds, typically to A4 or A5 size',
+        image: '/ifa/product/leaflet/a3-roll-fold.jpg'
+      }
+    ],
+    paperOptions: [
+      {
+        name: '130gsm Gloss',
+        description: 'Lightweight, economical option with a shiny finish that makes colors pop',
+        recommended: 'Best for short-term poster displays and folded leaflets'
+      },
+      {
+        name: '150gsm Silk',
+        description: 'Smooth, mid-weight paper with subtle sheen and professional feel',
+        recommended: 'Good all-rounder for most marketing applications'
+      },
+      {
+        name: '170gsm Silk',
+        description: 'Premium mid-weight with excellent print quality and durability',
+        recommended: 'Ideal for higher quality materials and displays'
+      },
+      {
+        name: '250gsm Silk',
+        description: 'Thick, premium paper with luxury feel and excellent durability',
+        recommended: 'Perfect for premium displays and important presentations'
+      },
+      {
+        name: '300gsm Silk',
+        description: 'Very thick card-like stock with substantial feel',
+        recommended: 'Ideal for exhibition displays and premium marketing'
+      }
+    ],
+    applications: [
+      'Exhibition and trade show displays',
+      'Technical diagrams and specifications',
+      'Educational posters and materials',
+      'Conference and event information',
+      'Maps and directional information',
+      'Product specification sheets',
+      'Large format menus and price lists',
+      'Architectural and design presentations'
+    ],
+    images: [
+      '/ifa/product/leaflet/a3-leaflet-1.jpg',
+      '/ifa/product/leaflet/a3-leaflet-folded.jpg',
+      '/ifa/product/leaflet/a3-poster-display.jpg',
+      '/ifa/product/leaflet/a3-leaflet-stack.jpg'
+    ],
+    imageSrc: '/ifa/product/leaflet/a3-leaflet-1.jpg',
+    price: 'Starting at €65 for 25',
+    moq: 25,
+    leadTime: '3-5 business days'
   }
 ];
 

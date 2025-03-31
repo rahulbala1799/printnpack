@@ -467,6 +467,250 @@ const ProductDetail = ({ product, relatedProducts }) => {
         </div>
       )}
 
+      {/* Hero section for Posters */}
+      {product && product.id === 'custom-posters' && (
+        <div className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-sky-500 border-b border-gray-200">
+          <div className="absolute inset-0 opacity-20">
+            <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <defs>
+                <pattern id="leaflet-grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" strokeWidth="0.5" opacity="0.3" />
+                </pattern>
+              </defs>
+              <rect width="100" height="100" fill="url(#leaflet-grid)" />
+            </svg>
+          </div>
+          
+          <div className="container mx-auto px-4 py-12 md:py-20 relative z-10">
+            {/* Mobile hero image - top position */}
+            <div className="md:hidden mb-8">
+              <div className="relative h-64 rounded-xl overflow-hidden shadow-2xl mx-auto max-w-sm">
+                <Image 
+                  src={product.imageSrc || '/ifa/product/leaflet/leaflet-hero.jpg'}
+                  alt={`${product.name} printing services`}
+                  fill 
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="inline-block bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-semibold mb-2">
+                    {product.id.includes('a6') ? 'A6 SIZE' : 
+                     product.id.includes('a5') ? 'A5 SIZE' : 
+                     product.id.includes('a4') ? 'A4 SIZE' : 'A3 SIZE'}
+                  </span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Desktop layout - side by side */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              <div className="text-white">
+                <span className="inline-block bg-white/20 backdrop-blur-sm text-white px-4 py-1 rounded-full text-sm font-medium mb-6">
+                  {product.category}
+                </span>
+                <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                  <span className="text-yellow-300">Professional</span><br />
+                  {product.name}
+                </h1>
+                <p className="text-xl text-blue-100 mb-8 max-w-lg">
+                  High-quality printed leaflets and flyers with premium paper options, vibrant colors, and fast turnaround.
+                </p>
+                
+                <div className="grid sm:grid-cols-2 gap-4 mb-8">
+                  {product.features.slice(0, 6).map((feature, index) => (
+                    <div key={index} className="flex items-start">
+                      <div className="flex-shrink-0 mr-2">
+                        <svg className="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span className="text-blue-50">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap gap-4">
+                  <Link href="#paper-options" className="bg-white hover:bg-gray-100 text-blue-700 py-3 px-6 rounded-lg font-medium inline-flex items-center transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-white">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Paper Options
+                  </Link>
+                  <Link href="#fold-calculator" className="bg-yellow-300 hover:bg-yellow-400 text-blue-900 py-3 px-6 rounded-lg font-medium inline-flex items-center transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-yellow-300">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                    Fold Calculator
+                  </Link>
+                </div>
+              </div>
+              
+              {/* Interactive Leaflet Display */}
+              <div className="relative hidden md:block">
+                <div className="relative h-[400px] rounded-xl overflow-hidden shadow-2xl z-10 bg-white p-6">
+                  <div className="relative h-full w-full">
+                    <Image 
+                      src={product.imageSrc || '/ifa/product/leaflet/leaflet-hero.jpg'}
+                      alt={`${product.name} printing example`}
+                      fill 
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+                
+                {/* Floating size indicators */}
+                <div className="absolute -right-2 top-0 bg-white text-blue-900 px-3 py-1 rounded-full text-sm font-bold shadow-lg z-30">
+                  {product.id.includes('a6') ? 'A6 Size' : 
+                   product.id.includes('a5') ? 'A5 Size' : 
+                   product.id.includes('a4') ? 'A4 Size' : 'A3 Size'}
+                </div>
+                
+                <div className="absolute -left-2 top-1/2 transform -translate-y-1/2 bg-white text-blue-900 px-3 py-1 rounded-full text-sm font-bold shadow-lg z-30">
+                  {product.id.includes('a6') ? '105 × 148mm' : 
+                   product.id.includes('a5') ? '148 × 210mm' : 
+                   product.id.includes('a4') ? '210 × 297mm' : '297 × 420mm'}
+                </div>
+                
+                {/* Paper stack effect */}
+                <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-[85%] h-[10px] bg-gray-300 rounded-b-xl z-0"></div>
+                <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-[70%] h-[10px] bg-gray-400 rounded-b-xl z-0"></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Creative wave divider */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-12 text-white">
+              <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
+            </svg>
+          </div>
+        </div>
+      )}
+
+      {/* Hero section for Leaflets */}
+      {product && (product.id === 'leaflets-a6' || product.id === 'leaflets-a5' || product.id === 'leaflets-a4' || product.id === 'leaflets-a3') && (
+        <div className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-sky-500 border-b border-gray-200">
+          <div className="absolute inset-0 opacity-20">
+            <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <defs>
+                <pattern id="leaflet-grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" strokeWidth="0.5" opacity="0.3" />
+                </pattern>
+              </defs>
+              <rect width="100" height="100" fill="url(#leaflet-grid)" />
+            </svg>
+          </div>
+          
+          <div className="container mx-auto px-4 py-12 md:py-20 relative z-10">
+            {/* Mobile hero image - top position */}
+            <div className="md:hidden mb-8">
+              <div className="relative h-64 rounded-xl overflow-hidden shadow-2xl mx-auto max-w-sm">
+                <Image 
+                  src={product.imageSrc || '/ifa/product/leaflet/leaflet-hero.jpg'}
+                  alt={`${product.name} printing services`}
+                  fill 
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="inline-block bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-semibold mb-2">
+                    {product.id.includes('a6') ? 'A6 SIZE' : 
+                     product.id.includes('a5') ? 'A5 SIZE' : 
+                     product.id.includes('a4') ? 'A4 SIZE' : 'A3 SIZE'}
+                  </span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Desktop layout - side by side */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              <div className="text-white">
+                <span className="inline-block bg-white/20 backdrop-blur-sm text-white px-4 py-1 rounded-full text-sm font-medium mb-6">
+                  {product.category}
+                </span>
+                <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                  <span className="text-yellow-300">Professional</span><br />
+                  {product.name}
+                </h1>
+                <p className="text-xl text-blue-100 mb-8 max-w-lg">
+                  High-quality printed leaflets and flyers with premium paper options, vibrant colors, and fast turnaround.
+                </p>
+                
+                <div className="grid sm:grid-cols-2 gap-4 mb-8">
+                  {product.features.slice(0, 6).map((feature, index) => (
+                    <div key={index} className="flex items-start">
+                      <div className="flex-shrink-0 mr-2">
+                        <svg className="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span className="text-blue-50">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap gap-4">
+                  <Link href="#paper-options" className="bg-white hover:bg-gray-100 text-blue-700 py-3 px-6 rounded-lg font-medium inline-flex items-center transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-white">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Paper Options
+                  </Link>
+                  <Link href="#fold-calculator" className="bg-yellow-300 hover:bg-yellow-400 text-blue-900 py-3 px-6 rounded-lg font-medium inline-flex items-center transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-yellow-300">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                    Fold Calculator
+                  </Link>
+                </div>
+              </div>
+              
+              {/* Interactive Leaflet Display */}
+              <div className="relative hidden md:block">
+                <div className="relative h-[400px] rounded-xl overflow-hidden shadow-2xl z-10 bg-white p-6">
+                  <div className="relative h-full w-full">
+                    <Image 
+                      src={product.imageSrc || '/ifa/product/leaflet/leaflet-hero.jpg'}
+                      alt={`${product.name} printing example`}
+                      fill 
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+                
+                {/* Floating size indicators */}
+                <div className="absolute -right-2 top-0 bg-white text-blue-900 px-3 py-1 rounded-full text-sm font-bold shadow-lg z-30">
+                  {product.id.includes('a6') ? 'A6 Size' : 
+                   product.id.includes('a5') ? 'A5 Size' : 
+                   product.id.includes('a4') ? 'A4 Size' : 'A3 Size'}
+                </div>
+                
+                <div className="absolute -left-2 top-1/2 transform -translate-y-1/2 bg-white text-blue-900 px-3 py-1 rounded-full text-sm font-bold shadow-lg z-30">
+                  {product.id.includes('a6') ? '105 × 148mm' : 
+                   product.id.includes('a5') ? '148 × 210mm' : 
+                   product.id.includes('a4') ? '210 × 297mm' : '297 × 420mm'}
+                </div>
+                
+                {/* Paper stack effect */}
+                <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-[85%] h-[10px] bg-gray-300 rounded-b-xl z-0"></div>
+                <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-[70%] h-[10px] bg-gray-400 rounded-b-xl z-0"></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Creative wave divider */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-12 text-white">
+              <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
+            </svg>
+          </div>
+        </div>
+      )}
+
       {/* Product Hero - Redesigned */}
       <div className="bg-gradient-to-b from-gray-50 to-white py-16">
         <div className="container mx-auto px-4">
@@ -1652,6 +1896,268 @@ const ProductDetail = ({ product, relatedProducts }) => {
       )}
 
       {/* Related Products */}
+      <div className="bg-gray-50 py-16">
+        <div className="container mx-auto px-4 py-12">
+          <h2 className="text-2xl font-bold mb-8">Related Products</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {relatedProducts.map(relatedProduct => (
+              <div key={relatedProduct.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                <div className="h-48 relative bg-gray-50">
+                  {relatedProduct.imageSrc.includes('css-placeholder-image') ? (
+                    <div className="absolute inset-0 css-placeholder banner"></div>
+                  ) : (
+                    <Image
+                      src={relatedProduct.imageSrc}
+                      alt={relatedProduct.name}
+                      fill
+                      className="object-contain p-4"
+                    />
+                  )}
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold mb-2">{relatedProduct.name}</h3>
+                  <p className="text-sm text-gray-600 mb-3 line-clamp-2">{relatedProduct.description}</p>
+                  <Link 
+                    href={`/products/${relatedProduct.id}`}
+                    className="text-blue-600 text-sm font-medium hover:text-blue-800"
+                  >
+                    View Details
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Product Specifications - Modern List Style */}
+      <div className="bg-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">Product Specifications</h2>
+            <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-md">
+              <div className="divide-y divide-gray-200">
+                {product.specifications && product.specifications.map((spec, index) => (
+                  <div key={index} className="grid grid-cols-1 md:grid-cols-3 text-sm sm:text-base">
+                    <div className="bg-gray-50 p-4 md:p-6 flex items-center font-medium text-gray-700">
+                      {spec.name}
+                    </div>
+                    <div className="col-span-2 p-4 md:p-6 text-gray-600">
+                      {spec.value}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Fold Calculator Section for Leaflets */}
+      {product && (product.id === 'leaflets-a6' || product.id === 'leaflets-a5' || product.id === 'leaflets-a4' || product.id === 'leaflets-a3') && (
+        <div id="fold-calculator" className="bg-gray-50 py-16 border-t border-gray-200">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold mb-4 text-gray-800">Leaflet Size & Fold Calculator</h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  Visualize different fold options and understand exactly how your final printed piece will look and fold.
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                {/* Interactive Fold Preview */}
+                <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                  <h3 className="text-xl font-bold mb-4 text-gray-700">Interactive Preview</h3>
+                  
+                  {/* A6 Leaflet Preview */}
+                  {product.id === 'leaflets-a6' && (
+                    <div className="relative aspect-[105/148] bg-blue-50 border-2 border-blue-300 rounded-sm mx-auto max-w-[260px] mb-6">
+                      <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+                        <span className="text-3xl font-bold text-blue-800 mb-1">A6</span>
+                        <span className="text-sm text-blue-700 font-medium">105mm × 148mm</span>
+                        <span className="text-xs text-blue-600 mt-2">Single sheet</span>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* A5 Leaflet Preview */}
+                  {product.id === 'leaflets-a5' && (
+                    <div>
+                      <div className="relative aspect-[148/210] bg-blue-50 border-2 border-blue-300 rounded-sm mx-auto max-w-[260px] mb-6">
+                        <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+                          <span className="text-3xl font-bold text-blue-800 mb-1">A5</span>
+                          <span className="text-sm text-blue-700 font-medium">148mm × 210mm</span>
+                          <span className="text-xs text-blue-600 mt-2">Single sheet</span>
+                          {/* Half-fold indicator line */}
+                          <div className="absolute left-0 right-0 top-1/2 border-t-2 border-blue-400 border-dashed"></div>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-gray-50 p-4 rounded-lg mb-6">
+                        <h4 className="font-medium text-gray-800 mb-2">Half-fold dimensions:</h4>
+                        <p className="text-gray-700">When folded: 105mm × 148mm (A6 size)</p>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* A4 Leaflet Preview */}
+                  {product.id === 'leaflets-a4' && (
+                    <div>
+                      <div className="relative aspect-[210/297] bg-blue-50 border-2 border-blue-300 rounded-sm mx-auto max-w-[260px] mb-6">
+                        <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+                          <span className="text-3xl font-bold text-blue-800 mb-1">A4</span>
+                          <span className="text-sm text-blue-700 font-medium">210mm × 297mm</span>
+                          
+                          {/* Fold indicator lines */}
+                          <div className="absolute left-0 right-0 top-1/2 border-t-2 border-blue-400 border-dashed"></div>
+                          <div className="absolute left-1/3 top-0 bottom-0 border-l-2 border-blue-400 border-dashed"></div>
+                          <div className="absolute left-2/3 top-0 bottom-0 border-l-2 border-blue-400 border-dashed"></div>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-gray-50 p-4 rounded-lg mb-6">
+                        <h4 className="font-medium text-gray-800 mb-2">Fold dimensions:</h4>
+                        <p className="text-gray-700">Half-fold: 148mm × 210mm (A5 size)</p>
+                        <p className="text-gray-700 mt-1">Tri-fold: 99mm × 210mm</p>
+                        <p className="text-gray-700 mt-1">Z-fold: 99mm × 210mm</p>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* A3 Leaflet Preview */}
+                  {product.id === 'leaflets-a3' && (
+                    <div>
+                      <div className="relative aspect-[297/420] bg-blue-50 border-2 border-blue-300 rounded-sm mx-auto max-w-[260px] mb-6">
+                        <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+                          <span className="text-3xl font-bold text-blue-800 mb-1">A3</span>
+                          <span className="text-sm text-blue-700 font-medium">297mm × 420mm</span>
+                          
+                          {/* Fold indicator lines */}
+                          <div className="absolute left-0 right-0 top-1/2 border-t-2 border-blue-400 border-dashed"></div>
+                          <div className="absolute left-0 right-0 top-1/4 border-t-2 border-blue-400 border-dashed"></div>
+                          <div className="absolute left-0 right-0 top-3/4 border-t-2 border-blue-400 border-dashed"></div>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-gray-50 p-4 rounded-lg mb-6">
+                        <h4 className="font-medium text-gray-800 mb-2">Fold dimensions:</h4>
+                        <p className="text-gray-700">Half-fold: 210mm × 297mm (A4 size)</p>
+                        <p className="text-gray-700 mt-1">Quarter-fold: 148mm × 210mm (A5 size)</p>
+                        <p className="text-gray-700 mt-1">Roll-fold: Variable depending on number of folds</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                
+                {/* Fold Options */}
+                <div>
+                  <h3 className="text-xl font-bold mb-6 text-gray-700">Available Fold Options</h3>
+                  
+                  <div className="space-y-6">
+                    {product.foldOptions && product.foldOptions.map((option, index) => (
+                      <div key={index} className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                        <h4 className="text-lg font-bold text-gray-800 mb-2">{option.name}</h4>
+                        <p className="text-gray-600 mb-3">{option.description}</p>
+                        <div className="bg-blue-50 p-3 rounded-md">
+                          <p className="text-sm font-medium text-blue-800">Dimensions:</p>
+                          <p className="text-sm text-blue-700">{option.dimensions}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div className="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0">
+                        <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div className="ml-3">
+                        <h5 className="text-sm font-medium text-yellow-800">Pro Tip</h5>
+                        <p className="text-sm text-yellow-700 mt-1">
+                          When designing folded leaflets, remember to account for the fold line and ensure important content isn't positioned where it will be affected by the fold.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Paper Options Section for Leaflets */}
+      {product && (product.id === 'leaflets-a6' || product.id === 'leaflets-a5' || product.id === 'leaflets-a4' || product.id === 'leaflets-a3') && (
+        <div id="paper-options" className="bg-white py-16 border-t border-gray-200">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold mb-4 text-gray-800">Paper Options</h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  Choose from a range of high-quality paper stocks to find the perfect match for your leaflet design and purpose.
+                </p>
+              </div>
+              
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {product.paperOptions && product.paperOptions.map((option, index) => (
+                  <div key={index} className="bg-white rounded-xl overflow-hidden shadow-md border border-gray-200 hover:shadow-lg transition-shadow">
+                    <div className="h-2 bg-gradient-to-r from-blue-500 to-blue-700"></div>
+                    <div className="p-6">
+                      <h3 className="font-bold text-lg text-gray-800 mb-2">{option.name}</h3>
+                      <p className="text-gray-600 text-sm mb-4">{option.description}</p>
+                      <div className="mt-auto">
+                        <p className="text-sm font-medium text-blue-700 mt-3">{option.recommended}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-12 bg-blue-50 p-6 rounded-xl">
+                <h3 className="font-bold text-xl text-blue-900 mb-3">Not sure which paper to choose?</h3>
+                <p className="text-blue-800 mb-4">
+                  We can send you a sample pack with all our paper options so you can feel the quality before placing your order.
+                </p>
+                <Link href="/contact?subject=Paper Sample Request" className="inline-flex items-center text-white bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-lg font-medium transition-colors">
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                  </svg>
+                  Request Paper Samples
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Applications Section */}
+      {product.applications && product.applications.length > 0 && (
+        <div className="bg-gray-50 py-16 border-t border-gray-200">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">Ideal Applications</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {product.applications.map((application, index) => (
+                  <div key={index} className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm flex items-center">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                      <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <span className="text-gray-700">{application}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Related Products Section */}
       <div className="bg-gray-50 py-16">
         <div className="container mx-auto px-4 py-12">
           <h2 className="text-2xl font-bold mb-8">Related Products</h2>
