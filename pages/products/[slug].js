@@ -408,7 +408,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 {/* Main poster */}
                 <div className="relative h-[400px] rounded-xl overflow-hidden shadow-2xl transform rotate-3 z-10 transition-transform duration-500 hover:rotate-0 border-8 border-white">
                   <Image 
-                    src="/ifa/product/poster/PosterPrinting-4.jpg"
+                    src="/ifa/product/Poster/PosterPrinting-4.jpg"
                     alt="Professional poster printing" 
                     fill 
                     className="object-cover"
@@ -421,7 +421,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 {/* Secondary posters in stack */}
                 <div className="absolute top-20 -right-10 w-48 h-64 rounded-lg overflow-hidden shadow-xl transform -rotate-6 z-20 transition-transform duration-500 hover:rotate-0 border-4 border-white">
                   <Image 
-                    src="/ifa/product/poster/1.webp"
+                    src="/ifa/product/Poster/1.webp"
                     alt="Retail poster example" 
                     fill 
                     className="object-cover"
@@ -430,7 +430,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 
                 <div className="absolute -bottom-10 -left-10 w-48 h-64 rounded-lg overflow-hidden shadow-xl transform rotate-12 z-0 transition-transform duration-500 hover:rotate-0 border-4 border-white">
                   <Image 
-                    src="/ifa/product/poster/2.webp"
+                    src="/ifa/product/Poster/2.webp"
                     alt="Event poster example" 
                     fill 
                     className="object-cover"
@@ -439,7 +439,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 
                 <div className="absolute top-10 -left-20 w-40 h-56 rounded-lg overflow-hidden shadow-xl transform -rotate-12 transition-transform duration-500 hover:rotate-0 border-4 border-white">
                   <Image 
-                    src="/ifa/product/poster/single_poster.jpg"
+                    src="/ifa/product/Poster/single_poster.jpg"
                     alt="Exhibition poster example" 
                     fill 
                     className="object-cover"
@@ -1493,42 +1493,42 @@ const ProductDetail = ({ product, relatedProducts }) => {
                   name: 'A4 Poster', 
                   dimensions: '210mm × 297mm', 
                   idealFor: 'Close-up viewing, tabletop displays, information sheets', 
-                  image: '/ifa/product/poster/1.webp',
+                  image: '/ifa/product/Poster/1.webp',
                   popular: false
                 },
                 { 
                   name: 'A3 Poster', 
                   dimensions: '297mm × 420mm', 
                   idealFor: 'Retail counter displays, meeting room notices, small ads', 
-                  image: '/ifa/product/poster/5.webp',
+                  image: '/ifa/product/Poster/5.webp',
                   popular: false
                 },
                 { 
                   name: 'A2 Poster', 
                   dimensions: '420mm × 594mm', 
                   idealFor: 'Small shop windows, conference signage, menu displays', 
-                  image: '/ifa/product/poster/3.webp',
+                  image: '/ifa/product/Poster/3.webp',
                   popular: true
                 },
                 { 
                   name: 'A1 Poster', 
                   dimensions: '594mm × 841mm', 
                   idealFor: 'Retail promotions, event announcements, exhibition displays', 
-                  image: '/ifa/product/poster/PosterPrinting-5.jpg',
+                  image: '/ifa/product/Poster/PosterPrinting-5.jpg',
                   popular: true
                 },
                 { 
                   name: 'A0 Poster', 
                   dimensions: '841mm × 1189mm', 
                   idealFor: 'Maximum impact displays, trade shows, large format advertising', 
-                  image: '/ifa/product/poster/PosterPrinting-4.jpg',
+                  image: '/ifa/product/Poster/PosterPrinting-4.jpg',
                   popular: false
                 },
                 { 
                   name: 'Custom Sizes', 
                   dimensions: 'Up to 1.5m width', 
                   idealFor: 'Specialized displays, non-standard frames, unique spaces', 
-                  image: '/ifa/product/poster/100-GSM-Map-Print-Spot-Vertical-Poster_05-1024x1024.webp',
+                  image: '/ifa/product/Poster/100-GSM-Map-Print-Spot-Vertical-Poster_05-1024x1024.webp',
                   popular: false
                 }
               ].map((size, i) => (
@@ -1610,7 +1610,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
                 </div>
                 <div className="relative h-full min-h-[300px] md:min-h-[400px]">
                   <Image
-                    src="/ifa/product/poster/single_poster.jpg"
+                    src="/ifa/product/Poster/single_poster.jpg"
                     alt="Eco-solvent poster printing"
                     fill
                     className="object-cover"
