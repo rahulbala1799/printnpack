@@ -74,7 +74,7 @@ const groupProductsByCategory = (products) => {
 // Main group categories for the main navigation
 const mainGroups = [
   { id: 'packaging', name: 'Packaging', categories: ['Food Packaging', 'Retail Packaging', 'Eco-Friendly Packaging', 'Shipping', 'Hospitality Products'] },
-  { id: 'wide-format', name: 'Wide Format', categories: ['Wide Format', 'Board Prints & Displays'] },
+  { id: 'wide-format', name: 'Wide Format', categories: ['Wide Format'] },
   { id: 'promotional', name: 'Promotional', categories: ['Promotional', 'Food Service'] },
 ];
 
