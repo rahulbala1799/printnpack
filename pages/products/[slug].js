@@ -291,6 +291,126 @@ const ProductDetail = ({ product, relatedProducts }) => {
         </div>
       )}
       
+      {/* Hero section for White Pizza Boxes */}
+      {product && product.id === 'white-pizza-boxes' && (
+        <div className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-gray-100 to-blue-100 border-b border-gray-200">
+          <div className="absolute inset-0 opacity-20">
+            <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <defs>
+                <pattern id="white-pizza-grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="blue" strokeWidth="0.5" opacity="0.3" />
+                </pattern>
+              </defs>
+              <rect width="100" height="100" fill="url(#white-pizza-grid)" />
+            </svg>
+          </div>
+          
+          <div className="container mx-auto px-4 py-8 md:py-16 relative z-10">
+            {/* Desktop layout - side by side */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              <div className="text-gray-800 order-2 md:order-1">
+                <span className="inline-block bg-blue-600/20 backdrop-blur-sm text-blue-900 px-4 py-1 rounded-full text-sm font-medium mb-4 md:mb-6">
+                  {product.category}
+                </span>
+                <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
+                  Premium <span className="text-blue-600">Pizza Boxes</span><br className="hidden sm:block" /> In Clean White
+                </h1>
+                <p className="text-lg md:text-xl text-gray-700 mb-6 md:mb-8 max-w-lg">
+                  Elegant white pizza boxes that keep your delicious creations hot while providing a clean, professional canvas for your brand.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
+                  <a 
+                    href="#size-comparison" 
+                    className="w-full sm:w-auto text-center inline-flex justify-center items-center bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-3 rounded-lg font-bold transition-colors"
+                  >
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                    </svg>
+                    Explore Sizes
+                  </a>
+                  <Link 
+                    href="/contact?subject=White Pizza Box Quote" 
+                    className="w-full sm:w-auto text-center inline-flex justify-center items-center bg-transparent hover:bg-blue-600/10 text-blue-600 border-2 border-blue-600 px-4 sm:px-6 py-3 rounded-lg font-bold transition-colors"
+                  >
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    Request Quote
+                  </Link>
+                </div>
+                
+                {/* Size markers */}
+                <div className="mt-6 md:mt-10">
+                  <span className="text-sm text-blue-800 block mb-2 md:inline md:mr-3">Available sizes: </span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {['7"', '9"', '10"', '12"', '14"'].map((size, idx) => (
+                      <span 
+                        key={idx} 
+                        className="inline-block px-2 py-1 rounded-full text-xs font-bold bg-white text-blue-600 border border-blue-200 shadow-sm"
+                      >
+                        {size}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              
+              <div className="relative h-64 sm:h-80 md:h-auto order-1 md:order-2">
+                {/* Rotating Image with Animation */}
+                <div className="relative aspect-square max-w-xs sm:max-w-sm md:max-w-md lg:max-w-xl mx-auto">
+                  {product.images.map((img, idx) => (
+                    <div 
+                      key={idx}
+                      className={`absolute inset-0 transition-all duration-1000 transform ${
+                        currentImageIndex === idx 
+                          ? 'opacity-100 scale-100 rotate-0' 
+                          : 'opacity-0 scale-90 rotate-6'
+                      }`}
+                    >
+                      <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-xl bg-white">
+                        <Image 
+                          src={img} 
+                          alt={`${product.name} - Image ${idx + 1}`} 
+                          fill
+                          className="object-cover"
+                          priority={idx === 0}
+                        />
+                      </div>
+                      
+                      {/* Decorative elements */}
+                      <div className="absolute -top-3 -right-3 md:-top-6 md:-right-6 w-8 h-8 md:w-12 md:h-12 bg-blue-500 rounded-full opacity-80 animate-pulse"></div>
+                      <div className="absolute -bottom-2 -left-2 md:-bottom-3 md:-left-3 w-6 h-6 md:w-8 md:h-8 bg-blue-300 rounded-full opacity-70 animate-bounce"></div>
+                      
+                      {/* Size indicator */}
+                      <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 bg-white text-blue-800 px-2 py-0.5 md:px-3 md:py-1 rounded-full font-bold shadow-lg transform -rotate-3 text-xs md:text-sm">
+                        {idx % 5 === 0 ? '7"' : idx % 5 === 1 ? '9"' : idx % 5 === 2 ? '10"' : idx % 5 === 3 ? '12"' : '14"'}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Image Navigation Dots */}
+                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1.5">
+                  {product.images.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentImageIndex(idx)}
+                      className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all ${
+                        currentImageIndex === idx ? 'bg-blue-600 scale-125' : 'bg-blue-300 hover:bg-blue-400'
+                      }`}
+                      aria-label={`View image ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Bottom decoration */}
+          <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-r from-blue-100 via-white to-blue-100"></div>
+        </div>
+      )}
+      
       {/* Hero section for Vinyl Banners */}
       {product && product.id === 'vinyl-banners' && (
         <div className="relative overflow-hidden bg-gradient-to-br from-blue-800 via-indigo-700 to-purple-800 border-b border-gray-200">
@@ -2583,6 +2703,69 @@ const ProductDetail = ({ product, relatedProducts }) => {
             </div>
           </div>
         </section>
+      )}
+
+      {/* Size Comparison Section for White Pizza Boxes */}
+      {product && product.id === 'white-pizza-boxes' && (
+        <div id="size-comparison" className="bg-white py-12 border-t border-gray-200">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">Size Comparison</h2>
+              
+              <div className="bg-gray-50 p-4 sm:p-6 rounded-xl shadow-sm overflow-hidden">
+                <div className="flex justify-center items-end space-x-2 sm:space-x-4 h-48 sm:h-64 mb-4 overflow-x-auto no-scrollbar">
+                  {['7', '9', '10', '12', '14'].map((size, idx) => {
+                    const dimensions = {
+                      '7': '7" (18cm)',
+                      '9': '9" (23cm)',
+                      '10': '10" (25cm)',
+                      '12': '12" (30.5cm)',
+                      '14': '14" (35.5cm)'
+                    };
+                    const isActive = idx === 2; // Default to 10" as active
+                    return (
+                      <div key={idx} className="flex flex-col items-center">
+                        <div 
+                          className={`${isActive ? 'bg-blue-50 border-blue-400' : 'bg-gray-100 border-gray-300'} border-2 rounded-lg mb-2 transition-all duration-300 flex items-center justify-center`}
+                          style={{
+                            transform: isActive ? 'translateY(-8px) scale(1.1)' : 'translateY(0) scale(1)',
+                            width: `${Math.min(parseInt(size) * 0.5, 10)}rem`,
+                            height: `${Math.min(parseInt(size) * 0.5, 10)}rem`,
+                            minWidth: '2.5rem',
+                            minHeight: '2.5rem',
+                            maxWidth: '10rem'
+                          }}
+                        >
+                          <span className={`font-bold ${isActive ? 'text-blue-900' : 'text-gray-500'} text-xs sm:text-sm`}>
+                            {size}"
+                          </span>
+                        </div>
+                        <span className="text-xs font-medium text-gray-500">{dimensions[size]}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+                
+                {/* Measurement Scale */}
+                <div className="bg-white h-2 rounded-full relative mb-4 mx-2">
+                  <div className="absolute inset-x-0 bottom-3 flex justify-between px-1">
+                    <span className="text-xs font-medium text-gray-500">7"</span>
+                    <span className="text-xs font-medium text-gray-500">14"</span>
+                  </div>
+                </div>
+                
+                <div className="mt-6 text-center">
+                  <p className="text-gray-600 max-w-3xl mx-auto text-sm sm:text-base">
+                    Our white pizza boxes come in 5 standard sizes to fit all your pizza offerings, from personal 7" pizzas to large 14" party-size pizzas.
+                  </p>
+                  <p className="text-blue-600 mt-2 text-sm sm:text-base">
+                    All boxes offer exceptional quality with 1.5-3mm thickness for optimal pizza protection.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </Layout>
   );

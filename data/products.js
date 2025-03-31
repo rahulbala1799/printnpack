@@ -3,19 +3,19 @@ const products = [
     id: 'white-pizza-boxes',
     name: 'White Pizza Boxes',
     category: 'Food Packaging',
-    description: 'Premium white pizza boxes that keep your food hot and showcase your brand with our company blue accents.',
+    description: 'Premium printed white pizza boxes that keep your food hot while maintaining a clean, professional look for your brand.',
     features: [
       'Made from food-grade white corrugated cardboard',
-      'Custom printing with company blue branding',
+      'Custom printing options available',
       'Stackable design for easy storage',
       'Multiple size options: 7", 9", 10", 12", and 14"',
       'Weekly delivery service available'
     ],
-    detailedDescription: 'Our premium white pizza boxes are designed to keep your pizzas hot and fresh during delivery while reinforcing your brand image. The clean white exterior with company blue accents creates a professional, high-end appearance. Made from high-quality food-grade materials, these boxes offer excellent insulation and stability. Available in 7", 9", 10", 12", and 14" sizes to accommodate any pizza style. Each box can be fully customized with your branding, including full-color printing options for logos, messaging, and design elements. Take advantage of our weekly delivery service to ensure you never run out of packaging.',
+    detailedDescription: 'Our premium white pizza boxes are designed to keep your pizzas hot and fresh during delivery while maintaining a professional appearance. The clean white exterior creates a perfect canvas for your brand elements. Made from high-quality food-grade materials, these boxes offer excellent insulation and stability. Available in 7", 9", 10", 12", and 14" sizes to accommodate any pizza style. Each box can be fully customized with your branding, including full-color printing options for logos, messaging, and design elements. Take advantage of our weekly delivery service to ensure you never run out of packaging.',
     specifications: [
       { name: 'Material', value: 'Food-grade white corrugated cardboard' },
       { name: 'Thickness', value: '1.5mm - 3mm (E-flute or B-flute)' },
-      { name: 'Color', value: 'White with company blue accents' },
+      { name: 'Color', value: 'Clean white' },
       { name: 'Sizes Available', value: '7", 9", 10", 12", 14"' },
       { name: 'Print Quality', value: 'Up to 4-color offset or digital printing' },
       { name: 'Minimum Order', value: '250 units' },
@@ -24,10 +24,15 @@ const products = [
       { name: 'Delivery Options', value: 'Weekly scheduled delivery service available' },
     ],
     images: [
-      '/images/hero/white-pizza-box.svg',
-      '/images/ifa/heroh/white-pizza.png'
+      '/images/products/pizza-boxes/white/mainimage.webp',
+      '/images/products/pizza-boxes/white/pizza-box-1000x1000w.webp',
+      '/images/products/pizza-boxes/white/pizza-box-1000x10003.webp',
+      '/images/products/pizza-boxes/white/P-PBP06WH.jpg',
+      '/images/products/pizza-boxes/white/pizza_prod_2w.jpg',
+      '/images/products/pizza-boxes/white/bagpizzabox.webp',
+      '/images/products/pizza-boxes/white/pizza-box-7inches-1000x1000openwithpizzainside.webp'
     ],
-    imageSrc: '/images/hero/white-pizza-box.svg',
+    imageSrc: '/images/products/pizza-boxes/white/mainimage.webp',
     price: 'Starting at €0.38 per unit',
     moq: 250,
     leadTime: '7-10 business days',
