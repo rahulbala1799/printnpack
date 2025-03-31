@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../../components/layout/Layout';
 import Head from 'next/head';
@@ -10,24 +10,71 @@ import PizzaBoxExplorer from '../../components/PizzaBoxExplorer';
 
 // Page component
 const ProductDetail = ({ product, relatedProducts }) => {
-  const router = useRouter();
-  const [selectedPaperWeight, setSelectedPaperWeight] = useState(null);
-  const [selectedPaperFinish, setSelectedPaperFinish] = useState(null);
-  const [selectedLamination, setSelectedLamination] = useState(null);
+  const [isClient, setIsClient] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [fallbackImage, setFallbackImage] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+  const router = useRouter();
+  
+  // Add reference for the SOS hero section
+  const sosHeroRef = useRef(null);
+  
+  // Tab view toggles
+  const [activeTab, setActiveTab] = useState('description');
+  
   useEffect(() => {
-    // Set up image rotation for pizza boxes
-    if (product && product.id === 'brown-pizza-boxes' && product.images && product.images.length > 1) {
-      const intervalId = setInterval(() => {
-        setCurrentImageIndex((prevIndex) => 
-          prevIndex === product.images.length - 1 ? 0 : prevIndex + 1
-        );
-      }, 3000); // Rotate every 3 seconds
+    setIsClient(true);
+    
+    // Auto rotate images if product exists and has images
+    if (product && product.images && product.images.length > 1) {
+      const interval = setInterval(() => {
+        setCurrentImageIndex(prev => (prev + 1) % product.images.length);
+      }, 3000);
       
-      return () => clearInterval(intervalId);
+      return () => clearInterval(interval);
     }
   }, [product]);
+  
+  // Parallax scroll effect for SOS Grab Bags
+  useEffect(() => {
+    if (product && product.id === 'sos-grab-bags') {
+      const handleScroll = () => {
+        if (sosHeroRef.current) {
+          const scrollPosition = window.scrollY;
+          const parallaxElements = sosHeroRef.current.querySelectorAll('[data-parallax]');
+          
+          parallaxElements.forEach(el => {
+            const speed = parseFloat(el.getAttribute('data-parallax') || 0.1);
+            el.style.transform = `translateY(${scrollPosition * speed}px)`;
+          });
+          
+          // Update parallax variable for background textures
+          document.documentElement.style.setProperty('--parallax-y', `${scrollPosition * 0.05}px`);
+        }
+      };
+      
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, [product]);
+  
+  if (router.isFallback) {
+    return <div className="container mx-auto px-4 py-8">Loading...</div>;
+  }
+  
+  if (!product) {
+    return (
+      <Layout>
+        <div className="container mx-auto px-4 py-8">
+          <h1 className="text-2xl font-bold mb-4">Product Not Found</h1>
+          <p>Sorry, the product you are looking for does not exist.</p>
+          <Link href="/products" className="text-blue-600 hover:underline mt-4 inline-block">
+            Browse all products
+          </Link>
+        </div>
+      </Layout>
+    );
+  }
 
   // If the page is not yet generated, this will be displayed initially until getStaticProps() runs
   if (router.isFallback) {
@@ -2770,119 +2817,233 @@ const ProductDetail = ({ product, relatedProducts }) => {
 
       {/* Hero section for SOS Grab Bags */}
       {product && product.id === 'sos-grab-bags' && (
-        <div className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-amber-100 to-amber-200 border-b border-gray-200">
-          <div className="absolute inset-0 opacity-20">
-            <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <defs>
-                <pattern id="sos-grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="brown" strokeWidth="0.5" opacity="0.3" />
-                </pattern>
-              </defs>
-              <rect width="100" height="100" fill="url(#sos-grid)" />
-            </svg>
+        <div className="relative overflow-hidden" ref={sosHeroRef}>
+          {/* Animated background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-amber-100 to-amber-200">
+            <div className="absolute inset-0 opacity-20">
+              <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="sos-grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                    <path d="M 10 0 L 0 0 0 10" fill="none" stroke="brown" strokeWidth="0.5" opacity="0.3" />
+                  </pattern>
+                  <linearGradient id="spark-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="rgba(217, 119, 6, 0.7)" />
+                    <stop offset="100%" stopColor="rgba(120, 53, 15, 0.5)" />
+                  </linearGradient>
+                </defs>
+                <rect width="100" height="100" fill="url(#sos-grid)" />
+              </svg>
+            </div>
+            
+            {/* Floating particles */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              {[...Array(15)].map((_, i) => (
+                <div 
+                  key={i}
+                  className="absolute rounded-full bg-amber-600/30 animate-float"
+                  style={{
+                    width: `${Math.random() * 30 + 10}px`,
+                    height: `${Math.random() * 30 + 10}px`,
+                    top: `${Math.random() * 100}%`,
+                    left: `${Math.random() * 100}%`,
+                    animationDuration: `${Math.random() * 10 + 10}s`,
+                    animationDelay: `${Math.random() * 5}s`,
+                    opacity: Math.random() * 0.5 + 0.3
+                  }}
+                  data-parallax={0.03 + (Math.random() * 0.05).toFixed(2)}
+                />
+              ))}
+            </div>
           </div>
           
-          <div className="container mx-auto px-4 py-8 md:py-16 relative z-10">
-            {/* Desktop layout - side by side */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div className="text-gray-800 order-2 md:order-1">
-                <span className="inline-block bg-amber-600/20 backdrop-blur-sm text-amber-900 px-4 py-1 rounded-full text-sm font-medium mb-4 md:mb-6">
-                  {product.category}
-                </span>
-                <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
-                  Stand-Up <span className="text-amber-800">Square Bottom</span><br className="hidden sm:block" /> Bags
-                </h1>
-                <p className="text-lg md:text-xl text-gray-700 mb-6 md:mb-8 max-w-lg">
-                  Versatile SOS grab bags with a sturdy self-opening design, perfect for takeaway food, coffee shops, bakeries, and retail.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-                  <a 
-                    href="#size-options" 
-                    className="w-full sm:w-auto text-center inline-flex justify-center items-center bg-amber-600 hover:bg-amber-700 text-white px-4 sm:px-6 py-3 rounded-lg font-bold transition-colors"
-                  >
-                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                    </svg>
-                    Explore Sizes
-                  </a>
-                  <Link 
-                    href="/contact?subject=SOS Bags Quote" 
-                    className="w-full sm:w-auto text-center inline-flex justify-center items-center bg-transparent hover:bg-amber-600/10 text-amber-700 border-2 border-amber-600 px-4 sm:px-6 py-3 rounded-lg font-bold transition-colors"
-                  >
-                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                    Request Quote
-                  </Link>
-                </div>
-                
-                {/* Size markers */}
-                <div className="mt-6 md:mt-10">
-                  <span className="text-sm text-amber-800 block mb-2 md:inline md:mr-3">Available sizes: </span>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-white text-amber-700 border border-amber-200 shadow-sm">
-                      Small (6"x3.5"x11")
-                    </span>
-                    <span className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-white text-amber-700 border border-amber-200 shadow-sm">
-                      Medium (8"x4.5"x13")
-                    </span>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="relative h-64 sm:h-80 md:h-auto order-1 md:order-2">
-                {/* Rotating Image with Animation */}
-                <div className="relative aspect-square max-w-xs sm:max-w-sm md:max-w-md lg:max-w-xl mx-auto">
+          <div className="container mx-auto px-4 py-12 md:py-20 relative z-10">
+            <div className="max-w-7xl mx-auto">
+              {/* 3D Rotating Carousel */}
+              <div className="relative h-[300px] sm:h-[400px] md:h-[500px] mb-10 md:mb-16">
+                <div className="sos-bag-carousel absolute inset-0">
                   {product.images.map((img, idx) => (
                     <div 
                       key={idx}
-                      className={`absolute inset-0 transition-all duration-1000 transform ${
-                        currentImageIndex === idx 
-                          ? 'opacity-100 scale-100 rotate-0' 
-                          : 'opacity-0 scale-90 rotate-6'
-                      }`}
+                      className="sos-carousel-item absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-1000"
+                      style={{
+                        zIndex: currentImageIndex === idx ? 10 : 0,
+                        opacity: currentImageIndex === idx ? 1 : 0,
+                        transform: `translate(-50%, -50%) 
+                          scale(${currentImageIndex === idx ? 1 : 0.8}) 
+                          rotate(${currentImageIndex === idx ? 0 : (idx < currentImageIndex ? -5 : 5)}deg)`,
+                        filter: `blur(${currentImageIndex === idx ? 0 : 5}px)`
+                      }}
+                      data-parallax={idx % 2 === 0 ? "-0.05" : "0.08"}
                     >
-                      <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-xl bg-white">
-                        <Image 
-                          src={img} 
-                          alt={`${product.name} - Image ${idx + 1}`} 
-                          fill
-                          className="object-cover"
-                          priority={idx === 0}
-                        />
-                      </div>
-                      
-                      {/* Decorative elements */}
-                      <div className="absolute -top-3 -right-3 md:-top-6 md:-right-6 w-8 h-8 md:w-12 md:h-12 bg-amber-500 rounded-full opacity-80 animate-pulse"></div>
-                      <div className="absolute -bottom-2 -left-2 md:-bottom-3 md:-left-3 w-6 h-6 md:w-8 md:h-8 bg-amber-300 rounded-full opacity-70 animate-bounce"></div>
-                      
-                      {/* Size indicator */}
-                      <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 bg-white text-amber-800 px-2 py-0.5 md:px-3 md:py-1 rounded-full font-bold shadow-lg transform -rotate-3 text-xs md:text-sm">
-                        {idx % 2 === 0 ? 'Small' : 'Medium'}
+                      <div className="relative w-full h-full flex items-center justify-center">
+                        <div 
+                          className="relative w-[250px] h-[350px] sm:w-[300px] sm:h-[400px] md:w-[400px] md:h-[500px] transition-transform duration-1000 animate-bob"
+                          style={{
+                            transform: `perspective(1000px) rotateY(${Math.sin(Date.now() / 3000 + idx) * 15}deg) rotateX(${Math.cos(Date.now() / 4000 + idx) * 10}deg)`
+                          }}
+                        >
+                          <div className="absolute inset-0 bg-white rounded-xl shadow-2xl overflow-hidden">
+                            <Image 
+                              src={img} 
+                              alt={`${product.name} - Image ${idx + 1}`} 
+                              fill
+                              className="object-contain p-4 hover:scale-105 transition-transform duration-500"
+                              priority={idx === 0}
+                            />
+                          </div>
+                          
+                          {/* Floating elements */}
+                          <div 
+                            className="absolute -top-3 -right-3 md:-top-6 md:-right-6 w-12 h-12 md:w-16 md:h-16 bg-amber-500/80 rounded-full animate-pulse"
+                            data-parallax="-0.15"
+                          ></div>
+                          <div 
+                            className="absolute -bottom-2 -left-2 md:-bottom-4 md:-left-4 w-8 h-8 md:w-10 md:h-10 bg-amber-700/60 rounded-full animate-bounce"
+                            data-parallax="0.12"
+                          ></div>
+                          
+                          {/* 3D shadow */}
+                          <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 w-3/4 h-4 bg-black/20 rounded-full blur-md"></div>
+                          
+                          {/* Size indicator */}
+                          <div 
+                            className="absolute bottom-3 right-3 bg-white text-amber-800 px-3 py-1 rounded-full font-bold shadow-lg transform -rotate-3 text-sm animate-wiggle"
+                          >
+                            {idx % 2 === 0 ? 'Small' : 'Medium'}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   ))}
                 </div>
                 
-                {/* Image Navigation Dots */}
-                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1.5">
+                {/* Navigation Controls */}
+                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
                   {product.images.map((_, idx) => (
                     <button
                       key={idx}
                       onClick={() => setCurrentImageIndex(idx)}
-                      className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all ${
-                        currentImageIndex === idx ? 'bg-amber-600 scale-125' : 'bg-amber-300 hover:bg-amber-400'
+                      className={`w-3 h-3 md:w-4 md:h-4 rounded-full transition-all ${
+                        currentImageIndex === idx 
+                          ? 'bg-amber-600 scale-125' 
+                          : 'bg-amber-300 hover:bg-amber-400'
                       }`}
                       aria-label={`View image ${idx + 1}`}
                     />
                   ))}
+                </div>
+                
+                {/* Side navigation buttons */}
+                <button
+                  onClick={() => setCurrentImageIndex(prev => (prev - 1 + product.images.length) % product.images.length)}
+                  className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/80 text-amber-800 rounded-full p-2 shadow-md hover:bg-white z-20"
+                  aria-label="Previous image"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => setCurrentImageIndex(prev => (prev + 1) % product.images.length)}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/80 text-amber-800 rounded-full p-2 shadow-md hover:bg-white z-20"
+                  aria-label="Next image"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                  </svg>
+                </button>
+              </div>
+              
+              {/* Content section */}
+              <div className="text-center md:text-left mb-10">
+                <div className="flex flex-col md:flex-row justify-between items-center">
+                  <div className="mb-8 md:mb-0 md:mr-8 max-w-2xl" data-parallax="0.05">
+                    <span className="inline-block bg-amber-600/20 backdrop-blur-sm text-amber-900 px-4 py-1 rounded-full text-sm font-medium mb-4">
+                      {product.category}
+                    </span>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-gray-800 tracking-tight">
+                      <span className="text-amber-800">Stand-Up</span> Square Bottom Bags
+                    </h1>
+                    <p className="text-lg text-gray-700 mb-6 max-w-lg mx-auto md:mx-0">
+                      Versatile SOS grab bags with a sturdy self-opening design, perfect for takeaway food, coffee shops, bakeries, and retail.
+                    </p>
+                    
+                    {/* Features list */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left mb-6">
+                      {product.features.slice(0, 4).map((feature, idx) => (
+                        <div key={idx} className="flex items-start">
+                          <div className="flex-shrink-0 mt-1">
+                            <svg className="h-5 w-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                          </div>
+                          <p className="ml-2 text-gray-700">{feature}</p>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    {/* Action buttons */}
+                    <div className="flex flex-col sm:flex-row gap-3 mt-6">
+                      <a 
+                        href="#size-options" 
+                        className="w-full sm:w-auto text-center inline-flex justify-center items-center bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-lg font-bold transition-colors"
+                      >
+                        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        Explore Sizes
+                      </a>
+                      <Link 
+                        href="/contact?subject=SOS Bags Quote" 
+                        className="w-full sm:w-auto text-center inline-flex justify-center items-center bg-transparent hover:bg-amber-600/10 text-amber-700 border-2 border-amber-600 px-6 py-3 rounded-lg font-bold transition-colors"
+                      >
+                        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        Request Quote
+                      </Link>
+                    </div>
+                  </div>
+                  
+                  {/* Key specs */}
+                  <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg w-full md:w-auto" data-parallax="-0.03">
+                    <h3 className="text-lg font-semibold text-amber-800 mb-4">Key Specifications</h3>
+                    <div className="space-y-3">
+                      {product.specifications.slice(0, 5).map((spec, idx) => (
+                        <div key={idx} className="flex items-start">
+                          <div className="flex-shrink-0 w-24 text-sm font-medium text-gray-500">
+                            {spec.name}:
+                          </div>
+                          <div className="ml-2 text-gray-800">{spec.value}</div>
+                        </div>
+                      ))}
+                      <div className="pt-3 border-t border-gray-200">
+                        <div className="flex items-center justify-between">
+                          <div className="text-gray-500 text-sm">Starting price:</div>
+                          <div className="text-xl font-bold text-amber-800">{product.price}</div>
+                        </div>
+                        <div className="text-sm text-gray-500 mt-1">
+                          Minimum order: {product.moq} units
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           
           {/* Bottom decoration */}
-          <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-r from-amber-100 via-amber-50 to-amber-100"></div>
+          <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-r from-amber-100 via-amber-50 to-amber-100"></div>
+          
+          {/* Parallax kraft paper texture overlay */}
+          <div 
+            className="absolute inset-0 pointer-events-none opacity-10 bg-repeat animate-paper-texture"
+            style={{
+              backgroundImage: 'url(/images/textures/kraft-paper-texture.png)'
+            }}
+            data-parallax="0.02"
+          ></div>
         </div>
       )}
       
