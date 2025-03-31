@@ -462,4 +462,50 @@ body {
   .animate-pulse-gradient {
     animation: pulse-gradient 12s ease-in-out infinite;
   }
+}
+
+/* CSS Placeholder for missing product images */
+.css-placeholder {
+  background-color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.css-placeholder::after {
+  content: "Product Image";
+  font-size: 14px;
+  font-weight: 500;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.css-placeholder.banner::after {
+  content: "Banner Image";
+}
+
+.css-placeholder::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+  transform: skewX(-20deg);
+}
+
+@keyframes shimmer {
+  100% {
+    left: 150%;
+  }
 } 
