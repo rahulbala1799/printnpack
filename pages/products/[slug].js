@@ -346,6 +346,127 @@ const ProductDetail = ({ product, relatedProducts }) => {
         </div>
       )}
 
+      {/* Special Hero Banner for Posters */}
+      {product.id === 'posters' && (
+        <div className="relative bg-gradient-to-r from-indigo-900 via-purple-800 to-pink-900 overflow-hidden">
+          <div className="absolute inset-0 opacity-20">
+            <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <defs>
+                <pattern id="poster-grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" strokeWidth="0.5" opacity="0.5" />
+                </pattern>
+              </defs>
+              <rect width="100" height="100" fill="url(#poster-grid)" />
+            </svg>
+          </div>
+          
+          <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+              <div className="text-white space-y-6 relative z-10">
+                <span className="inline-block bg-pink-500/30 backdrop-blur-sm text-white px-4 py-1 rounded-full text-sm font-medium mb-4">
+                  Premium Quality Prints
+                </span>
+                <h2 className="text-4xl md:text-5xl font-bold leading-tight">Custom Posters That <span className="text-pink-300">Demand Attention</span></h2>
+                <p className="text-xl text-indigo-100">Make your message impossible to miss with our vibrant eco-solvent poster prints on premium 170gsm and 200gsm paper.</p>
+                
+                {/* Flashy feature cards */}
+                <div className="grid grid-cols-2 gap-4 mt-8">
+                  {[
+                    { icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z', title: 'Premium Quality', desc: '170-200gsm paper' },
+                    { icon: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01', title: 'Eco-Solvent', desc: 'Vibrant colors' },
+                    { icon: 'M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z', title: 'Custom Sizes', desc: 'A4 to A0 & beyond' },
+                    { icon: 'M13 10V3L4 14h7v7l9-11h-7z', title: 'Fast Turnaround', desc: '1-3 business days' },
+                  ].map((feature, i) => (
+                    <div key={i} className="bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-colors group">
+                      <div className="flex items-center mb-2">
+                        <svg className="w-6 h-6 text-pink-300 group-hover:text-pink-200 transition-colors mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={feature.icon} />
+                        </svg>
+                        <h3 className="font-semibold">{feature.title}</h3>
+                      </div>
+                      <p className="text-indigo-200 text-sm">{feature.desc}</p>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* CTA buttons */}
+                <div className="flex flex-wrap gap-4 mt-8">
+                  <Link href="/contact" className="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 inline-flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    Get Quote Now
+                  </Link>
+                  <Link href="#sizes" className="bg-transparent border-2 border-white/30 hover:border-white/60 text-white font-medium py-3 px-6 rounded-lg transition duration-300 inline-flex items-center">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                    Explore Sizes
+                  </Link>
+                </div>
+              </div>
+              
+              {/* Interactive Poster Display */}
+              <div className="relative">
+                {/* Main poster */}
+                <div className="relative h-[400px] rounded-xl overflow-hidden shadow-2xl transform rotate-3 z-10 transition-transform duration-500 hover:rotate-0 border-8 border-white">
+                  <Image 
+                    src="/ifa/product/poster/PosterPrinting-4.jpg"
+                    alt="Professional poster printing" 
+                    fill 
+                    className="object-cover"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
+                    <span className="text-white font-semibold">Premium Poster Printing</span>
+                  </div>
+                </div>
+                
+                {/* Secondary posters in stack */}
+                <div className="absolute top-20 -right-10 w-48 h-64 rounded-lg overflow-hidden shadow-xl transform -rotate-6 z-20 transition-transform duration-500 hover:rotate-0 border-4 border-white">
+                  <Image 
+                    src="/ifa/product/poster/1.webp"
+                    alt="Retail poster example" 
+                    fill 
+                    className="object-cover"
+                  />
+                </div>
+                
+                <div className="absolute -bottom-10 -left-10 w-48 h-64 rounded-lg overflow-hidden shadow-xl transform rotate-12 z-0 transition-transform duration-500 hover:rotate-0 border-4 border-white">
+                  <Image 
+                    src="/ifa/product/poster/2.webp"
+                    alt="Event poster example" 
+                    fill 
+                    className="object-cover"
+                  />
+                </div>
+                
+                <div className="absolute top-10 -left-20 w-40 h-56 rounded-lg overflow-hidden shadow-xl transform -rotate-12 transition-transform duration-500 hover:rotate-0 border-4 border-white">
+                  <Image 
+                    src="/ifa/product/poster/single_poster.jpg"
+                    alt="Exhibition poster example" 
+                    fill 
+                    className="object-cover"
+                  />
+                </div>
+                
+                {/* Floating size indicators */}
+                <div className="absolute -right-2 top-0 bg-white text-indigo-900 px-3 py-1 rounded-full text-sm font-bold shadow-lg z-30">
+                  A0 - A4 Sizes
+                </div>
+                
+                <div className="absolute bottom-8 right-8 bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg z-30 animate-pulse">
+                  Custom Dimensions
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Creative wave divider */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-12 text-white">
+              <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
+            </svg>
+          </div>
+        </div>
+      )}
+
       {/* Product Hero - Redesigned */}
       <div className="bg-gradient-to-b from-gray-50 to-white py-16">
         <div className="container mx-auto px-4">
@@ -1350,6 +1471,218 @@ const ProductDetail = ({ product, relatedProducts }) => {
           <Link href="/contact" className="inline-block bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-colors">
             Contact Us
           </Link>
+        </div>
+      </div>
+
+      {/* End of FAQ section */}
+      <div className="border-t border-gray-200 mt-16 pt-16"></div>
+
+      {/* Size Guide for Posters */}
+      {product && product.id === 'posters' && (
+        <div id="sizes" className="container mx-auto px-4 py-16 scroll-mt-24">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Poster Sizing Guide</h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">Choose the perfect size for your promotional needs or create custom dimensions for your unique space</p>
+            </div>
+            
+            {/* Poster Size Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+              {[
+                { 
+                  name: 'A4 Poster', 
+                  dimensions: '210mm × 297mm', 
+                  idealFor: 'Close-up viewing, tabletop displays, information sheets', 
+                  image: '/ifa/product/poster/1.webp',
+                  popular: false
+                },
+                { 
+                  name: 'A3 Poster', 
+                  dimensions: '297mm × 420mm', 
+                  idealFor: 'Retail counter displays, meeting room notices, small ads', 
+                  image: '/ifa/product/poster/5.webp',
+                  popular: false
+                },
+                { 
+                  name: 'A2 Poster', 
+                  dimensions: '420mm × 594mm', 
+                  idealFor: 'Small shop windows, conference signage, menu displays', 
+                  image: '/ifa/product/poster/3.webp',
+                  popular: true
+                },
+                { 
+                  name: 'A1 Poster', 
+                  dimensions: '594mm × 841mm', 
+                  idealFor: 'Retail promotions, event announcements, exhibition displays', 
+                  image: '/ifa/product/poster/PosterPrinting-5.jpg',
+                  popular: true
+                },
+                { 
+                  name: 'A0 Poster', 
+                  dimensions: '841mm × 1189mm', 
+                  idealFor: 'Maximum impact displays, trade shows, large format advertising', 
+                  image: '/ifa/product/poster/PosterPrinting-4.jpg',
+                  popular: false
+                },
+                { 
+                  name: 'Custom Sizes', 
+                  dimensions: 'Up to 1.5m width', 
+                  idealFor: 'Specialized displays, non-standard frames, unique spaces', 
+                  image: '/ifa/product/poster/100-GSM-Map-Print-Spot-Vertical-Poster_05-1024x1024.webp',
+                  popular: false
+                }
+              ].map((size, i) => (
+                <div key={i} className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105 group relative">
+                  {size.popular && (
+                    <div className="absolute top-4 right-4 z-20">
+                      <span className="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                        POPULAR
+                      </span>
+                    </div>
+                  )}
+                  
+                  <div className="relative h-48 overflow-hidden">
+                    <Image
+                      src={size.image}
+                      alt={size.name}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="text-white font-bold text-xl">{size.name}</h3>
+                      <p className="text-white/80 text-sm">{size.dimensions}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="p-6">
+                    <div className="mb-4">
+                      <h4 className="text-gray-700 font-medium text-sm mb-2">IDEAL FOR:</h4>
+                      <p className="text-gray-600">{size.idealFor}</p>
+                    </div>
+                    <Link href="/contact" className="inline-flex items-center text-blue-600 font-medium hover:text-blue-800 group-hover:translate-x-1 transition-transform">
+                      Request Quote
+                      <svg className="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Eco-solvent printing info */}
+            <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl overflow-hidden shadow-lg">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="p-8 md:p-12">
+                  <div className="inline-flex items-center bg-green-100 text-green-800 px-4 py-1 rounded-full text-sm font-medium mb-6">
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />
+                    </svg>
+                    Eco-Friendly Technology
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Vibrant Eco-Solvent Printing</h3>
+                  <p className="text-gray-700 mb-6">
+                    Our eco-solvent printing technology delivers exceptional color reproduction and durability while being kinder to the environment than traditional methods. These inks provide:
+                  </p>
+                  <ul className="space-y-3 text-gray-600 mb-8">
+                    {[
+                      'Vibrant, true-to-life colors that pop',
+                      'Excellent UV resistance for longer-lasting prints',
+                      'Reduced environmental impact with lower VOCs',
+                      'Superior adhesion and durability on our premium papers',
+                      'Suitability for both indoor and short-term outdoor use'
+                    ].map((benefit, i) => (
+                      <li key={i} className="flex items-start">
+                        <svg className="w-5 h-5 text-green-600 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href="/contact" className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                    Request Samples
+                    <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </Link>
+                </div>
+                <div className="relative h-full min-h-[300px] md:min-h-[400px]">
+                  <Image
+                    src="/ifa/product/poster/single_poster.jpg"
+                    alt="Eco-solvent poster printing"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-green-900/20 to-blue-900/40 md:bg-gradient-to-l"></div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Application Cards */}
+            <div className="mt-20">
+              <h3 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-12">Popular Poster Applications</h3>
+              
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {[
+                  { icon: 'M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z', title: 'Retail Promotions', desc: 'Boost in-store sales with eye-catching promotional posters' },
+                  { icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z', title: 'Event Announcements', desc: 'Promote concerts, exhibitions, and special events' },
+                  { icon: 'M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z', title: 'Cinema & Theater', desc: 'Display movie listings and show times' },
+                  { icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253', title: 'Educational Displays', desc: 'Create informative posters for schools and colleges' },
+                  { icon: 'M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z', title: 'Restaurant Menus', desc: 'Display specials and menu items with appetizing visuals' },
+                  { icon: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z', title: 'Corporate Messaging', desc: 'Communicate company values and announcements' },
+                  { icon: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z', title: 'Trade Shows', desc: 'Create impactful booth graphics and information displays' },
+                  { icon: 'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z', title: 'Art Reproductions', desc: 'High-quality art prints for galleries and home decoration' }
+                ].map((app, i) => (
+                  <div key={i} className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+                    <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={app.icon} />
+                      </svg>
+                    </div>
+                    <h4 className="font-bold text-gray-900 mb-2">{app.title}</h4>
+                    <p className="text-gray-600 text-sm">{app.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Related Products */}
+      <div className="bg-gray-50 py-16">
+        <div className="container mx-auto px-4 py-12">
+          <h2 className="text-2xl font-bold mb-8">Related Products</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {relatedProducts.map(relatedProduct => (
+              <div key={relatedProduct.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                <div className="h-48 relative bg-gray-50">
+                  {relatedProduct.imageSrc.includes('css-placeholder-image') ? (
+                    <div className="absolute inset-0 css-placeholder banner"></div>
+                  ) : (
+                    <Image
+                      src={relatedProduct.imageSrc}
+                      alt={relatedProduct.name}
+                      fill
+                      className="object-contain p-4"
+                    />
+                  )}
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold mb-2">{relatedProduct.name}</h3>
+                  <p className="text-sm text-gray-600 mb-3 line-clamp-2">{relatedProduct.description}</p>
+                  <Link 
+                    href={`/products/${relatedProduct.id}`}
+                    className="text-blue-600 text-sm font-medium hover:text-blue-800"
+                  >
+                    View Details
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </Layout>

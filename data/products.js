@@ -784,116 +784,93 @@ const products = [
   },
   {
     id: 'posters',
-    name: 'Professional Posters',
+    name: 'Custom Posters',
     category: 'Wide Format',
-    description: 'High-definition posters with stunning color reproduction for marketing campaigns, events, and retail environments.',
+    description: 'High-quality custom posters printed on premium paper with vibrant eco-solvent inks. Perfect for advertising, events, retail displays, and exhibitions.',
     features: [
-      'Premium 170gsm-200gsm paper options',
-      'Photo-quality printing up to 1440dpi',
-      'Standard and custom sizes available',
-      'Multiple finish options (matte, gloss, satin)',
-      'Fast turnaround times with rush service',
-      'Lamination options for durability'
+      'Available in 170gsm and 200gsm premium paper',
+      'Eco-solvent printing for vibrant, long-lasting colors',
+      'Custom sizes available to meet your specific needs',
+      'Standard sizes from A4 to A0 and beyond',
+      'Indoor and short-term outdoor use',
+      'Fast turnaround times for urgent projects',
+      'Bulk discounts available for larger orders',
+      'Sharp, high-resolution image reproduction'
     ],
-    detailedDescription: 'Make a bold visual statement with our professional, high-definition posters, perfect for promotions, events, retail displays, and interior décor. Using state-of-the-art printing technology, we deliver stunning color reproduction and exceptional image clarity that brings your visuals to life with remarkable detail.\n\nOur posters are printed on premium heavyweight papers with options for gloss, matte, or satin finishes to suit your specific application. Whether you need standard sizes like A0 and A1 or custom dimensions for your unique space, our posters provide a cost-effective way to create maximum visual impact.\n\nFor installations requiring extra durability, we offer lamination services in gloss or matte finishes, providing protection against handling, moisture, and UV fading. This is especially valuable for posters in high-traffic areas or for longer-term displays. From design assistance to lightning-fast turnaround times, we provide a complete solution for your poster printing needs.',
+    detailedDescription: 'Our custom poster printing service delivers professional, eye-catching results for your advertising, promotional, and informational needs. Using premium 170gsm and 200gsm paper combined with advanced eco-solvent printing technology, we ensure vibrant colors and crisp text that stands out. Choose from standard sizes or specify your custom dimensions to perfectly fit your display location. Whether you need a single poster for your shop window or hundreds for a nationwide campaign, we offer competitive pricing with bulk discounts for larger quantities. Our streamlined production process allows for quick turnaround times without compromising on quality, making us the perfect partner for time-sensitive projects.',
     specifications: [
-      { name: 'Paper Types', value: '170gsm silk/satin, 200gsm gloss, 170gsm matte, 190gsm photo satin' },
-      { name: 'Standard Sizes', value: 'A0 (841mm × 1189mm), A1 (594mm × 841mm), A2 (420mm × 594mm), 24"×36", 36"×48", Custom sizes available' },
-      { name: 'Print Resolution', value: 'Up to 1440dpi for photographic quality reproduction' },
-      { name: 'Finishing Options', value: 'Lamination (gloss/matte), mounting to foam board or correx, edge sealing, encapsulation' },
-      { name: 'Color Profile', value: 'Full CMYK with ICC color management for accurate color reproduction' },
-      { name: 'Minimum Order', value: 'No minimum - single poster printing available' },
-      { name: 'Turnaround Time', value: 'Same day service available, standard 24-48 hours' },
-      { name: 'Custom Shapes', value: 'Cut-to-shape options available for unique designs' },
-      { name: 'Indoor Lifespan', value: '6-12 months unlaminated, 2+ years with lamination' },
-      { name: 'Design Template', value: 'Free artwork templates available for all standard sizes' }
+      { name: 'Paper Options', value: '170gsm premium satin, 200gsm premium satin' },
+      { name: 'Printing Technology', value: 'Eco-solvent printing for vibrant, long-lasting colors' },
+      { name: 'Standard Sizes', value: 'A4, A3, A2, A1, A0, 40x60cm, 50x70cm, 60x90cm, 70x100cm' },
+      { name: 'Custom Sizes', value: 'Available up to 1.5m width' },
+      { name: 'Finishing Options', value: 'Cut to size, lamination (matt or gloss)' },
+      { name: 'Color Mode', value: 'Full color CMYK printing' },
+      { name: 'Resolution', value: 'High-resolution 1440dpi for sharp details' },
+      { name: 'Production Time', value: '1-3 business days (rush service available)' },
+      { name: 'Minimum Order', value: 'No minimum - single posters available' }
     ],
-    applications: [
-      'Retail promotional displays',
-      'Corporate event signage',
-      'Exhibition and conference information',
-      'Restaurant and bar menus',
-      'Educational displays and presentations',
-      'Movie and entertainment promotions',
-      'Art reproductions and gallery displays',
-      'Wayfinding and informational signage'
-    ],
-    models: [
-      {
-        name: 'Standard Paper Posters',
-        description: 'Cost-effective solution for short-term promotional displays',
-        features: [
-          '170gsm silk/satin or matte paper',
-          'Vibrant color reproduction',
-          'Available in all standard and custom sizes',
-          'Unlaminated for economical printing'
-        ],
-        recommendedFor: 'Short-term promotions, event announcements, indoor retail displays, temporary information'
-      },
-      {
-        name: 'Premium Photo Posters',
-        description: 'High-impact visual display with superior image quality',
-        features: [
-          '190-200gsm photo-grade paper',
-          'Enhanced color gamut for photographic reproduction',
-          'Satin or gloss finish options',
-          'Superior detail resolution for close viewing'
-        ],
-        recommendedFor: 'Fashion displays, product showcases, art reproductions, premium brand advertising'
-      },
-      {
-        name: 'Laminated Posters',
-        description: 'Durable finish providing protection and enhanced appearance',
-        features: [
-          'Gloss, matte or satin lamination options',
-          'Protection against handling, moisture, and UV damage',
-          'Wipe-clean surface ideal for high-traffic areas',
-          'Extended lifespan of 2+ years indoor'
-        ],
-        recommendedFor: 'Long-term displays, educational environments, restaurants, information boards'
-      },
-      {
-        name: 'Mounted Posters',
-        description: 'Ready-to-display solution with rigid backing',
-        features: [
-          'Mounted on 5mm foam board or 3mm/5mm Correx',
-          'No need for additional framing',
-          'Professional edge finish options',
-          'Includes hanging options (adhesive hooks or drill holes)'
-        ],
-        recommendedFor: 'Exhibition displays, information points, boardroom presentations, semi-permanent installations'
-      }
-    ],
+    imageSrc: '/ifa/product/poster/single_poster.jpg',
     images: [
-      '/css-placeholder-image',
-      '/css-placeholder-image',
-      '/css-placeholder-image',
-      '/css-placeholder-image'
+      '/ifa/product/poster/single_poster.jpg',
+      '/ifa/product/poster/PosterPrinting-4.jpg',
+      '/ifa/product/poster/PosterPrinting-5.jpg',
+      '/ifa/product/poster/1.webp',
+      '/ifa/product/poster/2.webp',
+      '/ifa/product/poster/3.webp',
+      '/ifa/product/poster/4.webp',
+      '/ifa/product/poster/5.webp',
+      '/ifa/product/poster/aluminum_board_posters_cross_sell.jpg',
+      '/ifa/product/poster/100-GSM-Map-Print-Spot-Vertical-Poster_05-1024x1024.webp'
     ],
-    imageSrc: '/css-placeholder-image',
-    price: 'Starting at €20 per poster',
-    quoteRequired: false,
-    leadTime: '24-48 hours standard (same day available)',
+    price: 'Starting at €15 per poster',
+    moq: 1,
+    leadTime: '1-3 business days',
+    applications: [
+      'Retail promotions and sales advertising',
+      'Event announcements and concert promotions',
+      'Cinema and theater show times',
+      'Educational displays and presentations',
+      'Restaurant menus and specials',
+      'Corporate messaging and branding',
+      'Trade show and exhibition displays',
+      'Political campaigns',
+      'Art reproductions and gallery displays',
+      'Interior decoration'
+    ],
     faq: [
       {
-        question: 'What resolution should my artwork be for poster printing?',
-        answer: 'For optimum print quality, we recommend a minimum resolution of 150dpi at the final print size. For example, an A1 poster (594mm × 841mm) should have a resolution of at least 3508 × 4961 pixels. For the sharpest results, especially with photographic content, 300dpi is ideal.'
+        question: 'What is the difference between 170gsm and 200gsm paper?',
+        answer: '170gsm paper is our standard option, offering good durability and color reproduction at an economical price point. The 200gsm paper provides extra thickness and rigidity, making it more durable and giving a more premium feel, ideal for longer-term displays or higher-end environments.'
       },
       {
-        question: 'What file formats do you accept for poster printing?',
-        answer: 'We accept PDF (preferred), JPEG, TIFF, PNG, AI, and PSD files. PDF files should be created with fonts embedded and in CMYK color mode. When sending native design files (AI, PSD), please convert text to outlines/paths or include all fonts used in the design.'
+        question: 'What size posters can you print?',
+        answer: 'We offer standard sizes from A4 (210mm x 297mm) up to A0 (841mm x 1189mm), as well as common promotional sizes such as 40x60cm, 50x70cm, 60x90cm, and 70x100cm. We can also produce custom sizes up to 1.5m width to meet your specific requirements.'
       },
       {
-        question: 'How should I prepare my artwork for poster printing?',
-        answer: 'Set up your document at the exact size you want to print with 3mm bleed on all sides. Use CMYK color mode (not RGB) for most accurate color reproduction. Keep important text and elements at least 5mm from the edge. For templates and detailed specifications, please download our artwork guide or contact our design team.'
+        question: 'What does eco-solvent printing mean?',
+        answer: 'Eco-solvent printing uses environmentally friendly inks that contain milder solvents than traditional solvent inks. This provides vibrant, durable colors with reduced environmental impact and lower odor. Our eco-solvent inks deliver excellent color reproduction and UV resistance, making them suitable for both indoor and short-term outdoor applications.'
       },
       {
-        question: 'Do I need to laminate my posters?',
-        answer: 'Lamination is recommended if your posters will be displayed for more than a few weeks, will be handled frequently, or will be in areas with high humidity or direct sunlight. Lamination provides protection against tearing, moisture, UV fading, and fingerprints, extending the life of your posters significantly.'
+        question: 'How quickly can I get my posters?',
+        answer: 'Our standard production time is 1-3 business days, depending on quantity and current workload. Rush services are available for urgent requirements at an additional charge. For very large quantities, please contact us to discuss timeframes.'
       },
       {
-        question: 'What poster size should I choose?',
-        answer: 'The ideal size depends on viewing distance and location. A1 (594mm × 841mm) is our most popular size, providing good visibility from up to 10 meters away. For greater impact at medium distances, consider A0 (841mm × 1189mm). For close inspection of detailed information, A2 (420mm × 594mm) may be sufficient. We\'re happy to advise on the best size for your specific needs.'
+        question: 'Can I get my posters laminated?',
+        answer: 'Yes, we offer both matt and gloss lamination options for our posters. Lamination adds protection against fingerprints, moisture, and light scratching, extending the life of your posters. Matt lamination reduces glare and provides a sophisticated finish, while gloss lamination enhances color vibrancy and creates a more eye-catching appearance.'
+      }
+    ],
+    testimonials: [
+      {
+        quote: 'The poster quality exceeded our expectations. The colors were vibrant and the details crisp - perfect for our exhibition.',
+        author: 'Marketing Manager, Tech Startup'
+      },
+      {
+        quote: 'We needed 50 posters on short notice for our product launch. Not only did they deliver on time, but the print quality was excellent.',
+        author: 'Event Coordinator, Retail Chain'
+      },
+      {
+        quote: 'We\'ve been ordering our restaurant menu posters from PrintNPack for years. Consistent quality and great service every time.',
+        author: 'Restaurant Owner, Dublin'
       }
     ]
   },
