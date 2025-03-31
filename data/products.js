@@ -408,36 +408,6 @@ const products = [
     leadTime: '7-10 business days'
   },
   {
-    id: 'marketing-materials',
-    name: 'Marketing Materials',
-    category: 'Marketing',
-    description: 'High-quality printed materials to promote your business and generate leads.',
-    features: [
-      'Flyers and leaflets',
-      'Brochures and catalogs',
-      'Business cards',
-      'Posters and banners',
-      'Same-day printing available'
-    ],
-    detailedDescription: 'Our marketing materials are designed to help your business make a lasting impression. From sleek business cards to eye-catching brochures, we offer a wide range of high-quality printed products to suit your promotional needs. Each item can be fully customized with your branding, using premium papers and advanced printing techniques for professional results.',
-    specifications: [
-      { name: 'Materials', value: 'Various paper stocks (100-350gsm)' },
-      { name: 'Print Quality', value: 'High-resolution digital or offset printing' },
-      { name: 'Finishes Available', value: 'Matte, glossy, soft-touch, spot UV' },
-      { name: 'Minimum Order', value: 'Varies by product' },
-      { name: 'Production Time', value: '2-5 business days (rush options available)' },
-      { name: 'Customization', value: 'Size, shape, paper type, finishes' },
-    ],
-    images: [
-      '/images/hero/leaflet.svg',
-      '/images/ifa/heroh/marketing.png'
-    ],
-    imageSrc: '/images/hero/leaflet.svg',
-    price: 'Starting at €0.10 per unit',
-    moq: 100,
-    leadTime: '2-5 business days'
-  },
-  {
     id: 'napkins',
     name: 'Custom Napkins',
     category: 'Hospitality Products',
