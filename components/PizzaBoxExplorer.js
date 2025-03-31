@@ -82,29 +82,29 @@ const PizzaBoxExplorer = () => {
 
   return (
     <div className="mb-16">
-      <div className="mb-8 text-center">
-        <h3 className="text-2xl font-bold mb-3 text-gray-800">Pizza Box Size Explorer</h3>
-        <p className="text-gray-600 max-w-3xl mx-auto">
+      <div className="mb-6 sm:mb-8 text-center px-2">
+        <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-gray-800">Pizza Box Size Explorer</h3>
+        <p className="text-gray-600 max-w-3xl mx-auto text-sm sm:text-base">
           Choose from 5 different box sizes to perfectly fit your pizza offerings. Each eco-friendly kraft box can be customized with your branding.
         </p>
       </div>
       
       {/* Size selector - flashy tabs */}
-      <div className="relative mb-8">
-        <div className="flex justify-center space-x-2 md:space-x-4 overflow-x-auto pb-4 no-scrollbar">
+      <div className="relative mb-6 sm:mb-8">
+        <div className="flex justify-center space-x-1 sm:space-x-2 md:space-x-4 overflow-x-auto pb-4 -mx-4 px-4 no-scrollbar">
           {boxSizes.map((size) => (
             <button
               key={size.id}
               onClick={() => handleSizeClick(size.id)}
-              className={`relative px-5 py-3 rounded-full font-bold transition-all duration-300 transform ${
+              className={`relative min-w-0 px-3 sm:px-5 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 transform ${
                 activeSize === size.id 
-                  ? `text-white bg-gradient-to-r ${size.accent} shadow-lg scale-110` 
+                  ? `text-white bg-gradient-to-r ${size.accent} shadow-lg scale-105 sm:scale-110` 
                   : 'text-gray-600 bg-gray-100 hover:bg-gray-200'
               }`}
             >
               {size.name}
               {activeSize === size.id && (
-                <span className="absolute -top-2 -right-2 bg-yellow-400 text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center animate-pulse">
+                <span className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 bg-yellow-400 text-xs font-bold rounded-full w-4 h-4 sm:w-6 sm:h-6 flex items-center justify-center animate-pulse">
                   ✓
                 </span>
               )}
@@ -114,10 +114,10 @@ const PizzaBoxExplorer = () => {
       </div>
       
       {/* Interactive Pizza Box Display */}
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 mb-8">
         {/* Box Visualization */}
-        <div className="lg:col-span-3 bg-white p-6 rounded-xl border border-gray-200 shadow-md">
-          <div className="relative aspect-square max-w-md mx-auto">
+        <div className="lg:col-span-3 bg-white p-4 sm:p-6 rounded-xl border border-gray-200 shadow-md">
+          <div className="relative aspect-square max-w-sm mx-auto">
             {/* 3D Pizza Box with Lid */}
             <div 
               className={`absolute inset-0 ${currentBox.boxColor} ${currentBox.borderColor} border-2 rounded-lg shadow-xl transition-all duration-500 transform ${
@@ -141,7 +141,7 @@ const PizzaBoxExplorer = () => {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="relative w-2/3 h-2/3 flex items-center justify-center">
                     <div className="absolute inset-0 bg-blue-600 opacity-10 rounded-full transform -rotate-12"></div>
-                    <div className="text-blue-800 font-extrabold text-4xl transform -rotate-12">
+                    <div className="text-blue-800 font-extrabold text-2xl sm:text-3xl md:text-4xl transform -rotate-12">
                       PRINT<span className="text-orange-600">N</span>PACK
                     </div>
                   </div>
@@ -149,7 +149,7 @@ const PizzaBoxExplorer = () => {
                 
                 {/* Box Size Indicator */}
                 <div 
-                  className="absolute bottom-4 right-4 bg-white px-3 py-1 rounded-full font-bold text-sm shadow-md transform rotate-3"
+                  className="absolute bottom-4 right-4 bg-white px-2 py-0.5 sm:px-3 sm:py-1 rounded-full font-bold text-xs sm:text-sm shadow-md transform rotate-3"
                 >
                   {currentBox.dimension}
                 </div>
@@ -163,7 +163,7 @@ const PizzaBoxExplorer = () => {
                   backgroundColor: '#d4a76a'
                 }}
               >
-                <div className="absolute top-1/4 w-full text-center text-xs font-medium text-amber-800">
+                <div className="absolute top-1/4 w-full text-center text-xs font-medium text-amber-800 px-2 truncate">
                   Eco-Friendly • Kraft Material • {currentBox.height} Height
                 </div>
               </div>
@@ -173,7 +173,7 @@ const PizzaBoxExplorer = () => {
         
         {/* Box Details */}
         <div className="lg:col-span-2 flex flex-col space-y-4">
-          <div className={`bg-gradient-to-r ${currentBox.accent} text-white p-5 rounded-xl shadow-md`}>
+          <div className={`bg-gradient-to-r ${currentBox.accent} text-white p-4 rounded-xl shadow-md`}>
             <h4 className="text-xl font-bold mb-2">{currentBox.name} Pizza Box</h4>
             <p className="text-white/90 text-sm">
               Dimensions: {currentBox.dimension} × {currentBox.dimension} × {currentBox.height}
@@ -202,7 +202,7 @@ const PizzaBoxExplorer = () => {
                 </span>
                 Features
               </h5>
-              <ul className="text-gray-600 pl-8 space-y-1">
+              <ul className="text-gray-600 pl-8 space-y-1 text-sm sm:text-base">
                 <li>✓ Recycled kraft corrugated cardboard</li>
                 <li>✓ Stackable design for easy storage</li>
                 <li>✓ Customizable with your branding</li>
@@ -215,23 +215,26 @@ const PizzaBoxExplorer = () => {
       </div>
       
       {/* Size Comparison */}
-      <div className="bg-gray-50 p-6 rounded-xl shadow-sm">
-        <h4 className="text-xl font-bold mb-6 text-center text-gray-800">Size Comparison</h4>
-        <div className="flex justify-center items-end space-x-4 h-64 mb-4">
+      <div className="bg-gray-50 p-4 sm:p-6 rounded-xl shadow-sm overflow-hidden">
+        <h4 className="text-xl font-bold mb-4 sm:mb-6 text-center text-gray-800">Size Comparison</h4>
+        <div className="flex justify-center items-end space-x-2 sm:space-x-4 h-48 sm:h-64 mb-4 overflow-x-auto no-scrollbar">
           {boxSizes.map((size) => (
             <div 
               key={size.id}
               className="flex flex-col items-center"
             >
               <div 
-                className={`w-16 md:w-24 h-16 md:h-24 ${size.id === activeSize ? size.boxColor : 'bg-gray-100'} ${size.id === activeSize ? size.borderColor : 'border-gray-300'} border-2 rounded-lg mb-2 transition-all duration-300 flex items-center justify-center`}
+                className={`${size.id === activeSize ? size.boxColor : 'bg-gray-100'} ${size.id === activeSize ? size.borderColor : 'border-gray-300'} border-2 rounded-lg mb-2 transition-all duration-300 flex items-center justify-center`}
                 style={{
                   transform: size.id === activeSize ? 'translateY(-8px) scale(1.1)' : 'translateY(0) scale(1)',
-                  width: `${parseInt(size.name) * 0.6}rem`,
-                  maxWidth: '90%'
+                  width: `${Math.min(parseInt(size.name) * 0.5, 10)}rem`,
+                  height: `${Math.min(parseInt(size.name) * 0.5, 10)}rem`,
+                  minWidth: '2.5rem',
+                  minHeight: '2.5rem',
+                  maxWidth: '10rem'
                 }}
               >
-                <span className={`font-bold ${size.id === activeSize ? size.labelColor : 'text-gray-500'}`}>
+                <span className={`font-bold ${size.id === activeSize ? size.labelColor : 'text-gray-500'} text-xs sm:text-sm`}>
                   {size.name}
                 </span>
               </div>
@@ -241,7 +244,7 @@ const PizzaBoxExplorer = () => {
         </div>
         
         {/* Measurement Scale */}
-        <div className="bg-white h-2 rounded-full relative mb-4">
+        <div className="bg-white h-2 rounded-full relative mb-4 mx-2">
           <div className="absolute inset-x-0 bottom-3 flex justify-between px-1">
             <span className="text-xs font-medium text-gray-500">7"</span>
             <span className="text-xs font-medium text-gray-500">14"</span>
@@ -250,12 +253,12 @@ const PizzaBoxExplorer = () => {
       </div>
       
       {/* Call to Action */}
-      <div className="mt-8 bg-blue-50 rounded-xl p-6 flex flex-col md:flex-row items-center justify-between">
-        <div className="mb-4 md:mb-0">
+      <div className="mt-8 bg-blue-50 rounded-xl p-4 sm:p-6 flex flex-col md:flex-row items-center justify-between">
+        <div className="mb-4 md:mb-0 text-center md:text-left">
           <h4 className="text-xl font-bold text-blue-900">Need Custom Sizes?</h4>
-          <p className="text-blue-700">We can produce custom box sizes tailored to your specific requirements.</p>
+          <p className="text-blue-700 text-sm sm:text-base">We can produce custom box sizes tailored to your specific requirements.</p>
         </div>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold transition-colors flex items-center">
+        <button className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-3 rounded-lg font-bold transition-colors flex items-center justify-center">
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
           </svg>

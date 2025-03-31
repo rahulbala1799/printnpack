@@ -21,6 +21,13 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
+  overflow-x: hidden; /* Prevent horizontal scrolling on the entire site */
+}
+
+/* Fix for mobile devices */
+html {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 /* Custom Animations */
