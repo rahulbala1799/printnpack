@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "bash ./use-node-18.sh && npm install",
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "predev": "bash ./use-node-18.sh",
+    "dev": "node node_modules/next/dist/bin/next dev",
+    "clean": "bash ./use-node-18.sh --clean",
+    "clean:full": "bash ./use-node-18.sh --clean --full && npm install",
+    "build": "node node_modules/next/dist/bin/next build",
+    "start": "node node_modules/next/dist/bin/next start",
     "lint": "next lint",
     "postinstall": "next telemetry disable"
   },
@@ -18,6 +20,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^5.5.0",
     "react-intersection-observer": "^9.16.0",
+    "styled-jsx": "^5.1.6",
     "yup": "^1.6.1"
   },
   "devDependencies": {

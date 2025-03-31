@@ -2,7 +2,6 @@
 const nextConfig = {
   // Basic configuration - keeping it simple
   reactStrictMode: false,
-  swcMinify: true,
   
   // Enable image optimization with better settings for Vercel
   images: {
@@ -10,11 +9,7 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    path: '/_next/image',
-    loader: 'default',
-    minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     remotePatterns: [
       {
         protocol: 'https',
@@ -26,11 +21,6 @@ const nextConfig = {
   // Increase the buffer size for image processing
   experimental: {
     largePageDataBytes: 128 * 100000, // Increase for large pages
-  },
-  
-  // Increase timeout for image optimization
-  httpAgentOptions: {
-    keepAlive: true,
   },
 }
 
