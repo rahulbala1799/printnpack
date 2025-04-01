@@ -2259,7 +2259,8 @@ const products = [
     id: 'twisted-handle-brown-bags',
     name: 'Twisted Handle Brown Bags',
     category: 'Retail Packaging',
-    description: 'Premium brown kraft twisted handle paper bags with digital CMYK printing options for vibrant, detailed branding that stands out.',
+    hidden: true,
+    description: 'Premium twisted handle brown paper bags with elegant design and exceptional durability.',
     features: [
       'Strong twisted paper handles for secure carrying',
       'Premium brown kraft paper with eco-friendly appeal',
