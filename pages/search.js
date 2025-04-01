@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import products from '../data/products';
 import { FaSearch } from 'react-icons/fa';
-import { getAllProducts } from '../data/products';
 
 // ProductCard component (same as on products page for consistency)
 const ProductCard = ({ product }) => {
@@ -48,7 +47,7 @@ const ProductCard = ({ product }) => {
   );
 };
 
-const SearchPage = () => {
+export default function Search() {
   const router = useRouter();
   const { q } = router.query;
   const [results, setResults] = useState([]);
@@ -57,7 +56,6 @@ const SearchPage = () => {
   useEffect(() => {
     if (q) {
       const searchTerm = q.toLowerCase();
-      const products = getAllProducts();
       const filteredProducts = products.filter(product => 
         product.name.toLowerCase().includes(searchTerm) ||
         product.description.toLowerCase().includes(searchTerm)
@@ -109,7 +107,7 @@ const SearchPage = () => {
                       <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
                       <p className="text-gray-600 mb-4">{product.description}</p>
                       <a
-                        href={`/products/${product.slug}`}
+                        href={`/products/${product.id}`}
                         className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
                       >
                         View Details
@@ -124,6 +122,4 @@ const SearchPage = () => {
       </div>
     </Layout>
   );
-};
-
-export default SearchPage; 
+} 
