@@ -517,36 +517,6 @@ const products = [
     leadTime: '5-7 business days'
   },
   {
-    id: 'corrugated-boxes',
-    name: 'Corrugated Boxes',
-    category: 'Shipping',
-    description: 'Durable corrugated boxes for shipping and storage needs.',
-    features: [
-      'Custom sizes and strength options',
-      'Sustainable materials',
-      'Printed branding options',
-      'Bulk order discounts',
-      'Fast production times'
-    ],
-    detailedDescription: 'Our corrugated boxes provide excellent protection for your products during storage and shipping. Made from durable, multi-layered cardboard, these boxes offer superior strength and stability. Available in various flute profiles and wall thicknesses to suit different weight requirements, each box can be customized with your branding and designed to optimize shipping costs.',
-    specifications: [
-      { name: 'Material', value: 'Corrugated cardboard (various flute options)' },
-      { name: 'Wall Types', value: 'Single wall, double wall, triple wall' },
-      { name: 'Print Quality', value: 'Up to 4-color flexographic printing' },
-      { name: 'Minimum Order', value: '250 units' },
-      { name: 'Production Time', value: '7-10 business days' },
-      { name: 'Customization', value: 'Size, strength, printing, closure options' },
-    ],
-    images: [
-      '/images/hero/pizza-box.svg',
-      '/images/ifa/heroh/box.png'
-    ],
-    imageSrc: '/images/hero/pizza-box.svg',
-    price: 'Starting at €0.50 per unit',
-    moq: 250,
-    leadTime: '7-10 business days'
-  },
-  {
     id: 'roll-up-banner-stands',
     name: 'Roll-Up Banner Stands',
     category: 'Wide Format',
@@ -2239,6 +2209,37 @@ const products = [
       }
     ],
     weeklyDelivery: 'Our premium weekly delivery service ensures your business always has the right amount of branded packaging on hand. We establish a consistent delivery schedule tailored to your specific needs, helping you maintain adequate inventory without requiring large storage areas. Our account managers monitor your usage patterns to recommend optimal order quantities, reducing waste and controlling costs. This reliable service enhances your professional image while simplifying operations.'
+  },
+  {
+    id: 'printed-napkins',
+    name: 'Printed Napkins',
+    category: 'Branded Items',
+    description: 'Custom printed napkins for restaurants, cafes, and catering businesses.',
+    features: [
+      'Multiple size options',
+      '1-ply, 2-ply, or 3-ply available',
+      'Full-color printing',
+      'Paper or cloth options',
+      'Cocktail, luncheon, and dinner sizes',
+      'Various folding styles'
+    ],
+    detailedDescription: 'Our custom-printed napkins offer both functionality and branding opportunities for restaurants, cafes, and catering businesses. Available in various sizes, materials, and ply options, these napkins can be fully customized with your logo and design elements. Choose from different folding styles and ink colors to create napkins that perfectly complement your brand identity.',
+    specifications: [
+      { name: 'Material', value: 'Paper or cloth (various grades available)' },
+      { name: 'Ply Options', value: '1-ply, 2-ply, 3-ply' },
+      { name: 'Size Options', value: 'Cocktail, Luncheon, Dinner' },
+      { name: 'Print Quality', value: 'Up to 4-color printing' },
+      { name: 'Minimum Order', value: '1,000 units' },
+      { name: 'Production Time', value: '5-7 business days' },
+    ],
+    images: [
+      '/images/hero/napkin.svg',
+      '/images/ifa/heroh/napkin.png'
+    ],
+    imageSrc: '/images/hero/napkin.svg',
+    price: 'Starting at €0.05 per unit',
+    moq: 1000,
+    leadTime: '5-7 business days'
   }
 ];
 
