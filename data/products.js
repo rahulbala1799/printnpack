@@ -102,10 +102,15 @@ const products = [
       { name: 'Delivery Options', value: 'Weekly scheduled delivery service available' },
     ],
     images: [
-      '/images/hero/flat-handle-bag.svg',
-      '/images/ifa/heroh/flat-bag.png'
+      '/images/products/flat-handle-bags/1.png',
+      '/images/products/flat-handle-bags/2.png',
+      '/images/products/flat-handle-bags/3.png',
+      '/images/products/flat-handle-bags/4.png',
+      '/images/products/flat-handle-bags/5.png',
+      '/images/products/flat-handle-bags/6.png',
+      '/images/products/flat-handle-bags/7.png'
     ],
-    imageSrc: '/images/hero/flat-handle-bag.svg',
+    imageSrc: '/images/products/flat-handle-bags/1.png',
     price: 'Starting at €0.28 per unit',
     moq: 500,
     leadTime: '10-14 business days',
