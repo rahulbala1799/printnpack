@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Link from 'next/link';
-import { FaBoxOpen, FaShippingFast, FaPencilRuler, FaRecycle, FaChartLine, FaFileAlt } from 'react-icons/fa';
+import { FaBoxOpen, FaPencilRuler, FaRecycle, FaChartLine, FaFileAlt } from 'react-icons/fa';
 
 const ServicesPage = () => {
   const services = [
@@ -28,18 +28,6 @@ const ServicesPage = () => {
         'Full-color process printing',
         'Specialty finishes and coatings',
         'Bulk order discounts'
-      ]
-    },
-    {
-      icon: <FaShippingFast className="h-10 w-10 text-blue-600" />,
-      title: 'Packaging Production',
-      description: 'From small batches to large-scale production runs, our manufacturing capabilities can accommodate your packaging needs with quick turnaround times and consistent quality.',
-      features: [
-        'Flexible production volumes',
-        'Fast turnaround times',
-        'Quality control at every stage',
-        'Food-grade certified manufacturing',
-        'Competitive pricing'
       ]
     },
     {
@@ -86,7 +74,7 @@ const ServicesPage = () => {
         <title>Services - PrintNPack Packaging Solutions</title>
         <meta 
           name="description" 
-          content="Explore PrintNPack's comprehensive packaging services including custom design, printing, production, and sustainable solutions for businesses." 
+          content="Explore PrintNPack's comprehensive packaging services including custom design, printing, and sustainable solutions for businesses." 
         />
       </Head>
 
@@ -209,81 +197,19 @@ const ServicesPage = () => {
         </div>
       </div>
 
-      {/* Testimonials */}
+      {/* CTA Section */}
       <div className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">What Our Clients Say</h2>
-            <p className="text-xl text-gray-600">
-              Don't just take our word for it - hear from our satisfied clients
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-gray-800 mb-6">Ready to Get Started?</h2>
+            <p className="text-xl text-gray-600 mb-8">
+              Contact us today to discuss your packaging needs and discover how our services can help your business grow.
             </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-gray-50 p-8 rounded-lg shadow-md border border-gray-100">
-              <div className="flex items-center mb-4">
-                <div className="text-yellow-400 flex">
-                  <span>★★★★★</span>
-                </div>
-              </div>
-              <p className="text-gray-600 mb-6 italic">"PrintNPack delivered exceptional packaging solutions for our food products. Their attention to detail and commitment to quality has helped us enhance our brand image significantly."</p>
-              <div className="flex items-center">
-                <div className="rounded-full bg-blue-100 h-12 w-12 flex items-center justify-center text-blue-600 font-bold">SK</div>
-                <div className="ml-4">
-                  <h4 className="font-bold text-gray-800">Sanjay Kumar</h4>
-                  <p className="text-gray-500 text-sm">CEO, Tasty Treats</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-gray-50 p-8 rounded-lg shadow-md border border-gray-100">
-              <div className="flex items-center mb-4">
-                <div className="text-yellow-400 flex">
-                  <span>★★★★★</span>
-                </div>
-              </div>
-              <p className="text-gray-600 mb-6 italic">"We've been working with PrintNPack for over 5 years now. Their sustainable packaging solutions have not only reduced our environmental footprint but also resonated well with our eco-conscious customers."</p>
-              <div className="flex items-center">
-                <div className="rounded-full bg-blue-100 h-12 w-12 flex items-center justify-center text-blue-600 font-bold">AM</div>
-                <div className="ml-4">
-                  <h4 className="font-bold text-gray-800">Anita Mehta</h4>
-                  <p className="text-gray-500 text-sm">Marketing Director, GreenLife</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-gray-50 p-8 rounded-lg shadow-md border border-gray-100">
-              <div className="flex items-center mb-4">
-                <div className="text-yellow-400 flex">
-                  <span>★★★★★</span>
-                </div>
-              </div>
-              <p className="text-gray-600 mb-6 italic">"Their same-day printing service has been a game-changer for our business. PrintNPack consistently delivers high-quality marketing materials on tight deadlines, helping us respond quickly to market opportunities."</p>
-              <div className="flex items-center">
-                <div className="rounded-full bg-blue-100 h-12 w-12 flex items-center justify-center text-blue-600 font-bold">VP</div>
-                <div className="ml-4">
-                  <h4 className="font-bold text-gray-800">Vijay Patel</h4>
-                  <p className="text-gray-500 text-sm">Owner, Quick Commerce</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* CTA Section */}
-      <div className="bg-gradient-to-r from-blue-800 to-blue-600 text-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Elevate Your Packaging?</h2>
-          <p className="text-xl mb-8 max-w-3xl mx-auto">
-            Contact us today to discuss your packaging needs and discover how our services can help your business grow.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <Link href="/contact" className="bg-white text-blue-700 hover:bg-gray-100 py-3 px-6 rounded-md text-lg font-medium transition-colors">
+            <Link 
+              href="/contact" 
+              className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+            >
               Get in Touch
-            </Link>
-            <Link href="/products" className="border border-white text-white hover:bg-white/10 py-3 px-6 rounded-md text-lg font-medium transition-colors">
-              Explore Products
             </Link>
           </div>
         </div>
