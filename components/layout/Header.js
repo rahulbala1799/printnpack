@@ -171,37 +171,37 @@ const Header = () => {
         </div>
         
         {/* Main Navigation with Glass effect */}
-        <div className={`relative backdrop-blur-md bg-white py-4 transition-all duration-300 shadow-md ${scrolled ? 'py-3' : 'py-5'}`}>
+        <div className={`relative backdrop-blur-md bg-white py-2 transition-all duration-300 shadow-md ${scrolled ? 'py-1' : 'py-3'}`}>
           <div className="container mx-auto px-4 flex justify-between items-center">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <Logo scrolled={scrolled} />
               
               {/* Info links - visible on larger screens */}
-              <div className="hidden lg:flex items-center space-x-4 text-blue-700 text-sm ml-8">
+              <div className="hidden lg:flex items-center space-x-3 text-blue-700 text-xs ml-4">
                 <div className="flex items-center">
-                  <FaPhone className="mr-2" />
+                  <FaPhone className="mr-1" />
                   <span>+353 1 234 5678</span>
                 </div>
                 <div className="flex items-center">
-                  <FaEnvelope className="mr-2" />
+                  <FaEnvelope className="mr-1" />
                   <span>info@printnpack.ie</span>
                 </div>
               </div>
             </div>
             
             {/* Desktop Search and Navigation */}
-            <div className="hidden md:flex items-center space-x-6">
+            <div className="hidden md:flex items-center space-x-4">
               {/* Desktop Navigation */}
               <nav className="mr-2" aria-label="Main Navigation">
-                <ul className="flex space-x-8">
+                <ul className="flex space-x-5">
                   {menuItems.map((item) => (
                     <li key={item.path} className="relative group">
                       <Link 
                         href={item.path} 
-                        className="text-blue-800 font-bold text-lg hover:text-blue-600 transition-colors relative netflix-nav-link flex items-center"
+                        className="text-blue-800 font-semibold text-base hover:text-blue-600 transition-colors relative netflix-nav-link flex items-center"
                         aria-label={item.name}
                       >
-                        <span className="relative z-10 group-hover:transform group-hover:scale-110 transition-transform duration-200">
+                        <span className="relative z-10 group-hover:transform group-hover:scale-105 transition-transform duration-200">
                           {item.name}
                         </span>
                         <div className="absolute bottom-0 left-0 w-full h-1 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
@@ -212,14 +212,14 @@ const Header = () => {
               </nav>
               
               {/* Desktop Search */}
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-3">
                 <div className="relative z-10 hover:transform hover:scale-105 transition-transform duration-200">
                   <SearchBar />
                 </div>
                 
                 <Link 
                   href="/contact" 
-                  className="bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-2.5 rounded-md font-bold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/30"
+                  className="bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-md font-medium text-sm transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-blue-500/30"
                   aria-label="Contact Us"
                 >
                   Contact Us
