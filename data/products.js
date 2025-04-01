@@ -90,7 +90,7 @@ const products = [
       'Pricing based on ink coverage and design complexity',
       'Weekly delivery service available'
     ],
-    detailedDescription: 'Our flat handle paper bags combine style with functionality, making them perfect for retail, takeaway, and promotional use. The elegant flat handles provide comfort and durability, while the company blue and white design creates a professional, high-end appearance.\n\nAvailable in three perfectly sized options to accommodate various products: Small (8"×5"×10"), Medium (10"×6"×12"), and Large (12"×7"×14"). Each size is designed to provide optimal carrying capacity while maintaining an elegant, proportional appearance.\n\nWe use advanced digital CMYK printing technology that eliminates the need for expensive printing plates and setup costs. Unlike traditional printing methods, our digital process allows for unlimited color options with exceptional color accuracy and fine detail reproduction. The pricing is based on ink coverage and design complexity - larger designs and more elaborate graphics will use more ink and therefore cost more, but there are no hidden setup fees or minimum color charges. This creates a flexible and transparent pricing model perfect for both simple logo prints and complex, colorful designs.\n\nOur weekly delivery service ensures you never run out of essential packaging.',
+    detailedDescription: 'Our flat handle paper bags combine style with functionality, making them perfect for retail, takeaway, and promotional use. The elegant flat handles provide comfort and durability, while the company blue and white design creates a professional, high-end appearance.\n\nAvailable in three perfectly sized options to accommodate various products: Small (8"×5"×10"), Medium (10"×6"×12"), and Large (12"×7"×14"). Each size is designed to provide optimal carrying capacity while maintaining an elegant, proportional appearance.\n\nWe use advanced digital CMYK printing technology that eliminates the need for expensive printing plates andsetup costs. Unlike traditional printing methods, our digital process allows for unlimited color options with exceptional color accuracy and fine detail reproduction. The pricing is based on ink coverage and design complexity - larger designs and more elaborate graphics will use more ink and therefore cost more, but there are no hidden setup fees or minimum color charges. This creates a flexible and transparent pricing model perfect for both simple logo prints and complex, colorful designs.\n\nOur weekly delivery service ensures you never run out of essential packaging.',
     specifications: [
       { name: 'Material', value: 'Premium kraft paper (100-120gsm)' },
       { name: 'Handle Type', value: 'Flat paper' },
@@ -273,37 +273,43 @@ const products = [
   },
   {
     id: 'bagasse-boxes',
-    name: 'Bagasse Boxes',
+    name: 'Bagasse Burger Box',
     category: 'Eco-Friendly Packaging',
-    description: 'Sustainable bagasse boxes made from sugarcane fiber, available in multiple sizes with company blue and white branding.',
+    description: 'Sustainable bagasse burger boxes made from sugarcane fiber, perfect for eco-conscious food businesses seeking environmentally friendly packaging solutions.',
     features: [
       'Made from 100% biodegradable sugarcane fiber',
       'Microwave and freezer safe',
       'Oil and water resistant',
-      'Available in various sizes',
+      'Sturdy design perfect for burgers and sandwiches',
+      'Environmentally friendly alternative to plastic and foam containers',
       'Weekly delivery service available'
     ],
-    detailedDescription: 'Our bagasse boxes offer an eco-friendly alternative to traditional packaging. Made from sugarcane fiber, a renewable resource and agricultural by-product, these boxes are 100% biodegradable and compostable. The natural white color with company blue branding creates a clean, professional appearance while showcasing your environmental commitment. These versatile containers are oil and water resistant, microwave and freezer safe, and available in multiple sizes to suit various applications. Our weekly delivery service ensures your business maintains a consistent supply of sustainable packaging.',
+    detailedDescription: 'Our bagasse burger boxes offer an eco-friendly alternative to traditional packaging. Made from sugarcane fiber, a renewable resource and agricultural by-product, these boxes are 100% biodegradable and compostable. The natural design creates a clean, professional appearance while showcasing your environmental commitment. These versatile containers are specifically designed for burgers and sandwiches, providing excellent insulation and moisture resistance. They\'re oil and water resistant, microwave and freezer safe, and sturdy enough to hold even the largest gourmet burgers. Our weekly delivery service ensures your business maintains a consistent supply of sustainable packaging.',
     specifications: [
       { name: 'Material', value: 'Sugarcane fiber (bagasse)' },
-      { name: 'Color', value: 'Natural white with company blue branding' },
+      { name: 'Color', value: 'Natural white' },
       { name: 'Temperature Range', value: '-20°C to +120°C' },
-      { name: 'Size Options', value: 'Various sizes available to suit different food portions' },
-      { name: 'Print Quality', value: 'Up to 4-color biodegradable inks' },
+      { name: 'Size', value: 'Suitable for standard and gourmet burgers' },
+      { name: 'Features', value: 'Oil and water resistant, stackable, biodegradable' },
+      { name: 'Sustainability', value: '100% biodegradable, compostable, made from renewable resources' },
       { name: 'Minimum Order', value: '500 units' },
-      { name: 'Production Time', value: '10-14 business days' },
-      { name: 'Certification', value: 'Biodegradable, compostable' },
+      { name: 'Production Time', value: '7-10 business days' },
+      { name: 'Customization', value: 'Custom printing available' },
       { name: 'Delivery Options', value: 'Weekly scheduled delivery service available' },
     ],
     images: [
-      '/images/hero/bagasse-box.svg',
-      '/images/ifa/heroh/bagasse.png'
+      '/images/products/bagasse-burger-box/1.png',
+      '/images/products/bagasse-burger-box/2.png',
+      '/images/products/bagasse-burger-box/3.png',
+      '/images/products/bagasse-burger-box/4.png',
+      '/images/products/bagasse-burger-box/5.png',
+      '/images/products/bagasse-burger-box/6.png'
     ],
-    imageSrc: '/images/hero/bagasse-box.svg',
+    imageSrc: '/images/products/bagasse-burger-box/1.png',
     price: 'Starting at €0.32 per unit',
     moq: 500,
-    leadTime: '10-14 business days',
-    weeklyDelivery: 'Our weekly delivery service for restaurants and food service businesses provides a reliable supply of eco-friendly packaging tailored to your needs. We establish a consistent delivery schedule that ensures you maintain adequate stock without requiring large storage areas. Our account managers track your usage patterns to recommend optimal order quantities, helping you maintain efficiency and reduce waste. This premium service featuring sustainable packaging enhances your brand\'s environmental commitment while simplifying operations.'
+    leadTime: '7-10 business days',
+    weeklyDelivery: 'Our weekly delivery service is perfect for food service businesses that require a consistent supply of eco-friendly packaging. We establish a regular delivery schedule tailored to your needs, ensuring you always have sufficient stock without requiring large storage areas. Our account team monitors your usage patterns to optimize order quantities, helping you maintain efficiency and reduce costs. This reliable service of sustainable packaging enhances your green credentials while simplifying operations.'
   },
   {
     id: 'pizza-boxes',
@@ -483,6 +489,7 @@ const products = [
     id: 'napkins',
     name: 'Custom Napkins',
     category: 'Hospitality Products',
+    hidden: true,
     description: 'Premium napkins with your branding that enhance the dining experience.',
     features: [
       'Multiple ply options',
