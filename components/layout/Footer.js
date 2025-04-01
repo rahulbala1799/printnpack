@@ -34,15 +34,16 @@ const Footer = () => {
             </ul>
           </div>
           
-          {/* Services */}
+          {/* Product Categories */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Services</h3>
+            <h3 className="text-xl font-bold mb-4">Products</h3>
             <ul className="space-y-2">
-              <li><Link href="/services/cardboard-boxes" className="hover:text-blue-300">Cardboard Boxes</Link></li>
-              <li><Link href="/services/plastic-packaging" className="hover:text-blue-300">Plastic Packaging</Link></li>
-              <li><Link href="/services/custom-printing" className="hover:text-blue-300">Custom Printing</Link></li>
-              <li><Link href="/services/eco-friendly" className="hover:text-blue-300">Eco-Friendly Options</Link></li>
-              <li><Link href="/services/bulk-orders" className="hover:text-blue-300">Bulk Orders</Link></li>
+              <li><Link href="/products" className="hover:text-blue-300">Food Packaging</Link></li>
+              <li><Link href="/products" className="hover:text-blue-300">Retail Packaging</Link></li>
+              <li><Link href="/products" className="hover:text-blue-300">Eco-Friendly Packaging</Link></li>
+              <li><Link href="/products" className="hover:text-blue-300">Hospitality Products</Link></li>
+              <li><Link href="/products" className="hover:text-blue-300">Wide Format</Link></li>
+              <li><Link href="/products" className="hover:text-blue-300">Leaflets</Link></li>
             </ul>
           </div>
           

@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import products from '../data/products';
+import { useRouter } from 'next/router';
 
 // Improved ProductCard component with animations and better styling
 const ProductCard = ({ product }) => {
@@ -79,6 +80,8 @@ const mainGroups = [
 ];
 
 const ProductsPage = () => {
+  const router = useRouter();
+  const { group, category } = router.query;
   const [activeGroup, setActiveGroup] = useState('packaging');
   const [activeCategory, setActiveCategory] = useState('all');
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -101,6 +104,16 @@ const ProductsPage = () => {
       }
     }
   }, []);
+
+  // Handle URL parameters
+  useEffect(() => {
+    if (group) {
+      setActiveGroup(group);
+    }
+    if (category) {
+      setActiveCategory(category);
+    }
+  }, [group, category]);
   
   // Save category selections to localStorage when they change
   useEffect(() => {
