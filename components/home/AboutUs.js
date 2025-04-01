@@ -257,13 +257,23 @@ const AboutUs = () => {
               </p>
               <div className="flex flex-wrap -mx-2">
                 <div className="w-1/2 px-2 mb-4">
-                  <div className="w-full h-32 bg-gradient-to-r from-green-100 to-green-300 rounded-lg flex items-center justify-center">
-                    <div className="text-green-800 text-sm font-medium">Eco-Friendly</div>
+                  <div className="w-full h-32 relative rounded-lg overflow-hidden">
+                    <Image
+                      src="/images/products/bagasse-burger-box/1.png"
+                      alt="Eco-Friendly Packaging"
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                 </div>
                 <div className="w-1/2 px-2 mb-4">
-                  <div className="w-full h-32 bg-gradient-to-r from-amber-100 to-amber-300 rounded-lg flex items-center justify-center">
-                    <div className="text-amber-800 text-sm font-medium">Premium Quality</div>
+                  <div className="w-full h-32 relative rounded-lg overflow-hidden">
+                    <Image
+                      src="/images/products/flat-handle-bags/1.png"
+                      alt="Premium Quality Packaging"
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                 </div>
               </div>

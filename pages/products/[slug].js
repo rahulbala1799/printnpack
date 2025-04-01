@@ -8,7 +8,6 @@ import products, { getProductBySlug, getRelatedProducts } from '../../data/produ
 import PaperOptionsExplorer, { PaperComparisonChart } from '../../components/PaperOptionsExplorer';
 import PizzaBoxExplorer from '../../components/PizzaBoxExplorer';
 
-// Page component
 const ProductDetail = ({ product, relatedProducts }) => {
   const [isClient, setIsClient] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

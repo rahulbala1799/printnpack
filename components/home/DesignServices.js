@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import ServiceIcon from '../ServiceIcon';
 
 const DesignServices = () => {
   const [activeService, setActiveService] = useState(null);
@@ -112,179 +113,57 @@ const DesignServices = () => {
   };
   
   return (
-    <section className="py-16 relative overflow-hidden">
-      {/* Background with design elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-64 h-64 rounded-full bg-blue-600/5 -translate-x-1/3 -translate-y-1/3"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-blue-600/5 translate-x-1/3 translate-y-1/3"></div>
-        <motion.div 
-          className="absolute top-20 right-10 w-6 h-6 rounded-full bg-blue-300/30"
-          animate={{ 
-            y: [0, 15, 0],
-            opacity: [0.5, 0.8, 0.5] 
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div 
-          className="absolute bottom-40 left-10 w-4 h-4 rounded-full bg-purple-300/30"
-          animate={{ 
-            y: [0, -10, 0],
-            opacity: [0.3, 0.7, 0.3] 
-          }}
-          transition={{
-            duration: 2.5,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        
-        {/* Grid pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="h-full w-full bg-[linear-gradient(to_right,#8884_1px,transparent_1px),linear-gradient(to_bottom,#8884_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
-        </div>
-      </div>
-      
+    <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
-        <motion.div 
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-            <span className="text-blue-600">CREATIVE SOLUTIONS</span>
-          </h2>
-          <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">DESIGN SERVICES</h3>
-          <p className="text-gray-600 max-w-3xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Creative Solutions</h2>
+          <h3 className="text-2xl font-semibold text-blue-600 mb-4">Professional Design Services</h3>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             We blend creativity with strategy to design materials that capture attention and communicate your message at affordable prices.
           </p>
-        </motion.div>
-        
-        {/* Services Card Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-6xl mx-auto">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.id}
-              className="relative group overflow-hidden"
-              onMouseEnter={() => {setActiveService(service.id); setIsHovering(true);}}
-              onMouseLeave={() => {setActiveService(null); setIsHovering(false);}}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <div 
-                className={`
-                  rounded-xl overflow-hidden h-full bg-white shadow-md hover:shadow-xl 
-                  transition-all duration-300 transform group-hover:scale-[1.02]
-                  border border-gray-100 flex flex-col relative
-                `}
-              >
-                {/* Spotlight effect */}
-                <div 
-                  className="absolute inset-0 pointer-events-none transition-opacity duration-300"
-                  style={getSpotlightStyle(service.id)}
-                />
-                
-                {/* Card Header with Gradient Background */}
-                <div className={`bg-gradient-to-r ${service.color} p-5 relative h-48`}>
-                  <div className="absolute inset-0 bg-black/20"></div>
-                  <div className="relative z-10">
-                    <div className="p-2 bg-white/20 backdrop-blur-sm rounded-full inline-flex mb-3">
-                      <div className="bg-white text-blue-600 rounded-full p-1.5">
-                        {service.icon}
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-bold text-white mb-1">{service.title}</h3>
-                    <div className="w-10 h-1 bg-white/50 rounded-full mb-2"></div>
-                  </div>
-                  
-                  {/* Service image */}
-                  <div className="absolute right-2 bottom-2 w-24 h-24 overflow-hidden">
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      width={96}
-                      height={96}
-                      className="object-contain drop-shadow-md transform group-hover:scale-110 transition-transform duration-300"
-                    />
-                  </div>
-                  
-                  {/* Floating design elements */}
-                  <motion.div 
-                    className="absolute top-2 right-2 w-20 h-20 text-white/10"
-                    animate={{ 
-                      rotate: [0, 360],
-                      scale: [1, 1.05, 1],
-                    }}
-                    transition={{
-                      duration: 20,
-                      repeat: Infinity,
-                      ease: "linear"
-                    }}
-                  >
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-                      <path d="M46.5,-77.5C59.2,-71.3,68.5,-57.6,74.5,-43.1C80.5,-28.5,83.2,-13.3,81.5,1C79.8,15.3,73.7,28.5,65.2,39.7C56.7,50.9,45.7,59.9,33.4,66.9C21.1,73.9,7.4,78.8,-5.6,76.6C-18.6,74.4,-31,65.1,-40.2,54.6C-49.5,44.1,-55.5,32.4,-62.5,19.1C-69.5,5.9,-77.5,-9,-75.1,-21.9C-72.7,-34.9,-60,-45.9,-46.4,-51.6C-32.8,-57.3,-18.4,-57.8,-2.2,-60C14,-62.2,28,-63.1,41.4,-65.8C54.9,-68.6,67.9,-74.1,81.3,-74.7" transform="translate(100 100)" />
-                    </svg>
-                  </motion.div>
-                </div>
-                
-                {/* Card Content */}
-                <div className="p-5 flex-grow flex flex-col">
-                  <p className="text-gray-600 mb-4 flex-grow">{service.description}</p>
-                  <Link 
-                    href={service.link} 
-                    className="
-                      text-sm font-medium inline-flex items-center
-                      text-blue-600 hover:text-blue-800 transition-colors
-                      group-hover:underline
-                    "
-                  >
-                    Learn More
-                    <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+          <p className="text-base text-gray-500 mt-4 max-w-2xl mx-auto">
+            Our experienced design team uses industry-standard tools to create stunning visuals that represent your brand perfectly. From concept to final design, we handle everything in-house.
+          </p>
         </div>
-        
-        {/* CTA Section */}
-        <motion.div 
-          className="mt-12 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <div className="inline-block mb-6">
-            <div className="flex items-center justify-center gap-2 bg-blue-50 px-4 py-2 rounded-full">
-              <span className="bg-blue-600 w-2 h-2 rounded-full animate-pulse"></span>
-              <span className="text-blue-600 font-medium text-sm">Starting from just €49</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+            <div className="w-24 h-24 mx-auto mb-4">
+              <ServiceIcon type="posters" className="w-full h-full text-primary" />
             </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Posters</h3>
+            <p className="text-gray-600">Professional poster designs for events, promotions, and branding</p>
+            <p className="text-sm text-blue-600 mt-2">Custom layouts & artwork included</p>
           </div>
-          
-          <Link 
-            href="/services/design" 
-            className="
-              relative inline-flex items-center justify-center px-8 py-3.5
-              overflow-hidden font-medium text-white bg-blue-600 rounded-lg
-              group hover:bg-blue-700 transition-all duration-300
-              shadow-md hover:shadow-lg
-            "
-          >
-            <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
-            <span className="relative font-semibold">View Design Portfolio</span>
-          </Link>
-        </motion.div>
+          <div className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+            <div className="w-24 h-24 mx-auto mb-4">
+              <ServiceIcon type="vinyls" className="w-full h-full text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Vinyls</h3>
+            <p className="text-gray-600">Custom vinyl graphics and decals for any surface</p>
+            <p className="text-sm text-blue-600 mt-2">Vector artwork & cutting files provided</p>
+          </div>
+          <div className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+            <div className="w-24 h-24 mx-auto mb-4">
+              <ServiceIcon type="leaflets" className="w-full h-full text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Leaflets</h3>
+            <p className="text-gray-600">Eye-catching leaflet designs that engage your audience</p>
+            <p className="text-sm text-blue-600 mt-2">Professional layout & typography</p>
+          </div>
+          <div className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+            <div className="w-24 h-24 mx-auto mb-4">
+              <ServiceIcon type="menus" className="w-full h-full text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Menus</h3>
+            <p className="text-gray-600">Appetizing menu designs that showcase your offerings</p>
+            <p className="text-sm text-blue-600 mt-2">Custom photography & styling available</p>
+          </div>
+        </div>
+        <div className="mt-12 text-center">
+          <p className="text-base text-gray-600 max-w-2xl mx-auto">
+            All designs are created using professional design software and follow industry best practices. We offer unlimited revisions to ensure you're completely satisfied with the final result.
+          </p>
+        </div>
       </div>
     </section>
   );
