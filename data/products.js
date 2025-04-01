@@ -1316,134 +1316,39 @@ const products = [
   },
   {
     id: 'premium-linen-feel-napkins',
-    name: 'Premium Linen Feel Napkins (Airlaid)',
+    name: 'Premium Linen-Feel Napkins',
     category: 'Hospitality Products',
-    description: 'Elegant cloth-like napkins with superior absorbency and premium texture, perfect for upscale dining and events.',
+    description: 'Elegant linen-feel napkins with customizable printing options, adding a touch of luxury to any dining experience.',
     features: [
-      'Luxurious cloth-like texture and appearance',
-      'Superior absorbency compared to standard paper napkins',
-      'Size: 40cm × 40cm (unfolded), 20cm × 10cm (folded)',
-      'Optional cutlery pocket for elegant place settings',
-      'Available in white and various color options',
-      'Custom logo printing available'
+      'Linen-feel texture with premium quality',
+      'Custom printing options with your logo',
+      'Multiple folding options available',
+      'Available in various sizes and colors',
+      'More absorbent than standard paper napkins',
+      'Weekly delivery service available'
     ],
-    detailedDescription: 'Our Premium Linen Feel Napkins (also known as Airlaid napkins) combine the elegance of linen with the convenience of disposable products. Created using innovative air-laid technology, these napkins feature a unique textile-like texture that provides a luxurious feel and exceptional absorbency.\n\nUnlike standard paper napkins, our airlaid napkins won\'t fall apart when wet and maintain their structure throughout the dining experience. The premium material absorbs up to 3 times more liquid than traditional paper napkins, making them perfect for upscale restaurants, catered events, and premium hospitality settings.\n\nEach napkin measures 40cm × 40cm unfolded, and comes pre-folded in a convenient 4-fold × 2-fold configuration (20cm × 10cm folded size). Choose between our standard folded napkins or our innovative cutlery pocket option, which creates an elegant presentation for silverware and reduces table setting time.\n\nAvailable in classic white or a range of elegant colors to match your branding, these napkins can also be custom printed with your logo for a truly personalized touch. Enhance your guests\' dining experience while showcasing attention to detail with these superior quality napkins.',
+    detailedDescription: 'Our premium linen-feel napkins combine the elegance of cloth with the convenience of disposable napkins. The sophisticated texture and appearance create a high-end dining experience while maintaining practicality. Available in multiple sizes and colors to match your branding and decor. These napkins can be customized with your logo or design using high-quality printing methods that don\'t compromise the premium feel. Perfect for restaurants, hotels, catering, and special events where you want to make a memorable impression. Our weekly delivery service ensures you never run out of these essential items.',
     specifications: [
-      { name: 'Material', value: 'Premium air-laid paper (textile-like non-woven)' },
-      { name: 'Unfolded Size', value: '40cm × 40cm' },
-      { name: 'Folded Size', value: '20cm × 10cm (4-fold × 2-fold)' },
-      { name: 'Weight/GSM', value: '65gsm (superior absorbency grade)' },
-      { name: 'Color Options', value: 'White standard, custom colors available' },
-      { name: 'Cutlery Options', value: 'Standard or with cutlery pocket/latch' },
-      { name: 'Customization', value: 'Logo printing, embossing options available' },
-      { name: 'Minimum Order', value: '1,000 units (custom printing: 5,000 units)' },
-      { name: 'Production Time', value: '7-10 business days (custom: 2-3 weeks)' },
-      { name: 'Absorbency', value: 'Up to 3x more absorbent than standard paper napkins' }
-    ],
-    applications: [
-      'Fine dining restaurants and upscale cafés',
-      'Hotels and premium banquet facilities',
-      'Wedding receptions and formal events',
-      'Catering services and event planning',
-      'Corporate dining and VIP hospitality areas',
-      'Upscale cocktail bars and lounges',
-      'Premium cruise ships and travel services',
-      'High-end retail and customer service areas'
-    ],
-    models: [
-      {
-        name: 'Standard Premium Airlaid',
-        description: 'Classic 4-fold × 2-fold napkin configuration',
-        features: [
-          'Elegant folded presentation (20cm × 10cm)',
-          'Superior 65gsm textile-like material',
-          'Available in white or custom colors',
-          'Perfect for traditional table settings'
-        ],
-        recommendedFor: 'Restaurants, catering, standard dining service'
-      },
-      {
-        name: 'Cutlery Pocket Airlaid',
-        description: 'Innovative design with integrated silverware pocket',
-        features: [
-          'Specially folded to create cutlery pocket',
-          'Streamlines table setting process',
-          'Elevates presentation and guest experience',
-          'Prevents silverware from touching table surface'
-        ],
-        recommendedFor: 'Fine dining, banquets, catered events, premium table service'
-      },
-      {
-        name: 'Custom Printed Airlaid',
-        description: 'Personalized napkins with your branding',
-        features: [
-          'High-quality logo or custom design printing',
-          'Up to 3 colors for sophisticated look',
-          'Color-matching available to your brand palette',
-          'Available for both standard and cutlery pocket styles'
-        ],
-        recommendedFor: 'Brand-conscious venues, special events, corporate dining'
-      },
-      {
-        name: 'Colored Airlaid Collection',
-        description: 'Premium airlaid napkins in stylish color options',
-        features: [
-          'Available in elegant colors (ivory, black, burgundy, navy, etc.)',
-          'Same premium quality and absorbency',
-          'Color-fast and non-bleeding dyes',
-          'Perfect for themed events and color-coordinated settings'
-        ],
-        recommendedFor: 'Themed events, seasonal promotions, designer table settings'
-      }
+      { name: 'Material', value: 'Premium airlaid paper with linen-feel texture' },
+      { name: 'Sizes Available', value: 'Cocktail (25x25cm), Dinner (40x40cm), Premium (48x48cm)' },
+      { name: 'Colors', value: 'White, cream, black, company blue, and custom colors available' },
+      { name: 'Print Quality', value: 'Up to 4-color printing with logo or design' },
+      { name: 'Folding Options', value: 'Quarter fold, eighth fold, pocket fold, and custom options' },
+      { name: 'Minimum Order', value: '1,000 units' },
+      { name: 'Production Time', value: '7-10 business days' },
+      { name: 'Sustainability', value: 'Biodegradable options available' },
+      { name: 'Delivery Options', value: 'Weekly scheduled delivery service available' },
     ],
     images: [
-      '/images/placeholders/napkins/airlaid-main.jpg',
-      '/images/placeholders/napkins/airlaid-cutlery-pocket.jpg',
-      '/images/placeholders/napkins/airlaid-texture-detail.jpg',
-      '/images/placeholders/napkins/airlaid-color-options.jpg',
-      '/images/placeholders/napkins/airlaid-printed-example.jpg',
-      '/images/placeholders/napkins/airlaid-table-setting.jpg'
+      '/images/products/premium-linen-feel-napkins/1.png',
+      '/images/products/premium-linen-feel-napkins/2.png',
+      '/images/products/premium-linen-feel-napkins/3.png'
     ],
-    imageSrc: '/images/placeholders/napkins/airlaid-main.jpg',
-    price: 'Starting at €0.08 per napkin',
-    quoteRequired: false,
-    leadTime: '7-10 business days standard',
-    faq: [
-      {
-        question: 'How do airlaid napkins differ from standard paper napkins?',
-        answer: 'Airlaid napkins are created using a unique manufacturing process that results in a cloth-like texture and superior absorbency. Unlike standard paper napkins, they don\'t use traditional binding agents but instead use air to scatter and intertwine the fibers. This results in a more durable, absorbent product that won\'t fall apart when wet and provides a premium feel similar to linen but with the convenience of a disposable product.'
-      },
-      {
-        question: 'Are these napkins environmentally friendly?',
-        answer: 'Our Premium Linen Feel Napkins are more eco-friendly than traditional cloth napkins when considering the complete lifecycle impact including water and energy used in laundering cloth. They\'re made primarily from sustainable wood pulp fibers and are biodegradable under proper conditions. For businesses with strong environmental priorities, we also offer options made with recycled content and FSC-certified materials (minimum order quantities apply).'
-      },
-      {
-        question: 'What is the cutlery pocket option and how does it work?',
-        answer: 'The cutlery pocket is a specially designed fold in the napkin that creates a convenient sleeve for holding silverware. The napkin is pre-folded in a way that forms a pocket where knives, forks, and spoons can be neatly tucked, creating an elegant presentation while also saving time during table setting. This design keeps silverware from touching the table surface and provides a more upscale presentation than traditional napkin and silverware arrangements.'
-      },
-      {
-        question: 'What are the minimum quantities for custom printed napkins?',
-        answer: 'For custom printed napkins with your logo or design, the minimum order quantity is 5,000 units. This ensures cost-effective production while maintaining quality standards. For standard white or colored napkins without custom printing, the minimum order is 1,000 units. Volume discounts are available for larger orders, with significant price breaks at 10,000, 25,000, and 50,000+ units.'
-      },
-      {
-        question: 'How should these napkins be stored?',
-        answer: 'For optimal quality, store Premium Linen Feel Napkins in their original packaging in a cool, dry place away from direct sunlight and moisture. Avoid storing in areas with strong odors as the napkins can absorb ambient scents. The napkins have a shelf life of approximately 2 years when stored properly, though we recommend using them within 12 months of purchase for best results.'
-      }
-    ],
-    testimonials: [
-      {
-        quote: 'Our customers frequently comment on the quality of these napkins. They\'ve elevated our table presentation without the laundry costs of linen.',
-        author: 'Executive Chef, Luxury Hotel Group'
-      },
-      {
-        quote: 'The cutlery pocket option has been a game-changer for our event setup, saving time while creating a more elegant presentation.',
-        author: 'Director of Catering, Wedding Venue'
-      },
-      {
-        quote: 'We\'ve tried many napkin options over the years, but the absorbency and feel of these airlaid napkins is unmatched for disposable products.',
-        author: 'Purchasing Manager, Restaurant Chain'
-      }
-    ]
+    imageSrc: '/images/products/premium-linen-feel-napkins/1.png',
+    price: 'Starting at €0.10 per unit',
+    moq: 1000,
+    leadTime: '7-10 business days',
+    weeklyDelivery: 'Our weekly delivery service is ideal for hospitality businesses that need a consistent supply of premium napkins. We establish a regular delivery schedule tailored to your needs, ensuring you always have sufficient stock without requiring large storage areas. Our account team monitors your usage patterns to optimize order quantities, helping you maintain efficiency and reduce costs. This reliable branded napkin service enhances your professional image while simplifying operations.'
   },
   {
     id: 'leaflets-a6',
