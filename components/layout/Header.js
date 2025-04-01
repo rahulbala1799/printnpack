@@ -170,81 +170,91 @@ const Header = () => {
           <div className="absolute inset-0 bg-particles opacity-20"></div>
         </div>
         
-        {/* Top Bar with Glass effect */}
-        <div className="relative backdrop-blur-sm bg-blue-900/90 md:bg-white/5">
-          <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div className="hidden md:flex items-center space-x-4 text-white">
-              <div className="flex items-center">
-                <FaPhone className="mr-2" />
-                <span>+353 1 234 5678</span>
-              </div>
-              <div className="flex items-center">
-                <FaEnvelope className="mr-2" />
-                <span>info@printnpack.ie</span>
-              </div>
-            </div>
-            <div className="flex items-center space-x-2 md:space-x-4">
-              <a href="tel:+35312345678" className="text-white md:hidden flex items-center">
-                <FaPhone className="text-lg" />
-              </a>
-              <a href="mailto:info@printnpack.ie" className="text-white md:hidden flex items-center">
-                <FaEnvelope className="text-lg" />
-              </a>
-              {/* Mobile search button */}
-              <button 
-                onClick={() => setIsSearchOpen(true)}
-                className="text-white md:hidden flex items-center p-2"
-                aria-label="Search products"
-              >
-                <FaSearch className="text-lg" />
-              </button>
-              <Link href="/contact" className="bg-blue-800/80 md:bg-white/20 backdrop-blur-md hover:bg-white/30 text-white px-4 py-2 rounded-lg transition-colors shadow-glow">
-                Contact Us
-              </Link>
-            </div>
-          </div>
-        </div>
-        
         {/* Main Navigation with Glass effect */}
-        <div className={`relative backdrop-blur-md bg-white/90 py-4 transition-all duration-300 shadow-md ${scrolled ? 'py-2' : ''}`}>
+        <div className={`relative backdrop-blur-md bg-gradient-to-r from-blue-800 via-blue-900 to-blue-800 py-4 transition-all duration-300 shadow-md ${scrolled ? 'py-3' : 'py-5'}`}>
           <div className="container mx-auto px-4 flex justify-between items-center">
-            <Logo scrolled={scrolled} />
+            <div className="flex items-center gap-4">
+              <Logo scrolled={scrolled} />
+              
+              {/* Info links - visible on larger screens */}
+              <div className="hidden lg:flex items-center space-x-4 text-blue-200 text-sm ml-8">
+                <div className="flex items-center">
+                  <FaPhone className="mr-2" />
+                  <span>+353 1 234 5678</span>
+                </div>
+                <div className="flex items-center">
+                  <FaEnvelope className="mr-2" />
+                  <span>info@printnpack.ie</span>
+                </div>
+              </div>
+            </div>
             
             {/* Desktop Search and Navigation */}
             <div className="hidden md:flex items-center space-x-6">
-              {/* Desktop Search */}
-              <div className="mr-4">
-                <SearchBar />
-              </div>
-              
               {/* Desktop Navigation */}
-              <nav>
-                <ul className="flex space-x-6">
+              <nav className="mr-2" aria-label="Main Navigation">
+                <ul className="flex space-x-8">
                   {menuItems.map((item) => (
-                    <li key={item.path}>
+                    <li key={item.path} className="relative group">
                       <Link 
                         href={item.path} 
-                        className="text-blue-900 hover:text-blue-700 transition-colors relative nav-link"
+                        className="text-white font-bold text-lg hover:text-blue-200 transition-colors relative netflix-nav-link flex items-center"
+                        aria-label={item.name}
                       >
-                        {item.name}
+                        <span className="relative z-10 group-hover:transform group-hover:scale-110 transition-transform duration-200">
+                          {item.name}
+                        </span>
+                        <div className="absolute bottom-0 left-0 w-full h-1 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                       </Link>
                     </li>
                   ))}
                 </ul>
               </nav>
+              
+              {/* Desktop Search */}
+              <div className="flex items-center space-x-4">
+                <div className="relative z-10 hover:transform hover:scale-105 transition-transform duration-200">
+                  <SearchBar />
+                </div>
+                
+                <Link 
+                  href="/contact" 
+                  className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white px-6 py-2.5 rounded-md font-bold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-500/30"
+                  aria-label="Contact Us"
+                >
+                  Contact Us
+                </Link>
+              </div>
+            </div>
+            
+            {/* Mobile quick actions */}
+            <div className="md:hidden flex items-center space-x-3">
+              <a href="tel:+35312345678" className="text-white flex items-center p-2" aria-label="Call Us">
+                <FaPhone className="text-lg" />
+              </a>
+              <a href="mailto:info@printnpack.ie" className="text-white flex items-center p-2" aria-label="Email Us">
+                <FaEnvelope className="text-lg" />
+              </a>
+              <button 
+                onClick={() => setIsSearchOpen(true)}
+                className="text-white flex items-center p-2"
+                aria-label="Search products"
+              >
+                <FaSearch className="text-lg" />
+              </button>
             </div>
             
             {/* Mobile Nav Hamburger Button */}
             <button
               id="hamburger"
               aria-label="Toggle Menu"
-              className="md:hidden p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-blue-900 relative z-10"
+              className="md:hidden p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white relative z-10"
               onClick={() => setIsOpen(!isOpen)}
             >
               <div className="hamburger-icon">
-                <span className={`hamburger-line ${isOpen ? 'line-1-active' : ''}`}></span>
-                <span className={`hamburger-line ${isOpen ? 'line-2-active' : ''}`}></span>
-                <span className={`hamburger-line ${isOpen ? 'line-3-active' : ''}`}></span>
+                <span className={`hamburger-line bg-white ${isOpen ? 'line-1-active' : ''}`}></span>
+                <span className={`hamburger-line bg-white ${isOpen ? 'line-2-active' : ''}`}></span>
+                <span className={`hamburger-line bg-white ${isOpen ? 'line-3-active' : ''}`}></span>
               </div>
             </button>
           </div>

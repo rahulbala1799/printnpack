@@ -310,6 +310,44 @@ html {
   width: 100%;
 }
 
+/* Netflix-style navigation */
+.netflix-nav-link {
+  position: relative;
+  padding: 0.5rem 0;
+  text-shadow: 0 0 10px rgba(0,0,0,0.2);
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.netflix-nav-link::before {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  transform: scaleX(0);
+  transform-origin: left;
+  background-color: #e50914;
+  transition: transform 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
+  opacity: 0;
+}
+
+.netflix-nav-link:hover::before {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+.netflix-nav-link:hover {
+  transform: translateY(-2px);
+}
+
+@keyframes nav-pulse {
+  0% { opacity: 0.9; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 0.9; transform: scale(1); }
+}
+
 /* Particle background effect */
 .bg-particles {
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.15) 1px, transparent 1px);
