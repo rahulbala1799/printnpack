@@ -34,7 +34,6 @@ import {
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaArrowRight, FaCheck } from 'react-icons/fa';
-import ServiceIcon from '../components/ServiceIcon';
 
 export default function Home() {
   // USP data with simpler, consistent packaging-themed icons
