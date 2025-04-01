@@ -1,57 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import products from '../../data/products';
 
 const ImageGallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState(null);
+  const [mobileProducts, setMobileProducts] = useState([]);
   
-  const images = [
-    { 
-      src: '/images/ifa/heroh/1.png', 
-      alt: 'Premium packaging product 1',
-      size: 'large' // large images span 2 columns or rows
-    },
-    { 
-      src: '/images/ifa/heroh/2.png', 
-      alt: 'Premium packaging product 2',
-      size: 'medium'
-    },
-    { 
-      src: '/images/ifa/heroh/3.png', 
-      alt: 'Premium packaging product 3',
-      size: 'medium'
-    },
-    { 
-      src: '/images/ifa/heroh/4.png', 
-      alt: 'Premium packaging product 4',
-      size: 'large'
-    },
-    { 
-      src: '/images/ifa/heroh/5.png', 
-      alt: 'Premium packaging product 5',
-      size: 'medium'
-    },
-    { 
-      src: '/images/ifa/heroh/6.png', 
-      alt: 'Premium packaging product 6',
-      size: 'large'
-    },
-    { 
-      src: '/images/ifa/heroh/7.png', 
-      alt: 'Premium packaging product 7',
-      size: 'medium'
-    },
-    { 
-      src: '/images/ifa/heroh/8.png', 
-      alt: 'Premium packaging product 8',
-      size: 'medium'
-    }
-  ];
+  // Filter out products with no images or hidden products
+  const productGallery = products
+    .filter(product => !product.hidden && product.images && product.images.length > 0)
+    .map(product => ({
+      id: product.id,
+      name: product.name,
+      category: product.category,
+      imageSrc: product.imageSrc,
+      images: product.images,
+      size: getRandomSize() // Assign random sizes for visual interest
+    }));
 
-  const openModal = (image) => {
+  // Function to get random size for masonry layout
+  function getRandomSize() {
+    const sizes = ['medium', 'medium', 'medium', 'large', 'medium', 'medium'];
+    return sizes[Math.floor(Math.random() * sizes.length)];
+  }
+  
+  // Select 6 random products for mobile view on initial load and when window is resized
+  useEffect(() => {
+    const shuffleProducts = () => {
+      const shuffled = [...productGallery].sort(() => 0.5 - Math.random());
+      setMobileProducts(shuffled.slice(0, 6));
+    };
+    
+    shuffleProducts();
+    
+    // Re-shuffle on resize for better mobile experience
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        shuffleProducts();
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const openModal = (image, product) => {
     setModalImage(image);
+    setSelectedProduct(product);
     setModalOpen(true);
     document.body.style.overflow = 'hidden';
   };
@@ -90,9 +90,9 @@ const ImageGallery = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-800">Our Premium Products</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-800">Product Gallery</h2>
           <p className="text-center text-gray-600 max-w-2xl mx-auto mb-8 md:mb-12 px-2">
-            Explore our range of high-quality packaging solutions designed for businesses that value presentation and sustainability.
+            Browse through images of our quality packaging products in real-world applications, showcasing the versatility and visual appeal of our solutions.
           </p>
         </motion.div>
 
@@ -103,11 +103,11 @@ const ImageGallery = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => openModal(selectedImage)}
+            onClick={() => openModal(selectedImage, selectedProduct)}
           >
             <Image
               src={selectedImage}
-              alt="Selected packaging product"
+              alt={selectedProduct ? selectedProduct.name : "Selected packaging product"}
               fill
               style={{ objectFit: 'contain' }}
               className="bg-white p-4"
@@ -120,12 +120,12 @@ const ImageGallery = () => {
           </motion.div>
         )}
 
-        {/* Mobile Gallery View - Simplified grid */}
+        {/* Mobile Gallery View - Simplified grid with randomized products */}
         <div className="block md:hidden">
           <div className="grid grid-cols-2 gap-3">
-            {images.map((image, index) => (
+            {mobileProducts.map((product, index) => (
               <motion.div
-                key={index}
+                key={`mobile-${product.id}-${index}`}
                 className="aspect-square relative overflow-hidden rounded-lg shadow-md bg-white hover:shadow-lg transition-shadow cursor-pointer"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
@@ -134,23 +134,27 @@ const ImageGallery = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 onClick={() => {
-                  setSelectedImage(image.src);
+                  setSelectedImage(product.imageSrc);
+                  setSelectedProduct(product);
                   window.scrollTo({
                     top: document.querySelector('.gallery-selected-preview')?.offsetTop - 80 || 0,
                     behavior: 'smooth'
                   });
                 }}
               >
-                <div className="aspect-square w-full h-full relative">
+                <Link href={`/products/${product.id}`} className="aspect-square w-full h-full relative block">
                   <Image
-                    src={image.src}
-                    alt={image.alt}
+                    src={product.imageSrc}
+                    alt={product.name}
                     fill
                     sizes="(max-width: 640px) 50vw"
                     style={{ objectFit: 'contain' }}
                     className="p-2"
                   />
-                </div>
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-2">
+                    <p className="text-white text-xs font-medium truncate">{product.name}</p>
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -158,35 +162,40 @@ const ImageGallery = () => {
 
         {/* Desktop Masonry Gallery - Hidden on mobile */}
         <div className="hidden md:block">
-          <div className="grid grid-cols-4 auto-rows-auto gap-4 md:gap-6">
-            {images.map((image, index) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-auto gap-4 md:gap-6">
+            {productGallery.map((product, index) => (
               <motion.div
-                key={index}
-                className={`${getSizeClass(image.size)} relative overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow cursor-pointer`}
+                key={`desktop-${product.id}-${index}`}
+                className={`${getSizeClass(product.size)} relative overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow cursor-pointer`}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
                 onClick={() => {
-                  setSelectedImage(image.src);
+                  setSelectedImage(product.imageSrc);
+                  setSelectedProduct(product);
                   window.scrollTo({
                     top: document.querySelector('.gallery-selected-preview')?.offsetTop - 100 || 0,
                     behavior: 'smooth'
                   });
                 }}
               >
-                <div className="aspect-square w-full h-full relative">
+                <Link href={`/products/${product.id}`} className="aspect-square w-full h-full relative block">
                   <Image
-                    src={image.src}
-                    alt={image.alt}
+                    src={product.imageSrc}
+                    alt={product.name}
                     fill
                     sizes="(min-width: 768px) 25vw, 20vw"
                     style={{ objectFit: 'contain' }}
                     className="p-3 hover:scale-105 transition-transform duration-300"
                   />
-                </div>
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                    <p className="text-white text-xs md:text-sm font-medium truncate">{product.name}</p>
+                    <p className="text-blue-100 text-xs truncate">{product.category}</p>
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -203,12 +212,12 @@ const ImageGallery = () => {
           <p className="text-gray-700 mb-4 md:mb-6 px-2">
             All products are available in custom sizes and designs to suit your specific requirements.
           </p>
-          <a 
+          <Link 
             href="/products" 
             className="inline-block bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 md:py-3 md:px-8 rounded-full font-medium transition-colors duration-300 shadow-md hover:shadow-lg"
           >
             View All Products
-          </a>
+          </Link>
         </motion.div>
       </div>
 
@@ -235,10 +244,10 @@ const ImageGallery = () => {
               >
                 ✕
               </button>
-              <div className="relative w-full h-[60vh] md:h-[80vh]">
+              <div className="relative w-full h-[60vh] md:h-[75vh]">
                 <Image
                   src={modalImage}
-                  alt="Enlarged product image"
+                  alt={selectedProduct ? selectedProduct.name : "Enlarged product image"}
                   fill
                   style={{ objectFit: 'contain' }}
                   quality={90}
@@ -246,6 +255,18 @@ const ImageGallery = () => {
                   sizes="(max-width: 768px) 100vw, 80vw"
                 />
               </div>
+              {selectedProduct && (
+                <div className="p-4 md:p-6 bg-white">
+                  <h3 className="text-lg md:text-xl font-bold text-gray-800">{selectedProduct.name}</h3>
+                  <p className="text-sm text-gray-600 mb-3">{selectedProduct.category}</p>
+                  <Link 
+                    href={`/products/${selectedProduct.id}`}
+                    className="inline-block bg-blue-600 hover:bg-blue-700 text-white py-1.5 px-4 rounded-lg text-sm font-medium transition-colors"
+                  >
+                    View Product Details
+                  </Link>
+                </div>
+              )}
             </motion.div>
           </motion.div>
         )}
