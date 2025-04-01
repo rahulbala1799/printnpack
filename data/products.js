@@ -115,33 +115,72 @@ const products = [
     id: 'twisted-handle-paper-bags',
     name: 'Twisted Handle Paper Bags',
     category: 'Retail Packaging',
-    description: 'Elegant paper bags with twisted handles in company blue and white designs for upscale retail packaging.',
+    description: 'Premium twisted handle paper bags with elegant design and exceptional durability, perfect for upscale retail packaging and branded shopping experiences.',
     features: [
       'Strong twisted paper handles for secure carrying',
-      'Company blue and white color options',
-      'Available in medium and small sizes',
-      'Premium quality paper construction',
+      'Luxurious finish with premium paper quality',
+      'Available in Large, Medium, and Small sizes',
+      'Digital CMYK printing for vibrant, detailed branding',
+      'Exceptionally sturdy construction for heavier items',
       'Weekly delivery service available'
     ],
-    detailedDescription: 'Our twisted handle paper bags offer a stylish, upscale packaging solution for boutiques, gift shops, and high-end retail. The distinctive twisted handles provide both visual appeal and functional strength. Available in company blue and white color schemes and in both medium and small sizes, these bags create a premium shopping experience. Each bag can be fully customized with your branding through various printing techniques. Take advantage of our weekly delivery service to maintain a consistent supply without requiring extensive storage space.',
+    detailedDescription: 'Our twisted handle paper bags offer a stylish, upscale packaging solution that elevates your brand presentation. The distinctive twisted handles provide both visual elegance and superior functional strength for a premium shopping experience. The exceptionally sturdy construction ensures reliable performance even for heavier items, making these bags ideal for boutiques, gift shops, luxury retail, and high-end product launches.\n\nAvailable in three perfectly proportioned sizes to accommodate various products, each bag features a smooth, premium finish that serves as an excellent canvas for your brand. Our digital CMYK printing delivers vibrant, detailed graphics with exceptional color accuracy to showcase your branding with maximum impact. Take advantage of our weekly delivery service to maintain a consistent supply without requiring extensive storage space.',
     specifications: [
-      { name: 'Material', value: 'Premium kraft paper (100-130gsm)' },
-      { name: 'Handle Type', value: 'Twisted paper' },
-      { name: 'Color Scheme', value: 'White with company blue accents or company blue with white accents' },
-      { name: 'Size Options', value: 'Small (8"x4.5"x10"), Medium (10"x5"x13")' },
-      { name: 'Print Quality', value: 'Up to 4-color offset or digital printing' },
+      { name: 'Material', value: 'Premium kraft paper (130-170gsm)' },
+      { name: 'Handle Type', value: 'Twisted paper with reinforced attachment' },
+      { name: 'Color Options', value: 'Natural kraft, white, black, or custom colors available' },
+      { name: 'Size Options', value: 'Small (8"×4.5"×10"), Medium (10"×5"×13"), Large (12"×6"×15.5")' },
+      { name: 'Print Method', value: 'Digital CMYK printing for detailed, vibrant graphics' },
+      { name: 'Print Coverage', value: 'Full exterior custom printing with optional interior printing' },
       { name: 'Minimum Order', value: '500 units' },
       { name: 'Production Time', value: '10-14 business days' },
+      { name: 'Special Features', value: 'Reinforced bottom, premium paper finish, sturdy construction' },
       { name: 'Delivery Options', value: 'Weekly scheduled delivery service available' },
     ],
     images: [
-      '/images/hero/twisted-handle-bag.svg',
-      '/images/ifa/heroh/twisted-bag.png'
+      '/images/products/twisted-handle-bags/1.png',
+      '/images/products/twisted-handle-bags/2.png',
+      '/images/products/twisted-handle-bags/3.png',
+      '/images/products/twisted-handle-bags/4.png',
+      '/images/products/twisted-handle-bags/5.png',
+      '/images/products/twisted-handle-bags/6.png'
     ],
-    imageSrc: '/images/hero/twisted-handle-bag.svg',
-    price: 'Starting at €0.30 per unit',
+    imageSrc: '/images/products/twisted-handle-bags/1.png',
+    price: 'Starting at €0.35 per unit',
     moq: 500,
     leadTime: '10-14 business days',
+    applications: [
+      'Luxury Retail & Boutiques',
+      'Fashion & Apparel Stores',
+      'Gift Shops & Jewelry Stores',
+      'Cosmetics & Beauty Retail',
+      'Premium Food & Confectionery',
+      'Product Launches & Events',
+      'Department Stores',
+      'Museum & Gallery Shops'
+    ],
+    faq: [
+      {
+        question: 'Can I order different sizes in the same order?',
+        answer: 'Yes, you can order a mix of sizes within the same order, provided you meet the minimum quantity requirement for each size variant.'
+      },
+      {
+        question: 'What printing options are available for these bags?',
+        answer: 'We use digital CMYK printing which provides exceptional color reproduction, fine details, and photographic-quality images. Custom pantone color matching is also available for an additional fee.'
+      },
+      {
+        question: 'How sturdy are the twisted handles?',
+        answer: 'Our twisted handles are reinforced at attachment points and designed to support the weight of typical retail items. The Large size bags can comfortably hold items up to 5kg.'
+      },
+      {
+        question: 'Are these bags eco-friendly?',
+        answer: 'Yes, our twisted handle paper bags are made from sustainably sourced materials and are fully recyclable, biodegradable, and compostable.'
+      },
+      {
+        question: 'Can I add special finishes to these bags?',
+        answer: 'Yes, we offer options including spot UV, foil stamping, embossing, and matte or gloss lamination to enhance your design and create a truly premium finish.'
+      }
+    ],
     weeklyDelivery: 'Our premium weekly delivery service ensures your business always has the right amount of branded packaging on hand. We establish a consistent delivery schedule tailored to your specific needs, helping you maintain adequate inventory without requiring large storage areas. Our account managers monitor your usage patterns to recommend optimal order quantities, reducing waste and controlling costs. This reliable service enhances your professional image while simplifying operations.'
   },
   {
@@ -2200,6 +2239,78 @@ const products = [
     price: '€0.20',
     moq: 100,
     leadTime: '3-5 business days'
+  },
+  {
+    id: 'twisted-handle-brown-bags',
+    name: 'Twisted Handle Brown Bags',
+    category: 'Retail Packaging',
+    description: 'Premium brown kraft twisted handle paper bags with digital CMYK printing options for vibrant, detailed branding that stands out.',
+    features: [
+      'Strong twisted paper handles for secure carrying',
+      'Premium brown kraft paper with eco-friendly appeal',
+      'Available in Large, Medium, and Small sizes',
+      'Full-color digital CMYK printing for unlimited color options',
+      'Exceptionally sturdy construction for heavier items',
+      'Weekly delivery service available'
+    ],
+    detailedDescription: 'Our brown kraft twisted handle paper bags combine eco-friendly aesthetics with premium functionality, making them ideal for brands that want to showcase their environmental consciousness while delivering a high-end shopping experience. The natural brown kraft finish provides a rustic, artisanal appeal that resonates with today\'s environmentally-aware consumers.\n\nUnlike traditional printing methods, our digital CMYK printing technology allows for unlimited color options with exceptional color accuracy and fine detail reproduction. This means your logos, graphics, and branding elements can be reproduced exactly as designed, regardless of complexity. The larger the print area, the more the cost scales proportionally, allowing for flexible budgeting options.\n\nAvailable in three perfectly proportioned sizes to accommodate various products: Small (8"×4.5"×10"), Medium (10"×5"×13"), and Large (12"×6"×15.5"). Each bag features reinforced bottoms and sturdy twisted paper handles that can support substantial weight, making them suitable for boutiques, gift shops, specialty food retailers, and premium brand promotions.',
+    specifications: [
+      { name: 'Material', value: 'Premium brown kraft paper (130-170gsm)' },
+      { name: 'Handle Type', value: 'Twisted paper with reinforced attachment' },
+      { name: 'Color', value: 'Natural brown kraft' },
+      { name: 'Size Options', value: 'Small (8"×4.5"×10"), Medium (10"×5"×13"), Large (12"×6"×15.5")' },
+      { name: 'Print Method', value: 'Digital CMYK printing for detailed, vibrant graphics' },
+      { name: 'Print Coverage', value: 'Full exterior custom printing with scaling pricing based on print area' },
+      { name: 'Minimum Order', value: '500 units' },
+      { name: 'Production Time', value: '10-14 business days' },
+      { name: 'Special Features', value: 'Reinforced bottom, eco-friendly materials, sturdy construction' },
+      { name: 'Delivery Options', value: 'Weekly scheduled delivery service available' },
+    ],
+    images: [
+      '/images/products/twisted-handle-brown-bags/1.png',
+      '/images/products/twisted-handle-brown-bags/2.png',
+      '/images/products/twisted-handle-brown-bags/3.png',
+      '/images/products/twisted-handle-brown-bags/4.png',
+      '/images/products/twisted-handle-brown-bags/5.png',
+      '/images/products/twisted-handle-brown-bags/6.png'
+    ],
+    imageSrc: '/images/products/twisted-handle-brown-bags/1.png',
+    price: 'Starting at €0.38 per unit',
+    moq: 500,
+    leadTime: '10-14 business days',
+    applications: [
+      'Eco-conscious Retail & Boutiques',
+      'Organic & Natural Product Stores',
+      'Artisanal Food & Craft Shops',
+      'Sustainable Fashion Brands',
+      'Farm Shops & Farmers Markets',
+      'Premium Food & Confectionery',
+      'Eco-friendly Product Launches',
+      'Specialty Gift Shops'
+    ],
+    faq: [
+      {
+        question: 'How does digital CMYK printing pricing work?',
+        answer: 'Digital CMYK printing costs are calculated based on the size of the printed area. The larger the graphic or logo you want to print, the higher the cost. This allows for flexible budgeting while still achieving vibrant, high-quality prints with unlimited color options.'
+      },
+      {
+        question: 'Can I order different sizes in the same order?',
+        answer: 'Yes, you can order a mix of sizes within the same order, provided you meet the minimum quantity requirement for each size variant.'
+      },
+      {
+        question: 'What types of graphics work best with digital CMYK printing?',
+        answer: 'Digital CMYK printing excels with photographic images, gradients, multi-colored designs, and fine text. Unlike traditional printing, there\'s no limit to the number of colors you can use, making it perfect for complex logos and detailed artwork.'
+      },
+      {
+        question: 'How eco-friendly are these brown kraft bags?',
+        answer: 'Our brown kraft bags are made from sustainably sourced materials that are fully recyclable, biodegradable, and compostable. We use eco-friendly inks in our printing process, making these bags an excellent choice for environmentally conscious brands.'
+      },
+      {
+        question: 'Can I add special finishes to these bags?',
+        answer: 'Yes, we offer options including spot UV, foil stamping, embossing, and matte or gloss selective coating to enhance your design and create eye-catching contrast against the natural kraft background.'
+      }
+    ],
+    weeklyDelivery: 'Our premium weekly delivery service ensures your business always has the right amount of branded packaging on hand. We establish a consistent delivery schedule tailored to your specific needs, helping you maintain adequate inventory without requiring large storage areas. Our account managers monitor your usage patterns to recommend optimal order quantities, reducing waste and controlling costs. This reliable service enhances your professional image while simplifying operations.'
   }
 ];
 
