@@ -114,16 +114,13 @@ const ProductsPage = () => {
   useEffect(() => {
     let filtered = [];
     
-    // First filter out any hidden products
-    const visibleProducts = products.filter(product => !product.hidden);
-    
     if (activeCategory === 'all') {
       // Show all products from the active group
       const groupCategories = mainGroups.find(g => g.id === activeGroup)?.categories || [];
-      filtered = visibleProducts.filter(product => groupCategories.includes(product.category));
+      filtered = products.filter(product => groupCategories.includes(product.category));
     } else {
       // Show products from the specific category
-      filtered = visibleProducts.filter(product => product.category === activeCategory);
+      filtered = products.filter(product => product.category === activeCategory);
     }
     
     // Apply search filter if there's a search term

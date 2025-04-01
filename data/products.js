@@ -3,7 +3,6 @@ const products = [
     id: 'white-pizza-boxes',
     name: 'White Pizza Boxes',
     category: 'Food Packaging',
-    hidden: true,
     description: 'Premium printed white pizza boxes that keep your food hot while maintaining a clean, professional look for your brand.',
     features: [
       'Made from food-grade white corrugated cardboard',
@@ -43,7 +42,6 @@ const products = [
     id: 'brown-pizza-boxes',
     name: 'Brown Pizza Boxes',
     category: 'Food Packaging',
-    hidden: true,
     description: 'Eco-friendly brown pizza boxes with company blue branding that keep food hot and showcase your sustainability commitment. Available in 7", 9", 10", 12", and 14" sizes.',
     features: [
       'Made from recycled kraft corrugated cardboard',
@@ -451,7 +449,6 @@ const products = [
     id: 'burger-boxes',
     name: 'Burger Boxes',
     category: 'Food Packaging',
-    hidden: true,
     description: 'Premium burger boxes designed to keep your burgers and sandwiches fresh and presentable.',
     features: [
       'Made from bagasse (sugarcane fiber)',
@@ -2344,11 +2341,7 @@ export const getRelatedProducts = (productId, limit = 3) => {
   if (!currentProduct) return [];
   
   return products
-    .filter(product => 
-      product.category === currentProduct.category && 
-      product.id !== productId &&
-      !product.hidden
-    )
+    .filter(product => product.category === currentProduct.category && product.id !== productId)
     .slice(0, limit);
 };
 
