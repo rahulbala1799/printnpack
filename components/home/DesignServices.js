@@ -1,418 +1,278 @@
-import React, { useState } from 'react';
-import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const DesignServices = () => {
-  const [hoveredService, setHoveredService] = useState(null);
+  const [activeService, setActiveService] = useState(null);
+  const [isHovering, setIsHovering] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [windowWidth, setWindowWidth] = useState(0);
   
-  const designServices = [
+  // Update window width on resize
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    
+    if (typeof window !== 'undefined') {
+      setWindowWidth(window.innerWidth);
+      window.addEventListener('resize', handleResize);
+    }
+    
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', handleResize);
+      }
+    };
+  }, []);
+  
+  // Track mouse position for interactive elements
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    
+    if (typeof window !== 'undefined') {
+      window.addEventListener('mousemove', handleMouseMove);
+    }
+    
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('mousemove', handleMouseMove);
+      }
+    };
+  }, []);
+  
+  // Services data
+  const services = [
     {
       id: 'posters',
       title: 'Posters',
       description: 'Eye-catching posters that demand attention and convey your message with impact.',
-      image: '/images/ifa/heroh/2.png',
-      color: 'from-fuchsia-600 to-violet-800',
-      accentColor: '#FF00FF',
-      textColor: 'text-white',
-      pattern: 'radial-gradient(circle, rgba(255,0,255,0.3) 2px, transparent 2px)',
-      patternSize: '20px 20px'
+      image: '/images/ifa/heroh/posters.png',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
+        </svg>
+      ),
+      color: 'from-purple-500 to-indigo-600',
+      link: '/services/design/posters'
     },
     {
       id: 'vinyls',
       title: 'Vinyls',
       description: 'Premium vinyl stickers and graphics for branding that sticks with your customers.',
-      image: '/images/ifa/heroh/3.png',
-      color: 'from-cyan-500 to-blue-700',
-      accentColor: '#00FFFF',
-      textColor: 'text-white',
-      pattern: 'linear-gradient(45deg, rgba(0,255,255,0.3) 25%, transparent 25%, transparent 50%, rgba(0,255,255,0.3) 50%, rgba(0,255,255,0.3) 75%, transparent 75%, transparent)',
-      patternSize: '20px 20px'
+      image: '/images/ifa/heroh/vinyls.png',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+        </svg>
+      ),
+      color: 'from-blue-500 to-cyan-600',
+      link: '/services/design/vinyls'
     },
     {
       id: 'leaflets',
       title: 'Leaflets',
-      description: "Professional leaflets that put your information directly into customers' hands.",
-      image: '/images/ifa/heroh/leaflet.png',
-      color: 'from-lime-500 to-green-700',
-      accentColor: '#ADFF2F',
-      textColor: 'text-white',
-      pattern: 'repeating-linear-gradient(0deg, rgba(173,255,47,0.2), rgba(173,255,47,0.2) 2px, transparent 2px, transparent 4px)',
-      patternSize: '20px 20px'
+      description: 'Professional leaflets that put your information directly into customers\' hands.',
+      image: '/images/ifa/heroh/leaflets.png',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
+        </svg>
+      ),
+      color: 'from-teal-500 to-green-600',
+      link: '/services/design/leaflets'
     },
     {
       id: 'menus',
       title: 'Menus',
       description: 'Appetizing menu designs that showcase your offerings and enhance the dining experience.',
-      image: '/images/ifa/heroh/5.png',
-      color: 'from-yellow-500 to-orange-700',
-      accentColor: '#FFFF00',
-      textColor: 'text-white',
-      pattern: 'repeating-radial-gradient(circle at 0 0, transparent 0, rgba(255,255,0,0.2) 8px), repeating-linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0))',
-      patternSize: '20px 20px'
+      image: '/images/ifa/heroh/menus.png',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+        </svg>
+      ),
+      color: 'from-amber-500 to-orange-600',
+      link: '/services/design/menus'
     }
   ];
   
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
+  // Calculate effects for active service
+  const getSpotlightStyle = (serviceId) => {
+    if (!isHovering || activeService !== serviceId || windowWidth < 768) return {};
+    
+    const x = mousePosition.x;
+    const y = mousePosition.y;
+    
+    return {
+      background: `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 60%)`,
+    };
   };
   
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    show: { y: 0, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } }
-  };
-
-  // Custom glitch effect for heading
-  const glitchAnimation = {
-    hidden: { skewX: 0, skewY: 0, scale: 1 },
-    show: { 
-      skewX: [0, -2, 0, 2, 0], 
-      skewY: [0, 1, 0, -1, 0],
-      scale: [1, 1.02, 1, 1.01, 1],
-      transition: { 
-        repeat: Infinity, 
-        repeatType: "mirror", 
-        duration: 2, 
-        ease: "easeInOut" 
-      }
-    }
-  };
-
   return (
-    <section className="relative py-20 overflow-hidden">
-      {/* High contrast background */}
-      <div className="absolute inset-0 bg-black"></div>
-      
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Grid lines */}
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.07) 1px, transparent 1px)',
-          backgroundSize: '60px 60px'
-        }}></div>
-        
-        {/* Neon accents */}
+    <section className="py-16 relative overflow-hidden">
+      {/* Background with design elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-0 w-64 h-64 rounded-full bg-blue-600/5 -translate-x-1/3 -translate-y-1/3"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-blue-600/5 translate-x-1/3 translate-y-1/3"></div>
         <motion.div 
-          className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-20 blur-3xl"
+          className="absolute top-20 right-10 w-6 h-6 rounded-full bg-blue-300/30"
           animate={{ 
-            background: [
-              'radial-gradient(circle, #ff00ff 0%, transparent 70%)',
-              'radial-gradient(circle, #00ffff 0%, transparent 70%)',
-              'radial-gradient(circle, #ffff00 0%, transparent 70%)',
-              'radial-gradient(circle, #ff00ff 0%, transparent 70%)'
-            ]
+            y: [0, 15, 0],
+            opacity: [0.5, 0.8, 0.5] 
           }}
-          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-        ></motion.div>
-
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
         <motion.div 
-          className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-20 blur-3xl"
+          className="absolute bottom-40 left-10 w-4 h-4 rounded-full bg-purple-300/30"
           animate={{ 
-            background: [
-              'radial-gradient(circle, #00ffff 0%, transparent 70%)',
-              'radial-gradient(circle, #ffff00 0%, transparent 70%)',
-              'radial-gradient(circle, #ff00ff 0%, transparent 70%)',
-              'radial-gradient(circle, #00ffff 0%, transparent 70%)'
-            ]
+            y: [0, -10, 0],
+            opacity: [0.3, 0.7, 0.3] 
           }}
-          transition={{ duration: 8, repeat: Infinity, ease: "linear", delay: 2 }}
-        ></motion.div>
-        
-        {/* Floating design elements */}
-        <motion.div 
-          className="absolute top-20 left-10 w-20 h-20 opacity-40 hidden lg:block"
-          initial={{ y: 0 }}
-          animate={{ y: [0, -15, 0], filter: ['hue-rotate(0deg)', 'hue-rotate(90deg)', 'hue-rotate(180deg)', 'hue-rotate(270deg)', 'hue-rotate(360deg)'] }}
-          transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-        >
-          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="#00FFFF">
-            <path d="M45.4,-52.9C58.9,-39.1,70.3,-25.2,74.3,-9C78.3,7.2,74.9,25.8,64.4,38.7C53.9,51.7,36.3,59.1,18.1,66.2C-0.2,73.3,-18.9,80.1,-33.9,74.9C-48.9,69.6,-60.1,52.2,-70.3,33.3C-80.6,14.4,-89.9,-6,-86.9,-24.4C-83.9,-42.8,-68.7,-59.3,-51,-69.3C-33.3,-79.3,-13.1,-82.8,2.9,-86.3C19,-89.7,31.9,-66.8,45.4,-52.9Z" transform="translate(100 100)" />
-          </svg>
-        </motion.div>
-        
-        <motion.div 
-          className="absolute bottom-20 right-10 w-24 h-24 opacity-40 hidden lg:block"
-          initial={{ rotate: 0 }}
-          animate={{ rotate: 360, filter: ['hue-rotate(0deg)', 'hue-rotate(120deg)', 'hue-rotate(240deg)', 'hue-rotate(360deg)'] }}
-          transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-        >
-          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="#FF00FF">
-            <path d="M44.3,-65.2C53.2,-55.1,53.2,-36.6,53.2,-21.6C53.2,-6.6,53.5,5,53.9,20.8C54.3,36.5,54.9,56.4,45.9,66.5C36.8,76.6,18.1,76.9,0.9,76.1C-16.3,75.3,-32.6,73.4,-46.6,64.9C-60.5,56.3,-71.7,41.1,-73.9,25.2C-76.1,9.3,-69.3,-7.2,-63.8,-23.9C-58.3,-40.5,-54.2,-57.3,-43.5,-66.5C-32.7,-75.8,-15.9,-77.4,0.5,-78.5C18,-79.5,35.2,-75.3,44.1,-65.2Z" transform="translate(100 100)" />
-          </svg>
-        </motion.div>
-        
-        <motion.div 
-          className="absolute top-1/2 left-1/3 w-16 h-16 opacity-40 hidden lg:block"
-          animate={{ 
-            scale: [1, 1.2, 1],
-            rotateZ: [0, 10, -10, 0],
-            filter: ['hue-rotate(0deg)', 'hue-rotate(180deg)', 'hue-rotate(360deg)']
+          transition={{
+            duration: 2.5,
+            repeat: Infinity,
+            ease: "easeInOut"
           }}
-          transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
-        >
-          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="#FFFF00">
-            <path d="M39.5,-63.4C49.3,-56.9,54.3,-42.6,59.8,-29.1C65.4,-15.6,71.4,-2.8,70.4,9.2C69.4,21.2,61.3,32.5,51.3,41.3C41.3,50.1,29.5,56.4,16.5,61.2C3.5,65.9,-10.8,69,-24.5,66.7C-38.2,64.4,-51.3,56.7,-60.4,45.1C-69.4,33.5,-74.4,18,-73.3,3.3C-72.2,-11.4,-64.9,-25.4,-55.3,-36.3C-45.7,-47.3,-33.7,-55.2,-21.1,-59.6C-8.5,-64,-2.1,-65,7.8,-77.1C17.7,-89.3,29.7,-112.5,39.5,-63.4Z" transform="translate(100 100)" />
-          </svg>
-        </motion.div>
+        />
+        
+        {/* Grid pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="h-full w-full bg-[linear-gradient(to_right,#8884_1px,transparent_1px),linear-gradient(to_bottom,#8884_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+        </div>
       </div>
       
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Section heading with creative elements */}
-        <div className="relative mb-16 text-center">
-          <motion.div 
-            initial={{ scale: 0.9, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="inline-block"
-          >
-            <span className="font-light text-xl text-white tracking-widest block mb-2">CREATIVE SOLUTIONS</span>
-            <motion.h2 
-              className="text-5xl md:text-7xl font-bold mb-3 relative"
-              variants={glitchAnimation}
-              initial="hidden"
-              animate="show"
-            >
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] via-[#00FFFF] to-[#FFFF00]">
-                DESIGN SERVICES
-              </span>
-              <motion.span 
-                className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-[#FF00FF] via-[#00FFFF] to-[#FFFF00]"
-                initial={{ width: 0, opacity: 0 }}
-                whileInView={{ width: '100%', opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5, duration: 0.6 }}
-              ></motion.span>
-            </motion.h2>
-          </motion.div>
-          
-          <motion.p 
-            className="text-lg text-gray-300 max-w-xl mx-auto mt-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-          >
-            We blend creativity with strategy to design materials that capture attention
-            and communicate your message at affordable prices.
-          </motion.p>
-        </div>
-        
-        {/* Design services grid */}
+      <div className="container mx-auto px-4">
+        {/* Section Header */}
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-        >
-          {designServices.map((service) => (
-            <motion.div
-              key={service.id}
-              variants={itemVariants}
-              className="relative rounded-xl overflow-hidden group cursor-pointer perspective"
-              style={{ height: '28rem' }}
-              onMouseEnter={() => setHoveredService(service.id)}
-              onMouseLeave={() => setHoveredService(null)}
-            >
-              {/* 3D card tilt effect wrapper */}
-              <motion.div
-                className="w-full h-full relative"
-                animate={hoveredService === service.id ? {
-                  rotateX: [0, 2, 0],
-                  rotateY: [0, 5, 0]
-                } : {}}
-                transition={{ duration: 0.3 }}
-              >
-                {/* Background gradient and pattern */}
-                <div 
-                  className={`absolute inset-0 z-0 bg-gradient-to-br ${service.color} transition-all duration-500 ${
-                    hoveredService === service.id ? 'opacity-100' : 'opacity-95'
-                  }`}
-                  style={{
-                    backgroundImage: service.pattern,
-                    backgroundSize: service.patternSize
-                  }}
-                ></div>
-                
-                {/* Neon border effect */}
-                <div 
-                  className="absolute inset-[3px] rounded-lg z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{
-                    boxShadow: `0 0 15px ${service.accentColor}, inset 0 0 15px ${service.accentColor}`,
-                    transition: 'opacity 0.5s ease'
-                  }}
-                ></div>
-                
-                {/* Decorative elements */}
-                <div className="absolute top-0 right-0 w-40 h-40 rounded-full opacity-30 blur-xl transform translate-x-10 -translate-y-10 transition-all duration-500"
-                  style={{ 
-                    background: `radial-gradient(circle, ${service.accentColor} 0%, transparent 70%)`,
-                    transform: hoveredService === service.id ? 'translate(40px, -40px) scale(1.25)' : 'translate(40px, -40px) scale(1)'
-                  }}
-                ></div>
-                
-                <div className="absolute bottom-0 left-0 w-32 h-32 rounded-full opacity-20 blur-xl transform -translate-x-10 translate-y-10 transition-all duration-700"
-                  style={{ 
-                    background: `radial-gradient(circle, ${service.accentColor} 0%, transparent 70%)`,
-                    transform: hoveredService === service.id ? 'translate(-40px, 40px) scale(1.25)' : 'translate(-40px, 40px) scale(1)'
-                  }}
-                ></div>
-                
-                {/* Service content */}
-                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-white p-6 transition-all duration-500">
-                  {/* Animated circle behind image */}
-                  <motion.div
-                    className="absolute w-48 h-48 rounded-full border-2 opacity-50"
-                    style={{ borderColor: service.accentColor }}
-                    animate={hoveredService === service.id ? {
-                      scale: [1, 1.2, 1],
-                      opacity: [0.5, 0.7, 0.5]
-                    } : {}}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  ></motion.div>
-                  
-                  <motion.div 
-                    className="relative h-52 w-52 mb-6 transition-transform duration-700 z-20"
-                    animate={hoveredService === service.id ? { 
-                      scale: 1.1,
-                      y: -10
-                    } : {
-                      scale: 1,
-                      y: 0
-                    }}
-                  >
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      fill
-                      className="object-contain drop-shadow-xl"
-                      style={{ 
-                        filter: hoveredService === service.id ? 
-                          `drop-shadow(0 0 12px ${service.accentColor}) brightness(1.2) contrast(1.1)` : 
-                          'brightness(1.05) contrast(1.05)' 
-                      }}
-                    />
-                  </motion.div>
-                  
-                  {/* Text overlay for better contrast */}
-                  <div className="bg-black/60 backdrop-blur-sm p-3 rounded-lg max-w-[90%] w-full">
-                    <h3 className="text-2xl font-bold relative mb-3 z-20 text-center">
-                      <span className="relative">
-                        {service.title}
-                        <motion.span 
-                          className="absolute -bottom-1 left-1/2 h-0.5 transform -translate-x-1/2 origin-center transition-all duration-300"
-                          style={{ background: service.accentColor }}
-                          animate={hoveredService === service.id ? { width: '80%' } : { width: '0%' }}
-                        ></motion.span>
-                      </span>
-                    </h3>
-                    
-                    <p className="text-center text-white mb-4 max-w-xs mx-auto z-20">{service.description}</p>
-                    
-                    <motion.div
-                      animate={hoveredService === service.id ? { y: 0, opacity: 1 } : { y: 10, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="z-20 flex justify-center"
-                    >
-                      <Link 
-                        href="/services" 
-                        className="px-6 py-2.5 rounded-full backdrop-blur-sm border transition-all duration-300 text-sm font-medium flex items-center"
-                        style={{ 
-                          borderColor: service.accentColor,
-                          backgroundColor: 'rgba(0,0,0,0.5)',
-                          boxShadow: hoveredService === service.id ? `0 0 10px ${service.accentColor}` : 'none'
-                        }}
-                      >
-                        <span>Learn More</span>
-                        <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                        </svg>
-                      </Link>
-                    </motion.div>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-          ))}
-        </motion.div>
-        
-        {/* Call to action */}
-        <motion.div 
-          className="mt-16 text-center"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.8, duration: 0.6 }}
+          transition={{ duration: 0.6 }}
         >
-          <div className="relative inline-block">
-            {/* Animated glow effect */}
-            <motion.div 
-              className="absolute inset-0 rounded-lg opacity-70 blur-xl"
-              style={{ 
-                background: 'linear-gradient(90deg, #FF00FF, #00FFFF, #FFFF00, #FF00FF)'
-              }}
-              animate={{ 
-                backgroundPosition: ['0% center', '200% center'],
-                scale: [1, 1.05, 1],
-                opacity: [0.7, 0.9, 0.7]
-              }}
-              transition={{ 
-                backgroundPosition: {
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "linear"
-                },
-                scale: {
-                  duration: 2,
-                  repeat: Infinity,
-                  repeatType: "reverse" 
-                },
-                opacity: {
-                  duration: 2,
-                  repeat: Infinity,
-                  repeatType: "reverse"
-                }
-              }}
-            ></motion.div>
-            
-            <Link 
-              href="/services#design" 
-              className="relative inline-flex items-center justify-center bg-black text-white py-3 px-8 rounded-lg font-medium z-10 border border-white/10 shadow-xl"
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+            <span className="text-blue-600">CREATIVE SOLUTIONS</span>
+          </h2>
+          <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">DESIGN SERVICES</h3>
+          <p className="text-gray-600 max-w-3xl mx-auto">
+            We blend creativity with strategy to design materials that capture attention and communicate your message at affordable prices.
+          </p>
+        </motion.div>
+        
+        {/* Services Card Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-6xl mx-auto">
+          {services.map((service, index) => (
+            <motion.div
+              key={service.id}
+              className="relative group overflow-hidden"
+              onMouseEnter={() => {setActiveService(service.id); setIsHovering(true);}}
+              onMouseLeave={() => {setActiveService(null); setIsHovering(false);}}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <span>View Design Portfolio</span>
-              <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-              </svg>
-            </Link>
+              <div 
+                className={`
+                  rounded-xl overflow-hidden h-full bg-white shadow-md hover:shadow-xl 
+                  transition-all duration-300 transform group-hover:scale-[1.02]
+                  border border-gray-100 flex flex-col relative
+                `}
+              >
+                {/* Spotlight effect */}
+                <div 
+                  className="absolute inset-0 pointer-events-none transition-opacity duration-300"
+                  style={getSpotlightStyle(service.id)}
+                />
+                
+                {/* Card Header with Gradient Background */}
+                <div className={`bg-gradient-to-r ${service.color} p-5 relative h-48`}>
+                  <div className="absolute inset-0 bg-black/20"></div>
+                  <div className="relative z-10">
+                    <div className="p-2 bg-white/20 backdrop-blur-sm rounded-full inline-flex mb-3">
+                      <div className="bg-white text-blue-600 rounded-full p-1.5">
+                        {service.icon}
+                      </div>
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-1">{service.title}</h3>
+                    <div className="w-10 h-1 bg-white/50 rounded-full mb-2"></div>
+                  </div>
+                  
+                  {/* Floating design elements */}
+                  <motion.div 
+                    className="absolute top-2 right-2 w-20 h-20 text-white/10"
+                    animate={{ 
+                      rotate: [0, 360],
+                      scale: [1, 1.05, 1],
+                    }}
+                    transition={{
+                      duration: 20,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }}
+                  >
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                      <path d="M46.5,-77.5C59.2,-71.3,68.5,-57.6,74.5,-43.1C80.5,-28.5,83.2,-13.3,81.5,1C79.8,15.3,73.7,28.5,65.2,39.7C56.7,50.9,45.7,59.9,33.4,66.9C21.1,73.9,7.4,78.8,-5.6,76.6C-18.6,74.4,-31,65.1,-40.2,54.6C-49.5,44.1,-55.5,32.4,-62.5,19.1C-69.5,5.9,-77.5,-9,-75.1,-21.9C-72.7,-34.9,-60,-45.9,-46.4,-51.6C-32.8,-57.3,-18.4,-57.8,-2.2,-60C14,-62.2,28,-63.1,41.4,-65.8C54.9,-68.6,67.9,-74.1,81.3,-74.7" transform="translate(100 100)" />
+                    </svg>
+                  </motion.div>
+                </div>
+                
+                {/* Card Content */}
+                <div className="p-5 flex-grow flex flex-col">
+                  <p className="text-gray-600 mb-4 flex-grow">{service.description}</p>
+                  <Link 
+                    href={service.link} 
+                    className="
+                      text-sm font-medium inline-flex items-center
+                      text-blue-600 hover:text-blue-800 transition-colors
+                      group-hover:underline
+                    "
+                  >
+                    Learn More
+                    <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+        
+        {/* CTA Section */}
+        <motion.div 
+          className="mt-12 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <div className="inline-block mb-6">
+            <div className="flex items-center justify-center gap-2 bg-blue-50 px-4 py-2 rounded-full">
+              <span className="bg-blue-600 w-2 h-2 rounded-full animate-pulse"></span>
+              <span className="text-blue-600 font-medium text-sm">Starting from just €49</span>
+            </div>
           </div>
           
-          <motion.p 
-            className="mt-4 text-white"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 1, duration: 0.6 }}
+          <Link 
+            href="/services/design" 
+            className="
+              relative inline-flex items-center justify-center px-8 py-3.5
+              overflow-hidden font-medium text-white bg-blue-600 rounded-lg
+              group hover:bg-blue-700 transition-all duration-300
+              shadow-md hover:shadow-lg
+            "
           >
-            <span className="text-xl font-light">Starting from just </span>
-            <motion.span 
-              className="text-2xl font-semibold"
-              animate={{
-                color: ['#FF00FF', '#00FFFF', '#FFFF00', '#FF00FF'],
-              }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-            >
-              €49
-            </motion.span>
-          </motion.p>
+            <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+            <span className="relative font-semibold">View Design Portfolio</span>
+          </Link>
         </motion.div>
       </div>
     </section>
