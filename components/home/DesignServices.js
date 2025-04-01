@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import ServiceIcon from '@/components/ServiceIcon';
+import { FaFileAlt, FaStickyNote, FaBookOpen, FaUtensils } from 'react-icons/fa';
 
 const DesignServices = () => {
   const [activeService, setActiveService] = useState(null);
@@ -127,32 +127,32 @@ const DesignServices = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
-            <div className="w-24 h-24 mx-auto mb-4">
-              <ServiceIcon type="posters" className="w-full h-full text-primary" />
+            <div className="w-24 h-24 mx-auto mb-4 flex items-center justify-center">
+              <FaFileAlt className="w-12 h-12 text-primary" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Posters</h3>
             <p className="text-gray-600">Professional poster designs for events, promotions, and branding</p>
             <p className="text-sm text-blue-600 mt-2">Custom layouts & artwork included</p>
           </div>
           <div className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
-            <div className="w-24 h-24 mx-auto mb-4">
-              <ServiceIcon type="vinyls" className="w-full h-full text-primary" />
+            <div className="w-24 h-24 mx-auto mb-4 flex items-center justify-center">
+              <FaStickyNote className="w-12 h-12 text-primary" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Vinyls</h3>
             <p className="text-gray-600">Custom vinyl graphics and decals for any surface</p>
             <p className="text-sm text-blue-600 mt-2">Vector artwork & cutting files provided</p>
           </div>
           <div className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
-            <div className="w-24 h-24 mx-auto mb-4">
-              <ServiceIcon type="leaflets" className="w-full h-full text-primary" />
+            <div className="w-24 h-24 mx-auto mb-4 flex items-center justify-center">
+              <FaBookOpen className="w-12 h-12 text-primary" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Leaflets</h3>
             <p className="text-gray-600">Eye-catching leaflet designs that engage your audience</p>
             <p className="text-sm text-blue-600 mt-2">Professional layout & typography</p>
           </div>
           <div className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
-            <div className="w-24 h-24 mx-auto mb-4">
-              <ServiceIcon type="menus" className="w-full h-full text-primary" />
+            <div className="w-24 h-24 mx-auto mb-4 flex items-center justify-center">
+              <FaUtensils className="w-12 h-12 text-primary" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Menus</h3>
             <p className="text-gray-600">Appetizing menu designs that showcase your offerings</p>
