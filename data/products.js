@@ -131,7 +131,7 @@ const products = [
       'Pricing based on ink coverage and design complexity',
       'Weekly delivery service available'
     ],
-    detailedDescription: 'Our twisted handle paper bags offer a stylish, upscale packaging solution that elevates your brand presentation. The distinctive twisted handles provide both visual elegance and superior functional strength for a premium shopping experience. The exceptionally sturdy construction ensures reliable performance even for heavier items, making these bags ideal for boutiques, gift shops, luxury retail, and high-end product launches.\n\nAvailable in three perfectly proportioned sizes to accommodate various products: Small (8"×4.5"×10"), Medium (10"×5"×13"), and Large (12"×6"×15.5"). Each size features a robust construction with reinforced bottoms to support substantial weight while maintaining an elegant appearance.\n\nWe use advanced digital CMYK printing technology that eliminates the need for expensive printing plates and setup costs typically associated with traditional printing methods. Our digital process allows for unlimited color options with exceptional color accuracy and fine detail reproduction - perfect for complex logos, photographic elements, and intricate patterns. The pricing structure is transparent and based solely on ink coverage and design complexity - larger designs with more colors and elaborate details will use more ink and therefore cost more, but there are no hidden setup fees or minimum color charges.\n\nThis cost-effective approach means you can have fully customized, high-quality branded packaging without the high setup costs and minimum order quantities typically associated with premium retail packaging. Take advantage of our weekly delivery service to maintain a consistent supply without requiring extensive storage space.',
+    detailedDescription: 'Our twisted handle paper bags offer a stylish, upscale packaging solution that elevates your brand presentation. The distinctive twisted handles provide both visual elegance and superior functional strength for a premium shopping experience. The exceptionally sturdy construction ensures reliable performance even for heavier items, making these bags ideal for boutiques, gift shops, luxury retail, and high-end product launches.\n\nAvailable in three perfectly proportioned sizes to accommodate various products: Small (8"×4.5"×10"), Medium (10"×5"×13"), and Large (12"×6"×15.5"). Each size features a robust construction with reinforced bottoms to support substantial weight while maintaining an elegant appearance.\n\nWe use advanced digital CMYK printing technology that eliminates the need for expensive printing plates andsetup costs typically associated with traditional printing methods. Our digital process allows for unlimited color options with exceptional color accuracy and fine detail reproduction - perfect for complex logos, photographic elements, and intricate patterns. The pricing structure is transparent and based solely on ink coverage and design complexity - larger designs with more colors and elaborate details will use more ink and therefore cost more, but there are no hidden setup fees or minimum color charges.\n\nThis cost-effective approach means you can have fully customized, high-quality branded packaging without the high setup costs and minimum order quantities typically associated with premium retail packaging. Take advantage of our weekly delivery service to maintain a consistent supply without requiring extensive storage space.',
     specifications: [
       { name: 'Material', value: 'Premium kraft paper (130-170gsm)' },
       { name: 'Handle Type', value: 'Twisted paper with reinforced attachment' },
@@ -240,6 +240,7 @@ const products = [
     id: 'flat-paper-bags',
     name: 'Flat Paper Bags',
     category: 'Retail Packaging',
+    hidden: true,
     description: 'Simple and effective flat paper bags in company blue and white designs, with or without grease-proof lining.',
     features: [
       'Clean, flat design without handles',
@@ -308,6 +309,7 @@ const products = [
     id: 'pizza-boxes',
     name: 'Pizza Boxes',
     category: 'Food Packaging',
+    hidden: true,
     description: 'Premium pizza boxes that keep your food hot and enhance your brand image.',
     features: [
       'Made from food-grade materials',
@@ -367,6 +369,7 @@ const products = [
     id: 'paper-bags',
     name: 'Paper Bags',
     category: 'Retail Packaging',
+    hidden: true,
     description: 'Eco-friendly paper bags that elevate your brand and customer experience.',
     features: [
       'Sustainable kraft paper options',
@@ -449,6 +452,7 @@ const products = [
     id: 'burger-boxes',
     name: 'Burger Boxes',
     category: 'Food Packaging',
+    hidden: true,
     description: 'Premium burger boxes designed to keep your burgers and sandwiches fresh and presentable.',
     features: [
       'Made from bagasse (sugarcane fiber)',
@@ -2341,7 +2345,11 @@ export const getRelatedProducts = (productId, limit = 3) => {
   if (!currentProduct) return [];
   
   return products
-    .filter(product => product.category === currentProduct.category && product.id !== productId)
+    .filter(product => 
+      product.category === currentProduct.category && 
+      product.id !== productId &&
+      !product.hidden
+    )
     .slice(0, limit);
 };
 
