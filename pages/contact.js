@@ -28,20 +28,36 @@ const ContactPage = () => {
       productInterest: 'General Inquiry'
     },
     validationSchema: contactSchema,
-    onSubmit: (values, { resetForm }) => {
-      // In production, we would submit to an API endpoint
-      console.log('Form submitted:', values);
-      
-      // Show success message
-      setFormSubmitted(true);
-      
-      // Reset form
-      resetForm();
-      
-      // Hide success message after 5 seconds
-      setTimeout(() => {
-        setFormSubmitted(false);
-      }, 5000);
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(values),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to send message');
+        }
+
+        // Show success message
+        setFormSubmitted(true);
+        
+        // Reset form
+        resetForm();
+        
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+          setFormSubmitted(false);
+        }, 5000);
+      } catch (error) {
+        console.error('Error sending message:', error);
+        alert('Failed to send message. Please try again later.');
+      } finally {
+        setSubmitting(false);
+      }
     },
   });
 
