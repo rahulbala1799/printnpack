@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* About Section */}
           <div>
-            <h3 className="text-xl font-bold mb-4">PrintNPack</h3>
+            <h3 className="text-xl font-bold mb-4">printNpack</h3>
             <p className="mb-4">
               We are dedicated to providing high-quality packaging solutions for businesses of all sizes.
               Our commitment to excellence and innovation makes us the preferred choice for packaging needs.

@@ -142,7 +142,7 @@ const PizzaBoxExplorer = () => {
                   <div className="relative w-2/3 h-2/3 flex items-center justify-center">
                     <div className="absolute inset-0 bg-blue-600 opacity-10 rounded-full transform -rotate-12"></div>
                     <div className="text-blue-800 font-extrabold text-2xl sm:text-3xl md:text-4xl transform -rotate-12">
-                      PRINT<span className="text-orange-600">N</span>PACK
+                      print<span className="text-orange-600">N</span>pack
                     </div>
                   </div>
                 </div>

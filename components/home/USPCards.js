@@ -130,7 +130,7 @@ const USPCards = ({ data }) => {
           </motion.div>
           
           <div className="text-center relative">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Why Choose <span className="text-blue-700">Print<span className="text-blue-900">N</span>Pack</span>?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Why Choose <span className="text-blue-700">print<span className="text-blue-900">N</span>pack</span>?</h2>
             <div className="flex items-center justify-center gap-2 mb-4">
               <div className="h-1 w-10 bg-blue-700"></div>
               <RiBox3Line className="text-xl text-blue-700" />

@@ -62,9 +62,9 @@ const Logo = ({ scrolled }) => {
         </motion.div>
         
         <div className={`font-extrabold transition-all duration-300 ${scrolled ? 'text-xl' : 'text-2xl'}`}>
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-900">Print</span>
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-900">print</span>
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-blue-600">N</span>
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-900">Pack</span>
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-900">pack</span>
         </div>
       </motion.div>
     </Link>
@@ -272,7 +272,7 @@ const Header = () => {
           <div className="flex items-center gap-3">
             <FaBox className="text-2xl text-white" />
             <div className="text-xl font-bold text-white">
-              <span className="text-gradient-white">PrintNPack</span>
+              <span className="text-gradient-white">printNpack</span>
             </div>
           </div>
           <button

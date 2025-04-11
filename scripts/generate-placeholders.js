@@ -24,7 +24,7 @@ products.forEach(product => {
       ${product.name.split('-').join(' ').toUpperCase()}
     </text>
     <text x="50%" y="65%" font-family="Arial" font-size="16" fill="${product.textColor}" text-anchor="middle" dominant-baseline="middle">
-      PrintNPack
+      printNpack
     </text>
   </svg>
   `;
