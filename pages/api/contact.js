@@ -8,19 +8,43 @@ export default async function handler(req, res) {
   try {
     const { name, email, phone, message, productInterest } = req.body;
 
+    // Validate required fields
+    if (!name || !email || !message) {
+      return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    // Log the attempt
+    console.log('Attempting to send email from:', email);
+
     // Create a transporter using Gmail SMTP
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false,
       auth: {
         user: process.env.GMAIL_USER,
         pass: process.env.GMAIL_APP_PASSWORD,
       },
+      debug: true, // Enable debug logs
     });
+
+    // Verify SMTP connection
+    try {
+      await transporter.verify();
+      console.log('SMTP connection verified successfully');
+    } catch (verifyError) {
+      console.error('SMTP verification failed:', verifyError);
+      return res.status(500).json({ 
+        message: 'Failed to connect to email server',
+        error: verifyError.message 
+      });
+    }
 
     // Email content
     const mailOptions = {
-      from: email,
+      from: `"${name}" <${email}>`,
       to: 'printnpackireland@gmail.com',
+      replyTo: email,
       subject: `New Contact Form Submission - ${productInterest}`,
       text: `
 Name: ${name}
@@ -43,11 +67,19 @@ ${message}
     };
 
     // Send the email
-    await transporter.sendMail(mailOptions);
+    console.log('Attempting to send email with options:', { ...mailOptions, text: '[Content hidden]' });
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully:', info.messageId);
 
-    res.status(200).json({ message: 'Email sent successfully' });
+    res.status(200).json({ 
+      message: 'Email sent successfully',
+      messageId: info.messageId 
+    });
   } catch (error) {
-    console.error('Error sending email:', error);
-    res.status(500).json({ message: 'Error sending email' });
+    console.error('Error in contact API:', error);
+    res.status(500).json({ 
+      message: 'Error sending email',
+      error: error.message 
+    });
   }
 } 

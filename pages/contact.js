@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 
 const ContactPage = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   // Form validation schema using Yup
   const contactSchema = Yup.object().shape({
@@ -30,6 +31,7 @@ const ContactPage = () => {
     validationSchema: contactSchema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       try {
+        setErrorMessage('');
         const response = await fetch('/api/contact', {
           method: 'POST',
           headers: {
@@ -38,8 +40,10 @@ const ContactPage = () => {
           body: JSON.stringify(values),
         });
 
+        const data = await response.json();
+
         if (!response.ok) {
-          throw new Error('Failed to send message');
+          throw new Error(data.error || data.message || 'Failed to send message');
         }
 
         // Show success message
@@ -54,7 +58,7 @@ const ContactPage = () => {
         }, 5000);
       } catch (error) {
         console.error('Error sending message:', error);
-        alert('Failed to send message. Please try again later.');
+        setErrorMessage(error.message || 'Failed to send message. Please try again later.');
       } finally {
         setSubmitting(false);
       }
@@ -245,6 +249,21 @@ const ContactPage = () => {
                 </div>
               ) : (
                 <form onSubmit={formik.handleSubmit} className="space-y-6">
+                  {errorMessage && (
+                    <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg shadow-md mb-6">
+                      <div className="flex items-center">
+                        <div className="bg-red-100 rounded-full p-2 mr-4">
+                          <svg className="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-medium text-red-800">Error</h3>
+                          <p className="text-red-700">{errorMessage}</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Your Name *</label>
