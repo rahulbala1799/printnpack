@@ -70,18 +70,53 @@ const HeroSectionRed = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
   
+  // Custom CSS for red gradient background
+  const customStyles = `
+    @keyframes red-pulse-gradient {
+      0% {
+        background-image: radial-gradient(
+          circle at var(--mouse-x, 50%) var(--mouse-y, 30%), 
+          rgba(220, 38, 38, 0.95) 0%, 
+          rgba(185, 28, 28, 0.98) 50%, 
+          rgba(127, 29, 29, 1) 100%
+        );
+      }
+      50% {
+        background-image: radial-gradient(
+          circle at var(--mouse-x, 50%) var(--mouse-y, 30%), 
+          rgba(248, 113, 113, 0.95) 0%, 
+          rgba(220, 38, 38, 0.98) 50%, 
+          rgba(153, 27, 27, 1) 100%
+        );
+      }
+      100% {
+        background-image: radial-gradient(
+          circle at var(--mouse-x, 50%) var(--mouse-y, 30%), 
+          rgba(220, 38, 38, 0.95) 0%, 
+          rgba(185, 28, 28, 0.98) 50%, 
+          rgba(127, 29, 29, 1) 100%
+        );
+      }
+    }
+    .animate-red-pulse-gradient {
+      animation: red-pulse-gradient 12s ease-in-out infinite;
+    }
+  `;
+  
   // Store mouse position as CSS variables to be used by the animation
   const gradientStyle = {
     '--mouse-x': `${mousePosition.x}%`,
     '--mouse-y': `${Math.min(mousePosition.y, 30)}%`,
     backgroundSize: '200% 200%',
-    background: 'linear-gradient(135deg, #cc0000, #ff3333, #990000)',
   };
 
   return (
     <div className="relative w-full overflow-hidden">
+      {/* Add custom styles */}
+      <style>{customStyles}</style>
+      
       {/* Red gradient background with particles and sheen effect */}
-      <div className="absolute inset-0 animate-pulse-gradient" style={gradientStyle}>
+      <div className="absolute inset-0 animate-red-pulse-gradient" style={gradientStyle}>
         {/* Moving particles overlay */}
         <div className="absolute inset-0 bg-particles opacity-20"></div>
         
