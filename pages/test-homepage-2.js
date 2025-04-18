@@ -116,6 +116,18 @@ export default function TestHomepageMinimal() {
 
   // Override any global styles that might interfere with minimal design
   const minimalStylesOverride = `
+    /* More aggressive fixes for horizontal scrolling */
+    html, body, #__next {
+      overflow-x: hidden !important;
+      width: 100% !important;
+      max-width: 100vw !important;
+      position: relative;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
     .section-minimal {
       background-color: white !important;
       background-image: none !important;
@@ -123,6 +135,8 @@ export default function TestHomepageMinimal() {
       overflow-x: hidden; /* Prevent horizontal scrolling */
       width: 100%;
       max-width: 100vw;
+      margin-left: auto;
+      margin-right: auto;
     }
     
     /* Reduced spacing between sections */
@@ -138,6 +152,10 @@ export default function TestHomepageMinimal() {
       .section-minimal {
         padding-top: 1.5rem !important;
         padding-bottom: 1.5rem !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 100% !important;
+        overflow-x: hidden !important;
       }
       
       .section-divider {
@@ -155,6 +173,11 @@ export default function TestHomepageMinimal() {
       overflow-x: hidden;
       width: 100%;
       max-width: 100vw;
+    }
+    
+    /* Force all images and containers to respect width */
+    img, div, section {
+      max-width: 100%;
     }
     
     /* Add subtle shadow to the bottom of each section - simplified */
@@ -272,6 +295,8 @@ export default function TestHomepageMinimal() {
     .section-minimal div[class*="max-w-"] {
       padding-left: 1rem;
       padding-right: 1rem;
+      max-width: 100vw !important;
+      overflow-x: hidden !important;
     }
     
     @media (max-width: 768px) {
@@ -279,6 +304,7 @@ export default function TestHomepageMinimal() {
       .section-minimal div[class*="max-w-"] {
         padding-left: 0.75rem;
         padding-right: 0.75rem;
+        width: 100% !important;
       }
     }
     
@@ -327,7 +353,7 @@ export default function TestHomepageMinimal() {
         <title>MINIMALIST THEME - PrintNPack - Premium Irish Packaging Solutions</title>
         <meta name="description" content="Ultra-minimalist design concept for PrintNPack - Premium Irish packaging solutions with clean design and colorful accents." />
         <meta name="robots" content="noindex, nofollow" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
         <style>{minimalStylesOverride}</style>
       </Head>
       
