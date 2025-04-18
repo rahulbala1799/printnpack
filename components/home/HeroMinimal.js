@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Head from 'next/head';
@@ -53,6 +53,7 @@ const HeroSectionMinimal = () => {
     }
   ];
 
+  const heroRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
   const [isMounted, setIsMounted] = useState(false);
@@ -70,6 +71,8 @@ const HeroSectionMinimal = () => {
   
   // Track mouse/touch position for subtle background effect
   useEffect(() => {
+    if (!isMounted) return;
+    
     const handleMouseMove = (e) => {
       // Calculate mouse position as percentage of screen width/height
       const x = (e.clientX / window.innerWidth) * 100;
@@ -103,16 +106,18 @@ const HeroSectionMinimal = () => {
       window.removeEventListener('touchmove', handleTouchMove);
       clearInterval(mobileAnimation);
     };
-  }, []);
-   
+  }, [isMounted]);
+  
   // Add more visual elements for mobile
   useEffect(() => {
+    if (!isMounted || !heroRef.current) return;
+    
     // Add additional subtle background elements for mobile
     const addMobileBackgroundElements = () => {
-      if (typeof window === 'undefined' || window.innerWidth >= 768) return;
+      if (window.innerWidth >= 768) return;
       
       // Create subtle background patterns for mobile
-      const heroSection = document.querySelector('.minimal-hero');
+      const heroSection = heroRef.current;
       if (!heroSection) return;
       
       const createPatternElement = (className) => {
@@ -142,22 +147,221 @@ const HeroSectionMinimal = () => {
     return () => {
       window.removeEventListener('resize', addMobileBackgroundElements);
     };
-  }, []);
+  }, [isMounted]);
 
-  // All styles will be applied client-side to avoid hydration errors
-  const getStyles = () => {
-    if (!isMounted) return null;
+  // Apply dynamic colors based on the current slide
+  useEffect(() => {
+    if (!isMounted) return;
     
-    return {
-      __html: `
-        .minimal-hero {
+    const applyDynamicStyles = () => {
+      document.documentElement.style.setProperty('--accent-color', slides[currentSlide].color);
+      
+      // Update radial gradient positions
+      const heroElement = heroRef.current;
+      if (heroElement && heroElement.style) {
+        heroElement.style.setProperty('--mouse-x', `${mousePosition.x}%`);
+        heroElement.style.setProperty('--mouse-y', `${mousePosition.y}%`);
+      }
+    };
+    
+    applyDynamicStyles();
+  }, [currentSlide, isMounted, mousePosition, slides]);
+
+  return (
+    <div 
+      ref={heroRef} 
+      className={`relative w-full overflow-hidden hero-minimal border-b border-gray-100 ${isMounted ? 'hero-mounted' : ''}`}
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-20 relative z-10">
+        <div className="flex flex-col-reverse md:flex-row items-center">
+          {/* Content Section */}
+          <div className="md:w-1/2 z-10 space-y-6 mt-8 md:mt-0 text-center md:text-left w-full">
+            <div>
+              {/* Minimal Badge */}
+              <div className="inline-block mb-4 px-3 py-1 rounded-full bg-gray-100 text-xs text-gray-800">
+                <span className="inline-block mr-1 text-accent">•</span> 
+                Premium Packaging Solutions
+              </div>
+              
+              {/* Main Headline */}
+              <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-gray-900 mb-4 hero-headline">
+                <span className="text-accent">{slides[currentSlide].product}</span>
+                <br className="hidden md:block" />
+                <span className="md:mt-2 inline-block">{slides[currentSlide].title.split(slides[currentSlide].product)[1]}</span>
+              </h1>
+              
+              {/* Minimal subtitle */}
+              <p className="text-gray-600 text-lg mb-6 mt-3">{slides[currentSlide].subtitle}</p>
+              
+              {/* Mobile-friendly benefits list */}
+              <div className="mt-6 mb-8 hero-benefits-list">
+                <ul className="space-y-4 text-sm md:text-base">
+                  {slides[currentSlide].benefits.map((benefit, index) => (
+                    <li key={index} className="flex items-center">
+                      <svg className="h-5 w-5 text-accent mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-gray-700">{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              {/* Action buttons - Clean minimal style */}
+              <div className="flex flex-col sm:flex-row gap-4 mt-4 hero-content-spacing">
+                <Link href="/quote" className="btn-accent inline-flex items-center justify-center px-5 py-3 rounded-md text-white font-medium shadow-sm">
+                  {slides[currentSlide].cta}
+                </Link>
+                <a href="tel:+35312345678" className="btn-secondary inline-flex items-center justify-center px-5 py-3 border rounded-md font-medium">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                  </svg>
+                  Speak to an Expert
+                </a>
+              </div>
+              
+              {/* Minimal tags */}
+              <div className="flex flex-wrap gap-2 mt-6">
+                <span className="tag px-3 py-1 rounded-full text-xs">🇮🇪 Irish-Made</span>
+                {(currentSlide === 1 || currentSlide === 3 || currentSlide === 4) && (
+                  <span className="tag px-3 py-1 rounded-full text-xs">⚡ Same-Day</span>
+                )}
+                <span className="tag px-3 py-1 rounded-full text-xs">💯 Premium Quality</span>
+                <span className="tag px-3 py-1 rounded-full text-xs">🌱 Eco-Friendly</span>
+              </div>
+            </div>
+          </div>
+          
+          {/* Product Image - Enhanced for mobile - 10% larger */}
+          <div className="md:w-1/2 z-10 flex items-center justify-center">
+            <div className="relative subtle-pulse">
+              <div className="h-66 w-66 md:h-80 md:w-80 flex items-center justify-center relative">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="relative h-full w-full">
+                    <Image
+                      src={slides[currentSlide].imageSrc}
+                      alt={slides[currentSlide].product}
+                      fill
+                      className="object-contain"
+                      priority={currentSlide === 0}
+                      sizes="(max-width: 768px) 264px, 320px"
+                      unoptimized={process.env.NODE_ENV === 'production'}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Minimal slide indicators */}
+        <div className="mt-8 flex justify-center space-x-2">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`h-2 rounded-full transition-all ${
+                index === currentSlide 
+                  ? 'w-8 bg-accent' 
+                  : 'w-2 bg-gray-300 hover:bg-gray-400'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+      
+      <style jsx>{`
+        .hero-minimal {
           background-color: #ffffff;
           position: relative;
           overflow: hidden;
           padding-top: 1rem;
         }
         
-        .minimal-hero::before {
+        /* Ensure headings don't break words awkwardly */
+        .hero-headline {
+          line-height: 1.2;
+          word-break: keep-all;
+          hyphens: none;
+          white-space: normal;
+        }
+        
+        /* Improved spacing for mobile */
+        @media (max-width: 768px) {
+          .hero-minimal {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+          }
+          .hero-content-spacing {
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+          }
+          .hero-benefits-list {
+            margin: 2rem 0;
+          }
+        }
+        
+        .text-accent {
+          color: var(--accent-color, #3b82f6);
+        }
+        
+        .bg-accent {
+          background-color: var(--accent-color, #3b82f6);
+        }
+        
+        .border-accent {
+          border-color: var(--accent-color, #3b82f6);
+        }
+        
+        .btn-accent {
+          background-color: var(--accent-color, #3b82f6);
+          transition: all 0.3s ease;
+        }
+        
+        .btn-accent:hover {
+          opacity: 0.9;
+          transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+          color: #111827;
+          border-color: #e5e7eb;
+          transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+          border-color: var(--accent-color, #3b82f6);
+          color: var(--accent-color, #3b82f6);
+        }
+        
+        .tag {
+          background-color: #f3f4f6;
+          color: #4b5563;
+          transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+          background-color: var(--accent-color, #3b82f6);
+          color: white;
+        }
+        
+        @keyframes subtlePulse {
+          0%, 100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+          50% {
+            transform: scale(1.02);
+            opacity: 0.9;
+          }
+        }
+        
+        .subtle-pulse {
+          animation: subtlePulse 5s ease infinite;
+        }
+        
+        .hero-mounted::before {
           content: '';
           position: absolute;
           top: 0;
@@ -165,23 +369,23 @@ const HeroSectionMinimal = () => {
           right: 0;
           bottom: 0;
           background: radial-gradient(
-            circle at ${mousePosition.x}% ${mousePosition.y}%, 
-            ${slides[currentSlide].color}05 0%,
-            ${slides[currentSlide].color}03 30%,
+            circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+            rgba(var(--accent-color-rgb, 59, 130, 246), 0.02) 0%,
+            rgba(var(--accent-color-rgb, 59, 130, 246), 0.01) 30%,
             transparent 70%
           );
           opacity: 0.7;
           z-index: 0;
         }
         
-        .minimal-hero::after {
+        .hero-mounted::after {
           content: '';
           position: absolute;
           top: 0;
           left: 0;
           right: 0;
           bottom: 0;
-          background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='${slides[currentSlide].color}' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+          background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='var(--accent-color, %233b82f6)' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
           opacity: 0.5;
           z-index: 0;
         }
@@ -221,218 +425,7 @@ const HeroSectionMinimal = () => {
           z-index: 0;
           opacity: 0.2;
         }
-        
-        .minimal-accent-color {
-          color: ${slides[currentSlide].color};
-        }
-        
-        .minimal-accent-border {
-          border-color: ${slides[currentSlide].color};
-        }
-        
-        .minimal-accent-bg {
-          background-color: ${slides[currentSlide].color};
-        }
-        
-        .minimal-dot {
-          transition: all 0.3s ease;
-        }
-        
-        .minimal-cta {
-          background-color: ${slides[currentSlide].color};
-          transition: all 0.3s ease;
-        }
-        
-        .minimal-cta:hover {
-          opacity: 0.9;
-          transform: translateY(-2px);
-        }
-        
-        .minimal-secondary-cta {
-          color: #111827;
-          border-color: #e5e7eb;
-          transition: all 0.3s ease;
-        }
-        
-        .minimal-secondary-cta:hover {
-          border-color: ${slides[currentSlide].color};
-          color: ${slides[currentSlide].color};
-        }
-        
-        .minimal-benefit-icon {
-          color: ${slides[currentSlide].color};
-        }
-        
-        .minimal-tag {
-          background-color: #f3f4f6;
-          color: #4b5563;
-          transition: all 0.3s ease;
-        }
-        
-        .minimal-tag:hover {
-          background-color: ${slides[currentSlide].color};
-          color: white;
-        }
-        
-        @keyframes subtlePulse {
-          0%, 100% {
-            transform: scale(1);
-            opacity: 1;
-          }
-          50% {
-            transform: scale(1.02);
-            opacity: 0.9;
-          }
-        }
-        
-        .subtle-pulse {
-          animation: subtlePulse 5s ease infinite;
-        }
-        
-        /* Ensure headings don't break words awkwardly */
-        .hero-headline {
-          line-height: 1.2;
-          word-break: keep-all;
-          hyphens: none;
-          white-space: normal;
-        }
-        
-        /* Improved spacing for mobile */
-        @media (max-width: 768px) {
-          .minimal-hero {
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-          }
-          .hero-content-spacing {
-            margin-top: 2rem;
-            margin-bottom: 1.5rem;
-          }
-          .hero-benefits-list {
-            margin: 2rem 0;
-          }
-        }
-      `
-    };
-  };
-
-  // Basic static styles that are safe for SSR
-  const safeStaticStyles = `
-    .minimal-hero {
-      background-color: white;
-      position: relative;
-      overflow: hidden;
-    }
-    .minimal-dot {
-      transition: all 0.3s ease;
-    }
-  `;
-
-  return (
-    <div className="relative w-full overflow-hidden minimal-hero border-b border-gray-100">
-      {/* Apply a minimal set of static styles for SSR */}
-      <style dangerouslySetInnerHTML={{ __html: safeStaticStyles }} />
-      
-      {/* Apply dynamic styles only after client-side mount */}
-      {isMounted && <style dangerouslySetInnerHTML={getStyles()} />}
-      
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-20 relative z-10">
-        <div className="flex flex-col-reverse md:flex-row items-center">
-          {/* Content Section */}
-          <div className="md:w-1/2 z-10 space-y-6 mt-8 md:mt-0 text-center md:text-left w-full">
-            <div>
-              {/* Minimal Badge */}
-              <div className="inline-block mb-4 px-3 py-1 rounded-full bg-gray-100 text-xs text-gray-800">
-                <span className="inline-block mr-1 minimal-accent-color">•</span> 
-                Premium Packaging Solutions
-              </div>
-              
-              {/* Main Headline */}
-              <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-gray-900 mb-4 hero-headline">
-                <span className="minimal-accent-color">{slides[currentSlide].product}</span>
-                <br className="hidden md:block" />
-                <span className="md:mt-2 inline-block">{slides[currentSlide].title.split(slides[currentSlide].product)[1]}</span>
-              </h1>
-              
-              {/* Minimal subtitle */}
-              <p className="text-gray-600 text-lg mb-6 mt-3">{slides[currentSlide].subtitle}</p>
-              
-              {/* Mobile-friendly benefits list */}
-              <div className="mt-6 mb-8 hero-benefits-list">
-                <ul className="space-y-4 text-sm md:text-base">
-                  {slides[currentSlide].benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-center">
-                      <svg className="h-5 w-5 minimal-benefit-icon mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span className="text-gray-700">{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              {/* Action buttons - Clean minimal style */}
-              <div className="flex flex-col sm:flex-row gap-4 mt-4 hero-content-spacing">
-                <Link href="/quote" className="minimal-cta inline-flex items-center justify-center px-5 py-3 rounded-md text-white font-medium shadow-sm">
-                  {slides[currentSlide].cta}
-                </Link>
-                <a href="tel:+35312345678" className="minimal-secondary-cta inline-flex items-center justify-center px-5 py-3 border rounded-md font-medium">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                  </svg>
-                  Speak to an Expert
-                </a>
-              </div>
-              
-              {/* Minimal tags */}
-              <div className="flex flex-wrap gap-2 mt-6">
-                <span className="minimal-tag px-3 py-1 rounded-full text-xs">🇮🇪 Irish-Made</span>
-                {(currentSlide === 1 || currentSlide === 3 || currentSlide === 4) && (
-                  <span className="minimal-tag px-3 py-1 rounded-full text-xs">⚡ Same-Day</span>
-                )}
-                <span className="minimal-tag px-3 py-1 rounded-full text-xs">💯 Premium Quality</span>
-                <span className="minimal-tag px-3 py-1 rounded-full text-xs">🌱 Eco-Friendly</span>
-              </div>
-            </div>
-          </div>
-          
-          {/* Product Image - Enhanced for mobile - 10% larger */}
-          <div className="md:w-1/2 z-10 flex items-center justify-center">
-            <div className="relative subtle-pulse">
-              <div className="h-66 w-66 md:h-80 md:w-80 flex items-center justify-center relative">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative h-full w-full">
-                    <Image
-                      src={slides[currentSlide].imageSrc}
-                      alt={slides[currentSlide].product}
-                      fill
-                      className="object-contain"
-                      priority={currentSlide === 0}
-                      sizes="(max-width: 768px) 264px, 320px"
-                      unoptimized={process.env.NODE_ENV === 'production'}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Minimal slide indicators */}
-        <div className="mt-8 flex justify-center space-x-2">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`h-2 rounded-full transition-all minimal-dot ${
-                index === currentSlide 
-                  ? 'w-8 minimal-accent-bg' 
-                  : 'w-2 bg-gray-300 hover:bg-gray-400'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-      </div>
+      `}</style>
     </div>
   );
 };

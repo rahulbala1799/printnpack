@@ -16,6 +16,11 @@
   
   --fast-delivery-color-start: 168, 85, 247;
   --fast-delivery-color-end: 126, 34, 206;
+
+  --accent-color: #3b82f6;
+  --accent-color-rgb: 59, 130, 246;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
 }
 
 body {
