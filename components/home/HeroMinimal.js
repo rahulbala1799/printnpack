@@ -47,12 +47,13 @@ const HeroSectionMinimal = () => {
       cta: "Enhance Your Brand Today",
       product: "Napkin",
       benefits: ["Improves customer experience", "Reinforces brand identity", "Low cost, high impact marketing"],
-      imageSrc: "/images/hero/napkin.png",
+      imageSrc: "/hero/napkin.png",
       color: "#ec4899" // Pink
     }
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -61,21 +62,78 @@ const HeroSectionMinimal = () => {
     return () => clearInterval(interval);
   }, [slides.length]);
   
-  const customStyles = `
+  // Track mouse/touch position for subtle background effect
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      // Calculate mouse position as percentage of screen width/height
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      setMousePosition({ x, y });
+    };
+
+    const handleTouchMove = (e) => {
+      if (e.touches && e.touches[0]) {
+        const x = (e.touches[0].clientX / window.innerWidth) * 100;
+        const y = (e.touches[0].clientY / window.innerHeight) * 100;
+        setMousePosition({ x, y });
+      }
+    };
+
+    // Simulate subtle movement on mobile
+    const mobileAnimation = setInterval(() => {
+      if (window.innerWidth < 768) {
+        setMousePosition(prev => ({
+          x: prev.x + (Math.random() * 2 - 1),
+          y: prev.y + (Math.random() * 2 - 1),
+        }));
+      }
+    }, 1000);
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchmove', handleTouchMove);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
+      clearInterval(mobileAnimation);
+    };
+  }, []);
+  
+  // Base styles that don't depend on client-side state
+  const staticStyles = `
     .minimal-hero {
       background-color: #ffffff;
+      position: relative;
+      overflow: hidden;
     }
     
-    .minimal-accent-color {
-      color: ${slides[currentSlide].color};
+    .minimal-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(
+        circle at 50% 50%, 
+        rgba(59, 130, 246, 0.02) 0%,
+        rgba(59, 130, 246, 0.01) 30%,
+        transparent 70%
+      );
+      opacity: 0.7;
+      z-index: 0;
     }
     
-    .minimal-accent-border {
-      border-color: ${slides[currentSlide].color};
-    }
-    
-    .minimal-accent-bg {
-      background-color: ${slides[currentSlide].color};
+    .minimal-hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233b82f6' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+      opacity: 0.5;
+      z-index: 0;
     }
     
     .minimal-dot {
@@ -83,7 +141,6 @@ const HeroSectionMinimal = () => {
     }
     
     .minimal-cta {
-      background-color: ${slides[currentSlide].color};
       transition: all 0.3s ease;
     }
     
@@ -98,32 +155,78 @@ const HeroSectionMinimal = () => {
       transition: all 0.3s ease;
     }
     
-    .minimal-secondary-cta:hover {
-      border-color: ${slides[currentSlide].color};
-      color: ${slides[currentSlide].color};
-    }
-    
-    .minimal-benefit-icon {
-      color: ${slides[currentSlide].color};
-    }
-    
     .minimal-tag {
       background-color: #f3f4f6;
       color: #4b5563;
       transition: all 0.3s ease;
     }
     
-    .minimal-tag:hover {
-      background-color: ${slides[currentSlide].color};
-      color: white;
+    @keyframes subtlePulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.02);
+        opacity: 0.9;
+      }
+    }
+    
+    .subtle-pulse {
+      animation: subtlePulse 5s ease infinite;
     }
   `;
 
   return (
     <div className="relative w-full overflow-hidden minimal-hero border-b border-gray-100">
-      <style>{customStyles}</style>
+      {/* Apply static styles first */}
+      <style>{staticStyles}</style>
       
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+      {/* Apply dynamic styles with useEffect to avoid hydration issues */}
+      {typeof window !== 'undefined' && (
+        <style>{`
+          .minimal-hero::before {
+            background: radial-gradient(
+              circle at ${mousePosition.x}% ${mousePosition.y}%, 
+              ${slides[currentSlide].color}05 0%,
+              ${slides[currentSlide].color}03 30%,
+              transparent 70%
+            );
+          }
+          
+          .minimal-accent-color {
+            color: ${slides[currentSlide].color};
+          }
+          
+          .minimal-accent-border {
+            border-color: ${slides[currentSlide].color};
+          }
+          
+          .minimal-accent-bg {
+            background-color: ${slides[currentSlide].color};
+          }
+          
+          .minimal-cta {
+            background-color: ${slides[currentSlide].color};
+          }
+          
+          .minimal-secondary-cta:hover {
+            border-color: ${slides[currentSlide].color};
+            color: ${slides[currentSlide].color};
+          }
+          
+          .minimal-benefit-icon {
+            color: ${slides[currentSlide].color};
+          }
+          
+          .minimal-tag:hover {
+            background-color: ${slides[currentSlide].color};
+            color: white;
+          }
+        `}</style>
+      )}
+      
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-20 relative z-10">
         <div className="flex flex-col-reverse md:flex-row items-center">
           {/* Content Section */}
           <div className="md:w-1/2 z-10 space-y-6 mt-8 md:mt-0 text-center md:text-left w-full">
@@ -182,10 +285,10 @@ const HeroSectionMinimal = () => {
             </div>
           </div>
           
-          {/* Product Image - Clean presentation */}
+          {/* Product Image - Enhanced for mobile - 10% larger */}
           <div className="md:w-1/2 z-10 flex items-center justify-center">
-            <div className="relative">
-              <div className="h-60 w-60 md:h-80 md:w-80 flex items-center justify-center relative">
+            <div className="relative subtle-pulse">
+              <div className="h-66 w-66 md:h-80 md:w-80 flex items-center justify-center relative">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="relative h-full w-full">
                     <Image
@@ -194,7 +297,7 @@ const HeroSectionMinimal = () => {
                       fill
                       className="object-contain"
                       priority={currentSlide === 0}
-                      sizes="(max-width: 768px) 240px, 320px"
+                      sizes="(max-width: 768px) 264px, 320px"
                       unoptimized={process.env.NODE_ENV === 'production'}
                     />
                   </div>
