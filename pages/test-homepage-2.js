@@ -7,7 +7,6 @@ import Services from '../components/home/Services';
 import AboutUs from '../components/home/AboutUs';
 import CTA from '../components/home/CTA';
 import Head from 'next/head';
-import PromoBanner from '../components/home/PromoBanner';
 import PrintingTimes from '../components/home/PrintingTimes';
 import DecorativeImages from '../components/home/DecorativeImages';
 import FloatingImages from '../components/home/FloatingImages';
@@ -120,6 +119,84 @@ export default function TestHomepageMinimal() {
     .section-minimal {
       background-color: white !important;
       background-image: none !important;
+      position: relative;
+      overflow-x: hidden; /* Prevent horizontal scrolling */
+      width: 100%;
+      max-width: 100vw;
+    }
+    
+    /* Reduced spacing between sections */
+    .section-minimal {
+      padding-top: 2rem !important;
+      padding-bottom: 2rem !important;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Mobile-specific adjustments */
+    @media (max-width: 768px) {
+      .section-minimal {
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+      }
+      
+      .section-divider {
+        margin: 0.5rem 0;
+        height: 1px;
+      }
+      
+      .section-divider::before {
+        display: none; /* Hide divider circles on mobile */
+      }
+    }
+    
+    /* Fix horizontal scrolling issues */
+    body, html {
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100vw;
+    }
+    
+    /* Add subtle shadow to the bottom of each section - simplified */
+    .section-minimal::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.01), rgba(0,0,0,0));
+      z-index: -1;
+    }
+    
+    /* Enhanced visual separation for alternating sections - simplified */
+    .section-minimal.bg-gray-50 {
+      background-color: #f9fafb !important;
+      border-top: 1px solid #f3f4f6;
+      box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.02);
+    }
+    
+    /* Add subtle divider decoration between sections - simplified */
+    .section-divider {
+      position: relative;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(209, 213, 219, 0.4), transparent);
+      margin: 0;
+      padding: 0;
+    }
+    
+    .section-divider::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 8px;
+      background-color: white;
+      border-radius: 50%;
+      border: 1px solid #f3f4f6;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     }
     
     /* Scroll animation styles */
@@ -179,11 +256,6 @@ export default function TestHomepageMinimal() {
     }
     
     /* Enhance white space and brightness for minimal theme */
-    .section-minimal {
-      padding-top: 3rem !important;
-      padding-bottom: 3rem !important;
-    }
-    
     .section-minimal h2 {
       font-weight: 700;
       margin-bottom: 0.75rem;
@@ -195,21 +267,39 @@ export default function TestHomepageMinimal() {
       color: #1f2937;
     }
     
-    /* Add subtle white card effect to sections */
-    .section-minimal:not(.bg-gray-50) {
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-      position: relative;
-      z-index: 1;
+    /* Condensed section content */
+    .section-minimal .container,
+    .section-minimal div[class*="max-w-"] {
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
     
-    /* Enhance visual separation */
-    .section-minimal.bg-gray-50 {
-      background-color: #f9fafb !important;
-      border-top: 1px solid #f3f4f6;
-      border-bottom: 1px solid #f3f4f6;
+    @media (max-width: 768px) {
+      .section-minimal .container,
+      .section-minimal div[class*="max-w-"] {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+      }
     }
     
-    /* Enhance buttons */
+    /* Light section headers */
+    .section-minimal .section-header {
+      background-color: white;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.5rem;
+    }
+    
+    /* Subtle divider lines */
+    .section-minimal .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+      margin: 1.5rem 0;
+      opacity: 0.7;
+    }
+    
+    /* Enhanced button styles */
     .section-minimal .btn-primary,
     .section-minimal button:not(.minimal-dot):not([class*="text-"]):not([type="submit"]) {
       background-color: white;
@@ -229,23 +319,6 @@ export default function TestHomepageMinimal() {
       transform: translateY(-1px);
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     }
-    
-    /* Light section headers */
-    .section-minimal .section-header {
-      background-color: white;
-      padding: 1.5rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-      margin-bottom: 2rem;
-    }
-    
-    /* Subtle divider lines */
-    .section-minimal .divider {
-      height: 1px;
-      background: linear-gradient(to right, transparent, #e5e7eb, transparent);
-      margin: 2rem 0;
-      opacity: 0.7;
-    }
   `;
 
   return (
@@ -254,6 +327,7 @@ export default function TestHomepageMinimal() {
         <title>MINIMALIST THEME - PrintNPack - Premium Irish Packaging Solutions</title>
         <meta name="description" content="Ultra-minimalist design concept for PrintNPack - Premium Irish packaging solutions with clean design and colorful accents." />
         <meta name="robots" content="noindex, nofollow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
         <style>{minimalStylesOverride}</style>
       </Head>
       
@@ -261,50 +335,61 @@ export default function TestHomepageMinimal() {
         <HeroSectionMinimal />
       </div>
       
-      <div className="section-minimal bg-white animate-on-scroll">
-        <PromoBanner />
-      </div>
+      <div className="section-divider"></div>
       
       <div className="section-minimal bg-white border-t border-gray-100 animate-on-scroll animate-scale">
         <ProductShowcase />
       </div>
       
-      <div className="section-minimal bg-gray-50 border-t border-gray-100 animate-on-scroll stagger-children">
+      <div className="section-divider"></div>
+      
+      <div className="section-minimal bg-gray-50 border-t border-gray-100 animate-on-scroll animate-from-right">
         <USPCards data={uspData} isMinimal={true} />
       </div>
+      
+      <div className="section-divider"></div>
       
       <div className="section-minimal bg-white border-t border-gray-100 animate-on-scroll animate-from-left">
         <PrintingTimes />
       </div>
       
+      <div className="section-divider"></div>
+      
       <div className="section-minimal bg-gray-50 border-t border-gray-100 animate-on-scroll animate-from-right">
         <ImageGallery />
       </div>
+      
+      <div className="section-divider"></div>
       
       <div className="section-minimal bg-white border-t border-gray-100 animate-on-scroll">
         <DesignServices />
       </div>
       
+      <div className="section-divider"></div>
+      
       <div className="section-minimal bg-gray-50 border-t border-gray-100 animate-on-scroll animate-scale">
         <Services />
       </div>
+      
+      <div className="section-divider"></div>
       
       <div className="section-minimal bg-white border-t border-gray-100 animate-on-scroll animate-from-left">
         <AboutUs />
       </div>
       
+      <div className="section-divider"></div>
+      
       <div className="section-minimal bg-gray-50 border-t border-gray-100 animate-on-scroll">
         <CTA />
       </div>
       
-      {/* Test theme navigation */}
-      <div className="fixed bottom-4 right-4 bg-white/95 backdrop-blur-sm p-3 rounded-lg shadow-md z-50 border border-gray-200">
-        <div className="text-sm font-bold mb-2">Theme Test Pages:</div>
+      {/* Test theme navigation - simplified for mobile */}
+      <div className="fixed bottom-4 right-4 bg-white/95 backdrop-blur-sm p-2 rounded-lg shadow-md z-50 border border-gray-200 text-xs sm:text-sm">
+        <div className="font-bold mb-1">Theme Tests:</div>
         <div className="space-y-1">
-          <Link href="/" className="text-sm text-blue-600 hover:underline block">Original Blue Theme</Link>
-          <Link href="/test-homepage-red" className="text-sm text-red-600 hover:underline block">Red Theme</Link>
-          <div className="text-sm font-bold block">Minimalist Theme (Current)</div>
-          <div className="text-xs text-gray-500 mt-2">Private test pages - not indexed</div>
+          <Link href="/" className="text-blue-600 hover:underline block">Original</Link>
+          <Link href="/test-homepage-red" className="text-red-600 hover:underline block">Red</Link>
+          <div className="font-bold block">Minimal (Current)</div>
         </div>
       </div>
     </Layout>

@@ -10,7 +10,7 @@ const HeroSectionMinimal = () => {
       title: "Premium Pizza Boxes That Boost Sales",
       subtitle: "Locally sourced packaging that enhances your brand value & customer experience",
       cta: "Get Your Custom Quote Today",
-      product: "Pizza Box",
+      product: "Pizza Boxes",
       benefits: ["Elevates your product presentation", "Boosts perceived value", "Enhances customer experience"],
       imageSrc: "/images/ifa/heroh/pizza.png",
       color: "#3b82f6" // Blue
@@ -19,7 +19,7 @@ const HeroSectionMinimal = () => {
       title: "Paper Bags That Close More Sales",
       subtitle: "SAME-DAY PRINTING available - Irish-made bags that turn customers into loyal fans",
       cta: "Request Free Samples Now",
-      product: "Paper Bag",
+      product: "Paper Bags",
       benefits: ["Increases repeat purchases", "Strengthens brand perception", "Eco-friendly marketing tool"],
       imageSrc: "/images/ifa/heroh/bag.png",
       color: "#10b981" // Green
@@ -28,7 +28,7 @@ const HeroSectionMinimal = () => {
       title: "Sustainable Burger Boxes Customers Love",
       subtitle: "Stand out from competitors with premium eco-friendly packaging",
       cta: "Elevate Your Packaging Today",
-      product: "Bagasse Box",
+      product: "Burger Boxes",
       benefits: ["Improves customer perception", "Supports your green initiatives", "Creates Instagram-worthy presentations"],
       imageSrc: "/images/ifa/heroh/burger.png",
       color: "#f59e0b" // Amber
@@ -37,7 +37,7 @@ const HeroSectionMinimal = () => {
       title: "Marketing Materials That Generate Leads",
       subtitle: "SAME-DAY PRINTING available - Convert prospects into customers with high-impact designs",
       cta: "Boost Your Marketing Now",
-      product: "Leaflet",
+      product: "Marketing Materials",
       benefits: ["Increases response rates", "Drives store traffic", "Boosts campaign ROI"],
       imageSrc: "/images/ifa/heroh/leaflet.png",
       color: "#8b5cf6" // Purple
@@ -46,7 +46,7 @@ const HeroSectionMinimal = () => {
       title: "Premium Napkins That Elevate Your Brand",
       subtitle: "SAME-DAY PRINTING available - Turn everyday items into powerful marketing tools",
       cta: "Enhance Your Brand Today",
-      product: "Napkin",
+      product: "Custom Napkins",
       benefits: ["Improves customer experience", "Reinforces brand identity", "Low cost, high impact marketing"],
       imageSrc: "/images/ifa/heroh/napkin.png",
       color: "#ec4899" // Pink
@@ -174,22 +174,13 @@ const HeroSectionMinimal = () => {
     // Preload all slide images
     const preloadImages = () => {
       slides.forEach(slide => {
-        const img = new Image();
+        const img = new window.Image();
         img.src = slide.imageSrc;
       });
     };
     
     preloadImages();
   }, [isMounted, slides]);
-
-  // Add mobile-specific styling and update the Image component
-  const imageStyle = {
-    objectFit: 'contain',
-    maxWidth: '100%',
-    maxHeight: '100%',
-    width: 'auto',
-    height: 'auto'
-  };
 
   return (
     <div 
@@ -207,11 +198,12 @@ const HeroSectionMinimal = () => {
                 Premium Packaging Solutions
               </div>
               
-              {/* Main Headline */}
+              {/* Main Headline - Update the layout to prevent awkward breaks */}
               <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-gray-900 mb-4 hero-headline">
-                <span className="text-accent">{slides[currentSlide].product}</span>
-                <br className="hidden md:block" />
-                <span className="md:mt-2 inline-block">{slides[currentSlide].title.split(slides[currentSlide].product)[1]}</span>
+                <div className="inline-block text-accent whitespace-nowrap">{slides[currentSlide].product}</div>
+                <div className="inline md:block">
+                  {slides[currentSlide].title.split(slides[currentSlide].product)[1]}
+                </div>
               </h1>
               
               {/* Minimal subtitle */}
@@ -289,7 +281,6 @@ const HeroSectionMinimal = () => {
                             parent.appendChild(placeholder);
                           }
                         }}
-                        style={imageStyle}
                       />
                     </div>
                   </div>
@@ -337,6 +328,25 @@ const HeroSectionMinimal = () => {
           word-break: keep-all;
           hyphens: none;
           white-space: normal;
+        }
+        
+        /* Prevent word breaks on product names */
+        .hero-headline .text-accent {
+          display: inline-block;
+          margin-right: 0.2em;
+        }
+        
+        /* Mobile-specific headline adjustments */
+        @media (max-width: 768px) {
+          .hero-headline {
+            font-size: 1.875rem;
+            line-height: 1.3;
+          }
+          
+          .hero-headline div {
+            display: inline;
+            word-break: normal;
+          }
         }
         
         /* Improved spacing for mobile */
