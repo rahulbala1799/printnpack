@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Layout from '../components/layout/Layout';
 import HeroSectionMinimal from '../components/home/HeroMinimal';
 import ProductShowcase from '../components/home/ProductShowcase';
@@ -68,11 +68,114 @@ export default function TestHomepageMinimal() {
     }
   ];
 
+  // Initialize scroll animations when the component mounts
+  useEffect(() => {
+    // Init Observer API for scroll animations
+    const initScrollAnimations = () => {
+      // Only run on client-side
+      if (typeof window === 'undefined') return;
+      
+      const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+      
+      // Create observer for fade-in animation
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-section-visible');
+            // Unobserve after animating to improve performance
+            observer.unobserve(entry.target);
+          }
+        });
+      }, options);
+      
+      // Observe all elements with our animation class
+      document.querySelectorAll('.animate-on-scroll').forEach(section => {
+        observer.observe(section);
+      });
+      
+      return () => {
+        // Clean up
+        document.querySelectorAll('.animate-on-scroll').forEach(section => {
+          observer.unobserve(section);
+        });
+      };
+    };
+    
+    // Small delay to ensure DOM is ready
+    setTimeout(initScrollAnimations, 100);
+    
+    // Handle staggered animation timings by adding data attributes
+    document.querySelectorAll('.stagger-item').forEach((item, index) => {
+      item.setAttribute('style', `--stagger-delay: ${index * 0.1}s`);
+    });
+    
+  }, []);
+
   // Override any global styles that might interfere with minimal design
   const minimalStylesOverride = `
     .section-minimal {
       background-color: white !important;
       background-image: none !important;
+    }
+    
+    /* Scroll animation styles */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .animate-section-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Staggered animation for children */
+    .stagger-children .stagger-item {
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+      transition-delay: var(--stagger-delay, 0s);
+    }
+    
+    .animate-section-visible .stagger-item {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Fade in from left/right animations */
+    .animate-from-left {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    
+    .animate-from-right {
+      opacity: 0;
+      transform: translateX(30px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    
+    .animate-section-visible.animate-from-left,
+    .animate-section-visible.animate-from-right {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    /* Scale animation */
+    .animate-scale {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    
+    .animate-section-visible.animate-scale {
+      opacity: 1;
+      transform: scale(1);
     }
   `;
 
@@ -89,39 +192,39 @@ export default function TestHomepageMinimal() {
         <HeroSectionMinimal />
       </div>
       
-      <div className="section-minimal bg-white">
+      <div className="section-minimal bg-white animate-on-scroll">
         <PromoBanner />
       </div>
       
-      <div className="section-minimal bg-white border-t border-gray-100">
+      <div className="section-minimal bg-white border-t border-gray-100 animate-on-scroll animate-scale">
         <ProductShowcase />
       </div>
       
-      <div className="section-minimal bg-gray-50 border-t border-gray-100">
-        <USPCards data={uspData} />
+      <div className="section-minimal bg-gray-50 border-t border-gray-100 animate-on-scroll stagger-children">
+        <USPCards data={uspData} isMinimal={true} />
       </div>
       
-      <div className="section-minimal bg-white border-t border-gray-100">
+      <div className="section-minimal bg-white border-t border-gray-100 animate-on-scroll animate-from-left">
         <PrintingTimes />
       </div>
       
-      <div className="section-minimal bg-gray-50 border-t border-gray-100">
+      <div className="section-minimal bg-gray-50 border-t border-gray-100 animate-on-scroll animate-from-right">
         <ImageGallery />
       </div>
       
-      <div className="section-minimal bg-white border-t border-gray-100">
+      <div className="section-minimal bg-white border-t border-gray-100 animate-on-scroll">
         <DesignServices />
       </div>
       
-      <div className="section-minimal bg-gray-50 border-t border-gray-100">
+      <div className="section-minimal bg-gray-50 border-t border-gray-100 animate-on-scroll animate-scale">
         <Services />
       </div>
       
-      <div className="section-minimal bg-white border-t border-gray-100">
+      <div className="section-minimal bg-white border-t border-gray-100 animate-on-scroll animate-from-left">
         <AboutUs />
       </div>
       
-      <div className="section-minimal bg-gray-50 border-t border-gray-100">
+      <div className="section-minimal bg-gray-50 border-t border-gray-100 animate-on-scroll">
         <CTA />
       </div>
       

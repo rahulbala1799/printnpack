@@ -4,7 +4,7 @@ import { RiTimerFlashLine, RiLeafLine, RiAwardLine, RiNumbersLine, RiRulerLine, 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-const USPCards = ({ data }) => {
+const USPCards = ({ data, isMinimal = false }) => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   
@@ -76,6 +76,123 @@ const USPCards = ({ data }) => {
   
   // Use the data prop if provided, otherwise use the default data
   const displayData = data || defaultUspData;
+
+  // Determine if we should use the minimal staggered animation or the framer motion animation
+  const renderUSPCard = (usp, index) => {
+    if (isMinimal) {
+      // For minimalist theme - uses CSS staggered animations
+      return (
+        <div 
+          key={index}
+          className="stagger-item relative bg-white rounded-xl shadow-md overflow-hidden border border-gray-100
+                    w-[calc(50%-0.5rem)] 
+                    aspect-square
+                    sm:w-[calc(50%-0.75rem)]
+                    md:w-[calc(33.333%-1rem)]
+                    lg:w-[calc(33.333%-1rem)]
+                    xl:w-[calc(25%-1rem)]
+                    hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+        >
+          {/* Side accent bar with logo mark */}
+          <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-700 via-blue-500 to-blue-700"></div>
+          
+          <div className="h-full p-4 flex flex-col">
+            {/* Icon with pulse effect */}
+            <div className="relative mx-auto mb-4">
+              <div className={`h-16 w-16 rounded-xl bg-gradient-to-br ${typeof usp.color === 'string' ? usp.color : 'from-blue-500 to-blue-700'} flex items-center justify-center opacity-90`}>
+                <div className="text-white">
+                  {usp.icon}
+                </div>
+              </div>
+              <div className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-blue-700 animate-pulse"></div>
+            </div>
+            
+            {/* Content */}
+            <div className="flex-1 flex flex-col justify-between">
+              <div>
+                <h3 className="text-base font-bold text-gray-800 mb-2 text-center">{usp.title}</h3>
+                <div className={`px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${usp.color} mx-auto mb-3 inline-block`}>
+                  {usp.stat}
+                </div>
+                
+                <p className="text-xs text-gray-600 mb-4 text-center leading-tight line-clamp-3">{usp.description}</p>
+              </div>
+              
+              <div className="text-xs text-gray-500 flex items-center gap-1 justify-center mt-auto">
+                <RiBox3Line className="text-blue-700" />
+                <span>{usp.statLabel}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      // Original animation with Framer Motion
+      return (
+        <motion.div 
+          key={index}
+          className="relative bg-white rounded-xl shadow-md overflow-hidden border border-gray-100
+                    w-[calc(50%-0.5rem)] 
+                    aspect-square
+                    sm:w-[calc(50%-0.75rem)]
+                    md:w-[calc(33.333%-1rem)]
+                    lg:w-[calc(33.333%-1rem)]
+                    xl:w-[calc(25%-1rem)]"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ 
+            duration: 0.4, 
+            delay: index * 0.1,
+            ease: [0.43, 0.13, 0.23, 0.96] 
+          }}
+          whileHover={{ 
+            y: -5,
+            boxShadow: "0 15px 30px -10px rgba(0, 0, 0, 0.15)",
+            scale: 1.02
+          }}
+        >
+          {/* Side accent bar with logo mark */}
+          <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-700 via-blue-500 to-blue-700"></div>
+          
+          <div className="h-full p-4 flex flex-col">
+            {/* Icon with pulse effect */}
+            <div className="relative mx-auto mb-4">
+              <div className={`h-16 w-16 rounded-xl bg-gradient-to-br ${typeof usp.color === 'string' ? usp.color : 'from-blue-500 to-blue-700'} flex items-center justify-center opacity-90`}>
+                <motion.div
+                  whileHover={{ scale: 1.2, rotate: 10 }}
+                  className="text-white"
+                >
+                  {usp.icon}
+                </motion.div>
+              </div>
+              <motion.div 
+                className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-blue-700"
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+            </div>
+            
+            {/* Content */}
+            <div className="flex-1 flex flex-col justify-between">
+              <div>
+                <h3 className="text-base font-bold text-gray-800 mb-2 text-center">{usp.title}</h3>
+                <div className={`px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${usp.color} mx-auto mb-3 inline-block`}>
+                  {usp.stat}
+                </div>
+                
+                <p className="text-xs text-gray-600 mb-4 text-center leading-tight line-clamp-3">{usp.description}</p>
+              </div>
+              
+              <div className="text-xs text-gray-500 flex items-center gap-1 justify-center mt-auto">
+                <RiBox3Line className="text-blue-700" />
+                <span>{usp.statLabel}</span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      );
+    }
+  };
 
   return (
     <section ref={sectionRef} className="relative py-10 overflow-hidden bg-gradient-to-b from-white to-gray-50">
@@ -152,69 +269,7 @@ const USPCards = ({ data }) => {
         </div>
         
         <div className="flex flex-wrap justify-center gap-4 mt-4">
-          {displayData.map((usp, index) => (
-            <motion.div 
-              key={index}
-              className="relative bg-white rounded-xl shadow-md overflow-hidden border border-gray-100
-                        w-[calc(50%-0.5rem)] 
-                        aspect-square
-                        sm:w-[calc(50%-0.75rem)]
-                        md:w-[calc(33.333%-1rem)]
-                        lg:w-[calc(33.333%-1rem)]
-                        xl:w-[calc(25%-1rem)]"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ 
-                duration: 0.4, 
-                delay: index * 0.1,
-                ease: [0.43, 0.13, 0.23, 0.96] 
-              }}
-              whileHover={{ 
-                y: -5,
-                boxShadow: "0 15px 30px -10px rgba(0, 0, 0, 0.15)",
-                scale: 1.02
-              }}
-            >
-              {/* Side accent bar with logo mark */}
-              <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-700 via-blue-500 to-blue-700"></div>
-              
-              <div className="h-full p-4 flex flex-col">
-                {/* Icon with pulse effect */}
-                <div className="relative mx-auto mb-4">
-                  <div className={`h-16 w-16 rounded-xl bg-gradient-to-br ${typeof usp.color === 'string' ? usp.color : 'from-blue-500 to-blue-700'} flex items-center justify-center opacity-90`}>
-                    <motion.div
-                      whileHover={{ scale: 1.2, rotate: 10 }}
-                      className="text-white"
-                    >
-                      {usp.icon}
-                    </motion.div>
-                  </div>
-                  <motion.div 
-                    className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-blue-700"
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                </div>
-                
-                {/* Content */}
-                <div className="flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-base font-bold text-gray-800 mb-2 text-center">{usp.title}</h3>
-                    <div className={`px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${usp.color} mx-auto mb-3 inline-block`}>
-                      {usp.stat}
-                    </div>
-                    
-                    <p className="text-xs text-gray-600 mb-4 text-center leading-tight line-clamp-3">{usp.description}</p>
-                  </div>
-                  
-                  <div className="text-xs text-gray-500 flex items-center gap-1 justify-center mt-auto">
-                    <RiBox3Line className="text-blue-700" />
-                    <span>{usp.statLabel}</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+          {displayData.map((usp, index) => renderUSPCard(usp, index))}
         </div>
       </div>
     </section>
