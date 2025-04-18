@@ -47,7 +47,7 @@ const HeroSectionMinimal = () => {
       cta: "Enhance Your Brand Today",
       product: "Napkin",
       benefits: ["Improves customer experience", "Reinforces brand identity", "Low cost, high impact marketing"],
-      imageSrc: "/hero/napkin.png",
+      imageSrc: "/images/hero/napkin.png",
       color: "#ec4899" // Pink
     }
   ];
@@ -99,12 +99,52 @@ const HeroSectionMinimal = () => {
     };
   }, []);
   
+  // Add more visual elements for mobile
+  useEffect(() => {
+    // Add additional subtle background elements for mobile
+    const addMobileBackgroundElements = () => {
+      if (typeof window === 'undefined' || window.innerWidth >= 768) return;
+      
+      // Create subtle background patterns for mobile
+      const heroSection = document.querySelector('.minimal-hero');
+      if (!heroSection) return;
+      
+      const createPatternElement = (className) => {
+        const element = document.createElement('div');
+        element.className = className;
+        return element;
+      };
+      
+      // Add subtle decorative elements if they don't already exist
+      if (!document.querySelector('.mobile-bg-pattern-1')) {
+        const pattern1 = createPatternElement('mobile-bg-pattern-1');
+        const pattern2 = createPatternElement('mobile-bg-pattern-2');
+        const pattern3 = createPatternElement('mobile-bg-pattern-3');
+        
+        heroSection.appendChild(pattern1);
+        heroSection.appendChild(pattern2);
+        heroSection.appendChild(pattern3);
+      }
+    };
+    
+    // Call once after mount
+    setTimeout(addMobileBackgroundElements, 500);
+    
+    // Also call on resize
+    window.addEventListener('resize', addMobileBackgroundElements);
+    
+    return () => {
+      window.removeEventListener('resize', addMobileBackgroundElements);
+    };
+  }, []);
+  
   // Base styles that don't depend on client-side state
   const staticStyles = `
     .minimal-hero {
       background-color: #ffffff;
       position: relative;
       overflow: hidden;
+      padding-top: 1rem;
     }
     
     .minimal-hero::before {
@@ -134,6 +174,42 @@ const HeroSectionMinimal = () => {
       background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233b82f6' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
       opacity: 0.5;
       z-index: 0;
+    }
+    
+    .mobile-bg-pattern-1 {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(240,240,250,0.3) 70%, transparent 100%);
+      top: 10%;
+      right: -50px;
+      z-index: 0;
+      opacity: 0.4;
+    }
+    
+    .mobile-bg-pattern-2 {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(240,240,250,0.3) 70%, transparent 100%);
+      bottom: 15%;
+      left: -40px;
+      z-index: 0;
+      opacity: 0.3;
+    }
+    
+    .mobile-bg-pattern-3 {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border: 1px solid rgba(220,220,230,0.2);
+      border-radius: 50%;
+      top: 40%;
+      left: 20%;
+      z-index: 0;
+      opacity: 0.2;
     }
     
     .minimal-dot {
@@ -174,6 +250,29 @@ const HeroSectionMinimal = () => {
     
     .subtle-pulse {
       animation: subtlePulse 5s ease infinite;
+    }
+    
+    /* Ensure headings don't break words awkwardly */
+    .hero-headline {
+      line-height: 1.2;
+      word-break: keep-all;
+      hyphens: none;
+      white-space: normal;
+    }
+    
+    /* Improved spacing for mobile */
+    @media (max-width: 768px) {
+      .minimal-hero {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+      .hero-content-spacing {
+        margin-top: 2rem;
+        margin-bottom: 1.5rem;
+      }
+      .hero-benefits-list {
+        margin: 2rem 0;
+      }
     }
   `;
 
@@ -238,20 +337,21 @@ const HeroSectionMinimal = () => {
               </div>
               
               {/* Main Headline */}
-              <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-gray-900 mb-4">
+              <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-gray-900 mb-4 hero-headline">
                 <span className="minimal-accent-color">{slides[currentSlide].product}</span>
-                <br />{slides[currentSlide].title.split(slides[currentSlide].product)[1]}
+                <br className="hidden md:block" />
+                <span className="md:mt-2 inline-block">{slides[currentSlide].title.split(slides[currentSlide].product)[1]}</span>
               </h1>
               
               {/* Minimal subtitle */}
-              <p className="text-gray-600 text-lg mb-6">{slides[currentSlide].subtitle}</p>
+              <p className="text-gray-600 text-lg mb-6 mt-3">{slides[currentSlide].subtitle}</p>
               
               {/* Mobile-friendly benefits list */}
-              <div className="mt-4 mb-6">
-                <ul className="space-y-3 text-sm md:text-base">
+              <div className="mt-6 mb-8 hero-benefits-list">
+                <ul className="space-y-4 text-sm md:text-base">
                   {slides[currentSlide].benefits.map((benefit, index) => (
                     <li key={index} className="flex items-center">
-                      <svg className="h-5 w-5 minimal-benefit-icon mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="h-5 w-5 minimal-benefit-icon mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
                       <span className="text-gray-700">{benefit}</span>
@@ -261,7 +361,7 @@ const HeroSectionMinimal = () => {
               </div>
               
               {/* Action buttons - Clean minimal style */}
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col sm:flex-row gap-4 mt-4 hero-content-spacing">
                 <Link href="/quote" className="minimal-cta inline-flex items-center justify-center px-5 py-3 rounded-md text-white font-medium shadow-sm">
                   {slides[currentSlide].cta}
                 </Link>

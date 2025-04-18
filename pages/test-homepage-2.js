@@ -177,6 +177,75 @@ export default function TestHomepageMinimal() {
       opacity: 1;
       transform: scale(1);
     }
+    
+    /* Enhance white space and brightness for minimal theme */
+    .section-minimal {
+      padding-top: 3rem !important;
+      padding-bottom: 3rem !important;
+    }
+    
+    .section-minimal h2 {
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: #111827;
+    }
+    
+    .section-minimal h3 {
+      font-weight: 600;
+      color: #1f2937;
+    }
+    
+    /* Add subtle white card effect to sections */
+    .section-minimal:not(.bg-gray-50) {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Enhance visual separation */
+    .section-minimal.bg-gray-50 {
+      background-color: #f9fafb !important;
+      border-top: 1px solid #f3f4f6;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    
+    /* Enhance buttons */
+    .section-minimal .btn-primary,
+    .section-minimal button:not(.minimal-dot):not([class*="text-"]):not([type="submit"]) {
+      background-color: white;
+      border: 1px solid #e5e7eb;
+      color: #374151;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      border-radius: 0.375rem;
+      padding: 0.5rem 1rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    
+    .section-minimal .btn-primary:hover,
+    .section-minimal button:not(.minimal-dot):not([class*="text-"]):not([type="submit"]):hover {
+      background-color: #f9fafb;
+      border-color: #d1d5db;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Light section headers */
+    .section-minimal .section-header {
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+    }
+    
+    /* Subtle divider lines */
+    .section-minimal .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+      margin: 2rem 0;
+      opacity: 0.7;
+    }
   `;
 
   return (
