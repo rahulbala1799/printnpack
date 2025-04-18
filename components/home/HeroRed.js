@@ -194,10 +194,10 @@ const HeroSectionRed = () => {
             </div>
           </div>
           
-          {/* Product Image - Larger on mobile */}
+          {/* Product Image - Smaller on mobile by 20% */}
           <div className="md:w-1/2 z-10 flex items-center justify-center overflow-visible w-full">
-            <div className="relative transform scale-125 md:scale-150">
-              <div className="h-72 w-72 md:h-96 md:w-96 flex items-center justify-center relative">
+            <div className="relative transform scale-100 md:scale-150">
+              <div className="h-60 w-60 md:h-96 md:w-96 flex items-center justify-center relative">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="relative h-full w-full">
                     <Image
@@ -206,7 +206,7 @@ const HeroSectionRed = () => {
                       fill
                       className="object-contain"
                       priority={currentSlide === 0}
-                      sizes="(max-width: 768px) 288px, 384px"
+                      sizes="(max-width: 768px) 240px, 384px"
                       unoptimized={process.env.NODE_ENV === 'production'}
                     />
                   </div>
