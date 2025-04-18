@@ -48,7 +48,7 @@ const HeroSectionMinimal = () => {
       cta: "Enhance Your Brand Today",
       product: "Napkin",
       benefits: ["Improves customer experience", "Reinforces brand identity", "Low cost, high impact marketing"],
-      imageSrc: "/images/hero/napkin.png",
+      imageSrc: "/images/ifa/heroh/napkin.png",
       color: "#ec4899" // Pink
     }
   ];
@@ -167,6 +167,30 @@ const HeroSectionMinimal = () => {
     applyDynamicStyles();
   }, [currentSlide, isMounted, mousePosition, slides]);
 
+  // Add a useEffect to preload all images when the component mounts
+  useEffect(() => {
+    if (!isMounted) return;
+    
+    // Preload all slide images
+    const preloadImages = () => {
+      slides.forEach(slide => {
+        const img = new Image();
+        img.src = slide.imageSrc;
+      });
+    };
+    
+    preloadImages();
+  }, [isMounted, slides]);
+
+  // Add mobile-specific styling and update the Image component
+  const imageStyle = {
+    objectFit: 'contain',
+    maxWidth: '100%',
+    maxHeight: '100%',
+    width: 'auto',
+    height: 'auto'
+  };
+
   return (
     <div 
       ref={heroRef} 
@@ -232,23 +256,51 @@ const HeroSectionMinimal = () => {
             </div>
           </div>
           
-          {/* Product Image - Enhanced for mobile - 10% larger */}
+          {/* Product Image with improved loading */}
           <div className="md:w-1/2 z-10 flex items-center justify-center">
             <div className="relative subtle-pulse">
-              <div className="h-66 w-66 md:h-80 md:w-80 flex items-center justify-center relative">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative h-full w-full">
-                    <Image
-                      src={slides[currentSlide].imageSrc}
-                      alt={slides[currentSlide].product}
-                      fill
-                      className="object-contain"
-                      priority={currentSlide === 0}
-                      sizes="(max-width: 768px) 264px, 320px"
-                      unoptimized={process.env.NODE_ENV === 'production'}
-                    />
+              <div className="h-72 w-72 md:h-80 md:w-80 flex items-center justify-center relative overflow-hidden">
+                {isMounted && (
+                  <div className="absolute inset-0 flex items-center justify-center hero-image-container">
+                    <div className="relative h-full w-full flex items-center justify-center">
+                      <Image
+                        src={slides[currentSlide].imageSrc}
+                        alt={slides[currentSlide].product}
+                        fill
+                        className="object-contain transition-opacity duration-500"
+                        priority={true}
+                        sizes="(max-width: 768px) 288px, 320px"
+                        quality={90}
+                        loading="eager"
+                        onError={(e) => {
+                          console.error(`Failed to load image: ${slides[currentSlide].imageSrc}`);
+                          e.target.style.display = 'none';
+                          // Show a fallback placeholder with the product name
+                          const parent = e.target.parentNode;
+                          if (parent) {
+                            const placeholder = document.createElement('div');
+                            placeholder.className = 'absolute inset-0 flex items-center justify-center bg-gray-100 rounded-xl';
+                            placeholder.innerHTML = `
+                              <div class="text-center p-4">
+                                <div class="text-accent text-4xl mb-2">📦</div>
+                                <div class="font-bold text-gray-800">${slides[currentSlide].product}</div>
+                              </div>
+                            `;
+                            parent.appendChild(placeholder);
+                          }
+                        }}
+                        style={imageStyle}
+                      />
+                    </div>
                   </div>
-                </div>
+                )}
+                
+                {/* Fallback when not mounted */}
+                {!isMounted && (
+                  <div className="h-full w-full flex items-center justify-center bg-gray-50 rounded-xl">
+                    <div className="animate-pulse bg-gray-200 h-5/6 w-5/6 rounded-lg"></div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -424,6 +476,28 @@ const HeroSectionMinimal = () => {
           left: 20%;
           z-index: 0;
           opacity: 0.2;
+        }
+        
+        /* Add mobile-specific image styling */
+        .hero-image-container {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        @media (max-width: 768px) {
+          .hero-image-container {
+            max-height: 280px;
+          }
+          
+          .hero-image-container img {
+            max-width: 90% !important;
+            max-height: 90% !important;
+            object-position: center !important;
+          }
         }
       `}</style>
     </div>
