@@ -180,7 +180,7 @@ const Header = () => {
               <div className="hidden lg:flex items-center space-x-3 text-blue-700 text-xs ml-4">
                 <div className="flex items-center">
                   <FaPhone className="mr-1" />
-                  <span>+353 1 234 5678</span>
+                  <span>+353 1 912 8616</span>
                 </div>
                 <div className="flex items-center">
                   <FaEnvelope className="mr-1" />
@@ -229,7 +229,7 @@ const Header = () => {
             
             {/* Mobile quick actions */}
             <div className="md:hidden flex items-center space-x-3">
-              <a href="tel:+35312345678" className="text-blue-700 flex items-center p-2" aria-label="Call Us">
+              <a href="tel:+35319128616" className="text-blue-700 flex items-center p-2" aria-label="Call Us">
                 <FaPhone className="text-lg" />
               </a>
               <a href="mailto:info@printnpack.ie" className="text-blue-700 flex items-center p-2" aria-label="Email Us">
@@ -325,7 +325,7 @@ const Header = () => {
           <div className="space-y-4">
             <div className={`flex items-center opacity-0 ${isOpen ? 'animate-slide-in-left' : ''}`} style={{ animationDelay: '0.35s' }}>
               <FaPhone className="text-blue-200 mr-3" />
-              <a href="tel:+35312345678" className="text-white hover:text-blue-200">+353 1 234 5678</a>
+              <a href="tel:+35319128616" className="text-white hover:text-blue-200">+353 1 912 8616</a>
             </div>
             <div className={`flex items-center opacity-0 ${isOpen ? 'animate-slide-in-left' : ''}`} style={{ animationDelay: '0.4s' }}>
               <FaEnvelope className="text-blue-200 mr-3" />

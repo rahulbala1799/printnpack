@@ -119,7 +119,7 @@ const ContactPage = () => {
               <h3 className="text-xl font-bold mb-3">WhatsApp</h3>
               <p className="text-gray-600 mb-5">Message us on WhatsApp for a quick response to your packaging needs</p>
               <a 
-                href="https://wa.me/353123456789" 
+                href="https://wa.me/353894400155" 
                 target="_blank"
                 rel="noopener noreferrer" 
                 className="bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-6 rounded-lg transition-colors inline-flex items-center"
@@ -137,10 +137,10 @@ const ContactPage = () => {
               <h3 className="text-xl font-bold mb-3">Call Us</h3>
               <p className="text-gray-600 mb-5">Speak directly with our team for personalized advice and quotes</p>
               <a 
-                href="tel:+35312345678" 
+                href="tel:+35319128616" 
                 className="bg-amber-500 hover:bg-amber-600 text-white font-medium py-3 px-6 rounded-lg transition-colors inline-flex items-center"
               >
-                +353 1 234 5678
+                +353 1 912 8616
                 <FaArrowRight className="ml-2" />
               </a>
             </div>
@@ -170,7 +170,7 @@ const ContactPage = () => {
                   <FaPhone className="text-blue-300 mr-4 mt-1 text-xl" />
                   <div>
                     <h3 className="font-semibold mb-1">Phone</h3>
-                    <p>+353 1 234 5678</p>
+                    <p>+353 1 912 8616</p>
                   </div>
                 </div>
                 
@@ -197,7 +197,7 @@ const ContactPage = () => {
                   <div>
                     <h3 className="font-semibold mb-1">Customer Support</h3>
                     <p>24/7 Live Chat Support Available</p>
-                    <p>WhatsApp: +353 87 654 3210</p>
+                    <p>WhatsApp: 089 440 0155</p>
                   </div>
                 </div>
               </div>
