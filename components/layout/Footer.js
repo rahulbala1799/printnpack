@@ -53,7 +53,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li className="flex items-start">
                 <FaMapMarkerAlt className="text-blue-200 mt-1 mr-3 flex-shrink-0" />
-                <span>123 Packaging Lane, Dublin, County Dublin, Ireland</span>
+                <span>Unit 14 Ashbourne Business Centre, Ashbourne, Co. Meath, A84 KV57</span>
               </li>
               <li className="flex items-center">
                 <FaPhone className="mr-2" />

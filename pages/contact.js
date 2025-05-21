@@ -161,8 +161,9 @@ const ContactPage = () => {
                   <FaMapMarkerAlt className="text-blue-300 mr-4 mt-1 text-xl" />
                   <div>
                     <h3 className="font-semibold mb-1">Our Office</h3>
-                    <p>123 Packaging Street, Dublin</p>
-                    <p>County Dublin, Ireland D01 AB12</p>
+                    <p>Unit 14 Ashbourne Business Centre</p>
+                    <p>Ashbourne, Co. Meath</p>
+                    <p>A84 KV57</p>
                   </div>
                 </div>
                 
@@ -390,7 +391,7 @@ const ContactPage = () => {
           <h2 className="text-2xl font-bold text-gray-800 mb-8 text-center">Visit Our Location</h2>
           <div className="bg-white p-4 rounded-lg shadow-md h-96 flex justify-center items-center">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19053.35504334446!2d-6.271220871532034!3d53.34474449850711!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670e9b64d9d95d%3A0xd576ac603a5b992b!2sDublin!5e0!3m2!1sen!2sie!4v1657293345546!5m2!1sen!2sie" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2374.3441666387522!2d-6.399543723897092!3d53.51128647242307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x486717c0694c8b7f%3A0x90e678b64eb9a090!2sAshbourne%20Business%20Centre!5e0!3m2!1sen!2sie!4v1709754844330!5m2!1sen!2sie" 
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
