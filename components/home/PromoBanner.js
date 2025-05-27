@@ -165,9 +165,12 @@ const PromoBanner = () => {
               >
                 <span className="text-yellow-300">15% OFF</span> Your First Order!
               </motion.h3>
-              <p className="text-sm md:text-base opacity-90">
+              <Link 
+                href="/contact"
+                className="text-sm md:text-base opacity-90 hover:opacity-100 transition-opacity cursor-pointer block"
+              >
                 Contact us today to claim this exclusive offer
-              </p>
+              </Link>
             </div>
           </div>
 
