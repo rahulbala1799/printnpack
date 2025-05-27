@@ -238,23 +238,21 @@ const PromoBanner = () => {
         
         {/* Mobile CTA */}
         <div className="md:hidden w-full flex justify-center mt-4">
-          <motion.div 
+          <motion.a
+            href="/contact"
             whileHover={{ scale: 1.05 }} 
             whileTap={{ scale: 0.95 }}
+            className="bg-yellow-400 text-black font-bold py-2 px-4 rounded hover:bg-yellow-300 transition-all flex items-center shadow-lg cursor-pointer"
+            style={{ 
+              boxShadow: isFlashing ? 
+                "0 0 8px rgba(250, 204, 21, 0.8), 0 0 16px rgba(250, 204, 21, 0.6)" : 
+                "0 4px 6px rgba(0, 0, 0, 0.2)",
+              transition: "box-shadow 0.5s",
+              WebkitTapHighlightColor: 'transparent'
+            }}
           >
-            <Link 
-              href="/contact"
-              className="bg-yellow-400 text-black font-bold py-2 px-4 rounded hover:bg-yellow-300 transition-all flex items-center shadow-lg inline-block"
-              style={{ 
-                boxShadow: isFlashing ? 
-                  "0 0 8px rgba(250, 204, 21, 0.8), 0 0 16px rgba(250, 204, 21, 0.6)" : 
-                  "0 4px 6px rgba(0, 0, 0, 0.2)",
-                transition: "box-shadow 0.5s"
-              }}
-            >
-              Contact Us <FaArrowRight className="ml-2" />
-            </Link>
-          </motion.div>
+            Contact Us <FaArrowRight className="ml-2" />
+          </motion.a>
         </div>
       </div>
     </motion.div>
