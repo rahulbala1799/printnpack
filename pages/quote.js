@@ -293,11 +293,11 @@ const QuotePage = () => {
                         } transition-all duration-200`}
                       >
                         <option value="">Select a product type</option>
-                        <option value="Pizza Boxes">Pizza Boxes</option>
-                        <option value="Paper Bags">Paper Bags</option>
-                        <option value="Wide Format Products">Wide Format Products</option>
-                        <option value="Roll-Up Banners">Roll-Up Banners</option>
-                        <option value="Custom Packaging">Custom Packaging</option>
+                        <option value="Posters">Posters</option>
+                        <option value="Vinyls">Vinyls</option>
+                        <option value="Leaflets">Leaflets</option>
+                        <option value="Menus">Menus</option>
+                        <option value="Custom Design">Custom Design</option>
                       </select>
                       {formik.touched.productType && formik.errors.productType && (
                         <p className="mt-1 text-sm text-red-600">{formik.errors.productType}</p>
