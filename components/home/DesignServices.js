@@ -56,7 +56,7 @@ const DesignServices = () => {
         </svg>
       ),
       color: 'from-purple-500 to-indigo-600',
-      link: '/services/design/posters'
+      link: '/services/posters'
     },
     {
       id: 'vinyls',
@@ -70,7 +70,7 @@ const DesignServices = () => {
         </svg>
       ),
       color: 'from-blue-500 to-cyan-600',
-      link: '/services/design/vinyls'
+      link: '/services/vinyls'
     },
     {
       id: 'leaflets',
@@ -83,7 +83,7 @@ const DesignServices = () => {
         </svg>
       ),
       color: 'from-teal-500 to-green-600',
-      link: '/services/design/leaflets'
+      link: '/services/leaflets'
     },
     {
       id: 'menus',
@@ -96,7 +96,7 @@ const DesignServices = () => {
         </svg>
       ),
       color: 'from-amber-500 to-orange-600',
-      link: '/services/design/menus'
+      link: '/services/menus'
     }
   ];
   
@@ -126,38 +126,38 @@ const DesignServices = () => {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+          <Link href="/services/posters" className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
             <div className="w-24 h-24 mx-auto mb-4 flex items-center justify-center">
               <FaFileAlt className="w-12 h-12 text-primary" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Posters</h3>
             <p className="text-gray-600">Professional poster designs for events, promotions, and branding</p>
             <p className="text-sm text-blue-600 mt-2">Custom layouts & artwork included</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+          </Link>
+          <Link href="/services/vinyls" className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
             <div className="w-24 h-24 mx-auto mb-4 flex items-center justify-center">
               <FaStickyNote className="w-12 h-12 text-primary" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Vinyls</h3>
             <p className="text-gray-600">Custom vinyl graphics and decals for any surface</p>
             <p className="text-sm text-blue-600 mt-2">Vector artwork & cutting files provided</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+          </Link>
+          <Link href="/services/leaflets" className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
             <div className="w-24 h-24 mx-auto mb-4 flex items-center justify-center">
               <FaBookOpen className="w-12 h-12 text-primary" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Leaflets</h3>
             <p className="text-gray-600">Eye-catching leaflet designs that engage your audience</p>
             <p className="text-sm text-blue-600 mt-2">Professional layout & typography</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+          </Link>
+          <Link href="/services/menus" className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
             <div className="w-24 h-24 mx-auto mb-4 flex items-center justify-center">
               <FaUtensils className="w-12 h-12 text-primary" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Menus</h3>
             <p className="text-gray-600">Appetizing menu designs that showcase your offerings</p>
             <p className="text-sm text-blue-600 mt-2">Custom photography & styling available</p>
-          </div>
+          </Link>
         </div>
         <div className="mt-12 text-center">
           <p className="text-base text-gray-600 max-w-2xl mx-auto">

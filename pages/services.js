@@ -10,33 +10,33 @@ export default function Services() {
       icon: <FaFileAlt className="w-12 h-12 text-primary" />,
       title: "Posters",
       description: "Professional poster designs for events, promotions, and branding",
-      link: "/services/design/posters"
+      link: "/services/posters"
     },
     {
       icon: <FaStickyNote className="w-12 h-12 text-primary" />,
       title: "Vinyls",
       description: "Custom vinyl graphics and decals for any surface",
-      link: "/services/design/vinyls"
+      link: "/services/vinyls"
     },
     {
       icon: <FaBookOpen className="w-12 h-12 text-primary" />,
       title: "Leaflets",
       description: "Eye-catching leaflet designs that engage your audience",
-      link: "/services/design/leaflets"
+      link: "/services/leaflets"
     },
     {
       icon: <FaUtensils className="w-12 h-12 text-primary" />,
       title: "Menus",
       description: "Appetizing menu designs that showcase your offerings",
-      link: "/services/design/menus"
+      link: "/services/menus"
     }
   ];
 
   return (
     <Layout>
       <Head>
-        <title>Our Services - PrintNPack</title>
-        <meta name="description" content="Explore our range of professional printing and design services at PrintNPack." />
+        <title>Our Services - Print n Pack</title>
+        <meta name="description" content="Explore our range of professional printing and design services at Print n Pack." />
       </Head>
 
       <div className="container mx-auto px-4 py-12">
@@ -55,10 +55,11 @@ export default function Services() {
               </div>
               <h2 className="text-xl font-semibold text-gray-900 mb-2">{service.title}</h2>
               <p className="text-gray-600 mb-4">{service.description}</p>
-              <Link href={service.link}>
-                <a className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
-                  Learn More
-                </a>
+              <Link 
+                href={service.link}
+                className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+              >
+                Learn More
               </Link>
             </div>
           ))}
