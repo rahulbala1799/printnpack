@@ -1,11 +1,21 @@
 import '../styles/globals.css';
 import { Inter } from 'next/font/google';
 import Head from 'next/head';
+import { useEffect } from 'react';
 
 // If loading a variable font, you don't need to specify the font weight
 const inter = Inter({ subsets: ['latin'] });
 
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    // Initialize GTM
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'gtm.start': new Date().getTime(),
+      event: 'gtm.js'
+    });
+  }, []);
+
   return (
     <>
       <Head>
