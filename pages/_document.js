@@ -15,6 +15,20 @@ export default function Document() {
           }}
         />
         {/* End Google Tag Manager */}
+        
+        {/* Google Ads Conversion Tracking */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17101649834" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-17101649834');
+            `
+          }}
+        />
+        {/* End Google Ads Conversion Tracking */}
       </Head>
       <body>
         {/* Google Tag Manager (noscript) */}
