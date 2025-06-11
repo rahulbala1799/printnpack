@@ -20,6 +20,19 @@ const QuotePage = () => {
     specifications: Yup.string().required('Please provide product specifications').min(10, 'Specifications must be at least 10 characters'),
   });
 
+  // Function to track conversion
+  const trackConversion = () => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'conversion', {'send_to': 'AW-17101649834/WakQCK-pt88aEKrv2do_'});
+    }
+  };
+
+  // Function to handle WhatsApp click
+  const handleWhatsAppClick = () => {
+    trackConversion();
+    // The link will still open normally
+  };
+
   // Setup formik
   const formik = useFormik({
     initialValues: {
@@ -53,6 +66,10 @@ const QuotePage = () => {
         }
 
         setFormSubmitted(true);
+        
+        // Track conversion
+        trackConversion();
+        
         resetForm();
         
         setTimeout(() => {
@@ -105,7 +122,8 @@ const QuotePage = () => {
               <a 
                 href="https://wa.me/353894400155" 
                 target="_blank"
-                rel="noopener noreferrer" 
+                rel="noopener noreferrer"
+                onClick={handleWhatsAppClick}
                 className="bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-6 rounded-lg transition-colors inline-flex items-center"
               >
                 WhatsApp Us
