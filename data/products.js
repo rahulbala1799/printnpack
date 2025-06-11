@@ -1310,11 +1310,18 @@ const products = [
       { name: 'Delivery Options', value: 'Weekly scheduled delivery service available' },
     ],
     images: [
-      '/images/products/premium-linen-feel-napkins/1.png',
-      '/images/products/premium-linen-feel-napkins/2.png',
-      '/images/products/premium-linen-feel-napkins/3.png'
+      '/images/products/premium-linen-feel-napkins/Napkin Mock 1.jpg',
+      '/images/products/premium-linen-feel-napkins/Napkin Mock 2.jpg',
+      '/images/products/premium-linen-feel-napkins/Napkin Mock 3.jpg',
+      '/images/products/premium-linen-feel-napkins/Napkin Mock 4.jpg',
+      '/images/products/premium-linen-feel-napkins/Napkin Mock 5.jpg',
+      '/images/products/premium-linen-feel-napkins/Napkin Mock 6.jpg',
+      '/images/products/premium-linen-feel-napkins/Napkin Mock 7.jpg',
+      '/images/products/premium-linen-feel-napkins/Napkin Mock 8.jpg',
+      '/images/products/premium-linen-feel-napkins/Napkin Mock 9.jpg',
+      '/images/products/premium-linen-feel-napkins/Napkin Mock 10.jpg'
     ],
-    imageSrc: '/images/products/premium-linen-feel-napkins/1.png',
+    imageSrc: '/images/products/premium-linen-feel-napkins/Napkin Mock 1.jpg',
     price: 'Starting at €0.10 per unit',
     moq: 1000,
     leadTime: '7-10 business days',
