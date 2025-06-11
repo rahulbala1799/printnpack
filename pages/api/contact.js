@@ -15,12 +15,22 @@ export default async function handler(req, res) {
 
     // Log the attempt
     console.log('Attempting to send email from:', email);
+    
+    // Check if environment variables are loaded
+    if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+      console.error('Missing email credentials:', {
+        GMAIL_USER: process.env.GMAIL_USER ? 'Set' : 'Missing',
+        GMAIL_APP_PASSWORD: process.env.GMAIL_APP_PASSWORD ? 'Set' : 'Missing'
+      });
+      return res.status(500).json({ 
+        message: 'Email service not configured properly',
+        error: 'Missing email credentials'
+      });
+    }
 
     // Create a transporter using Gmail SMTP
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
+    const transporter = nodemailer.createTransporter({
+      service: 'gmail',
       auth: {
         user: process.env.GMAIL_USER,
         pass: process.env.GMAIL_APP_PASSWORD,
