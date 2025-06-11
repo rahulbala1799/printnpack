@@ -52,8 +52,8 @@ export default async function handler(req, res) {
 
     // Email content
     const mailOptions = {
-      from: `"${name}" <${email}>`,
-      to: 'printnpackireland@gmail.com',
+      from: `"${name}" <${process.env.GMAIL_USER}>`,
+      to: 'info@printnpack.ie',
       replyTo: email,
       subject: `New Contact Form Submission - ${productInterest}`,
       text: `
