@@ -43,23 +43,8 @@ export default function Document() {
         {/* End Google Tag Manager (noscript) */}
         <Main />
         <NextScript />
-        {/* Tawk.to Live Chat Widget */}
-        <script
-          type="text/javascript"
-          dangerouslySetInnerHTML={{
-            __html: `
-              var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-              (function(){
-                var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-                s1.async=true;
-                s1.src='https://embed.tawk.to/67f9051e43ce3e190eb7f90a/1ioibo07f';
-                s1.charset='UTF-8';
-                s1.setAttribute('crossorigin','*');
-                s0.parentNode.insertBefore(s1,s0);
-              })();
-            `
-          }}
-        />
+        {/* Tidio Live Chat Widget */}
+        <script src="//code.tidio.co/gm3mpxjjik3qz1bqfryswb0v63gjhuve.js" async></script>
       </body>
     </Html>
   )
