@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Basic configuration - keeping it simple
-  reactStrictMode: false,
+  reactStrictMode: true,
   
   // Enable image optimization with better settings for Vercel
   images: {
