@@ -2,10 +2,10 @@
 (() => {
 var exports = {};
 exports.id = 905;
-exports.ids = [905,660];
+exports.ids = [905];
 exports.modules = {
 
-/***/ 8690:
+/***/ 3197:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -14,10 +14,10 @@ __webpack_require__.r(__webpack_exports__);
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
   config: () => (/* binding */ config),
-  "default": () => (/* binding */ next_route_loaderkind_PAGES_page_2Fproducts_2F_5Bslug_5D_preferredRegion_absolutePagePath_private_next_pages_2Fproducts_2F_5Bslug_5D_js_absoluteAppPath_private_next_pages_2F_app_js_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_middlewareConfigBase64_e30_3D_),
+  "default": () => (/* binding */ next_route_loaderkind_PAGES_page_2Fproducts_2F_5Bslug_5D_preferredRegion_absolutePagePath_private_next_pages_2Fproducts_2F_5Bslug_5D_js_absoluteAppPath_private_next_pages_2F_app_js_absoluteDocumentPath_private_next_pages_2F_document_js_middlewareConfigBase64_e30_3D_),
   getServerSideProps: () => (/* binding */ getServerSideProps),
-  getStaticPaths: () => (/* binding */ next_route_loaderkind_PAGES_page_2Fproducts_2F_5Bslug_5D_preferredRegion_absolutePagePath_private_next_pages_2Fproducts_2F_5Bslug_5D_js_absoluteAppPath_private_next_pages_2F_app_js_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_middlewareConfigBase64_e30_3D_getStaticPaths),
-  getStaticProps: () => (/* binding */ next_route_loaderkind_PAGES_page_2Fproducts_2F_5Bslug_5D_preferredRegion_absolutePagePath_private_next_pages_2Fproducts_2F_5Bslug_5D_js_absoluteAppPath_private_next_pages_2F_app_js_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_middlewareConfigBase64_e30_3D_getStaticProps),
+  getStaticPaths: () => (/* binding */ next_route_loaderkind_PAGES_page_2Fproducts_2F_5Bslug_5D_preferredRegion_absolutePagePath_private_next_pages_2Fproducts_2F_5Bslug_5D_js_absoluteAppPath_private_next_pages_2F_app_js_absoluteDocumentPath_private_next_pages_2F_document_js_middlewareConfigBase64_e30_3D_getStaticPaths),
+  getStaticProps: () => (/* binding */ next_route_loaderkind_PAGES_page_2Fproducts_2F_5Bslug_5D_preferredRegion_absolutePagePath_private_next_pages_2Fproducts_2F_5Bslug_5D_js_absoluteAppPath_private_next_pages_2F_app_js_absoluteDocumentPath_private_next_pages_2F_document_js_middlewareConfigBase64_e30_3D_getStaticProps),
   reportWebVitals: () => (/* binding */ reportWebVitals),
   routeModule: () => (/* binding */ routeModule),
   unstable_getServerProps: () => (/* binding */ unstable_getServerProps),
@@ -42,9 +42,8 @@ var pages_module = __webpack_require__(3185);
 var route_kind = __webpack_require__(5244);
 // EXTERNAL MODULE: ./node_modules/next/dist/build/webpack/loaders/next-route-loader/helpers.js
 var helpers = __webpack_require__(7182);
-// EXTERNAL MODULE: ./node_modules/next/dist/pages/_document.js
-var _document = __webpack_require__(9259);
-var _document_default = /*#__PURE__*/__webpack_require__.n(_document);
+// EXTERNAL MODULE: ./pages/_document.js
+var _document = __webpack_require__(2638);
 // EXTERNAL MODULE: ./pages/_app.js
 var _app = __webpack_require__(5225);
 // EXTERNAL MODULE: ./node_modules/react/jsx-runtime.js
@@ -56,8 +55,8 @@ var style_default = /*#__PURE__*/__webpack_require__.n(style_);
 var external_react_ = __webpack_require__(6689);
 // EXTERNAL MODULE: external "next/router"
 var router_ = __webpack_require__(1853);
-// EXTERNAL MODULE: ./components/layout/Layout.js + 4 modules
-var Layout = __webpack_require__(5180);
+// EXTERNAL MODULE: ./components/layout/Layout.js + 5 modules
+var Layout = __webpack_require__(869);
 // EXTERNAL MODULE: external "next/head"
 var head_ = __webpack_require__(968);
 var head_default = /*#__PURE__*/__webpack_require__.n(head_);
@@ -1012,12 +1011,12 @@ const PizzaBoxExplorer = ()=>{
                                                         /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                                             className: "text-blue-800 font-extrabold text-2xl sm:text-3xl md:text-4xl transform -rotate-12",
                                                             children: [
-                                                                "PRINT",
+                                                                "print",
                                                                 /*#__PURE__*/ jsx_runtime.jsx("span", {
                                                                     className: "text-orange-600",
                                                                     children: "N"
                                                                 }),
-                                                                "PACK"
+                                                                "pack"
                                                             ]
                                                         })
                                                     ]
@@ -6823,7 +6822,7 @@ async function getStaticProps({ params }) {
 }
 /* harmony default export */ const _slug_ = (ProductDetail);
 
-;// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js?kind=PAGES&page=%2Fproducts%2F%5Bslug%5D&preferredRegion=&absolutePagePath=private-next-pages%2Fproducts%2F%5Bslug%5D.js&absoluteAppPath=private-next-pages%2F_app.js&absoluteDocumentPath=next%2Fdist%2Fpages%2F_document&middlewareConfigBase64=e30%3D!
+;// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js?kind=PAGES&page=%2Fproducts%2F%5Bslug%5D&preferredRegion=&absolutePagePath=private-next-pages%2Fproducts%2F%5Bslug%5D.js&absoluteAppPath=private-next-pages%2F_app.js&absoluteDocumentPath=private-next-pages%2F_document.js&middlewareConfigBase64=e30%3D!
 // @ts-ignore this need to be imported from next/dist to be external
 
 
@@ -6838,10 +6837,10 @@ async function getStaticProps({ params }) {
 
 const PagesRouteModule = pages_module.PagesRouteModule;
 // Re-export the component (should be the default export).
-/* harmony default export */ const next_route_loaderkind_PAGES_page_2Fproducts_2F_5Bslug_5D_preferredRegion_absolutePagePath_private_next_pages_2Fproducts_2F_5Bslug_5D_js_absoluteAppPath_private_next_pages_2F_app_js_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_middlewareConfigBase64_e30_3D_ = ((0,helpers/* hoist */.l)(_slug_namespaceObject, "default"));
+/* harmony default export */ const next_route_loaderkind_PAGES_page_2Fproducts_2F_5Bslug_5D_preferredRegion_absolutePagePath_private_next_pages_2Fproducts_2F_5Bslug_5D_js_absoluteAppPath_private_next_pages_2F_app_js_absoluteDocumentPath_private_next_pages_2F_document_js_middlewareConfigBase64_e30_3D_ = ((0,helpers/* hoist */.l)(_slug_namespaceObject, "default"));
 // Re-export methods.
-const next_route_loaderkind_PAGES_page_2Fproducts_2F_5Bslug_5D_preferredRegion_absolutePagePath_private_next_pages_2Fproducts_2F_5Bslug_5D_js_absoluteAppPath_private_next_pages_2F_app_js_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_middlewareConfigBase64_e30_3D_getStaticProps = (0,helpers/* hoist */.l)(_slug_namespaceObject, "getStaticProps");
-const next_route_loaderkind_PAGES_page_2Fproducts_2F_5Bslug_5D_preferredRegion_absolutePagePath_private_next_pages_2Fproducts_2F_5Bslug_5D_js_absoluteAppPath_private_next_pages_2F_app_js_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_middlewareConfigBase64_e30_3D_getStaticPaths = (0,helpers/* hoist */.l)(_slug_namespaceObject, "getStaticPaths");
+const next_route_loaderkind_PAGES_page_2Fproducts_2F_5Bslug_5D_preferredRegion_absolutePagePath_private_next_pages_2Fproducts_2F_5Bslug_5D_js_absoluteAppPath_private_next_pages_2F_app_js_absoluteDocumentPath_private_next_pages_2F_document_js_middlewareConfigBase64_e30_3D_getStaticProps = (0,helpers/* hoist */.l)(_slug_namespaceObject, "getStaticProps");
+const next_route_loaderkind_PAGES_page_2Fproducts_2F_5Bslug_5D_preferredRegion_absolutePagePath_private_next_pages_2Fproducts_2F_5Bslug_5D_js_absoluteAppPath_private_next_pages_2F_app_js_absoluteDocumentPath_private_next_pages_2F_document_js_middlewareConfigBase64_e30_3D_getStaticPaths = (0,helpers/* hoist */.l)(_slug_namespaceObject, "getStaticPaths");
 const getServerSideProps = (0,helpers/* hoist */.l)(_slug_namespaceObject, "getServerSideProps");
 const config = (0,helpers/* hoist */.l)(_slug_namespaceObject, "config");
 const reportWebVitals = (0,helpers/* hoist */.l)(_slug_namespaceObject, "reportWebVitals");
@@ -6863,12 +6862,19 @@ const routeModule = new PagesRouteModule({
     },
     components: {
         App: _app["default"],
-        Document: (_document_default())
+        Document: _document["default"]
     },
     userland: _slug_namespaceObject
 });
 
 //# sourceMappingURL=pages.js.map
+
+/***/ }),
+
+/***/ 2296:
+/***/ ((module) => {
+
+module.exports = require("formik");
 
 /***/ }),
 
@@ -7108,6 +7114,13 @@ module.exports = require("react-icons/io5");
 
 module.exports = require("styled-jsx/style");
 
+/***/ }),
+
+/***/ 5609:
+/***/ ((module) => {
+
+module.exports = require("yup");
+
 /***/ })
 
 };
@@ -7117,7 +7130,7 @@ module.exports = require("styled-jsx/style");
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [259,583,719,61,225,180], () => (__webpack_exec__(8690)));
+var __webpack_exports__ = __webpack_require__.X(0, [698,719,61,400,869], () => (__webpack_exec__(3197)));
 module.exports = __webpack_exports__;
 
 })();

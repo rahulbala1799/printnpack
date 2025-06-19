@@ -21,7 +21,7 @@ const placeholderSvg = `
 
 // Create a generic team member placeholder
 fs.writeFileSync(path.join(teamDir, 'placeholder.svg'), placeholderSvg.trim());
-console.log('Generated team member placeholder');
+
 
 // Also create a company history image
 const historyDir = path.join(process.cwd(), 'public', 'images', 'about');
@@ -39,6 +39,4 @@ const historySvg = `
 `;
 
 fs.writeFileSync(path.join(historyDir, 'history.svg'), historySvg.trim());
-console.log('Generated company history image');
-
-console.log('All placeholder images have been created!'); 
+ 

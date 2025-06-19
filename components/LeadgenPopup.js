@@ -115,7 +115,7 @@ This is a lead from the website popup form.`,
           setShowPopup(false);
         }, 3000);
       } catch (error) {
-        console.error('Error sending message:', error);
+  
         setErrorMessage(error.message || 'Failed to send message. Please try again later.');
       } finally {
         setSubmitting(false);

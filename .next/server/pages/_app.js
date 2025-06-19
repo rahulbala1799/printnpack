@@ -2,10 +2,10 @@
 (() => {
 var exports = {};
 exports.id = 888;
-exports.ids = [888,660];
+exports.ids = [888];
 exports.modules = {
 
-/***/ 6793:
+/***/ 9581:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -27,8 +27,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_dist_server_future_route_modules_pages_module__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_dist_server_future_route_modules_pages_module__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var next_dist_server_future_route_kind__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5244);
 /* harmony import */ var next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7182);
-/* harmony import */ var next_dist_pages_document__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9259);
-/* harmony import */ var next_dist_pages_document__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_dist_pages_document__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var private_next_pages_document_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2638);
 /* harmony import */ var private_next_pages_app_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5225);
 // @ts-ignore this need to be imported from next/dist to be external
 
@@ -69,7 +68,7 @@ const routeModule = new PagesRouteModule({
     },
     components: {
         App: private_next_pages_app_js__WEBPACK_IMPORTED_MODULE_4__["default"],
-        Document: (next_dist_pages_document__WEBPACK_IMPORTED_MODULE_3___default())
+        Document: private_next_pages_document_js__WEBPACK_IMPORTED_MODULE_3__["default"]
     },
     userland: private_next_pages_app_js__WEBPACK_IMPORTED_MODULE_4__
 });
@@ -162,7 +161,7 @@ module.exports = require("styled-jsx/style");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [259,583,225], () => (__webpack_exec__(6793)));
+var __webpack_exports__ = __webpack_require__.X(0, [698,400], () => (__webpack_exec__(9581)));
 module.exports = __webpack_exports__;
 
 })();

@@ -14,14 +14,11 @@ export default async function handler(req, res) {
     }
 
     // Log the attempt
-    console.log('Attempting to send email from:', email);
+  
     
     // Check if environment variables are loaded
     if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
-      console.error('Missing email credentials:', {
-        GMAIL_USER: process.env.GMAIL_USER ? 'Set' : 'Missing',
-        GMAIL_APP_PASSWORD: process.env.GMAIL_APP_PASSWORD ? 'Set' : 'Missing'
-      });
+
       return res.status(500).json({ 
         message: 'Email service not configured properly',
         error: 'Missing email credentials'
@@ -35,15 +32,15 @@ export default async function handler(req, res) {
         user: process.env.GMAIL_USER,
         pass: process.env.GMAIL_APP_PASSWORD,
       },
-      debug: true, // Enable debug logs
+      debug: false
     });
 
     // Verify SMTP connection
     try {
       await transporter.verify();
-      console.log('SMTP connection verified successfully');
+
     } catch (verifyError) {
-      console.error('SMTP verification failed:', verifyError);
+
       return res.status(500).json({ 
         message: 'Failed to connect to email server',
         error: verifyError.message 
@@ -77,16 +74,14 @@ ${message}
     };
 
     // Send the email
-    console.log('Attempting to send email with options:', { ...mailOptions, text: '[Content hidden]' });
     const info = await transporter.sendMail(mailOptions);
-    console.log('Email sent successfully:', info.messageId);
 
     res.status(200).json({ 
       message: 'Email sent successfully',
       messageId: info.messageId 
     });
   } catch (error) {
-    console.error('Error in contact API:', error);
+
     res.status(500).json({ 
       message: 'Error sending email',
       error: error.message 

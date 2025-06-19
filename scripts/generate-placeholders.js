@@ -30,7 +30,7 @@ products.forEach(product => {
   `;
   
   fs.writeFileSync(path.join(heroDir, `${product.name}.svg`), svg.trim());
-  console.log(`Generated ${product.name}.svg`);
+  
 });
 
-console.log('All placeholder images have been created!'); 
+ 

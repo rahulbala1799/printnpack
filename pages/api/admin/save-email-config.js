@@ -31,7 +31,7 @@ export default async function handler(req, res) {
     // Return success
     res.status(200).json({ message: 'Configuration saved successfully' });
   } catch (error) {
-    console.error('Error saving email config:', error);
+
     res.status(500).json({ message: 'Failed to save configuration', error: error.message });
   }
 } 
