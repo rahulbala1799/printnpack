@@ -154,10 +154,10 @@ const ContactPage = () => {
               <h3 className="text-xl font-bold mb-3">Call Us</h3>
               <p className="text-gray-600 mb-5">Speak directly with our team for personalized advice and quotes</p>
               <a 
-                href="tel:+35319128616" 
+                href="tel:+353894400155" 
                 className="bg-amber-500 hover:bg-amber-600 text-white font-medium py-3 px-6 rounded-lg transition-colors inline-flex items-center"
               >
-                +353 1 912 8616
+                +353 89 440 0155
                 <FaArrowRight className="ml-2" />
               </a>
             </div>
@@ -188,7 +188,7 @@ const ContactPage = () => {
                   <FaPhone className="text-blue-300 mr-4 mt-1 text-xl" />
                   <div>
                     <h3 className="font-semibold mb-1">Phone</h3>
-                    <p>+353 1 912 8616</p>
+                    <p>+353 89 440 0155</p>
                   </div>
                 </div>
                 

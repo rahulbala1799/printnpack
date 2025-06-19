@@ -180,7 +180,7 @@ const Header = () => {
               <div className="hidden lg:flex items-center space-x-3 text-blue-700 text-xs ml-4">
                 <div className="flex items-center">
                   <FaPhone className="mr-1" />
-                  <span>+353 1 912 8616</span>
+                  <span>+353 89 440 0155</span>
                 </div>
                 <div className="flex items-center">
                   <FaEnvelope className="mr-1" />
@@ -325,7 +325,7 @@ const Header = () => {
           <div className="space-y-4">
             <div className={`flex items-center opacity-0 ${isOpen ? 'animate-slide-in-left' : ''}`} style={{ animationDelay: '0.35s' }}>
               <FaPhone className="text-blue-200 mr-3" />
-              <a href="tel:+35319128616" className="text-white hover:text-blue-200">+353 1 912 8616</a>
+                              <a href="tel:+353894400155" className="text-white hover:text-blue-200">+353 89 440 0155</a>
             </div>
             <div className={`flex items-center opacity-0 ${isOpen ? 'animate-slide-in-left' : ''}`} style={{ animationDelay: '0.4s' }}>
               <FaEnvelope className="text-blue-200 mr-3" />
