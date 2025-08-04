@@ -76,6 +76,7 @@ const groupProductsByCategory = (products) => {
 const mainGroups = [
   { id: 'packaging', name: 'Packaging', categories: ['Food Packaging', 'Retail Packaging', 'Eco-Friendly Packaging', 'Shipping', 'Hospitality Products'] },
   { id: 'clothing', name: 'Clothing', categories: ['Apparel'] },
+  { id: 'rubber-stamps', name: 'Rubber Stamps', categories: ['Stamps'] },
   { id: 'wide-format', name: 'Wide Format', categories: ['Wide Format'] },
   { id: 'leaflets', name: 'Leaflets and Flyers', categories: ['Leaflets', 'Food Service'] },
 ];
@@ -200,6 +201,8 @@ const ProductsPage = () => {
               onClick={() => {
                 if (group.id === 'clothing') {
                   router.push('/clothing');
+                } else if (group.id === 'rubber-stamps') {
+                  router.push('/rubber-stamps');
                 } else {
                   setActiveGroup(group.id);
                   setActiveCategory('all');
