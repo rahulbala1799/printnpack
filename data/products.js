@@ -1,44 +1,5 @@
 const products = [
   {
-    id: 'white-pizza-boxes',
-    name: 'White Pizza Boxes',
-    category: 'Food Packaging',
-    description: 'Premium printed white pizza boxes that keep your food hot while maintaining a clean, professional look for your brand.',
-    features: [
-      'Made from food-grade white corrugated cardboard',
-      'Custom printing options available',
-      'Stackable design for easy storage',
-      'Multiple size options: 7", 9", 10", 12", and 14"',
-      'Weekly delivery service available'
-    ],
-    detailedDescription: 'Our premium white pizza boxes are designed to keep your pizzas hot and fresh during delivery while maintaining a professional appearance. The clean white exterior creates a perfect canvas for your brand elements. Made from high-quality food-grade materials, these boxes offer excellent insulation and stability. Available in 7", 9", 10", 12", and 14" sizes to accommodate any pizza style. Each box can be fully customized with your branding, including full-color printing options for logos, messaging, and design elements. Take advantage of our weekly delivery service to ensure you never run out of packaging.',
-    specifications: [
-      { name: 'Material', value: 'Food-grade white corrugated cardboard' },
-      { name: 'Thickness', value: '1.5mm - 3mm (E-flute or B-flute)' },
-      { name: 'Color', value: 'Clean white' },
-      { name: 'Sizes Available', value: '7", 9", 10", 12", 14"' },
-      { name: 'Print Quality', value: 'Up to 4-color offset or digital printing' },
-      { name: 'Minimum Order', value: '250 units' },
-      { name: 'Production Time', value: '7-10 business days' },
-      { name: 'Customization', value: 'Size, printing, finish' },
-      { name: 'Delivery Options', value: 'Weekly scheduled delivery service available' },
-    ],
-    images: [
-      '/images/products/pizza-boxes/white/mainimage.webp',
-      '/images/products/pizza-boxes/white/pizza-box-1000x1000w.webp',
-      '/images/products/pizza-boxes/white/pizza-box-1000x10003.webp',
-      '/images/products/pizza-boxes/white/P-PBP06WH.jpg',
-      '/images/products/pizza-boxes/white/pizza_prod_2w.jpg',
-      '/images/products/pizza-boxes/white/bagpizzabox.webp',
-      '/images/products/pizza-boxes/white/pizza-box-7inches-1000x1000openwithpizzainside.webp'
-    ],
-    imageSrc: '/images/products/pizza-boxes/white/mainimage.webp',
-    price: 'Starting at €0.38 per unit',
-    moq: 250,
-    leadTime: '7-10 business days',
-    weeklyDelivery: 'Take advantage of our weekly delivery service specifically designed for restaurants. We\'ll establish a regular schedule that ensures you never run out of packaging while minimizing storage requirements. Our account managers will track your usage patterns to recommend optimal order quantities, helping you maintain efficiency and reduce costs. This branded packaging with consistent weekly delivery enhances your professional image and ensures operational consistency.'
-  },
-  {
     id: 'brown-pizza-boxes',
     name: 'Brown Pizza Boxes',
     category: 'Food Packaging',
@@ -352,66 +313,6 @@ const products = [
     moq: 500,
     leadTime: '7-10 business days',
     weeklyDelivery: 'Our weekly delivery service is perfect for food service businesses that require a consistent supply of eco-friendly packaging. We establish a regular delivery schedule tailored to your needs, ensuring you always have sufficient stock without requiring large storage areas. Our account team monitors your usage patterns to optimize order quantities, helping you maintain efficiency and reduce costs. This reliable service of sustainable packaging enhances your green credentials while simplifying operations.'
-  },
-  {
-    id: 'pizza-boxes',
-    name: 'Pizza Boxes',
-    category: 'Food Packaging',
-    hidden: true,
-    description: 'Premium pizza boxes that keep your food hot and enhance your brand image.',
-    features: [
-      'Made from food-grade materials',
-      'Custom printing options',
-      'Stackable design for easy storage',
-      'Available in white or brown kraft options',
-      'Multiple size options: 7", 9", 10", 12", and 14"',
-      'Weekly delivery service available'
-    ],
-    detailedDescription: 'Our premium pizza boxes are designed to keep your pizzas hot and fresh during delivery while reinforcing your brand image. Made from high-quality food-grade materials, these boxes offer excellent insulation and stability. Choose from white or brown kraft materials with company blue accents to suit your brand aesthetic. Available in 7", 9", 10", 12", and 14" sizes to accommodate any pizza style. Each box can be fully customized with your branding, including full-color printing options for logos, messaging, and design elements. Take advantage of our weekly delivery service to ensure you never run out of packaging.',
-    specifications: [
-      { name: 'Material', value: 'Food-grade corrugated cardboard (white or brown kraft)' },
-      { name: 'Thickness', value: '1.5mm - 3mm (E-flute or B-flute)' },
-      { name: 'Color Options', value: 'White with company blue accents or Natural brown with company blue accents' },
-      { name: 'Sizes Available', value: '7", 9", 10", 12", 14"' },
-      { name: 'Print Quality', value: 'Up to 4-color offset or digital printing' },
-      { name: 'Minimum Order', value: '250 units' },
-      { name: 'Production Time', value: '7-10 business days' },
-      { name: 'Customization', value: 'Size, color, printing, finish' },
-      { name: 'Delivery Options', value: 'Weekly scheduled delivery service available' },
-    ],
-    images: [
-      '/images/hero/pizza-box.svg',
-      '/images/ifa/heroh/pizza.png'
-    ],
-    imageSrc: '/images/hero/pizza-box.svg',
-    price: 'Starting at €0.50 per unit',
-    moq: 250,
-    leadTime: '7-10 business days',
-    weeklyDelivery: 'Take advantage of our weekly delivery service specifically designed for restaurants. We\'ll establish a regular schedule that ensures you never run out of packaging while minimizing storage requirements. Our account managers will track your usage patterns to recommend optimal order quantities, helping you maintain efficiency and reduce costs. This branded packaging with consistent weekly delivery enhances your professional image and ensures operational consistency.',
-    variants: [
-      {
-        name: 'White Pizza Boxes',
-        description: 'Premium white pizza boxes with company blue accents that keep food hot and showcase your brand.',
-        features: [
-          'Made from food-grade white corrugated cardboard',
-          'Clean, professional appearance with company blue accents',
-          'Available in 7", 9", 10", 12", and 14" sizes',
-          'Ideal for upscale restaurants and premium positioning'
-        ],
-        imageSrc: '/images/hero/white-pizza-box.svg'
-      },
-      {
-        name: 'Brown Pizza Boxes',
-        description: 'Eco-friendly brown kraft pizza boxes with company blue accents that showcase your sustainability commitment.',
-        features: [
-          'Made from recycled kraft corrugated cardboard',
-          'Natural brown with company blue accents',
-          'Available in 7", 9", 10", 12", and 14" sizes',
-          'Perfect for businesses emphasizing eco-friendliness'
-        ],
-        imageSrc: '/images/hero/brown-pizza-box.svg'
-      }
-    ]
   },
   {
     id: 'paper-bags',
