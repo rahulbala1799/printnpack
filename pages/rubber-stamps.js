@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Image from 'next/image';
+import RubberStampQuoteForm from '../components/RubberStampQuoteForm';
 
 const RubberStampsPage = () => {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
@@ -380,35 +381,12 @@ const RubberStampsPage = () => {
         </div>
       </section>
 
-      {/* Quote Modal Placeholder - You can integrate with ClothingQuoteForm or create a specific RubberStampQuoteForm */}
-      {quoteModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div 
-            className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
-            onClick={() => setQuoteModalOpen(false)}
-          />
-          <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-6">
-            <h3 className="text-xl font-bold mb-4">Get Your {selectedStampType} Quote</h3>
-            <p className="text-gray-600 mb-4">
-              Contact us for a personalized quote on your rubber stamp requirements.
-            </p>
-            <div className="flex gap-4">
-              <a 
-                href="/contact" 
-                className="flex-1 bg-blue-600 text-white text-center py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                Contact Us
-              </a>
-              <button 
-                onClick={() => setQuoteModalOpen(false)}
-                className="flex-1 border border-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Quote Modal */}
+      <RubberStampQuoteForm 
+        isOpen={quoteModalOpen}
+        onClose={() => setQuoteModalOpen(false)}
+        stampType={selectedStampType}
+      />
     </Layout>
   );
 };
