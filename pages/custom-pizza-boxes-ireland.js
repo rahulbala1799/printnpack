@@ -343,9 +343,9 @@ const CustomPizzaBoxesIreland = () => {
       </section>
 
       {/* Pizza Box Sizes Section */}
-      <section className="py-20 bg-white" data-animate>
+      <section className="py-12 bg-white" data-animate>
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-black text-gray-800 mb-6">
               All Pizza Box Sizes Available
             </h2>
@@ -377,9 +377,9 @@ const CustomPizzaBoxesIreland = () => {
       </section>
 
       {/* Applications Section */}
-      <section className="py-20 bg-gradient-to-br from-red-50 to-orange-50" data-animate>
+      <section className="py-12 bg-gradient-to-br from-red-50 to-orange-50" data-animate>
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-black text-gray-800 mb-6">
               Perfect for Every Business
             </h2>

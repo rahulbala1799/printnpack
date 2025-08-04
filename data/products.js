@@ -40,45 +40,7 @@ const products = [
     leadTime: '5-7 business days',
     weeklyDelivery: 'Our weekly delivery service is perfect for busy restaurants and takeaways that need a reliable supply of custom pizza boxes. We establish a regular delivery schedule based on your needs, ensuring you never run out of branded packaging. Our team monitors your usage patterns and adjusts quantities to optimize efficiency and reduce costs. This service helps maintain consistent branding while simplifying your operations and inventory management.'
   },
-  {
-    id: 'brown-pizza-boxes',
-    name: 'Brown Pizza Boxes',
-    category: 'Food Packaging',
-    description: 'Eco-friendly brown pizza boxes with company blue branding that keep food hot and showcase your sustainability commitment. Available in 7", 9", 10", 12", and 14" sizes.',
-    features: [
-      'Made from recycled kraft corrugated cardboard',
-      'Custom printing with company blue branding',
-      'Stackable design for easy storage',
-      'Multiple size options: 7", 9", 10", 12", and 14"',
-      'All boxes 4.5-5cm high for perfect pizza fit',
-      'Low minimum order quantity of 100 pieces'
-    ],
-    detailedDescription: 'Our brown kraft pizza boxes combine sustainability with excellent performance. The natural brown exterior with company blue accents creates an eco-friendly yet professional appearance. Made from recycled materials, these boxes offer excellent insulation and stability while showcasing your environmental commitment. Available in 7", 9", 10", 12", and 14" sizes to accommodate any pizza style, with all boxes measuring 4.5-5cm in height. Each box can be fully customized with your branding while maintaining the sustainable aesthetic. With a low minimum order quantity of just 100 pieces, these pizza boxes are perfect for businesses of all sizes.',
-    specifications: [
-      { name: 'Material', value: 'Recycled kraft corrugated cardboard' },
-      { name: 'Thickness', value: '1.5mm - 3mm (E-flute or B-flute)' },
-      { name: 'Color', value: 'Natural brown with company blue accents' },
-      { name: 'Sizes Available', value: '7" (18cm), 9" (23cm), 10" (25cm), 12" (30.5cm), 14" (35.5cm)' },
-      { name: 'Box Height', value: '4.5-5cm depending on size' },
-      { name: 'Print Quality', value: 'Up to 4-color offset or digital printing' },
-      { name: 'Minimum Order', value: '100 units' },
-      { name: 'Production Time', value: '7-10 business days' },
-      { name: 'Customization', value: 'Size, printing, finish' },
-      { name: 'Delivery Options', value: 'Weekly scheduled delivery service available' },
-    ],
-    images: [
-      '/ifa/product/pizzab/5.png',
-      '/ifa/product/pizzab/6.png',
-      '/ifa/product/pizzab/7.png',
-      '/ifa/product/pizzab/8.png',
-      '/ifa/product/pizzab/9.png'
-    ],
-    imageSrc: '/ifa/product/pizzab/5.png',
-    price: 'Starting at €0.35 per unit',
-    moq: 250,
-    leadTime: '7-10 business days',
-    weeklyDelivery: 'Our weekly delivery service is designed specifically for busy restaurants and food service businesses. We establish a consistent delivery schedule tailored to your needs, ensuring you maintain adequate stock without requiring large storage areas. Our account team monitors your usage patterns to optimize order quantities, reducing waste and controlling costs. This reliable branded packaging delivery service enhances your professional image while simplifying operations.'
-  },
+
   {
     id: 'flat-handle-paper-bags',
     name: 'Flat Handle Paper Bags',
