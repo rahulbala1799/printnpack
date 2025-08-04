@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '../components/layout/Layout';
 import Head from 'next/head';
+import ClothingQuoteForm from '../components/ClothingQuoteForm';
 
 const ClothingPage = () => {
+  const [quoteModalOpen, setQuoteModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState('');
+
+  const handleQuoteClick = (productTitle) => {
+    setSelectedProduct(productTitle);
+    setQuoteModalOpen(true);
+  };
+
   const clothingProducts = [
     {
       title: "T-Shirts",
@@ -114,7 +123,10 @@ const ClothingPage = () => {
                     </div>
                   )}
 
-                  <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+                  <button 
+                    onClick={() => handleQuoteClick(product.title)}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                  >
                     Get Quote for {product.title}
                   </button>
                 </div>
@@ -202,6 +214,13 @@ const ClothingPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Quote Modal */}
+      <ClothingQuoteForm 
+        isOpen={quoteModalOpen}
+        onClose={() => setQuoteModalOpen(false)}
+        productType={selectedProduct}
+      />
     </Layout>
   );
 };

@@ -75,6 +75,7 @@ const groupProductsByCategory = (products) => {
 // Main group categories for the main navigation
 const mainGroups = [
   { id: 'packaging', name: 'Packaging', categories: ['Food Packaging', 'Retail Packaging', 'Eco-Friendly Packaging', 'Shipping', 'Hospitality Products'] },
+  { id: 'clothing', name: 'Clothing', categories: ['Apparel'] },
   { id: 'wide-format', name: 'Wide Format', categories: ['Wide Format'] },
   { id: 'leaflets', name: 'Leaflets and Flyers', categories: ['Leaflets', 'Food Service'] },
 ];
@@ -197,8 +198,12 @@ const ProductsPage = () => {
             <button
               key={group.id}
               onClick={() => {
-                setActiveGroup(group.id);
-                setActiveCategory('all');
+                if (group.id === 'clothing') {
+                  router.push('/clothing');
+                } else {
+                  setActiveGroup(group.id);
+                  setActiveCategory('all');
+                }
               }}
               className={`py-5 px-6 font-bold text-lg relative transition-colors duration-300 ${
                 activeGroup === group.id 
