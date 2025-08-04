@@ -12,11 +12,11 @@ const CustomClothingIreland = () => {
 
   // Hero images rotation
   const heroImages = [
-    '/images/apparel/1.png',
-    '/images/apparel/6.png',
-    '/images/apparel/12.png',
-    '/images/apparel/2.png',
-    '/images/apparel/7.png'
+    '/images/apparel/TSHIRT MOCK UP 1.jpg',
+    '/images/apparel/POLO SHIRT MOCK UP 1.jpg',
+    '/images/apparel/HOODIE MOCK UP 1.jpg',
+    '/images/apparel/TSHIRT MOCK UP 2.jpg',
+    '/images/apparel/POLO SHIRT MOCK UP 2.jpg'
   ];
 
   // Auto-rotate hero images
@@ -57,11 +57,11 @@ const CustomClothingIreland = () => {
       features: ['100% Cotton Options', 'Screen & Digital Printing', 'All Sizes Available', 'Fast 3-5 Day Turnaround'],
       startingPrice: '€8.50',
       images: [
-        '/images/apparel/1.png',
-        '/images/apparel/2.png',
-        '/images/apparel/3.png',
-        '/images/apparel/4.png',
-        '/images/apparel/5.png'
+        '/images/apparel/TSHIRT MOCK UP 1.jpg',
+        '/images/apparel/TSHIRT MOCK UP 2.jpg',
+        '/images/apparel/TSHIRT MOCK UP 3.jpg',
+        '/images/apparel/TSHIRT MOCK UP 4.jpg',
+        '/images/apparel/TSHIRT MOCK UP 5.jpg'
       ]
     },
     {
@@ -71,12 +71,12 @@ const CustomClothingIreland = () => {
       features: ['Embroidery & Printing', 'Corporate Quality', 'Moisture-Wicking Fabric', 'Professional Appearance'],
       startingPrice: '€12.99',
       images: [
-        '/images/apparel/6.png',
-        '/images/apparel/7.png',
-        '/images/apparel/8.png',
-        '/images/apparel/9.png',
-        '/images/apparel/10.png',
-        '/images/apparel/11.png'
+        '/images/apparel/POLO SHIRT MOCK UP 1.jpg',
+        '/images/apparel/POLO SHIRT MOCK UP 2.jpg',
+        '/images/apparel/POLO SHIRT MOCK UP 3.jpg',
+        '/images/apparel/POLO SHIRT MOCK UP 4.jpg',
+        '/images/apparel/POLO SHIRT MOCK UP 5.jpg',
+        '/images/apparel/POLO SHIRT MOCK UP 6.jpg'
       ]
     },
     {
@@ -86,11 +86,11 @@ const CustomClothingIreland = () => {
       features: ['Heavy-Weight Cotton', 'Custom Printing', 'Pullover & Zip Options', 'Weather Resistant'],
       startingPrice: '€18.50',
       images: [
-        '/images/apparel/12.png',
-        '/images/apparel/13.png',
-        '/images/apparel/14.png',
-        '/images/apparel/15.png',
-        '/images/apparel/16.png'
+        '/images/apparel/HOODIE MOCK UP 1.jpg',
+        '/images/apparel/HOODIE MOCK UP 2.jpg',
+        '/images/apparel/HOODIE MOCK UP 3.jpg',
+        '/images/apparel/HOODIE MOCK UP 4.jpg',
+        '/images/apparel/HOODIE MOCK UP 5.jpg'
       ]
     },
     {
@@ -190,13 +190,13 @@ const CustomClothingIreland = () => {
         <meta name="keywords" content="custom clothing Ireland, printed t-shirts Dublin, corporate uniforms Ireland, custom hoodies Cork, promotional clothing Galway, embroidered polo shirts, hi-viz jackets Ireland, workwear printing, team clothing Ireland, branded apparel" />
         <meta property="og:title" content="Custom Clothing Ireland | Professional Printed Apparel & Uniforms" />
         <meta property="og:description" content="High-quality custom clothing printing across Ireland. Corporate uniforms, promotional t-shirts, hoodies, and workwear. Free design service, fast delivery." />
-        <meta property="og:image" content="https://www.printnpack.ie/images/apparel/1.png" />
+        <meta property="og:image" content="https://www.printnpack.ie/images/apparel/TSHIRT MOCK UP 1.jpg" />
         <meta property="og:url" content="https://www.printnpack.ie/clothing" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Custom Clothing Ireland | Print n Pack" />
         <meta name="twitter:description" content="Premium custom clothing printing and embroidery services across Ireland. Corporate uniforms, promotional apparel, and team wear." />
-        <meta name="twitter:image" content="https://www.printnpack.ie/images/apparel/1.png" />
+        <meta name="twitter:image" content="https://www.printnpack.ie/images/apparel/TSHIRT MOCK UP 1.jpg" />
         <link rel="canonical" href="https://www.printnpack.ie/clothing" />
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Print n Pack Ireland" />
