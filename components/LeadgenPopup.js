@@ -13,8 +13,8 @@ const LeadgenPopup = () => {
   // Check if we should show the popup
   useEffect(() => {
     const checkShowPopup = () => {
-      // Only show on products page
-      if (router.pathname !== '/products') return;
+      // Only show on products page and home page
+      if (router.pathname !== '/products' && router.pathname !== '/') return;
 
       // Check if user has already seen/dismissed popup
       const popupDismissed = localStorage.getItem('leadgen_popup_dismissed');
@@ -294,12 +294,8 @@ This is a lead from the website popup form.`,
                     <option value="">Select a category</option>
                     <option value="Pizza Boxes">Pizza Boxes</option>
                     <option value="Paper Bags">Paper Bags</option>
-                    <option value="Food Packaging">Food Packaging</option>
-                    <option value="Retail Packaging">Retail Packaging</option>
-                    <option value="Eco-Friendly Packaging">Eco-Friendly Packaging</option>
                     <option value="Wide Format Printing">Wide Format Printing</option>
                     <option value="Leaflets & Flyers">Leaflets & Flyers</option>
-                    <option value="Custom Solution">Custom Solution</option>
                   </select>
                 </div>
 
