@@ -272,6 +272,47 @@ const products = [
     weeklyDelivery: 'Our weekly delivery service provides a reliable supply of packaging materials customized to your specific business needs. This service is particularly valuable for businesses that require consistent packaging without maintaining large storage inventories. Our team tracks your usage patterns to optimize delivery quantities, ensuring you never run short while minimizing waste. This premium service elevates your professional image while streamlining operations.'
   },
   {
+    id: 'custom-pizza-boxes-ireland',
+    name: 'Custom Pizza Boxes',
+    category: 'Food Packaging',
+    url: '/custom-pizza-boxes-ireland',
+    description: 'Premium custom printed pizza boxes for restaurants, takeaways, and food delivery services across Ireland. Full-color printing, all sizes available.',
+    features: [
+      'Full-color custom printing with your logo and branding',
+      'All pizza sizes from 7" personal to 20" party size',
+      'Food-safe corrugated cardboard construction',
+      'Grease-resistant and heat-retention design',
+      'Fast delivery across Ireland',
+      'Professional design service available'
+    ],
+    detailedDescription: 'Our custom pizza boxes are the perfect way to promote your restaurant brand while keeping pizzas hot and fresh. Made from high-quality, food-safe corrugated cardboard with full-color printing capabilities, these boxes are designed specifically for the Irish food service market. Whether you run a pizza restaurant, takeaway service, or food delivery business, our custom pizza boxes will help you stand out from the competition. We offer all standard pizza sizes and can accommodate custom dimensions. Our experienced design team can help create stunning artwork that showcases your brand and attracts customers. With fast turnaround times and competitive pricing, we\'re Ireland\'s preferred choice for custom pizza box printing.',
+    specifications: [
+      { name: 'Material', value: 'Food-safe corrugated cardboard' },
+      { name: 'Printing', value: 'Full-color CMYK printing' },
+      { name: 'Sizes Available', value: '7" to 20" (custom sizes available)' },
+      { name: 'Features', value: 'Grease-resistant, heat-retention, stackable' },
+      { name: 'Customization', value: 'Logo, branding, custom designs' },
+      { name: 'Minimum Order', value: '500 units' },
+      { name: 'Production Time', value: '5-7 business days' },
+      { name: 'Design Service', value: 'Professional design team available' },
+      { name: 'Delivery', value: 'Fast delivery across Ireland' },
+      { name: 'Quality', value: 'Food-safe inks and materials' },
+    ],
+    images: [
+      '/images/pizza-boxes/PIZZA_BOX_1.jpg',
+      '/images/pizza-boxes/PIZZA_BOX_2.jpg',
+      '/images/pizza-boxes/PIZZA_BOX_3.jpg',
+      '/images/pizza-boxes/PIZZA_BOX_4.jpg',
+      '/images/pizza-boxes/PIZZA_BOX_5.jpg',
+      '/images/pizza-boxes/PIZZA_BOX_6.jpg'
+    ],
+    imageSrc: '/images/pizza-boxes/PIZZA_BOX_1.jpg',
+    price: 'Starting at €0.45 per box',
+    moq: 500,
+    leadTime: '5-7 business days',
+    weeklyDelivery: 'Our weekly delivery service is perfect for busy restaurants and takeaways that need a reliable supply of custom pizza boxes. We establish a regular delivery schedule based on your needs, ensuring you never run out of branded packaging. Our team monitors your usage patterns and adjusts quantities to optimize efficiency and reduce costs. This service helps maintain consistent branding while simplifying your operations and inventory management.'
+  },
+  {
     id: 'eco-bagasse-burger-boxes',
     name: 'Bagasse Burger Box',
     category: 'Eco-Friendly Packaging',
