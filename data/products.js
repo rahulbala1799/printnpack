@@ -275,6 +275,7 @@ const products = [
     id: 'eco-bagasse-burger-boxes',
     name: 'Bagasse Burger Box',
     category: 'Eco-Friendly Packaging',
+    url: '/eco-bagasse-burger-boxes',
     description: 'Sustainable bagasse burger boxes made from sugarcane fiber, perfect for eco-conscious food businesses seeking environmentally friendly packaging solutions.',
     features: [
       'Made from 100% biodegradable sugarcane fiber',

@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 const ProductCard = ({ product }) => {
   return (
     <div className="group bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col">
-      <Link href={`/products/${product.id}`} className="block relative h-60 overflow-hidden bg-gray-100">
+      <Link href={product.url || `/products/${product.id}`} className="block relative h-60 overflow-hidden bg-gray-100">
         {!product.imageSrc || product.imageSrc.includes('css-placeholder-image') ? (
           <div className="absolute inset-0 css-placeholder banner flex items-center justify-center">
             <span className="sr-only">{product.name}</span>
@@ -33,7 +33,7 @@ const ProductCard = ({ product }) => {
         <h3 className="font-bold text-lg mt-1 text-gray-800">{product.name}</h3>
         <p className="mt-2 text-gray-600 text-sm line-clamp-3 flex-grow">{product.description}</p>
         <div className="mt-4 pt-4 border-t border-gray-100">
-          <Link href={`/products/${product.id}`} className="inline-flex items-center text-blue-600 font-medium group-hover:text-blue-800 transition-colors">
+          <Link href={product.url || `/products/${product.id}`} className="inline-flex items-center text-blue-600 font-medium group-hover:text-blue-800 transition-colors">
             View Details
             <svg
               className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300"
