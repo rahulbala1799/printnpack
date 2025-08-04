@@ -292,8 +292,8 @@ This is a lead from the website popup form.`,
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                   >
                     <option value="">Select a category</option>
-                    <option value="Pizza Boxes">Pizza Boxes</option>
-                    <option value="Paper Bags">Paper Bags</option>
+                    <option value="Packaging">Packaging</option>
+                    <option value="Clothing">Clothing</option>
                     <option value="Wide Format Printing">Wide Format Printing</option>
                     <option value="Leaflets & Flyers">Leaflets & Flyers</option>
                   </select>
