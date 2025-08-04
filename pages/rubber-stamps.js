@@ -20,28 +20,10 @@ const RubberStampsPage = () => {
       seoKeywords: "business rubber stamps, company logo stamps, address stamps, professional stamps"
     },
     {
-      title: "Self-Inking Stamps",
-      description: "Convenient self-inking rubber stamps that automatically re-ink after each impression. Ideal for high-volume stamping with consistent, clean results.",
-      features: ["Auto Re-Inking", "Clean Impressions", "High Volume Use", "Long-Lasting"],
-      seoKeywords: "self-inking stamps, automatic stamps, office stamps, high volume stamps"
-    },
-    {
-      title: "Pre-Inked Stamps",
-      description: "Premium pre-inked rubber stamps offering thousands of crisp impressions before re-inking. Perfect for detailed designs and fine text.",
-      features: ["Thousands of Impressions", "Crisp Detail", "Fine Text Capability", "Premium Quality"],
-      seoKeywords: "pre-inked stamps, premium stamps, detailed stamps, fine text stamps"
-    },
-    {
       title: "Traditional Hand Stamps",
       description: "Classic wooden handle rubber stamps requiring a separate ink pad. Ideal for occasional use and traditional stamping applications.",
       features: ["Wooden Handle", "Separate Ink Pad", "Traditional Design", "Cost Effective"],
       seoKeywords: "traditional rubber stamps, wooden handle stamps, classic stamps, hand stamps"
-    },
-    {
-      title: "Date & Numbering Stamps",
-      description: "Specialized stamps for dating documents and sequential numbering. Essential for document control and administrative tasks.",
-      features: ["Adjustable Dates", "Sequential Numbering", "Document Control", "Administrative Use"],
-      seoKeywords: "date stamps, numbering stamps, document stamps, administrative stamps"
     },
     {
       title: "Signature Stamps",
@@ -68,10 +50,10 @@ const RubberStampsPage = () => {
     <Layout>
       <Head>
         <title>Custom Rubber Stamps Ireland | Business & Personal Stamps | Print n Pack</title>
-        <meta name="description" content="Professional custom rubber stamps in Ireland. Self-inking, pre-inked, business stamps, signature stamps & more. Fast turnaround, high quality. Order online today!" />
-        <meta name="keywords" content="rubber stamps Ireland, custom stamps, business stamps, self-inking stamps, pre-inked stamps, signature stamps, date stamps, company logo stamps, address stamps, professional stamps, Dublin stamps" />
+        <meta name="description" content="Professional custom rubber stamps in Ireland. Business stamps, traditional hand stamps, and signature stamps. Fast turnaround, high quality. Order online today!" />
+        <meta name="keywords" content="rubber stamps Ireland, custom stamps, business stamps, traditional hand stamps, signature stamps, company logo stamps, address stamps, professional stamps, Dublin stamps" />
         <meta property="og:title" content="Custom Rubber Stamps Ireland | Professional Business Stamps" />
-        <meta property="og:description" content="High-quality custom rubber stamps for business and personal use. Self-inking, pre-inked, and traditional stamps available. Fast delivery across Ireland." />
+        <meta property="og:description" content="High-quality custom rubber stamps for business and personal use. Business stamps, traditional hand stamps, and signature stamps available. Fast delivery across Ireland." />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="geo.region" content="IE" />
