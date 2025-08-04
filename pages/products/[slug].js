@@ -3185,9 +3185,12 @@ const ProductDetail = ({ product, relatedProducts }) => {
 // This function gets called at build time
 export async function getStaticPaths() {
   // Get the paths we want to pre-render based on products
-  const paths = products.map((product) => ({
-    params: { slug: product.id },
-  }));
+  // Exclude eco-bagasse-burger-boxes as it has its own standalone page
+  const paths = products
+    .filter((product) => product.id !== 'eco-bagasse-burger-boxes')
+    .map((product) => ({
+      params: { slug: product.id },
+    }));
 
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
