@@ -10,7 +10,7 @@ const ProductShowcase = () => {
     'brown-pizza-boxes',
     'twisted-handle-paper-bags',
     'flat-handle-paper-bags',
-    'bagasse-boxes'
+    'eco-bagasse-burger-boxes'
   ];
   
   // Find the products from the product data

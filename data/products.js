@@ -272,7 +272,7 @@ const products = [
     weeklyDelivery: 'Our weekly delivery service provides a reliable supply of packaging materials customized to your specific business needs. This service is particularly valuable for businesses that require consistent packaging without maintaining large storage inventories. Our team tracks your usage patterns to optimize delivery quantities, ensuring you never run short while minimizing waste. This premium service elevates your professional image while streamlining operations.'
   },
   {
-    id: 'bagasse-boxes',
+    id: 'eco-bagasse-burger-boxes',
     name: 'Bagasse Burger Box',
     category: 'Eco-Friendly Packaging',
     description: 'Sustainable bagasse burger boxes made from sugarcane fiber, perfect for eco-conscious food businesses seeking environmentally friendly packaging solutions.',
