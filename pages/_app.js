@@ -1,14 +1,27 @@
-import '../styles/globals.css'
-import Layout from '../components/layout/Layout'
-import Head from 'next/head'
-import Script from 'next/script'
+import '../styles/globals.css';
+import { Inter } from 'next/font/google';
+import Head from 'next/head';
+import { useEffect } from 'react';
+import Script from 'next/script';
 
-export default function App({ Component, pageProps }) {
+// If loading a variable font, you don't need to specify the font weight
+const inter = Inter({ subsets: ['latin'] });
+
+function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    // Initialize GTM
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'gtm.start': new Date().getTime(),
+      event: 'gtm.js'
+    });
+  }, []);
+
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="printNpack - Professional printing and packaging solutions in Ireland" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#1e3a8a" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
@@ -24,9 +37,15 @@ export default function App({ Component, pageProps }) {
         }}
       />
       
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <style jsx global>{`
+        html {
+          font-family: ${inter.style.fontFamily}, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+            Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+        }
+      `}</style>
+      <Component {...pageProps} />
     </>
-  )
-} 
+  );
+}
+
+export default MyApp; 
