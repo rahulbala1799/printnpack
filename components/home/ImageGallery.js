@@ -142,7 +142,7 @@ const ImageGallery = () => {
                   });
                 }}
               >
-                <Link href={`/products/${product.id}`} className="aspect-square w-full h-full relative block">
+                <Link href={product.url || `/products/${product.id}`} className="aspect-square w-full h-full relative block">
                   <Image
                     src={product.imageSrc}
                     alt={product.name}
@@ -182,7 +182,7 @@ const ImageGallery = () => {
                   });
                 }}
               >
-                <Link href={`/products/${product.id}`} className="aspect-square w-full h-full relative block">
+                <Link href={product.url || `/products/${product.id}`} className="aspect-square w-full h-full relative block">
                   <Image
                     src={product.imageSrc}
                     alt={product.name}
@@ -260,7 +260,7 @@ const ImageGallery = () => {
                   <h3 className="text-lg md:text-xl font-bold text-gray-800">{selectedProduct.name}</h3>
                   <p className="text-sm text-gray-600 mb-3">{selectedProduct.category}</p>
                   <Link 
-                    href={`/products/${selectedProduct.id}`}
+                    href={selectedProduct.url || `/products/${selectedProduct.id}`}
                     className="inline-block bg-blue-600 hover:bg-blue-700 text-white py-1.5 px-4 rounded-lg text-sm font-medium transition-colors"
                   >
                     View Product Details

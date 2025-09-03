@@ -769,6 +769,7 @@ const products = [
     id: 'foamex-boards',
     name: 'Foamex Boards',
     category: 'Wide Format',
+    url: '/foamex-boards',
     imageSrc: '/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif',
     price: 'Starting at €25 per board',
     quoteRequired: false,

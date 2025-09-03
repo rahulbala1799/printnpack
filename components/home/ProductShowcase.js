@@ -34,7 +34,7 @@ const ProductShowcase = () => {
         <div className="grid grid-cols-2 gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto">
           {featuredProducts.map((product) => (
             <Link 
-              href={`/products/${product.id}`} 
+              href={product.url || `/products/${product.id}`} 
               key={product.id}
               className="group flex flex-col bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
             >

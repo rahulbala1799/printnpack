@@ -97,7 +97,7 @@ const SearchBar = ({ isMobile = false, onClose }) => {
           <div className="divide-y divide-gray-100">
             {searchResults.map((product) => (
               <Link 
-                href={`/products/${product.id}`} 
+                href={product.url || `/products/${product.id}`} 
                 key={product.id}
                 onClick={handleResultClick}
                 className="flex items-center p-3 hover:bg-gray-50 transition-colors"
