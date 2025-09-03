@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Link from 'next/link';
-import { FaFileAlt, FaStickyNote, FaBookOpen, FaUtensils } from 'react-icons/fa';
+import { FaFileAlt, FaStickyNote, FaBookOpen, FaUtensils, FaImage } from 'react-icons/fa';
 
 export default function Services() {
   const services = [
@@ -29,6 +29,12 @@ export default function Services() {
       title: "Menus",
       description: "Appetizing menu designs that showcase your offerings",
       link: "/services/menus"
+    },
+    {
+      icon: <FaImage className="w-12 h-12 text-primary" />,
+      title: "Foamex Boards",
+      description: "Premium PVC signage and display boards for indoor applications",
+      link: "/foamex-boards"
     }
   ];
 

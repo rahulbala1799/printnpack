@@ -203,6 +203,8 @@ const ProductsPage = () => {
                   router.push('/clothing');
                 } else if (group.id === 'rubber-stamps') {
                   router.push('/rubber-stamps');
+                } else if (group.id === 'wide-format') {
+                  router.push('/foamex-boards');
                 } else {
                   setActiveGroup(group.id);
                   setActiveCategory('all');
