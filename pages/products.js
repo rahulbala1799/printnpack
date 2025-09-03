@@ -204,7 +204,9 @@ const ProductsPage = () => {
                 } else if (group.id === 'rubber-stamps') {
                   router.push('/rubber-stamps');
                 } else if (group.id === 'wide-format') {
-                  router.push('/foamex-boards');
+                  // For wide-format, show both options or redirect to a landing page
+                  setActiveGroup(group.id);
+                  setActiveCategory('all');
                 } else {
                   setActiveGroup(group.id);
                   setActiveCategory('all');

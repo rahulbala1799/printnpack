@@ -35,6 +35,12 @@ export default function Services() {
       title: "Foamex Boards",
       description: "Premium PVC signage and display boards for indoor applications",
       link: "/foamex-boards"
+    },
+    {
+      icon: <FaImage className="w-12 h-12 text-primary" />,
+      title: "Correx Boards",
+      description: "Weather-resistant outdoor signage and display boards for all conditions",
+      link: "/correx-boards"
     }
   ];
 

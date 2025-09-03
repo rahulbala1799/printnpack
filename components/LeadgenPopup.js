@@ -296,6 +296,7 @@ This is a lead from the website popup form.`,
                     <option value="Clothing">Clothing</option>
                     <option value="Wide Format Printing">Wide Format Printing</option>
                     <option value="Foamex Boards">Foamex Boards</option>
+                    <option value="Correx Boards">Correx Boards</option>
                     <option value="Leaflets & Flyers">Leaflets & Flyers</option>
                   </select>
                 </div>

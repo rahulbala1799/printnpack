@@ -957,6 +957,7 @@ const products = [
     id: 'correx-boards',
     name: 'Correx Boards',
     category: 'Wide Format',
+    url: '/correx-boards',
     description: 'Weather-resistant corrugated polypropylene boards (commonly known as Corriboard in Ireland) for durable outdoor signage, ideal for elections, construction, real estate, and temporary displays.',
     features: [
       'Ultra-lightweight yet highly durable material',
