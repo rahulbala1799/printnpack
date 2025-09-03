@@ -425,6 +425,7 @@ const products = [
     id: 'roll-up-banner-stands',
     name: 'Roll-Up Banner Stands',
     category: 'Wide Format',
+    url: '/roll-up-banners',
     description: 'Professional roll-up banner stands that create instant impact for exhibitions, retail displays, and presentations.',
     features: [
       'Premium quality portable display system',
@@ -1075,6 +1076,7 @@ const products = [
     id: 'vinyl-stickers',
     name: 'Vinyl Stickers',
     category: 'Wide Format',
+    url: '/vinyl-stickers',
     description: 'Premium vinyl stickers and decals for business branding, promotions, and creative applications in any size or shape.',
     features: [
       'High-quality vinyl materials with professional adhesives',

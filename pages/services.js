@@ -41,6 +41,18 @@ export default function Services() {
       title: "Correx Boards",
       description: "Weather-resistant outdoor signage and display boards for all conditions",
       link: "/correx-boards"
+    },
+    {
+      icon: <FaImage className="w-12 h-12 text-primary" />,
+      title: "Vinyl Stickers",
+      description: "Custom vinyl graphics, decals, and stickers for all applications",
+      link: "/vinyl-stickers"
+    },
+    {
+      icon: <FaImage className="w-12 h-12 text-primary" />,
+      title: "Roll Up Banners",
+      description: "Professional exhibition and trade show displays with easy setup",
+      link: "/roll-up-banners"
     }
   ];
 
