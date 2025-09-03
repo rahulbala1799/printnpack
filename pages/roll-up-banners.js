@@ -12,11 +12,11 @@ const RollUpBannersPage = () => {
 
   // Hero images rotation
   const heroImages = [
-    '/ifa/product/rollup/roll-up-banner-1.png',
-    '/ifa/product/rollup/roll-up-banner-2.png',
-    '/ifa/product/rollup/roll-up-banner-3.png',
-    '/ifa/product/rollup/roll-up-banner-4.png',
-    '/ifa/product/rollup/roll-up-banner-5.png'
+    '/ifa/product/rollup/1.png',
+    '/ifa/product/rollup/2.png',
+    '/ifa/product/rollup/3.png',
+    '/ifa/product/rollup/4.png',
+    '/ifa/product/rollup/5.png'
   ];
 
   // Auto-rotate hero images
@@ -59,8 +59,8 @@ const RollUpBannersPage = () => {
       material: 'Premium Vinyl',
       applications: ['Trade shows', 'Exhibitions', 'Retail displays', 'Corporate events', 'Reception areas'],
       images: [
-        '/ifa/product/rollup/roll-up-banner-1.png',
-        '/ifa/product/rollup/roll-up-banner-2.png'
+        '/ifa/product/rollup/1.png',
+        '/ifa/product/rollup/2.png'
       ]
     },
     {
@@ -72,8 +72,8 @@ const RollUpBannersPage = () => {
       material: 'Premium Vinyl + Aluminium',
       applications: ['High-end exhibitions', 'Corporate headquarters', 'Premium retail', 'VIP events', 'Executive offices'],
       images: [
-        '/ifa/product/rollup/roll-up-banner-3.png',
-        '/ifa/product/rollup/roll-up-banner-4.png'
+        '/ifa/product/rollup/3.png',
+        '/ifa/product/rollup/4.png'
       ]
     },
     {
@@ -85,8 +85,8 @@ const RollUpBannersPage = () => {
       material: 'Lightweight Vinyl',
       applications: ['Travel exhibitions', 'Mobile sales', 'Temporary displays', 'Event marketing', 'Portable displays'],
       images: [
-        '/ifa/product/rollup/roll-up-banner-5.png',
-        '/ifa/product/rollup/roll-up-banner-1.png'
+        '/ifa/product/rollup/5.png',
+        '/ifa/product/rollup/1.png'
       ]
     },
     {
@@ -98,8 +98,8 @@ const RollUpBannersPage = () => {
       material: 'Custom Materials',
       applications: ['Special events', 'Unique displays', 'Branded systems', 'Custom sizes', 'Specialty applications'],
       images: [
-        '/ifa/product/rollup/roll-up-banner-2.png',
-        '/ifa/product/rollup/roll-up-banner-3.png'
+        '/ifa/product/rollup/2.png',
+        '/ifa/product/rollup/3.png'
       ]
     }
   ];

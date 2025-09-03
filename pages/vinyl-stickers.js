@@ -12,11 +12,11 @@ const VinylStickersPage = () => {
 
   // Hero images rotation
   const heroImages = [
-    '/ifa/product/vinylstk/vinyl-stickers-ireland.jpg',
-    '/ifa/product/vinylstk/vinyl-stickers-dublin.jpg',
-    '/ifa/product/vinylstk/vinyl-stickers-cork.jpg',
-    '/ifa/product/vinylstk/vinyl-stickers-galway.jpg',
-    '/ifa/product/vinylstk/vinyl-stickers-limerick.jpg'
+    '/ifa/product/vinylstk/Window_Sticker_2_01041803202404.png.webp',
+    '/ifa/product/vinylstk/Window_Sticker_3_01042303202404.png.webp',
+    '/ifa/product/vinylstk/Transperent_Sticker_low_03281303202404.png.webp',
+    '/ifa/product/vinylstk/carstk.webp',
+    '/ifa/product/vinylstk/Vinyl-Decals-_-Stickers.jpg'
   ];
 
   // Auto-rotate hero images
@@ -59,8 +59,8 @@ const VinylStickersPage = () => {
       material: 'Premium Vinyl',
       applications: ['Vehicle graphics', 'Window decals', 'Wall murals', 'Product labels', 'Signage'],
       images: [
-        '/ifa/product/vinylstk/vinyl-stickers-ireland.jpg',
-        '/ifa/product/vinylstk/vinyl-stickers-dublin.jpg'
+        '/ifa/product/vinylstk/Window_Sticker_2_01041803202404.png.webp',
+        '/ifa/product/vinylstk/Window_Sticker_3_01042303202404.png.webp'
       ]
     },
     {
@@ -72,8 +72,8 @@ const VinylStickersPage = () => {
       material: 'Premium Vinyl',
       applications: ['Window decals', 'Wall graphics', 'Floor graphics', 'Equipment marking', 'Safety signs'],
       images: [
-        '/ifa/product/vinylstk/vinyl-stickers-cork.jpg',
-        '/ifa/product/vinylstk/vinyl-stickers-galway.jpg'
+        '/ifa/product/vinylstk/Transperent_Sticker_low_03281303202404.png.webp',
+        '/ifa/product/vinylstk/carstk.webp'
       ]
     },
     {
@@ -85,8 +85,8 @@ const VinylStickersPage = () => {
       material: 'Premium Vinyl',
       applications: ['Product labels', 'Asset tags', 'Equipment marking', 'Inventory labels', 'Custom stickers'],
       images: [
-        '/ifa/product/vinylstk/vinyl-stickers-limerick.jpg',
-        '/ifa/product/vinylstk/vinyl-stickers-ireland.jpg'
+        '/ifa/product/vinylstk/carstk.webp',
+        '/ifa/product/vinylstk/Vinyl-Decals-_-Stickers.jpg'
       ]
     },
     {
@@ -98,8 +98,8 @@ const VinylStickersPage = () => {
       material: 'Premium Vinyl',
       applications: ['Vehicle wraps', 'Large format graphics', 'Exhibition graphics', 'Retail displays', 'Event branding'],
       images: [
-        '/ifa/product/vinylstk/vinyl-stickers-dublin.jpg',
-        '/ifa/product/vinylstk/vinyl-stickers-cork.jpg'
+        '/ifa/product/vinylstk/Window_Sticker_2_01041803202404.png.webp',
+        '/ifa/product/vinylstk/Transperent_Sticker_low_03281303202404.png.webp'
       ]
     }
   ];
