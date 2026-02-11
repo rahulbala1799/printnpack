@@ -8,22 +8,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#1a365d',
-        secondary: '#2d3748',
-        accent: '#e53e3e',
+        primary: '#0f172a',
+        secondary: '#1e293b',
+        accent: '#2563eb',
+        'accent-dark': '#1e40af',
+        'brand-navy': '#0f172a',
+        'brand-slate': '#1e293b',
       },
-      animation: {
-        'spin-slow': 'spin 3s linear infinite',
-        'draw': 'draw 2s ease-in-out forwards',
-        'bounce-slow': 'bounce 3s infinite',
-      },
-      keyframes: {
-        draw: {
-          '0%': { strokeDasharray: '1000', strokeDashoffset: '1000' },
-          '100%': { strokeDasharray: '1000', strokeDashoffset: '0' },
-        },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
     },
   },
   plugins: [],
-} 
+}

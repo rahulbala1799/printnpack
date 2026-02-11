@@ -1,11 +1,7 @@
 import '../styles/globals.css';
-import { Inter } from 'next/font/google';
 import Head from 'next/head';
 import { useEffect } from 'react';
 import Script from 'next/script';
-
-// If loading a variable font, you don't need to specify the font weight
-const inter = Inter({ subsets: ['latin'] });
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -21,26 +17,23 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="theme-color" content="#1e3a8a" />
+        <meta name="theme-color" content="#0f172a" />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
       </Head>
-      
+
       {/* Analytics Script */}
       <Script
         src="/analytics.js"
         strategy="afterInteractive"
-        onLoad={() => {
-          console.log('📊 Analytics script loaded successfully');
-        }}
-        onError={(e) => {
-          console.error('❌ Analytics script failed to load:', e);
-        }}
       />
-      
+
       <style jsx global>{`
         html {
-          font-family: ${inter.style.fontFamily}, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-            Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+            Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
         }
       `}</style>
       <Component {...pageProps} />
@@ -48,4 +41,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp; 
+export default MyApp;

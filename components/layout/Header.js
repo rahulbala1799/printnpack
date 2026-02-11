@@ -1,109 +1,35 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { 
-  FaPhone, 
-  FaEnvelope, 
-  FaBars, 
-  FaTimes, 
-  FaChevronRight, 
-  FaHome, 
-  FaInfoCircle, 
-  FaBoxOpen, 
-  FaTools, 
+import {
+  FaPhone,
+  FaEnvelope,
+  FaBars,
+  FaTimes,
+  FaChevronRight,
+  FaHome,
+  FaInfoCircle,
+  FaBoxOpen,
+  FaTools,
   FaPhoneAlt,
-  FaPrint,
-  FaTruck,
-  FaRecycle,
-  FaShoppingBag,
-  FaPizzaSlice,
-  FaLeaf,
-  FaCube,
-  FaBox,
   FaSearch
 } from 'react-icons/fa';
-import { BsFillDropletFill, BsBox } from 'react-icons/bs';
-import { IoColorPaletteSharp } from 'react-icons/io5';
 import SearchBar from '../search/SearchBar';
 import MobileSearch from '../search/MobileSearch';
-
-// Logo Component with package box icon
-const Logo = ({ scrolled }) => {
-  const boxVariants = {
-    hover: {
-      rotateY: [0, 15, 0, -15, 0],
-      scale: [1, 1.1, 1],
-      transition: {
-        duration: 2,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
-  
-  return (
-    <Link href="/" aria-label="Home page">
-      <motion.div 
-        className="flex items-center gap-3 cursor-pointer"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        whileHover="hover"
-      >
-        {/* Box icon for packaging */}
-        <motion.div
-          variants={boxVariants}
-          className="relative"
-          transition={{ delay: 0.2 }}
-          style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
-        >
-          <FaBox className="text-3xl text-blue-700" />
-        </motion.div>
-        
-        <div className={`font-extrabold transition-all duration-300 ${scrolled ? 'text-xl' : 'text-2xl'}`}>
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-900">print</span>
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-blue-600">N</span>
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-900">pack</span>
-        </div>
-      </motion.div>
-    </Link>
-  );
-};
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-
-  // Track mouse position for gradient effect
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      // Calculate mouse position as percentage of screen width/height
-      const x = (e.clientX / window.innerWidth) * 100;
-      const y = (e.clientY / window.innerHeight) * 100;
-      setMousePosition({ x, y });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 20);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close the mobile menu when user clicks outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       const navMenu = document.getElementById('navMenu');
@@ -112,21 +38,17 @@ const Header = () => {
         setIsOpen(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
 
-  // Lock body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
+    return () => { document.body.style.overflow = 'unset'; };
   }, [isOpen]);
 
   const menuItems = [
@@ -141,212 +63,176 @@ const Header = () => {
     setIsOpen(false);
   };
 
-  // Calculate dynamic gradient position based on mouse movement
-  const gradientStyle = {
-    backgroundImage: `
-      radial-gradient(
-        circle at ${mousePosition.x}% ${Math.min(mousePosition.y, 30)}%, 
-        rgba(37, 99, 235, 0.9) 0%, 
-        rgba(30, 58, 138, 0.95) 50%, 
-        rgba(23, 37, 84, 1) 100%
-      )
-    `,
-    backgroundSize: '200% 200%',
-  };
-
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'shadow-md' : ''}`}>
-      {/* Mobile search overlay */}
+    <header className={`sticky top-0 z-50 transition-all duration-200 ${scrolled ? 'shadow-md' : 'shadow-sm'}`}>
       <MobileSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
-      
-      {/* Animated Background with Glass Effect */}
-      <div className="relative">
-        {/* Animated gradient background */}
-        <div 
-          className="absolute inset-0 animate-gradient-slow" 
-          style={gradientStyle}
-        >
-          {/* Moving particles overlay */}
-          <div className="absolute inset-0 bg-particles opacity-20"></div>
+
+      {/* Top bar - desktop only */}
+      <div className="hidden lg:block bg-slate-900 text-white">
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center h-9 text-sm">
+          <div className="flex items-center gap-6">
+            <a href="tel:+353894400155" className="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors">
+              <FaPhone className="text-xs" />
+              <span>+353 89 440 0155</span>
+            </a>
+            <a href="mailto:info@printnpack.ie" className="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors">
+              <FaEnvelope className="text-xs" />
+              <span>info@printnpack.ie</span>
+            </a>
+          </div>
+          <div className="text-slate-400 text-xs">
+            Ireland&apos;s Printing &amp; Packaging Specialists
+          </div>
         </div>
-        
-        {/* Main Navigation with Glass effect */}
-        <div className={`relative backdrop-blur-md bg-white py-2 transition-all duration-300 shadow-md ${scrolled ? 'py-1' : 'py-3'}`}>
-          <div className="container mx-auto px-4 flex justify-between items-center">
-            <div className="flex items-center gap-3">
-              <Logo scrolled={scrolled} />
-              
-              {/* Info links - visible on larger screens */}
-              <div className="hidden lg:flex items-center space-x-3 text-blue-700 text-xs ml-4">
-                <div className="flex items-center">
-                  <FaPhone className="mr-1" />
-                  <span>+353 89 440 0155</span>
-                </div>
-                <div className="flex items-center">
-                  <FaEnvelope className="mr-1" />
-                  <span>info@printnpack.ie</span>
-                </div>
-              </div>
+      </div>
+
+      {/* Main navigation */}
+      <div className={`bg-white border-b border-slate-200 transition-all duration-200 ${scrolled ? 'py-2' : 'py-3'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2">
+            <div className="flex items-center">
+              <span className="text-xl font-bold text-slate-900 tracking-tight">
+                print<span className="text-blue-600">N</span>pack
+              </span>
             </div>
-            
-            {/* Desktop Search and Navigation */}
-            <div className="hidden md:flex items-center space-x-4">
-              {/* Desktop Navigation */}
-              <nav className="mr-2" aria-label="Main Navigation">
-                <ul className="flex space-x-5">
-                  {menuItems.map((item) => (
-                    <li key={item.path} className="relative group">
-                      <Link 
-                        href={item.path} 
-                        className="text-blue-800 font-semibold text-base hover:text-blue-600 transition-colors relative netflix-nav-link flex items-center"
-                        aria-label={item.name}
-                      >
-                        <span className="relative z-10 group-hover:transform group-hover:scale-105 transition-transform duration-200">
-                          {item.name}
-                        </span>
-                        <div className="absolute bottom-0 left-0 w-full h-1 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-              
-              {/* Desktop Search */}
-              <div className="flex items-center space-x-3">
-                <div className="relative z-10 hover:transform hover:scale-105 transition-transform duration-200">
-                  <SearchBar />
-                </div>
-                
-                <Link 
-                  href="/contact" 
-                  className="bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-md font-medium text-sm transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-blue-500/30"
-                  aria-label="Contact Us"
-                >
-                  Contact Us
-                </Link>
-              </div>
-            </div>
-            
-            {/* Mobile quick actions */}
-            <div className="md:hidden flex items-center space-x-3">
-              <a href="tel:+35319128616" className="text-blue-700 flex items-center p-2" aria-label="Call Us">
-                <FaPhone className="text-lg" />
-              </a>
-              <a href="mailto:info@printnpack.ie" className="text-blue-700 flex items-center p-2" aria-label="Email Us">
-                <FaEnvelope className="text-lg" />
-              </a>
-              <button 
-                onClick={() => setIsSearchOpen(true)}
-                className="text-blue-700 flex items-center p-2"
-                aria-label="Search products"
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-1">
+            <nav aria-label="Main Navigation">
+              <ul className="flex items-center gap-1">
+                {menuItems.map((item) => (
+                  <li key={item.path}>
+                    <Link
+                      href={item.path}
+                      className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <div className="flex items-center gap-2 ml-4 pl-4 border-l border-slate-200">
+              <SearchBar />
+              <Link
+                href="/quote"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md text-sm font-medium transition-colors"
               >
-                <FaSearch className="text-lg" />
-              </button>
+                Get Quote
+              </Link>
             </div>
-            
-            {/* Mobile Nav Hamburger Button */}
+          </div>
+
+          {/* Mobile actions */}
+          <div className="md:hidden flex items-center gap-2">
+            <a href="tel:+353894400155" className="p-2 text-slate-600" aria-label="Call Us">
+              <FaPhone className="text-base" />
+            </a>
+            <button
+              onClick={() => setIsSearchOpen(true)}
+              className="p-2 text-slate-600"
+              aria-label="Search products"
+            >
+              <FaSearch className="text-base" />
+            </button>
             <button
               id="hamburger"
               aria-label="Toggle Menu"
-              className="md:hidden p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-blue-700 relative z-10"
+              className="p-2 text-slate-700"
               onClick={() => setIsOpen(!isOpen)}
             >
               <div className="hamburger-icon">
-                <span className={`hamburger-line bg-blue-700 ${isOpen ? 'line-1-active' : ''}`}></span>
-                <span className={`hamburger-line bg-blue-700 ${isOpen ? 'line-2-active' : ''}`}></span>
-                <span className={`hamburger-line bg-blue-700 ${isOpen ? 'line-3-active' : ''}`}></span>
+                <span className={`hamburger-line bg-slate-700 ${isOpen ? 'line-1-active' : ''}`}></span>
+                <span className={`hamburger-line bg-slate-700 ${isOpen ? 'line-2-active' : ''}`}></span>
+                <span className={`hamburger-line bg-slate-700 ${isOpen ? 'line-3-active' : ''}`}></span>
               </div>
             </button>
           </div>
         </div>
       </div>
-      
-      {/* Mobile Navigation Drawer - add search link at the top */}
-      <div 
+
+      {/* Mobile Navigation Drawer */}
+      <div
         id="navMenu"
-        className={`fixed top-0 right-0 h-full w-80 bg-gradient-to-b from-blue-900 to-blue-800 backdrop-blur-lg shadow-2xl transform transition-transform duration-300 ease-in-out z-50 ${
+        className={`fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-50 ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="flex justify-between items-center p-6 border-b border-white/20">
-          <div className="flex items-center gap-3">
-            <FaBox className="text-2xl text-white" />
-            <div className="text-xl font-bold text-white">
-              <span className="text-gradient-white">printNpack</span>
-            </div>
-          </div>
+        <div className="flex justify-between items-center p-5 border-b border-slate-200">
+          <span className="text-lg font-bold text-slate-900">
+            print<span className="text-blue-600">N</span>pack
+          </span>
           <button
             aria-label="Close Menu"
-            className="p-2 text-white focus:outline-none"
+            className="p-2 text-slate-500 hover:text-slate-700"
             onClick={() => setIsOpen(false)}
           >
-            <FaTimes size={24} />
+            <FaTimes size={20} />
           </button>
         </div>
-        
-        <nav className="px-4 py-6">
-          <ul className="space-y-4">
-            {/* Add Search as the first item */}
+
+        <nav className="px-3 py-4">
+          <ul className="space-y-1">
             <li className={`opacity-0 ${isOpen ? 'animate-slide-in-right' : ''} mobile-menu-item-0`}>
-              <button 
+              <button
                 onClick={() => {
                   setIsOpen(false);
                   setTimeout(() => setIsSearchOpen(true), 300);
-                }} 
-                className="flex w-full items-center p-3 rounded-lg text-white hover:bg-white/10 transition-colors group"
+                }}
+                className="flex w-full items-center p-3 rounded-lg text-slate-700 hover:bg-slate-50 transition-colors"
               >
-                <span className="mr-3 text-blue-200"><FaSearch /></span>
-                <span className="font-medium">Search</span>
-                <FaChevronRight className="ml-auto opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all text-blue-200" />
+                <span className="mr-3 text-slate-400"><FaSearch /></span>
+                <span className="font-medium text-sm">Search Products</span>
               </button>
             </li>
-            
-            {/* Existing menu items */}
+
             {menuItems.map((item, index) => (
-              <li 
-                key={item.path} 
+              <li
+                key={item.path}
                 className={`opacity-0 ${isOpen ? 'animate-slide-in-right' : ''} mobile-menu-item-${index + 1}`}
               >
-                <Link 
-                  href={item.path} 
-                  className="flex items-center p-3 rounded-lg text-white hover:bg-white/10 transition-colors group"
+                <Link
+                  href={item.path}
+                  className="flex items-center p-3 rounded-lg text-slate-700 hover:bg-slate-50 transition-colors"
                   onClick={handleMenuItemClick}
                 >
-                  <span className="mr-3 text-blue-200">{item.icon}</span>
-                  <span className="font-medium">{item.name}</span>
-                  <FaChevronRight className="ml-auto opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all text-blue-200" />
+                  <span className="mr-3 text-slate-400">{item.icon}</span>
+                  <span className="font-medium text-sm">{item.name}</span>
+                  <FaChevronRight className="ml-auto text-slate-300 text-xs" />
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
-        
-        <div className="border-t border-white/20 p-6 mt-6">
-          <div className="space-y-4">
-            <div className={`flex items-center opacity-0 ${isOpen ? 'animate-slide-in-left' : ''}`} style={{ animationDelay: '0.35s' }}>
-              <FaPhone className="text-blue-200 mr-3" />
-                              <a href="tel:+353894400155" className="text-white hover:text-blue-200">+353 89 440 0155</a>
-            </div>
-            <div className={`flex items-center opacity-0 ${isOpen ? 'animate-slide-in-left' : ''}`} style={{ animationDelay: '0.4s' }}>
-              <FaEnvelope className="text-blue-200 mr-3" />
-              <a href="mailto:info@printnpack.ie" className="text-white hover:text-blue-200 break-all">info@printnpack.ie</a>
-            </div>
-            <Link 
-              href="/contact" 
-              className={`w-full flex items-center justify-center bg-white/10 backdrop-blur-md text-white py-3 rounded-lg mt-4 hover:bg-white/20 transition-colors shadow-glow opacity-0 ${isOpen ? 'animate-fade-in' : ''}`}
-              style={{ animationDelay: '0.45s' }}
+
+        <div className="border-t border-slate-200 p-5 mt-2">
+          <div className="space-y-3">
+            <a href="tel:+353894400155" className="flex items-center text-sm text-slate-600 hover:text-slate-900">
+              <FaPhone className="text-slate-400 mr-3 text-xs" />
+              +353 89 440 0155
+            </a>
+            <a href="mailto:info@printnpack.ie" className="flex items-center text-sm text-slate-600 hover:text-slate-900">
+              <FaEnvelope className="text-slate-400 mr-3 text-xs" />
+              info@printnpack.ie
+            </a>
+            <Link
+              href="/quote"
+              className="w-full flex items-center justify-center bg-blue-600 text-white py-3 rounded-lg mt-3 hover:bg-blue-700 transition-colors text-sm font-medium"
               onClick={handleMenuItemClick}
             >
-              Get A Quote
+              Get a Free Quote
             </Link>
           </div>
         </div>
       </div>
-      
-      {/* Overlay when mobile nav is open */}
-      <div 
-        className={`fixed inset-0 bg-black transition-opacity duration-300 ${
-          isOpen ? 'opacity-50 z-40' : 'opacity-0 pointer-events-none'
+
+      {/* Overlay */}
+      <div
+        className={`fixed inset-0 bg-black/40 transition-opacity duration-300 ${
+          isOpen ? 'opacity-100 z-40' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => setIsOpen(false)}
       ></div>
@@ -354,4 +240,4 @@ const Header = () => {
   );
 };
 
-export default Header; 
+export default Header;
