@@ -92,7 +92,7 @@ This is a lead from the website popup form.`,
         });
 
         const data = await response.json();
-        if (!response.ok) throw new Error(data.error || data.message || 'Failed to send message');
+        if (!response.ok) throw new Error(data.message || 'Something went wrong. Please try again or email us at info@printnpack.ie');
 
         setFormSubmitted(true);
         trackConversion();
