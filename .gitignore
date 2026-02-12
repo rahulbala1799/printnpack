@@ -1,4 +1,4 @@
-st# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
 /node_modules
@@ -11,6 +11,10 @@ st# See https://help.github.com/articles/ignoring-files/ for more about ignoring
 # next.js
 /.next/
 /out/
+
+# cache
+/cache
+.cache
 
 # production
 /build
