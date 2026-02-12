@@ -746,6 +746,7 @@ export default function PlainPackagingPage() {
         <meta name="description" content="841 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland." />
       </Head>
 
+      <div className="overflow-x-hidden min-w-0">
       {/* ── Page header ───────────────────────────────────────────────────────── */}
       <div className="bg-stone-50 border-b border-stone-200">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6">
@@ -882,11 +883,11 @@ export default function PlainPackagingPage() {
 
       {/* ── Sticky top bar: search + filter trigger + quote ────────────────────── */}
       <div className="sticky top-0 z-30 bg-white border-b border-stone-200 shadow-sm">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-2.5 flex items-center gap-2">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-2.5 flex items-center gap-2 min-w-0">
 
-          {/* Search */}
-          <div className="flex-1 relative">
-            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-stone-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          {/* Search — 16px font prevents iOS zoom on focus; min-w-0 prevents flex overflow */}
+          <div className="flex-1 min-w-0 relative">
+            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
             </svg>
             <input
@@ -894,7 +895,7 @@ export default function PlainPackagingPage() {
               placeholder="Search by name, code, or category…"
               value={search}
               onChange={e => handleSearchChange(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-xs border border-stone-200 rounded-xl outline-none focus:border-stone-400 focus:ring-2 focus:ring-stone-100 bg-stone-50 transition-all"
+              className="w-full min-w-0 pl-9 pr-3 py-2 text-base border border-stone-200 rounded-xl outline-none focus:border-stone-400 focus:ring-2 focus:ring-stone-100 bg-stone-50 transition-all"
             />
             {search && (
               <button onClick={() => handleSearchChange('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 transition-colors">
@@ -1144,6 +1145,8 @@ export default function PlainPackagingPage() {
           </button>
         </div>
       )}
+
+      </div>
 
       {/* ── Quote Drawer ───────────────────────────────────────────────────────── */}
       {drawerOpen && (
