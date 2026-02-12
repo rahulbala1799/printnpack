@@ -81,8 +81,13 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
     : selectedBreak ? fmtTotal(selectedBreak.price, selectedBreak.qty) : '—';
   const pricePerUnit = isTiered && selectedTier ? fmt(selectedTier.pricePerCase) + ' / case' : selectedBreak ? fmt(selectedBreak.price) : '—';
 
-  const stat1 = isTiered ? (selectedTier ? fmt(selectedTier.pricePerCase) : (product.caseTiers?.[0] ? fmt(product.caseTiers[0].pricePerCase) : '—') : (selectedBreak ? pricePerUnit : product.qtyBreaks?.[0] ? fmt(product.qtyBreaks[0].price) : '—');
-  const stat2 = isTiered ? '1 case' : `${product.moq ?? '—'}+`;
+  let stat1 = '—';
+  if (isTiered) {
+    stat1 = selectedTier ? fmt(selectedTier.pricePerCase) : (product.caseTiers && product.caseTiers[0] ? fmt(product.caseTiers[0].pricePerCase) : '—');
+  } else {
+    stat1 = selectedBreak ? pricePerUnit : (product.qtyBreaks && product.qtyBreaks[0] ? fmt(product.qtyBreaks[0].price) : '—');
+  }
+  const stat2 = isTiered ? '1 case' : (product.moq != null ? String(product.moq) + '+' : '—');
   const stat3 = product.leadTime || 'Contact';
   const statsRowItems = [
     { value: stat1, label: isTiered ? 'per case' : 'from / unit' },
