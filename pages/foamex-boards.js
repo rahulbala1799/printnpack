@@ -1,608 +1,523 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import FoamexQuoteForm from '../components/FoamexQuoteForm';
+
+// ─── Data ────────────────────────────────────────────────────────────────────
+
+const heroImages = [
+  '/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif',
+  '/ifa/product/foamex/foam-board-printing-1000x1000.webp',
+  '/ifa/product/foamex/foam-board-photo-prints-1000x1000.webp',
+  '/ifa/product/foamex/sign-boards-1000x1000.webp',
+];
+
+const galleryImages = [
+  ...heroImages,
+  '/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif',
+  '/ifa/product/foamex/foam-board-printing-1000x1000.webp',
+];
+
+const thicknessOptions = [
+  { size: '3mm', label: '3mm', popular: false },
+  { size: '5mm', label: '5mm', popular: true },
+  { size: '5.5mm', label: '5.5mm', popular: false },
+  { size: '10mm', label: '10mm', popular: false },
+];
+
+const features = [
+  {
+    title: 'Lightweight & Durable',
+    description: 'Perfect balance of weight and strength for easy handling and long-lasting performance.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Multiple Thicknesses',
+    description: 'Choose from 3mm, 5mm, 5.5mm, and 10mm to match your specific needs.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Direct UV Printing',
+    description: 'Vibrant colours and sharp detail with our advanced printing technology.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Indoor & Sheltered Use',
+    description: 'Perfect for indoor applications with optional outdoor use for short-term events.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Custom Sizes Available',
+    description: 'Standard sizes plus custom dimensions up to 8ft x 4ft (2440mm x 1220mm).',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Fast Turnaround',
+    description: 'Quick production and delivery to meet your project deadlines across Ireland.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+      </svg>
+    ),
+  },
+];
+
+const specs = [
+  { label: 'Material', value: 'PVC foamex' },
+  { label: 'Thicknesses', value: '3mm, 5mm, 5.5mm, 10mm' },
+  { label: 'Max size', value: '2440mm x 1220mm (8ft x 4ft)' },
+  { label: 'Printing', value: 'Direct UV, high resolution' },
+  { label: 'Finishing', value: 'Unlaminated, matt or gloss laminate' },
+  { label: 'Use', value: 'Indoor & sheltered outdoor' },
+  { label: 'Delivery', value: 'Nationwide Ireland' },
+];
+
+// ─── Components ──────────────────────────────────────────────────────────────
+
+const CheckIcon = () => (
+  <svg className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+  </svg>
+);
+
+// ─── Page ────────────────────────────────────────────────────────────────────
 
 const FoamexBoardsPage = () => {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState('');
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState({});
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+  const timeoutRef = useRef(null);
 
-  // Hero images rotation
-  const heroImages = [
-    '/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif',
-    '/ifa/product/foamex/foam-board-printing-1000x1000.webp',
-    '/ifa/product/foamex/foam-board-photo-prints-1000x1000.webp',
-    '/ifa/product/foamex/sign-boards-1000x1000.webp'
-  ];
+  const goToImage = useCallback((nextIndex) => {
+    if (nextIndex === currentImage) return;
+    setIsTransitioning(true);
+    timeoutRef.current = setTimeout(() => {
+      setCurrentImage(nextIndex);
+      requestAnimationFrame(() => setIsTransitioning(false));
+    }, 400);
+  }, [currentImage]);
 
-  // Auto-rotate hero images
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex(prev => (prev + 1) % heroImages.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [heroImages.length]);
+      goToImage((currentImage + 1) % heroImages.length);
+    }, 5000);
+    return () => {
+      clearInterval(interval);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, [currentImage, goToImage]);
 
-  // Intersection Observer for animations
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(prev => ({
-              ...prev,
-              [entry.target.id]: true
-            }));
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = document.querySelectorAll('[data-animate]');
-    elements.forEach(el => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
-  const foamexProducts = [
-    {
-      name: '3mm Foamex',
-      slug: '3mm-foamex',
-      description: 'Lightweight and economical foamex boards perfect for temporary displays, short-term promotions, and lightweight signage. Easy to cut and modify.',
-      features: ['Lightweight & Economical', 'Ideal for Temporary Displays', 'Easy to Cut & Modify', 'Perfect for Short-term Signage'],
-      startingPrice: '€25',
-      thickness: '3mm',
-      applications: ['Temporary displays', 'Short-term promotions', 'Lightweight signage', 'Easy cutting applications'],
-      images: [
-        '/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif',
-        '/ifa/product/foamex/foam-board-printing-1000x1000.webp'
-      ]
-    },
-    {
-      name: '5mm Foamex',
-      slug: '5mm-foamex',
-      description: 'Our most popular thickness offering excellent balance of rigidity and weight. Perfect for most general purpose signage applications.',
-      features: ['Most Popular Thickness', 'Excellent Balance of Rigidity & Weight', 'Stays Flat & Stable', 'Great All-round Option'],
-      startingPrice: '€35',
-      thickness: '5mm',
-      applications: ['General purpose signage', 'Retail displays', 'Exhibition graphics', 'POS materials'],
-      images: [
-        '/ifa/product/foamex/foam-board-photo-prints-1000x1000.webp',
-        '/ifa/product/foamex/sign-boards-1000x1000.webp'
-      ]
-    },
-    {
-      name: '5.5mm Foamex',
-      slug: '5-5mm-foamex',
-      description: 'Enhanced durability with extra rigidity for larger displays. Premium appearance with very stable vertical displays.',
-      features: ['Enhanced Durability', 'Extra Rigidity for Larger Displays', 'Very Stable in Vertical Displays', 'Premium Appearance'],
-      startingPrice: '€45',
-      thickness: '5.5mm',
-      applications: ['Premium displays', 'Larger format graphics', 'Enhanced durability needs', 'Vertical displays'],
-      images: [
-        '/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif',
-        '/ifa/product/foamex/foam-board-printing-1000x1000.webp'
-      ]
-    },
-    {
-      name: '10mm Foamex',
-      slug: '10mm-foamex',
-      description: 'Maximum rigidity and durability for premium signage and self-standing displays. Ideal for long-term installations.',
-      features: ['Maximum Rigidity & Durability', 'Excellent for Free-standing Displays', 'Premium Heavyweight Feel', 'Ideal for Long-term Installations'],
-      startingPrice: '€65',
-      thickness: '10mm',
-      applications: ['Free-standing displays', 'Long-term installations', 'Maximum rigidity needs', 'Premium signage'],
-      images: [
-        '/ifa/product/foamex/sign-boards-1000x1000.webp',
-        '/ifa/product/foamex/foam-board-photo-prints-1000x1000.webp'
-      ]
-    }
-  ];
-
-  const sizeOptions = [
-    { size: 'A0', dimensions: '841mm x 1189mm', idealFor: 'Large posters and exhibition graphics' },
-    { size: 'A1', dimensions: '594mm x 841mm', idealFor: 'Medium posters and retail displays' },
-    { size: 'A2', dimensions: '420mm x 594mm', idealFor: 'Counter displays and small signs' },
-    { size: '60cm x 90cm', dimensions: '600mm x 900mm', idealFor: 'Popular standard size for displays' },
-    { size: '70cm x 100cm', dimensions: '700mm x 1000mm', idealFor: 'Large format signage' },
-    { size: 'Custom', dimensions: 'Up to 2440mm x 1220mm', idealFor: 'Precisely sized to your requirements' }
-  ];
-
-  const finishingOptions = [
-    { name: 'Unlaminated', description: 'Standard finish perfect for most indoor applications' },
-    { name: 'Matt Laminated', description: 'Anti-glare finish with added durability against scratches' },
-    { name: 'Gloss Laminated', description: 'High-shine finish for vibrant colors and stronger visual impact' },
-    { name: 'Double-Sided Printing', description: 'Different designs on each side for maximum visibility' }
-  ];
-
-  const applications = [
-    'Retail displays and POS materials',
-    'Exhibition stand graphics',
-    'Interior signage',
-    'Wayfinding signs',
-    'Menu boards for restaurants',
-    'Information displays',
-    'Shop window displays',
-    'Photo mounting'
-  ];
+  const openQuote = () => setQuoteModalOpen(true);
 
   return (
     <Layout>
       <Head>
-        <title>Foamex Boards - Premium PVC Signage | printNpack Ireland</title>
+        <title>Foamex Boards - Premium PVC Signage | Print n Pack Ireland</title>
         <meta name="description" content="Premium quality foamex PVC boards for indoor signage, exhibitions, and displays. Available in 3mm, 5mm, 5.5mm, and 10mm thicknesses. Custom sizes and finishing options available." />
         <meta name="keywords" content="foamex boards, PVC signage, indoor displays, exhibition graphics, retail signage, Ireland" />
+        <meta property="og:title" content="Foamex Boards - Premium PVC Signage Ireland" />
+        <meta property="og:description" content="High-quality foamex PVC boards for indoor signage, exhibitions, and displays. Multiple thicknesses, custom sizes, professional finishing." />
+        <meta property="og:image" content="https://www.printnpack.ie/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif" />
+        <meta property="og:url" content="https://www.printnpack.ie/foamex-boards" />
+        <meta property="og:type" content="website" />
         <link rel="canonical" href="https://www.printnpack.ie/foamex-boards" />
       </Head>
 
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-purple-900 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-        
-        {/* Floating background elements */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-blue-400 rounded-full opacity-20 animate-float"></div>
-        <div className="absolute bottom-20 right-10 w-24 h-24 bg-purple-400 rounded-full opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-blue-300 rounded-full opacity-20 animate-float" style={{ animationDelay: '4s' }}></div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 py-20 lg:py-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div data-animate id="hero-text">
-              <div className={`transition-all duration-1000 ${isVisible['hero-text'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight">
-                  Premium
-                  <span className="block text-blue-300">Foamex Boards</span>
-                  <span className="block text-2xl md:text-3xl lg:text-4xl text-blue-200 mt-4 font-normal">
-                    Professional PVC Signage Solutions
-                  </span>
-                </h1>
-                <p className="text-xl md:text-2xl mb-8 text-blue-100 leading-relaxed">
-                  High-quality foamex PVC boards perfect for indoor signage, exhibitions, and displays. 
-                  Available in multiple thicknesses with custom sizes and professional finishing options.
-                </p>
-                
-                <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                  <button
-                    onClick={() => {
-                      setSelectedProduct('5mm Foamex');
-                      setQuoteModalOpen(true);
+      {/* ── Breadcrumb ── */}
+      <nav className="bg-gray-50 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+          <ol className="flex items-center gap-2 text-sm text-gray-500">
+            <li><Link href="/" className="hover:text-gray-700">Home</Link></li>
+            <li>/</li>
+            <li><Link href="/#products" className="hover:text-gray-700">Products</Link></li>
+            <li>/</li>
+            <li className="text-gray-800 font-medium">Foamex Boards</li>
+          </ol>
+        </div>
+      </nav>
+
+      {/* ── Hero / Product Overview ── */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+            <div>
+              <div className="relative aspect-square bg-gray-50 rounded-2xl overflow-hidden mb-3">
+                {heroImages.map((img, i) => (
+                  <div
+                    key={img}
+                    className="absolute inset-0"
+                    style={{
+                      transition: 'opacity 0.8s ease',
+                      opacity: i === currentImage && !isTransitioning ? 1 : 0,
                     }}
-                    className="bg-yellow-400 text-blue-800 px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-300 transform hover:scale-105 transition-all duration-300 shadow-xl"
                   >
-                    Get Custom Quote 🚀
-                  </button>
-                  <a
-                    href="tel:+353894400155"
-                    className="border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300 text-center"
-                  >
-                    Call +353 89 440 0155 📞
-                  </a>
-                </div>
-
-                <div className="grid grid-cols-3 gap-6 text-center">
-                  <div>
-                    <div className="text-2xl font-bold text-yellow-400">€25</div>
-                    <div className="text-sm text-blue-200">Starting Price</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-yellow-400">3-5</div>
-                    <div className="text-sm text-blue-200">Days Delivery</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-yellow-400">4</div>
-                    <div className="text-sm text-blue-200">Thickness Options</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div data-animate id="hero-image" className="relative">
-              <div className={`transition-all duration-1000 delay-300 ${isVisible['hero-image'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                <div className="relative h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-                  <Image
-                    src={heroImages[currentImageIndex]}
-                    alt="Foamex Boards"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                </div>
-                
-                {/* Image navigation dots */}
-                <div className="flex justify-center mt-4 space-x-2">
-                  {heroImages.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentImageIndex(index)}
-                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                        index === currentImageIndex ? 'bg-yellow-400 scale-125' : 'bg-white/50 hover:bg-white/75'
-                      }`}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Our Foamex Boards */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16" data-animate id="why-choose">
-            <div className={`transition-all duration-1000 ${isVisible['why-choose'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h2 className="text-4xl md:text-5xl font-black text-gray-800 mb-6">
-                Why Our Foamex Boards Stand Out
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Premium quality foamex PVC boards designed for professional signage and display applications
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { icon: '🔄', title: 'Lightweight & Durable', description: 'Perfect balance of weight and strength for easy handling and long-lasting performance' },
-              { icon: '📏', title: 'Multiple Thicknesses', description: 'Choose from 3mm, 5mm, 5.5mm, and 10mm to match your specific needs' },
-              { icon: '🎨', title: 'Direct UV Printing', description: 'Vibrant colors and sharp detail with our advanced printing technology' },
-              { icon: '🏠', title: 'Indoor & Sheltered Use', description: 'Perfect for indoor applications with optional outdoor use for short-term events' },
-              { icon: '✂️', title: 'Easy to Cut & Mount', description: 'Simple to work with for custom installations and mounting requirements' },
-              { icon: '📐', title: 'Custom Sizes Available', description: 'Standard sizes plus custom dimensions up to 8ft x 4ft' },
-              { icon: '🖼️', title: 'High-Resolution Quality', description: '1440dpi print quality for crisp, professional results' },
-              { icon: '⚡', title: 'Fast Turnaround', description: 'Quick production and delivery to meet your project deadlines' }
-            ].map((feature, index) => (
-              <div key={index} data-animate id={`feature-${index}`} className="text-center">
-                <div className={`transition-all duration-1000 delay-${index * 100} ${isVisible[`feature-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  <div className="text-4xl mb-4">{feature.icon}</div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-3">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Product Range */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16" data-animate id="product-range">
-            <div className={`transition-all duration-1000 ${isVisible['product-range'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h2 className="text-4xl md:text-5xl font-black text-gray-800 mb-6">
-                Our Premium Foamex Range
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Choose the perfect thickness and specifications for your signage and display needs
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {foamexProducts.map((product, index) => (
-              <div key={product.slug} data-animate id={`product-${index}`} className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden hover:shadow-2xl transition-all duration-300">
-                <div className={`transition-all duration-1000 delay-${index * 200} ${isVisible[`product-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  <div className="relative h-64 overflow-hidden">
                     <Image
-                      src={product.images[0]}
-                      alt={product.name}
+                      src={img}
+                      alt={`Foamex boards ${i + 1}`}
                       fill
-                      className="object-cover hover:scale-105 transition-transform duration-500"
+                      className="object-cover"
+                      priority={i === 0}
+                      sizes="(max-width: 768px) 100vw, 50vw"
                     />
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-                        {product.thickness}
-                      </span>
-                    </div>
                   </div>
-                  
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-3">{product.name}</h3>
-                    <p className="text-gray-600 mb-4">{product.description}</p>
-                    
-                    <div className="mb-4">
-                      <h4 className="font-semibold text-gray-800 mb-2">Key Features:</h4>
-                      <ul className="space-y-1">
-                        {product.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-center text-sm text-gray-600">
-                            <span className="text-green-500 mr-2">✓</span>
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                ))}
+              </div>
+              <div className="grid grid-cols-4 gap-2">
+                {heroImages.map((img, i) => (
+                  <button
+                    key={img}
+                    onClick={() => goToImage(i)}
+                    className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${
+                      i === currentImage ? 'border-blue-500 ring-1 ring-blue-300' : 'border-transparent opacity-70 hover:opacity-100'
+                    }`}
+                  >
+                    <Image src={img} alt={`Thumbnail ${i + 1}`} fill className="object-cover" sizes="80px" />
+                  </button>
+                ))}
+              </div>
+            </div>
 
-                    <div className="mb-6">
-                      <h4 className="font-semibold text-gray-800 mb-2">Ideal for:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {product.applications.map((app, idx) => (
-                          <span key={idx} className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
-                            {app}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+            <div className="lg:sticky lg:top-24">
+              <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 rounded-full px-3 py-1 text-sm font-medium mb-4 border border-blue-200">
+                <span className="w-2 h-2 bg-blue-500 rounded-full" />
+                Indoor Signage & Displays
+              </div>
 
-                    <div className="flex items-center justify-between">
-                      <div className="text-2xl font-bold text-blue-600">
-                        Starting at {product.startingPrice}
-                      </div>
-                      <button
-                        onClick={() => {
-                          setSelectedProduct(product.name);
-                          setQuoteModalOpen(true);
-                        }}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
-                      >
-                        Get Quote
-                      </button>
-                    </div>
-                  </div>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">
+                Foamex Boards
+              </h1>
+
+              <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
+                Premium PVC foamex boards for indoor signage, exhibitions, and displays. Multiple thicknesses, custom sizes, and professional finishing options.
+              </p>
+
+              <div className="grid grid-cols-3 gap-3 mb-6">
+                <div className="bg-gray-50 rounded-xl p-3 text-center">
+                  <div className="text-lg sm:text-xl font-bold text-gray-900">From €25</div>
+                  <div className="text-xs text-gray-500">starting price</div>
+                </div>
+                <div className="bg-gray-50 rounded-xl p-3 text-center">
+                  <div className="text-lg sm:text-xl font-bold text-gray-900">3–5 days</div>
+                  <div className="text-xs text-gray-500">delivery</div>
+                </div>
+                <div className="bg-gray-50 rounded-xl p-3 text-center">
+                  <div className="text-lg sm:text-xl font-bold text-gray-900">4</div>
+                  <div className="text-xs text-gray-500">thickness options</div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Size Options */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16" data-animate id="size-options">
-            <div className={`transition-all duration-1000 ${isVisible['size-options'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h2 className="text-4xl md:text-5xl font-black text-gray-800 mb-6">
-                Size Options & Specifications
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Standard sizes plus custom dimensions to perfectly fit your requirements
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {sizeOptions.map((option, index) => (
-              <div key={option.size} data-animate id={`size-${index}`} className="bg-white rounded-xl p-6 shadow-lg border border-gray-200">
-                <div className={`transition-all duration-1000 delay-${index * 100} ${isVisible[`size-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">{option.size}</h3>
-                  <p className="text-lg text-blue-600 font-medium mb-3">{option.dimensions}</p>
-                  <p className="text-gray-600">{option.idealFor}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Finishing Options */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16" data-animate id="finishing-options">
-            <div className={`transition-all duration-1000 ${isVisible['finishing-options'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h2 className="text-4xl md:text-5xl font-black text-gray-800 mb-6">
-                Professional Finishing Options
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Choose the perfect finish to enhance your signage and protect your investment
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {finishingOptions.map((option, index) => (
-              <div key={option.name} data-animate id={`finishing-${index}`} className="bg-gray-50 rounded-xl p-6">
-                <div className={`transition-all duration-1000 delay-${index * 200} ${isVisible[`finishing-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  <h3 className="text-xl font-bold text-gray-800 mb-3">{option.name}</h3>
-                  <p className="text-gray-600">{option.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Applications */}
-      <section className="py-20 bg-blue-900 text-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16" data-animate id="applications">
-            <div className={`transition-all duration-1000 ${isVisible['applications'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h2 className="text-4xl md:text-5xl font-black mb-6">
-                Perfect for Every Application
-              </h2>
-              <p className="text-xl text-blue-200 max-w-3xl mx-auto">
-                Our foamex boards serve businesses across Ireland in various industries and applications
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {applications.map((application, index) => (
-              <div key={index} data-animate id={`application-${index}`} className="text-center">
-                <div className={`transition-all duration-1000 delay-${index * 100} ${isVisible[`application-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  <div className="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">📋</span>
-                  </div>
-                  <p className="text-blue-100">{application}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16" data-animate id="pricing">
-            <div className={`transition-all duration-1000 ${isVisible['pricing'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h2 className="text-4xl md:text-5xl font-black text-gray-800 mb-6">
-                Competitive Ireland Pricing
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Best prices for foamex boards in Ireland. Volume discounts available for corporate and bulk orders.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">Starter Package</h3>
-              <div className="text-4xl font-bold text-blue-600 mb-6">€25</div>
-              <ul className="space-y-3 mb-8">
-                <li>✓ Basic foamex boards</li>
-                <li>✓ Standard sizes</li>
-                <li>✓ 7-day delivery</li>
+              <ul className="space-y-2.5 mb-6">
+                {[
+                  'Lightweight & durable',
+                  '3mm, 5mm, 5.5mm, 10mm',
+                  'Direct UV printing',
+                  'Custom sizes up to 8ft x 4ft',
+                  'Matt & gloss laminate options',
+                  'Nationwide Ireland delivery',
+                ].map((point) => (
+                  <li key={point} className="flex items-start gap-2.5 text-sm text-gray-600">
+                    <CheckIcon />
+                    {point}
+                  </li>
+                ))}
               </ul>
-              <button
-                onClick={() => {
-                  setSelectedProduct('5mm Foamex');
-                  setQuoteModalOpen(true);
-                }}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-medium transition-colors"
-              >
-                Get Quote
-              </button>
-            </div>
 
-            <div className="bg-white rounded-2xl p-8 shadow-xl border-2 border-blue-500 relative">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <span className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-bold">MOST POPULAR</span>
+              <div className="flex flex-col sm:flex-row gap-3 mb-6">
+                <button
+                  onClick={openQuote}
+                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-6 rounded-xl transition-colors text-center"
+                >
+                  Get Custom Quote
+                </button>
+                <a
+                  href="tel:+353894400155"
+                  className="flex-1 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3.5 px-6 rounded-xl border border-gray-300 transition-colors text-center"
+                >
+                  Call +353 89 440 0155
+                </a>
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">Professional Package</h3>
-              <div className="text-4xl font-bold text-blue-600 mb-6">€35</div>
-              <ul className="space-y-3 mb-8">
-                <li>✓ Premium foamex boards</li>
-                <li>✓ Custom sizes available</li>
-                <li>✓ 5-day delivery</li>
-                <li>✓ Free design service</li>
-              </ul>
-              <button
-                onClick={() => {
-                  setSelectedProduct('5mm Foamex');
-                  setQuoteModalOpen(true);
-                }}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-medium transition-colors"
-              >
-                Get Quote
-              </button>
-            </div>
 
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">Enterprise Package</h3>
-              <div className="text-4xl font-bold text-blue-600 mb-6">€45</div>
-              <ul className="space-y-3 mb-8">
-                <li>✓ Premium foamex boards</li>
-                <li>✓ Custom sizes & finishes</li>
-                <li>✓ 3-day rush delivery</li>
-                <li>✓ Dedicated account manager</li>
-              </ul>
-              <button
-                onClick={() => {
-                  setSelectedProduct('5.5mm Foamex');
-                  setQuoteModalOpen(true);
-                }}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-medium transition-colors"
-              >
-                Get Quote
-              </button>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-400 border-t border-gray-100 pt-4">
+                <span className="flex items-center gap-1">
+                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
+                  Quality Guaranteed
+                </span>
+                <span className="flex items-center gap-1">
+                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                  Irish Business
+                </span>
+              </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="text-center mt-12">
+      {/* ── Features ── */}
+      <section className="bg-gray-50 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+              Why Choose Our Foamex Boards?
+            </h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">
+              Premium PVC boards designed for professional signage and display applications.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {features.map((feature) => (
+              <div
+                key={feature.title}
+                className="bg-white rounded-xl p-5 sm:p-6 border border-gray-200 hover:border-blue-200 hover:shadow-md transition-all"
+              >
+                <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center mb-3">
+                  {feature.icon}
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-1.5">{feature.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Thickness options ── */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+              Thickness Options
+            </h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">
+              Choose the right thickness for your signage and display needs.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto">
+            {thicknessOptions.map((s) => (
+              <div
+                key={s.size}
+                className={`relative rounded-xl p-4 text-center border-2 transition-all ${
+                  s.popular ? 'border-blue-300 bg-blue-50' : 'border-gray-200 bg-gray-50 hover:border-gray-300'
+                }`}
+              >
+                {s.popular && (
+                  <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wide">
+                    Popular
+                  </span>
+                )}
+                <div className={`text-xl sm:text-2xl font-bold ${s.popular ? 'text-blue-600' : 'text-gray-800'}`}>
+                  {s.size}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-center text-sm text-gray-400 mt-6">
+            Not sure which thickness? <button onClick={openQuote} className="text-blue-600 hover:underline font-medium">Get a quote</button> and we’ll recommend the best option.
+          </p>
+        </div>
+      </section>
+
+      {/* ── Gallery ── */}
+      <section id="gallery" className="bg-gray-50 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+              Design Gallery
+            </h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">
+              Examples of foamex boards we’ve produced for Irish businesses.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+            {galleryImages.map((img, i) => (
+              <button
+                key={`${img}-${i}`}
+                onClick={() => setLightboxIndex(i)}
+                className="group relative aspect-square rounded-xl overflow-hidden bg-white border border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all"
+              >
+                <Image
+                  src={img}
+                  alt={`Foamex boards ${i + 1}`}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                />
+              </button>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
             <button
-              onClick={() => {
-                setSelectedProduct('5mm Foamex');
-                setQuoteModalOpen(true);
-              }}
-              className="bg-yellow-400 text-blue-800 px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-300 transform hover:scale-105 transition-all duration-300 shadow-xl"
+              onClick={openQuote}
+              className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-xl border border-gray-300 transition-colors"
             >
-              Get Volume Pricing 💰
+              Get Your Custom Quote
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+              </svg>
             </button>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-500 text-white">
-        <div className="max-w-4xl mx-auto text-center px-4">
-          <h2 className="text-4xl md:text-6xl font-black mb-6">
-            Ready for Professional Signage?
+      {/* ── Lightbox ── */}
+      {lightboxIndex !== null && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setLightboxIndex(null)}
+        >
+          <button className="absolute top-4 right-4 text-white/80 hover:text-white p-2" onClick={() => setLightboxIndex(null)}>
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <button
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-2"
+            onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex - 1 + galleryImages.length) % galleryImages.length); }}
+          >
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+          </button>
+          <button
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-2"
+            onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex + 1) % galleryImages.length); }}
+          >
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+          </button>
+          <div className="relative w-full max-w-3xl aspect-square" onClick={(e) => e.stopPropagation()}>
+            <Image
+              src={galleryImages[lightboxIndex]}
+              alt={`Foamex ${lightboxIndex + 1}`}
+              fill
+              className="object-contain"
+              sizes="90vw"
+            />
+          </div>
+          <div className="absolute bottom-4 text-white/60 text-sm">
+            {lightboxIndex + 1} / {galleryImages.length}
+          </div>
+        </div>
+      )}
+
+      {/* ── Specifications ── */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+                Technical Specifications
+              </h2>
+              <p className="text-gray-500 mb-6">
+                Professional foamex boards for indoor signage and displays.
+              </p>
+
+              <div className="border border-gray-200 rounded-xl overflow-hidden">
+                {specs.map((spec, i) => (
+                  <div
+                    key={spec.label}
+                    className={`flex justify-between items-center px-4 py-3 text-sm ${
+                      i % 2 === 0 ? 'bg-gray-50' : 'bg-white'
+                    }`}
+                  >
+                    <span className="font-medium text-gray-700">{spec.label}</span>
+                    <span className="text-gray-500 text-right">{spec.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100">
+              <Image
+                src={heroImages[0]}
+                alt="Foamex boards"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="bg-gray-900">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+            Ready for professional signage?
           </h2>
-          <p className="text-xl md:text-2xl mb-8 opacity-95">
-            Join hundreds of Irish businesses using our foamex boards for stunning displays and signage.
+          <p className="text-gray-400 mb-8 max-w-xl mx-auto">
+            Get a free quote with no obligation. We’ll help you choose the right thickness, size, and finish.
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
-              onClick={() => {
-                setSelectedProduct('5mm Foamex');
-                setQuoteModalOpen(true);
-              }}
-              className="bg-white text-blue-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-100 transform hover:scale-105 transition-all duration-300 shadow-2xl min-w-[250px]"
+              onClick={openQuote}
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-8 rounded-xl transition-colors"
             >
-              Get Custom Quote Now 🚀
+              Get Free Quote
             </button>
             <a
               href="tel:+353894400155"
-              className="border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300 min-w-[250px]"
+              className="bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-3.5 px-8 rounded-xl border border-gray-700 transition-colors"
             >
-              Call +353 89 440 0155 📞
+              Call +353 89 440 0155
             </a>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 opacity-90">
-            <div className="text-center">
-              <div className="text-3xl mb-2">🇮🇪</div>
-              <div className="font-semibold">Made in Ireland</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl mb-2">⚡</div>
-              <div className="font-semibold">Fast Delivery</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl mb-2">💯</div>
-              <div className="font-semibold">Quality Guaranteed</div>
-            </div>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-8 text-sm text-gray-500">
+            <span className="flex items-center gap-1.5">
+              <CheckIcon />
+              No obligation
+            </span>
+            <span className="flex items-center gap-1.5">
+              <CheckIcon />
+              Free design service
+            </span>
+            <span className="flex items-center gap-1.5">
+              <CheckIcon />
+              Ireland-wide delivery
+            </span>
           </div>
         </div>
       </section>
 
-      {/* Quote Modal */}
+      {/* ── Quote Modal ── */}
       {quoteModalOpen && (
         <FoamexQuoteForm
           isOpen={quoteModalOpen}
           onClose={() => setQuoteModalOpen(false)}
-          productType={selectedProduct}
+          productType="5mm Foamex"
         />
       )}
-
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .animate-float {
-          animation: float 4s ease-in-out infinite;
-        }
-        
-        .animate-fadeInUp {
-          animation: fadeInUp 0.6s ease-out forwards;
-        }
-      `}</style>
     </Layout>
   );
 };

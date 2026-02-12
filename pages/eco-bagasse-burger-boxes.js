@@ -1,458 +1,517 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import BagasseQuoteForm from '../components/BagasseQuoteForm';
+
+// ─── Data ────────────────────────────────────────────────────────────────────
+
+const heroImages = [
+  '/images/products/bagasse-burger-box/1.png',
+  '/images/products/bagasse-burger-box/2.png',
+  '/images/products/bagasse-burger-box/3.png',
+  '/images/products/bagasse-burger-box/4.png',
+  '/images/products/bagasse-burger-box/5.png',
+  '/images/products/bagasse-burger-box/6.png',
+];
+
+const galleryImages = heroImages;
+
+const sizeOptions = [
+  { size: 'Standard', label: 'Standard', popular: true },
+  { size: 'Gourmet', label: 'Gourmet', popular: true },
+  { size: 'Custom', label: 'Custom Size', popular: false },
+];
+
+const features = [
+  {
+    title: '100% Biodegradable',
+    description: 'Made from sugarcane fibre, completely compostable and eco-friendly. No plastic.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Heat Resistant',
+    description: 'Microwave safe and withstands temperatures from -20°C to +120°C.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.647 6.646A8.252 8.252 0 0112 3a8.252 8.252 0 013.362 2.214" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Oil & Water Resistant',
+    description: 'Grease-proof design keeps food fresh and packaging intact.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Sturdy Construction',
+    description: 'Strong enough for the largest gourmet burgers and sandwiches.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Freezer Safe',
+    description: 'Perfect for storage and preparation, freezer to microwave ready.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3m3 3H9" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Stackable Design',
+    description: 'Space-efficient storage and transport with secure stacking.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.25 2.25 0 01-1.5 2.122v5.256a2.25 2.25 0 01-1.5 2.122 2.25 2.25 0 01-1.5-2.122V9.878m-12 0A2.25 2.25 0 014.5 12v.878" />
+      </svg>
+    ),
+  },
+];
+
+const specs = [
+  { label: 'Material', value: '100% Sugarcane fibre (bagasse)' },
+  { label: 'Colour', value: 'Natural white' },
+  { label: 'Temperature range', value: '-20°C to +120°C' },
+  { label: 'Size options', value: 'Standard & gourmet burger sizes' },
+  { label: 'Min. order', value: '500 units' },
+  { label: 'Lead time', value: '7–10 business days' },
+  { label: 'Customization', value: 'Custom printing available' },
+  { label: 'Certifications', value: 'FDA food safe, compostable' },
+];
+
+// ─── Components ──────────────────────────────────────────────────────────────
+
+const CheckIcon = () => (
+  <svg className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+  </svg>
+);
+
+// ─── Page ────────────────────────────────────────────────────────────────────
 
 const EcoBagasseBurgerBoxes = () => {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+  const timeoutRef = useRef(null);
 
-  const handleQuoteClick = () => {
-    setQuoteModalOpen(true);
-  };
+  const goToImage = useCallback((nextIndex) => {
+    if (nextIndex === currentImage) return;
+    setIsTransitioning(true);
+    timeoutRef.current = setTimeout(() => {
+      setCurrentImage(nextIndex);
+      requestAnimationFrame(() => setIsTransitioning(false));
+    }, 400);
+  }, [currentImage]);
 
-  const productImages = [
-    "/images/products/bagasse-burger-box/1.png",
-    "/images/products/bagasse-burger-box/2.png", 
-    "/images/products/bagasse-burger-box/3.png",
-    "/images/products/bagasse-burger-box/4.png",
-    "/images/products/bagasse-burger-box/5.png",
-    "/images/products/bagasse-burger-box/6.png"
-  ];
+  useEffect(() => {
+    const interval = setInterval(() => {
+      goToImage((currentImage + 1) % heroImages.length);
+    }, 5000);
+    return () => {
+      clearInterval(interval);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, [currentImage, goToImage]);
 
-  const features = [
-    {
-      icon: "🌱",
-      title: "100% Biodegradable",
-      description: "Made from sugarcane fiber, completely compostable and eco-friendly"
-    },
-    {
-      icon: "🔥",
-      title: "Heat Resistant",
-      description: "Microwave safe and withstands temperatures from -20°C to +120°C"
-    },
-    {
-      icon: "💧",
-      title: "Oil & Water Resistant",
-      description: "Grease-proof design keeps food fresh and packaging intact"
-    },
-    {
-      icon: "💪",
-      title: "Sturdy Construction",
-      description: "Strong enough for the largest gourmet burgers and sandwiches"
-    },
-    {
-      icon: "❄️",
-      title: "Freezer Safe",
-      description: "Perfect for storage and preparation, freezer to microwave ready"
-    },
-    {
-      icon: "📦",
-      title: "Stackable Design",
-      description: "Space-efficient storage and transport with secure stacking"
-    }
-  ];
-
-  const specifications = [
-    { label: "Material", value: "100% Sugarcane Fiber (Bagasse)" },
-    { label: "Color", value: "Natural White" },
-    { label: "Temperature Range", value: "-20°C to +120°C" },
-    { label: "Size Options", value: "Standard & Gourmet Burger Sizes" },
-    { label: "Minimum Order", value: "500 units" },
-    { label: "Lead Time", value: "7-10 business days" },
-    { label: "Customization", value: "Custom printing available" },
-    { label: "Certifications", value: "FDA Food Safe, Compostable" }
-  ];
-
-  const applications = [
-    "Fast Food Restaurants",
-    "Food Trucks & Mobile Vendors", 
-    "Takeaway & Delivery Services",
-    "Cafeterias & Canteens",
-    "Catering Companies",
-    "Event Food Services",
-    "Hospital & School Food Services",
-    "Corporate Dining"
-  ];
+  const openQuote = () => setQuoteModalOpen(true);
 
   return (
     <Layout>
       <Head>
         <title>Eco-Friendly Bagasse Burger Boxes Ireland | Sustainable Food Packaging | Print n Pack</title>
-        <meta name="description" content="Premium biodegradable bagasse burger boxes made from sugarcane fiber. Microwave safe, oil resistant, 100% compostable. Perfect for eco-conscious food businesses in Ireland." />
-        <meta name="keywords" content="bagasse burger boxes Ireland, eco-friendly food packaging, biodegradable burger boxes, sugarcane fiber packaging, compostable food containers, sustainable packaging Dublin, green food packaging, eco burger boxes" />
+        <meta name="description" content="Premium biodegradable bagasse burger boxes made from sugarcane fibre. Microwave safe, oil resistant, 100% compostable. Perfect for eco-conscious food businesses in Ireland." />
+        <meta name="keywords" content="bagasse burger boxes Ireland, eco-friendly food packaging, biodegradable burger boxes, sugarcane fibre packaging, compostable food containers, sustainable packaging Dublin, green food packaging, eco burger boxes" />
         <meta property="og:title" content="Eco-Friendly Bagasse Burger Boxes | Sustainable Food Packaging Ireland" />
         <meta property="og:description" content="Premium biodegradable bagasse burger boxes. 100% compostable, microwave safe, oil resistant. Perfect for eco-conscious restaurants and food services." />
-        <meta property="og:type" content="product" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="geo.region" content="IE" />
-        <meta name="geo.placename" content="Ireland" />
-        <link rel="canonical" href="https://printnpack.ie/eco-bagasse-burger-boxes" />
+        <meta property="og:image" content="https://www.printnpack.ie/images/products/bagasse-burger-box/1.png" />
+        <meta property="og:url" content="https://www.printnpack.ie/eco-bagasse-burger-boxes" />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://www.printnpack.ie/eco-bagasse-burger-boxes" />
       </Head>
 
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-green-600 via-emerald-700 to-teal-800 text-white py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-black opacity-20"></div>
-        <div className="absolute inset-0">
-          <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="eco-pattern" width="80" height="80" patternUnits="userSpaceOnUse">
-                <circle cx="40" cy="40" r="3" fill="currentColor" fillOpacity="0.1" />
-                <path d="M20 20 Q40 10 60 20 Q50 40 60 60 Q40 50 20 60 Q30 40 20 20" fill="currentColor" fillOpacity="0.05" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#eco-pattern)" />
-          </svg>
+      {/* ── Breadcrumb ── */}
+      <nav className="bg-gray-50 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+          <ol className="flex items-center gap-2 text-sm text-gray-500">
+            <li><Link href="/" className="hover:text-gray-700">Home</Link></li>
+            <li>/</li>
+            <li><Link href="/#products" className="hover:text-gray-700">Products</Link></li>
+            <li>/</li>
+            <li className="text-gray-800 font-medium">Bagasse Burger Boxes</li>
+          </ol>
         </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <div className="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-6 py-2 mb-6">
-                  <span className="text-sm font-medium">🌱 100% Eco-Friendly</span>
-                </div>
-                
-                <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                  Sustainable
-                  <span className="block bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
-                    Bagasse Burger Boxes
-                  </span>
-                </h1>
-                
-                <p className="text-xl md:text-2xl mb-8 text-gray-200 leading-relaxed">
-                  Premium biodegradable burger boxes made from sugarcane fiber. The perfect eco-friendly packaging solution for environmentally conscious food businesses.
-                </p>
-                
-                <div className="flex flex-wrap gap-4 mb-8">
-                  <span className="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full font-medium">
-                    ✓ 100% Biodegradable
-                  </span>
-                  <span className="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full font-medium">
-                    ✓ Microwave Safe
-                  </span>
-                  <span className="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full font-medium">
-                    ✓ Oil Resistant
-                  </span>
-                </div>
+      </nav>
 
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <button 
-                    onClick={handleQuoteClick}
-                    className="bg-gradient-to-r from-yellow-500 to-green-500 hover:from-yellow-600 hover:to-green-600 text-white font-bold py-4 px-8 rounded-full text-lg shadow-2xl transform hover:scale-105 transition-all duration-300"
+      {/* ── Hero / Product Overview ── */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+            <div>
+              <div className="relative aspect-square bg-gray-50 rounded-2xl overflow-hidden mb-3">
+                {heroImages.map((img, i) => (
+                  <div
+                    key={img}
+                    className="absolute inset-0"
+                    style={{
+                      transition: 'opacity 0.8s ease',
+                      opacity: i === currentImage && !isTransitioning ? 1 : 0,
+                    }}
                   >
-                    Get Custom Quote
+                    <Image
+                      src={img}
+                      alt={`Bagasse burger box ${i + 1}`}
+                      fill
+                      className="object-cover"
+                      priority={i === 0}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="grid grid-cols-6 gap-2">
+                {heroImages.map((img, i) => (
+                  <button
+                    key={img}
+                    onClick={() => goToImage(i)}
+                    className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${
+                      i === currentImage ? 'border-emerald-500 ring-1 ring-emerald-300' : 'border-transparent opacity-70 hover:opacity-100'
+                    }`}
+                  >
+                    <Image src={img} alt={`Thumbnail ${i + 1}`} fill className="object-cover" sizes="80px" />
                   </button>
-                  <a 
-                    href="#specifications"
-                    className="border-2 border-white text-white font-bold py-4 px-8 rounded-full text-lg hover:bg-white hover:text-green-600 transition-colors text-center"
-                  >
-                    View Specifications
-                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="lg:sticky lg:top-24">
+              <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 rounded-full px-3 py-1 text-sm font-medium mb-4 border border-emerald-200">
+                <span className="w-2 h-2 bg-emerald-500 rounded-full" />
+                100% Eco-Friendly · Compostable
+              </div>
+
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">
+                Bagasse Burger Boxes
+              </h1>
+
+              <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
+                Premium biodegradable burger boxes made from sugarcane fibre. The perfect eco-friendly packaging for environmentally conscious food businesses across Ireland.
+              </p>
+
+              <div className="grid grid-cols-3 gap-3 mb-6">
+                <div className="bg-gray-50 rounded-xl p-3 text-center">
+                  <div className="text-lg sm:text-xl font-bold text-gray-900">From €0.32</div>
+                  <div className="text-xs text-gray-500">per unit</div>
+                </div>
+                <div className="bg-gray-50 rounded-xl p-3 text-center">
+                  <div className="text-lg sm:text-xl font-bold text-gray-900">500+</div>
+                  <div className="text-xs text-gray-500">min. order</div>
+                </div>
+                <div className="bg-gray-50 rounded-xl p-3 text-center">
+                  <div className="text-lg sm:text-xl font-bold text-gray-900">7–10 days</div>
+                  <div className="text-xs text-gray-500">production</div>
                 </div>
               </div>
 
-              <div className="relative">
-                <div className="relative bg-white/10 backdrop-blur-sm rounded-3xl p-8">
-                  <div className="aspect-square relative overflow-hidden rounded-2xl">
-                    <Image
-                      src={productImages[selectedImageIndex]}
-                      alt="Eco-friendly bagasse burger box"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  
-                  <div className="grid grid-cols-6 gap-2 mt-4">
-                    {productImages.map((image, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setSelectedImageIndex(index)}
-                        className={`aspect-square relative overflow-hidden rounded-lg border-2 transition-all ${
-                          selectedImageIndex === index 
-                            ? 'border-yellow-400 scale-105' 
-                            : 'border-white/30 hover:border-white/60'
-                        }`}
-                      >
-                        <Image
-                          src={image}
-                          alt={`Bagasse burger box view ${index + 1}`}
-                          fill
-                          className="object-cover"
-                        />
-                      </button>
-                    ))}
-                  </div>
-                </div>
+              <ul className="space-y-2.5 mb-6">
+                {[
+                  '100% biodegradable & compostable',
+                  'Microwave and freezer safe',
+                  'Oil and water resistant',
+                  'Standard & gourmet sizes',
+                  'Nationwide Ireland delivery',
+                ].map((point) => (
+                  <li key={point} className="flex items-start gap-2.5 text-sm text-gray-600">
+                    <CheckIcon />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="flex flex-col sm:flex-row gap-3 mb-6">
+                <button
+                  onClick={openQuote}
+                  className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3.5 px-6 rounded-xl transition-colors text-center"
+                >
+                  Get Custom Quote
+                </button>
+                <a
+                  href="tel:+353894400155"
+                  className="flex-1 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3.5 px-6 rounded-xl border border-gray-300 transition-colors text-center"
+                >
+                  Call +353 89 440 0155
+                </a>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-400 border-t border-gray-100 pt-4">
+                <span className="flex items-center gap-1">
+                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
+                  Food Safe
+                </span>
+                <span className="flex items-center gap-1">
+                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                  Irish Business
+                </span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+      {/* ── Features ── */}
+      <section className="bg-gray-50 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
               Why Choose Our Bagasse Burger Boxes?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our eco-friendly bagasse burger boxes offer superior performance while protecting the environment
+            <p className="text-gray-500 max-w-2xl mx-auto">
+              Eco-friendly packaging that performs. Superior quality with a clear environmental benefit.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <div key={index} className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-8">
-                <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {features.map((feature) => (
+              <div
+                key={feature.title}
+                className="bg-white rounded-xl p-5 sm:p-6 border border-gray-200 hover:border-emerald-200 hover:shadow-md transition-all"
+              >
+                <div className="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center mb-3">
                   {feature.icon}
                 </div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-4 group-hover:text-green-600 transition-colors">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {feature.description}
-                </p>
+                <h3 className="font-semibold text-gray-900 mb-1.5">{feature.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Specifications */}
-      <section id="specifications" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+      {/* ── Size options ── */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+              Size Options
+            </h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">
+              Standard and gourmet burger sizes. Custom dimensions available on request.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
+            {sizeOptions.map((s) => (
+              <div
+                key={s.size}
+                className={`relative rounded-xl p-4 text-center border-2 transition-all ${
+                  s.popular ? 'border-emerald-300 bg-emerald-50' : 'border-gray-200 bg-gray-50 hover:border-gray-300'
+                }`}
+              >
+                {s.popular && (
+                  <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wide">
+                    Popular
+                  </span>
+                )}
+                <div className={`text-xl font-bold ${s.popular ? 'text-emerald-600' : 'text-gray-800'}`}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-center text-sm text-gray-400 mt-6">
+            Need a custom size? <button onClick={openQuote} className="text-emerald-600 hover:underline font-medium">Request a quote</button>
+          </p>
+        </div>
+      </section>
+
+      {/* ── Gallery ── */}
+      <section id="gallery" className="bg-gray-50 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+              Design Gallery
+            </h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">
+              Examples of our bagasse burger boxes for Irish food businesses.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+            {galleryImages.map((img, i) => (
+              <button
+                key={img}
+                onClick={() => setLightboxIndex(i)}
+                className="group relative aspect-square rounded-xl overflow-hidden bg-white border border-gray-200 hover:border-emerald-300 hover:shadow-lg transition-all"
+              >
+                <Image
+                  src={img}
+                  alt={`Bagasse burger box ${i + 1}`}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                />
+              </button>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <button
+              onClick={openQuote}
+              className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-xl border border-gray-300 transition-colors"
+            >
+              Get Your Custom Quote
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Lightbox ── */}
+      {lightboxIndex !== null && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setLightboxIndex(null)}
+        >
+          <button className="absolute top-4 right-4 text-white/80 hover:text-white p-2" onClick={() => setLightboxIndex(null)}>
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <button
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-2"
+            onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex - 1 + galleryImages.length) % galleryImages.length); }}
+          >
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+          </button>
+          <button
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-2"
+            onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex + 1) % galleryImages.length); }}
+          >
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+          </button>
+          <div className="relative w-full max-w-3xl aspect-square" onClick={(e) => e.stopPropagation()}>
+            <Image
+              src={galleryImages[lightboxIndex]}
+              alt={`Bagasse burger box ${lightboxIndex + 1}`}
+              fill
+              className="object-contain"
+              sizes="90vw"
+            />
+          </div>
+          <div className="absolute bottom-4 text-white/60 text-sm">
+            {lightboxIndex + 1} / {galleryImages.length}
+          </div>
+        </div>
+      )}
+
+      {/* ── Specifications ── */}
+      <section id="specifications" className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                 Technical Specifications
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Detailed specifications for our premium bagasse burger boxes
+              <p className="text-gray-500 mb-6">
+                Premium bagasse burger boxes built to food-safety standards.
               </p>
-            </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="space-y-6">
-                {specifications.map((spec, index) => (
-                  <div key={index} className="flex justify-between items-center py-4 border-b border-gray-200">
-                    <span className="font-semibold text-gray-800">{spec.label}</span>
-                    <span className="text-gray-600 text-right">{spec.value}</span>
+              <div className="border border-gray-200 rounded-xl overflow-hidden">
+                {specs.map((spec, i) => (
+                  <div
+                    key={spec.label}
+                    className={`flex justify-between items-center px-4 py-3 text-sm ${
+                      i % 2 === 0 ? 'bg-gray-50' : 'bg-white'
+                    }`}
+                  >
+                    <span className="font-medium text-gray-700">{spec.label}</span>
+                    <span className="text-gray-500 text-right">{spec.value}</span>
                   </div>
                 ))}
               </div>
+            </div>
 
-              <div className="bg-gradient-to-br from-green-50 to-emerald-100 rounded-3xl p-8">
-                <h3 className="text-2xl font-bold text-gray-800 mb-6">Pricing Information</h3>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-700">Starting Price:</span>
-                    <span className="text-2xl font-bold text-green-600">€0.32 per unit</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-700">Minimum Order:</span>
-                    <span className="font-semibold">500 units</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-700">Volume Discounts:</span>
-                    <span className="font-semibold">Available</span>
-                  </div>
-                </div>
-                
-                <button 
-                  onClick={handleQuoteClick}
-                  className="w-full mt-6 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105"
-                >
-                  Get Volume Pricing
-                </button>
-              </div>
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100">
+              <Image
+                src={heroImages[0]}
+                alt="Bagasse burger box"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Applications */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-green-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-                Perfect for Every Food Business
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Our bagasse burger boxes serve food businesses across Ireland with sustainable packaging solutions
-              </p>
-            </div>
+      {/* ── CTA ── */}
+      <section className="bg-gray-900">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+            Ready to switch to eco-friendly burger boxes?
+          </h2>
+          <p className="text-gray-400 mb-8 max-w-xl mx-auto">
+            Get a free quote with no obligation. We'll help you choose the right size and quantity for your business.
+          </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {applications.map((application, index) => (
-                <div key={index} className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <h3 className="font-bold text-gray-800">{application}</h3>
-                </div>
-              ))}
-            </div>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <button
+              onClick={openQuote}
+              className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3.5 px-8 rounded-xl transition-colors"
+            >
+              Get Free Quote
+            </button>
+            <a
+              href="tel:+353894400155"
+              className="bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-3.5 px-8 rounded-xl border border-gray-700 transition-colors"
+            >
+              Call +353 89 440 0155
+            </a>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-8 text-sm text-gray-500">
+            <span className="flex items-center gap-1.5">
+              <CheckIcon />
+              No obligation
+            </span>
+            <span className="flex items-center gap-1.5">
+              <CheckIcon />
+              Volume discounts
+            </span>
+            <span className="flex items-center gap-1.5">
+              <CheckIcon />
+              Ireland-wide delivery
+            </span>
           </div>
         </div>
       </section>
 
-      {/* Environmental Impact */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-                Environmental Impact
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Make a positive impact on the environment with every meal served
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="w-24 h-24 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-3xl">🌱</span>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">Renewable Resource</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Made from sugarcane bagasse, a renewable agricultural by-product that would otherwise be waste.
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-24 h-24 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-3xl">♻️</span>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">100% Compostable</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Breaks down completely in commercial composting facilities within 60-90 days, leaving no harmful residue.
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-24 h-24 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-3xl">🌍</span>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">Carbon Neutral</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Lower carbon footprint compared to traditional plastic or foam packaging, helping fight climate change.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Weekly Delivery Service */}
-      <section className="py-20 bg-gradient-to-br from-green-600 to-emerald-700 text-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Weekly Delivery Service
-              </h2>
-              <p className="text-xl text-gray-200 max-w-3xl mx-auto">
-                Never run out of eco-friendly packaging with our reliable weekly delivery service
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-bold mb-4">Scheduled Deliveries</h3>
-                <p className="text-gray-200 leading-relaxed">
-                  Regular weekly deliveries ensure you never run out of packaging supplies when you need them most.
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H9a2 2 0 01-2-2z" />
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-bold mb-4">Inventory Management</h3>
-                <p className="text-gray-200 leading-relaxed">
-                  We monitor your usage patterns and optimize order quantities to maintain perfect stock levels.
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-bold mb-4">Cost Savings</h3>
-                <p className="text-gray-200 leading-relaxed">
-                  Volume discounts and reduced storage costs help you save money while maintaining sustainability.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-yellow-400 via-green-500 to-emerald-600 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-black opacity-20"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Ready to Go Green?
-            </h2>
-            <p className="text-xl mb-8 text-gray-100 max-w-2xl mx-auto">
-              Join thousands of Irish businesses making the switch to sustainable packaging. Get your custom quote today and start making a positive environmental impact.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
-                onClick={handleQuoteClick}
-                className="bg-white text-green-600 font-bold py-4 px-8 rounded-full text-lg hover:bg-gray-100 transition-colors transform hover:scale-105 shadow-xl"
-              >
-                Get Custom Quote
-              </button>
-              <a 
-                href="/contact" 
-                className="border-2 border-white text-white font-bold py-4 px-8 rounded-full text-lg hover:bg-white hover:text-green-600 transition-colors transform hover:scale-105"
-              >
-                Speak to Expert
-              </a>
-            </div>
-            
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-              <div>
-                <div className="text-3xl font-bold mb-2">€0.32</div>
-                <div className="text-gray-200">Starting Price per Unit</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold mb-2">7-10</div>
-                <div className="text-gray-200">Business Days Delivery</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold mb-2">100%</div>
-                <div className="text-gray-200">Biodegradable & Compostable</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Quote Modal */}
-      <BagasseQuoteForm 
-        isOpen={quoteModalOpen}
-        onClose={() => setQuoteModalOpen(false)}
-      />
+      {/* ── Quote Modal ── */}
+      {quoteModalOpen && (
+        <BagasseQuoteForm
+          isOpen={quoteModalOpen}
+          onClose={() => setQuoteModalOpen(false)}
+        />
+      )}
     </Layout>
   );
 };

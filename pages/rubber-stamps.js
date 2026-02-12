@@ -1,51 +1,128 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import RubberStampQuoteForm from '../components/RubberStampQuoteForm';
+
+// ─── Data ────────────────────────────────────────────────────────────────────
+
+const heroImages = [
+  '/images/rubber-stamps/Rubberstam_6.jpg',
+  '/images/rubber-stamps/Rubberstam_7.jpg',
+  '/images/rubber-stamps/RubberStamp_10.jpg',
+  '/images/rubber-stamps/RubberStamp_11.jpg',
+  '/images/rubber-stamps/RubberStamp_12.jpg',
+];
+
+const galleryImages = [
+  '/images/rubber-stamps/Rubberstam_6.jpg',
+  '/images/rubber-stamps/Rubberstam_7.jpg',
+  '/images/rubber-stamps/Rubberstam_8.jpg',
+  '/images/rubber-stamps/Rubberstam_9.jpg',
+  '/images/rubber-stamps/RubberStamp_10.jpg',
+  '/images/rubber-stamps/RubberStamp_11.jpg',
+  '/images/rubber-stamps/RubberStamp_12.jpg',
+  '/images/rubber-stamps/RubberStamp_13.jpg',
+  '/images/rubber-stamps/RubberStamp_14.jpg',
+  '/images/rubber-stamps/RubberStamp_15.jpg',
+];
+
+const stampTypes = [
+  { title: 'Custom Business Stamps', description: 'Company logos, addresses, official documentation. Invoices, letterheads, corporate branding.', popular: true },
+  { title: 'Traditional Hand Stamps', description: 'Classic wooden handle stamps with separate ink pad. Occasional use and traditional applications.', popular: false },
+  { title: 'Signature Stamps', description: 'Personalized signature stamps for authorized document signing. Streamline approvals.', popular: true },
+];
+
+const features = [
+  {
+    title: 'Same day service',
+    description: 'Same day and next day service available for urgent orders.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Premium quality',
+    description: 'Professional-grade materials and precision manufacturing for crisp, clear impressions.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Custom design',
+    description: 'Fully customizable: logos, text, graphics, and special formatting to match your brand.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Expert support',
+    description: 'Our design team helps you create the perfect stamp with professional advice.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
+      </svg>
+    ),
+  },
+];
+
+const specs = [
+  { label: 'Types', value: 'Business, traditional hand, signature stamps' },
+  { label: 'Materials', value: 'Professional-grade rubber and mounts' },
+  { label: 'Turnaround', value: 'Same day & next day available' },
+  { label: 'Delivery', value: 'Nationwide Ireland' },
+];
+
+// ─── Components ──────────────────────────────────────────────────────────────
+
+const CheckIcon = () => (
+  <svg className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+  </svg>
+);
+
+// ─── Page ────────────────────────────────────────────────────────────────────
 
 const RubberStampsPage = () => {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
-  const [selectedStampType, setSelectedStampType] = useState('');
+  const [selectedStampType, setSelectedStampType] = useState('Custom Rubber Stamp');
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+  const timeoutRef = useRef(null);
 
-  const handleQuoteClick = (stampType) => {
+  const goToImage = useCallback((nextIndex) => {
+    if (nextIndex === currentImage) return;
+    setIsTransitioning(true);
+    timeoutRef.current = setTimeout(() => {
+      setCurrentImage(nextIndex);
+      requestAnimationFrame(() => setIsTransitioning(false));
+    }, 400);
+  }, [currentImage]);
+
+  useEffect(() => {
+    const interval = setInterval(() => goToImage((currentImage + 1) % heroImages.length), 5000);
+    return () => {
+      clearInterval(interval);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, [currentImage, goToImage]);
+
+  const openQuote = () => {
+    setSelectedStampType('Custom Rubber Stamp');
+    setQuoteModalOpen(true);
+  };
+  const openQuoteWithType = (stampType) => {
     setSelectedStampType(stampType);
     setQuoteModalOpen(true);
   };
-
-  const stampTypes = [
-    {
-      title: "Custom Business Stamps",
-      description: "Professional business rubber stamps for company logos, addresses, and official documentation. Perfect for invoices, letterheads, and corporate branding.",
-      features: ["Company Logo Stamps", "Address Stamps", "Date & Time Stamps", "Invoice & Receipt Stamps"],
-      seoKeywords: "business rubber stamps, company logo stamps, address stamps, professional stamps"
-    },
-    {
-      title: "Traditional Hand Stamps",
-      description: "Classic wooden handle rubber stamps requiring a separate ink pad. Ideal for occasional use and traditional stamping applications.",
-      features: ["Wooden Handle", "Separate Ink Pad", "Traditional Design", "Cost Effective"],
-      seoKeywords: "traditional rubber stamps, wooden handle stamps, classic stamps, hand stamps"
-    },
-    {
-      title: "Signature Stamps",
-      description: "Personalized signature rubber stamps for authorized document signing. Streamline your approval process with professional signature stamps.",
-      features: ["Personal Signatures", "Authorization Stamps", "Document Approval", "Professional Use"],
-      seoKeywords: "signature stamps, authorization stamps, approval stamps, document signing"
-    }
-  ];
-
-  const stampImages = [
-    "/images/rubber-stamps/Rubberstam_6.jpg",
-    "/images/rubber-stamps/Rubberstam_7.jpg",
-    "/images/rubber-stamps/Rubberstam_8.jpg",
-    "/images/rubber-stamps/Rubberstam_9.jpg",
-    "/images/rubber-stamps/RubberStamp_10.jpg",
-    "/images/rubber-stamps/RubberStamp_11.jpg",
-    "/images/rubber-stamps/RubberStamp_12.jpg",
-    "/images/rubber-stamps/RubberStamp_13.jpg",
-    "/images/rubber-stamps/RubberStamp_14.jpg",
-    "/images/rubber-stamps/RubberStamp_15.jpg"
-  ];
 
   return (
     <Layout>
@@ -55,338 +132,189 @@ const RubberStampsPage = () => {
         <meta name="keywords" content="rubber stamps Ireland, custom stamps, business stamps, traditional hand stamps, signature stamps, company logo stamps, address stamps, professional stamps, Dublin stamps" />
         <meta property="og:title" content="Custom Rubber Stamps Ireland | Professional Business Stamps" />
         <meta property="og:description" content="High-quality custom rubber stamps for business and personal use. Business stamps, traditional hand stamps, and signature stamps available. Fast delivery across Ireland." />
+        <meta property="og:image" content="https://www.printnpack.ie/images/rubber-stamps/RubberStamp_10.jpg" />
+        <meta property="og:url" content="https://www.printnpack.ie/rubber-stamps" />
         <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="geo.region" content="IE" />
-        <meta name="geo.placename" content="Ireland" />
-        <link rel="canonical" href="https://printnpack.ie/rubber-stamps" />
+        <link rel="canonical" href="https://www.printnpack.ie/rubber-stamps" />
       </Head>
 
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 text-white py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-black opacity-20"></div>
-        <div className="absolute inset-0">
-          <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="stamp-pattern" width="60" height="60" patternUnits="userSpaceOnUse">
-                <circle cx="30" cy="30" r="2" fill="currentColor" fillOpacity="0.1" />
-                <circle cx="10" cy="10" r="1" fill="currentColor" fillOpacity="0.05" />
-                <circle cx="50" cy="50" r="1" fill="currentColor" fillOpacity="0.05" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#stamp-pattern)" />
-          </svg>
+      <nav className="bg-gray-50 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+          <ol className="flex items-center gap-2 text-sm text-gray-500">
+            <li><Link href="/" className="hover:text-gray-700">Home</Link></li>
+            <li>/</li>
+            <li><Link href="/#products" className="hover:text-gray-700">Products</Link></li>
+            <li>/</li>
+            <li className="text-gray-800 font-medium">Rubber Stamps</li>
+          </ol>
         </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-6 py-2 mb-6">
-              <span className="text-sm font-medium">🇮🇪 Made in Ireland</span>
-            </div>
-            
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              Professional
-              <span className="block bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
-                Rubber Stamps
-              </span>
-            </h1>
-            
-            <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto leading-relaxed">
-              Custom rubber stamps for business and personal use. From self-inking stamps to traditional wooden handles - we create professional stamps that make an impression.
-            </p>
-            
-            <div className="flex flex-wrap justify-center gap-4 text-lg mb-8">
-              <span className="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full font-medium">
-                ✓ Same Day Service Available
-              </span>
-              <span className="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full font-medium">
-                ✓ Professional Quality
-              </span>
-              <span className="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full font-medium">
-                ✓ Custom Designs
-              </span>
-            </div>
+      </nav>
 
-            <button 
-              onClick={() => handleQuoteClick('Custom Rubber Stamp')}
-              className="bg-gradient-to-r from-orange-500 to-pink-600 hover:from-orange-600 hover:to-pink-700 text-white font-bold py-4 px-8 rounded-full text-lg shadow-2xl transform hover:scale-105 transition-all duration-300"
-            >
-              Get Custom Quote Now
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+            <div>
+              <div className="relative aspect-square bg-gray-50 rounded-2xl overflow-hidden mb-3">
+                {heroImages.map((img, i) => (
+                  <div key={img} className="absolute inset-0" style={{ transition: 'opacity 0.8s ease', opacity: i === currentImage && !isTransitioning ? 1 : 0 }}>
+                    <Image src={img} alt={`Rubber stamp ${i + 1}`} fill className="object-cover" priority={i === 0} sizes="(max-width: 768px) 100vw, 50vw" />
+                  </div>
+                ))}
+              </div>
+              <div className="grid grid-cols-5 gap-2">
+                {heroImages.map((img, i) => (
+                  <button key={img} onClick={() => goToImage(i)} className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${i === currentImage ? 'border-indigo-500 ring-1 ring-indigo-300' : 'border-transparent opacity-70 hover:opacity-100'}`}>
+                    <Image src={img} alt={`Thumbnail ${i + 1}`} fill className="object-cover" sizes="80px" />
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="lg:sticky lg:top-24">
+              <div className="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 rounded-full px-3 py-1 text-sm font-medium mb-4 border border-indigo-200">
+                <span className="w-2 h-2 bg-indigo-500 rounded-full" />
+                Made in Ireland
+              </div>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">Rubber Stamps</h1>
+              <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
+                Custom rubber stamps for business and personal use. From self-inking to traditional wooden handles — professional stamps that make an impression.
+              </p>
+              <div className="grid grid-cols-3 gap-3 mb-6">
+                <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">24hr</div><div className="text-xs text-gray-500">express</div></div>
+                <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">1000+</div><div className="text-xs text-gray-500">customers</div></div>
+                <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">15+</div><div className="text-xs text-gray-500">years</div></div>
+              </div>
+              <ul className="space-y-2.5 mb-6">
+                {['Same day service available', 'Professional quality', 'Custom designs', 'Expert support', 'Nationwide Ireland delivery'].map((point) => (
+                  <li key={point} className="flex items-start gap-2.5 text-sm text-gray-600"><CheckIcon />{point}</li>
+                ))}
+              </ul>
+              <div className="flex flex-col sm:flex-row gap-3 mb-6">
+                <button onClick={openQuote} className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3.5 px-6 rounded-xl transition-colors text-center">Get Custom Quote</button>
+                <a href="tel:+353894400155" className="flex-1 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3.5 px-6 rounded-xl border border-gray-300 transition-colors text-center">Call +353 89 440 0155</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-gray-50 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Why Choose Our Rubber Stamps?</h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">Ireland’s trusted rubber stamp specialists.</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {features.map((f) => (
+              <div key={f.title} className="bg-white rounded-xl p-5 sm:p-6 border border-gray-200 hover:border-indigo-200 hover:shadow-md transition-all">
+                <div className="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center mb-3">{f.icon}</div>
+                <h3 className="font-semibold text-gray-900 mb-1.5">{f.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{f.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Stamp Types</h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">Choose the right stamp for your needs.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+            {stampTypes.map((s) => (
+              <div key={s.title} className={`rounded-xl p-5 border-2 transition-all ${s.popular ? 'border-indigo-300 bg-indigo-50' : 'border-gray-200 bg-gray-50 hover:border-gray-300'}`}>
+                <h3 className="font-semibold text-gray-900 mb-2">{s.title}</h3>
+                <p className="text-sm text-gray-500 mb-4">{s.description}</p>
+                <button onClick={() => openQuoteWithType(s.title)} className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors">
+                  Get Quote for {s.title.replace('Custom ', '').replace(' Stamps', '')}
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="gallery" className="bg-gray-50 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Stamp Gallery</h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">Examples of our rubber stamps.</p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+            {galleryImages.map((img, i) => (
+              <button key={`${img}-${i}`} onClick={() => setLightboxIndex(i)} className="group relative aspect-square rounded-xl overflow-hidden bg-white border border-gray-200 hover:border-indigo-300 hover:shadow-lg transition-all">
+                <Image src={img} alt={`Stamp ${i + 1}`} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 640px) 50vw, 20vw" />
+              </button>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <button onClick={openQuote} className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-xl border border-gray-300 transition-colors">
+              Get Your Custom Quote
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" /></svg>
             </button>
           </div>
         </div>
       </section>
 
-      {/* Image Showcase */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-              Our Stamp Gallery
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Browse our collection of high-quality rubber stamps designed for various business and personal applications
-            </p>
+      {lightboxIndex !== null && (
+        <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4" onClick={() => setLightboxIndex(null)}>
+          <button className="absolute top-4 right-4 text-white/80 hover:text-white p-2" onClick={() => setLightboxIndex(null)}>
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+          <button className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-2" onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex - 1 + galleryImages.length) % galleryImages.length); }}>
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+          </button>
+          <button className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-2" onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex + 1) % galleryImages.length); }}>
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+          </button>
+          <div className="relative w-full max-w-3xl aspect-square" onClick={(e) => e.stopPropagation()}>
+            <Image src={galleryImages[lightboxIndex]} alt={`Stamp ${lightboxIndex + 1}`} fill className="object-contain" sizes="90vw" />
           </div>
+          <div className="absolute bottom-4 text-white/60 text-sm">{lightboxIndex + 1} / {galleryImages.length}</div>
+        </div>
+      )}
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
-            {stampImages.map((image, index) => (
-              <div key={index} className="group relative aspect-square overflow-hidden rounded-xl shadow-lg bg-white">
-                <Image
-                  src={image}
-                  alt={`Professional rubber stamp ${index + 1}`}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute bottom-4 left-4 text-white">
-                    <p className="text-sm font-semibold">Stamp #{index + 1}</p>
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Specifications</h2>
+              <p className="text-gray-500 mb-6">Professional rubber stamps for every application.</p>
+              <div className="border border-gray-200 rounded-xl overflow-hidden">
+                {specs.map((spec, i) => (
+                  <div key={spec.label} className={`flex justify-between items-center px-4 py-3 text-sm ${i % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
+                    <span className="font-medium text-gray-700">{spec.label}</span>
+                    <span className="text-gray-500 text-right">{spec.value}</span>
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stamp Types Grid */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-              Choose Your Perfect Stamp
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              From business stamps to personal signatures, we offer a complete range of professional rubber stamp solutions tailored to your needs
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {stampTypes.map((stamp, index) => (
-              <div key={index} className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                <div className="p-8">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4 group-hover:text-blue-600 transition-colors">
-                    {stamp.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 mb-6 leading-relaxed">
-                    {stamp.description}
-                  </p>
-                  
-                  <div className="space-y-2 mb-8">
-                    {stamp.features.map((feature, featureIndex) => (
-                      <div key={featureIndex} className="flex items-center text-sm text-gray-700">
-                        <svg className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        {feature}
-                      </div>
-                    ))}
-                  </div>
-                  
-                  <button 
-                    onClick={() => handleQuoteClick(stamp.title)}
-                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform group-hover:scale-105"
-                  >
-                    Get Quote for {stamp.title}
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-              Why Choose Our Rubber Stamps?
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We're Ireland's trusted rubber stamp specialists with years of experience creating professional stamping solutions
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center group">
-              <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">Lightning Fast</h3>
-              <p className="text-gray-600 leading-relaxed">Same day and next day service available for urgent orders. We understand your business can't wait.</p>
             </div>
-
-            <div className="text-center group">
-              <div className="w-20 h-20 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">Premium Quality</h3>
-              <p className="text-gray-600 leading-relaxed">Professional-grade materials and precision manufacturing ensure crisp, clear impressions every time.</p>
-            </div>
-
-            <div className="text-center group">
-              <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">Custom Design</h3>
-              <p className="text-gray-600 leading-relaxed">Fully customizable designs including logos, text, graphics, and special formatting to match your brand.</p>
-            </div>
-
-            <div className="text-center group">
-              <div className="w-20 h-20 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">Expert Support</h3>
-              <p className="text-gray-600 leading-relaxed">Our design team helps you create the perfect stamp with professional advice and technical support.</p>
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100">
+              <Image src={heroImages[0]} alt="Rubber stamps" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Applications Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-                Perfect for Every Business
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Our rubber stamps serve businesses across Ireland in various industries and applications
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-8 hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Legal & Professional Services</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li>• Solicitor signature stamps</li>
-                  <li>• Court document stamps</li>
-                  <li>• Notary public stamps</li>
-                  <li>• Legal firm address stamps</li>
-                </ul>
-              </div>
-
-              <div className="bg-gradient-to-br from-green-50 to-emerald-100 rounded-2xl p-8 hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Healthcare & Medical</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li>• Doctor signature stamps</li>
-                  <li>• Prescription stamps</li>
-                  <li>• Medical practice stamps</li>
-                  <li>• Patient record stamps</li>
-                </ul>
-              </div>
-
-              <div className="bg-gradient-to-br from-purple-50 to-pink-100 rounded-2xl p-8 hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Education & Schools</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li>• Teacher marking stamps</li>
-                  <li>• School address stamps</li>
-                  <li>• Student record stamps</li>
-                  <li>• Library date stamps</li>
-                </ul>
-              </div>
-
-              <div className="bg-gradient-to-br from-yellow-50 to-orange-100 rounded-2xl p-8 hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Retail & Commerce</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li>• Invoice & receipt stamps</li>
-                  <li>• Return address stamps</li>
-                  <li>• Quality control stamps</li>
-                  <li>• Inventory stamps</li>
-                </ul>
-              </div>
-
-              <div className="bg-gradient-to-br from-red-50 to-rose-100 rounded-2xl p-8 hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Government & Public Sector</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li>• Official document stamps</li>
-                  <li>• Department stamps</li>
-                  <li>• Authorization stamps</li>
-                  <li>• Date received stamps</li>
-                </ul>
-              </div>
-
-              <div className="bg-gradient-to-br from-teal-50 to-cyan-100 rounded-2xl p-8 hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Manufacturing & Industry</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li>• Quality assurance stamps</li>
-                  <li>• Inspection stamps</li>
-                  <li>• Serial number stamps</li>
-                  <li>• Date code stamps</li>
-                </ul>
-              </div>
-            </div>
+      <section className="bg-gray-900">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Ready to create your custom stamp?</h2>
+          <p className="text-gray-400 mb-8 max-w-xl mx-auto">Get professional rubber stamps made to your exact specifications. Fast turnaround and competitive prices.</p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <button onClick={openQuote} className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3.5 px-8 rounded-xl transition-colors">Get Custom Quote</button>
+            <a href="tel:+353894400155" className="bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-3.5 px-8 rounded-xl border border-gray-700 transition-colors">Call +353 89 440 0155</a>
+          </div>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-8 text-sm text-gray-500">
+            <span className="flex items-center gap-1.5"><CheckIcon /> No obligation</span>
+            <span className="flex items-center gap-1.5"><CheckIcon /> Ireland-wide delivery</span>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-black opacity-20"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Ready to Create Your Custom Stamp?
-            </h2>
-            <p className="text-xl mb-8 text-gray-200 max-w-2xl mx-auto">
-              Get professional rubber stamps made to your exact specifications. Fast turnaround, competitive prices, and exceptional quality guaranteed.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
-                onClick={() => handleQuoteClick('Custom Rubber Stamp')}
-                className="bg-white text-blue-600 font-bold py-4 px-8 rounded-full text-lg hover:bg-gray-100 transition-colors transform hover:scale-105 shadow-xl"
-              >
-                Get Custom Quote
-              </button>
-              <a 
-                href="/contact" 
-                className="border-2 border-white text-white font-bold py-4 px-8 rounded-full text-lg hover:bg-white hover:text-blue-600 transition-colors transform hover:scale-105"
-              >
-                Speak to Expert
-              </a>
-            </div>
-            
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-              <div>
-                <div className="text-3xl font-bold mb-2">24hr</div>
-                <div className="text-gray-300">Express Service</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold mb-2">1000+</div>
-                <div className="text-gray-300">Happy Customers</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold mb-2">15+</div>
-                <div className="text-gray-300">Years Experience</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Quote Modal */}
-      <RubberStampQuoteForm 
-        isOpen={quoteModalOpen}
-        onClose={() => setQuoteModalOpen(false)}
-        stampType={selectedStampType}
-      />
+      {quoteModalOpen && (
+        <RubberStampQuoteForm isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} stampType={selectedStampType} />
+      )}
     </Layout>
   );
 };

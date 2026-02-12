@@ -1,611 +1,324 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import VinylStickerQuoteForm from '../components/VinylStickerQuoteForm';
+
+// ─── Data ────────────────────────────────────────────────────────────────────
+
+const heroImages = [
+  '/ifa/product/vinylstk/Window_Sticker_2_01041803202404.png.webp',
+  '/ifa/product/vinylstk/Window_Sticker_3_01042303202404.png.webp',
+  '/ifa/product/vinylstk/Transperent_Sticker_low_03281303202404.png.webp',
+  '/ifa/product/vinylstk/carstk.webp',
+  '/ifa/product/vinylstk/Vinyl-Decals-_-Stickers.jpg',
+];
+
+const galleryImages = [...heroImages];
+
+const productOptions = [
+  { size: 'Vinyl Stickers', label: 'Stickers', popular: true },
+  { size: 'Vinyl Decals', label: 'Decals', popular: true },
+  { size: 'Vinyl Labels', label: 'Labels', popular: false },
+  { size: 'Vinyl Graphics', label: 'Graphics', popular: false },
+];
+
+const features = [
+  {
+    title: 'Premium vinyl',
+    description: 'High-quality vinyl with excellent outdoor durability and vibrant colours.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Vehicles & windows',
+    description: 'Vehicle graphics, window decals, wall murals, and floor graphics.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 002.985-3.545M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Custom shapes',
+    description: 'Die-cut custom shapes, transparent or white backing, gloss or matte finish.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Fast turnaround',
+    description: '1–3 day delivery. Same-day options available for urgent orders.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Multiple materials',
+    description: 'Premium, economy, reflective, fluorescent, metallic, and chrome vinyl.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Ireland-wide',
+    description: 'Professional quality vinyl stickers and decals delivered across Ireland.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+      </svg>
+    ),
+  },
+];
+
+const specs = [
+  { label: 'Materials', value: 'Premium, economy, reflective, fluorescent, metallic, chrome' },
+  { label: 'Finish', value: 'Gloss, matte, satin, transparent, white backing, die-cut' },
+  { label: 'Use', value: 'Indoor & outdoor' },
+  { label: 'Applications', value: 'Vehicles, windows, walls, floors, labels, signage' },
+  { label: 'Delivery', value: 'Nationwide Ireland, 1–3 days' },
+];
+
+// ─── Components ──────────────────────────────────────────────────────────────
+
+const CheckIcon = () => (
+  <svg className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+  </svg>
+);
+
+// ─── Page ────────────────────────────────────────────────────────────────────
 
 const VinylStickersPage = () => {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState('');
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState({});
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+  const timeoutRef = useRef(null);
 
-  // Hero images rotation
-  const heroImages = [
-    '/ifa/product/vinylstk/Window_Sticker_2_01041803202404.png.webp',
-    '/ifa/product/vinylstk/Window_Sticker_3_01042303202404.png.webp',
-    '/ifa/product/vinylstk/Transperent_Sticker_low_03281303202404.png.webp',
-    '/ifa/product/vinylstk/carstk.webp',
-    '/ifa/product/vinylstk/Vinyl-Decals-_-Stickers.jpg'
-  ];
+  const goToImage = useCallback((nextIndex) => {
+    if (nextIndex === currentImage) return;
+    setIsTransitioning(true);
+    timeoutRef.current = setTimeout(() => {
+      setCurrentImage(nextIndex);
+      requestAnimationFrame(() => setIsTransitioning(false));
+    }, 400);
+  }, [currentImage]);
 
-  // Auto-rotate hero images
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex(prev => (prev + 1) % heroImages.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [heroImages.length]);
+    const interval = setInterval(() => goToImage((currentImage + 1) % heroImages.length), 5000);
+    return () => {
+      clearInterval(interval);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, [currentImage, goToImage]);
 
-  // Intersection Observer for animations
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(prev => ({
-              ...prev,
-              [entry.target.id]: true
-            }));
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = document.querySelectorAll('[data-animate]');
-    elements.forEach(el => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
-  const vinylProducts = [
-    {
-      name: 'Vinyl Stickers',
-      slug: 'vinyl-stickers',
-      description: 'High-quality vinyl stickers with excellent outdoor durability and vibrant colors. Perfect for vehicle graphics, window decals, and wall murals.',
-      features: ['Premium Vinyl Material', 'Outdoor Durability', 'Vibrant Colors', 'Easy Application', 'Custom Shapes'],
-      startingPrice: '€2',
-      material: 'Premium Vinyl',
-      applications: ['Vehicle graphics', 'Window decals', 'Wall murals', 'Product labels', 'Signage'],
-      images: [
-        '/ifa/product/vinylstk/Window_Sticker_2_01041803202404.png.webp',
-        '/ifa/product/vinylstk/Window_Sticker_3_01042303202404.png.webp'
-      ]
-    },
-    {
-      name: 'Vinyl Decals',
-      slug: 'vinyl-decals',
-      description: 'Professional vinyl decals perfect for indoor and outdoor applications. Easy to apply with excellent adhesion and print quality.',
-      features: ['Professional Finish', 'Easy Application', 'Excellent Adhesion', 'High Print Quality', 'Versatile Use'],
-      startingPrice: '€3',
-      material: 'Premium Vinyl',
-      applications: ['Window decals', 'Wall graphics', 'Floor graphics', 'Equipment marking', 'Safety signs'],
-      images: [
-        '/ifa/product/vinylstk/Transperent_Sticker_low_03281303202404.png.webp',
-        '/ifa/product/vinylstk/carstk.webp'
-      ]
-    },
-    {
-      name: 'Vinyl Labels',
-      slug: 'vinyl-labels',
-      description: 'Custom vinyl labels for product packaging, asset tags, and equipment marking. Professional appearance with long-lasting durability.',
-      features: ['Custom Shapes', 'Professional Appearance', 'Long-lasting Durability', 'High Adhesion', 'Multiple Finishes'],
-      startingPrice: '€1.50',
-      material: 'Premium Vinyl',
-      applications: ['Product labels', 'Asset tags', 'Equipment marking', 'Inventory labels', 'Custom stickers'],
-      images: [
-        '/ifa/product/vinylstk/carstk.webp',
-        '/ifa/product/vinylstk/Vinyl-Decals-_-Stickers.jpg'
-      ]
-    },
-    {
-      name: 'Vinyl Graphics',
-      slug: 'vinyl-graphics',
-      description: 'Large format vinyl graphics for maximum visual impact. Perfect for vehicle wraps, exhibition graphics, and retail displays.',
-      features: ['Large Format Capability', 'Maximum Visual Impact', 'Professional Installation', 'Custom Sizing', 'Premium Materials'],
-      startingPrice: '€25',
-      material: 'Premium Vinyl',
-      applications: ['Vehicle wraps', 'Large format graphics', 'Exhibition graphics', 'Retail displays', 'Event branding'],
-      images: [
-        '/ifa/product/vinylstk/Window_Sticker_2_01041803202404.png.webp',
-        '/ifa/product/vinylstk/Transperent_Sticker_low_03281303202404.png.webp'
-      ]
-    }
-  ];
-
-  const materialOptions = [
-    { material: 'Premium Vinyl', description: 'High-quality outdoor vinyl with excellent durability and vibrant colors', lifespan: '3-7 years outdoor' },
-    { material: 'Economy Vinyl', description: 'Cost-effective vinyl for indoor applications and short-term use', lifespan: '1-2 years indoor' },
-    { material: 'Reflective Vinyl', description: 'Safety vinyl with high visibility for road signs and safety applications', lifespan: '5-8 years outdoor' },
-    { material: 'Fluorescent Vinyl', description: 'Bright, eye-catching vinyl for maximum visibility and attention', lifespan: '2-4 years outdoor' },
-    { material: 'Metallic Vinyl', description: 'Premium metallic finish for luxury applications and premium branding', lifespan: '3-5 years outdoor' },
-    { material: 'Chrome Vinyl', description: 'Mirror-like chrome effect for premium vehicle graphics and displays', lifespan: '2-4 years outdoor' }
-  ];
-
-  const finishOptions = [
-    { finish: 'Gloss', description: 'Shiny, vibrant finish that enhances colors and provides premium appearance' },
-    { finish: 'Matte', description: 'Non-reflective, subtle finish for professional and understated look' },
-    { finish: 'Satin', description: 'Semi-gloss finish offering elegant appearance with reduced glare' },
-    { finish: 'Transparent', description: 'See-through background allowing surface to show through' },
-    { finish: 'White Backing', description: 'Opaque white background for maximum color vibrancy' },
-    { finish: 'Die Cut', description: 'Custom shape cutting for unique and creative designs' }
-  ];
-
-  const applications = [
-    'Vehicle graphics and wraps',
-    'Window decals and graphics',
-    'Wall murals and graphics',
-    'Floor graphics and safety signs',
-    'Product labels and packaging',
-    'Equipment marking and identification',
-    'Safety and warning signs',
-    'Event branding and displays'
-  ];
+  const openQuote = () => setQuoteModalOpen(true);
 
   return (
     <Layout>
       <Head>
-        <title>Vinyl Stickers - Custom Vinyl Graphics & Decals | printNpack Ireland</title>
+        <title>Vinyl Stickers - Custom Vinyl Graphics & Decals | Print n Pack Ireland</title>
         <meta name="description" content="High-quality vinyl stickers, decals, and graphics for vehicles, windows, walls, and more. Custom designs with premium materials and professional installation across Ireland." />
         <meta name="keywords" content="vinyl stickers, vinyl decals, vinyl graphics, vehicle wraps, window decals, wall graphics, Ireland" />
+        <meta property="og:title" content="Vinyl Stickers - Custom Graphics & Decals Ireland" />
+        <meta property="og:description" content="Premium vinyl stickers and decals. Vehicles, windows, walls. Custom shapes and materials. Fast delivery Ireland." />
+        <meta property="og:image" content="https://www.printnpack.ie/ifa/product/vinylstk/Window_Sticker_2_01041803202404.png.webp" />
+        <meta property="og:url" content="https://www.printnpack.ie/vinyl-stickers" />
+        <meta property="og:type" content="website" />
         <link rel="canonical" href="https://www.printnpack.ie/vinyl-stickers" />
       </Head>
 
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-        
-        {/* Floating background elements */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-purple-400 rounded-full opacity-20 animate-float"></div>
-        <div className="absolute bottom-20 right-10 w-24 h-24 bg-indigo-400 rounded-full opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-purple-300 rounded-full opacity-20 animate-float" style={{ animationDelay: '4s' }}></div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 py-20 lg:py-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div data-animate id="hero-text">
-              <div className={`transition-all duration-1000 ${isVisible['hero-text'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight">
-                  Custom
-                  <span className="block text-purple-300">Vinyl Stickers</span>
-                  <span className="block text-2xl md:text-3xl lg:text-4xl text-purple-200 mt-4 font-normal">
-                    Premium Graphics & Decals
-                  </span>
-                </h1>
-                <p className="text-xl md:text-2xl mb-8 text-purple-100 leading-relaxed">
-                  High-quality vinyl stickers, decals, and graphics for vehicles, windows, walls, and more. 
-                  Custom designs with premium materials and professional installation.
-                </p>
-                
-                <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                  <button
-                    onClick={() => {
-                      setSelectedProduct('Vinyl Stickers');
-                      setQuoteModalOpen(true);
-                    }}
-                    className="bg-yellow-400 text-purple-800 px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-300 transform hover:scale-105 transition-all duration-300 shadow-xl"
-                  >
-                    Get Custom Quote 🚀
+      <nav className="bg-gray-50 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+          <ol className="flex items-center gap-2 text-sm text-gray-500">
+            <li><Link href="/" className="hover:text-gray-700">Home</Link></li>
+            <li>/</li>
+            <li><Link href="/#products" className="hover:text-gray-700">Products</Link></li>
+            <li>/</li>
+            <li className="text-gray-800 font-medium">Vinyl Stickers</li>
+          </ol>
+        </div>
+      </nav>
+
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+            <div>
+              <div className="relative aspect-square bg-gray-50 rounded-2xl overflow-hidden mb-3">
+                {heroImages.map((img, i) => (
+                  <div key={img} className="absolute inset-0" style={{ transition: 'opacity 0.8s ease', opacity: i === currentImage && !isTransitioning ? 1 : 0 }}>
+                    <Image src={img} alt={`Vinyl sticker ${i + 1}`} fill className="object-cover" priority={i === 0} sizes="(max-width: 768px) 100vw, 50vw" />
+                  </div>
+                ))}
+              </div>
+              <div className="grid grid-cols-5 gap-2">
+                {heroImages.map((img, i) => (
+                  <button key={img} onClick={() => goToImage(i)} className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${i === currentImage ? 'border-purple-500 ring-1 ring-purple-300' : 'border-transparent opacity-70 hover:opacity-100'}`}>
+                    <Image src={img} alt={`Thumbnail ${i + 1}`} fill className="object-cover" sizes="80px" />
                   </button>
-                  <a
-                    href="tel:+353894400155"
-                    className="border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-purple-600 transition-colors duration-300 text-center"
-                  >
-                    Call +353 89 440 0155 📞
-                  </a>
-                </div>
-
-                <div className="grid grid-cols-3 gap-6 text-center">
-                  <div>
-                    <div className="text-2xl font-bold text-yellow-400">€2</div>
-                    <div className="text-sm text-purple-200">Starting Price</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-yellow-400">1-3</div>
-                    <div className="text-sm text-purple-200">Days Delivery</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-yellow-400">6</div>
-                    <div className="text-sm text-purple-200">Material Types</div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
-
-            <div data-animate id="hero-image" className="relative">
-              <div className={`transition-all duration-1000 delay-300 ${isVisible['hero-image'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                <div className="relative h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-                  <Image
-                    src={heroImages[currentImageIndex]}
-                    alt="Vinyl Stickers"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                </div>
-                
-                {/* Image navigation dots */}
-                <div className="flex justify-center mt-4 space-x-2">
-                  {heroImages.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentImageIndex(index)}
-                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                        index === currentImageIndex ? 'bg-yellow-400 scale-125' : 'bg-white/50 hover:bg-white/75'
-                      }`}
-                    />
-                  ))}
-                </div>
+            <div className="lg:sticky lg:top-24">
+              <div className="inline-flex items-center gap-2 bg-purple-50 text-purple-700 rounded-full px-3 py-1 text-sm font-medium mb-4 border border-purple-200">
+                <span className="w-2 h-2 bg-purple-500 rounded-full" />
+                Custom graphics & decals
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Our Vinyl Stickers */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16" data-animate id="why-choose">
-            <div className={`transition-all duration-1000 ${isVisible['why-choose'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h2 className="text-4xl md:text-5xl font-black text-gray-800 mb-6">
-                Why Our Vinyl Stickers Stand Out
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Premium vinyl materials with professional printing and installation for maximum impact and durability
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">Vinyl Stickers & Decals</h1>
+              <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
+                High-quality vinyl stickers, decals, and graphics for vehicles, windows, walls, and more. Custom designs with premium materials.
               </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { icon: '🎨', title: 'Premium Materials', description: 'High-quality vinyl with excellent outdoor durability and vibrant color retention' },
-              { icon: '✂️', title: 'Custom Cutting', description: 'Precise die-cutting for unique shapes and professional finishes' },
-              { icon: '🔧', title: 'Easy Application', description: 'Professional installation with transfer tape for bubble-free application' },
-              { icon: '🌞', title: 'UV Resistant', description: 'Long-lasting colors that resist fading from sunlight and weather' },
-              { icon: '💧', title: 'Waterproof', description: 'Waterproof materials perfect for outdoor and vehicle applications' },
-              { icon: '📏', title: 'Multiple Sizes', description: 'From small labels to large vehicle wraps and wall graphics' },
-              { icon: '🎯', title: 'Versatile Use', description: 'Suitable for vehicles, windows, walls, floors, and equipment' },
-              { icon: '⚡', title: 'Fast Turnaround', description: '1-3 business days for most orders with rush options available' }
-            ].map((feature, index) => (
-              <div key={index} data-animate id={`feature-${index}`} className="text-center">
-                <div className={`transition-all duration-1000 delay-${index * 100} ${isVisible[`feature-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  <div className="text-4xl mb-4">{feature.icon}</div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-3">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
-                </div>
+              <div className="grid grid-cols-3 gap-3 mb-6">
+                <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">From €2</div><div className="text-xs text-gray-500">starting</div></div>
+                <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">1–3 days</div><div className="text-xs text-gray-500">delivery</div></div>
+                <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">6</div><div className="text-xs text-gray-500">material types</div></div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Product Range */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16" data-animate id="product-range">
-            <div className={`transition-all duration-1000 ${isVisible['product-range'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h2 className="text-4xl md:text-5xl font-black text-gray-800 mb-6">
-                Our Premium Vinyl Range
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Choose the perfect vinyl solution for your specific application and design requirements
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {vinylProducts.map((product, index) => (
-              <div key={product.slug} data-animate id={`product-${index}`} className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden hover:shadow-2xl transition-all duration-300">
-                <div className={`transition-all duration-1000 delay-${index * 200} ${isVisible[`product-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  <div className="relative h-64 overflow-hidden">
-                    <Image
-                      src={product.images[0]}
-                      alt={product.name}
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-                        {product.material}
-                      </span>
-                    </div>
-                  </div>
-                  
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-3">{product.name}</h3>
-                    <p className="text-gray-600 mb-4">{product.description}</p>
-                    
-                    <div className="mb-4">
-                      <h4 className="font-semibold text-gray-800 mb-2">Key Features:</h4>
-                      <ul className="space-y-1">
-                        {product.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-center text-sm text-gray-600">
-                            <span className="text-purple-500 mr-2">✓</span>
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="mb-6">
-                      <h4 className="font-semibold text-gray-800 mb-2">Ideal for:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {product.applications.map((app, idx) => (
-                          <span key={idx} className="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">
-                            {app}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <div className="text-2xl font-bold text-purple-600">
-                        Starting at {product.startingPrice}
-                      </div>
-                      <button
-                        onClick={() => {
-                          setSelectedProduct(product.name);
-                          setQuoteModalOpen(true);
-                        }}
-                        className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
-                      >
-                        Get Quote
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Material Options */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16" data-animate id="material-options">
-            <div className={`transition-all duration-1000 ${isVisible['material-options'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h2 className="text-4xl md:text-5xl font-black text-gray-800 mb-6">
-                Material Types & Specifications
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Choose from our range of premium vinyl materials to match your specific application needs
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {materialOptions.map((option, index) => (
-              <div key={option.material} data-animate id={`material-${index}`} className="bg-white rounded-xl p-6 shadow-lg border border-gray-200">
-                <div className={`transition-all duration-1000 delay-${index * 100} ${isVisible[`material-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">{option.material}</h3>
-                  <p className="text-lg text-purple-600 font-medium mb-3">{option.lifespan}</p>
-                  <p className="text-gray-600">{option.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Finish Options */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16" data-animate id="finish-options">
-            <div className={`transition-all duration-1000 ${isVisible['finish-options'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h2 className="text-4xl md:text-5xl font-black text-gray-800 mb-6">
-                Finish Options & Effects
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Multiple finish options to achieve the perfect look for your vinyl graphics and decals
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {finishOptions.map((option, index) => (
-              <div key={option.finish} data-animate id={`finish-${index}`} className="bg-gray-50 rounded-xl p-6">
-                <div className={`transition-all duration-1000 delay-${index * 200} ${isVisible[`finish-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  <h3 className="text-xl font-bold text-gray-800 mb-3">{option.finish}</h3>
-                  <p className="text-gray-600">{option.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Applications */}
-      <section className="py-20 bg-purple-900 text-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16" data-animate id="applications">
-            <div className={`transition-all duration-1000 ${isVisible['applications'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h2 className="text-4xl md:text-5xl font-black mb-6">
-                Perfect for Every Application
-              </h2>
-              <p className="text-xl text-purple-200 max-w-3xl mx-auto">
-                Our vinyl solutions serve businesses across Ireland in various industries and applications
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {applications.map((application, index) => (
-              <div key={index} data-animate id={`application-${index}`} className="text-center">
-                <div className={`transition-all duration-1000 delay-${index * 100} ${isVisible[`application-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  <div className="w-16 h-16 bg-purple-700 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">🎯</span>
-                  </div>
-                  <p className="text-purple-100">{application}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16" data-animate id="pricing">
-            <div className={`transition-all duration-1000 ${isVisible['pricing'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h2 className="text-4xl md:text-5xl font-black text-gray-800 mb-6">
-                Competitive Ireland Pricing
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Best prices for vinyl stickers and graphics in Ireland. Volume discounts available for bulk orders.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">Starter Package</h3>
-              <div className="text-4xl font-bold text-purple-600 mb-6">€2</div>
-              <ul className="space-y-3 mb-8">
-                <li>✓ Basic vinyl stickers</li>
-                <li>✓ Standard sizes</li>
-                <li>✓ 3-day delivery</li>
+              <ul className="space-y-2.5 mb-6">
+                {['Premium vinyl, outdoor durable', 'Vehicles, windows, walls', 'Custom shapes & die-cut', 'Gloss, matte, transparent', 'Nationwide Ireland delivery'].map((point) => (
+                  <li key={point} className="flex items-start gap-2.5 text-sm text-gray-600"><CheckIcon />{point}</li>
+                ))}
               </ul>
-              <button
-                onClick={() => {
-                  setSelectedProduct('Vinyl Stickers');
-                  setQuoteModalOpen(true);
-                }}
-                className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 px-6 rounded-lg font-medium transition-colors"
-              >
-                Get Quote
-              </button>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-xl border-2 border-purple-500 relative">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <span className="bg-purple-500 text-white px-4 py-2 rounded-full text-sm font-bold">MOST POPULAR</span>
+              <div className="flex flex-col sm:flex-row gap-3 mb-6">
+                <button onClick={openQuote} className="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3.5 px-6 rounded-xl transition-colors text-center">Get Custom Quote</button>
+                <a href="tel:+353894400155" className="flex-1 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3.5 px-6 rounded-xl border border-gray-300 transition-colors text-center">Call +353 89 440 0155</a>
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">Professional Package</h3>
-              <div className="text-4xl font-bold text-purple-600 mb-6">€3</div>
-              <ul className="space-y-3 mb-8">
-                <li>✓ Premium vinyl materials</li>
-                <li>✓ Custom sizes available</li>
-                <li>✓ 2-day delivery</li>
-                <li>✓ Free design service</li>
-              </ul>
-              <button
-                onClick={() => {
-                  setSelectedProduct('Vinyl Decals');
-                  setQuoteModalOpen(true);
-                }}
-                className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 px-6 rounded-lg font-medium transition-colors"
-              >
-                Get Quote
-              </button>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-400 border-t border-gray-100 pt-4">
+                <span className="flex items-center gap-1"><svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>Quality Guaranteed</span>
+                <span className="flex items-center gap-1"><svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>Irish Business</span>
+              </div>
             </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">Enterprise Package</h3>
-              <div className="text-4xl font-bold text-purple-600 mb-6">€25</div>
-              <ul className="space-y-3 mb-8">
-                <li>✓ Large format graphics</li>
-                <li>✓ Premium materials & finishes</li>
-                <li>✓ 1-day rush delivery</li>
-                <li>✓ Professional installation</li>
-              </ul>
-              <button
-                onClick={() => {
-                  setSelectedProduct('Vinyl Graphics');
-                  setQuoteModalOpen(true);
-                }}
-                className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 px-6 rounded-lg font-medium transition-colors"
-              >
-                Get Quote
-              </button>
-            </div>
-          </div>
-
-          <div className="text-center mt-12">
-            <button
-              onClick={() => {
-                setSelectedProduct('Vinyl Stickers');
-                setQuoteModalOpen(true);
-              }}
-              className="bg-yellow-400 text-purple-800 px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-300 transform hover:scale-105 transition-all duration-300 shadow-xl"
-            >
-              Get Volume Pricing 💰
-            </button>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-purple-600 to-indigo-500 text-white">
-        <div className="max-w-4xl mx-auto text-center px-4">
-          <h2 className="text-4xl md:text-6xl font-black mb-6">
-            Ready for Custom Vinyl?
-          </h2>
-          <p className="text-xl md:text-2xl mb-8 opacity-95">
-            Join hundreds of Irish businesses using our vinyl solutions for professional graphics and branding.
+      <section className="bg-gray-50 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Why Choose Our Vinyl Stickers?</h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">Premium materials and professional results for every application.</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {features.map((f) => (
+              <div key={f.title} className="bg-white rounded-xl p-5 sm:p-6 border border-gray-200 hover:border-purple-200 hover:shadow-md transition-all">
+                <div className="w-10 h-10 bg-purple-50 text-purple-600 rounded-lg flex items-center justify-center mb-3">{f.icon}</div>
+                <h3 className="font-semibold text-gray-900 mb-1.5">{f.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{f.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Product Types</h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">Stickers, decals, labels, and large-format graphics.</p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto">
+            {productOptions.map((s) => (
+              <div key={s.size} className={`rounded-xl p-4 text-center border-2 transition-all ${s.popular ? 'border-purple-300 bg-purple-50' : 'border-gray-200 bg-gray-50 hover:border-gray-300'}`}>
+                <div className={`text-lg font-bold ${s.popular ? 'text-purple-600' : 'text-gray-800'}`}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+          <p className="text-center text-sm text-gray-400 mt-6">
+            <button onClick={openQuote} className="text-purple-600 hover:underline font-medium">Get a quote</button> for your project.
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-            <button
-              onClick={() => {
-                setSelectedProduct('Vinyl Stickers');
-                setQuoteModalOpen(true);
-              }}
-              className="bg-white text-purple-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-100 transform hover:scale-105 transition-all duration-300 shadow-2xl min-w-[250px]"
-            >
-              Get Custom Quote Now 🚀
-            </button>
-            <a
-              href="tel:+353894400155"
-              className="border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-purple-600 transition-colors duration-300 min-w-[250px]"
-            >
-              Call +353 89 440 0155 📞
-            </a>
-          </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 opacity-90">
-            <div className="text-center">
-              <div className="text-3xl mb-2">🇮🇪</div>
-              <div className="font-semibold">Made in Ireland</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl mb-2">⚡</div>
-              <div className="font-semibold">Fast Delivery</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl mb-2">💯</div>
-              <div className="font-semibold">Quality Guaranteed</div>
-            </div>
+      <section id="gallery" className="bg-gray-50 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Gallery</h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">Examples of our vinyl stickers and decals.</p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+            {galleryImages.map((img, i) => (
+              <button key={`${img}-${i}`} onClick={() => setLightboxIndex(i)} className="group relative aspect-square rounded-xl overflow-hidden bg-white border border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all">
+                <Image src={img} alt={`Vinyl ${i + 1}`} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" />
+              </button>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <button onClick={openQuote} className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-xl border border-gray-300 transition-colors">
+              Get Your Custom Quote
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" /></svg>
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Quote Modal */}
-      {quoteModalOpen && (
-        <VinylStickerQuoteForm
-          isOpen={quoteModalOpen}
-          onClose={() => setQuoteModalOpen(false)}
-          productType={selectedProduct}
-        />
+      {lightboxIndex !== null && (
+        <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4" onClick={() => setLightboxIndex(null)}>
+          <button className="absolute top-4 right-4 text-white/80 hover:text-white p-2" onClick={() => setLightboxIndex(null)}>
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+          <button className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-2" onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex - 1 + galleryImages.length) % galleryImages.length); }}>
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+          </button>
+          <button className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-2" onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex + 1) % galleryImages.length); }}>
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+          </button>
+          <div className="relative w-full max-w-3xl aspect-square" onClick={(e) => e.stopPropagation()}>
+            <Image src={galleryImages[lightboxIndex]} alt={`Vinyl ${lightboxIndex + 1}`} fill className="object-contain" sizes="90vw" />
+          </div>
+          <div className="absolute bottom-4 text-white/60 text-sm">{lightboxIndex + 1} / {galleryImages.length}</div>
+        </div>
       )}
 
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .animate-float {
-          animation: float 4s ease-in-out infinite;
-        }
-        
-        .animate-fadeInUp {
-          animation: fadeInUp 0.6s ease-out forwards;
-        }
-      `}</style>
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Specifications</h2>
+              <p className="text-gray-500 mb-6">Materials and finishes for every application.</p>
+              <div className="border border-gray-200 rounded-xl overflow-hidden">
+                {specs.map((spec, i) => (
+                  <div key={spec.label} className={`flex justify-between items-center px-4 py-3 text-sm ${i % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
+                    <span className="font-medium text-gray-700">{spec.label}</span>
+                    <span className="text-gray-500 text-right">{spec.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100">
+              <Image src={heroImages[0]} alt="Vinyl stickers" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-gray-900">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Ready for custom vinyl?</h2>
+          <p className="text-gray-400 mb-8 max-w-xl mx-auto">Get a free quote. We’ll help with material, size, and finish.</p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <button onClick={openQuote} className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3.5 px-8 rounded-xl transition-colors">Get Free Quote</button>
+            <a href="tel:+353894400155" className="bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-3.5 px-8 rounded-xl border border-gray-700 transition-colors">Call +353 89 440 0155</a>
+          </div>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-8 text-sm text-gray-500">
+            <span className="flex items-center gap-1.5"><CheckIcon /> No obligation</span>
+            <span className="flex items-center gap-1.5"><CheckIcon /> Ireland-wide delivery</span>
+          </div>
+        </div>
+      </section>
+
+      {quoteModalOpen && (
+        <VinylStickerQuoteForm isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} productType="Vinyl Stickers" />
+      )}
     </Layout>
   );
 };
