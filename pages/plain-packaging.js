@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PLAIN_PRODUCTS, CATEGORIES } from '../data/plain-products';
+import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 const fmt = (n) => `€${Number(n).toFixed(2)}`;
@@ -134,9 +135,16 @@ const ProductCard = ({ product, onAdd, inQuote }) => {
   return (
     <div className={`bg-white rounded-xl border flex flex-col transition-all duration-200 hover:shadow-md ${inQuote ? 'border-amber-300 ring-2 ring-amber-100' : 'border-stone-200 hover:border-stone-300'}`}>
 
-      {/* Image */}
-      <Link href={`/plain-packaging/${product.id}`} className="block relative bg-stone-50 rounded-t-xl overflow-hidden flex-shrink-0" style={{ paddingBottom: '48%' }}>
-        <Image src={product.imageSrc} alt={product.name} fill className="object-contain p-3 hover:scale-105 transition-transform duration-500" onError={() => {}} />
+      {/* Image / Icon */}
+      <Link href={`/plain-packaging/${product.id}`} className="block relative rounded-t-xl overflow-hidden flex-shrink-0" style={{ paddingBottom: '48%' }}>
+        {isPlaceholderImage(product.imageSrc) ? (
+          <PackagingIcon
+            category={product.category}
+            className="absolute inset-0 w-full h-full hover:scale-105 transition-transform duration-500"
+          />
+        ) : (
+          <Image src={product.imageSrc} alt={product.name} fill className="object-contain p-3 hover:scale-105 transition-transform duration-500" />
+        )}
         {inQuote && (
           <div className="absolute top-2 right-2 z-10 w-5 h-5 bg-amber-500 rounded-full flex items-center justify-center">
             <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7"/></svg>
@@ -238,8 +246,12 @@ const QuoteLineItem = ({ item, idx, onRemove, onUpdateTier, onUpdateCases }) => 
       {/* Product */}
       <td className="py-3 pr-3">
         <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-lg border border-stone-100 bg-stone-50 overflow-hidden flex-shrink-0 relative">
-            <Image src={item.product.imageSrc} alt="" fill className="object-contain p-1" />
+          <div className="w-9 h-9 rounded-lg border border-stone-100 overflow-hidden flex-shrink-0 relative">
+            {isPlaceholderImage(item.product.imageSrc) ? (
+              <PackagingIcon category={item.product.category} className="w-full h-full" />
+            ) : (
+              <Image src={item.product.imageSrc} alt="" fill className="object-contain p-1" />
+            )}
           </div>
           <div className="min-w-0">
             <p className="text-xs font-semibold text-stone-900 leading-snug line-clamp-2">{item.product.name}</p>

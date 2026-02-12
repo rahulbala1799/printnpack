@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PLAIN_PRODUCTS, getProductById, getRelatedProducts } from '../../data/plain-products';
+import PackagingIcon, { isPlaceholderImage } from '../../components/PackagingIcon';
 
 const fmtCase = (n) => `€${Number(n).toFixed(2)}`;
 
@@ -96,16 +97,20 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-start">
 
             {/* Image */}
-            <div className="relative aspect-square bg-stone-50 rounded-2xl overflow-hidden border border-stone-200">
-              <Image
-                src={product.imageSrc}
-                alt={product.name}
-                fill
-                className="object-contain p-8"
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div className="absolute top-4 left-4">
+            <div className="relative aspect-square rounded-2xl overflow-hidden border border-stone-200">
+              {isPlaceholderImage(product.imageSrc) ? (
+                <PackagingIcon category={product.category} className="w-full h-full" />
+              ) : (
+                <Image
+                  src={product.imageSrc}
+                  alt={product.name}
+                  fill
+                  className="object-contain p-8"
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              )}
+              <div className="absolute top-4 left-4 z-10">
                 <span className="text-xs font-semibold px-3 py-1.5 rounded-full bg-white/90 text-stone-700 border border-stone-200 shadow-sm">
                   {product.category}
                 </span>
@@ -231,13 +236,17 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
                   href={`/plain-packaging/${p.id}`}
                   className="bg-white border border-stone-200 rounded-2xl overflow-hidden hover:border-stone-300 hover:shadow-md transition-all group"
                 >
-                  <div className="relative bg-stone-50 overflow-hidden" style={{ paddingBottom: '60%' }}>
-                    <Image
-                      src={p.imageSrc}
-                      alt={p.name}
-                      fill
-                      className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
-                    />
+                  <div className="relative overflow-hidden" style={{ paddingBottom: '60%' }}>
+                    {isPlaceholderImage(p.imageSrc) ? (
+                      <PackagingIcon category={p.category} className="absolute inset-0 w-full h-full group-hover:scale-105 transition-transform duration-500" />
+                    ) : (
+                      <Image
+                        src={p.imageSrc}
+                        alt={p.name}
+                        fill
+                        className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+                      />
+                    )}
                   </div>
                   <div className="p-3">
                     <p className="font-bold text-stone-900 text-xs leading-snug line-clamp-2">{p.name}</p>
