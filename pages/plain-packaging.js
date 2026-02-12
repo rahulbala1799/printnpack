@@ -592,6 +592,8 @@ export default function PlainPackagingPage() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(30);
+  const [visibleCategoryCount, setVisibleCategoryCount] = useState(4);
+  const [categoryModalOpen, setCategoryModalOpen] = useState(false);
 
   const handleAdd = useCallback(({ product, tier, numCases }) => {
     setQuoteItems(prev => {
@@ -727,59 +729,117 @@ export default function PlainPackagingPage() {
         </div>
       </div>
 
-      {/* ── Browse by category: visible quick-jump grid ───────────────────────── */}
+      {/* ── Browse by category: 4 visible, then "Show 4 more" (max 12), then "View all" → modal ── */}
       <div className="bg-white border-b border-stone-200">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-8">
-          <div className="flex items-baseline justify-between gap-4 mb-6">
-            <div>
-              <h2 className="text-lg font-bold text-stone-900">Browse by category</h2>
-              <p className="text-sm text-stone-500 mt-0.5">Jump to your section — {categoriesWithCount.length} categories</p>
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-4">
+          <div className="flex items-baseline justify-between gap-3 mb-3">
+            <div className="min-w-0">
+              <h2 className="text-base font-bold text-stone-900">Browse by category</h2>
+              <p className="text-xs text-stone-500 mt-0.5 truncate">{categoriesWithCount.length} categories</p>
             </div>
             {activeCategory !== 'All' && (
               <button
                 onClick={() => handleCategoryChange('All')}
-                className="text-xs font-semibold text-stone-500 hover:text-stone-900 underline underline-offset-2 transition-colors"
+                className="text-xs font-semibold text-stone-500 hover:text-stone-900 underline underline-offset-2 flex-shrink-0"
               >
                 Show all
               </button>
             )}
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
-            {/* All categories card */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
+            {/* All */}
             <button
               onClick={() => handleCategoryChange('All')}
-              className={`flex flex-col items-center text-center p-4 rounded-2xl border-2 transition-all duration-200 ${
+              className={`flex flex-col items-center text-center p-3 rounded-xl border-2 transition-all duration-200 ${
                 activeCategory === 'All'
-                  ? 'border-stone-900 bg-stone-900 text-white shadow-lg ring-2 ring-stone-300 ring-offset-2'
-                  : 'border-stone-200 bg-stone-50/50 hover:border-stone-400 hover:shadow-md hover:bg-stone-100/80'
+                  ? 'border-stone-900 bg-stone-900 text-white shadow-md ring-2 ring-stone-300 ring-offset-1'
+                  : 'border-stone-200 bg-stone-50/50 hover:border-stone-400 hover:shadow-sm hover:bg-stone-100/80'
               }`}
             >
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-2 ${activeCategory === 'All' ? 'bg-white/20' : 'bg-stone-200'}`}>
-                <svg className="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-1.5 ${activeCategory === 'All' ? 'bg-white/20' : 'bg-stone-200'}`}>
+                <svg className="w-5 h-5 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
               </div>
-              <span className="text-sm font-semibold leading-tight">All</span>
-              <span className={`text-xs mt-0.5 ${activeCategory === 'All' ? 'text-stone-300' : 'text-stone-400'}`}>{PLAIN_PRODUCTS.length} products</span>
+              <span className="text-xs font-semibold leading-tight">All</span>
+              <span className={`text-[10px] mt-0.5 ${activeCategory === 'All' ? 'text-stone-300' : 'text-stone-400'}`}>{PLAIN_PRODUCTS.length}</span>
             </button>
-            {categoriesWithCount.map(({ name, count }) => (
+            {categoriesWithCount.slice(0, Math.min(visibleCategoryCount, 12)).map(({ name, count }) => (
               <button
                 key={name}
                 onClick={() => handleCategoryChange(name)}
-                className={`flex flex-col items-center text-center p-4 rounded-2xl border-2 transition-all duration-200 ${
+                className={`flex flex-col items-center text-center p-3 rounded-xl border-2 transition-all duration-200 ${
                   activeCategory === name
-                    ? 'border-stone-900 bg-stone-900 text-white shadow-lg ring-2 ring-stone-300 ring-offset-2'
-                    : 'border-stone-200 bg-white hover:border-stone-400 hover:shadow-md hover:bg-stone-50'
+                    ? 'border-stone-900 bg-stone-900 text-white shadow-md ring-2 ring-stone-300 ring-offset-1'
+                    : 'border-stone-200 bg-white hover:border-stone-400 hover:shadow-sm hover:bg-stone-50'
                 }`}
               >
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-2 overflow-hidden flex-shrink-0 ${activeCategory === name ? 'bg-white/20' : 'bg-stone-100'}`}>
-                  <PackagingIcon category={name} className="w-full h-full min-w-[48px] min-h-[48px]" />
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-1.5 overflow-hidden flex-shrink-0 ${activeCategory === name ? 'bg-white/20' : 'bg-stone-100'}`}>
+                  <PackagingIcon category={name} className="w-full h-full min-w-[40px] min-h-[40px]" />
                 </div>
-                <span className="text-sm font-semibold leading-tight line-clamp-2">{name}</span>
-                <span className={`text-xs mt-0.5 ${activeCategory === name ? 'text-stone-300' : 'text-stone-400'}`}>{count} products</span>
+                <span className="text-xs font-semibold leading-tight line-clamp-2">{name}</span>
+                <span className={`text-[10px] mt-0.5 ${activeCategory === name ? 'text-stone-300' : 'text-stone-400'}`}>{count}</span>
               </button>
             ))}
           </div>
+          <div className="flex items-center gap-2 mt-3 flex-wrap">
+            {visibleCategoryCount < 12 && visibleCategoryCount < categoriesWithCount.length ? (
+              <button
+                onClick={() => setVisibleCategoryCount(prev => Math.min(prev + 4, 12))}
+                className="text-xs font-semibold text-stone-600 bg-stone-100 hover:bg-stone-200 px-3 py-1.5 rounded-lg transition-colors"
+              >
+                Show 4 more
+              </button>
+            ) : null}
+            {categoriesWithCount.length > 12 && (
+              <button
+                onClick={() => setCategoryModalOpen(true)}
+                className="text-xs font-semibold text-stone-700 bg-stone-200 hover:bg-stone-300 px-3 py-1.5 rounded-lg transition-colors"
+              >
+                View all {categoriesWithCount.length} categories
+              </button>
+            )}
+          </div>
         </div>
       </div>
+
+      {/* ── Category picker modal (all 57) ─────────────────────────────────────── */}
+      {categoryModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={() => setCategoryModalOpen(false)}>
+          <div className="bg-white rounded-2xl shadow-xl max-w-md w-full max-h-[85vh] flex flex-col" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between p-4 border-b border-stone-200">
+              <h3 className="text-lg font-bold text-stone-900">Choose category</h3>
+              <button onClick={() => setCategoryModalOpen(false)} className="w-8 h-8 flex items-center justify-center rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200 transition-colors">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            </div>
+            <div className="overflow-y-auto p-3 flex-1 min-h-0">
+              <button
+                onClick={() => { handleCategoryChange('All'); setCategoryModalOpen(false); }}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-colors mb-1 ${
+                  activeCategory === 'All' ? 'bg-stone-900 text-white' : 'hover:bg-stone-100'
+                }`}
+              >
+                <span className="font-semibold text-sm">All</span>
+                <span className={`text-xs ml-auto ${activeCategory === 'All' ? 'text-stone-300' : 'text-stone-400'}`}>{PLAIN_PRODUCTS.length} products</span>
+              </button>
+              {categoriesWithCount.map(({ name, count }) => (
+                <button
+                  key={name}
+                  onClick={() => { handleCategoryChange(name); setCategoryModalOpen(false); }}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-colors ${
+                    activeCategory === name ? 'bg-stone-900 text-white' : 'hover:bg-stone-100'
+                  }`}
+                >
+                  <div className="w-8 h-8 rounded-lg overflow-hidden flex-shrink-0 bg-stone-100">
+                    <PackagingIcon category={name} className="w-full h-full min-w-[32px] min-h-[32px]" />
+                  </div>
+                  <span className="font-medium text-sm flex-1 truncate">{name}</span>
+                  <span className={`text-xs flex-shrink-0 ${activeCategory === name ? 'text-stone-300' : 'text-stone-400'}`}>{count}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── Sticky top bar: search + filter trigger + quote ────────────────────── */}
       <div className="sticky top-0 z-30 bg-white border-b border-stone-200 shadow-sm">
