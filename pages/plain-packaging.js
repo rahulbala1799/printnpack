@@ -10,7 +10,10 @@ import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 const fmt = (n) => `€${Number(n).toFixed(2)}`;
 const DISCOUNT = 0.95; // 5% off
+const VAT_RATE = 0.23; // 23% VAT
 const discountedPrice = (p) => Math.round(p * DISCOUNT * 100) / 100;
+const vatAmount = (subtotal) => Math.round(subtotal * VAT_RATE * 100) / 100;
+const totalIncVat = (subtotal) => Math.round(subtotal * (1 + VAT_RATE) * 100) / 100;
 
 // Return the tier that applies to this many cases (e.g. 4 cases → "4-6 cases" tier)
 function getTierForCases(tiers, numCases) {
@@ -330,6 +333,8 @@ const QuoteDrawer = ({ items, onClose, onRemove, onUpdateTier, onUpdateCases }) 
   const [errors, setErrors] = useState({});
 
   const subtotal = items.reduce((s, it) => s + discountedPrice(it.tier.pricePerCase) * it.numCases, 0);
+  const vat = vatAmount(subtotal);
+  const total = totalIncVat(subtotal);
 
   const validate = () => {
     const e = {};
@@ -358,7 +363,7 @@ const QuoteDrawer = ({ items, onClose, onRemove, onUpdateTier, onUpdateCases }) 
           email: form.email,
           phone: form.phone,
           subject: `Plain Packaging Quote${form.company ? ` — ${form.company}` : ''} (${items.length} line${items.length !== 1 ? 's' : ''})`,
-          message: `Name: ${form.name}${form.company ? `\nCompany: ${form.company}` : ''}\nPhone: ${form.phone}\nEmail: ${form.email}\n\nQuote Lines:\n${lines}\n\nSubtotal (estimate): ${fmt(subtotal)}\n\nNotes: ${form.notes || 'None'}`,
+          message: `Name: ${form.name}${form.company ? `\nCompany: ${form.company}` : ''}\nPhone: ${form.phone}\nEmail: ${form.email}\n\nQuote Lines:\n${lines}\n\nSubtotal (ex. VAT): ${fmt(subtotal)}\nVAT (23%): ${fmt(vat)}\nTotal (inc. VAT): ${fmt(total)}\n\nNotes: ${form.notes || 'None'}`,
           source: 'Plain Packaging Quote Builder',
         }),
       });
@@ -383,7 +388,7 @@ const QuoteDrawer = ({ items, onClose, onRemove, onUpdateTier, onUpdateCases }) 
             </h2>
             {step !== 'success' && (
               <p className="text-xs text-stone-400 mt-0.5">
-                {items.length} line{items.length !== 1 ? 's' : ''} · Est. <span className="font-semibold text-stone-700">{fmt(subtotal)}</span>
+                {items.length} line{items.length !== 1 ? 's' : ''} · <span className="font-semibold text-stone-700">{fmt(total)}</span> inc. VAT
               </p>
             )}
           </div>
@@ -450,15 +455,21 @@ const QuoteDrawer = ({ items, onClose, onRemove, onUpdateTier, onUpdateCases }) 
                     </tbody>
                   </table>
 
-                  {/* Subtotal row */}
-                  <div className="mt-4 pt-3 border-t border-stone-200 flex items-center justify-between">
-                    <div>
-                      <p className="text-xs text-stone-400">Estimated subtotal</p>
-                      <p className="text-xs text-stone-400">Final price confirmed on order</p>
+                  {/* Totals: subtotal, VAT, total */}
+                  <div className="mt-4 pt-3 border-t border-stone-200 space-y-1.5">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-stone-500">Subtotal (ex. VAT)</span>
+                      <span className="font-semibold text-stone-700">{fmt(subtotal)}</span>
                     </div>
-                    <div className="text-right">
-                      <p className="text-2xl font-bold text-stone-900">{fmt(subtotal)}</p>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-stone-500">VAT (23%)</span>
+                      <span className="font-semibold text-stone-700">{fmt(vat)}</span>
                     </div>
+                    <div className="flex justify-between pt-2 border-t border-stone-100">
+                      <span className="text-stone-600 font-semibold">Total (inc. VAT)</span>
+                      <span className="text-xl font-bold text-stone-900">{fmt(total)}</span>
+                    </div>
+                    <p className="text-xs text-stone-400">Final price confirmed on order</p>
                   </div>
                 </div>
               )}
@@ -474,7 +485,7 @@ const QuoteDrawer = ({ items, onClose, onRemove, onUpdateTier, onUpdateCases }) 
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-xs text-stone-500">{items.length} product{items.length !== 1 ? 's' : ''} · {items.reduce((s, i) => s + i.numCases, 0)} total cases</p>
-                    <p className="text-lg font-bold text-stone-900 mt-0.5">{fmt(subtotal)} <span className="text-sm font-normal text-stone-400">est.</span></p>
+                    <p className="text-lg font-bold text-stone-900 mt-0.5">{fmt(total)} <span className="text-sm font-normal text-stone-400">inc. VAT</span></p>
                   </div>
                   <button type="button" onClick={() => setStep('quote')} className="text-xs text-stone-500 underline hover:text-stone-800">Edit items</button>
                 </div>
@@ -559,9 +570,13 @@ const QuoteDrawer = ({ items, onClose, onRemove, onUpdateTier, onUpdateCases }) 
                     <p className="text-xs font-bold text-stone-900 flex-shrink-0">{fmt(discountedPrice(item.tier.pricePerCase) * item.numCases)}</p>
                   </div>
                 ))}
-                <div className="flex items-center justify-between px-4 py-3 bg-stone-100">
-                  <p className="text-sm font-bold text-stone-800">Subtotal</p>
-                  <p className="text-sm font-bold text-stone-900">{fmt(subtotal)}</p>
+                <div className="px-4 py-2.5 border-t border-stone-200 space-y-1">
+                  <div className="flex justify-between text-xs"><span className="text-stone-500">Subtotal</span><span className="font-semibold">{fmt(subtotal)}</span></div>
+                  <div className="flex justify-between text-xs"><span className="text-stone-500">VAT (23%)</span><span className="font-semibold">{fmt(vat)}</span></div>
+                  <div className="flex justify-between pt-1.5 border-t border-stone-200">
+                    <span className="text-sm font-bold text-stone-800">Total (inc. VAT)</span>
+                    <span className="text-sm font-bold text-stone-900">{fmt(total)}</span>
+                  </div>
                 </div>
               </div>
 
@@ -578,7 +593,7 @@ const QuoteDrawer = ({ items, onClose, onRemove, onUpdateTier, onUpdateCases }) 
             <div className="flex items-center justify-between mb-3">
               <div>
                 <p className="text-xs text-stone-400">{items.length} line{items.length !== 1 ? 's' : ''} · {items.reduce((s,i) => s + i.numCases, 0)} cases</p>
-                <p className="text-lg font-bold text-stone-900">{fmt(subtotal)}</p>
+                <p className="text-lg font-bold text-stone-900">{fmt(total)} <span className="text-xs font-normal text-stone-500">inc. VAT</span></p>
               </div>
               {step === 'quote' && (
                 <button onClick={() => setStep('contact')} className="flex items-center gap-2 bg-stone-900 hover:bg-black text-white font-bold py-3 px-5 rounded-xl transition-colors text-sm">
@@ -624,7 +639,7 @@ export default function PlainPackagingPage() {
       if (i >= 0) return prev;
       return [...prev, { product, tier, numCases }];
     });
-    setDrawerOpen(true);
+    // Don't open drawer — user clicks Quote to view cart; ProductCard shows "Added" animation
   }, []);
 
   const handleRemove = useCallback((idx) => setQuoteItems(prev => prev.filter((_, i) => i !== idx)), []);
@@ -672,7 +687,8 @@ export default function PlainPackagingPage() {
   }, [activeCategory, search, priceRange, sort]);
 
   const quoteIds = useMemo(() => new Set(quoteItems.map(it => it.product.id)), [quoteItems]);
-  const totalEst = quoteItems.reduce((s, it) => s + discountedPrice(it.tier.pricePerCase) * it.numCases, 0);
+  const subtotalEst = quoteItems.reduce((s, it) => s + discountedPrice(it.tier.pricePerCase) * it.numCases, 0);
+  const totalEst = totalIncVat(subtotalEst);
 
   // Category counts for browse section
   const categoryCounts = useMemo(() => {
@@ -1122,6 +1138,7 @@ export default function PlainPackagingPage() {
             </div>
             <div className="flex items-center gap-1.5">
               <span className="text-base font-bold">{fmt(totalEst)}</span>
+              <span className="text-[10px] text-stone-400 font-normal">inc. VAT</span>
               <svg className="w-4 h-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7"/></svg>
             </div>
           </button>
