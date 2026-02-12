@@ -3,138 +3,7 @@ import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-
-// ─── Product catalogue ─────────────────────────────────────────────────────────
-const PLAIN_PRODUCTS = [
-  {
-    id: 'plain-pizza-boxes',
-    name: 'Plain Pizza Boxes',
-    tagline: 'Single-wall corrugated, food-safe',
-    category: 'Boxes',
-    imageSrc: '/images/pizza-boxes/PIZZA_BOX_1.jpg',
-    material: 'Corrugated cardboard — B-flute, food-safe',
-    moq: 500,
-    sizes: ['7"', '9"', '10"', '12"', '14"'],
-    qtyBreaks: [
-      { qty: 500,   label: '500',    price: 0.65 },
-      { qty: 1000,  label: '1,000',  price: 0.52 },
-      { qty: 2500,  label: '2,500',  price: 0.40 },
-      { qty: 5000,  label: '5,000',  price: 0.32 },
-    ],
-    leadTime: '5–7 days',
-    tag: 'Best seller',
-  },
-  {
-    id: 'plain-brown-kraft-bags',
-    name: 'Plain Brown Kraft Bags',
-    tagline: 'Twisted handle, sturdy kraft paper',
-    category: 'Bags',
-    imageSrc: '/images/paper-bags/PAPER_BAG_1.jpg',
-    material: '90gsm recycled kraft — twisted paper handle',
-    moq: 500,
-    sizes: ['Small', 'Medium', 'Large', 'XL'],
-    qtyBreaks: [
-      { qty: 500,   label: '500',    price: 0.28 },
-      { qty: 1000,  label: '1,000',  price: 0.22 },
-      { qty: 2500,  label: '2,500',  price: 0.16 },
-      { qty: 5000,  label: '5,000',  price: 0.12 },
-    ],
-    leadTime: '5–7 days',
-    tag: 'Eco-friendly',
-  },
-  {
-    id: 'plain-white-carrier-bags',
-    name: 'Plain White Carrier Bags',
-    tagline: 'Flat handle, bright white glossy',
-    category: 'Bags',
-    imageSrc: '/images/paper-bags/PAPER_BAG_1.jpg',
-    material: '120gsm coated paper — flat handle',
-    moq: 500,
-    sizes: ['Small', 'Medium', 'Large', 'XL'],
-    qtyBreaks: [
-      { qty: 500,   label: '500',    price: 0.35 },
-      { qty: 1000,  label: '1,000',  price: 0.28 },
-      { qty: 2500,  label: '2,500',  price: 0.20 },
-      { qty: 5000,  label: '5,000',  price: 0.16 },
-    ],
-    leadTime: '5–7 days',
-    tag: null,
-  },
-  {
-    id: 'plain-white-napkins',
-    name: 'Plain White Napkins',
-    tagline: '2-ply, soft-fold, catering grade',
-    category: 'Napkins',
-    imageSrc: '/images/napkins/NAPKIN_1.jpg',
-    material: '2-ply virgin tissue — quarter-fold',
-    moq: 1000,
-    sizes: ['33×33cm', '40×40cm'],
-    qtyBreaks: [
-      { qty: 1000,  label: '1,000',   price: 0.08 },
-      { qty: 2500,  label: '2,500',   price: 0.06 },
-      { qty: 5000,  label: '5,000',   price: 0.04 },
-      { qty: 10000, label: '10,000',  price: 0.03 },
-    ],
-    leadTime: '3–5 days',
-    tag: 'Fast dispatch',
-  },
-  {
-    id: 'plain-corrugated-mailers',
-    name: 'Plain Corrugated Mailer Boxes',
-    tagline: 'Self-lock, no tape required',
-    category: 'Mailers',
-    imageSrc: '/images/pizza-boxes/PIZZA_BOX_1.jpg',
-    material: 'E-flute corrugated board — plain brown',
-    moq: 250,
-    sizes: ['A5', 'A4', 'A3', 'Custom'],
-    qtyBreaks: [
-      { qty: 250,   label: '250',    price: 0.95 },
-      { qty: 500,   label: '500',    price: 0.75 },
-      { qty: 1000,  label: '1,000',  price: 0.60 },
-      { qty: 2500,  label: '2,500',  price: 0.45 },
-    ],
-    leadTime: '7–10 days',
-    tag: null,
-  },
-  {
-    id: 'plain-sos-grab-bags',
-    name: 'Plain SOS Grab Bags',
-    tagline: 'Square-bottom, ideal for takeaway',
-    category: 'Bags',
-    imageSrc: '/images/paper-bags/PAPER_BAG_1.jpg',
-    material: '80gsm kraft — SOS square-bottom',
-    moq: 500,
-    sizes: ['Small', 'Medium', 'Large'],
-    qtyBreaks: [
-      { qty: 500,   label: '500',    price: 0.32 },
-      { qty: 1000,  label: '1,000',  price: 0.25 },
-      { qty: 2500,  label: '2,500',  price: 0.18 },
-      { qty: 5000,  label: '5,000',  price: 0.14 },
-    ],
-    leadTime: '5–7 days',
-    tag: 'Takeaway favourite',
-  },
-  {
-    id: 'plain-flat-paper-bags',
-    name: 'Plain Flat Paper Bags',
-    tagline: 'Gusseted, ideal for bakeries & delis',
-    category: 'Bags',
-    imageSrc: '/images/paper-bags/PAPER_BAG_1.jpg',
-    material: '60gsm greaseproof-lined kraft',
-    moq: 500,
-    sizes: ['Small', 'Medium', 'Large'],
-    qtyBreaks: [
-      { qty: 500,   label: '500',    price: 0.20 },
-      { qty: 1000,  label: '1,000',  price: 0.16 },
-      { qty: 2500,  label: '2,500',  price: 0.12 },
-      { qty: 5000,  label: '5,000',  price: 0.09 },
-    ],
-    leadTime: '5–7 days',
-    tag: null,
-  },
-];
-
-const CATEGORIES = ['All', 'Boxes', 'Bags', 'Napkins', 'Mailers'];
+import { PLAIN_PRODUCTS, CATEGORIES } from '../data/plain-products';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 const fmt = (n) => `€${n.toFixed(2)}`;
@@ -157,12 +26,12 @@ const ProductCard = ({ product, onAdd }) => {
     <div className="bg-white rounded-2xl border border-stone-200 overflow-hidden flex flex-col hover:border-stone-300 hover:shadow-md transition-all duration-200">
 
       {/* Image */}
-      <div className="relative bg-stone-50 overflow-hidden" style={{ paddingBottom: '55%' }}>
+      <Link href={`/plain-packaging/${product.id}`} className="block relative bg-stone-50 overflow-hidden" style={{ paddingBottom: '55%' }}>
         <Image
           src={product.imageSrc}
           alt={product.name}
           fill
-          className="object-cover"
+          className="object-cover hover:scale-105 transition-transform duration-500"
           onError={() => {}}
         />
         {/* Badges */}
@@ -184,15 +53,23 @@ const ProductCard = ({ product, onAdd }) => {
             ⏱ {product.leadTime}
           </span>
         </div>
-      </div>
+      </Link>
 
       {/* Body */}
       <div className="p-4 flex-1 flex flex-col gap-4">
 
         {/* Title */}
-        <div>
-          <h3 className="font-bold text-stone-900 text-base leading-snug">{product.name}</h3>
-          <p className="text-xs text-stone-400 mt-0.5">{product.material}</p>
+        <div className="flex items-start justify-between gap-2">
+          <div>
+            <h3 className="font-bold text-stone-900 text-base leading-snug">{product.name}</h3>
+            <p className="text-xs text-stone-400 mt-0.5">{product.material}</p>
+          </div>
+          <Link
+            href={`/plain-packaging/${product.id}`}
+            className="flex-shrink-0 text-xs font-semibold text-stone-500 hover:text-stone-800 underline underline-offset-2 transition-colors"
+          >
+            Details
+          </Link>
         </div>
 
         {/* Size selector */}
