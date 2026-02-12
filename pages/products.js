@@ -72,7 +72,7 @@ const ProductCard = ({ product }) => {
   return (
     <div className="group bg-white rounded-xl overflow-hidden border border-stone-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col">
       {/* Image */}
-      <Link href={product.url || `/products/${product.id}`} className="relative block overflow-hidden bg-stone-50" style={{ paddingBottom: '58%' }}>
+      <Link href={product.url || `/products/${product.id}`} className="relative block overflow-hidden bg-stone-50" style={{ paddingBottom: '68%' }}>
         <div className="absolute inset-0">
           {!product.imageSrc || product.imageSrc.includes('css-placeholder-image') ? (
             <div className="absolute inset-0 css-placeholder banner flex items-center justify-center bg-gradient-to-br from-stone-100 to-stone-200">
@@ -83,7 +83,7 @@ const ProductCard = ({ product }) => {
               src={product.imageSrc}
               alt={product.name}
               fill
-              className="object-cover group-hover:scale-103 transition-transform duration-500"
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
           )}
         </div>
@@ -91,7 +91,7 @@ const ProductCard = ({ product }) => {
         {/* MOQ badge */}
         {product.moq && (
           <div className="absolute top-2 right-2 z-10">
-            <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/90 text-stone-500 border border-stone-200 backdrop-blur-sm">
+            <span className="text-[9px] font-medium px-1.5 py-0.5 rounded-full bg-white/90 text-stone-500 border border-stone-200 backdrop-blur-sm leading-none">
               MOQ {product.moq.toLocaleString()}
             </span>
           </div>
@@ -99,28 +99,25 @@ const ProductCard = ({ product }) => {
       </Link>
 
       {/* Content */}
-      <div className="p-3 flex-1 flex flex-col">
-        <h3 className="font-semibold text-stone-900 text-xs leading-snug mb-1 line-clamp-2">
+      <div className="p-2.5 flex-1 flex flex-col">
+        <h3 className="font-semibold text-stone-900 text-[11px] leading-tight mb-1.5 line-clamp-2">
           {product.name}
         </h3>
-        <p className="text-stone-400 text-[11px] line-clamp-1 flex-1 mb-2.5 leading-relaxed">
-          {product.description}
-        </p>
 
         {/* Price row */}
-        <div className="flex items-end justify-between mb-2.5 pb-2.5 border-b border-stone-50">
+        <div className="flex items-end justify-between mt-auto mb-2">
           {product.price ? (
             <div>
-              <div className="text-[10px] text-stone-400 leading-none mb-0.5">From</div>
-              <div className="text-sm font-bold text-stone-900 leading-none">{product.price}</div>
+              <div className="text-[9px] text-stone-400 leading-none mb-0.5">From</div>
+              <div className="text-xs font-bold text-stone-900 leading-none">{product.price}</div>
             </div>
           ) : (
-            <div className="text-xs font-medium text-stone-400">POA</div>
+            <div className="text-[10px] font-medium text-stone-400">POA</div>
           )}
           {product.leadTime && (
             <div className="text-right">
-              <div className="text-[10px] text-stone-400 leading-none mb-0.5">Delivery</div>
-              <div className="text-[11px] font-semibold text-stone-600 leading-none">{product.leadTime}</div>
+              <div className="text-[9px] text-stone-400 leading-none mb-0.5">Delivery</div>
+              <div className="text-[10px] font-semibold text-stone-500 leading-none">{product.leadTime}</div>
             </div>
           )}
         </div>
@@ -128,10 +125,10 @@ const ProductCard = ({ product }) => {
         {/* CTA */}
         <Link
           href={product.url || `/products/${product.id}`}
-          className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-semibold text-white bg-stone-800 hover:bg-stone-700 active:scale-95 transition-all duration-200"
+          className="w-full flex items-center justify-center gap-1 py-1.5 px-2 rounded-lg text-[10px] font-semibold text-white bg-stone-800 hover:bg-stone-700 active:scale-95 transition-all duration-200"
         >
-          View Details
-          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          View
+          <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </Link>
@@ -398,7 +395,7 @@ const ProductsPage = () => {
           ) : (
             <>
               {/* Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+              <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3">
                 {filteredProducts.slice(0, visibleCount).map(product => (
                   <ProductCard
                     key={product.id}
