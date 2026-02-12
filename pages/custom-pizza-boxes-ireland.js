@@ -111,33 +111,6 @@ const specs = [
   { label: 'Delivery', value: 'Nationwide Ireland delivery' },
 ];
 
-const pricingTiers = [
-  {
-    name: 'Starter',
-    price: '0.65',
-    unit: 'per box',
-    volume: '500 - 1,000 boxes',
-    highlight: false,
-    items: ['Single colour printing', 'Standard sizes', '7-day delivery', 'Email support'],
-  },
-  {
-    name: 'Professional',
-    price: '0.45',
-    unit: 'per box',
-    volume: '1,000 - 5,000 boxes',
-    highlight: true,
-    items: ['Full-colour CMYK printing', 'All sizes available', '5-day delivery', 'Free design service'],
-  },
-  {
-    name: 'Enterprise',
-    price: '0.35',
-    unit: 'per box',
-    volume: '5,000+ boxes',
-    highlight: false,
-    items: ['Premium printing quality', 'Custom sizes & shapes', '3-day rush available', 'Dedicated account manager'],
-  },
-];
-
 // ─── Components ──────────────────────────────────────────────────────────────
 
 const CheckIcon = () => (
@@ -535,75 +508,6 @@ const CustomPizzaBoxesIreland = () => {
               />
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* ── Pricing ── */}
-      <section className="bg-gray-50 border-y border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
-              Transparent Pricing
-            </h2>
-            <p className="text-gray-500 max-w-2xl mx-auto">
-              Competitive rates with volume discounts. All prices include setup costs.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
-            {pricingTiers.map((tier) => (
-              <div
-                key={tier.name}
-                className={`rounded-xl p-5 sm:p-6 border-2 transition-all ${
-                  tier.highlight
-                    ? 'bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-200'
-                    : 'bg-white text-gray-900 border-gray-200'
-                }`}
-              >
-                {tier.highlight && (
-                  <span className="inline-block bg-white text-blue-600 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wide mb-3">
-                    Most Popular
-                  </span>
-                )}
-                <h3 className={`font-semibold mb-1 ${tier.highlight ? '' : 'text-gray-800'}`}>
-                  {tier.name}
-                </h3>
-                <div className="mb-1">
-                  <span className="text-3xl font-bold">€{tier.price}</span>
-                  <span className={`text-sm ml-1 ${tier.highlight ? 'text-blue-100' : 'text-gray-400'}`}>
-                    {tier.unit}
-                  </span>
-                </div>
-                <p className={`text-xs mb-4 ${tier.highlight ? 'text-blue-200' : 'text-gray-400'}`}>
-                  {tier.volume}
-                </p>
-                <ul className="space-y-2">
-                  {tier.items.map((item) => (
-                    <li key={item} className={`flex items-start gap-2 text-sm ${tier.highlight ? 'text-blue-50' : 'text-gray-500'}`}>
-                      <svg className={`w-4 h-4 flex-shrink-0 mt-0.5 ${tier.highlight ? 'text-blue-200' : 'text-emerald-500'}`} fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <button
-                  onClick={openQuote}
-                  className={`w-full mt-5 py-2.5 rounded-lg font-semibold text-sm transition-colors ${
-                    tier.highlight
-                      ? 'bg-white text-blue-600 hover:bg-blue-50'
-                      : 'bg-gray-900 text-white hover:bg-gray-800'
-                  }`}
-                >
-                  Get Quote
-                </button>
-              </div>
-            ))}
-          </div>
-
-          <p className="text-center text-sm text-gray-400 mt-6">
-            Prices are per-unit estimates. Final pricing depends on size, quantity, and design complexity.
-          </p>
         </div>
       </section>
 
