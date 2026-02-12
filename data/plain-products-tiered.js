@@ -1686,17 +1686,6 @@ export const TIERED_PLAIN_PRODUCTS = [
     images: ['/images/ifa/heroh/logos/logo.png'],
   },
   {
-    id: "230011",
-    code: "230011",
-    name: "VITTA window pouch 35X18CM - (500)",
-    category: "Bakery Packaging",
-    qtyPerCase: "500",
-    description: "VITTA window pouch 35X18CM - (500) | 500 per case | Bakery Packaging | Bulk wholesale Ireland",
-    caseTiers: [{ casesLabel: "1-3 cases", pricePerCase: 112.7 }, { casesLabel: "4-6 cases", pricePerCase: 106.77 }, { casesLabel: "7-9 cases", pricePerCase: 100.84 }, { casesLabel: "10+ cases", pricePerCase: 87.0 }],
-    imageSrc: "/images/ifa/heroh/logos/logo.png",
-    images: ['/images/ifa/heroh/logos/logo.png'],
-  },
-  {
     id: "10845",
     code: "10845",
     name: "Carton Container White No 8 (250's)",
