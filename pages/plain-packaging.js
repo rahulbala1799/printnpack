@@ -9,6 +9,21 @@ import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 const fmt = (n) => `€${Number(n).toFixed(2)}`;
+const DISCOUNT = 0.95; // 5% off
+const discountedPrice = (p) => Math.round(p * DISCOUNT * 100) / 100;
+
+// Return the tier that applies to this many cases (e.g. 4 cases → "4-6 cases" tier)
+function getTierForCases(tiers, numCases) {
+  if (!tiers?.length) return null;
+  for (const t of tiers) {
+    const L = t.casesLabel;
+    const plus = L.match(/^(\d+)\+/);
+    if (plus) { if (numCases >= parseInt(plus[1], 10)) return t; continue; }
+    const range = L.match(/^(\d+)-(\d+)/);
+    if (range) { const min = parseInt(range[1], 10); const max = parseInt(range[2], 10); if (numCases >= min && numCases <= max) return t; }
+  }
+  return tiers[tiers.length - 1];
+}
 
 // Price buckets for filter
 const PRICE_RANGES = [
@@ -119,12 +134,12 @@ const FilterPanel = ({ categories, activeCategory, setActiveCategory, priceRange
 
 // ─── Product Card ─────────────────────────────────────────────────────────────
 const ProductCard = ({ product, onAdd, inQuote }) => {
-  const [selectedTier, setSelectedTier] = useState(product.caseTiers[0]);
   const [numCases, setNumCases] = useState(1);
-  const [justAdded, setJustAdded] = useState(false);
+  const selectedTier = getTierForCases(product.caseTiers, numCases) || product.caseTiers[0];
   const [tiersOpen, setTiersOpen] = useState(false);
+  const [justAdded, setJustAdded] = useState(false);
 
-  const lineTotal = selectedTier ? numCases * selectedTier.pricePerCase : 0;
+  const lineTotal = selectedTier ? numCases * discountedPrice(selectedTier.pricePerCase) : 0;
 
   const handleAdd = () => {
     onAdd({ product, tier: selectedTier, numCases });
@@ -184,28 +199,33 @@ const ProductCard = ({ product, onAdd, inQuote }) => {
               >
                 <span className="font-semibold">{selectedTier.casesLabel}</span>
                 <div className="flex items-center gap-1.5">
-                  <span className="font-bold text-amber-300">{fmt(selectedTier.pricePerCase)}<span className="text-stone-400 font-normal">/case</span></span>
+                  <span className="line-through text-stone-400 text-[10px]">{fmt(selectedTier.pricePerCase)}</span>
+                  <span className="font-bold text-amber-300">{fmt(discountedPrice(selectedTier.pricePerCase))}<span className="text-stone-400 font-normal">/case</span></span>
                   <svg className="w-3 h-3 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7"/></svg>
                 </div>
               </button>
             ) : (
               <div className="border border-stone-200 rounded-lg overflow-hidden">
-                {product.caseTiers.map((tier, i) => (
-                  <button
-                    key={tier.casesLabel}
-                    onClick={() => { setSelectedTier(tier); setTiersOpen(false); }}
-                    className={`w-full flex items-center justify-between px-3 py-2 text-xs transition-colors border-b last:border-b-0 border-stone-100 ${
-                      selectedTier.casesLabel === tier.casesLabel
-                        ? 'bg-stone-900 text-white'
-                        : 'bg-white text-stone-700 hover:bg-stone-50'
-                    }`}
-                  >
-                    <span className="font-semibold">{tier.casesLabel}</span>
-                    <span className={`font-bold ${selectedTier.casesLabel === tier.casesLabel ? 'text-amber-300' : 'text-stone-900'}`}>
-                      {fmt(tier.pricePerCase)}<span className="font-normal opacity-60">/case</span>
-                    </span>
-                  </button>
-                ))}
+                {product.caseTiers.map((tier) => {
+                  const minCases = tier.casesLabel.includes('+') ? parseInt(tier.casesLabel, 10) : parseInt(tier.casesLabel, 10);
+                  return (
+                    <button
+                      key={tier.casesLabel}
+                      onClick={() => { setNumCases(minCases); setTiersOpen(false); }}
+                      className={`w-full flex items-center justify-between px-3 py-2 text-xs transition-colors border-b last:border-b-0 border-stone-100 ${
+                        selectedTier.casesLabel === tier.casesLabel
+                          ? 'bg-stone-900 text-white'
+                          : 'bg-white text-stone-700 hover:bg-stone-50'
+                      }`}
+                    >
+                      <span className="font-semibold">{tier.casesLabel}</span>
+                      <span className={`font-bold ${selectedTier.casesLabel === tier.casesLabel ? 'text-amber-300' : 'text-stone-900'}`}>
+                        <span className="line-through opacity-70 mr-1">{fmt(tier.pricePerCase)}</span>
+                        {fmt(discountedPrice(tier.pricePerCase))}<span className="font-normal opacity-60">/case</span>
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             )}
           </div>
@@ -240,7 +260,8 @@ const ProductCard = ({ product, onAdd, inQuote }) => {
 
 // ─── Quote Line Item ──────────────────────────────────────────────────────────
 const QuoteLineItem = ({ item, idx, onRemove, onUpdateTier, onUpdateCases }) => {
-  const lineTotal = item.tier.pricePerCase * item.numCases;
+  const unitDiscounted = discountedPrice(item.tier.pricePerCase);
+  const lineTotal = unitDiscounted * item.numCases;
   return (
     <tr className="border-b border-stone-100 last:border-0">
       {/* Product */}
@@ -270,7 +291,7 @@ const QuoteLineItem = ({ item, idx, onRemove, onUpdateTier, onUpdateCases }) => 
           className="text-xs border border-stone-200 rounded-lg px-2 py-1.5 bg-white text-stone-700 outline-none focus:border-stone-400 w-full min-w-[100px]"
         >
           {item.product.caseTiers.map(t => (
-            <option key={t.casesLabel} value={t.casesLabel}>{t.casesLabel} — {fmt(t.pricePerCase)}</option>
+            <option key={t.casesLabel} value={t.casesLabel}>{t.casesLabel} — {fmt(discountedPrice(t.pricePerCase))}</option>
           ))}
         </select>
       </td>
@@ -284,7 +305,8 @@ const QuoteLineItem = ({ item, idx, onRemove, onUpdateTier, onUpdateCases }) => 
       </td>
       {/* Unit */}
       <td className="py-3 pr-3 text-right">
-        <span className="text-xs font-semibold text-stone-700">{fmt(item.tier.pricePerCase)}</span>
+        <span className="text-xs text-stone-400 line-through mr-1">{fmt(item.tier.pricePerCase)}</span>
+        <span className="text-xs font-semibold text-stone-700">{fmt(unitDiscounted)}</span>
       </td>
       {/* Total */}
       <td className="py-3 pr-2 text-right">
@@ -307,7 +329,7 @@ const QuoteDrawer = ({ items, onClose, onRemove, onUpdateTier, onUpdateCases }) 
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', notes: '' });
   const [errors, setErrors] = useState({});
 
-  const subtotal = items.reduce((s, it) => s + it.tier.pricePerCase * it.numCases, 0);
+  const subtotal = items.reduce((s, it) => s + discountedPrice(it.tier.pricePerCase) * it.numCases, 0);
 
   const validate = () => {
     const e = {};
@@ -324,9 +346,10 @@ const QuoteDrawer = ({ items, onClose, onRemove, onUpdateTier, onUpdateCases }) 
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setSubmitting(true);
     try {
-      const lines = items.map(it =>
-        `${it.product.name} [${it.product.code}] | ${it.product.qtyPerCase}/case | ${it.numCases} cases @ ${it.tier.casesLabel} | ${fmt(it.tier.pricePerCase)}/case = ${fmt(it.tier.pricePerCase * it.numCases)}`
-      ).join('\n');
+      const lines = items.map(it => {
+        const unit = discountedPrice(it.tier.pricePerCase);
+        return `${it.product.name} [${it.product.code}] | ${it.product.qtyPerCase}/case | ${it.numCases} cases @ ${it.tier.casesLabel} | ${fmt(unit)}/case = ${fmt(unit * it.numCases)}`;
+      }).join('\n');
       await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -533,7 +556,7 @@ const QuoteDrawer = ({ items, onClose, onRemove, onUpdateTier, onUpdateCases }) 
                       <p className="text-xs font-semibold text-stone-800 truncate">{item.product.name}</p>
                       <p className="text-xs text-stone-400">{item.numCases} case{item.numCases !== 1 ? 's' : ''} · {item.tier.casesLabel}</p>
                     </div>
-                    <p className="text-xs font-bold text-stone-900 flex-shrink-0">{fmt(item.tier.pricePerCase * item.numCases)}</p>
+                    <p className="text-xs font-bold text-stone-900 flex-shrink-0">{fmt(discountedPrice(item.tier.pricePerCase) * item.numCases)}</p>
                   </div>
                 ))}
                 <div className="flex items-center justify-between px-4 py-3 bg-stone-100">
@@ -606,7 +629,7 @@ export default function PlainPackagingPage() {
 
   const handleRemove = useCallback((idx) => setQuoteItems(prev => prev.filter((_, i) => i !== idx)), []);
   const handleUpdateTier = useCallback((idx, t) => setQuoteItems(prev => prev.map((it, i) => i === idx ? {...it, tier: t} : it)), []);
-  const handleUpdateCases = useCallback((idx, n) => setQuoteItems(prev => prev.map((it, i) => i === idx ? {...it, numCases: n} : it)), []);
+  const handleUpdateCases = useCallback((idx, n) => setQuoteItems(prev => prev.map((it, i) => i === idx ? {...it, numCases: n, tier: getTierForCases(it.product.caseTiers, n) || it.tier} : it)), []);
 
   // Active filter count for badge
   const activeFilterCount = [
@@ -649,7 +672,7 @@ export default function PlainPackagingPage() {
   }, [activeCategory, search, priceRange, sort]);
 
   const quoteIds = useMemo(() => new Set(quoteItems.map(it => it.product.id)), [quoteItems]);
-  const totalEst = quoteItems.reduce((s, it) => s + it.tier.pricePerCase * it.numCases, 0);
+  const totalEst = quoteItems.reduce((s, it) => s + discountedPrice(it.tier.pricePerCase) * it.numCases, 0);
 
   // Category counts for browse section
   const categoryCounts = useMemo(() => {

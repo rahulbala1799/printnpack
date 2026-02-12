@@ -8,10 +8,23 @@ import { PLAIN_PRODUCTS, getProductById, getRelatedProducts } from '../../data/p
 import PackagingIcon, { isPlaceholderImage } from '../../components/PackagingIcon';
 
 const fmtCase = (n) => `€${Number(n).toFixed(2)}`;
+const DISCOUNT = 0.95;
+const discountedPrice = (p) => Math.round(p * DISCOUNT * 100) / 100;
+function getTierForCases(tiers, numCases) {
+  if (!tiers?.length) return null;
+  for (const t of tiers) {
+    const L = t.casesLabel;
+    const plus = L.match(/^(\d+)\+/);
+    if (plus) { if (numCases >= parseInt(plus[1], 10)) return t; continue; }
+    const range = L.match(/^(\d+)-(\d+)/);
+    if (range) { const min = parseInt(range[1], 10); const max = parseInt(range[2], 10); if (numCases >= min && numCases <= max) return t; }
+  }
+  return tiers[tiers.length - 1];
+}
 
 export default function PlainPackagingDetail({ product, relatedProducts }) {
-  const [selectedTier, setSelectedTier] = useState(product?.caseTiers?.[0] || null);
   const [numCases, setNumCases] = useState(1);
+  const selectedTier = product?.caseTiers ? getTierForCases(product.caseTiers, numCases) || product.caseTiers[0] : null;
   const [quoteSubmitted, setQuoteSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', notes: '' });
@@ -33,7 +46,7 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
   }
 
   const estimatedTotal = selectedTier
-    ? `€${(numCases * selectedTier.pricePerCase).toFixed(2)}`
+    ? `€${(numCases * discountedPrice(selectedTier.pricePerCase)).toFixed(2)}`
     : '—';
 
   const validate = () => {
@@ -59,7 +72,7 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
           email: form.email,
           phone: form.phone,
           subject: `Plain Packaging Quote — ${product.name} [${product.code}] — ${form.company}`,
-          message: `Company: ${form.company}\n\nProduct: ${product.name}\nCode: ${product.code}\nQty per case: ${product.qtyPerCase}\nCases: ${numCases} (${selectedTier?.casesLabel})\nPrice per case: ${fmtCase(selectedTier?.pricePerCase ?? 0)}\nEstimated Total: ${estimatedTotal}\n\nNotes: ${form.notes || 'None'}`,
+          message: `Company: ${form.company}\n\nProduct: ${product.name}\nCode: ${product.code}\nQty per case: ${product.qtyPerCase}\nCases: ${numCases} (${selectedTier?.casesLabel})\nPrice per case: ${fmtCase(selectedTier ? discountedPrice(selectedTier.pricePerCase) : 0)}\nEstimated Total: ${estimatedTotal}\n\nNotes: ${form.notes || 'None'}`,
           source: 'Plain Packaging Detail Page',
         }),
       });
@@ -134,8 +147,11 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-3">
                 <div className="bg-stone-50 rounded-xl border border-stone-200 p-3 text-center">
-                  <div className="text-base font-bold text-stone-900 leading-snug">
+                  <div className="text-stone-400 text-xs line-through">
                     {selectedTier ? fmtCase(selectedTier.pricePerCase) : fmtCase(product.caseTiers[0]?.pricePerCase ?? 0)}
+                  </div>
+                  <div className="text-base font-bold text-stone-900 leading-snug">
+                    {selectedTier ? fmtCase(discountedPrice(selectedTier.pricePerCase)) : fmtCase(product.caseTiers[0] ? discountedPrice(product.caseTiers[0].pricePerCase) : 0)}
                   </div>
                   <div className="text-xs text-stone-400 mt-0.5">from / case</div>
                 </div>
@@ -154,29 +170,33 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
                 <p className="text-stone-600 text-sm leading-relaxed">{product.description}</p>
               )}
 
-              {/* Case tier pricing */}
+              {/* Case tier pricing — selecting a tier sets numCases so tier stays in sync */}
               <div>
                 <p className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">
                   Price per case — select volume
                 </p>
                 <div className="flex flex-col gap-2">
-                  {product.caseTiers.map((tier) => (
-                    <button
-                      key={tier.casesLabel}
-                      onClick={() => setSelectedTier(tier)}
-                      className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border text-sm transition-all ${
-                        selectedTier?.casesLabel === tier.casesLabel
-                          ? 'bg-stone-800 text-white border-stone-800 shadow-sm'
-                          : 'bg-white text-stone-700 border-stone-200 hover:border-stone-300 hover:bg-stone-50'
-                      }`}
-                    >
-                      <span className="font-semibold">{tier.casesLabel}</span>
-                      <span className={`text-base font-bold ${selectedTier?.casesLabel === tier.casesLabel ? 'text-amber-300' : 'text-stone-900'}`}>
-                        {fmtCase(tier.pricePerCase)}
-                        <span className={`text-xs font-normal ml-1 ${selectedTier?.casesLabel === tier.casesLabel ? 'text-stone-300' : 'text-stone-400'}`}>/ case</span>
-                      </span>
-                    </button>
-                  ))}
+                  {product.caseTiers.map((tier) => {
+                    const minCases = tier.casesLabel.includes('+') ? parseInt(tier.casesLabel, 10) : parseInt(tier.casesLabel, 10);
+                    return (
+                      <button
+                        key={tier.casesLabel}
+                        onClick={() => setNumCases(minCases)}
+                        className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border text-sm transition-all ${
+                          selectedTier?.casesLabel === tier.casesLabel
+                            ? 'bg-stone-800 text-white border-stone-800 shadow-sm'
+                            : 'bg-white text-stone-700 border-stone-200 hover:border-stone-300 hover:bg-stone-50'
+                        }`}
+                      >
+                        <span className="font-semibold">{tier.casesLabel}</span>
+                        <span className={`text-base font-bold ${selectedTier?.casesLabel === tier.casesLabel ? 'text-amber-300' : 'text-stone-900'}`}>
+                          <span className="line-through opacity-70 text-sm font-normal mr-1">{fmtCase(tier.pricePerCase)}</span>
+                          {fmtCase(discountedPrice(tier.pricePerCase))}
+                          <span className={`text-xs font-normal ml-1 ${selectedTier?.casesLabel === tier.casesLabel ? 'text-stone-300' : 'text-stone-400'}`}>/ case</span>
+                        </span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -252,7 +272,7 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
                     <p className="font-bold text-stone-900 text-xs leading-snug line-clamp-2">{p.name}</p>
                     <p className="text-xs text-stone-400 mt-1">{p.qtyPerCase} / case</p>
                     <p className="text-xs text-stone-500 mt-2">
-                      From <span className="font-bold text-stone-800">{fmtCase(p.caseTiers[p.caseTiers.length - 1]?.pricePerCase ?? 0)}</span> / case
+                      From <span className="font-bold text-stone-800">{fmtCase(p.caseTiers[p.caseTiers.length - 1] ? discountedPrice(p.caseTiers[p.caseTiers.length - 1].pricePerCase) : 0)}</span> / case
                     </p>
                   </div>
                 </Link>
