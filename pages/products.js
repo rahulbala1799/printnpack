@@ -430,6 +430,35 @@ const ProductsPage = () => {
       <main className="bg-gray-50 min-h-screen">
         <div className="container mx-auto px-4 py-8 md:py-12">
 
+          {/* Plain packaging promo card — shown when Packaging tab is active */}
+          {activeGroup === 'packaging' && !searchTerm && (
+            <Link
+              href="/plain-packaging"
+              className="flex items-center justify-between gap-4 bg-gray-950 text-white rounded-2xl px-5 py-4 mb-7 group hover:bg-gray-900 transition-colors border border-white/5 hover:border-orange-500/30"
+            >
+              <div className="flex items-center gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center flex-shrink-0">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                  </svg>
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className="font-bold text-sm text-white">Plain Packaging</span>
+                    <span className="text-xs font-bold bg-orange-500 text-white px-2 py-0.5 rounded-full">New</span>
+                  </div>
+                  <div className="text-xs text-gray-400">No artwork? No problem. Order plain stock with volume pricing — build your quote in seconds.</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-1 text-orange-400 font-bold text-xs flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                Browse
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+            </Link>
+          )}
+
           {/* Count + Sort row */}
           <div className="flex items-center justify-between mb-6">
             <p className="text-sm text-gray-500">
