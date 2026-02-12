@@ -5,8 +5,18 @@ import { TIERED_PLAIN_PRODUCTS, TIERED_CATEGORIES } from './plain-products-tiere
 
 // Product images in public/images/plain-packaging/ — assign by product code (overrides placeholder logo)
 const PLAIN_IMAGE_OVERRIDES = {
-  '1206653': '/images/plain-packaging/1206653.webp', // 6" Bagasse Burger Box
-  '1206654': '/images/plain-packaging/1206654.webp', // 7" Bagasse Small Rectangle Meal Box
+  '120075': '/images/plain-packaging/120075.webp',
+  '120076': '/images/plain-packaging/120076.webp',
+  '1206653': '/images/plain-packaging/1206653.webp',
+  '1206654': '/images/plain-packaging/1206654.webp',
+  '150003': '/images/plain-packaging/150003.webp',
+  '150004': '/images/plain-packaging/150004.webp',
+  '160003': '/images/plain-packaging/160003.webp',
+  '160006': '/images/plain-packaging/160006.webp',
+  '160007': '/images/plain-packaging/160007.webp',
+  '160008': '/images/plain-packaging/160008.webp',
+  '160009': '/images/plain-packaging/160009.webp',
+  'CLSB1300': '/images/plain-packaging/CLSB1300.webp',
 };
 
 function applyImageOverrides(products) {
