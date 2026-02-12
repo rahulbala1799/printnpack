@@ -161,50 +161,50 @@ const ProductCard = ({ product, onAdd, inQuote }) => {
             className="absolute inset-0 w-full h-full hover:scale-105 transition-transform duration-500"
           />
         ) : (
-          <Image src={product.imageSrc} alt={product.name} fill className="object-contain p-3 hover:scale-105 transition-transform duration-500" />
+          <Image src={product.imageSrc} alt={product.name} fill className="object-contain p-2 sm:p-3 hover:scale-105 transition-transform duration-500" />
         )}
         {inQuote && (
-          <div className="absolute top-2 right-2 z-10 w-5 h-5 bg-amber-500 rounded-full flex items-center justify-center">
-            <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7"/></svg>
+          <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 z-10 w-4 h-4 sm:w-5 sm:h-5 bg-amber-500 rounded-full flex items-center justify-center">
+            <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7"/></svg>
           </div>
         )}
       </Link>
 
       {/* Body */}
-      <div className="p-3 flex-1 flex flex-col gap-2.5">
+      <div className="p-2 sm:p-3 flex-1 flex flex-col gap-1.5 sm:gap-2.5">
 
         {/* Category chip + code */}
-        <div className="flex items-center justify-between gap-2">
-          <span className="text-xs bg-stone-100 text-stone-600 px-2 py-0.5 rounded-md font-medium flex-shrink-0 truncate max-w-[120px]">{product.category}</span>
-          <span className="text-xs text-stone-400 flex-shrink-0">#{product.code}</span>
+        <div className="flex items-center justify-between gap-1">
+          <span className="text-[10px] sm:text-xs bg-stone-100 text-stone-600 px-1.5 sm:px-2 py-0.5 rounded-md font-medium flex-shrink-0 truncate max-w-[90px] sm:max-w-[120px]">{product.category}</span>
+          <span className="text-[10px] sm:text-xs text-stone-400 flex-shrink-0 hidden sm:inline">#{product.code}</span>
         </div>
 
         {/* Name */}
-        <div className="flex items-start justify-between gap-1.5">
-          <h3 className="font-semibold text-stone-900 text-sm leading-snug line-clamp-2 flex-1">{product.name}</h3>
-          <Link href={`/plain-packaging/${product.id}`} className="flex-shrink-0 text-stone-300 hover:text-stone-600 transition-colors mt-0.5" title="Full details">
+        <div className="flex items-start justify-between gap-1">
+          <h3 className="font-semibold text-stone-900 text-xs sm:text-sm leading-snug line-clamp-2 flex-1">{product.name}</h3>
+          <Link href={`/plain-packaging/${product.id}`} className="flex-shrink-0 text-stone-300 hover:text-stone-600 transition-colors mt-0.5 hidden sm:block" title="Full details">
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
           </Link>
         </div>
 
         {product.qtyPerCase && (
-          <p className="text-xs text-stone-400">{product.qtyPerCase} per case</p>
+          <p className="text-[10px] sm:text-xs text-stone-400">{product.qtyPerCase}/case</p>
         )}
 
         {/* Tier picker — collapsed button / expanded list */}
-        <div className="flex-1 flex flex-col justify-end gap-2">
+        <div className="flex-1 flex flex-col justify-end gap-1.5 sm:gap-2">
           <div>
-            <p className="text-xs font-semibold text-stone-400 uppercase tracking-wider mb-1.5">Volume pricing</p>
+            <p className="text-[10px] sm:text-xs font-semibold text-stone-400 uppercase tracking-wider mb-1 sm:mb-1.5 hidden sm:block">Volume pricing</p>
             {!tiersOpen ? (
               <button
                 onClick={() => setTiersOpen(true)}
-                className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg bg-stone-900 text-white text-xs"
+                className="w-full flex items-center justify-between px-2 sm:px-3 py-1.5 sm:py-2.5 rounded-lg bg-stone-900 text-white text-[10px] sm:text-xs"
               >
-                <span className="font-semibold">{selectedTier.casesLabel}</span>
-                <div className="flex items-center gap-1.5">
-                  <span className="line-through text-stone-400 text-[10px]">{fmt(selectedTier.pricePerCase)}</span>
-                  <span className="font-bold text-amber-300">{fmt(discountedPrice(selectedTier.pricePerCase))}<span className="text-stone-400 font-normal">/case</span></span>
-                  <svg className="w-3 h-3 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7"/></svg>
+                <span className="font-semibold truncate">{selectedTier.casesLabel}</span>
+                <div className="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
+                  <span className="line-through text-stone-400 text-[9px] sm:text-[10px] hidden sm:inline">{fmt(selectedTier.pricePerCase)}</span>
+                  <span className="font-bold text-amber-300">{fmt(discountedPrice(selectedTier.pricePerCase))}<span className="text-stone-400 font-normal hidden sm:inline">/case</span></span>
+                  <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7"/></svg>
                 </div>
               </button>
             ) : (
@@ -215,7 +215,7 @@ const ProductCard = ({ product, onAdd, inQuote }) => {
                     <button
                       key={tier.casesLabel}
                       onClick={() => { setNumCases(minCases); setTiersOpen(false); }}
-                      className={`w-full flex items-center justify-between px-3 py-2 text-xs transition-colors border-b last:border-b-0 border-stone-100 ${
+                      className={`w-full flex items-center justify-between px-2 sm:px-3 py-1.5 sm:py-2 text-[10px] sm:text-xs transition-colors border-b last:border-b-0 border-stone-100 ${
                         selectedTier.casesLabel === tier.casesLabel
                           ? 'bg-stone-900 text-white'
                           : 'bg-white text-stone-700 hover:bg-stone-50'
@@ -223,7 +223,7 @@ const ProductCard = ({ product, onAdd, inQuote }) => {
                     >
                       <span className="font-semibold">{tier.casesLabel}</span>
                       <span className={`font-bold ${selectedTier.casesLabel === tier.casesLabel ? 'text-amber-300' : 'text-stone-900'}`}>
-                        <span className="line-through opacity-70 mr-1">{fmt(tier.pricePerCase)}</span>
+                        <span className="line-through opacity-70 mr-1 hidden sm:inline">{fmt(tier.pricePerCase)}</span>
                         {fmt(discountedPrice(tier.pricePerCase))}<span className="font-normal opacity-60">/case</span>
                       </span>
                     </button>
@@ -234,24 +234,24 @@ const ProductCard = ({ product, onAdd, inQuote }) => {
           </div>
 
           {/* Cases stepper + Add to Quote */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1 sm:gap-1.5">
             <div className="flex items-center border border-stone-200 rounded-lg overflow-hidden flex-shrink-0">
-              <button onClick={() => setNumCases(Math.max(1, numCases - 1))} className="w-7 h-8 flex items-center justify-center text-stone-400 hover:bg-stone-50 font-bold text-sm">−</button>
-              <span className="w-8 text-center text-sm font-semibold text-stone-900">{numCases}</span>
-              <button onClick={() => setNumCases(numCases + 1)} className="w-7 h-8 flex items-center justify-center text-stone-400 hover:bg-stone-50 font-bold text-sm">+</button>
+              <button onClick={() => setNumCases(Math.max(1, numCases - 1))} className="w-6 sm:w-7 h-7 sm:h-8 flex items-center justify-center text-stone-400 hover:bg-stone-50 font-bold text-xs sm:text-sm">−</button>
+              <span className="w-6 sm:w-8 text-center text-xs sm:text-sm font-semibold text-stone-900">{numCases}</span>
+              <button onClick={() => setNumCases(numCases + 1)} className="w-6 sm:w-7 h-7 sm:h-8 flex items-center justify-center text-stone-400 hover:bg-stone-50 font-bold text-xs sm:text-sm">+</button>
             </div>
             <button
               onClick={handleAdd}
-              className={`flex-1 flex items-center justify-center gap-1 h-8 rounded-lg text-xs font-bold transition-all ${
+              className={`flex-1 flex items-center justify-center gap-1 h-7 sm:h-8 rounded-lg text-[10px] sm:text-xs font-bold transition-all ${
                 justAdded
                   ? 'bg-emerald-600 text-white'
                   : 'bg-stone-900 hover:bg-black text-white active:scale-[0.97]'
               }`}
             >
               {justAdded ? (
-                <><svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7"/></svg>Added</>
+                <><svg className="w-2.5 h-2.5 sm:w-3 sm:h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7"/></svg><span className="hidden sm:inline">Added</span><svg className="w-2.5 h-2.5 sm:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7"/></svg></>
               ) : (
-                <><svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4"/></svg>Add · {fmt(lineTotal)}</>
+                <><svg className="w-2.5 h-2.5 sm:w-3 sm:h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4"/></svg><span className="sm:hidden">{fmt(lineTotal)}</span><span className="hidden sm:inline">Add · {fmt(lineTotal)}</span></>
               )}
             </button>
           </div>
@@ -749,21 +749,21 @@ export default function PlainPackagingPage() {
       <div className="overflow-x-hidden min-w-0">
       {/* ── Page header ───────────────────────────────────────────────────────── */}
       <div className="bg-stone-50 border-b border-stone-200">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6">
-          <nav className="flex items-center gap-2 text-xs text-stone-400 mb-4">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
+          <nav className="flex items-center gap-2 text-[10px] sm:text-xs text-stone-400 mb-2 sm:mb-4">
             <Link href="/" className="hover:text-stone-700 transition-colors">Home</Link>
             <span>/</span>
             <span className="text-stone-700 font-medium">Plain Packaging</span>
           </nav>
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 sm:gap-3">
             <div>
-              <h1 className="text-2xl font-bold text-stone-900">Plain Packaging</h1>
-              <p className="text-sm text-stone-500 mt-1">841 products · 57 categories · 4-tier volume pricing</p>
+              <h1 className="text-xl sm:text-2xl font-bold text-stone-900">Plain Packaging</h1>
+              <p className="text-xs sm:text-sm text-stone-500 mt-0.5 sm:mt-1">841 products · 57 categories · 4-tier volume pricing</p>
             </div>
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-xs bg-amber-50 border border-amber-200 text-amber-700 px-3 py-1.5 rounded-lg font-semibold">B2B Wholesale</span>
-              <span className="text-xs bg-stone-100 border border-stone-200 text-stone-600 px-3 py-1.5 rounded-lg font-semibold">No min. order</span>
-              <span className="text-xs bg-stone-100 border border-stone-200 text-stone-600 px-3 py-1.5 rounded-lg font-semibold">Ireland delivery</span>
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+              <span className="text-[10px] sm:text-xs bg-amber-50 border border-amber-200 text-amber-700 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg font-semibold">B2B Wholesale</span>
+              <span className="text-[10px] sm:text-xs bg-stone-100 border border-stone-200 text-stone-600 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg font-semibold">No min. order</span>
+              <span className="text-[10px] sm:text-xs bg-stone-100 border border-stone-200 text-stone-600 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg font-semibold">Ireland delivery</span>
             </div>
           </div>
         </div>
@@ -771,11 +771,11 @@ export default function PlainPackagingPage() {
 
       {/* ── Browse by category: 4 visible, then "Show 4 more" (max 12), then "View all" → modal ── */}
       <div className="bg-white border-b border-stone-200">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-4">
-          <div className="flex items-baseline justify-between gap-3 mb-3">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
+          <div className="flex items-baseline justify-between gap-3 mb-2 sm:mb-3">
             <div className="min-w-0">
-              <h2 className="text-base font-bold text-stone-900">Browse by category</h2>
-              <p className="text-xs text-stone-500 mt-0.5 truncate">{categoriesWithCount.length} categories</p>
+              <h2 className="text-sm sm:text-base font-bold text-stone-900">Browse by category</h2>
+              <p className="text-[10px] sm:text-xs text-stone-500 mt-0.5 truncate">{categoriesWithCount.length} categories</p>
             </div>
             {activeCategory !== 'All' && (
               <button
@@ -786,37 +786,37 @@ export default function PlainPackagingPage() {
               </button>
             )}
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
+          <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 gap-1.5 sm:gap-3">
             {/* All */}
             <button
               onClick={() => handleCategoryChange('All')}
-              className={`flex flex-col items-center text-center p-3 rounded-xl border-2 transition-all duration-200 ${
+              className={`flex flex-col items-center text-center p-2 sm:p-3 rounded-xl border-2 transition-all duration-200 ${
                 activeCategory === 'All'
                   ? 'border-stone-900 bg-stone-900 text-white shadow-md ring-2 ring-stone-300 ring-offset-1'
                   : 'border-stone-200 bg-stone-50/50 hover:border-stone-400 hover:shadow-sm hover:bg-stone-100/80'
               }`}
             >
-              <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-1.5 ${activeCategory === 'All' ? 'bg-white/20' : 'bg-stone-200'}`}>
-                <svg className="w-5 h-5 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+              <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center mb-1 sm:mb-1.5 ${activeCategory === 'All' ? 'bg-white/20' : 'bg-stone-200'}`}>
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
               </div>
-              <span className="text-xs font-semibold leading-tight">All</span>
-              <span className={`text-[10px] mt-0.5 ${activeCategory === 'All' ? 'text-stone-300' : 'text-stone-400'}`}>{PLAIN_PRODUCTS.length}</span>
+              <span className="text-[10px] sm:text-xs font-semibold leading-tight">All</span>
+              <span className={`text-[9px] sm:text-[10px] mt-0.5 ${activeCategory === 'All' ? 'text-stone-300' : 'text-stone-400'}`}>{PLAIN_PRODUCTS.length}</span>
             </button>
             {categoriesWithCount.slice(0, Math.min(visibleCategoryCount, 12)).map(({ name, count }) => (
               <button
                 key={name}
                 onClick={() => handleCategoryChange(name)}
-                className={`flex flex-col items-center text-center p-3 rounded-xl border-2 transition-all duration-200 ${
+                className={`flex flex-col items-center text-center p-2 sm:p-3 rounded-xl border-2 transition-all duration-200 ${
                   activeCategory === name
                     ? 'border-stone-900 bg-stone-900 text-white shadow-md ring-2 ring-stone-300 ring-offset-1'
                     : 'border-stone-200 bg-white hover:border-stone-400 hover:shadow-sm hover:bg-stone-50'
                 }`}
               >
-                <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-1.5 overflow-hidden flex-shrink-0 ${activeCategory === name ? 'bg-white/20' : 'bg-stone-100'}`}>
-                  <PackagingIcon category={name} className="w-full h-full min-w-[40px] min-h-[40px]" />
+                <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center mb-1 sm:mb-1.5 overflow-hidden flex-shrink-0 ${activeCategory === name ? 'bg-white/20' : 'bg-stone-100'}`}>
+                  <PackagingIcon category={name} className="w-full h-full min-w-[32px] min-h-[32px] sm:min-w-[40px] sm:min-h-[40px]" />
                 </div>
-                <span className="text-xs font-semibold leading-tight line-clamp-2">{name}</span>
-                <span className={`text-[10px] mt-0.5 ${activeCategory === name ? 'text-stone-300' : 'text-stone-400'}`}>{count}</span>
+                <span className="text-[10px] sm:text-xs font-semibold leading-tight line-clamp-2">{name}</span>
+                <span className={`text-[9px] sm:text-[10px] mt-0.5 ${activeCategory === name ? 'text-stone-300' : 'text-stone-400'}`}>{count}</span>
               </button>
             ))}
           </div>
@@ -883,19 +883,19 @@ export default function PlainPackagingPage() {
 
       {/* ── Sticky top bar: search + filter trigger + quote ────────────────────── */}
       <div className="sticky top-0 z-30 bg-white border-b border-stone-200 shadow-sm">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-2.5 flex items-center gap-2 min-w-0">
+        <div className="max-w-screen-xl mx-auto px-3 sm:px-6 py-2 sm:py-2.5 flex items-center gap-1.5 sm:gap-2 min-w-0">
 
           {/* Search — 16px font prevents iOS zoom on focus; min-w-0 prevents flex overflow */}
           <div className="flex-1 min-w-0 relative">
-            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 sm:w-4 sm:h-4 text-stone-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
             </svg>
             <input
               type="text"
-              placeholder="Search by name, code, or category…"
+              placeholder="Search products…"
               value={search}
               onChange={e => handleSearchChange(e.target.value)}
-              className="w-full min-w-0 pl-9 pr-3 py-2 text-base border border-stone-200 rounded-xl outline-none focus:border-stone-400 focus:ring-2 focus:ring-stone-100 bg-stone-50 transition-all"
+              className="w-full min-w-0 pl-8 sm:pl-9 pr-3 py-1.5 sm:py-2 text-base border border-stone-200 rounded-xl outline-none focus:border-stone-400 focus:ring-2 focus:ring-stone-100 bg-stone-50 transition-all"
             />
             {search && (
               <button onClick={() => handleSearchChange('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 transition-colors">
@@ -935,11 +935,11 @@ export default function PlainPackagingPage() {
 
         {/* Quick category chips: top categories always visible when sticky */}
         <div className="border-t border-stone-100">
-          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-2 flex items-center gap-2 overflow-x-auto no-scrollbar">
-            <span className="text-xs font-medium text-stone-400 flex-shrink-0">Quick:</span>
+          <div className="max-w-screen-xl mx-auto px-3 sm:px-6 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar">
+            <span className="text-[10px] sm:text-xs font-medium text-stone-400 flex-shrink-0">Quick:</span>
             <button
               onClick={() => handleCategoryChange('All')}
-              className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+              className={`flex-shrink-0 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-semibold transition-all ${
                 activeCategory === 'All' ? 'bg-stone-900 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
               }`}
             >
@@ -949,11 +949,11 @@ export default function PlainPackagingPage() {
               <button
                 key={name}
                 onClick={() => handleCategoryChange(name)}
-                className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all whitespace-nowrap ${
+                className={`flex-shrink-0 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-semibold transition-all whitespace-nowrap ${
                   activeCategory === name ? 'bg-stone-900 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
                 }`}
               >
-                {name} <span className="opacity-70">({count})</span>
+                {name} <span className="opacity-70 hidden sm:inline">({count})</span>
               </button>
             ))}
           </div>
@@ -961,7 +961,7 @@ export default function PlainPackagingPage() {
 
         {/* Active filter chips row */}
         {activeFilterCount > 0 && (
-          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 pb-2 flex items-center gap-2 flex-wrap">
+          <div className="max-w-screen-xl mx-auto px-3 sm:px-6 pb-1.5 sm:pb-2 flex items-center gap-1.5 sm:gap-2 flex-wrap">
             <span className="text-xs text-stone-400">Active:</span>
             {activeCategory !== 'All' && (
               <button onClick={() => handleCategoryChange('All')} className="flex items-center gap-1 text-xs bg-stone-900 text-white px-2.5 py-1 rounded-lg font-semibold hover:bg-black transition-colors">
@@ -984,7 +984,7 @@ export default function PlainPackagingPage() {
       </div>
 
       {/* ── Main layout: sidebar + grid ────────────────────────────────────────── */}
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6 flex gap-6 items-start">
+      <div className="max-w-screen-xl mx-auto px-3 sm:px-6 py-4 sm:py-6 flex gap-6 items-start">
 
         {/* ── Desktop sidebar ────────────────────────────────────────────────── */}
         <aside className="hidden lg:block w-56 flex-shrink-0 sticky top-[88px]">
@@ -1003,23 +1003,23 @@ export default function PlainPackagingPage() {
         </aside>
 
         {/* ── Product grid ────────────────────────────────────────────────────── */}
-        <div className="flex-1 min-w-0">
+        <div className={`flex-1 min-w-0 ${quoteItems.length > 0 ? 'pb-16 lg:pb-0' : ''}`}>
 
           {/* Result count + sort + per-page */}
-          <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
-            <p className="text-xs text-stone-500">
+          <div className="flex items-center justify-between gap-2 mb-3 sm:mb-4 flex-wrap">
+            <p className="text-[10px] sm:text-xs text-stone-500">
               <span className="font-semibold text-stone-800">{totalFiltered.toLocaleString()}</span> product{totalFiltered !== 1 ? 's' : ''}
               {activeCategory !== 'All' && <> in <span className="font-medium">{activeCategory}</span></>}
               {perPage !== 'All' && totalPages > 1 && (
-                <> · page <span className="font-medium">{safePage}</span> of <span className="font-medium">{totalPages}</span></>
+                <> · p.<span className="font-medium">{safePage}</span>/<span className="font-medium">{totalPages}</span></>
               )}
             </p>
-            <div className="flex items-center gap-2 flex-shrink-0">
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
               <span className="text-xs text-stone-400 hidden sm:inline">Sort:</span>
               <select
                 value={sort}
                 onChange={e => handleSortChange(e.target.value)}
-                className="text-xs border border-stone-200 rounded-lg px-2.5 py-1.5 bg-white text-stone-700 outline-none focus:border-stone-400 transition-colors"
+                className="text-[10px] sm:text-xs border border-stone-200 rounded-lg px-1.5 sm:px-2.5 py-1 sm:py-1.5 bg-white text-stone-700 outline-none focus:border-stone-400 transition-colors"
               >
                 {SORT_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
               </select>
@@ -1027,7 +1027,7 @@ export default function PlainPackagingPage() {
               <select
                 value={perPage}
                 onChange={e => { setPerPage(e.target.value === 'All' ? 'All' : Number(e.target.value)); setCurrentPage(1); }}
-                className="text-xs border border-stone-200 rounded-lg px-2.5 py-1.5 bg-white text-stone-700 outline-none focus:border-stone-400 transition-colors"
+                className="text-[10px] sm:text-xs border border-stone-200 rounded-lg px-1.5 sm:px-2.5 py-1 sm:py-1.5 bg-white text-stone-700 outline-none focus:border-stone-400 transition-colors"
               >
                 {PER_PAGE_OPTIONS.map(o => <option key={o} value={o}>{o}</option>)}
               </select>
@@ -1041,7 +1041,7 @@ export default function PlainPackagingPage() {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3">
                 {paginated.map(product => (
                   <ProductCard
                     key={product.id}
@@ -1054,31 +1054,31 @@ export default function PlainPackagingPage() {
 
               {/* Pagination bar */}
               {perPage !== 'All' && totalPages > 1 && (
-                <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="mt-5 sm:mt-8 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
                   {/* Info */}
-                  <p className="text-xs text-stone-400 order-2 sm:order-1">
-                    Showing {((safePage - 1) * effectivePerPage) + 1}–{Math.min(safePage * effectivePerPage, totalFiltered)} of {totalFiltered.toLocaleString()}
+                  <p className="text-[10px] sm:text-xs text-stone-400 order-2 sm:order-1">
+                    {((safePage - 1) * effectivePerPage) + 1}–{Math.min(safePage * effectivePerPage, totalFiltered)} of {totalFiltered.toLocaleString()}
                   </p>
 
                   {/* Page buttons */}
-                  <div className="flex items-center gap-1 order-1 sm:order-2">
+                  <div className="flex items-center gap-0.5 sm:gap-1 order-1 sm:order-2">
                     {/* Prev */}
                     <button
                       onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                       disabled={safePage === 1}
-                      className="w-8 h-8 flex items-center justify-center rounded-lg border border-stone-200 text-stone-500 hover:border-stone-400 hover:bg-stone-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                      className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg border border-stone-200 text-stone-500 hover:border-stone-400 hover:bg-stone-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                     >
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7"/></svg>
+                      <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7"/></svg>
                     </button>
 
                     {pageWindow.map((pg, i) =>
                       pg === '…' ? (
-                        <span key={`ellipsis-${i}`} className="w-8 h-8 flex items-center justify-center text-stone-400 text-xs">…</span>
+                        <span key={`ellipsis-${i}`} className="w-6 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-stone-400 text-[10px] sm:text-xs">…</span>
                       ) : (
                         <button
                           key={pg}
                           onClick={() => setCurrentPage(pg)}
-                          className={`w-8 h-8 flex items-center justify-center rounded-lg text-xs font-semibold transition-all ${
+                          className={`w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg text-[10px] sm:text-xs font-semibold transition-all ${
                             safePage === pg
                               ? 'bg-stone-900 text-white border border-stone-900'
                               : 'border border-stone-200 text-stone-600 hover:border-stone-400 hover:bg-stone-50'
@@ -1093,9 +1093,9 @@ export default function PlainPackagingPage() {
                     <button
                       onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                       disabled={safePage === totalPages}
-                      className="w-8 h-8 flex items-center justify-center rounded-lg border border-stone-200 text-stone-500 hover:border-stone-400 hover:bg-stone-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                      className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg border border-stone-200 text-stone-500 hover:border-stone-400 hover:bg-stone-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                     >
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7"/></svg>
+                      <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7"/></svg>
                     </button>
                   </div>
                 </div>
@@ -1128,19 +1128,19 @@ export default function PlainPackagingPage() {
 
       {/* ── Mobile sticky quote bar ────────────────────────────────────────────── */}
       {quoteItems.length > 0 && (
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-30 p-3 bg-white border-t border-stone-200">
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-30 p-2 sm:p-3 bg-white border-t border-stone-200 safe-area-bottom">
           <button
             onClick={() => setDrawerOpen(true)}
-            className="w-full flex items-center justify-between bg-stone-900 text-white font-bold py-3.5 px-5 rounded-2xl active:scale-[0.98] transition-transform"
+            className="w-full flex items-center justify-between bg-stone-900 text-white font-bold py-2.5 sm:py-3.5 px-4 sm:px-5 rounded-2xl active:scale-[0.98] transition-transform"
           >
-            <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded-xl bg-white/20 flex items-center justify-center text-sm font-bold flex-shrink-0">{quoteItems.length}</div>
-              <span className="text-sm">View Quote</span>
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-xl bg-white/20 flex items-center justify-center text-xs sm:text-sm font-bold flex-shrink-0">{quoteItems.length}</div>
+              <span className="text-xs sm:text-sm">View Quote</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="text-base font-bold">{fmt(totalEst)}</span>
-              <span className="text-[10px] text-stone-400 font-normal">inc. VAT</span>
-              <svg className="w-4 h-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7"/></svg>
+              <span className="text-sm sm:text-base font-bold">{fmt(totalEst)}</span>
+              <span className="text-[9px] sm:text-[10px] text-stone-400 font-normal">inc. VAT</span>
+              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7"/></svg>
             </div>
           </button>
         </div>
