@@ -1,7 +1,8 @@
 // Shared data for plain (unbranded) packaging products
 // Used by /plain-packaging (listing) and /plain-packaging/[slug] (detail)
+import { TIERED_PLAIN_PRODUCTS, TIERED_CATEGORIES } from './plain-products-tiered';
 
-export const PLAIN_PRODUCTS = [
+const PLAIN_PRODUCTS_MANUAL = [
   {
     id: 'plain-pizza-boxes',
     name: 'Plain Pizza Boxes',
@@ -258,7 +259,12 @@ export const PLAIN_PRODUCTS = [
   },
 ];
 
-export const CATEGORIES = ['All', 'Boxes', 'Bags', 'Napkins', 'Mailers'];
+// Combined list: manual products + tiered (Excel-import) products
+export const PLAIN_PRODUCTS = [...PLAIN_PRODUCTS_MANUAL, ...TIERED_PLAIN_PRODUCTS];
+
+const manualCategories = [...new Set(PLAIN_PRODUCTS_MANUAL.map(p => p.category))];
+const allCategories = new Set([...manualCategories, ...TIERED_CATEGORIES]);
+export const CATEGORIES = ['All', ...[...allCategories].sort()];
 
 export function getProductById(id) {
   return PLAIN_PRODUCTS.find(p => p.id === id) || null;

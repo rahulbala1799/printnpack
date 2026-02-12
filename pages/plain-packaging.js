@@ -12,15 +12,40 @@ const fmtTotal = (price, qty) =>
 
 // ─── Product Card ─────────────────────────────────────────────────────────────
 const ProductCard = ({ product, onAdd }) => {
-  const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
-  const [selectedBreak, setSelectedBreak] = useState(product.qtyBreaks[0]);
+  const isTiered = product.caseTiers && product.caseTiers.length > 0;
+  const [selectedSize, setSelectedSize] = useState(product.sizes?.[0]);
+  const [selectedBreak, setSelectedBreak] = useState(product.qtyBreaks?.[0]);
   const [justAdded, setJustAdded] = useState(false);
 
   const handleAdd = () => {
+    if (isTiered) return;
     onAdd({ product, size: selectedSize, qtyBreak: selectedBreak });
     setJustAdded(true);
     setTimeout(() => setJustAdded(false), 1800);
   };
+
+  // Tiered (case-based) product: simple card, quote on detail page
+  if (isTiered) {
+    const fromPrice = product.caseTiers[product.caseTiers.length - 1]?.pricePerCase;
+    return (
+      <div className="bg-white rounded-2xl border border-stone-200 overflow-hidden flex flex-col hover:border-stone-300 hover:shadow-md transition-all duration-200">
+        <Link href={`/plain-packaging/${product.id}`} className="block relative bg-stone-50 overflow-hidden" style={{ paddingBottom: '55%' }}>
+          <Image src={product.imageSrc} alt={product.name} fill className="object-cover hover:scale-105 transition-transform duration-500" onError={() => {}} />
+          <div className="absolute top-3 left-3 z-10">
+            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-white/90 text-stone-700 border border-stone-200 shadow-sm">{product.category}</span>
+          </div>
+        </Link>
+        <div className="p-4 flex-1 flex flex-col gap-3">
+          <h3 className="font-bold text-stone-900 text-base leading-snug">{product.name}</h3>
+          {product.qtyPerCase && <p className="text-xs text-stone-400">{product.qtyPerCase} per case</p>}
+          <div className="mt-auto flex items-center justify-between">
+            <span className="text-sm text-stone-500">From <span className="font-bold text-stone-800">{fromPrice != null ? fmt(fromPrice) : '—'}</span> / case</span>
+            <Link href={`/plain-packaging/${product.id}`} className="text-xs font-semibold text-stone-600 hover:text-stone-900 underline underline-offset-2">View details →</Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white rounded-2xl border border-stone-200 overflow-hidden flex flex-col hover:border-stone-300 hover:shadow-md transition-all duration-200">
@@ -34,45 +59,27 @@ const ProductCard = ({ product, onAdd }) => {
           className="object-cover hover:scale-105 transition-transform duration-500"
           onError={() => {}}
         />
-        {/* Badges */}
         <div className="absolute top-3 left-3 flex gap-2 z-10">
-          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-white/90 text-stone-700 border border-stone-200 shadow-sm">
-            {product.category}
-          </span>
+          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-white/90 text-stone-700 border border-stone-200 shadow-sm">{product.category}</span>
         </div>
         {product.tag && (
           <div className="absolute top-3 right-3 z-10">
-            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200">
-              {product.tag}
-            </span>
+            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200">{product.tag}</span>
           </div>
         )}
-        {/* Lead time */}
         <div className="absolute bottom-3 left-3 z-10">
-          <span className="text-xs px-2 py-1 rounded-full bg-white/90 text-stone-500 border border-stone-100 shadow-sm">
-            ⏱ {product.leadTime}
-          </span>
+          <span className="text-xs px-2 py-1 rounded-full bg-white/90 text-stone-500 border border-stone-100 shadow-sm">⏱ {product.leadTime}</span>
         </div>
       </Link>
 
-      {/* Body */}
       <div className="p-4 flex-1 flex flex-col gap-4">
-
-        {/* Title */}
         <div className="flex items-start justify-between gap-2">
           <div>
             <h3 className="font-bold text-stone-900 text-base leading-snug">{product.name}</h3>
             <p className="text-xs text-stone-400 mt-0.5">{product.material}</p>
           </div>
-          <Link
-            href={`/plain-packaging/${product.id}`}
-            className="flex-shrink-0 text-xs font-semibold text-stone-500 hover:text-stone-800 underline underline-offset-2 transition-colors"
-          >
-            Details
-          </Link>
+          <Link href={`/plain-packaging/${product.id}`} className="flex-shrink-0 text-xs font-semibold text-stone-500 hover:text-stone-800 underline underline-offset-2 transition-colors">Details</Link>
         </div>
-
-        {/* Size selector */}
         <div>
           <p className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">Size</p>
           <div className="flex flex-wrap gap-1.5">
@@ -80,77 +87,38 @@ const ProductCard = ({ product, onAdd }) => {
               <button
                 key={size}
                 onClick={() => setSelectedSize(size)}
-                className={`text-xs font-semibold px-3 py-1.5 rounded-lg border transition-all ${
-                  selectedSize === size
-                    ? 'bg-stone-800 text-white border-stone-800'
-                    : 'bg-white text-stone-600 border-stone-200 hover:border-stone-400'
-                }`}
+                className={`text-xs font-semibold px-3 py-1.5 rounded-lg border transition-all ${selectedSize === size ? 'bg-stone-800 text-white border-stone-800' : 'bg-white text-stone-600 border-stone-200 hover:border-stone-400'}`}
               >
                 {size}
               </button>
             ))}
           </div>
         </div>
-
-        {/* Volume pricing */}
         <div>
-          <p className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">
-            Volume pricing — tap to select
-          </p>
+          <p className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">Volume pricing — tap to select</p>
           <div className="flex flex-col gap-1.5">
             {product.qtyBreaks.map((b) => (
               <button
                 key={b.qty}
                 onClick={() => setSelectedBreak(b)}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl border text-sm transition-all ${
-                  selectedBreak.qty === b.qty
-                    ? 'bg-stone-800 text-white border-stone-800 shadow-sm'
-                    : 'bg-white text-stone-700 border-stone-200 hover:border-stone-300 hover:bg-stone-50'
-                }`}
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl border text-sm transition-all ${selectedBreak.qty === b.qty ? 'bg-stone-800 text-white border-stone-800 shadow-sm' : 'bg-white text-stone-700 border-stone-200 hover:border-stone-300 hover:bg-stone-50'}`}
               >
                 <span className="font-semibold">{b.label} units</span>
                 <div className="flex items-baseline gap-1.5">
-                  <span className={`text-base font-bold ${selectedBreak.qty === b.qty ? 'text-amber-300' : 'text-stone-900'}`}>
-                    {fmt(b.price)}
-                  </span>
-                  <span className={`text-xs ${selectedBreak.qty === b.qty ? 'text-stone-300' : 'text-stone-400'}`}>
-                    / unit
-                  </span>
-                  <span className={`text-xs font-semibold ml-1 ${selectedBreak.qty === b.qty ? 'text-stone-300' : 'text-stone-400'}`}>
-                    = {fmtTotal(b.price, b.qty)}
-                  </span>
+                  <span className={`text-base font-bold ${selectedBreak.qty === b.qty ? 'text-amber-300' : 'text-stone-900'}`}>{fmt(b.price)}</span>
+                  <span className={`text-xs ${selectedBreak.qty === b.qty ? 'text-stone-300' : 'text-stone-400'}`}>/ unit</span>
+                  <span className={`text-xs font-semibold ml-1 ${selectedBreak.qty === b.qty ? 'text-stone-300' : 'text-stone-400'}`}>= {fmtTotal(b.price, b.qty)}</span>
                 </div>
               </button>
             ))}
           </div>
         </div>
-
-        {/* Add to quote */}
         <button
           onClick={handleAdd}
-          className={`mt-auto w-full flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm font-bold transition-all duration-300 ${
-            justAdded
-              ? 'bg-emerald-600 text-white'
-              : 'bg-stone-800 hover:bg-stone-900 text-white active:scale-[0.98]'
-          }`}
+          className={`mt-auto w-full flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm font-bold transition-all duration-300 ${justAdded ? 'bg-emerald-600 text-white' : 'bg-stone-800 hover:bg-stone-900 text-white active:scale-[0.98]'}`}
         >
-          {justAdded ? (
-            <>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-              </svg>
-              Added to Quote
-            </>
-          ) : (
-            <>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
-              </svg>
-              Add to Quote — {fmtTotal(selectedBreak.price, selectedBreak.qty)}
-            </>
-          )}
+          {justAdded ? (<><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>Added to Quote</>) : (<><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" /></svg>Add to Quote — {fmtTotal(selectedBreak.price, selectedBreak.qty)}</>)}
         </button>
-
       </div>
     </div>
   );

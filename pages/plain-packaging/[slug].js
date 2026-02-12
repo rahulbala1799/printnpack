@@ -13,8 +13,11 @@ const fmtTotal = (price, qty) =>
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function PlainPackagingDetail({ product, relatedProducts }) {
+  const isTiered = product?.caseTiers && product.caseTiers.length > 0;
   const [selectedSize, setSelectedSize] = useState(product?.sizes?.[0] || '');
   const [selectedBreak, setSelectedBreak] = useState(product?.qtyBreaks?.[0] || null);
+  const [selectedTier, setSelectedTier] = useState(product?.caseTiers?.[0] || null);
+  const [numCases, setNumCases] = useState(1);
   const [quoteSubmitted, setQuoteSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', notes: '' });
@@ -59,7 +62,9 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
           email: form.email,
           phone: form.phone,
           subject: `Plain Packaging Quote — ${product.name} — ${form.company}`,
-          message: `Company: ${form.company}\n\nProduct: ${product.name}\nSize: ${selectedSize}\nQuantity: ${selectedBreak?.label} units\nEstimated Total: ${fmtTotal(selectedBreak?.price, selectedBreak?.qty)}\n\nNotes: ${form.notes || 'None'}`,
+          message: isTiered
+            ? `Company: ${form.company}\n\nProduct: ${product.name}\nCases: ${numCases} (${selectedTier?.casesLabel || '—'})\nPrice per case: €${selectedTier?.pricePerCase?.toFixed(2) ?? '—'}\nEstimated Total: €${(numCases * (selectedTier?.pricePerCase ?? 0)).toFixed(2)}\n\nNotes: ${form.notes || 'None'}`
+            : `Company: ${form.company}\n\nProduct: ${product.name}\nSize: ${selectedSize}\nQuantity: ${selectedBreak?.label} units\nEstimated Total: ${fmtTotal(selectedBreak?.price, selectedBreak?.qty)}\n\nNotes: ${form.notes || 'None'}`,
           source: 'Plain Packaging Detail Page',
         }),
       });
@@ -71,8 +76,10 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
     }
   };
 
-  const estimatedTotal = selectedBreak ? fmtTotal(selectedBreak.price, selectedBreak.qty) : '—';
-  const pricePerUnit = selectedBreak ? fmt(selectedBreak.price) : '—';
+  const estimatedTotal = isTiered && selectedTier
+    ? `€${(numCases * selectedTier.pricePerCase).toLocaleString('en-IE', { minimumFractionDigits: 2 })}`
+    : selectedBreak ? fmtTotal(selectedBreak.price, selectedBreak.qty) : '—';
+  const pricePerUnit = isTiered && selectedTier ? fmt(selectedTier.pricePerCase) + ' / case' : selectedBreak ? fmt(selectedBreak.price) : '—';
 
   return (
     <Layout>
@@ -136,15 +143,15 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
                 <h1 className="text-2xl sm:text-3xl font-bold text-stone-900 leading-tight mb-1">
                   {product.name}
                 </h1>
-                <p className="text-stone-400 text-sm">{product.material}</p>
+                <p className="text-stone-400 text-sm">{product.material || product.qtyPerCase || ''}</p>
               </div>
 
               {/* Stats row */}
               <div className="grid grid-cols-3 gap-3">
                 {[
-                  { v: `${selectedBreak ? pricePerUnit : fmt(product.qtyBreaks[0].price)}`, l: 'from / unit' },
-                  { v: `${product.moq}+`, l: 'min. order' },
-                  { v: product.leadTime, l: 'lead time' },
+                  { v: isTiered ? (selectedTier ? fmt(selectedTier.pricePerCase) : (product.caseTiers?.[0] ? fmt(product.caseTiers[0].pricePerCase) : '—') : (selectedBreak ? pricePerUnit : product.qtyBreaks?.[0] ? fmt(product.qtyBreaks[0].price) : '—'), l: isTiered ? 'per case' : 'from / unit' },
+                  { v: isTiered ? '1 case' : `${product.moq ?? '—'}+`, l: 'min. order' },
+                  { v: product.leadTime || 'Contact', l: 'lead time' },
                 ].map(s => (
                   <div key={s.l} className="bg-stone-50 rounded-xl border border-stone-200 p-3 text-center">
                     <div className="text-base font-bold text-stone-900 leading-snug">{s.v}</div>
@@ -154,69 +161,84 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
               </div>
 
               {/* Description */}
-              <p className="text-stone-600 text-sm leading-relaxed">{product.description}</p>
+              <p className="text-stone-600 text-sm leading-relaxed">{product.description || product.tagline || ''}</p>
 
-              {/* Size selector */}
-              <div>
-                <p className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">Size</p>
-                <div className="flex flex-wrap gap-2">
-                  {product.sizes.map(size => (
-                    <button
-                      key={size}
-                      onClick={() => setSelectedSize(size)}
-                      className={`text-sm font-semibold px-4 py-2 rounded-xl border transition-all ${
-                        selectedSize === size
-                          ? 'bg-stone-800 text-white border-stone-800'
-                          : 'bg-white text-stone-600 border-stone-200 hover:border-stone-400'
-                      }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Volume pricing */}
-              <div>
-                <p className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">
-                  Volume pricing — select quantity
-                </p>
-                <div className="flex flex-col gap-2">
-                  {product.qtyBreaks.map((b) => (
-                    <button
-                      key={b.qty}
-                      onClick={() => setSelectedBreak(b)}
-                      className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border text-sm transition-all ${
-                        selectedBreak?.qty === b.qty
-                          ? 'bg-stone-800 text-white border-stone-800 shadow-sm'
-                          : 'bg-white text-stone-700 border-stone-200 hover:border-stone-300 hover:bg-stone-50'
-                      }`}
-                    >
-                      <span className="font-semibold">{b.label} units</span>
-                      <div className="flex items-baseline gap-2">
-                        <span className={`text-base font-bold ${selectedBreak?.qty === b.qty ? 'text-amber-300' : 'text-stone-900'}`}>
-                          {fmt(b.price)}
-                        </span>
-                        <span className={`text-xs ${selectedBreak?.qty === b.qty ? 'text-stone-300' : 'text-stone-400'}`}>
-                          / unit
-                        </span>
-                        <span className={`text-xs font-semibold ${selectedBreak?.qty === b.qty ? 'text-stone-300' : 'text-stone-400'}`}>
-                          = {fmtTotal(b.price, b.qty)}
-                        </span>
+              {isTiered ? (
+                <>
+                  {/* Case tier pricing */}
+                  <div>
+                    <p className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">Price per case — by volume</p>
+                    <div className="flex flex-col gap-2">
+                      {product.caseTiers.map((tier) => (
+                        <button
+                          key={tier.casesLabel}
+                          onClick={() => setSelectedTier(tier)}
+                          className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border text-sm transition-all ${
+                            selectedTier?.casesLabel === tier.casesLabel ? 'bg-stone-800 text-white border-stone-800 shadow-sm' : 'bg-white text-stone-700 border-stone-200 hover:border-stone-300 hover:bg-stone-50'
+                          }`}
+                        >
+                          <span className="font-semibold">{tier.casesLabel}</span>
+                          <span className={`text-base font-bold ${selectedTier?.casesLabel === tier.casesLabel ? 'text-amber-300' : 'text-stone-900'}`}>{fmt(tier.pricePerCase)}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  {/* Number of cases */}
+                  <div>
+                    <p className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">Number of cases</p>
+                    <input
+                      type="number"
+                      min={1}
+                      value={numCases}
+                      onChange={(e) => setNumCases(Math.max(1, parseInt(e.target.value, 10) || 1))}
+                      className="w-full px-4 py-3 border border-stone-200 rounded-xl text-sm font-semibold text-stone-900"
+                    />
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* Size selector */}
+                  {product.sizes?.length > 0 && (
+                    <div>
+                      <p className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">Size</p>
+                      <div className="flex flex-wrap gap-2">
+                        {product.sizes.map(size => (
+                          <button key={size} onClick={() => setSelectedSize(size)} className={`text-sm font-semibold px-4 py-2 rounded-xl border transition-all ${selectedSize === size ? 'bg-stone-800 text-white border-stone-800' : 'bg-white text-stone-600 border-stone-200 hover:border-stone-400'}`}>
+                            {size}
+                          </button>
+                        ))}
                       </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
+                    </div>
+                  )}
+                  {/* Volume pricing */}
+                  {product.qtyBreaks?.length > 0 && (
+                    <div>
+                      <p className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">Volume pricing — select quantity</p>
+                      <div className="flex flex-col gap-2">
+                        {product.qtyBreaks.map((b) => (
+                          <button key={b.qty} onClick={() => setSelectedBreak(b)} className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border text-sm transition-all ${selectedBreak?.qty === b.qty ? 'bg-stone-800 text-white border-stone-800 shadow-sm' : 'bg-white text-stone-700 border-stone-200 hover:border-stone-300 hover:bg-stone-50'}`}>
+                            <span className="font-semibold">{b.label} units</span>
+                            <div className="flex items-baseline gap-2">
+                              <span className={`text-base font-bold ${selectedBreak?.qty === b.qty ? 'text-amber-300' : 'text-stone-900'}`}>{fmt(b.price)}</span>
+                              <span className={`text-xs ${selectedBreak?.qty === b.qty ? 'text-stone-300' : 'text-stone-400'}`}>/ unit</span>
+                              <span className={`text-xs font-semibold ${selectedBreak?.qty === b.qty ? 'text-stone-300' : 'text-stone-400'}`}>= {fmtTotal(b.price, b.qty)}</span>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
 
               {/* Selected summary */}
-              {selectedBreak && (
+              {(isTiered ? selectedTier : selectedBreak) && (
                 <div className="bg-stone-50 border border-stone-200 rounded-xl p-4 flex items-center justify-between">
                   <div>
                     <p className="text-xs text-stone-500">Your estimate</p>
                     <p className="text-xl font-bold text-stone-900">{estimatedTotal}</p>
                     <p className="text-xs text-stone-400 mt-0.5">
-                      {selectedBreak.label} × {product.name} ({selectedSize})
+                      {isTiered ? `${numCases} cases × ${product.name} (${selectedTier?.casesLabel})` : `${selectedBreak?.label} × ${product.name} (${selectedSize})`}
                     </p>
                   </div>
                   <button
@@ -332,9 +354,9 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
                   </div>
                   <div className="p-4">
                     <h3 className="font-bold text-stone-900 text-sm leading-snug">{p.name}</h3>
-                    <p className="text-xs text-stone-400 mt-1">{p.material}</p>
+                    <p className="text-xs text-stone-400 mt-1">{p.material || p.qtyPerCase || ''}</p>
                     <div className="flex items-center justify-between mt-3">
-                      <span className="text-xs text-stone-500">From <span className="font-bold text-stone-800">{fmt(p.qtyBreaks[0].price)}</span> / unit</span>
+                      <span className="text-xs text-stone-500">From <span className="font-bold text-stone-800">{p.caseTiers?.length ? fmt(p.caseTiers[p.caseTiers.length - 1].pricePerCase) : fmt(p.qtyBreaks?.[0]?.price)}</span> {p.caseTiers?.length ? '/ case' : '/ unit'}</span>
                       <span className="text-xs text-stone-400">⏱ {p.leadTime}</span>
                     </div>
                   </div>
@@ -380,7 +402,7 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
               <div className="flex items-center justify-between px-6 py-4 border-b border-stone-100">
                 <div>
                   <p className="font-bold text-stone-900 text-base">Request a Quote</p>
-                  <p className="text-xs text-stone-400 mt-0.5">{product.name} · {selectedSize} · {selectedBreak?.label} units</p>
+                  <p className="text-xs text-stone-400 mt-0.5">{product.name} · {isTiered ? `${numCases} cases` : `${selectedSize} · ${selectedBreak?.label} units`}</p>
                 </div>
                 <button
                   onClick={() => setFormOpen(false)}
@@ -407,7 +429,7 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
                   <div className="w-full bg-stone-50 border border-stone-200 rounded-xl p-4 text-left mb-6">
                     <p className="text-xs text-stone-500 mb-1">Your order summary</p>
                     <p className="font-semibold text-stone-800 text-sm">{product.name}</p>
-                    <p className="text-xs text-stone-500 mt-1">Size: {selectedSize} · Qty: {selectedBreak?.label} units</p>
+                    <p className="text-xs text-stone-500 mt-1">{isTiered ? `Cases: ${numCases} (${selectedTier?.casesLabel})` : `Size: ${selectedSize} · Qty: ${selectedBreak?.label} units`}</p>
                     <p className="text-base font-bold text-stone-900 mt-2">{estimatedTotal} <span className="text-xs font-normal text-stone-400">estimated</span></p>
                   </div>
                   <button
@@ -423,7 +445,7 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
                   {/* Order summary banner */}
                   <div className="bg-stone-50 border border-stone-200 rounded-xl p-3.5 flex items-center justify-between">
                     <div>
-                      <p className="text-xs text-stone-500">{selectedBreak?.label} × {product.name} ({selectedSize})</p>
+                      <p className="text-xs text-stone-500">{isTiered ? `${numCases} cases × ${product.name}` : `${selectedBreak?.label} × ${product.name} (${selectedSize})`}</p>
                       <p className="text-lg font-bold text-stone-900">{estimatedTotal}</p>
                     </div>
                     <span className="text-xs text-stone-400 bg-white border border-stone-200 px-2 py-1 rounded-lg">estimate</span>
@@ -484,7 +506,7 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
       )}
 
       {/* ── Mobile sticky CTA ─────────────────────────────────────────────────── */}
-      {selectedBreak && (
+      {(selectedBreak || (isTiered && selectedTier)) && (
         <div className="lg:hidden fixed bottom-0 left-0 right-0 z-30 p-3 bg-white border-t border-stone-200">
           <button
             onClick={() => setFormOpen(true)}
