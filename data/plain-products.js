@@ -100,6 +100,7 @@ const PLAIN_IMAGE_OVERRIDES = {
   '170067': '/images/plain-packaging/170067.webp',
   '230000': '/images/plain-packaging/230000.webp',
   'CL8BL': '/images/plain-packaging/CL8BL.webp',
+  'CL8WL': '/images/plain-packaging/CL8WL.webp',
   'CL12BL': '/images/plain-packaging/CL12BL.webp',
   'CL12WL': '/images/plain-packaging/CL12WL.webp',
   'CLSB750': '/images/plain-packaging/CLSB750.webp',
