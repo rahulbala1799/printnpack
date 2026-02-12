@@ -1642,17 +1642,6 @@ export const TIERED_PLAIN_PRODUCTS = [
     images: ['/images/ifa/heroh/logos/logo.png'],
   },
   {
-    id: "220036",
-    code: "220036",
-    name: "Silicone sheet 150x150mm (1000)",
-    category: "Bakery Packaging",
-    qtyPerCase: "1000",
-    description: "Silicone sheet 150x150mm (1000) | 1000 per case | Bakery Packaging | Bulk wholesale Ireland",
-    caseTiers: [{ casesLabel: "1-3 cases", pricePerCase: 16.06 }, { casesLabel: "4-6 cases", pricePerCase: 15.22 }, { casesLabel: "7-9 cases", pricePerCase: 14.37 }, { casesLabel: "10+ cases", pricePerCase: 12.4 }],
-    imageSrc: "/images/ifa/heroh/logos/logo.png",
-    images: ['/images/ifa/heroh/logos/logo.png'],
-  },
-  {
     id: "230001",
     code: "230001",
     name: "Brown Tulip Muffin Cases (10x200)",
