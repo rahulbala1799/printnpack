@@ -649,6 +649,20 @@ export default function PlainPackagingPage() {
   const quoteIds = useMemo(() => new Set(quoteItems.map(it => it.product.id)), [quoteItems]);
   const totalEst = quoteItems.reduce((s, it) => s + it.tier.pricePerCase * it.numCases, 0);
 
+  // Category counts for browse section
+  const categoryCounts = useMemo(() => {
+    const c = {};
+    PLAIN_PRODUCTS.forEach(p => { c[p.category] = (c[p.category] || 0) + 1; });
+    return c;
+  }, []);
+
+  const categoriesWithCount = useMemo(() =>
+    CATEGORIES.filter(c => c !== 'All')
+      .map(cat => ({ name: cat, count: categoryCounts[cat] || 0 }))
+      .sort((a, b) => b.count - a.count),
+    [categoryCounts]
+  );
+
   const clearAllFilters = () => {
     setActiveCategory('All');
     setPriceRange(PRICE_RANGES[0]);
@@ -713,6 +727,60 @@ export default function PlainPackagingPage() {
         </div>
       </div>
 
+      {/* ── Browse by category: visible quick-jump grid ───────────────────────── */}
+      <div className="bg-white border-b border-stone-200">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-8">
+          <div className="flex items-baseline justify-between gap-4 mb-6">
+            <div>
+              <h2 className="text-lg font-bold text-stone-900">Browse by category</h2>
+              <p className="text-sm text-stone-500 mt-0.5">Jump to your section — {categoriesWithCount.length} categories</p>
+            </div>
+            {activeCategory !== 'All' && (
+              <button
+                onClick={() => handleCategoryChange('All')}
+                className="text-xs font-semibold text-stone-500 hover:text-stone-900 underline underline-offset-2 transition-colors"
+              >
+                Show all
+              </button>
+            )}
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
+            {/* All categories card */}
+            <button
+              onClick={() => handleCategoryChange('All')}
+              className={`flex flex-col items-center text-center p-4 rounded-2xl border-2 transition-all duration-200 ${
+                activeCategory === 'All'
+                  ? 'border-stone-900 bg-stone-900 text-white shadow-lg ring-2 ring-stone-300 ring-offset-2'
+                  : 'border-stone-200 bg-stone-50/50 hover:border-stone-400 hover:shadow-md hover:bg-stone-100/80'
+              }`}
+            >
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-2 ${activeCategory === 'All' ? 'bg-white/20' : 'bg-stone-200'}`}>
+                <svg className="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+              </div>
+              <span className="text-sm font-semibold leading-tight">All</span>
+              <span className={`text-xs mt-0.5 ${activeCategory === 'All' ? 'text-stone-300' : 'text-stone-400'}`}>{PLAIN_PRODUCTS.length} products</span>
+            </button>
+            {categoriesWithCount.map(({ name, count }) => (
+              <button
+                key={name}
+                onClick={() => handleCategoryChange(name)}
+                className={`flex flex-col items-center text-center p-4 rounded-2xl border-2 transition-all duration-200 ${
+                  activeCategory === name
+                    ? 'border-stone-900 bg-stone-900 text-white shadow-lg ring-2 ring-stone-300 ring-offset-2'
+                    : 'border-stone-200 bg-white hover:border-stone-400 hover:shadow-md hover:bg-stone-50'
+                }`}
+              >
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-2 overflow-hidden flex-shrink-0 ${activeCategory === name ? 'bg-white/20' : 'bg-stone-100'}`}>
+                  <PackagingIcon category={name} className="w-full h-full min-w-[48px] min-h-[48px]" />
+                </div>
+                <span className="text-sm font-semibold leading-tight line-clamp-2">{name}</span>
+                <span className={`text-xs mt-0.5 ${activeCategory === name ? 'text-stone-300' : 'text-stone-400'}`}>{count} products</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* ── Sticky top bar: search + filter trigger + quote ────────────────────── */}
       <div className="sticky top-0 z-30 bg-white border-b border-stone-200 shadow-sm">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-2.5 flex items-center gap-2">
@@ -765,6 +833,32 @@ export default function PlainPackagingPage() {
           </button>
         </div>
 
+        {/* Quick category chips: top categories always visible when sticky */}
+        <div className="border-t border-stone-100">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-2 flex items-center gap-2 overflow-x-auto no-scrollbar">
+            <span className="text-xs font-medium text-stone-400 flex-shrink-0">Quick:</span>
+            <button
+              onClick={() => handleCategoryChange('All')}
+              className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                activeCategory === 'All' ? 'bg-stone-900 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+              }`}
+            >
+              All
+            </button>
+            {categoriesWithCount.slice(0, 10).map(({ name, count }) => (
+              <button
+                key={name}
+                onClick={() => handleCategoryChange(name)}
+                className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all whitespace-nowrap ${
+                  activeCategory === name ? 'bg-stone-900 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                }`}
+              >
+                {name} <span className="opacity-70">({count})</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Active filter chips row */}
         {activeFilterCount > 0 && (
           <div className="max-w-screen-xl mx-auto px-4 sm:px-6 pb-2 flex items-center gap-2 flex-wrap">
@@ -793,7 +887,7 @@ export default function PlainPackagingPage() {
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6 flex gap-6 items-start">
 
         {/* ── Desktop sidebar ────────────────────────────────────────────────── */}
-        <aside className="hidden lg:block w-56 flex-shrink-0 sticky top-[120px]">
+        <aside className="hidden lg:block w-56 flex-shrink-0 sticky top-[88px]">
           <div className="bg-white border border-stone-200 rounded-2xl p-4">
             <FilterPanel
               categories={CATEGORIES}
