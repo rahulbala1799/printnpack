@@ -1741,17 +1741,6 @@ export const TIERED_PLAIN_PRODUCTS = [
     images: ['/images/ifa/heroh/logos/logo.png'],
   },
   {
-    id: "120108",
-    code: "120108",
-    name: "No.12 White Biobox Containers (34oz) (6x40's)",
-    category: "Biobox",
-    qtyPerCase: "6x40",
-    description: "No.12 White Biobox Containers (34oz) (6x40's) | 6x40 per case | white | Bulk wholesale Ireland",
-    caseTiers: [{ casesLabel: "1-3 cases", pricePerCase: 37.14 }, { casesLabel: "4-6 cases", pricePerCase: 35.18 }, { casesLabel: "7-9 cases", pricePerCase: 33.23 }, { casesLabel: "10+ cases", pricePerCase: 28.67 }],
-    imageSrc: "/images/ifa/heroh/logos/logo.png",
-    images: ['/images/ifa/heroh/logos/logo.png'],
-  },
-  {
     id: "120122",
     code: "120122",
     name: "No.2 Kraft Biobox Containers 196x139x47mm (49oz) (4x50)",
