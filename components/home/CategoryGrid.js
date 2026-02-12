@@ -69,36 +69,36 @@ const categories = [
 
 const CategoryGrid = () => {
   return (
-    <section className="py-12 bg-white">
+    <section className="py-8 sm:py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+        <div className="text-center mb-6 sm:mb-8">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
             Browse by Category
           </h2>
-          <p className="mt-2 text-gray-500">
+          <p className="mt-1 sm:mt-2 text-sm sm:text-base text-gray-500">
             Find exactly what you need for your business
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4">
           {categories.map((cat) => {
             const IconComponent = cat.icon;
             return (
               <Link
                 key={cat.name}
                 href={cat.href}
-                className={`group flex flex-col items-center p-5 rounded-xl border ${cat.color} hover:shadow-md transition-all duration-200 hover:-translate-y-0.5`}
+                className={`group flex flex-col items-center p-3 sm:p-5 rounded-xl border ${cat.color} hover:shadow-md transition-all duration-200 hover:-translate-y-0.5`}
               >
-                <div className={`w-12 h-12 rounded-xl ${cat.iconBg} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
-                  <IconComponent className="w-6 h-6" />
+                <div className={`w-9 h-9 sm:w-12 sm:h-12 rounded-xl ${cat.iconBg} flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform`}>
+                  <IconComponent className="w-4 h-4 sm:w-6 sm:h-6" />
                 </div>
-                <h3 className="font-semibold text-sm text-gray-900 text-center">
+                <h3 className="font-semibold text-[10px] sm:text-sm text-gray-900 text-center leading-tight">
                   {cat.name}
                 </h3>
-                <p className="text-xs text-gray-500 text-center mt-1 line-clamp-2">
+                <p className="text-[9px] sm:text-xs text-gray-500 text-center mt-0.5 sm:mt-1 line-clamp-2 hidden sm:block">
                   {cat.description}
                 </p>
-                <span className="mt-2 text-xs font-medium opacity-70">
+                <span className="mt-1 sm:mt-2 text-[9px] sm:text-xs font-medium opacity-70">
                   {cat.productCount} {cat.productCount === 1 ? 'product' : 'products'}
                 </span>
               </Link>

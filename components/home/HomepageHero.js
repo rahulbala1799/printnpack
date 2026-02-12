@@ -30,7 +30,7 @@ const slides = [
 const quickLinks = [
   { label: 'Pizza Boxes', href: '/custom-pizza-boxes-ireland' },
   { label: 'Paper Bags', href: '/products/flat-handle-paper-bags' },
-  { label: 'Leaflets', href: '/services/leaflets' },
+  { label: 'Plain Packaging', href: '/plain-packaging' },
   { label: 'Roll-Up Banners', href: '/roll-up-banners' },
   { label: 'Foamex Boards', href: '/foamex-boards' },
 ];
@@ -45,10 +45,8 @@ const HomepageHero = () => {
   const goToSlide = useCallback((nextIndex) => {
     if (nextIndex === currentSlide) return;
     setIsTransitioning(true);
-    // Wait for fade-out, then swap content, then fade-in
     timeoutRef.current = setTimeout(() => {
       setCurrentSlide(nextIndex);
-      // Small delay before fade-in to allow React to render new content
       requestAnimationFrame(() => {
         setIsTransitioning(false);
       });
@@ -97,7 +95,6 @@ const HomepageHero = () => {
             background: 'radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 70%)',
           }}
         />
-        {/* Subtle dot pattern */}
         <div className="absolute inset-0" style={{
           backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 1px)',
           backgroundSize: '32px 32px'
@@ -105,14 +102,14 @@ const HomepageHero = () => {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center py-10 lg:py-16 gap-8 lg:gap-12">
+        <div className="flex flex-col lg:flex-row items-center py-8 sm:py-10 lg:py-16 gap-6 lg:gap-12">
           {/* Left content */}
           <div className="lg:w-1/2 z-10 text-center lg:text-left">
             {/* Trust badge */}
-            <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-sm rounded-full px-4 py-1.5 mb-5 shadow-sm border border-gray-100">
-              <span className="text-amber-400 text-sm">★★★★★</span>
-              <span className="text-gray-600 text-sm font-medium">Trusted Irish Business</span>
-              <span className="text-xs bg-emerald-500 text-white px-2 py-0.5 rounded-full">Irish Made</span>
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-white/70 backdrop-blur-sm rounded-full px-3 sm:px-4 py-1 sm:py-1.5 mb-4 sm:mb-5 shadow-sm border border-gray-100">
+              <span className="text-amber-400 text-xs sm:text-sm">★★★★★</span>
+              <span className="text-gray-600 text-xs sm:text-sm font-medium">Trusted Irish Business</span>
+              <span className="text-[10px] sm:text-xs bg-emerald-500 text-white px-1.5 sm:px-2 py-0.5 rounded-full">Irish Made</span>
             </div>
 
             {/* Animated text container */}
@@ -123,47 +120,47 @@ const HomepageHero = () => {
                 transform: isTransitioning ? 'translateY(8px)' : 'translateY(0)',
               }}
             >
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-tight mb-2 text-gray-800">
+              <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold tracking-tight leading-tight mb-2 text-gray-800">
                 {slides[currentSlide].title}
                 <span
-                  className="block mt-1"
+                  className="block mt-0.5 sm:mt-1"
                   style={{ color: slides[currentSlide].accentColor }}
                 >
                   {slides[currentSlide].subtitle}
                 </span>
               </h1>
-              <p className="text-base sm:text-lg text-gray-500 mb-6 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+              <p className="text-sm sm:text-base lg:text-lg text-gray-500 mb-4 sm:mb-6 max-w-lg mx-auto lg:mx-0 leading-relaxed">
                 {slides[currentSlide].description}
               </p>
             </div>
 
             {/* Search bar */}
-            <form onSubmit={handleSearch} className="relative max-w-lg mx-auto lg:mx-0 mb-5">
+            <form onSubmit={handleSearch} className="relative max-w-lg mx-auto lg:mx-0 mb-4 sm:mb-5">
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search products... e.g. pizza boxes, leaflets"
-                className="w-full px-5 py-3.5 pr-14 rounded-xl bg-white text-gray-900 placeholder-gray-400 shadow-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent text-sm sm:text-base"
+                className="w-full px-4 sm:px-5 py-3 sm:py-3.5 pr-12 sm:pr-14 rounded-xl bg-white text-gray-900 placeholder-gray-400 shadow-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent text-base"
               />
               <button
                 type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white p-2.5 rounded-lg transition-colors"
+                className="absolute right-1.5 sm:right-2 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white p-2 sm:p-2.5 rounded-lg transition-colors"
               >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </button>
             </form>
 
             {/* Quick links */}
-            <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
-              <span className="text-gray-400 text-sm py-1">Popular:</span>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center lg:justify-start">
+              <span className="text-gray-400 text-xs sm:text-sm py-1">Popular:</span>
               {quickLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm bg-white/80 hover:bg-white text-gray-600 hover:text-gray-900 px-3 py-1 rounded-full transition-colors border border-gray-200 hover:border-gray-300 shadow-sm"
+                  className="text-xs sm:text-sm bg-white/80 hover:bg-white text-gray-600 hover:text-gray-900 px-2.5 sm:px-3 py-1 rounded-full transition-colors border border-gray-200 hover:border-gray-300 shadow-sm"
                 >
                   {link.label}
                 </Link>
@@ -171,10 +168,10 @@ const HomepageHero = () => {
             </div>
 
             {/* USP pills */}
-            <div className="flex flex-wrap gap-3 sm:gap-4 mt-6 justify-center lg:justify-start">
+            <div className="flex flex-wrap gap-2 sm:gap-4 mt-4 sm:mt-6 justify-center lg:justify-start">
               {['Low MOQs from 100', 'Fast Delivery', 'Same-Day Dispatch'].map((text) => (
-                <div key={text} className="flex items-center gap-1.5 text-sm text-gray-500">
-                  <svg className="w-4 h-4 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <div key={text} className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm text-gray-500">
+                  <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   {text}
@@ -185,7 +182,7 @@ const HomepageHero = () => {
 
           {/* Right - Product images with crossfade */}
           <div className="lg:w-1/2 flex items-center justify-center">
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+            <div className="relative w-48 h-48 sm:w-72 sm:h-72 lg:w-96 lg:h-96">
               {slides.map((slide, index) => (
                 <div
                   key={slide.imageSrc}
@@ -202,7 +199,7 @@ const HomepageHero = () => {
                     className="object-contain"
                     style={{ filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.1))' }}
                     priority={index === 0}
-                    sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 384px"
+                    sizes="(max-width: 640px) 192px, (max-width: 1024px) 288px, 384px"
                     unoptimized={process.env.NODE_ENV === 'production'}
                   />
                 </div>
@@ -212,7 +209,7 @@ const HomepageHero = () => {
         </div>
 
         {/* Slide indicators */}
-        <div className="flex justify-center gap-2 pb-6">
+        <div className="flex justify-center gap-2 pb-4 sm:pb-6">
           {slides.map((_, index) => (
             <button
               key={index}
