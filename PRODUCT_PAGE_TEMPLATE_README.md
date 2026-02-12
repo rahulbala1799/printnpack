@@ -227,7 +227,7 @@ Use this when converting a page (e.g. `eco-bagasse-burger-boxes.js`, `foamex-boa
 | `roll-up-banners.js` | `/roll-up-banners` | ✅ RollUpBannerQuoteForm |
 | `clothing.js` | `/clothing` | ✅ ClothingQuoteForm |
 
-For each row (except pizza boxes), apply the template structure and sections above; optionally upgrade the existing QuoteForm to the multi-step wizard pattern like `PizzaBoxQuoteForm`.
+All of the above use the template. **All remaining catalog products** (paper bags, napkins, leaflets, posters, vinyl banners, etc.) are covered by the **dynamic product page** at `/products/[slug]`, which uses the shared **`ProductPageTemplate`** component (`components/ProductPageTemplate.js`). Product data from `data/products.js` drives breadcrumb, hero, features, gallery, specs, and CTA; quote links go to `/quote?product=...`. Products with a dedicated page (e.g. `product.url === '/custom-pizza-boxes-ireland'`) redirect from `/products/[slug]` to that page.
 
 ---
 
