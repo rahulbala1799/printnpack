@@ -560,6 +560,7 @@ const products = [
     id: 'vinyl-banners',
     name: 'Vinyl Banners',
     category: 'Wide Format',
+    url: '/vinyl-banners',
     description: 'High-impact vinyl banners for indoor and outdoor advertising that command attention and withstand the elements.',
     features: [
       'Premium quality 440gsm/510gsm vinyl material',
@@ -678,6 +679,7 @@ const products = [
     id: 'posters',
     name: 'Custom Posters',
     category: 'Wide Format',
+    url: '/posters',
     description: 'High-quality custom posters printed on premium paper with vibrant eco-solvent inks. Perfect for advertising, events, retail displays, and exhibitions.',
     features: [
       'Available in 170gsm and 200gsm premium paper',

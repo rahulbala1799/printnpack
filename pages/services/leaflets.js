@@ -61,6 +61,31 @@ const LeafletsPage = () => {
               </div>
             </div>
 
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Leaflet Sizes</h2>
+            <p className="text-gray-600 mb-8">Choose the size that fits your campaign. Each size has its own product page with full specs and quote options.</p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+              <Link href="/products/leaflets-a6" className="block p-5 rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:shadow-md transition-all bg-white">
+                <span className="text-2xl font-bold text-gray-900">A6</span>
+                <p className="text-sm text-gray-500 mt-1">Compact, pocket-sized</p>
+                <span className="inline-flex items-center text-blue-600 font-medium mt-2 text-sm">View product <FaArrowRight className="ml-1" /></span>
+              </Link>
+              <Link href="/products/leaflets-a5" className="block p-5 rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:shadow-md transition-all bg-white">
+                <span className="text-2xl font-bold text-gray-900">A5</span>
+                <p className="text-sm text-gray-500 mt-1">Versatile, mid-size</p>
+                <span className="inline-flex items-center text-blue-600 font-medium mt-2 text-sm">View product <FaArrowRight className="ml-1" /></span>
+              </Link>
+              <Link href="/products/leaflets-a4" className="block p-5 rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:shadow-md transition-all bg-white">
+                <span className="text-2xl font-bold text-gray-900">A4</span>
+                <p className="text-sm text-gray-500 mt-1">Detailed brochures</p>
+                <span className="inline-flex items-center text-blue-600 font-medium mt-2 text-sm">View product <FaArrowRight className="ml-1" /></span>
+              </Link>
+              <Link href="/products/leaflets-a3" className="block p-5 rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:shadow-md transition-all bg-white">
+                <span className="text-2xl font-bold text-gray-900">A3</span>
+                <p className="text-sm text-gray-500 mt-1">Large format, posters</p>
+                <span className="inline-flex items-center text-blue-600 font-medium mt-2 text-sm">View product <FaArrowRight className="ml-1" /></span>
+              </Link>
+            </div>
+
             <h2 className="text-3xl font-bold text-gray-900 mb-8">Our Leaflet Services Include:</h2>
             
             <ul className="space-y-4 mb-12">
