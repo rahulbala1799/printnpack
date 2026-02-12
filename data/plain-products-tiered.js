@@ -1774,17 +1774,6 @@ export const TIERED_PLAIN_PRODUCTS = [
     images: ['/images/ifa/heroh/logos/logo.png'],
   },
   {
-    id: "210003",
-    code: "210003",
-    name: "Fusion 6 Hour Wick Chafing Fuel (24)",
-    category: "Candles & Chafing",
-    qtyPerCase: "24",
-    description: "Fusion 6 Hour Wick Chafing Fuel (24) | 24 per case | Candles & Chafing | Bulk wholesale Ireland",
-    caseTiers: [{ casesLabel: "1-3 cases", pricePerCase: 81.7 }, { casesLabel: "4-6 cases", pricePerCase: 77.4 }, { casesLabel: "7-9 cases", pricePerCase: 73.1 }, { casesLabel: "10+ cases", pricePerCase: 63.07 }],
-    imageSrc: "/images/ifa/heroh/logos/logo.png",
-    images: ['/images/ifa/heroh/logos/logo.png'],
-  },
-  {
     id: "220021",
     code: "220021",
     name: "300mm Single Bar Heat Sealer (1)",
