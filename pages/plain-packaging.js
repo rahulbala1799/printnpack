@@ -590,6 +590,8 @@ export default function PlainPackagingPage() {
   const [priceRange, setPriceRange] = useState(PRICE_RANGES[0]);
   const [sort, setSort] = useState('default');
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage, setPerPage] = useState(30);
 
   const handleAdd = useCallback(({ product, tier, numCases }) => {
     setQuoteItems(prev => {
@@ -652,7 +654,35 @@ export default function PlainPackagingPage() {
     setPriceRange(PRICE_RANGES[0]);
     setSort('default');
     setSearch('');
+    setCurrentPage(1);
   };
+
+  // Reset to page 1 whenever filters/search/sort change
+  const handleCategoryChange = (c) => { setActiveCategory(c); setCurrentPage(1); };
+  const handlePriceChange = (r) => { setPriceRange(r); setCurrentPage(1); };
+  const handleSortChange = (s) => { setSort(s); setCurrentPage(1); };
+  const handleSearchChange = (v) => { setSearch(v); setCurrentPage(1); };
+
+  const PER_PAGE_OPTIONS = [30, 50, 100, 200, 'All'];
+  const totalFiltered = filtered.length;
+  const effectivePerPage = perPage === 'All' ? totalFiltered : perPage;
+  const totalPages = Math.max(1, Math.ceil(totalFiltered / effectivePerPage));
+  const safePage = Math.min(currentPage, totalPages);
+  const paginated = filtered.slice((safePage - 1) * effectivePerPage, safePage * effectivePerPage);
+
+  // Page window for pagination bar (max 7 buttons)
+  const pageWindow = useMemo(() => {
+    if (totalPages <= 7) return Array.from({ length: totalPages }, (_, i) => i + 1);
+    const delta = 2;
+    const left = Math.max(2, safePage - delta);
+    const right = Math.min(totalPages - 1, safePage + delta);
+    const pages = [1];
+    if (left > 2) pages.push('…');
+    for (let i = left; i <= right; i++) pages.push(i);
+    if (right < totalPages - 1) pages.push('…');
+    pages.push(totalPages);
+    return pages;
+  }, [totalPages, safePage]);
 
   return (
     <Layout>
@@ -696,11 +726,11 @@ export default function PlainPackagingPage() {
               type="text"
               placeholder="Search by name, code, or category…"
               value={search}
-              onChange={e => setSearch(e.target.value)}
+              onChange={e => handleSearchChange(e.target.value)}
               className="w-full pl-9 pr-3 py-2 text-xs border border-stone-200 rounded-xl outline-none focus:border-stone-400 focus:ring-2 focus:ring-stone-100 bg-stone-50 transition-all"
             />
             {search && (
-              <button onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 transition-colors">
+              <button onClick={() => handleSearchChange('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 transition-colors">
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12"/></svg>
               </button>
             )}
@@ -740,17 +770,17 @@ export default function PlainPackagingPage() {
           <div className="max-w-screen-xl mx-auto px-4 sm:px-6 pb-2 flex items-center gap-2 flex-wrap">
             <span className="text-xs text-stone-400">Active:</span>
             {activeCategory !== 'All' && (
-              <button onClick={() => setActiveCategory('All')} className="flex items-center gap-1 text-xs bg-stone-900 text-white px-2.5 py-1 rounded-lg font-semibold hover:bg-black transition-colors">
+              <button onClick={() => handleCategoryChange('All')} className="flex items-center gap-1 text-xs bg-stone-900 text-white px-2.5 py-1 rounded-lg font-semibold hover:bg-black transition-colors">
                 {activeCategory} <svg className="w-2.5 h-2.5 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12"/></svg>
               </button>
             )}
             {priceRange.label !== 'Any price' && (
-              <button onClick={() => setPriceRange(PRICE_RANGES[0])} className="flex items-center gap-1 text-xs bg-stone-900 text-white px-2.5 py-1 rounded-lg font-semibold hover:bg-black transition-colors">
+              <button onClick={() => handlePriceChange(PRICE_RANGES[0])} className="flex items-center gap-1 text-xs bg-stone-900 text-white px-2.5 py-1 rounded-lg font-semibold hover:bg-black transition-colors">
                 {priceRange.label} <svg className="w-2.5 h-2.5 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12"/></svg>
               </button>
             )}
             {sort !== 'default' && (
-              <button onClick={() => setSort('default')} className="flex items-center gap-1 text-xs bg-stone-900 text-white px-2.5 py-1 rounded-lg font-semibold hover:bg-black transition-colors">
+              <button onClick={() => handleSortChange('default')} className="flex items-center gap-1 text-xs bg-stone-900 text-white px-2.5 py-1 rounded-lg font-semibold hover:bg-black transition-colors">
                 {SORT_OPTIONS.find(o => o.value === sort)?.label} <svg className="w-2.5 h-2.5 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12"/></svg>
               </button>
             )}
@@ -768,11 +798,11 @@ export default function PlainPackagingPage() {
             <FilterPanel
               categories={CATEGORIES}
               activeCategory={activeCategory}
-              setActiveCategory={setActiveCategory}
+              setActiveCategory={handleCategoryChange}
               priceRange={priceRange}
-              setPriceRange={setPriceRange}
+              setPriceRange={handlePriceChange}
               sort={sort}
-              setSort={setSort}
+              setSort={handleSortChange}
               isMobile={false}
             />
           </div>
@@ -781,41 +811,102 @@ export default function PlainPackagingPage() {
         {/* ── Product grid ────────────────────────────────────────────────────── */}
         <div className="flex-1 min-w-0">
 
-          {/* Result count */}
-          <div className="flex items-center justify-between mb-4">
+          {/* Result count + sort + per-page */}
+          <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
             <p className="text-xs text-stone-500">
-              <span className="font-semibold text-stone-800">{filtered.length.toLocaleString()}</span> product{filtered.length !== 1 ? 's' : ''}
+              <span className="font-semibold text-stone-800">{totalFiltered.toLocaleString()}</span> product{totalFiltered !== 1 ? 's' : ''}
               {activeCategory !== 'All' && <> in <span className="font-medium">{activeCategory}</span></>}
+              {perPage !== 'All' && totalPages > 1 && (
+                <> · page <span className="font-medium">{safePage}</span> of <span className="font-medium">{totalPages}</span></>
+              )}
             </p>
-            {/* Desktop quick sort pill */}
-            <div className="hidden sm:flex items-center gap-2">
-              <span className="text-xs text-stone-400">Sort:</span>
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <span className="text-xs text-stone-400 hidden sm:inline">Sort:</span>
               <select
                 value={sort}
-                onChange={e => setSort(e.target.value)}
+                onChange={e => handleSortChange(e.target.value)}
                 className="text-xs border border-stone-200 rounded-lg px-2.5 py-1.5 bg-white text-stone-700 outline-none focus:border-stone-400 transition-colors"
               >
                 {SORT_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
               </select>
+              <span className="text-xs text-stone-400 hidden sm:inline">Show:</span>
+              <select
+                value={perPage}
+                onChange={e => { setPerPage(e.target.value === 'All' ? 'All' : Number(e.target.value)); setCurrentPage(1); }}
+                className="text-xs border border-stone-200 rounded-lg px-2.5 py-1.5 bg-white text-stone-700 outline-none focus:border-stone-400 transition-colors"
+              >
+                {PER_PAGE_OPTIONS.map(o => <option key={o} value={o}>{o}</option>)}
+              </select>
             </div>
           </div>
 
-          {filtered.length === 0 ? (
+          {totalFiltered === 0 ? (
             <div className="text-center py-20 bg-white rounded-2xl border border-stone-200">
               <p className="text-stone-400 text-sm mb-2">No products found</p>
               <button onClick={clearAllFilters} className="text-xs text-stone-500 underline hover:text-stone-900">Clear all filters</button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-              {filtered.map(product => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  onAdd={handleAdd}
-                  inQuote={quoteIds.has(product.id)}
-                />
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                {paginated.map(product => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    onAdd={handleAdd}
+                    inQuote={quoteIds.has(product.id)}
+                  />
+                ))}
+              </div>
+
+              {/* Pagination bar */}
+              {perPage !== 'All' && totalPages > 1 && (
+                <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  {/* Info */}
+                  <p className="text-xs text-stone-400 order-2 sm:order-1">
+                    Showing {((safePage - 1) * effectivePerPage) + 1}–{Math.min(safePage * effectivePerPage, totalFiltered)} of {totalFiltered.toLocaleString()}
+                  </p>
+
+                  {/* Page buttons */}
+                  <div className="flex items-center gap-1 order-1 sm:order-2">
+                    {/* Prev */}
+                    <button
+                      onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                      disabled={safePage === 1}
+                      className="w-8 h-8 flex items-center justify-center rounded-lg border border-stone-200 text-stone-500 hover:border-stone-400 hover:bg-stone-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                    >
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7"/></svg>
+                    </button>
+
+                    {pageWindow.map((pg, i) =>
+                      pg === '…' ? (
+                        <span key={`ellipsis-${i}`} className="w-8 h-8 flex items-center justify-center text-stone-400 text-xs">…</span>
+                      ) : (
+                        <button
+                          key={pg}
+                          onClick={() => setCurrentPage(pg)}
+                          className={`w-8 h-8 flex items-center justify-center rounded-lg text-xs font-semibold transition-all ${
+                            safePage === pg
+                              ? 'bg-stone-900 text-white border border-stone-900'
+                              : 'border border-stone-200 text-stone-600 hover:border-stone-400 hover:bg-stone-50'
+                          }`}
+                        >
+                          {pg}
+                        </button>
+                      )
+                    )}
+
+                    {/* Next */}
+                    <button
+                      onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                      disabled={safePage === totalPages}
+                      className="w-8 h-8 flex items-center justify-center rounded-lg border border-stone-200 text-stone-500 hover:border-stone-400 hover:bg-stone-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                    >
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7"/></svg>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
@@ -829,11 +920,11 @@ export default function PlainPackagingPage() {
             <FilterPanel
               categories={CATEGORIES}
               activeCategory={activeCategory}
-              setActiveCategory={setActiveCategory}
+              setActiveCategory={handleCategoryChange}
               priceRange={priceRange}
-              setPriceRange={setPriceRange}
+              setPriceRange={handlePriceChange}
               sort={sort}
-              setSort={setSort}
+              setSort={handleSortChange}
               onClose={() => setMobileFiltersOpen(false)}
               isMobile
             />
