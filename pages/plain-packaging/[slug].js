@@ -81,10 +81,13 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
     : selectedBreak ? fmtTotal(selectedBreak.price, selectedBreak.qty) : '—';
   const pricePerUnit = isTiered && selectedTier ? fmt(selectedTier.pricePerCase) + ' / case' : selectedBreak ? fmt(selectedBreak.price) : '—';
 
+  const stat1 = isTiered ? (selectedTier ? fmt(selectedTier.pricePerCase) : (product.caseTiers?.[0] ? fmt(product.caseTiers[0].pricePerCase) : '—') : (selectedBreak ? pricePerUnit : product.qtyBreaks?.[0] ? fmt(product.qtyBreaks[0].price) : '—');
+  const stat2 = isTiered ? '1 case' : `${product.moq ?? '—'}+`;
+  const stat3 = product.leadTime || 'Contact';
   const statsRowItems = [
-    { v: isTiered ? (selectedTier ? fmt(selectedTier.pricePerCase) : (product.caseTiers?.[0] ? fmt(product.caseTiers[0].pricePerCase) : '—') : (selectedBreak ? pricePerUnit : product.qtyBreaks?.[0] ? fmt(product.qtyBreaks[0].price) : '—'), l: isTiered ? 'per case' : 'from / unit' },
-    { v: isTiered ? '1 case' : `${product.moq ?? '—'}+`, l: 'min. order' },
-    { v: product.leadTime || 'Contact', l: 'lead time' },
+    { value: stat1, label: isTiered ? 'per case' : 'from / unit' },
+    { value: stat2, label: 'min. order' },
+    { value: stat3, label: 'lead time' },
   ];
 
   return (
@@ -155,9 +158,9 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
               {/* Stats row */}
               <div className="grid grid-cols-3 gap-3">
                 {statsRowItems.map((s) => (
-                  <div key={s.l} className="bg-stone-50 rounded-xl border border-stone-200 p-3 text-center">
-                    <div className="text-base font-bold text-stone-900 leading-snug">{s.v}</div>
-                    <div className="text-xs text-stone-400 mt-0.5">{s.l}</div>
+                  <div key={s.label} className="bg-stone-50 rounded-xl border border-stone-200 p-3 text-center">
+                    <div className="text-base font-bold text-stone-900 leading-snug">{s.value}</div>
+                    <div className="text-xs text-stone-400 mt-0.5">{s.label}</div>
                   </div>
                 ))}
               </div>
