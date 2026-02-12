@@ -38,12 +38,9 @@ export default async function handler(req, res) {
     // Verify SMTP connection
     try {
       await transporter.verify();
-
     } catch (verifyError) {
-
-      return res.status(500).json({ 
-        message: 'Failed to connect to email server',
-        error: verifyError.message 
+      return res.status(500).json({
+        message: 'We could not process your request right now. Please try again or contact us directly at info@printnpack.ie',
       });
     }
 
@@ -81,10 +78,8 @@ ${message}
       messageId: info.messageId 
     });
   } catch (error) {
-
-    res.status(500).json({ 
-      message: 'Error sending email',
-      error: error.message 
+    res.status(500).json({
+      message: 'Something went wrong. Please try again or email us directly at info@printnpack.ie',
     });
   }
 } 
