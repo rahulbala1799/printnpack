@@ -30,7 +30,8 @@ const staticPages = [
   { path: '/blog/leaflet-printing-ireland-guide',        priority: '0.8', changefreq: 'monthly' },
   { path: '/blog/paper-bags-with-logo-ireland',          priority: '0.8', changefreq: 'monthly' },
   { path: '/blog/plain-packaging-wholesale-ireland',         priority: '0.8', changefreq: 'monthly' },
-  { path: '/blog/packaging-prices-ireland-covid-shipping',  priority: '0.8', changefreq: 'monthly' },
+  { path: '/blog/packaging-prices-ireland-covid-shipping',    priority: '0.8', changefreq: 'monthly' },
+  { path: '/blog/irish-restaurant-industry-delivery-2025',   priority: '0.8', changefreq: 'monthly' },
 ];
 
 function generateSitemap(productSlugs) {

@@ -70,6 +70,17 @@ const posts = [
     imageAlt: 'Packaging supply chain Ireland – COVID and shipping price impacts',
     category: 'Industry Insight',
   },
+  {
+    slug: 'irish-restaurant-industry-delivery-2025',
+    title: 'The Irish Restaurant Industry in 2025: Delivery Platforms, Commission Costs & the Models That Are Surviving',
+    excerpt:
+      "Ireland's foodservice market is worth a record €9.8 billion — yet over 600 restaurants have closed since the VAT hike. We break down platform commission economics, the food delivery boom, and the business models Irish operators are using to stay alive.",
+    date: '2026-02-13',
+    readTime: '12 min read',
+    image: '/images/pizza-boxes/PIZZA_BOX_3.jpg',
+    imageAlt: 'Irish restaurant delivery packaging – pizza boxes and takeaway supplies',
+    category: 'Industry Insight',
+  },
 ];
 
 export default function BlogIndex() {
