@@ -55,9 +55,20 @@ const posts = [
       'Buying plain packaging wholesale in Ireland does not need to be complicated. This guide covers what to stock, how to evaluate a supplier, and practical ways to reduce your per-unit cost on napkins, food containers, bags, and catering supplies.',
     date: '2026-02-13',
     readTime: '6 min read',
-    image: '/images/products/food-container.png',
+    image: '/images/plain-packaging/100396.webp',
     imageAlt: 'Plain packaging wholesale Ireland – bulk catering supplies',
     category: 'Wholesale Guide',
+  },
+  {
+    slug: 'packaging-prices-ireland-covid-shipping',
+    title: 'Why Packaging Prices Have Been All Over the Place — And What Irish Businesses Can Do About It',
+    excerpt:
+      'COVID factory shutdowns, dependency on Chinese manufacturing, and a container shipping crisis that pushed freight rates up by 800% — here is the full story of what drove Irish packaging prices up, what brought some of them back down, and why sustainable packaging is partly a response to all three.',
+    date: '2026-02-13',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/100396.webp',
+    imageAlt: 'Packaging supply chain Ireland – COVID and shipping price impacts',
+    category: 'Industry Insight',
   },
 ];
 

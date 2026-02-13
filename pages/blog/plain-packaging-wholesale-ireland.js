@@ -127,15 +127,38 @@ export default function PlainPackagingWholesaleIreland() {
           Plain Packaging Wholesale Ireland: How to Buy Catering Supplies in Bulk
         </h1>
 
-        <div className="relative rounded-2xl overflow-hidden h-64 sm:h-72 mb-8 border border-slate-100">
-          <Image
-            src="/images/products/food-container.png"
-            alt="Plain packaging wholesale Ireland – food containers and catering supplies bulk"
-            fill
-            className="object-cover"
-            priority
-            sizes="(max-width: 768px) 100vw, 768px"
-          />
+        {/* Hero image grid – real plain-packaging products */}
+        <div className="grid grid-cols-3 gap-3 mb-8">
+          <div className="relative rounded-2xl overflow-hidden h-48 col-span-2">
+            <Image
+              src="/images/plain-packaging/100396.webp"
+              alt="Plain packaging wholesale Ireland – kraft hot cups catering supply"
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 768px) 66vw, 512px"
+            />
+          </div>
+          <div className="flex flex-col gap-3">
+            <div className="relative rounded-xl overflow-hidden flex-1">
+              <Image
+                src="/images/plain-packaging/10928.webp"
+                alt="Foil containers wholesale Ireland – bulk catering food trays"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 33vw, 256px"
+              />
+            </div>
+            <div className="relative rounded-xl overflow-hidden flex-1">
+              <Image
+                src="/images/plain-packaging/100102.webp"
+                alt="Disposable cups wholesale Ireland – white hot cups catering"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 33vw, 256px"
+              />
+            </div>
+          </div>
         </div>
 
         <div className="prose prose-slate max-w-none">
@@ -257,6 +280,20 @@ export default function PlainPackagingWholesaleIreland() {
             </table>
           </div>
 
+          {/* Foil container image grid */}
+          <div className="grid grid-cols-4 gap-3 mb-8">
+            {[
+              { src: '/images/plain-packaging/10928.webp', alt: 'Foil container with lid wholesale Ireland – 4x8 catering tray' },
+              { src: '/images/plain-packaging/10929.webp', alt: 'Foil container Ireland – 4x5 catering tray bulk' },
+              { src: '/images/plain-packaging/109291.webp', alt: 'Foil container and lid combo Ireland – 9x9 bulk catering' },
+              { src: '/images/plain-packaging/109292.webp', alt: 'Foil food container Ireland – 6x9 catering supply wholesale' },
+            ].map(({ src, alt }) => (
+              <div key={src} className="relative rounded-xl overflow-hidden h-28">
+                <Image src={src} alt={alt} fill className="object-cover" sizes="25vw" />
+              </div>
+            ))}
+          </div>
+
           <h3 className="text-xl font-semibold text-slate-900 mt-8 mb-3">Plain Paper Bags (SOS / Carry Bags)</h3>
           <p className="text-slate-700 leading-relaxed mb-4">
             Plain brown kraft SOS bags are the standard carry bag for Irish takeaways. Ordering in case
@@ -264,6 +301,36 @@ export default function PlainPackagingWholesaleIreland() {
             justifies it, custom print runs on SOS bags start at surprisingly low quantities and the
             unit price uplift for a 1-colour logo is relatively small.
           </p>
+          <div className="grid grid-cols-3 gap-3 mb-8">
+            {[
+              { src: '/images/products/sos-bags/3.png', alt: 'SOS grab bags Ireland – kraft paper takeaway bags wholesale' },
+              { src: '/images/products/sos-bags/6.png', alt: 'Plain SOS bags wholesale Ireland – bulk catering carry bags' },
+              { src: '/images/products/sos-bags/9.png', alt: 'Brown kraft SOS bags Ireland – plain unbranded takeaway bags' },
+            ].map(({ src, alt }) => (
+              <div key={src} className="relative rounded-xl overflow-hidden h-36">
+                <Image src={src} alt={alt} fill className="object-cover" sizes="33vw" />
+              </div>
+            ))}
+          </div>
+
+          <h3 className="text-xl font-semibold text-slate-900 mt-8 mb-3">Disposable Cups &amp; Lids</h3>
+          <p className="text-slate-700 leading-relaxed mb-4">
+            For cafés, delis, and catering operations, disposable cups are one of the highest-volume
+            lines. Ordering cups and matching lids in case quantities keeps cost per serve low.
+            Available in white, kraft, and compostable options.
+          </p>
+          <div className="grid grid-cols-4 gap-3 mb-8">
+            {[
+              { src: '/images/plain-packaging/100102.webp', alt: '8oz white hot cups wholesale Ireland – catering coffee cups' },
+              { src: '/images/plain-packaging/100103.webp', alt: '12oz white hot cups wholesale Ireland – takeaway coffee cups' },
+              { src: '/images/plain-packaging/100396.webp', alt: '8oz kraft hot cups wholesale Ireland – eco catering cups' },
+              { src: '/images/plain-packaging/100397.webp', alt: '12oz kraft cups wholesale Ireland – sustainable hot cups' },
+            ].map(({ src, alt }) => (
+              <div key={src} className="relative rounded-xl overflow-hidden h-28">
+                <Image src={src} alt={alt} fill className="object-cover" sizes="25vw" />
+              </div>
+            ))}
+          </div>
 
           {/* Section 3 */}
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">
