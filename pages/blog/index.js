@@ -92,6 +92,17 @@ const posts = [
     imageAlt: 'Irish restaurant packaging costs 2025-2026 – cost data and trends',
     category: 'Industry Data',
   },
+  {
+    slug: 'eps-polystyrene-packaging-ireland-legal-2025',
+    title: 'Expanded Polystyrene (EPS) in Ireland: What Is Banned, What Is Still Legal, and What Changes by 2030',
+    excerpt:
+      'EPS single-use food containers have been illegal in Ireland since July 2021 — but not all EPS is banned. This guide covers the legal status of polystyrene packaging, the fish box exception, recycling reality in Ireland, and what PPWR means for Irish businesses by 2030.',
+    date: '2026-02-13',
+    readTime: '11 min read',
+    image: '/images/products/bagasse-burger-box/1.png',
+    imageAlt: 'Eco packaging Ireland – sustainable alternatives to expanded polystyrene EPS',
+    category: 'Compliance Guide',
+  },
 ];
 
 export default function BlogIndex() {
