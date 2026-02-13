@@ -26,6 +26,39 @@ const posts = [
     imageAlt: 'Eco-friendly bagasse burger boxes Ireland',
     category: 'Sustainability',
   },
+  {
+    slug: 'leaflet-printing-ireland-guide',
+    title: 'Leaflet Printing Ireland: Sizes, Paper Stocks & What Actually Works for Local Marketing',
+    excerpt:
+      'Leaflet printing remains one of the highest-ROI marketing channels for local Irish businesses. This guide covers every size from A6 to A3, paper weights, gloss vs silk, folding options, and practical distribution tips — so your print run actually generates customers.',
+    date: '2026-02-13',
+    readTime: '7 min read',
+    image: '/images/products/a5-leaflet.png',
+    imageAlt: 'A5 leaflet printing Ireland – flyers for local businesses',
+    category: 'Print Guide',
+  },
+  {
+    slug: 'paper-bags-with-logo-ireland',
+    title: 'Paper Bags with Logo Ireland: A Guide for Retailers, Cafés & Food Businesses',
+    excerpt:
+      'Every branded bag that leaves your business is a moving advertisement. This guide covers twisted handle, flat handle, and SOS paper bags — explaining which style suits your business, what GSM to choose, and how to get the best wholesale price.',
+    date: '2026-02-13',
+    readTime: '6 min read',
+    image: '/images/products/twisted-handle-bags/1.png',
+    imageAlt: 'Custom branded paper bags with logo Ireland',
+    category: 'Packaging Guide',
+  },
+  {
+    slug: 'plain-packaging-wholesale-ireland',
+    title: 'Plain Packaging Wholesale Ireland: How to Buy Catering Supplies in Bulk',
+    excerpt:
+      'Buying plain packaging wholesale in Ireland does not need to be complicated. This guide covers what to stock, how to evaluate a supplier, and practical ways to reduce your per-unit cost on napkins, food containers, bags, and catering supplies.',
+    date: '2026-02-13',
+    readTime: '6 min read',
+    image: '/images/products/food-container.png',
+    imageAlt: 'Plain packaging wholesale Ireland – bulk catering supplies',
+    category: 'Wholesale Guide',
+  },
 ];
 
 export default function BlogIndex() {
@@ -64,7 +97,7 @@ export default function BlogIndex() {
         </div>
 
         {/* Post grid */}
-        <div className="grid sm:grid-cols-2 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post) => (
             <article
               key={post.slug}

@@ -304,7 +304,7 @@ export default function PizzaBoxSizesIreland() {
           <div className="grid sm:grid-cols-3 gap-4 mb-8">
             {[
               { label: 'Low MOQs', desc: 'Order from as few as 100 boxes — ideal for new takeaways testing a design.' },
-              { label: 'Full-colour print', desc: 'CMYK printing across the full box surface, inside and out if required.' },
+              { label: 'Full-colour print', desc: 'CMYK printing across the full box surface — your logo, brand colours, and artwork printed directly on the board.' },
               { label: 'Fast delivery', desc: 'Nationwide delivery across all 32 counties of Ireland, including next-day options.' },
             ].map((item) => (
               <div key={item.label} className="bg-slate-50 rounded-xl p-5 border border-slate-200">
