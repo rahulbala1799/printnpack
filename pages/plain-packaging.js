@@ -350,9 +350,15 @@ const QuoteLineItem = ({ item, idx, onRemove, onUpdateTier, onUpdateCases }) => 
         <span className="text-xs font-bold text-stone-900">{fmt(lineTotal)}</span>
       </td>
       {/* Remove */}
-      <td className="py-3 pl-1">
-        <button onClick={() => onRemove(idx)} className="w-6 h-6 flex items-center justify-center text-stone-300 hover:text-red-500 transition-colors rounded-full hover:bg-red-50">
-          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12"/></svg>
+      <td className="py-3 pl-2 text-right align-middle">
+        <button
+          type="button"
+          onClick={() => onRemove(idx)}
+          aria-label={`Remove ${item.product.name} from quote`}
+          className="inline-flex items-center gap-1.5 px-2 py-1.5 text-xs font-medium text-stone-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+        >
+          <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+          <span className="hidden sm:inline">Remove</span>
         </button>
       </td>
     </tr>
@@ -472,7 +478,7 @@ const QuoteDrawer = ({ items, onClose, onRemove, onUpdateTier, onUpdateCases }) 
                         <th className="pb-2 text-xs font-bold text-stone-500 uppercase tracking-wide pr-3">Cases</th>
                         <th className="pb-2 text-xs font-bold text-stone-500 uppercase tracking-wide pr-3 text-right">Unit</th>
                         <th className="pb-2 text-xs font-bold text-stone-500 uppercase tracking-wide pr-2 text-right">Total</th>
-                        <th className="pb-2 w-6"/>
+                        <th className="pb-2 text-xs font-bold text-stone-500 uppercase tracking-wide pl-2 w-20 sm:w-24 text-right">Remove</th>
                       </tr>
                     </thead>
                     <tbody>
