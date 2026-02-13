@@ -1,4 +1,5 @@
 import products from '../data/products';
+import { TIERED_PLAIN_PRODUCTS } from '../data/plain-products-tiered';
 
 const SITE_URL = 'https://printnpack.ie';
 
@@ -26,7 +27,7 @@ const staticPages = [
   { path: '/services/vinyls',   priority: '0.8', changefreq: 'monthly' },
 ];
 
-function generateSitemap(productSlugs) {
+function generateSitemap(productSlugs, plainPackagingIds) {
   const today = new Date().toISOString().split('T')[0];
 
   const staticUrls = staticPages
@@ -53,17 +54,31 @@ function generateSitemap(productSlugs) {
     )
     .join('');
 
+  const plainPackagingUrls = (plainPackagingIds || [])
+    .map(
+      (id) => `
+  <url>
+    <loc>${SITE_URL}/plain-packaging/${id}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>`
+    )
+    .join('');
+
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${staticUrls}
 ${productUrls}
+${plainPackagingUrls}
 </urlset>`;
 }
 
 export async function getServerSideProps({ res }) {
   const productSlugs = (products || []).map((p) => p.slug).filter(Boolean);
+  const plainPackagingIds = (TIERED_PLAIN_PRODUCTS || []).map((p) => p.id).filter(Boolean);
 
-  const sitemap = generateSitemap(productSlugs);
+  const sitemap = generateSitemap(productSlugs, plainPackagingIds);
 
   res.setHeader('Content-Type', 'application/xml');
   res.setHeader('Cache-Control', 'public, s-maxage=86400, stale-while-revalidate=43200');
