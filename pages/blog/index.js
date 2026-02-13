@@ -81,6 +81,17 @@ const posts = [
     imageAlt: 'Irish restaurant delivery packaging – pizza boxes and takeaway supplies',
     category: 'Industry Insight',
   },
+  {
+    slug: 'packaging-costs-ireland-restaurants-2025-2026',
+    title: 'Irish Restaurants & Packaging Costs in 2025–2026: What the Data Actually Shows',
+    excerpt:
+      'Packaging costs for Irish restaurants peaked +39% above 2019 levels and remain +24% higher today. Here is the full data on what drove the spike, what PPWR means for Irish food businesses, and how operators are cutting cost-per-order.',
+    date: '2026-02-13',
+    readTime: '10 min read',
+    image: '/images/pizza-boxes/PIZZA_BOX_1.jpg',
+    imageAlt: 'Irish restaurant packaging costs 2025-2026 – cost data and trends',
+    category: 'Industry Data',
+  },
 ];
 
 export default function BlogIndex() {
