@@ -1,11 +1,31 @@
 "use client"
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import Layout from '../../components/layout/Layout';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PLAIN_PRODUCTS, getProductById, getRelatedProducts } from '../../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../../components/PackagingIcon';
+
+const PLAIN_QUOTE_KEY = 'printnpack_plain_quote';
+
+function addToPlainQuoteAndGo(product, tier, numCases) {
+  if (typeof window === 'undefined') return;
+  let items = [];
+  try {
+    const raw = window.localStorage.getItem(PLAIN_QUOTE_KEY);
+    if (raw) items = JSON.parse(raw);
+  } catch {}
+  const productId = product.id;
+  const casesLabel = tier.casesLabel;
+  const idx = items.findIndex((it) => it.productId === productId && it.casesLabel === casesLabel);
+  if (idx >= 0) items[idx].numCases = numCases;
+  else items.push({ productId, casesLabel, numCases });
+  try {
+    window.localStorage.setItem(PLAIN_QUOTE_KEY, JSON.stringify(items));
+  } catch {}
+}
 
 const fmtCase = (n) => `€${Number(n).toFixed(2)}`;
 const DISCOUNT = 0.95;
@@ -23,13 +43,9 @@ function getTierForCases(tiers, numCases) {
 }
 
 export default function PlainPackagingDetail({ product, relatedProducts }) {
+  const router = useRouter();
   const [numCases, setNumCases] = useState(1);
   const selectedTier = product?.caseTiers ? getTierForCases(product.caseTiers, numCases) || product.caseTiers[0] : null;
-  const [quoteSubmitted, setQuoteSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', notes: '' });
-  const [errors, setErrors] = useState({});
-  const [formOpen, setFormOpen] = useState(false);
 
   if (!product) {
     return (
@@ -49,39 +65,10 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
     ? `€${(numCases * discountedPrice(selectedTier.pricePerCase)).toFixed(2)}`
     : '—';
 
-  const validate = () => {
-    const e = {};
-    if (!form.name.trim()) e.name = 'Required';
-    if (!form.company.trim()) e.company = 'Required';
-    if (!form.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) e.email = 'Valid email required';
-    if (!form.phone.trim()) e.phone = 'Required';
-    return e;
-  };
-
-  const handleSubmit = async (e) => {
-    if (e && e.preventDefault) e.preventDefault();
-    const errs = validate();
-    if (Object.keys(errs).length) { setErrors(errs); return; }
-    setSubmitting(true);
-    try {
-      await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-          subject: `Plain Packaging Quote — ${product.name} [${product.code}] — ${form.company}`,
-          message: `Company: ${form.company}\n\nProduct: ${product.name}\nCode: ${product.code}\nQty per case: ${product.qtyPerCase}\nCases: ${numCases} (${selectedTier?.casesLabel})\nPrice per case: ${fmtCase(selectedTier ? discountedPrice(selectedTier.pricePerCase) : 0)}\nEstimated Total: ${estimatedTotal}\n\nNotes: ${form.notes || 'None'}`,
-          source: 'Plain Packaging Detail Page',
-        }),
-      });
-      setQuoteSubmitted(true);
-    } catch {
-      alert('Something went wrong. Please try again.');
-    } finally {
-      setSubmitting(false);
-    }
+  const handleAddToQuote = () => {
+    if (!selectedTier) return;
+    addToPlainQuoteAndGo(product, selectedTier, numCases);
+    router.push('/plain-packaging?openQuote=1');
   };
 
   return (
@@ -218,13 +205,13 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
                 </div>
               </div>
 
-              {/* CTA */}
+              {/* CTA — same quote flow as list page */}
               {selectedTier && (
                 <button
-                  onClick={() => setFormOpen(true)}
+                  onClick={handleAddToQuote}
                   className="w-full bg-stone-800 hover:bg-stone-900 text-white font-bold py-4 rounded-xl text-sm transition-colors active:scale-[0.98]"
                 >
-                  Get Quote — {estimatedTotal}
+                  Add to Quote — {estimatedTotal}
                 </button>
               )}
 
@@ -287,15 +274,15 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10 text-center">
           <h2 className="text-xl font-bold text-white mb-2">Need a larger order or custom quote?</h2>
           <p className="text-stone-400 text-sm mb-6 max-w-md mx-auto">
-            Contact us directly for bulk pricing, pallet orders, or if you need a product not listed.
+            Add items to your quote on the main Plain Packaging page, then submit one request for all.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <button
-              onClick={() => setFormOpen(true)}
-              className="bg-white hover:bg-stone-100 text-stone-900 font-bold py-3 px-8 rounded-xl transition-colors text-sm"
+            <Link
+              href="/plain-packaging"
+              className="bg-white hover:bg-stone-100 text-stone-900 font-bold py-3 px-8 rounded-xl transition-colors text-sm inline-flex items-center justify-center"
             >
-              Get a Quote
-            </button>
+              View Plain Packaging
+            </Link>
             <a
               href="tel:+353894400155"
               className="bg-stone-800 hover:bg-stone-700 text-stone-200 font-semibold py-3 px-8 rounded-xl border border-stone-700 transition-colors text-sm"
@@ -306,117 +293,11 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
         </div>
       </section>
 
-      {/* ── Quote Form Modal ─────────────────────────────────────────────────── */}
-      {formOpen && (
-        <>
-          <div className="fixed inset-0 bg-black/50 z-40" onClick={() => setFormOpen(false)} />
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
-
-              <div className="flex items-center justify-between px-6 py-4 border-b border-stone-100">
-                <div>
-                  <p className="font-bold text-stone-900 text-base">Request a Quote</p>
-                  <p className="text-xs text-stone-400 mt-0.5 truncate max-w-[260px]">{product.name} · {numCases} case{numCases !== 1 ? 's' : ''} · {selectedTier?.casesLabel}</p>
-                </div>
-                <button
-                  onClick={() => setFormOpen(false)}
-                  className="w-8 h-8 flex items-center justify-center rounded-full bg-stone-100 hover:bg-stone-200 text-stone-500 transition-colors"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-
-              {quoteSubmitted ? (
-                <div className="flex flex-col items-center text-center px-6 py-10">
-                  <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mb-4">
-                    <svg className="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-stone-900 mb-2">Quote Submitted!</h3>
-                  <p className="text-stone-500 text-sm max-w-xs mb-6">
-                    Thanks {form.name.split(' ')[0]}! We&apos;ll get back to you within 1–2 business days.
-                  </p>
-                  <div className="w-full bg-stone-50 border border-stone-200 rounded-xl p-4 text-left mb-6">
-                    <p className="font-semibold text-stone-800 text-sm line-clamp-2">{product.name}</p>
-                    <p className="text-xs text-stone-500 mt-1">{numCases} case{numCases !== 1 ? 's' : ''} · {selectedTier?.casesLabel}</p>
-                    <p className="text-base font-bold text-stone-900 mt-2">{estimatedTotal} <span className="text-xs font-normal text-stone-400">estimated</span></p>
-                  </div>
-                  <button
-                    onClick={() => { setFormOpen(false); setQuoteSubmitted(false); }}
-                    className="bg-stone-800 text-white text-sm font-semibold px-6 py-3 rounded-xl hover:bg-stone-900 transition-colors"
-                  >
-                    Close
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="p-6 flex flex-col gap-4">
-                  {/* Summary banner */}
-                  <div className="bg-stone-50 border border-stone-200 rounded-xl p-3.5 flex items-center justify-between">
-                    <div>
-                      <p className="text-xs text-stone-500 truncate max-w-[200px]">{numCases} case{numCases !== 1 ? 's' : ''} × {product.name}</p>
-                      <p className="text-lg font-bold text-stone-900">{estimatedTotal}</p>
-                    </div>
-                    <span className="text-xs text-stone-400 bg-white border border-stone-200 px-2 py-1 rounded-lg flex-shrink-0">estimate</span>
-                  </div>
-
-                  {[
-                    { id: 'name',    label: 'Full Name',    type: 'text',  placeholder: 'John Murphy' },
-                    { id: 'company', label: 'Company Name', type: 'text',  placeholder: 'Acme Foods Ltd' },
-                    { id: 'email',   label: 'Work Email',   type: 'email', placeholder: 'john@acmefoods.ie' },
-                    { id: 'phone',   label: 'Phone',        type: 'tel',   placeholder: '+353 1 234 5678' },
-                  ].map(f => (
-                    <div key={f.id}>
-                      <label className="block text-xs font-semibold text-stone-600 mb-1.5">
-                        {f.label} <span className="text-red-400">*</span>
-                      </label>
-                      <input
-                        type={f.type}
-                        placeholder={f.placeholder}
-                        value={form[f.id]}
-                        onChange={e => setForm(p => ({ ...p, [f.id]: e.target.value }))}
-                        className={`w-full px-3.5 py-2.5 text-sm border rounded-xl outline-none transition-all ${
-                          errors[f.id] ? 'border-red-300 ring-2 ring-red-100' : 'border-stone-200 focus:border-stone-400 focus:ring-2 focus:ring-stone-100'
-                        }`}
-                      />
-                      {errors[f.id] && <p className="text-xs text-red-500 mt-1">{errors[f.id]}</p>}
-                    </div>
-                  ))}
-
-                  <div>
-                    <label className="block text-xs font-semibold text-stone-600 mb-1.5">Notes (optional)</label>
-                    <textarea
-                      rows={3}
-                      placeholder="Delivery notes, special requirements…"
-                      value={form.notes}
-                      onChange={e => setForm(p => ({ ...p, notes: e.target.value }))}
-                      className="w-full px-3.5 py-2.5 text-sm border border-stone-200 rounded-xl outline-none focus:border-stone-400 focus:ring-2 focus:ring-stone-100 resize-none"
-                    />
-                  </div>
-
-                  <p className="text-xs text-stone-400">We will contact you to confirm stock and arrange delivery. We never share your data.</p>
-
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="w-full flex items-center justify-center gap-2 bg-stone-800 hover:bg-stone-900 disabled:opacity-60 text-white font-bold py-3.5 rounded-xl transition-colors text-sm"
-                  >
-                    {submitting ? 'Sending…' : 'Submit Quote Request'}
-                  </button>
-                </form>
-              )}
-            </div>
-          </div>
-        </>
-      )}
-
-      {/* ── Mobile sticky CTA ─────────────────────────────────────────────────── */}
+      {/* ── Mobile sticky CTA (same Add to Quote flow) ─────────────────────────── */}
       {selectedTier && (
         <div className="lg:hidden fixed bottom-0 left-0 right-0 z-30 p-3 bg-white border-t border-stone-200">
           <button
-            onClick={() => setFormOpen(true)}
+            onClick={handleAddToQuote}
             className="w-full flex items-center justify-between bg-stone-800 text-white font-bold py-4 px-5 rounded-2xl active:scale-[0.98] transition-transform"
           >
             <div>
@@ -424,7 +305,7 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
               <p className="text-base font-bold">{estimatedTotal}</p>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-sm">Get Quote</span>
+              <span className="text-sm">Add to Quote</span>
               <svg className="w-4 h-4 text-stone-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
               </svg>

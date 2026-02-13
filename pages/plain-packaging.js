@@ -1,11 +1,45 @@
 "use client"
 import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { PLAIN_PRODUCTS, CATEGORIES } from '../data/plain-products';
+import { PLAIN_PRODUCTS, CATEGORIES, getProductById } from '../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
+
+// ─── Quote persistence (shared with detail page) ───────────────────────────────
+const PLAIN_QUOTE_KEY = 'printnpack_plain_quote';
+
+function loadPlainQuote() {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = window.localStorage.getItem(PLAIN_QUOTE_KEY);
+    if (!raw) return [];
+    const arr = JSON.parse(raw);
+    if (!Array.isArray(arr)) return [];
+    return arr.map(({ productId, casesLabel, numCases }) => {
+      const product = getProductById(productId);
+      if (!product?.caseTiers?.length) return null;
+      const tier = product.caseTiers.find(t => t.casesLabel === casesLabel) || product.caseTiers[0];
+      return { product, tier, numCases: Number(numCases) || 1 };
+    }).filter(Boolean);
+  } catch {
+    return [];
+  }
+}
+
+function savePlainQuote(items) {
+  if (typeof window === 'undefined') return;
+  try {
+    const payload = items.map(({ product, tier, numCases }) => ({
+      productId: product.id,
+      casesLabel: tier.casesLabel,
+      numCases,
+    }));
+    window.localStorage.setItem(PLAIN_QUOTE_KEY, JSON.stringify(payload));
+  } catch {}
+}
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 const fmt = (n) => `€${Number(n).toFixed(2)}`;
@@ -621,8 +655,10 @@ const QuoteDrawer = ({ items, onClose, onRemove, onUpdateTier, onUpdateCases }) 
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function PlainPackagingPage() {
+  const router = useRouter();
   const [quoteItems, setQuoteItems] = useState([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [quoteHydrated, setQuoteHydrated] = useState(false);
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
   const [priceRange, setPriceRange] = useState(PRICE_RANGES[0]);
@@ -632,6 +668,27 @@ export default function PlainPackagingPage() {
   const [perPage, setPerPage] = useState(30);
   const [visibleCategoryCount, setVisibleCategoryCount] = useState(4);
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
+
+  // Rehydrate quote from localStorage on mount
+  useEffect(() => {
+    setQuoteItems(loadPlainQuote());
+    setQuoteHydrated(true);
+  }, []);
+
+  // Persist quote whenever it changes (after initial hydration)
+  useEffect(() => {
+    if (!quoteHydrated) return;
+    savePlainQuote(quoteItems);
+  }, [quoteHydrated, quoteItems]);
+
+  // Open drawer when coming from detail page with ?openQuote=1 (after quote rehydrated from localStorage)
+  useEffect(() => {
+    const open = router.query.openQuote === '1' || router.query.openQuote === 'true';
+    if (open && quoteHydrated) {
+      setDrawerOpen(true);
+      router.replace('/plain-packaging', undefined, { shallow: true });
+    }
+  }, [router.query.openQuote, quoteHydrated]);
 
   const handleAdd = useCallback(({ product, tier, numCases }) => {
     setQuoteItems(prev => {
