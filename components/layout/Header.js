@@ -13,7 +13,8 @@ import {
   FaTools,
   FaPhoneAlt,
   FaSearch,
-  FaBox
+  FaBox,
+  FaNewspaper
 } from 'react-icons/fa';
 import SearchBar from '../search/SearchBar';
 import MobileSearch from '../search/MobileSearch';
@@ -58,6 +59,7 @@ const Header = () => {
     { name: 'Products', path: '/products', icon: <FaBoxOpen /> },
     { name: 'Plain Packaging', path: '/plain-packaging', icon: <FaBox /> },
     { name: 'Services', path: '/services', icon: <FaTools /> },
+    { name: 'Blog', path: '/blog', icon: <FaNewspaper /> },
     { name: 'Contact', path: '/contact', icon: <FaPhoneAlt /> },
   ];
 
