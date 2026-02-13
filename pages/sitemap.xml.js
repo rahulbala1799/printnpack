@@ -24,6 +24,9 @@ const staticPages = [
   { path: '/services/menus',    priority: '0.8', changefreq: 'monthly' },
   { path: '/services/posters',  priority: '0.8', changefreq: 'monthly' },
   { path: '/services/vinyls',   priority: '0.8', changefreq: 'monthly' },
+  { path: '/blog',              priority: '0.8', changefreq: 'weekly'  },
+  { path: '/blog/pizza-box-sizes-ireland',               priority: '0.8', changefreq: 'monthly' },
+  { path: '/blog/eco-packaging-for-takeaways-ireland',   priority: '0.8', changefreq: 'monthly' },
 ];
 
 function generateSitemap(productSlugs) {

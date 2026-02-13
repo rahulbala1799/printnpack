@@ -1,0 +1,133 @@
+import Head from 'next/head';
+import Link from 'next/link';
+import Image from 'next/image';
+import Layout from '../../components/layout/Layout';
+
+const posts = [
+  {
+    slug: 'pizza-box-sizes-ireland',
+    title: 'Pizza Box Sizes Ireland: The Complete Guide for Takeaways & Restaurants',
+    excerpt:
+      'Not sure which pizza box size to order? From 7-inch personal boxes to 18-inch family sizes, we break down every standard size, explain what to look for in a custom pizza box, and show you how to get the best value per unit for your Irish takeaway.',
+    date: '2026-02-12',
+    readTime: '6 min read',
+    image: '/images/pizza-boxes/PIZZA_BOX_1.jpg',
+    imageAlt: 'Custom pizza boxes Ireland – various sizes',
+    category: 'Packaging Guide',
+  },
+  {
+    slug: 'eco-packaging-for-takeaways-ireland',
+    title: 'Eco Packaging for Takeaways Ireland: How to Switch to Sustainable Food Packaging',
+    excerpt:
+      'Irish consumers are choosing businesses that care about the planet. This guide covers the best eco-friendly food packaging options available in Ireland — from bagasse burger boxes to plain napkins wholesale — and how to make the switch without blowing your budget.',
+    date: '2026-02-13',
+    readTime: '7 min read',
+    image: '/images/products/bagasse-burger-box/1.png',
+    imageAlt: 'Eco-friendly bagasse burger boxes Ireland',
+    category: 'Sustainability',
+  },
+];
+
+export default function BlogIndex() {
+  const siteUrl = 'https://printnpack.ie';
+  const title = 'Resources & Guides | PrintNPack Ireland';
+  const description =
+    'Practical guides on packaging sizes, eco-friendly options, printing tips, and wholesale supplies for Irish takeaways, restaurants, and retailers.';
+
+  return (
+    <Layout>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={`${siteUrl}/blog`} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={`${siteUrl}/blog`} />
+        <meta property="og:site_name" content="PrintNPack Ireland" />
+        <meta property="og:locale" content="en_IE" />
+      </Head>
+
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+        {/* Header */}
+        <div className="mb-12">
+          <span className="text-blue-600 text-sm font-semibold uppercase tracking-wider">Resources</span>
+          <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mt-2 mb-4">
+            Packaging &amp; Print Guides
+          </h1>
+          <p className="text-slate-600 text-lg max-w-2xl">
+            Practical advice on custom packaging, eco-friendly options, print formats, and wholesale
+            supplies — written for Irish businesses.
+          </p>
+        </div>
+
+        {/* Post grid */}
+        <div className="grid sm:grid-cols-2 gap-8">
+          {posts.map((post) => (
+            <article
+              key={post.slug}
+              className="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition-shadow"
+            >
+              <Link href={`/blog/${post.slug}`} className="block">
+                <div className="relative h-52 w-full">
+                  <Image
+                    src={post.image}
+                    alt={post.imageAlt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                  />
+                </div>
+              </Link>
+              <div className="p-6">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="bg-blue-50 text-blue-700 text-xs font-semibold px-2.5 py-1 rounded-full">
+                    {post.category}
+                  </span>
+                  <span className="text-slate-400 text-xs">{post.readTime}</span>
+                </div>
+                <Link href={`/blog/${post.slug}`}>
+                  <h2 className="text-lg font-bold text-slate-900 hover:text-blue-600 transition-colors leading-snug mb-3">
+                    {post.title}
+                  </h2>
+                </Link>
+                <p className="text-slate-600 text-sm leading-relaxed mb-4">{post.excerpt}</p>
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="text-blue-600 text-sm font-medium hover:underline"
+                >
+                  Read the guide →
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="mt-16 bg-slate-900 rounded-2xl p-8 sm:p-10 text-center">
+          <h2 className="text-2xl font-bold text-white mb-3">Need packaging for your business?</h2>
+          <p className="text-slate-400 mb-6">
+            Get a free quote on custom pizza boxes, eco-friendly packaging, plain napkins wholesale, and more.
+            We deliver across all of Ireland.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              href="/quote"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+            >
+              Get a Free Quote
+            </Link>
+            <Link
+              href="/products"
+              className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+            >
+              Browse All Products
+            </Link>
+          </div>
+        </div>
+      </main>
+    </Layout>
+  );
+}
