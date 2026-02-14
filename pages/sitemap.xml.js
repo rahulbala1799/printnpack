@@ -34,6 +34,7 @@ const staticPages = [
   { path: '/blog/packaging-prices-ireland-covid-shipping',    priority: '0.8', changefreq: 'monthly' },
   { path: '/blog/irish-restaurant-industry-delivery-2025',   priority: '0.8', changefreq: 'monthly' },
   { path: '/blog/packaging-costs-ireland-restaurants-2025-2026', priority: '0.8', changefreq: 'monthly' },
+  { path: '/blog/eps-polystyrene-packaging-ireland-legal-2025', priority: '0.8', changefreq: 'monthly' },
 ];
 
 function generateSitemap(productSlugs, plainPackagingIds) {
