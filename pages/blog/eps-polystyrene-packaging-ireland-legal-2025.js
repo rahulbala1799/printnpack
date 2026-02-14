@@ -610,139 +610,187 @@ export default function EpsPost() {
         </section>
 
         {/* ── FLOWCHART ── */}
-        <section className="mb-14 -mt-14">
+        <section className="mb-14">
+          <h2 className="text-2xl font-bold text-slate-900 mb-2">
+            EPS Lifecycle Decision Map for Irish Businesses
+          </h2>
+          <p className="text-slate-500 text-sm mb-6">
+            Follow each decision in sequence to determine the right path for your EPS packaging.
+          </p>
+
           <div className="rounded-2xl border border-slate-200 overflow-hidden">
             <div className="bg-slate-900 text-white text-sm font-bold px-6 py-3">
-              EPS Lifecycle Options Map — Decision Guide for Irish Operators
+              EPS Lifecycle Options — Decision Guide for Irish Operators
             </div>
-            <div className="bg-white p-6 overflow-x-auto">
-              <div className="min-w-[560px]">
 
-                {/* START */}
-                <div className="flex justify-center mb-2">
-                  <div className="bg-slate-800 text-white text-xs font-bold px-6 py-2 rounded-full">
-                    Acquire packaging
-                  </div>
+            <div className="bg-slate-50 p-6 space-y-0">
+
+              {/* ── START ── */}
+              <div className="flex justify-center">
+                <div className="bg-slate-800 text-white text-sm font-bold px-8 py-3 rounded-full shadow">
+                  Acquire packaging
                 </div>
-                <Arrow />
+              </div>
 
-                {/* DECISION 1 */}
-                <Diamond color="amber">
-                  Is it a SUP-banned EPS food/beverage container for ready-to-eat use?
-                </Diamond>
+              {/* arrow */}
+              <div className="flex justify-center py-1">
+                <div className="flex flex-col items-center">
+                  <div className="w-0.5 h-5 bg-slate-400" />
+                  <div style={{ width: 0, height: 0, borderLeft: '5px solid transparent', borderRight: '5px solid transparent', borderTop: '6px solid #94a3b8' }} />
+                </div>
+              </div>
 
-                {/* Branch row */}
-                <div className="flex items-start justify-center gap-2 mt-1">
-                  {/* YES branch */}
-                  <div className="flex flex-col items-center w-52">
-                    <div className="flex items-center gap-1 mb-1">
-                      <div className="w-12 h-0.5 bg-red-400" />
-                      <span className="text-red-600 text-xs font-bold">YES</span>
-                    </div>
-                    <div className="w-0.5 h-4 bg-red-300" />
-                    <div className="bg-red-50 border-2 border-red-400 rounded-xl p-3 w-full text-center">
-                      <p className="text-red-800 text-xs font-bold mb-1">Stop procurement</p>
-                      <p className="text-red-700 text-xs">Switch to compliant alternatives</p>
-                      <p className="text-red-700 text-xs">Document the change</p>
-                    </div>
-                    <div className="w-0.5 h-4 bg-slate-300 mt-1" />
-                    <Link href="/eco-bagasse-burger-boxes"
-                      className="bg-green-600 text-white text-xs font-bold px-4 py-2 rounded-xl text-center hover:bg-green-700 transition-colors w-full block">
-                      Browse SUP-compliant alternatives →
+              {/* ── DECISION 1 ── */}
+              <div className="bg-amber-50 border-2 border-amber-400 rounded-2xl p-4">
+                <p className="text-xs font-bold text-amber-800 uppercase tracking-wider mb-2 flex items-center gap-1">
+                  <span className="text-amber-500 text-base">◆</span> Decision 1
+                </p>
+                <p className="text-sm font-bold text-amber-900 mb-4 leading-snug">
+                  Is it a SUP-banned EPS food / beverage container for ready-to-eat use?
+                </p>
+
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {/* YES outcome */}
+                  <div className="bg-red-50 border-2 border-red-300 rounded-xl p-4">
+                    <span className="inline-block bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full mb-2">YES — Stop here</span>
+                    <p className="text-xs font-bold text-red-800 mb-1">Stop procurement immediately</p>
+                    <ul className="text-xs text-red-700 space-y-0.5 mb-3">
+                      <li>• Switch to compliant alternatives</li>
+                      <li>• Document the change for records</li>
+                    </ul>
+                    <Link
+                      href="/eco-bagasse-burger-boxes"
+                      className="inline-block bg-green-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg hover:bg-green-700 transition-colors"
+                    >
+                      Browse SUP-compliant packaging →
                     </Link>
                   </div>
 
-                  {/* Centre divider */}
-                  <div className="flex flex-col items-center pt-6">
-                    <div className="w-0.5 h-6 bg-slate-300" />
-                    <span className="text-green-600 text-xs font-bold mt-1">NO</span>
-                    <div className="w-0.5 h-4 bg-green-300" />
-                  </div>
-
-                  {/* NO branch continues down — spacer */}
-                  <div className="w-52" />
-                </div>
-
-                {/* DECISION 2 — centred below the NO path */}
-                <div className="flex justify-center mt-2">
-                  <div className="flex flex-col items-center">
-                    <Arrow />
-                    <Diamond color="blue">
-                      Is the EPS clean and segregable at point of discard?
-                    </Diamond>
-
-                    <div className="flex items-start gap-2 mt-1 w-full">
-                      {/* NO branch */}
-                      <div className="flex flex-col items-center w-52">
-                        <div className="flex items-center gap-1 mb-1">
-                          <span className="text-red-600 text-xs font-bold">NO</span>
-                          <div className="w-12 h-0.5 bg-red-400" />
-                        </div>
-                        <div className="w-0.5 h-4 bg-red-300" />
-                        <div className="bg-orange-50 border-2 border-orange-300 rounded-xl p-3 w-full text-center">
-                          <p className="text-orange-800 text-xs font-bold mb-1">Residual waste stream</p>
-                          <p className="text-orange-700 text-xs">or specialist treatment route</p>
-                          <p className="text-orange-700 text-xs mt-1">Reduce contamination at source</p>
-                        </div>
-                      </div>
-
-                      {/* YES path */}
-                      <div className="flex flex-col items-center">
-                        <div className="flex items-center gap-1 mb-1">
-                          <div className="w-6 h-0.5 bg-green-400" />
-                          <span className="text-green-600 text-xs font-bold">YES</span>
-                        </div>
-                        <Arrow />
-                        <Diamond color="purple">
-                          Enough volume to justify densification?
-                        </Diamond>
-
-                        <div className="flex items-start gap-2 mt-1">
-                          {/* YES → compaction */}
-                          <div className="flex flex-col items-center w-44">
-                            <div className="flex items-center gap-1 mb-1">
-                              <span className="text-green-600 text-xs font-bold">YES</span>
-                              <div className="w-8 h-0.5 bg-green-400" />
-                            </div>
-                            <div className="w-0.5 h-4 bg-green-300" />
-                            <div className="bg-green-50 border-2 border-green-400 rounded-xl p-3 w-full text-center">
-                              <p className="text-green-800 text-xs font-bold">On-site compaction / densification</p>
-                              <p className="text-green-700 text-xs mt-1">Contract recycler / offtaker</p>
-                            </div>
-                          </div>
-
-                          {/* NO → separate collection */}
-                          <div className="flex flex-col items-center w-44">
-                            <div className="flex items-center gap-1 mb-1">
-                              <div className="w-8 h-0.5 bg-slate-400" />
-                              <span className="text-slate-600 text-xs font-bold">NO</span>
-                            </div>
-                            <div className="w-0.5 h-4 bg-slate-300" />
-                            <div className="bg-slate-50 border-2 border-slate-300 rounded-xl p-3 w-full text-center">
-                              <p className="text-slate-800 text-xs font-bold">Separate-collection sacks/bales</p>
-                              <p className="text-slate-600 text-xs mt-1">Authorised waste collector</p>
-                              <p className="text-slate-600 text-xs">Monitor costs</p>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Converge */}
-                        <Arrow />
-                        <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-3 text-center w-72">
-                          <p className="text-blue-800 text-xs font-bold">Recycling market acceptance</p>
-                          <p className="text-blue-600 text-xs mt-1">(briquette / beads / regranulate)</p>
-                        </div>
-                        <Arrow />
-                        <div className="bg-slate-800 text-white rounded-xl p-3 text-center w-72">
-                          <p className="text-white text-xs font-bold">Record weights, destinations &amp; compliance evidence</p>
-                          <p className="text-slate-300 text-xs mt-1">for audits and PPWR readiness</p>
-                        </div>
-                      </div>
-                    </div>
+                  {/* NO outcome */}
+                  <div className="bg-green-50 border-2 border-green-300 rounded-xl p-4 flex flex-col justify-between">
+                    <span className="inline-block bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full mb-2">NO — Continue</span>
+                    <p className="text-xs text-green-800 leading-relaxed">
+                      Cold-chain transport EPS (fish boxes, meat trays, etc.) is generally outside the SUP ban scope.
+                      Proceed to assess your waste management options below.
+                    </p>
+                    <p className="text-xs font-bold text-green-700 mt-2">↓ Proceed to Decision 2</p>
                   </div>
                 </div>
-
               </div>
+
+              {/* arrow */}
+              <div className="flex justify-center py-1">
+                <div className="flex flex-col items-center">
+                  <div className="w-0.5 h-5 bg-slate-400" />
+                  <div style={{ width: 0, height: 0, borderLeft: '5px solid transparent', borderRight: '5px solid transparent', borderTop: '6px solid #94a3b8' }} />
+                </div>
+              </div>
+
+              {/* ── DECISION 2 ── */}
+              <div className="bg-blue-50 border-2 border-blue-400 rounded-2xl p-4">
+                <p className="text-xs font-bold text-blue-800 uppercase tracking-wider mb-2 flex items-center gap-1">
+                  <span className="text-blue-500 text-base">◆</span> Decision 2
+                </p>
+                <p className="text-sm font-bold text-blue-900 mb-4 leading-snug">
+                  Is the EPS clean and segregable at the point of discard?
+                </p>
+
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {/* NO outcome */}
+                  <div className="bg-orange-50 border-2 border-orange-300 rounded-xl p-4">
+                    <span className="inline-block bg-orange-500 text-white text-xs font-bold px-2 py-0.5 rounded-full mb-2">NO — Dead end</span>
+                    <p className="text-xs font-bold text-orange-800 mb-1">Separate to residual waste stream</p>
+                    <ul className="text-xs text-orange-700 space-y-0.5">
+                      <li>• Or arrange specialist treatment route</li>
+                      <li>• Reduce contamination at source</li>
+                      <li>• Review SOPs to improve segregation</li>
+                    </ul>
+                  </div>
+
+                  {/* YES outcome */}
+                  <div className="bg-green-50 border-2 border-green-300 rounded-xl p-4 flex flex-col justify-between">
+                    <span className="inline-block bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full mb-2">YES — Continue</span>
+                    <p className="text-xs text-green-800 leading-relaxed">
+                      Clean, separately collected EPS can enter a recycling pathway.
+                      The next question determines which route is economically viable for your volume.
+                    </p>
+                    <p className="text-xs font-bold text-green-700 mt-2">↓ Proceed to Decision 3</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* arrow */}
+              <div className="flex justify-center py-1">
+                <div className="flex flex-col items-center">
+                  <div className="w-0.5 h-5 bg-slate-400" />
+                  <div style={{ width: 0, height: 0, borderLeft: '5px solid transparent', borderRight: '5px solid transparent', borderTop: '6px solid #94a3b8' }} />
+                </div>
+              </div>
+
+              {/* ── DECISION 3 ── */}
+              <div className="bg-purple-50 border-2 border-purple-400 rounded-2xl p-4">
+                <p className="text-xs font-bold text-purple-800 uppercase tracking-wider mb-2 flex items-center gap-1">
+                  <span className="text-purple-500 text-base">◆</span> Decision 3
+                </p>
+                <p className="text-sm font-bold text-purple-900 mb-4 leading-snug">
+                  Do you generate enough EPS volume to justify on-site densification?
+                </p>
+
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {/* YES */}
+                  <div className="bg-green-50 border-2 border-green-300 rounded-xl p-4">
+                    <span className="inline-block bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full mb-2">YES</span>
+                    <p className="text-xs font-bold text-green-800 mb-1">On-site compaction / densification</p>
+                    <ul className="text-xs text-green-700 space-y-0.5">
+                      <li>• Shred, heat, compact into briquettes</li>
+                      <li>• Contract a recycler / offtaker</li>
+                      <li>• Confirm downstream specs in writing</li>
+                    </ul>
+                    <p className="text-xs font-bold text-green-700 mt-2">↓ Proceed to Recycling step</p>
+                  </div>
+
+                  {/* NO */}
+                  <div className="bg-slate-100 border-2 border-slate-300 rounded-xl p-4">
+                    <span className="inline-block bg-slate-500 text-white text-xs font-bold px-2 py-0.5 rounded-full mb-2">NO</span>
+                    <p className="text-xs font-bold text-slate-800 mb-1">Separate-collection sacks / bales</p>
+                    <ul className="text-xs text-slate-700 space-y-0.5">
+                      <li>• Contract an authorised waste collector</li>
+                      <li>• Monitor collection frequency & costs</li>
+                      <li>• Keep collection records for compliance</li>
+                    </ul>
+                    <p className="text-xs font-bold text-slate-600 mt-2">↓ Proceed to Recycling step</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* arrow */}
+              <div className="flex justify-center py-1">
+                <div className="flex flex-col items-center">
+                  <div className="w-0.5 h-5 bg-slate-400" />
+                  <div style={{ width: 0, height: 0, borderLeft: '5px solid transparent', borderRight: '5px solid transparent', borderTop: '6px solid #94a3b8' }} />
+                </div>
+              </div>
+
+              {/* ── RECYCLING ── */}
+              <div className="bg-blue-600 text-white rounded-2xl p-4 text-center">
+                <p className="text-sm font-bold mb-1">♻️ Recycling Market Acceptance</p>
+                <p className="text-blue-200 text-xs">Briquette / beads / regranulate — material enters secondary market</p>
+              </div>
+
+              {/* arrow */}
+              <div className="flex justify-center py-1">
+                <div className="flex flex-col items-center">
+                  <div className="w-0.5 h-5 bg-slate-400" />
+                  <div style={{ width: 0, height: 0, borderLeft: '5px solid transparent', borderRight: '5px solid transparent', borderTop: '6px solid #94a3b8' }} />
+                </div>
+              </div>
+
+              {/* ── RECORD ── */}
+              <div className="bg-slate-800 text-white rounded-2xl p-4 text-center">
+                <p className="text-sm font-bold mb-1">📋 Record Weights, Destinations &amp; Compliance Evidence</p>
+                <p className="text-slate-300 text-xs">Required for PPWR audits from 12 August 2026 — start now, not at deadline</p>
+              </div>
+
             </div>
           </div>
         </section>
