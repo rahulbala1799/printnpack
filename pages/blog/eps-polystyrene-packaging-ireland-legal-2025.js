@@ -89,6 +89,40 @@ const timelineEvents = [
   { date: '1 Jan 2030', label: 'Format restrictions & recyclability', detail: 'PPWR restrictions on certain packaging formats (Annex V) bite; recyclability performance grades apply', color: 'bg-red-700' },
 ];
 
+function Arrow() {
+  return (
+    <div className="flex flex-col items-center my-0.5">
+      <div className="w-0.5 h-5 bg-slate-400" />
+      <div className="w-0 h-0"
+        style={{ borderLeft: '5px solid transparent', borderRight: '5px solid transparent', borderTop: '6px solid #94a3b8' }} />
+    </div>
+  );
+}
+
+function Diamond({ children, color = 'amber' }) {
+  const styles = {
+    amber: { bg: '#fffbeb', border: '#f59e0b', text: '#92400e' },
+    blue:  { bg: '#eff6ff', border: '#3b82f6', text: '#1e3a8a' },
+    purple:{ bg: '#faf5ff', border: '#a855f7', text: '#581c87' },
+  };
+  const s = styles[color];
+  return (
+    <div className="relative flex items-center justify-center" style={{ width: 260, height: 96 }}>
+      {/* Diamond shape */}
+      <div className="absolute inset-0" style={{
+        background: s.bg,
+        border: `2px solid ${s.border}`,
+        transform: 'rotate(45deg)',
+        borderRadius: 6,
+      }} />
+      {/* Text on top */}
+      <span className="relative z-10 text-center text-xs font-bold leading-snug px-8" style={{ color: s.text }}>
+        {children}
+      </span>
+    </div>
+  );
+}
+
 export default function EpsPost() {
   return (
     <Layout>
@@ -571,6 +605,200 @@ export default function EpsPost() {
                   <p className="text-sm text-slate-600 leading-relaxed">{step.body}</p>
                 </div>
               </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── FLOWCHART ── */}
+        <section className="mb-14 -mt-14">
+          <div className="rounded-2xl border border-slate-200 overflow-hidden">
+            <div className="bg-slate-900 text-white text-sm font-bold px-6 py-3">
+              EPS Lifecycle Options Map — Decision Guide for Irish Operators
+            </div>
+            <div className="bg-white p-6 overflow-x-auto">
+              <div className="min-w-[560px]">
+
+                {/* START */}
+                <div className="flex justify-center mb-2">
+                  <div className="bg-slate-800 text-white text-xs font-bold px-6 py-2 rounded-full">
+                    Acquire packaging
+                  </div>
+                </div>
+                <Arrow />
+
+                {/* DECISION 1 */}
+                <Diamond color="amber">
+                  Is it a SUP-banned EPS food/beverage container for ready-to-eat use?
+                </Diamond>
+
+                {/* Branch row */}
+                <div className="flex items-start justify-center gap-2 mt-1">
+                  {/* YES branch */}
+                  <div className="flex flex-col items-center w-52">
+                    <div className="flex items-center gap-1 mb-1">
+                      <div className="w-12 h-0.5 bg-red-400" />
+                      <span className="text-red-600 text-xs font-bold">YES</span>
+                    </div>
+                    <div className="w-0.5 h-4 bg-red-300" />
+                    <div className="bg-red-50 border-2 border-red-400 rounded-xl p-3 w-full text-center">
+                      <p className="text-red-800 text-xs font-bold mb-1">Stop procurement</p>
+                      <p className="text-red-700 text-xs">Switch to compliant alternatives</p>
+                      <p className="text-red-700 text-xs">Document the change</p>
+                    </div>
+                    <div className="w-0.5 h-4 bg-slate-300 mt-1" />
+                    <Link href="/eco-bagasse-burger-boxes"
+                      className="bg-green-600 text-white text-xs font-bold px-4 py-2 rounded-xl text-center hover:bg-green-700 transition-colors w-full block">
+                      Browse SUP-compliant alternatives →
+                    </Link>
+                  </div>
+
+                  {/* Centre divider */}
+                  <div className="flex flex-col items-center pt-6">
+                    <div className="w-0.5 h-6 bg-slate-300" />
+                    <span className="text-green-600 text-xs font-bold mt-1">NO</span>
+                    <div className="w-0.5 h-4 bg-green-300" />
+                  </div>
+
+                  {/* NO branch continues down — spacer */}
+                  <div className="w-52" />
+                </div>
+
+                {/* DECISION 2 — centred below the NO path */}
+                <div className="flex justify-center mt-2">
+                  <div className="flex flex-col items-center">
+                    <Arrow />
+                    <Diamond color="blue">
+                      Is the EPS clean and segregable at point of discard?
+                    </Diamond>
+
+                    <div className="flex items-start gap-2 mt-1 w-full">
+                      {/* NO branch */}
+                      <div className="flex flex-col items-center w-52">
+                        <div className="flex items-center gap-1 mb-1">
+                          <span className="text-red-600 text-xs font-bold">NO</span>
+                          <div className="w-12 h-0.5 bg-red-400" />
+                        </div>
+                        <div className="w-0.5 h-4 bg-red-300" />
+                        <div className="bg-orange-50 border-2 border-orange-300 rounded-xl p-3 w-full text-center">
+                          <p className="text-orange-800 text-xs font-bold mb-1">Residual waste stream</p>
+                          <p className="text-orange-700 text-xs">or specialist treatment route</p>
+                          <p className="text-orange-700 text-xs mt-1">Reduce contamination at source</p>
+                        </div>
+                      </div>
+
+                      {/* YES path */}
+                      <div className="flex flex-col items-center">
+                        <div className="flex items-center gap-1 mb-1">
+                          <div className="w-6 h-0.5 bg-green-400" />
+                          <span className="text-green-600 text-xs font-bold">YES</span>
+                        </div>
+                        <Arrow />
+                        <Diamond color="purple">
+                          Enough volume to justify densification?
+                        </Diamond>
+
+                        <div className="flex items-start gap-2 mt-1">
+                          {/* YES → compaction */}
+                          <div className="flex flex-col items-center w-44">
+                            <div className="flex items-center gap-1 mb-1">
+                              <span className="text-green-600 text-xs font-bold">YES</span>
+                              <div className="w-8 h-0.5 bg-green-400" />
+                            </div>
+                            <div className="w-0.5 h-4 bg-green-300" />
+                            <div className="bg-green-50 border-2 border-green-400 rounded-xl p-3 w-full text-center">
+                              <p className="text-green-800 text-xs font-bold">On-site compaction / densification</p>
+                              <p className="text-green-700 text-xs mt-1">Contract recycler / offtaker</p>
+                            </div>
+                          </div>
+
+                          {/* NO → separate collection */}
+                          <div className="flex flex-col items-center w-44">
+                            <div className="flex items-center gap-1 mb-1">
+                              <div className="w-8 h-0.5 bg-slate-400" />
+                              <span className="text-slate-600 text-xs font-bold">NO</span>
+                            </div>
+                            <div className="w-0.5 h-4 bg-slate-300" />
+                            <div className="bg-slate-50 border-2 border-slate-300 rounded-xl p-3 w-full text-center">
+                              <p className="text-slate-800 text-xs font-bold">Separate-collection sacks/bales</p>
+                              <p className="text-slate-600 text-xs mt-1">Authorised waste collector</p>
+                              <p className="text-slate-600 text-xs">Monitor costs</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Converge */}
+                        <Arrow />
+                        <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-3 text-center w-72">
+                          <p className="text-blue-800 text-xs font-bold">Recycling market acceptance</p>
+                          <p className="text-blue-600 text-xs mt-1">(briquette / beads / regranulate)</p>
+                        </div>
+                        <Arrow />
+                        <div className="bg-slate-800 text-white rounded-xl p-3 text-center w-72">
+                          <p className="text-white text-xs font-bold">Record weights, destinations &amp; compliance evidence</p>
+                          <p className="text-slate-300 text-xs mt-1">for audits and PPWR readiness</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── PRODUCT LINKS ── */}
+        <section className="mb-14">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">
+            SUP-Compliant Alternatives Available from PrintNPack Ireland
+          </h2>
+          <div className="grid sm:grid-cols-3 gap-5">
+            {[
+              {
+                href: '/eco-bagasse-burger-boxes',
+                img: '/images/products/bagasse-burger-box/1.png',
+                alt: 'Bagasse burger boxes Ireland – compostable EPS alternative',
+                title: 'Bagasse Burger & Food Boxes',
+                desc: 'Compostable, made from sugarcane fibre. Fully SUP-compliant and PPWR-ready. Grease-resistant for hot food.',
+                badge: 'Compostable',
+                badgeColor: 'bg-green-100 text-green-700',
+              },
+              {
+                href: '/plain-packaging',
+                img: '/images/plain-packaging/10928.webp',
+                alt: 'Foil containers Ireland – EPS-free food packaging',
+                title: 'Foil Containers (Plain)',
+                desc: 'Aluminium foil trays for hot and cold food. Widely recyclable, no single-use plastic, available from 500 units.',
+                badge: 'Widely Recyclable',
+                badgeColor: 'bg-blue-100 text-blue-700',
+              },
+              {
+                href: '/custom-pizza-boxes-ireland',
+                img: '/images/pizza-boxes/PIZZA_BOX_5.jpg',
+                alt: 'Custom corrugated pizza boxes Ireland – SUP compliant',
+                title: 'Corrugated Pizza & Food Boxes',
+                desc: 'Corrugated board boxes for pizza, burgers, and takeaway. Recyclable, no EPS, available plain or custom-printed.',
+                badge: 'Recyclable',
+                badgeColor: 'bg-slate-100 text-slate-700',
+              },
+            ].map((p) => (
+              <Link
+                key={p.href}
+                href={p.href}
+                className="group bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-md transition-shadow"
+              >
+                <div className="relative h-40 w-full">
+                  <Image src={p.img} alt={p.alt} fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="33vw" />
+                </div>
+                <div className="p-4">
+                  <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${p.badgeColor}`}>{p.badge}</span>
+                  <h3 className="font-bold text-slate-900 text-sm mt-2 mb-1">{p.title}</h3>
+                  <p className="text-slate-500 text-xs leading-relaxed">{p.desc}</p>
+                  <span className="text-blue-600 text-xs font-semibold mt-2 inline-block group-hover:underline">
+                    View product →
+                  </span>
+                </div>
+              </Link>
             ))}
           </div>
         </section>
