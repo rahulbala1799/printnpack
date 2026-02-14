@@ -28,8 +28,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# local env files
+# local env files (never commit DB URL or secrets)
+.env
 .env*.local
+.env.local
 
 # vercel
 .vercel
@@ -42,3 +44,6 @@ node_modules
 
 # cache
 /cache
+
+# local workflow / chat summary (do not commit)
+PLAIN_PACKAGING_WORKFLOW_README.md
