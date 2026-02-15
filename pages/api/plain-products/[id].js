@@ -14,6 +14,7 @@ function toProduct(row) {
     description: row.description,
     qtyPerCase: row.qty_per_case,
     caseTiers: row.case_tiers || [],
+    costPerCase: row.cost_per_case != null ? Number(row.cost_per_case) : null,
     imageSrc: row.image_src,
     images: row.images || [],
     is_active: row.is_active,
@@ -33,7 +34,7 @@ export default async function handler(req, res) {
 
   try {
     const row = await getRow(
-      'SELECT id, name, category, description, qty_per_case, case_tiers, image_src, images, is_active, sort_order FROM plain_products WHERE id = $1',
+      'SELECT id, name, category, description, qty_per_case, case_tiers, cost_per_case, image_src, images, is_active, sort_order FROM plain_products WHERE id = $1',
       [id]
     );
     const product = toProduct(row);

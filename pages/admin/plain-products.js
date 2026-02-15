@@ -218,20 +218,28 @@ export default function AdminPlainProducts() {
                     </td>
                     <td className="px-4 py-2 font-mono text-xs text-slate-600">{p.id}</td>
                     <td className="px-4 py-2 font-medium text-slate-900 max-w-xs truncate" title={p.name}>
-                      {p.name}
+                      <Link href={`/admin/plain-products/${p.id}`} className="hover:text-blue-600 hover:underline">
+                        {p.name}
+                      </Link>
                     </td>
                     <td className="px-4 py-2 text-slate-600">{p.category}</td>
                     <td className="px-4 py-2 text-slate-600">{p.qtyPerCase || '—'}</td>
                     <td className="px-4 py-2 text-slate-500">
                       {Array.isArray(p.caseTiers) ? p.caseTiers.length : 0} tiers
                     </td>
-                    <td className="px-4 py-2 text-right">
+                    <td className="px-4 py-2 text-right space-x-2">
+                      <Link
+                        href={`/admin/plain-products/${p.id}`}
+                        className="text-blue-600 hover:underline inline-flex items-center gap-1 text-xs"
+                      >
+                        Details
+                      </Link>
                       <Link
                         href={`/plain-packaging/${p.id}`}
                         target="_blank"
-                        className="text-blue-600 hover:underline inline-flex items-center gap-1 text-xs"
+                        className="text-slate-500 hover:text-blue-600 hover:underline inline-flex items-center gap-1 text-xs"
                       >
-                        <FiExternalLink size={12} /> View
+                        <FiExternalLink size={12} /> Site
                       </Link>
                     </td>
                   </tr>
