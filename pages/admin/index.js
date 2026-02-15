@@ -20,6 +20,13 @@ const quickLinks = [
     color: 'bg-blue-500',
   },
   {
+    href: '/admin/plain-products',
+    icon: FiPackage,
+    label: 'Plain Packaging',
+    desc: 'View plain packaging products (from DB)',
+    color: 'bg-amber-500',
+  },
+  {
     href: '/admin/email-config',
     icon: FiMail,
     label: 'Email Settings',

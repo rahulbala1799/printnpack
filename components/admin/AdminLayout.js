@@ -7,11 +7,12 @@ import {
 } from 'react-icons/fi';
 
 const navItems = [
-  { href: '/admin',          label: 'Dashboard',    icon: FiGrid },
-  { href: '/admin/products', label: 'Products',     icon: FiPackage },
-  { href: '/admin/blog',     label: 'Blog Posts',   icon: FiFileText },
-  { href: '/admin/email-config', label: 'Email',    icon: FiMail },
-  { href: '/admin/settings', label: 'Settings',     icon: FiSettings },
+  { href: '/admin',               label: 'Dashboard',       icon: FiGrid },
+  { href: '/admin/products',      label: 'Products',        icon: FiPackage },
+  { href: '/admin/plain-products', label: 'Plain Packaging', icon: FiPackage },
+  { href: '/admin/blog',          label: 'Blog Posts',       icon: FiFileText },
+  { href: '/admin/email-config',  label: 'Email',           icon: FiMail },
+  { href: '/admin/settings',      label: 'Settings',        icon: FiSettings },
 ];
 
 export default function AdminLayout({ children, title = 'Admin' }) {
