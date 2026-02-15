@@ -103,9 +103,12 @@ const LoginPage = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-md mx-auto">
             <div className="bg-white rounded-lg shadow-lg p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
                 Sign In
               </h2>
+              <p className="text-gray-500 text-sm text-center mb-6">
+                Use your email and password. Admin, staff and customer accounts all sign in here.
+              </p>
 
               {errorMessage && (
                 <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg">
