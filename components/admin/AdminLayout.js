@@ -20,12 +20,8 @@ export default function AdminLayout({ children, title = 'Admin' }) {
   const [adminUser, setAdminUser] = useState('Admin');
 
   useEffect(() => {
-    const hasToken = document.cookie.split(';').some((c) => c.trim().startsWith('token='));
-    if (!hasToken) {
-      router.replace('/login');
-      return;
-    }
-    fetch('/api/auth/me')
+    // HttpOnly cookie is not visible to JS — use /api/auth/me (cookie is sent automatically)
+    fetch('/api/auth/me', { credentials: 'include' })
       .then((res) => res.ok ? res.json() : Promise.reject())
       .then((data) => data.user?.name && setAdminUser(data.user.name))
       .catch(() => router.replace('/login'));

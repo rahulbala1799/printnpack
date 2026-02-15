@@ -41,7 +41,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/auth/me')
+    fetch('/api/auth/me', { credentials: 'include' })
       .then((res) => {
         if (!res.ok) throw new Error('Not authenticated');
         return res.json();
