@@ -402,9 +402,23 @@ const QuoteDrawer = ({ items, onClose, onRemove, onUpdateTier, onUpdateCases }) 
           name: form.name,
           email: form.email,
           phone: form.phone,
+          company: form.company || undefined,
           subject: `Plain Packaging Quote${form.company ? ` — ${form.company}` : ''} (${items.length} line${items.length !== 1 ? 's' : ''})`,
           message: `Name: ${form.name}${form.company ? `\nCompany: ${form.company}` : ''}\nPhone: ${form.phone}\nEmail: ${form.email}\n\nQuote Lines:\n${lines}\n\nSubtotal (ex. VAT): ${fmt(subtotal)}\nVAT (23%): ${fmt(vat)}\nTotal (inc. VAT): ${fmt(total)}\n\nNotes: ${form.notes || 'None'}`,
           source: 'Plain Packaging Quote Builder',
+          quoteItems: items.map(it => ({
+            name: it.product.name,
+            code: it.product.code,
+            qtyPerCase: it.product.qtyPerCase,
+            numCases: it.numCases,
+            tier: it.tier.casesLabel,
+            unitPrice: discountedPrice(it.tier.pricePerCase),
+            lineTotal: Math.round(discountedPrice(it.tier.pricePerCase) * it.numCases * 100) / 100,
+          })),
+          quoteSubtotal: Math.round(subtotal * 100) / 100,
+          quoteVat: Math.round(vat * 100) / 100,
+          quoteTotal: Math.round(total * 100) / 100,
+          quoteNotes: form.notes || '',
         }),
       });
       setStep('success');
