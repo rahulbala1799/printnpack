@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import AdminLayout from '../../components/admin/AdminLayout';
 import products from '../../data/products';
 import {
-  FiPackage, FiGrid, FiMail, FiArrowRight,
+  FiPackage, FiGrid, FiMail, FiArrowRight, FiUsers,
   FiTrendingUp, FiAlertCircle, FiCheckCircle,
 } from 'react-icons/fi';
 
@@ -25,6 +25,13 @@ const quickLinks = [
     label: 'Plain Packaging',
     desc: 'View plain packaging products (from DB)',
     color: 'bg-amber-500',
+  },
+  {
+    href: '/admin/leads',
+    icon: FiUsers,
+    label: 'Leads',
+    desc: 'Contact & quote form pipeline',
+    color: 'bg-cyan-500',
   },
   {
     href: '/admin/email-config',

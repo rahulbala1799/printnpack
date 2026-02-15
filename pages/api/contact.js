@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import { query } from '../../lib/database';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -6,36 +7,56 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { name, email, phone, message, productInterest } = req.body;
+    const body = req.body || {};
+    const { name, email, phone, message, productInterest, subject: bodySubject, source: bodySource, company } = body;
 
     // Validate required fields
     if (!name || !email || !message) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    // Log the attempt
-  
-    
-    // Check if environment variables are loaded
-    if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+    // Save as lead first (so we never lose a submission)
+    const leadSource = bodySource || productInterest || 'Contact';
+    const emailSubject = bodySubject || `New Contact Form Submission - ${productInterest || leadSource}`;
+    if (process.env.DATABASE_URL) {
+      try {
+        await query(
+          `INSERT INTO leads (source, name, email, phone, company, subject, message, payload, status)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 'new')`,
+          [
+            leadSource,
+            name,
+            email,
+            phone || null,
+            company || null,
+            emailSubject,
+            message,
+            JSON.stringify(body),
+          ]
+        );
+      } catch (leadErr) {
+        console.error('Lead save failed:', leadErr);
+        // Continue to send email
+      }
+    }
 
-      return res.status(500).json({ 
+    // Email via Gmail
+    if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+      return res.status(500).json({
         message: 'Email service not configured properly',
-        error: 'Missing email credentials'
+        error: 'Missing email credentials',
       });
     }
 
-    // Create a transporter using Gmail SMTP
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: process.env.GMAIL_USER,
         pass: process.env.GMAIL_APP_PASSWORD,
       },
-      debug: false
+      debug: false,
     });
 
-    // Verify SMTP connection
     try {
       await transporter.verify();
     } catch (verifyError) {
@@ -44,17 +65,17 @@ export default async function handler(req, res) {
       });
     }
 
-    // Email content
     const mailOptions = {
       from: `"${name}" <${process.env.GMAIL_USER}>`,
       to: 'info@printnpack.ie',
       replyTo: email,
-      subject: `New Contact Form Submission - ${productInterest}`,
+      subject: emailSubject,
       text: `
 Name: ${name}
 Email: ${email}
 Phone: ${phone || 'Not provided'}
-Product Interest: ${productInterest}
+Company: ${company || 'Not provided'}
+Product Interest: ${productInterest || leadSource}
 
 Message:
 ${message}
@@ -64,18 +85,18 @@ ${message}
 <p><strong>Name:</strong> ${name}</p>
 <p><strong>Email:</strong> ${email}</p>
 <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-<p><strong>Product Interest:</strong> ${productInterest}</p>
+${company ? `<p><strong>Company:</strong> ${company}</p>` : ''}
+<p><strong>Source:</strong> ${leadSource}</p>
 <h3>Message:</h3>
-<p>${message.replace(/\n/g, '<br>')}</p>
+<p>${(message || '').replace(/\n/g, '<br>')}</p>
       `,
     };
 
-    // Send the email
     const info = await transporter.sendMail(mailOptions);
 
-    res.status(200).json({ 
+    res.status(200).json({
       message: 'Email sent successfully',
-      messageId: info.messageId 
+      messageId: info.messageId,
     });
   } catch (error) {
     res.status(500).json({
