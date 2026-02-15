@@ -35,13 +35,19 @@ const LoginPage = () => {
           headers: {
             'Content-Type': 'application/json',
           },
+          credentials: 'include',
           body: JSON.stringify(values),
         });
 
-        const data = await response.json();
+        let data;
+        try {
+          data = await response.json();
+        } catch {
+          data = {};
+        }
 
         if (!response.ok) {
-          throw new Error(data.error || 'Login failed');
+          throw new Error(data.error || `Login failed (${response.status})`);
         }
 
         // Redirect based on role
