@@ -8,6 +8,13 @@ import {
   FiPackage, FiSearch, FiExternalLink, FiImage, FiTag, FiRefreshCw,
 } from 'react-icons/fi';
 
+function marginAtLowestTier(costPerCase, caseTiers) {
+  if (costPerCase == null || costPerCase <= 0 || !Array.isArray(caseTiers) || caseTiers.length === 0) return null;
+  const minPrice = Math.min(...caseTiers.map((t) => t.pricePerCase));
+  const pct = ((minPrice - costPerCase) / costPerCase) * 100;
+  return Math.round(pct * 10) / 10;
+}
+
 export default function AdminPlainProducts() {
   const router = useRouter();
   const [allowed, setAllowed] = useState(false);
@@ -173,13 +180,14 @@ export default function AdminPlainProducts() {
                 <th className="text-left px-4 py-3 text-slate-500 font-semibold text-xs uppercase tracking-wider">Category</th>
                 <th className="text-left px-4 py-3 text-slate-500 font-semibold text-xs uppercase tracking-wider w-28">Qty / case</th>
                 <th className="text-left px-4 py-3 text-slate-500 font-semibold text-xs uppercase tracking-wider w-24">Tiers</th>
-                <th className="text-right px-4 py-3 text-slate-500 font-semibold text-xs uppercase tracking-wider w-20">View</th>
+                <th className="text-right px-4 py-3 text-slate-500 font-semibold text-xs uppercase tracking-wider w-20">Margin</th>
+                <th className="text-right px-4 py-3 text-slate-500 font-semibold text-xs uppercase tracking-wider w-24">View</th>
               </tr>
             </thead>
             <tbody>
               {filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="px-4 py-8 text-center text-slate-500">
+                  <td colSpan={8} className="px-4 py-8 text-center text-slate-500">
                     {products.length === 0 ? (
                       loading ? (
                         <span className="inline-flex items-center gap-2">
@@ -226,6 +234,15 @@ export default function AdminPlainProducts() {
                     <td className="px-4 py-2 text-slate-600">{p.qtyPerCase || '—'}</td>
                     <td className="px-4 py-2 text-slate-500">
                       {Array.isArray(p.caseTiers) ? p.caseTiers.length : 0} tiers
+                    </td>
+                    <td className="px-4 py-2 text-right">
+                      {marginAtLowestTier(p.costPerCase, p.caseTiers) != null ? (
+                        <span className="text-emerald-600 font-medium">
+                          {marginAtLowestTier(p.costPerCase, p.caseTiers)}%
+                        </span>
+                      ) : (
+                        <span className="text-slate-400">—</span>
+                      )}
                     </td>
                     <td className="px-4 py-2 text-right space-x-2">
                       <Link

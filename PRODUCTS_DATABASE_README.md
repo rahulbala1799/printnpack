@@ -124,6 +124,9 @@ Image overrides (per product code) can live in the same table (`image_src`, `ima
 5. **Excel updates** – When the Excel file changes, run the Python script to regenerate `plain-products-tiered.js`, then run `npm run sync-plain-products` (or trigger via **cron**) so the DB stays in sync.
 6. **Cron (recommended)** – Call the sync regularly (e.g. Vercel Cron, GitHub Actions, or `GET /api/cron/sync-plain-products?secret=...`) so the DB mirrors the site.
 7. **Admin (optional)** – Wire admin plain-products list to `GET /api/plain-products`. Later, admin can edit products in the DB; sync can overwrite only tiered fields to keep manual overrides.
+8. **Cost prices** – Optional. `plain_products.cost_per_case` holds cost per case (admin-only). Import from **Price Adj September 2025.xlsx** (sheet “Price Adj September 2025”, column **Current Price** = cost):  
+   `python3 scripts/export-cost-from-price-adj.py [path/to/Price Adj September 2025.xlsx] | node scripts/import-cost-to-db.js`  
+   Or put the file in repo root or `~/Downloads` and run `npm run import-cost-prices`. Admin list and product detail then show **tier margins** (margin % at each selling tier).
 
 ---
 

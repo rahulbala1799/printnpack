@@ -13,6 +13,7 @@ function toProduct(row) {
     description: row.description,
     qtyPerCase: row.qty_per_case,
     caseTiers: row.case_tiers || [],
+    costPerCase: row.cost_per_case != null ? Number(row.cost_per_case) : null,
     imageSrc: row.image_src,
     images: row.images || [],
     is_active: row.is_active,
@@ -30,12 +31,12 @@ export default async function handler(req, res) {
     let rows;
     if (category && category !== 'All') {
       rows = await getRows(
-        'SELECT id, name, category, description, qty_per_case, case_tiers, image_src, images, is_active, sort_order FROM plain_products WHERE is_active = true AND category = $1 ORDER BY sort_order, name',
+        'SELECT id, name, category, description, qty_per_case, case_tiers, cost_per_case, image_src, images, is_active, sort_order FROM plain_products WHERE is_active = true AND category = $1 ORDER BY sort_order, name',
         [category]
       );
     } else {
       rows = await getRows(
-        'SELECT id, name, category, description, qty_per_case, case_tiers, image_src, images, is_active, sort_order FROM plain_products WHERE is_active = true ORDER BY sort_order, name'
+        'SELECT id, name, category, description, qty_per_case, case_tiers, cost_per_case, image_src, images, is_active, sort_order FROM plain_products WHERE is_active = true ORDER BY sort_order, name'
       );
     }
     const categories = [...new Set(rows.map((r) => r.category))].sort();

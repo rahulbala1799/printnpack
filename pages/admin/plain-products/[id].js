@@ -79,6 +79,11 @@ export default function AdminPlainProductDetail() {
   const minSelling = tiers.length ? Math.min(...tiers.map((t) => t.pricePerCase)) : null;
   const maxSelling = tiers.length ? Math.max(...tiers.map((t) => t.pricePerCase)) : null;
   const cost = product?.costPerCase ?? null;
+  const tierMargins = cost != null && cost > 0 && tiers.length
+    ? tiers.map((t) => marginPercent(cost, t.pricePerCase)).filter((m) => m != null)
+    : [];
+  const minMargin = tierMargins.length ? Math.min(...tierMargins) : null;
+  const maxMargin = tierMargins.length ? Math.max(...tierMargins) : null;
 
   return (
     <AdminLayout title={product ? product.name : 'Product'}>
@@ -233,12 +238,22 @@ export default function AdminPlainProductDetail() {
                   </span>
                 </div>
                 {cost != null && minSelling != null && (
-                  <div className="pt-3 border-t border-slate-100">
-                    <p className="text-xs text-slate-500 mb-1">Margin at lowest tier</p>
-                    <p className="text-lg font-semibold text-emerald-600">
-                      {marginPercent(cost, minSelling) != null ? `${marginPercent(cost, minSelling)}%` : '—'}
-                    </p>
-                  </div>
+                  <>
+                    <div className="pt-3 border-t border-slate-100">
+                      <p className="text-xs text-slate-500 mb-1">Margin at lowest tier</p>
+                      <p className="text-lg font-semibold text-emerald-600">
+                        {marginPercent(cost, minSelling) != null ? `${marginPercent(cost, minSelling)}%` : '—'}
+                      </p>
+                    </div>
+                    {minMargin != null && maxMargin != null && (
+                      <div className="pt-3 border-t border-slate-100">
+                        <p className="text-xs text-slate-500 mb-1">Tier margin range</p>
+                        <p className="text-sm font-medium text-slate-700">
+                          <span className="text-emerald-600">{minMargin}%</span> (lowest tier) – <span className="text-emerald-600">{maxMargin}%</span> (highest tier)
+                        </p>
+                      </div>
+                    )}
+                  </>
                 )}
                 {cost == null && (
                   <p className="text-sm text-slate-500 italic">
