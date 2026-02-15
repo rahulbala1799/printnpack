@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Layout from '../../components/layout/Layout';
+import AdminLayout from '../../components/admin/AdminLayout';
 import Head from 'next/head';
 import { FaEnvelope, FaKey, FaCheck, FaPaperPlane } from 'react-icons/fa';
 
@@ -107,15 +107,14 @@ const EmailConfig = () => {
   };
 
   return (
-    <Layout>
+    <AdminLayout title="Email Configuration">
       <Head>
-        <title>Email Configuration - printNpack Admin</title>
+        <title>Email Configuration — PrintNPack Admin</title>
+        <meta name="robots" content="noindex" />
       </Head>
 
-      <div className="min-h-screen bg-gray-100 py-12">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl font-bold text-gray-900 mb-8">Email Configuration</h1>
+      <div className="max-w-2xl">
+            <h2 className="text-xl font-bold text-slate-900 mb-6">Gmail Settings</h2>
 
             {/* Configuration Form */}
             <div className="bg-white rounded-lg shadow-md p-6 mb-8">
@@ -240,10 +239,8 @@ const EmailConfig = () => {
                 </div>
               </div>
             )}
-          </div>
-        </div>
       </div>
-    </Layout>
+    </AdminLayout>
   );
 };
 
