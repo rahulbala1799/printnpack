@@ -1,9 +1,17 @@
 import { verifyPassword, signToken, setAuthCookie } from '../../../lib/auth.js';
 import { getRow, query } from '../../../lib/database.js';
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '1mb',
+    },
+  },
+};
+
 export default async function handler(req, res) {
   // Allow CORS preflight
-  if (req.method === 'OPTIONS') {
+  if ((req.method || '').toUpperCase() === 'OPTIONS') {
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -11,8 +19,15 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed', received: req.method });
+  // Accept POST (case-insensitive; some proxies send "post") or X-HTTP-Method-Override: POST
+  const method = (req.headers['x-http-method-override'] || req.method || '').toUpperCase();
+  if (method !== 'POST') {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+    return res.status(405).json({
+      error: 'Method not allowed',
+      received: req.method,
+      hint: 'Server expects POST. If you sent POST, a proxy may be changing the method.',
+    });
   }
 
   try {

@@ -30,7 +30,9 @@ const LoginPage = () => {
         setErrorMessage('');
         setIsLoading(true);
 
-        const response = await fetch('/api/auth/login', {
+        // Use same origin to avoid redirects (redirects can turn POST into GET)
+        const apiUrl = typeof window !== 'undefined' ? `${window.location.origin}/api/auth/login` : '/api/auth/login';
+        const response = await fetch(apiUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -47,7 +49,9 @@ const LoginPage = () => {
         }
 
         if (!response.ok) {
-          throw new Error(data.error || `Login failed (${response.status})`);
+          const msg = data.error || `Login failed (${response.status})`;
+          const detail = data.received != null ? ` [server got: ${data.received}]` : '';
+          throw new Error(msg + detail);
         }
 
         // Redirect based on role
