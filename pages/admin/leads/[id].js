@@ -7,23 +7,59 @@ import {
   FiArrowLeft, FiMail, FiPhone, FiUser, FiBriefcase,
   FiMessageSquare, FiTag, FiCalendar, FiEdit3,
   FiCheck, FiX, FiExternalLink, FiChevronRight, FiPackage,
-  FiSave, FiCopy, FiShoppingCart, FiDollarSign, FiInfo,
+  FiSave, FiCopy, FiShoppingCart, FiInfo, FiClock,
+  FiAlertCircle, FiZap, FiActivity,
 } from 'react-icons/fi';
 
 // ─── Stage config ─────────────────────────────────────────────────────────────
 const STAGES = [
-  { id: 'new',        label: 'New',        icon: '🆕', color: 'bg-slate-100 text-slate-700 border-slate-200',      dot: 'bg-slate-400',    activeBg: 'bg-slate-700 text-white'    },
-  { id: 'contacted',  label: 'Contacted',  icon: '📞', color: 'bg-blue-50 text-blue-700 border-blue-200',          dot: 'bg-blue-500',     activeBg: 'bg-blue-600 text-white'     },
-  { id: 'qualified',  label: 'Qualified',  icon: '✅', color: 'bg-amber-50 text-amber-700 border-amber-200',       dot: 'bg-amber-500',    activeBg: 'bg-amber-500 text-white'    },
-  { id: 'quote_sent', label: 'Quote Sent', icon: '📄', color: 'bg-purple-50 text-purple-700 border-purple-200',    dot: 'bg-purple-500',   activeBg: 'bg-purple-600 text-white'   },
-  { id: 'won',        label: 'Won',        icon: '🏆', color: 'bg-emerald-50 text-emerald-700 border-emerald-200', dot: 'bg-emerald-500',  activeBg: 'bg-emerald-600 text-white'  },
-  { id: 'lost',       label: 'Lost',       icon: '❌', color: 'bg-red-50 text-red-600 border-red-200',             dot: 'bg-red-400',      activeBg: 'bg-red-500 text-white'      },
+  {
+    id: 'new', label: 'New', icon: '🆕',
+    color: 'bg-slate-100 text-slate-700 border-slate-200',
+    dot: 'bg-slate-400', activeBg: 'bg-slate-700 text-white',
+    bannerBg: 'from-slate-700 to-slate-800',
+    bannerAccent: 'bg-slate-500/20',
+  },
+  {
+    id: 'contacted', label: 'Contacted', icon: '📞',
+    color: 'bg-blue-50 text-blue-700 border-blue-200',
+    dot: 'bg-blue-500', activeBg: 'bg-blue-600 text-white',
+    bannerBg: 'from-blue-600 to-blue-700',
+    bannerAccent: 'bg-blue-400/20',
+  },
+  {
+    id: 'qualified', label: 'Qualified', icon: '✅',
+    color: 'bg-amber-50 text-amber-700 border-amber-200',
+    dot: 'bg-amber-500', activeBg: 'bg-amber-500 text-white',
+    bannerBg: 'from-amber-500 to-amber-600',
+    bannerAccent: 'bg-amber-300/20',
+  },
+  {
+    id: 'quote_sent', label: 'Quote Sent', icon: '📄',
+    color: 'bg-purple-50 text-purple-700 border-purple-200',
+    dot: 'bg-purple-500', activeBg: 'bg-purple-600 text-white',
+    bannerBg: 'from-purple-600 to-purple-700',
+    bannerAccent: 'bg-purple-400/20',
+  },
+  {
+    id: 'won', label: 'Won', icon: '🏆',
+    color: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    dot: 'bg-emerald-500', activeBg: 'bg-emerald-600 text-white',
+    bannerBg: 'from-emerald-600 to-emerald-700',
+    bannerAccent: 'bg-emerald-400/20',
+  },
+  {
+    id: 'lost', label: 'Lost', icon: '❌',
+    color: 'bg-red-50 text-red-600 border-red-200',
+    dot: 'bg-red-400', activeBg: 'bg-red-500 text-white',
+    bannerBg: 'from-red-500 to-red-600',
+    bannerAccent: 'bg-red-400/20',
+  },
 ];
 
 const PIPELINE_STAGES = ['new', 'contacted', 'qualified', 'quote_sent'];
 const END_STAGES = ['won', 'lost'];
 
-// ─── Avatar gradients ─────────────────────────────────────────────────────────
 const GRADIENTS = [
   'from-blue-500 to-indigo-600', 'from-violet-500 to-purple-700',
   'from-emerald-500 to-teal-700', 'from-amber-500 to-orange-600',
@@ -42,6 +78,13 @@ function formatDateFull(d) {
   });
 }
 
+function formatDateShort(d) {
+  if (!d) return '—';
+  return new Date(d).toLocaleDateString('en-IE', {
+    day: 'numeric', month: 'short', year: 'numeric',
+  });
+}
+
 function timeAgo(d) {
   if (!d) return '';
   const diff = Date.now() - new Date(d).getTime();
@@ -50,11 +93,70 @@ function timeAgo(d) {
   if (mins < 60) return `${mins}m ago`;
   const hrs = Math.floor(mins / 60);
   if (hrs < 24) return `${hrs}h ago`;
-  return `${Math.floor(hrs / 24)}d ago`;
+  const days = Math.floor(hrs / 24);
+  if (days === 1) return 'yesterday';
+  return `${days}d ago`;
+}
+
+function getAgeDays(dateStr) {
+  return Math.floor((Date.now() - new Date(dateStr)) / 86400000);
 }
 
 function fmt(n) {
   return `€${Number(n).toFixed(2)}`;
+}
+
+function getUrgency(lead) {
+  if (!lead) return null;
+  const age = getAgeDays(lead.created_at);
+  if (['won', 'lost'].includes(lead.status)) return null;
+  if (lead.status === 'new' && age >= 3) return 'critical';
+  if (lead.status === 'quote_sent' && age >= 5) return 'critical';
+  if (lead.status === 'contacted' && age >= 5) return 'high';
+  if (lead.status === 'qualified' && age >= 7) return 'high';
+  if (age >= 2) return 'medium';
+  return 'low';
+}
+
+function UrgencyBadge({ lead }) {
+  const u = getUrgency(lead);
+  if (!u || u === 'low') return null;
+  if (u === 'critical') return (
+    <span className="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full bg-red-100 text-red-700 border border-red-200">
+      <FiAlertCircle size={11} /> Needs immediate follow-up
+    </span>
+  );
+  if (u === 'high') return (
+    <span className="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full bg-orange-100 text-orange-700 border border-orange-200">
+      <FiZap size={11} /> Follow up soon
+    </span>
+  );
+  return (
+    <span className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200">
+      <FiClock size={11} /> Follow up recommended
+    </span>
+  );
+}
+
+// ─── Activity log (localStorage) ─────────────────────────────────────────────
+function loadActivity(leadId) {
+  try {
+    const raw = localStorage.getItem(`lead_activity_${leadId}`);
+    return raw ? JSON.parse(raw) : [];
+  } catch { return []; }
+}
+
+function saveActivity(leadId, events) {
+  try {
+    localStorage.setItem(`lead_activity_${leadId}`, JSON.stringify(events.slice(0, 20)));
+  } catch {}
+}
+
+function addActivityEvent(leadId, event) {
+  const existing = loadActivity(leadId);
+  const updated = [{ ...event, ts: new Date().toISOString() }, ...existing];
+  saveActivity(leadId, updated);
+  return updated;
 }
 
 // ─── Parse plain-text quote message (legacy fallback) ─────────────────────────
@@ -69,12 +171,7 @@ function parseQuoteLines(message) {
     if (inLines && line.includes(' | ')) {
       const parts = line.split(' | ');
       if (parts.length === 4) {
-        items.push({
-          nameCode: parts[0],
-          qtyPerCase: parts[1],
-          casesAtTier: parts[2],
-          priceTotal: parts[3],
-        });
+        items.push({ nameCode: parts[0], qtyPerCase: parts[1], casesAtTier: parts[2], priceTotal: parts[3] });
       }
     }
     if (line.startsWith('Subtotal')) subtotal = line.split(': ')[1] || '';
@@ -145,11 +242,10 @@ function InfoRow({ icon: Icon, label, value, href, mono, onCopy }) {
   );
 }
 
-// ─── Plain packaging quote table ──────────────────────────────────────────────
+// ─── Quote table ──────────────────────────────────────────────────────────────
 function QuoteTable({ lead }) {
   const p = lead.payload || {};
 
-  // Prefer structured quoteItems (new format)
   if (p.quoteItems && p.quoteItems.length > 0) {
     return (
       <SectionCard title="Quote Request" icon={FiShoppingCart} badge={`${p.quoteItems.length} line${p.quoteItems.length !== 1 ? 's' : ''}`}>
@@ -190,8 +286,6 @@ function QuoteTable({ lead }) {
             </tbody>
           </table>
         </div>
-
-        {/* Totals */}
         <div className="mt-4 pt-4 border-t border-slate-100 space-y-1.5">
           <div className="flex justify-between text-sm">
             <span className="text-slate-500">Subtotal (ex. VAT)</span>
@@ -206,7 +300,6 @@ function QuoteTable({ lead }) {
             <span className="text-emerald-700">{fmt(p.quoteTotal)}</span>
           </div>
         </div>
-
         {p.quoteNotes && (
           <div className="mt-4 p-3 bg-amber-50 border border-amber-100 rounded-xl">
             <p className="text-xs font-bold text-amber-700 uppercase tracking-wider mb-1">Customer Notes</p>
@@ -217,7 +310,6 @@ function QuoteTable({ lead }) {
     );
   }
 
-  // Fallback: parse text message
   const parsed = parseQuoteLines(lead.message);
   if (parsed) {
     return (
@@ -252,7 +344,7 @@ function QuoteTable({ lead }) {
   return <MessageSection lead={lead} />;
 }
 
-// ─── Regular message section ──────────────────────────────────────────────────
+// ─── Message section ──────────────────────────────────────────────────────────
 function MessageSection({ lead }) {
   return (
     <SectionCard title="Enquiry Details" icon={FiMessageSquare}>
@@ -265,12 +357,10 @@ function MessageSection({ lead }) {
       {lead.message ? (
         <div>
           <p className="text-xs text-slate-400 font-medium uppercase tracking-wider mb-3">Message</p>
-          {/* Message bubble */}
           <div className="relative">
             <div className="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-2xl rounded-tl-sm p-5 shadow-sm">
               <p className="text-sm text-slate-800 leading-relaxed whitespace-pre-wrap">{lead.message}</p>
             </div>
-            {/* Tail */}
             <div className="absolute top-0 -left-1.5 w-3 h-3 bg-slate-50 border-l border-t border-slate-200 rotate-[-45deg] rounded-sm" />
           </div>
           <div className="flex items-center gap-2 mt-3 pl-2">
@@ -299,8 +389,6 @@ function PipelineStepper({ lead, onUpdate, saving }) {
   const currentStage = STAGES.find((s) => s.id === lead.status) || STAGES[0];
   const pipelineIdx = PIPELINE_STAGES.indexOf(lead.status);
   const isEnd = END_STAGES.includes(lead.status);
-
-  // Progress %: each pipeline stage = 25%
   const progressPct = isEnd
     ? lead.status === 'won' ? 100 : 0
     : Math.round(((pipelineIdx + 1) / PIPELINE_STAGES.length) * 100);
@@ -323,9 +411,9 @@ function PipelineStepper({ lead, onUpdate, saving }) {
       </div>
 
       {/* Progress bar */}
-      <div className="h-1.5 bg-slate-100 rounded-full mb-5 overflow-hidden">
+      <div className="h-2 bg-slate-100 rounded-full mb-5 overflow-hidden">
         <div
-          className={`h-full rounded-full transition-all duration-500 ${lead.status === 'won' ? 'bg-emerald-500' : lead.status === 'lost' ? 'bg-red-400' : 'bg-blue-500'}`}
+          className={`h-full rounded-full transition-all duration-700 ${lead.status === 'won' ? 'bg-emerald-500' : lead.status === 'lost' ? 'bg-red-400' : 'bg-blue-500'}`}
           style={{ width: `${progressPct}%` }}
         />
       </div>
@@ -346,7 +434,7 @@ function PipelineStepper({ lead, onUpdate, saving }) {
                 onClick={() => isClickable && onUpdate(sid)}
                 disabled={!isClickable}
                 title={isClickable ? `Move to ${stage.label}` : undefined}
-                className={`flex flex-col items-center gap-1 px-3 py-2 rounded-xl transition-all shrink-0 ${
+                className={`flex flex-col items-center gap-1 px-3 py-2.5 rounded-xl transition-all shrink-0 min-w-[72px] ${
                   isCurrent
                     ? `${stage.activeBg} shadow-md scale-105`
                     : isPast
@@ -363,10 +451,8 @@ function PipelineStepper({ lead, onUpdate, saving }) {
           );
         })}
 
-        {/* Separator */}
         <div className="h-0.5 w-4 shrink-0 bg-slate-200 mx-1" />
 
-        {/* Won / Lost */}
         <div className="flex gap-1.5 shrink-0">
           {END_STAGES.map((sid) => {
             const stage = STAGES.find((s) => s.id === sid);
@@ -376,7 +462,7 @@ function PipelineStepper({ lead, onUpdate, saving }) {
                 key={sid}
                 onClick={() => !isCurrent && !saving && onUpdate(sid)}
                 disabled={isCurrent || saving}
-                className={`flex flex-col items-center gap-1 px-3 py-2 rounded-xl border transition-all shrink-0 ${
+                className={`flex flex-col items-center gap-1 px-3 py-2.5 rounded-xl border transition-all shrink-0 min-w-[64px] ${
                   isCurrent
                     ? `${stage.activeBg} border-transparent shadow-md scale-105`
                     : sid === 'won'
@@ -396,7 +482,7 @@ function PipelineStepper({ lead, onUpdate, saving }) {
         <button
           onClick={() => onUpdate('new')}
           disabled={saving}
-          className="mt-3 text-xs text-blue-600 hover:underline"
+          className="mt-4 text-xs text-blue-600 hover:underline font-medium flex items-center gap-1"
         >
           ↩ Reopen as New
         </button>
@@ -405,9 +491,66 @@ function PipelineStepper({ lead, onUpdate, saving }) {
   );
 }
 
-// ─── Notes with keyboard shortcut ─────────────────────────────────────────────
+// ─── Activity timeline ────────────────────────────────────────────────────────
+function ActivityTimeline({ events, lead }) {
+  if (events.length === 0) {
+    return (
+      <div className="flex items-start gap-3 py-3">
+        <div className="w-7 h-7 bg-slate-100 rounded-full flex items-center justify-center shrink-0">
+          <FiActivity size={12} className="text-slate-400" />
+        </div>
+        <div className="pt-1">
+          <p className="text-xs text-slate-500">Lead created</p>
+          <p className="text-xs text-slate-400 mt-0.5">{timeAgo(lead.created_at)}</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-0">
+      {events.map((event, i) => {
+        const stage = STAGES.find(s => s.id === event.toStage);
+        return (
+          <div key={i} className="flex items-start gap-3 py-2.5 relative">
+            {i < events.length - 1 && (
+              <div className="absolute left-3.5 top-9 bottom-0 w-px bg-slate-100" />
+            )}
+            <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-xs ${
+              event.type === 'stage_change'
+                ? stage ? `${stage.activeBg}` : 'bg-slate-200'
+                : 'bg-blue-100'
+            }`}>
+              {event.type === 'stage_change' ? (stage?.icon || '→') : '📝'}
+            </div>
+            <div className="pt-0.5 min-w-0">
+              <p className="text-xs font-semibold text-slate-700">
+                {event.type === 'stage_change'
+                  ? `Moved to ${stage?.label || event.toStage}`
+                  : event.label}
+              </p>
+              <p className="text-xs text-slate-400 mt-0.5">{timeAgo(event.ts)}</p>
+            </div>
+          </div>
+        );
+      })}
+      <div className="flex items-start gap-3 py-2.5">
+        <div className="w-7 h-7 bg-slate-100 rounded-full flex items-center justify-center shrink-0">
+          <FiActivity size={12} className="text-slate-400" />
+        </div>
+        <div className="pt-0.5">
+          <p className="text-xs text-slate-500">Lead received</p>
+          <p className="text-xs text-slate-400 mt-0.5">{formatDateShort(lead.created_at)} · {timeAgo(lead.created_at)}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Notes card ───────────────────────────────────────────────────────────────
 function NotesCard({ notes, setNotes, onSave, saving, saved, original }) {
   const isDirty = notes !== original;
+  const charCount = notes.length;
 
   const handleKeyDown = (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
@@ -427,14 +570,19 @@ function NotesCard({ notes, setNotes, onSave, saving, saved, original }) {
         className="w-full text-sm text-slate-800 bg-slate-50 border border-slate-200 rounded-xl p-3.5 resize-none focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all placeholder-slate-400 leading-relaxed"
       />
       <div className="flex items-center justify-between mt-2">
-        <span className="text-xs text-slate-400">
-          <kbd className="px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-xs font-mono">
-            {typeof window !== 'undefined' && navigator.platform?.includes('Mac') ? '⌘' : 'Ctrl'}
-          </kbd>
-          {' + '}
-          <kbd className="px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-xs font-mono">↵</kbd>
-          {' to save'}
-        </span>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-slate-400">
+            <kbd className="px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-xs font-mono">
+              {typeof window !== 'undefined' && navigator.platform?.includes('Mac') ? '⌘' : 'Ctrl'}
+            </kbd>
+            {' + '}
+            <kbd className="px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-xs font-mono">↵</kbd>
+            {' to save'}
+          </span>
+          {charCount > 0 && (
+            <span className="text-xs text-slate-400">{charCount} chars</span>
+          )}
+        </div>
         <button
           onClick={onSave}
           disabled={saving || !isDirty}
@@ -453,6 +601,88 @@ function NotesCard({ notes, setNotes, onSave, saving, saved, original }) {
   );
 }
 
+// ─── Quick reply templates ────────────────────────────────────────────────────
+function QuickReplyCard({ lead, isQuote }) {
+  const [expanded, setExpanded] = useState(null);
+
+  const templates = [
+    {
+      id: 'followup',
+      label: 'Initial Follow-Up',
+      icon: '👋',
+      subject: `Re: Your enquiry to PrintNPack`,
+      body: `Hi ${lead.name},\n\nThank you for reaching out to PrintNPack Ireland. I'd be happy to help with your packaging requirements.\n\nCould you let me know:\n- Approximate quantities you need\n- Any artwork/branding you have ready\n- Your preferred timeline\n\nLooking forward to hearing from you.\n\nBest regards,\nPrintNPack Ireland`,
+    },
+    {
+      id: 'quote',
+      label: 'Send Quote',
+      icon: '📋',
+      subject: `Quote from PrintNPack — ${lead.subject || 'Your Enquiry'}`,
+      body: `Hi ${lead.name},\n\nPlease find attached your quote from PrintNPack Ireland.\n\nDon't hesitate to get in touch if you have any questions.\n\nBest regards,\nPrintNPack Ireland`,
+    },
+    ...(isQuote ? [{
+      id: 'quote_followup',
+      label: 'Quote Follow-Up',
+      icon: '🔄',
+      subject: `Re: ${lead.subject || 'Plain Packaging Quote'}`,
+      body: `Hi ${lead.name},\n\nThank you for submitting your plain packaging quote request. We're reviewing your requirements and will have a formal quote ready shortly.\n\nIf you have any questions in the meantime, feel free to reply to this email.\n\nKind regards,\nPrintNPack Ireland`,
+    }] : []),
+    {
+      id: 'artwork',
+      label: 'Request Artwork',
+      icon: '🎨',
+      subject: `Artwork Required — PrintNPack`,
+      body: `Hi ${lead.name},\n\nTo proceed with your order we need your artwork files.\n\nPlease send:\n- PDF or AI file (300 DPI minimum)\n- Brand colour references (Pantone / CMYK / HEX)\n\nThanks,\nPrintNPack Ireland`,
+    },
+  ];
+
+  const selected = templates.find(t => t.id === expanded);
+
+  return (
+    <SectionCard title="Quick Reply Templates" icon={FiMail}>
+      <div className="flex flex-wrap gap-2 mb-3">
+        {templates.map(({ id, label, icon }) => (
+          <button
+            key={id}
+            onClick={() => setExpanded(expanded === id ? null : id)}
+            className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-xl border transition-all ${
+              expanded === id
+                ? 'bg-blue-600 text-white border-blue-600'
+                : 'bg-slate-50 border-slate-200 text-slate-700 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700'
+            }`}
+          >
+            <span>{icon}</span> {label}
+          </button>
+        ))}
+      </div>
+
+      {selected && (
+        <div className="border border-slate-200 rounded-xl overflow-hidden">
+          <div className="bg-slate-50 border-b border-slate-200 px-3.5 py-2.5">
+            <p className="text-xs text-slate-500 font-medium">To: <span className="text-slate-700">{lead.email}</span></p>
+            <p className="text-xs text-slate-500 font-medium mt-0.5">Subject: <span className="text-slate-700">{selected.subject}</span></p>
+          </div>
+          <div className="p-3.5 bg-white">
+            <p className="text-xs text-slate-700 leading-relaxed whitespace-pre-wrap font-mono">{selected.body}</p>
+          </div>
+          <div className="bg-slate-50 border-t border-slate-200 px-3.5 py-2.5">
+            <a
+              href={`mailto:${lead.email}?subject=${encodeURIComponent(selected.subject)}&body=${encodeURIComponent(selected.body)}`}
+              className="flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors"
+            >
+              <FiMail size={12} /> Open in email client <FiExternalLink size={10} />
+            </a>
+          </div>
+        </div>
+      )}
+
+      {!selected && (
+        <p className="text-xs text-slate-400">Select a template above to preview and send.</p>
+      )}
+    </SectionCard>
+  );
+}
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function LeadDetail() {
   const router = useRouter();
@@ -465,6 +695,7 @@ export default function LeadDetail() {
   const [savingNotes, setSavingNotes] = useState(false);
   const [notesSaved, setNotesSaved] = useState(false);
   const [stageSaving, setStageSaving] = useState(false);
+  const [activity, setActivity] = useState([]);
 
   // Auth
   useEffect(() => {
@@ -480,13 +711,18 @@ export default function LeadDetail() {
     setLoading(true);
     fetch(`/api/leads/${id}`, { credentials: 'include' })
       .then((r) => { if (!r.ok) throw new Error('Lead not found'); return r.json(); })
-      .then((data) => { setLead(data); setNotes(data.notes || ''); })
+      .then((data) => {
+        setLead(data);
+        setNotes(data.notes || '');
+        setActivity(loadActivity(id));
+      })
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
   }, [id]);
 
   const updateStage = useCallback(async (newStatus) => {
     if (!lead || stageSaving) return;
+    const prevStatus = lead.status;
     setStageSaving(true);
     try {
       const res = await fetch(`/api/leads/${id}`, {
@@ -495,7 +731,11 @@ export default function LeadDetail() {
         body: JSON.stringify({ status: newStatus }),
       });
       if (!res.ok) throw new Error('Update failed');
-      setLead(await res.json());
+      const updated = await res.json();
+      setLead(updated);
+      // Track in activity log
+      const events = addActivityEvent(id, { type: 'stage_change', fromStage: prevStatus, toStage: newStatus });
+      setActivity(events);
     } catch (e) { setError(e.message); }
     finally { setStageSaving(false); }
   }, [lead, id, stageSaving]);
@@ -518,10 +758,9 @@ export default function LeadDetail() {
     finally { setSavingNotes(false); }
   }, [lead, id, notes, savingNotes]);
 
-  // ── Loading / error states ──────────────────────────────────────────────────
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-100">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600" />
       </div>
     );
@@ -543,37 +782,12 @@ export default function LeadDetail() {
 
   const currentStage = STAGES.find((s) => s.id === lead.status) || STAGES[0];
   const isQuote = lead.source === 'Plain Packaging Quote Builder';
-  const hasStructuredQuote = isQuote && lead.payload?.quoteItems?.length > 0;
-  const hasParsedQuote = isQuote && !hasStructuredQuote && !!parseQuoteLines(lead.message);
-
-  // Quick reply templates
-  const replyTemplates = [
-    {
-      label: 'Initial Follow-Up',
-      subject: `Re: Your enquiry to PrintNPack`,
-      body: `Hi ${lead.name},\n\nThank you for reaching out to PrintNPack Ireland. I'd be happy to help with your packaging requirements.\n\nCould you let me know:\n- Approximate quantities you need\n- Any artwork/branding you have ready\n- Your preferred timeline\n\nLooking forward to hearing from you.\n\nBest regards,\nPrintNPack Ireland`,
-    },
-    {
-      label: 'Send Quote',
-      subject: `Quote from PrintNPack — ${lead.subject || 'Your Enquiry'}`,
-      body: `Hi ${lead.name},\n\nPlease find attached your quote from PrintNPack Ireland.\n\nDon't hesitate to get in touch if you have any questions.\n\nBest regards,\nPrintNPack Ireland`,
-    },
-    ...(isQuote ? [{
-      label: 'Quote Follow-Up',
-      subject: `Re: ${lead.subject || 'Plain Packaging Quote'}`,
-      body: `Hi ${lead.name},\n\nThank you for submitting your plain packaging quote request. We're reviewing your requirements and will have a formal quote ready shortly.\n\nIf you have any questions in the meantime, feel free to reply to this email.\n\nKind regards,\nPrintNPack Ireland`,
-    }] : []),
-    {
-      label: 'Request Artwork',
-      subject: `Artwork Required — PrintNPack`,
-      body: `Hi ${lead.name},\n\nTo proceed with your order we need your artwork files.\n\nPlease send:\n- PDF or AI file (300 DPI minimum)\n- Brand colour references (Pantone / CMYK / HEX)\n\nThanks,\nPrintNPack Ireland`,
-    },
-  ];
+  const ageDays = getAgeDays(lead.created_at);
 
   return (
     <AdminLayout title={lead.name}>
       <Head>
-        <title>{lead.name} — Lead Detail — PrintNPack Admin</title>
+        <title>{lead.name} — Lead — PrintNPack Admin</title>
         <meta name="robots" content="noindex" />
       </Head>
 
@@ -582,54 +796,55 @@ export default function LeadDetail() {
         href="/admin/leads"
         className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-800 mb-5 transition-colors group"
       >
-        <span className="group-hover:-translate-x-0.5 transition-transform">←</span> Back to pipeline
+        <FiArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform" />
+        Back to pipeline
       </Link>
 
-      {/* ── HERO HEADER ── */}
-      <div className="bg-white border border-slate-200 rounded-2xl p-5 mb-5 shadow-sm">
-        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+      {/* ── STAGE BANNER HEADER ── */}
+      <div className={`bg-gradient-to-r ${currentStage.bannerBg} rounded-2xl p-5 mb-5 text-white shadow-md relative overflow-hidden`}>
+        {/* Decorative background blob */}
+        <div className={`absolute top-0 right-0 w-48 h-48 ${currentStage.bannerAccent} rounded-full -translate-y-1/2 translate-x-1/4`} />
+        <div className={`absolute bottom-0 left-1/3 w-32 h-32 ${currentStage.bannerAccent} rounded-full translate-y-1/2`} />
+
+        <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-start gap-4">
-            {/* Big avatar */}
-            <div className={`w-16 h-16 bg-gradient-to-br ${getGradient(lead.name)} rounded-2xl flex items-center justify-center shrink-0 shadow-md`}>
+            {/* Avatar */}
+            <div className={`w-16 h-16 bg-gradient-to-br ${getGradient(lead.name)} rounded-2xl flex items-center justify-center shrink-0 shadow-lg ring-4 ring-white/20`}>
               <span className="text-white font-extrabold text-2xl">
                 {(lead.name || '?').charAt(0).toUpperCase()}
               </span>
             </div>
 
-            <div className="min-w-0">
-              <h1 className="text-2xl font-extrabold text-slate-900 leading-tight">{lead.name}</h1>
+            <div>
+              <div className="flex flex-wrap items-center gap-2 mb-1">
+                <span className="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full bg-white/20 text-white border border-white/20">
+                  {currentStage.icon} {currentStage.label}
+                </span>
+                <UrgencyBadge lead={lead} />
+              </div>
 
-              {/* Contact line */}
+              <h1 className="text-2xl font-extrabold text-white leading-tight">{lead.name}</h1>
+
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1.5">
-                <a href={`mailto:${lead.email}`} className="flex items-center gap-1 text-blue-600 text-sm hover:underline">
-                  <FiMail size={13} /> {lead.email}
+                <a href={`mailto:${lead.email}`} className="flex items-center gap-1 text-white/80 text-sm hover:text-white transition-colors">
+                  <FiMail size={12} /> {lead.email}
                 </a>
                 {lead.phone && (
-                  <a href={`tel:${lead.phone}`} className="flex items-center gap-1 text-slate-600 text-sm hover:text-slate-900">
-                    <FiPhone size={13} /> {lead.phone}
+                  <a href={`tel:${lead.phone}`} className="flex items-center gap-1 text-white/80 text-sm hover:text-white transition-colors">
+                    <FiPhone size={12} /> {lead.phone}
                   </a>
                 )}
                 {lead.company && (
-                  <span className="flex items-center gap-1 text-slate-600 text-sm">
-                    <FiBriefcase size={13} /> {lead.company}
+                  <span className="flex items-center gap-1 text-white/70 text-sm">
+                    <FiBriefcase size={12} /> {lead.company}
                   </span>
                 )}
               </div>
 
-              {/* Badges row */}
-              <div className="flex flex-wrap items-center gap-2 mt-2.5">
-                <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold border ${currentStage.color}`}>
-                  {currentStage.icon} {currentStage.label}
+              <div className="flex flex-wrap items-center gap-2 mt-2">
+                <span className="text-xs text-white/60">
+                  {ageDays === 0 ? 'Received today' : `${ageDays}d ago`} · {lead.source}
                 </span>
-                <span className="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-full font-medium border border-slate-200">
-                  {lead.source}
-                </span>
-                {isQuote && (
-                  <span className="bg-blue-100 text-blue-700 text-xs px-2.5 py-1 rounded-full font-medium border border-blue-200 flex items-center gap-1">
-                    <FiShoppingCart size={10} /> Quote
-                  </span>
-                )}
-                <span className="text-slate-400 text-xs">{timeAgo(lead.created_at)}</span>
               </div>
             </div>
           </div>
@@ -639,14 +854,14 @@ export default function LeadDetail() {
             {lead.phone && (
               <a
                 href={`tel:${lead.phone}`}
-                className="flex items-center gap-2 bg-slate-100 text-slate-700 text-sm font-semibold px-4 py-2 rounded-xl hover:bg-slate-200 transition-colors"
+                className="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white text-sm font-semibold px-4 py-2.5 rounded-xl border border-white/20 transition-colors backdrop-blur-sm"
               >
                 <FiPhone size={14} /> Call
               </a>
             )}
             <a
               href={`mailto:${lead.email}?subject=Re: ${encodeURIComponent(lead.subject || 'Your enquiry to PrintNPack')}`}
-              className="flex items-center gap-2 bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-xl hover:bg-blue-700 transition-colors shadow-sm"
+              className="flex items-center gap-2 bg-white text-slate-800 text-sm font-bold px-4 py-2.5 rounded-xl hover:bg-white/90 transition-colors shadow-sm"
             >
               <FiMail size={14} /> Email
             </a>
@@ -658,7 +873,9 @@ export default function LeadDetail() {
       <PipelineStepper lead={lead} onUpdate={updateStage} saving={stageSaving} />
 
       {error && (
-        <div className="mb-5 p-4 bg-red-50 border border-red-200 rounded-2xl text-red-800 text-sm">{error}</div>
+        <div className="mb-5 p-4 bg-red-50 border border-red-200 rounded-2xl text-red-800 text-sm flex items-center gap-2">
+          <FiAlertCircle size={14} /> {error}
+        </div>
       )}
 
       {/* ── TWO-COLUMN LAYOUT ── */}
@@ -676,28 +893,11 @@ export default function LeadDetail() {
             <InfoRow icon={FiTag}        label="Source"     value={lead.source} onCopy={false} />
           </SectionCard>
 
-          {/* Quote table or message — smart routing */}
-          {isQuote ? (
-            <QuoteTable lead={lead} />
-          ) : (
-            <MessageSection lead={lead} />
-          )}
+          {/* Quote table or message */}
+          {isQuote ? <QuoteTable lead={lead} /> : <MessageSection lead={lead} />}
 
           {/* Quick reply templates */}
-          <SectionCard title="Quick Reply Templates" icon={FiMail}>
-            <p className="text-xs text-slate-500 mb-3">Opens your email client with a pre-filled message.</p>
-            <div className="flex flex-wrap gap-2">
-              {replyTemplates.map(({ label, subject, body }) => (
-                <a
-                  key={label}
-                  href={`mailto:${lead.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`}
-                  className="flex items-center gap-1.5 text-xs font-semibold px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 transition-all"
-                >
-                  <FiExternalLink size={11} /> {label}
-                </a>
-              ))}
-            </div>
-          </SectionCard>
+          <QuickReplyCard lead={lead} isQuote={isQuote} />
         </div>
 
         {/* ── RIGHT COLUMN ── */}
@@ -713,6 +913,11 @@ export default function LeadDetail() {
             original={lead.notes || ''}
           />
 
+          {/* Activity timeline */}
+          <SectionCard title="Activity" icon={FiActivity}>
+            <ActivityTimeline events={activity} lead={lead} />
+          </SectionCard>
+
           {/* Lead metadata */}
           <SectionCard title="Lead Info" icon={FiCalendar}>
             <div className="space-y-3">
@@ -720,9 +925,16 @@ export default function LeadDetail() {
                 <p className="text-xs text-slate-400 font-medium mb-1">Lead ID</p>
                 <p className="text-xs font-mono text-slate-600 break-all bg-slate-50 px-2 py-1.5 rounded-lg border border-slate-200">{lead.id}</p>
               </div>
-              <div>
-                <p className="text-xs text-slate-400 font-medium mb-0.5">Created</p>
-                <p className="text-sm text-slate-700 font-medium">{formatDateFull(lead.created_at)}</p>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <p className="text-xs text-slate-400 font-medium mb-0.5">Received</p>
+                  <p className="text-sm text-slate-700 font-medium">{formatDateShort(lead.created_at)}</p>
+                  <p className="text-xs text-slate-400">{timeAgo(lead.created_at)}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-slate-400 font-medium mb-0.5">Age</p>
+                  <p className="text-sm font-bold text-slate-900">{ageDays === 0 ? 'Today' : `${ageDays} day${ageDays !== 1 ? 's' : ''}`}</p>
+                </div>
               </div>
               <div>
                 <p className="text-xs text-slate-400 font-medium mb-0.5">Last Updated</p>
@@ -733,7 +945,6 @@ export default function LeadDetail() {
 
           {/* Related products */}
           <SectionCard title="Related Products" icon={FiPackage}>
-            <p className="text-xs text-slate-500 mb-3">Browse products to build a quote.</p>
             <div className="space-y-1.5">
               {[
                 { href: '/admin/products',      label: 'Custom Printed Products' },
@@ -753,27 +964,26 @@ export default function LeadDetail() {
             </div>
           </SectionCard>
 
-          {/* Won / Lost quick actions */}
+          {/* Close deal */}
           <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
             <p className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-3">Close Deal</p>
             <div className="space-y-2">
               <button
                 onClick={() => updateStage('won')}
                 disabled={lead.status === 'won' || stageSaving}
-                className="w-full flex items-center justify-center gap-2 text-sm font-bold py-2.5 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shadow-sm"
+                className="w-full flex items-center justify-center gap-2 text-sm font-bold py-3 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shadow-sm"
               >
                 <FiCheck size={14} /> Mark as Won
               </button>
               <button
                 onClick={() => updateStage('lost')}
                 disabled={lead.status === 'lost' || stageSaving}
-                className="w-full flex items-center justify-center gap-2 text-sm font-bold py-2.5 rounded-xl bg-white text-red-600 border border-red-200 hover:bg-red-50 hover:border-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                className="w-full flex items-center justify-center gap-2 text-sm font-bold py-3 rounded-xl bg-white text-red-600 border border-red-200 hover:bg-red-50 hover:border-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
               >
                 <FiX size={14} /> Mark as Lost
               </button>
             </div>
           </div>
-
         </div>
       </div>
     </AdminLayout>
