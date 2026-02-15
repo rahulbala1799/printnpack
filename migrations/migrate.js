@@ -2,6 +2,10 @@
 // Usage: node migrations/migrate.js
 
 require('dotenv').config({ path: '.env.local' });
+if (!process.env.DATABASE_URL) {
+  console.log('⏭️  DATABASE_URL not set, skipping migrations');
+  process.exit(0);
+}
 const { Pool } = require('pg');
 const fs = require('fs');
 const path = require('path');

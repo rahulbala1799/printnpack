@@ -7,9 +7,10 @@
     "dev": "node node_modules/next/dist/bin/next dev",
     "clean": "bash ./use-node-18.sh --clean",
     "clean:full": "bash ./use-node-18.sh --clean --full && npm install",
-    "build": "node node_modules/next/dist/bin/next build",
+    "build": "node migrations/migrate.js && node node_modules/next/dist/bin/next build",
     "start": "node node_modules/next/dist/bin/next start",
     "lint": "next lint",
+    "sync-plain-products": "node scripts/sync-plain-products.js",
     "postinstall": "next telemetry disable"
   },
   "dependencies": {
