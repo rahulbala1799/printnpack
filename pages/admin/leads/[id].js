@@ -201,12 +201,13 @@ function SectionCard({ title, icon: Icon, badge, children, className = '' }) {
 }
 
 // ─── Contact info row ─────────────────────────────────────────────────────────
-function InfoRow({ icon: Icon, label, value, href, mono, onCopy }) {
+function InfoRow({ icon: Icon, label, value, href, mono, onCopy, showIfEmpty }) {
   const [copied, setCopied] = useState(false);
-  if (!value) return null;
+  if (!value && !showIfEmpty) return null;
+  const displayValue = value || '';
 
   const handleCopy = () => {
-    navigator.clipboard?.writeText(value).then(() => {
+    if (value) navigator.clipboard?.writeText(value).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     });
@@ -221,13 +222,13 @@ function InfoRow({ icon: Icon, label, value, href, mono, onCopy }) {
         <p className="text-xs text-slate-400 font-medium mb-0.5">{label}</p>
         {href ? (
           <a href={href} className={`text-sm font-semibold text-blue-600 hover:underline break-all ${mono ? 'font-mono text-xs' : ''}`}>
-            {value}
+            {displayValue}
           </a>
         ) : (
-          <p className={`text-sm font-semibold text-slate-900 break-words ${mono ? 'font-mono text-xs' : ''}`}>{value}</p>
+          <p className={`text-sm font-semibold break-words ${mono ? 'font-mono text-xs' : ''} ${displayValue ? 'text-slate-900' : 'text-slate-400'}`}>{displayValue || ' '}</p>
         )}
       </div>
-      {onCopy !== false && (
+      {onCopy !== false && value && (
         <button
           onClick={handleCopy}
           className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 rounded-lg hover:bg-slate-100 shrink-0"
@@ -986,7 +987,7 @@ export default function LeadDetail() {
           <SectionCard title="Contact Information" icon={FiUser}>
             <InfoRow icon={FiUser}       label="Full Name"  value={lead.name} />
             <InfoRow icon={FiMail}       label="Email"      value={lead.email}  href={`mailto:${lead.email}`} />
-            <InfoRow icon={FiPhone}      label="Phone"      value={lead.phone}  href={lead.phone ? `tel:${lead.phone}` : undefined} />
+            <InfoRow icon={FiPhone}      label="Phone"      value={lead.phone}  href={lead.phone ? `tel:${lead.phone}` : undefined} showIfEmpty />
             <InfoRow icon={FiBriefcase}  label="Company"    value={lead.company} />
             <InfoRow icon={FiTag}        label="Source"     value={lead.source} onCopy={false} />
           </SectionCard>
