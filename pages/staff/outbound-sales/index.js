@@ -33,7 +33,6 @@ export default function OutboundSalesPage({ printedProducts = [] }) {
   // Session & submit
   const [sessionStart] = useState(() => Date.now());
   const [sessionTime, setSessionTime] = useState('00:00');
-  const [visits, setVisits] = useState([]);
   const [queue, setQueue] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -151,19 +150,29 @@ export default function OutboundSalesPage({ printedProducts = [] }) {
   };
 
   const buildPayload = () => ({
-    idempotencyKey: typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `key-${Date.now()}-${Math.random().toString(36).slice(2)}`,
-    shopName: shopName.trim(),
-    displayAddress: locationInput.trim(),
-    latitude: lat,
-    longitude: lon,
-    metOwnerOrKdm: metKdm === 'yes',
-    interested: metKdm === 'yes' ? interested : null,
-    leafletOrMaterialDropped: metKdm === 'no' ? (leafletDropped === 'yes') : null,
-    visitAt: visitAt,
-    notes: notes.trim(),
-    productsInterestedPlain: productsInterestedPlain.length ? productsInterestedPlain : null,
-    productsInterestedPrinted: productsInterestedPrinted.length ? productsInterestedPrinted : null,
-    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      idempotencyKey: typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `key-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      shopName: shopName.trim(),
+      displayAddress: locationInput.trim(),
+      latitude: lat,
+      longitude: lon,
+      metOwnerOrKdm: metKdm === 'yes',
+      interested: metKdm === 'yes' ? interested : null,
+      leafletOrMaterialDropped: metKdm === 'no' ? (leafletDropped === 'yes') : null,
+      visitAt: visitAt,
+      notes: notes.trim(),
+      productsInterestedPlain: productsInterestedPlain.length
+        ? productsInterestedPlain.map((id) => {
+            const p = plainProducts.find((x) => x.id === id);
+            return p ? { id: p.id, name: p.name } : { id, name: String(id) };
+          })
+        : null,
+      productsInterestedPrinted: productsInterestedPrinted.length
+        ? productsInterestedPrinted.map((id) => {
+            const p = printedProducts.find((x) => x.id === id);
+            return p ? { id: p.id, name: p.name } : { id, name: String(id) };
+          })
+        : null,
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
   });
 
   const submitVisit = async () => {
@@ -187,25 +196,22 @@ export default function OutboundSalesPage({ printedProducts = [] }) {
       });
 
       if (res.ok) {
-        const data = await res.json().catch(() => ({}));
-        setVisits((prev) => [{ ...payload, queued: false, id: data.leadId || payload.idempotencyKey }, ...prev]);
         setSubmitting(false);
         setSubmitted(true);
         setSubmitLabel('✓ Visit Logged!');
         setShowAnother(true);
         setToast({ msg: 'Visit logged ✓', type: 'success' });
       } else {
-        // Queue and show as queued
         const newQueue = [...queue, payload];
         saveQueue(newQueue);
-        setVisits((prev) => [{ ...payload, queued: true }, ...prev]);
+        setQueue(newQueue);
         setSubmitting(false);
         setToast({ msg: 'Saved offline — will sync when back online', type: 'warning' });
       }
     } catch {
       const newQueue = [...queue, payload];
       saveQueue(newQueue);
-      setVisits((prev) => [{ ...payload, queued: true }, ...prev]);
+      setQueue(newQueue);
       setSubmitting(false);
       setToast({ msg: 'Saved offline — will sync when back online', type: 'warning' });
     }
@@ -260,10 +266,6 @@ export default function OutboundSalesPage({ printedProducts = [] }) {
     return () => clearTimeout(id);
   }, [toast.msg]);
 
-  const totalVisits = visits.length;
-  const interestedCount = visits.filter((v) => v.interested === 'yes').length;
-  const followUpCount = visits.filter((v) => v.interested === 'follow-up').length;
-
   const plainSelectedNames = plainProducts.filter((p) => productsInterestedPlain.includes(p.id)).map((p) => p.name);
   const printedSelectedNames = printedProducts.filter((p) => productsInterestedPrinted.includes(p.id)).map((p) => p.name);
 
@@ -284,28 +286,18 @@ export default function OutboundSalesPage({ printedProducts = [] }) {
       </Head>
 
       <div className="max-w-lg mx-auto pb-28">
-        {/* Session badge */}
-        <div className="flex justify-end mb-4">
+        {/* Session + link to logged visits */}
+        <div className="flex items-center justify-between gap-2 mb-4">
+          <Link
+            href="/staff/logged-visits"
+            className="text-sm font-semibold text-emerald-600 hover:underline"
+          >
+            View logged visits →
+          </Link>
           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-mono">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             {sessionTime}
           </span>
-        </div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-2 mb-6">
-          <div className="bg-white rounded-lg border border-slate-200 p-3 text-center">
-            <div className="text-xl font-semibold text-slate-900">{totalVisits}</div>
-            <div className="text-xs font-medium text-slate-500 uppercase tracking-wide">Visited</div>
-          </div>
-          <div className="bg-white rounded-lg border border-slate-200 p-3 text-center">
-            <div className="text-xl font-semibold text-emerald-600">{interestedCount}</div>
-            <div className="text-xs font-medium text-slate-500 uppercase tracking-wide">Interested</div>
-          </div>
-          <div className="bg-white rounded-lg border border-slate-200 p-3 text-center">
-            <div className="text-xl font-semibold text-amber-600">{followUpCount}</div>
-            <div className="text-xs font-medium text-slate-500 uppercase tracking-wide">Follow-up</div>
-          </div>
         </div>
 
         {/* Offline banner */}
@@ -521,45 +513,8 @@ export default function OutboundSalesPage({ printedProducts = [] }) {
                 placeholder="e.g. Owner said call next week, left samples…"
                 className="w-full px-3 py-2.5 rounded-lg border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
               />
-            </div>
           </div>
         </div>
-
-        {/* Today's visits */}
-        <div className="mb-4">
-          <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">Today&apos;s Visits</h2>
-          {visits.length === 0 ? (
-            <div className="text-center py-8 rounded-xl border border-dashed border-slate-200 text-slate-500 text-sm">
-              <div className="text-2xl mb-2 opacity-50">🗺️</div>
-              No visits logged yet today.<br />Get out there!
-            </div>
-          ) : (
-            <ul className="space-y-2">
-              {visits.map((v, i) => (
-                <li
-                  key={v.idempotencyKey || i}
-                  className="flex items-start gap-3 p-3 bg-white rounded-lg border border-slate-200"
-                >
-                  <div className="w-9 h-9 rounded-lg bg-slate-100 flex items-center justify-center shrink-0 text-base">
-                    {v.metOwnerOrKdm ? '🤝' : '📄'}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="font-semibold text-slate-900 truncate">{v.shopName}</p>
-                    <div className="flex flex-wrap items-center gap-1.5 mt-1">
-                      {v.queued && (
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Queued</span>
-                      )}
-                      {v.interested === 'yes' && <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Interested</span>}
-                      {v.interested === 'no' && <span className="text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-800">Not interested</span>}
-                      {v.interested === 'follow-up' && <span className="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Follow-up</span>}
-                      {v.leafletOrMaterialDropped === true && <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">Leaflet left</span>}
-                      <span className="text-xs text-slate-500 ml-auto">{v.time}</span>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
         </div>
       </div>
 

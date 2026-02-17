@@ -34,6 +34,12 @@ async function handler(req, res) {
     return res.status(400).json({ error: 'Location/address is required' });
   }
 
+  // Normalize products to { id, name }[] for neat display in admin
+  const norm = (arr) => {
+    if (!Array.isArray(arr) || arr.length === 0) return null;
+    return arr.map((x) => (typeof x === 'object' && x && 'id' in x ? { id: x.id, name: x.name || x.id } : { id: x, name: String(x) }));
+  };
+
   const visitPayload = {
     shopName: shopName.trim(),
     displayAddress: displayAddress.trim(),
@@ -44,8 +50,8 @@ async function handler(req, res) {
     leafletOrMaterialDropped: leafletOrMaterialDropped ?? null,
     visitAt: visitAt || null,
     notes: (notes && notes.trim()) || null,
-    productsInterestedPlain: Array.isArray(productsInterestedPlain) ? productsInterestedPlain : null,
-    productsInterestedPrinted: Array.isArray(productsInterestedPrinted) ? productsInterestedPrinted : null,
+    productsInterestedPlain: norm(productsInterestedPlain),
+    productsInterestedPrinted: norm(productsInterestedPrinted),
     staffId: user.id,
     staffName: user.name || user.email || 'Staff',
     idempotencyKey: idempotencyKey || null,

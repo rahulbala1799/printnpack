@@ -344,6 +344,97 @@ function QuoteTable({ lead }) {
   return <MessageSection lead={lead} />;
 }
 
+// ─── Outbound visit section (shop visit + products interested) ─────────────────
+function OutboundVisitSection({ lead }) {
+  const p = lead.payload || {};
+  const visits = Array.isArray(p.visits) ? p.visits : (p.shopName ? [p] : []);
+
+  const plain = p.productsInterestedPlain || (visits[0] && visits[0].productsInterestedPlain);
+  const printed = p.productsInterestedPrinted || (visits[0] && visits[0].productsInterestedPrinted);
+  const hasProducts = (Array.isArray(plain) && plain.length > 0) || (Array.isArray(printed) && printed.length > 0);
+
+  const staffName = p.staffName || visits[0]?.staffName;
+
+  return (
+    <>
+      <SectionCard title="Outbound Visit" icon={FiPackage} badge={staffName ? `By ${staffName}` : null}>
+        <div className="space-y-4">
+          {visits.map((v, i) => (
+            <div key={i} className="p-4 rounded-xl bg-slate-50 border border-slate-100">
+              <div className="flex flex-wrap items-center gap-2 mb-2">
+                {v.metOwnerOrKdm && (
+                  <>
+                    {v.interested === 'yes' && <span className="text-xs font-semibold px-2 py-1 rounded-full bg-emerald-100 text-emerald-800">Interested</span>}
+                    {v.interested === 'no' && <span className="text-xs font-semibold px-2 py-1 rounded-full bg-red-100 text-red-800">Not interested</span>}
+                    {v.interested === 'follow-up' && <span className="text-xs font-semibold px-2 py-1 rounded-full bg-amber-100 text-amber-800">Follow-up later</span>}
+                  </>
+                )}
+                {v.metOwnerOrKdm === false && (
+                  <span className="text-xs font-semibold px-2 py-1 rounded-full bg-slate-200 text-slate-700">
+                    {v.leafletOrMaterialDropped ? 'Leaflet dropped' : 'No leaflet'}
+                  </span>
+                )}
+              </div>
+              {v.displayAddress && (
+                <p className="text-sm text-slate-600 mb-1">
+                  <span className="text-slate-400">Address:</span> {v.displayAddress}
+                </p>
+              )}
+              {v.visitAt && (
+                <p className="text-xs text-slate-500">Visit: {new Date(v.visitAt).toLocaleString('en-IE')}</p>
+              )}
+              {v.notes && (
+                <p className="text-sm text-slate-700 mt-2 pt-2 border-t border-slate-200">{v.notes}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      </SectionCard>
+
+      {hasProducts && (
+        <SectionCard title="Products interested in" icon={FiShoppingCart}>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {Array.isArray(plain) && plain.length > 0 && (
+              <div className="rounded-xl border border-amber-200 bg-amber-50/50 overflow-hidden">
+                <div className="px-3.5 py-2 bg-amber-100/80 border-b border-amber-200">
+                  <p className="text-xs font-bold text-amber-800 uppercase tracking-wider">Plain Packaging</p>
+                </div>
+                <ul className="p-3 space-y-2">
+                  {plain.map((item, i) => (
+                    <li key={i} className="flex items-center gap-2 text-sm">
+                      <span className="w-6 h-6 rounded-lg bg-amber-200/60 flex items-center justify-center text-amber-800 text-xs font-bold shrink-0">
+                        {i + 1}
+                      </span>
+                      <span className="font-medium text-slate-900">{item.name || item.id}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {Array.isArray(printed) && printed.length > 0 && (
+              <div className="rounded-xl border border-blue-200 bg-blue-50/50 overflow-hidden">
+                <div className="px-3.5 py-2 bg-blue-100/80 border-b border-blue-200">
+                  <p className="text-xs font-bold text-blue-800 uppercase tracking-wider">Printed / Main catalogue</p>
+                </div>
+                <ul className="p-3 space-y-2">
+                  {printed.map((item, i) => (
+                    <li key={i} className="flex items-center gap-2 text-sm">
+                      <span className="w-6 h-6 rounded-lg bg-blue-200/60 flex items-center justify-center text-blue-800 text-xs font-bold shrink-0">
+                        {i + 1}
+                      </span>
+                      <span className="font-medium text-slate-900">{item.name || item.id}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </SectionCard>
+      )}
+    </>
+  );
+}
+
 // ─── Message section ──────────────────────────────────────────────────────────
 function MessageSection({ lead }) {
   return (
@@ -892,6 +983,9 @@ export default function LeadDetail() {
             <InfoRow icon={FiBriefcase}  label="Company"    value={lead.company} />
             <InfoRow icon={FiTag}        label="Source"     value={lead.source} onCopy={false} />
           </SectionCard>
+
+          {/* Outbound visit + products interested (when source is Outbound Sales Visit) */}
+          {lead.source === 'Outbound Sales Visit' && <OutboundVisitSection lead={lead} />}
 
           {/* Quote table or message */}
           {isQuote ? <QuoteTable lead={lead} /> : <MessageSection lead={lead} />}

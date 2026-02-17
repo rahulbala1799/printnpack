@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { FaBoxOpen, FaCubes, FaClipboardList, FaShoppingCart, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaBoxOpen, FaCubes, FaClipboardList, FaShoppingCart, FaMapMarkerAlt, FaListUl } from 'react-icons/fa';
 import StaffLayout from '../../components/staff/StaffLayout';
 
 export default function StaffDashboard() {
@@ -45,7 +45,8 @@ export default function StaffDashboard() {
   }
 
   const cards = [
-    { href: '/staff/outbound-sales', icon: FaMapMarkerAlt, label: 'Outbound Sales', desc: 'Log shop visits and sync to leads', color: 'bg-emerald-600' },
+    { href: '/staff/outbound-sales', icon: FaMapMarkerAlt, label: 'Outbound Sales', desc: 'Log a shop visit', color: 'bg-emerald-600' },
+    { href: '/staff/logged-visits', icon: FaListUl, label: 'Logged Visits', desc: 'View visits you’ve logged', color: 'bg-teal-600' },
     { href: '/staff/products', icon: FaBoxOpen, label: 'Products', desc: 'Main product catalogue', color: 'bg-blue-500' },
     { href: '/staff/plain-packaging', icon: FaCubes, label: 'Plain Packaging', desc: 'Plain packaging product list', color: 'bg-amber-500' },
     { href: '/staff/orders', icon: FaShoppingCart, label: 'Orders', desc: 'Manage customer orders', color: 'bg-slate-600' },
