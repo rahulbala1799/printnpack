@@ -349,9 +349,13 @@ function OutboundVisitSection({ lead }) {
   const p = lead.payload || {};
   const visits = Array.isArray(p.visits) ? p.visits : (p.shopName ? [p] : []);
 
-  const plain = p.productsInterestedPlain || (visits[0] && visits[0].productsInterestedPlain);
-  const printed = p.productsInterestedPrinted || (visits[0] && visits[0].productsInterestedPrinted);
-  const hasProducts = (Array.isArray(plain) && plain.length > 0) || (Array.isArray(printed) && printed.length > 0);
+  // Products: from latest visit first, then top-level payload (first visit)
+  const latestVisit = visits.length > 0 ? visits[visits.length - 1] : null;
+  const plain = (latestVisit && latestVisit.productsInterestedPlain) || p.productsInterestedPlain || (visits[0] && visits[0].productsInterestedPlain);
+  const printed = (latestVisit && latestVisit.productsInterestedPrinted) || p.productsInterestedPrinted || (visits[0] && visits[0].productsInterestedPrinted);
+
+  const plainList = Array.isArray(plain) ? plain : [];
+  const printedList = Array.isArray(printed) ? printed : [];
 
   const staffName = p.staffName || visits[0]?.staffName;
 
@@ -391,46 +395,49 @@ function OutboundVisitSection({ lead }) {
         </div>
       </SectionCard>
 
-      {hasProducts && (
-        <SectionCard title="Products interested in" icon={FiShoppingCart}>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {Array.isArray(plain) && plain.length > 0 && (
-              <div className="rounded-xl border border-amber-200 bg-amber-50/50 overflow-hidden">
-                <div className="px-3.5 py-2 bg-amber-100/80 border-b border-amber-200">
-                  <p className="text-xs font-bold text-amber-800 uppercase tracking-wider">Plain Packaging</p>
-                </div>
-                <ul className="p-3 space-y-2">
-                  {plain.map((item, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm">
-                      <span className="w-6 h-6 rounded-lg bg-amber-200/60 flex items-center justify-center text-amber-800 text-xs font-bold shrink-0">
-                        {i + 1}
-                      </span>
-                      <span className="font-medium text-slate-900">{item.name || item.id}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            {Array.isArray(printed) && printed.length > 0 && (
-              <div className="rounded-xl border border-blue-200 bg-blue-50/50 overflow-hidden">
-                <div className="px-3.5 py-2 bg-blue-100/80 border-b border-blue-200">
-                  <p className="text-xs font-bold text-blue-800 uppercase tracking-wider">Printed / Main catalogue</p>
-                </div>
-                <ul className="p-3 space-y-2">
-                  {printed.map((item, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm">
-                      <span className="w-6 h-6 rounded-lg bg-blue-200/60 flex items-center justify-center text-blue-800 text-xs font-bold shrink-0">
-                        {i + 1}
-                      </span>
-                      <span className="font-medium text-slate-900">{item.name || item.id}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </SectionCard>
-      )}
+      {/* Products interested – Plain Packaging (separate section) */}
+      <SectionCard
+        title="Products interested (Plain Packaging)"
+        icon={FiPackage}
+        badge={plainList.length > 0 ? `${plainList.length} product${plainList.length !== 1 ? 's' : ''}` : 'None selected'}
+      >
+        {plainList.length > 0 ? (
+          <ul className="space-y-2 list-none pl-0">
+            {plainList.map((item, i) => (
+              <li key={item.id || i} className="flex items-center gap-3 py-2.5 px-3 rounded-lg bg-amber-50/60 border border-amber-100">
+                <span className="w-7 h-7 rounded-lg bg-amber-200/80 flex items-center justify-center text-amber-900 text-xs font-bold shrink-0">
+                  {i + 1}
+                </span>
+                <span className="text-sm font-semibold text-slate-900">{item.name || item.id}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-sm text-slate-500 italic">No Plain Packaging products selected for this visit.</p>
+        )}
+      </SectionCard>
+
+      {/* Products interested – Printed (separate section) */}
+      <SectionCard
+        title="Products interested (Printed)"
+        icon={FiShoppingCart}
+        badge={printedList.length > 0 ? `${printedList.length} product${printedList.length !== 1 ? 's' : ''}` : 'None selected'}
+      >
+        {printedList.length > 0 ? (
+          <ul className="space-y-2 list-none pl-0">
+            {printedList.map((item, i) => (
+              <li key={item.id || i} className="flex items-center gap-3 py-2.5 px-3 rounded-lg bg-blue-50/60 border border-blue-100">
+                <span className="w-7 h-7 rounded-lg bg-blue-200/80 flex items-center justify-center text-blue-900 text-xs font-bold shrink-0">
+                  {i + 1}
+                </span>
+                <span className="text-sm font-semibold text-slate-900">{item.name || item.id}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-sm text-slate-500 italic">No Printed products selected for this visit.</p>
+        )}
+      </SectionCard>
     </>
   );
 }
