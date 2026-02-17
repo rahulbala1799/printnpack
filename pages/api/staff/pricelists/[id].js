@@ -1,10 +1,11 @@
-import { withAuth } from '../../../../../lib/withAuth.js';
-import { getRow, getRows, query } from '../../../../../lib/database.js';
+import { withAuth } from '../../../../lib/withAuth.js';
+import { getRow, getRows, query } from '../../../../lib/database.js';
 
 function toPricelist(r) {
   return {
     id: r.id,
     staff_id: r.staff_id,
+    customer_id: r.customer_id || null,
     customer_name: r.customer_name,
     notes: r.notes || '',
     status: r.status || 'draft',
@@ -22,7 +23,7 @@ function toPricelist(r) {
 async function getHandler(req, res) {
   try {
     const row = await getRow(
-      `SELECT id, staff_id, customer_name, notes, status, valid_from, valid_to, items, created_at, updated_at
+      `SELECT id, staff_id, customer_id, customer_name, notes, status, valid_from, valid_to, items, created_at, updated_at
        FROM customer_pricelists
        WHERE id = $1 AND staff_id = $2`,
       [req.query.id, req.user.id]
@@ -46,18 +47,29 @@ async function patchHandler(req, res) {
   try {
     const id = req.query.id;
     const current = await getRow(
-      'SELECT id, staff_id, customer_name, status FROM customer_pricelists WHERE id = $1 AND staff_id = $2',
+      'SELECT id, staff_id, customer_id, customer_name, status FROM customer_pricelists WHERE id = $1 AND staff_id = $2',
       [id, req.user.id]
     );
     if (!current) {
       return res.status(404).json({ error: 'Pricelist not found' });
     }
 
-    const { customer_name, notes, status, valid_from, valid_to, items } = req.body || {};
+    const { customer_id, customer_name, notes, status, valid_from, valid_to, items } = req.body || {};
     const updates = [];
     const params = [];
     let p = 1;
 
+    if (customer_id !== undefined) {
+      updates.push(`customer_id = $${p++}`);
+      params.push(customer_id || null);
+      if (customer_id) {
+        const cust = await getRow('SELECT name FROM customers WHERE id = $1', [customer_id]);
+        if (cust) {
+          updates.push(`customer_name = $${p++}`);
+          params.push(cust.name);
+        }
+      }
+    }
     if (typeof customer_name === 'string') {
       updates.push(`customer_name = $${p++}`);
       params.push(customer_name.trim());
@@ -70,15 +82,26 @@ async function patchHandler(req, res) {
       updates.push(`status = $${p++}`);
       params.push(status);
       if (status === 'active') {
-        const customerNameForArchive =
-          typeof customer_name === 'string' && customer_name.trim()
-            ? customer_name.trim()
-            : current.customer_name;
-        await query(
-          `UPDATE customer_pricelists SET status = 'archived', updated_at = now()
-           WHERE staff_id = $1 AND customer_name = $2 AND status = 'active' AND id != $3`,
-          [req.user.id, customerNameForArchive, id]
-        );
+        const effectiveCustomerId = customer_id !== undefined ? (customer_id || null) : current.customer_id;
+        let effectiveCustomerName = current.customer_name;
+        if (typeof customer_name === 'string' && customer_name.trim()) effectiveCustomerName = customer_name.trim();
+        else if (effectiveCustomerId) {
+          const cust = await getRow('SELECT name FROM customers WHERE id = $1', [effectiveCustomerId]);
+          if (cust) effectiveCustomerName = cust.name;
+        }
+        if (effectiveCustomerId) {
+          await query(
+            `UPDATE customer_pricelists SET status = 'archived', updated_at = now()
+             WHERE staff_id = $1 AND customer_id = $2 AND status = 'active' AND id != $3`,
+            [req.user.id, effectiveCustomerId, id]
+          );
+        } else {
+          await query(
+            `UPDATE customer_pricelists SET status = 'archived', updated_at = now()
+             WHERE staff_id = $1 AND customer_id IS NULL AND customer_name = $2 AND status = 'active' AND id != $3`,
+            [req.user.id, effectiveCustomerName, id]
+          );
+        }
       }
     }
     if (valid_from !== undefined) {
