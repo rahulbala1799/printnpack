@@ -1,10 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FaHome, FaBoxOpen, FaCubes, FaClipboardList, FaShoppingCart, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaBoxOpen, FaCubes, FaClipboardList, FaShoppingCart, FaSignOutAlt, FaMapMarkerAlt } from 'react-icons/fa';
 
 const navItems = [
   { href: '/staff', label: 'Home', icon: FaHome },
+  { href: '/staff/outbound-sales', label: 'Sales', icon: FaMapMarkerAlt },
   { href: '/staff/products', label: 'Products', icon: FaBoxOpen },
   { href: '/staff/plain-packaging', label: 'Plain', icon: FaCubes },
   { href: '/staff/orders', label: 'Orders', icon: FaShoppingCart },
