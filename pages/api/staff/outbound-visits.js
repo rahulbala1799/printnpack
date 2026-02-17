@@ -17,14 +17,22 @@ async function handler(req, res) {
       return res.status(200).json({ leads: [] });
     }
 
+    const staffIdParam = String(user.id);
+
     const rows = await getRows(
       `SELECT id, name, company, subject, message, payload, status, created_at, updated_at
        FROM leads
        WHERE source = 'Outbound Sales Visit'
-         AND (payload->>'staffId')::text = $1
+         AND (
+           payload->>'staffId' = $1
+           OR EXISTS (
+             SELECT 1 FROM jsonb_array_elements(COALESCE(payload->'visits', '[]'::jsonb)) AS v
+             WHERE (v->>'staffId') = $1
+           )
+         )
        ORDER BY updated_at DESC
        LIMIT 200`,
-      [user.id]
+      [staffIdParam]
     );
 
     const leads = rows.map((r) => ({

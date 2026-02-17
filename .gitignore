@@ -47,3 +47,4 @@ node_modules
 
 # local workflow / chat summary (do not commit)
 PLAIN_PACKAGING_WORKFLOW_README.md
+STAFF_DASHBOARD_UI_README.md

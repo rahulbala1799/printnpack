@@ -155,10 +155,10 @@ export default function LoggedVisitsPage() {
 
         <div className="pt-2">
           <Link
-            href="/staff/outbound-sales"
+            href="/staff"
             className="inline-flex items-center gap-2 text-emerald-600 font-semibold text-sm hover:underline"
           >
-            ← Back to Log a visit
+            ← Back to Dashboard
           </Link>
         </div>
       </div>
