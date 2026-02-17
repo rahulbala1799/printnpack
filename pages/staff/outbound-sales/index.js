@@ -23,6 +23,7 @@ export default function OutboundSalesPage({ printedProducts = [] }) {
   const [interested, setInterest] = useState('');
   const [leafletDropped, setLeafletDropped] = useState('');
   const [visitAt, setVisitAt] = useState('');
+  const [phone, setPhone] = useState('');
   const [notes, setNotes] = useState('');
   const [productsInterestedPlain, setProductsInterestedPlain] = useState([]);
   const [productsInterestedPrinted, setProductsInterestedPrinted] = useState([]);
@@ -153,6 +154,7 @@ export default function OutboundSalesPage({ printedProducts = [] }) {
       idempotencyKey: typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `key-${Date.now()}-${Math.random().toString(36).slice(2)}`,
       shopName: shopName.trim(),
       displayAddress: locationInput.trim(),
+      phone: phone.trim() || null,
       latitude: lat,
       longitude: lon,
       metOwnerOrKdm: metKdm === 'yes',
@@ -220,6 +222,7 @@ export default function OutboundSalesPage({ printedProducts = [] }) {
   const resetForm = () => {
     setShopName('');
     setLocationInput('');
+    setPhone('');
     setLat(null);
     setLon(null);
     setLocationStatus('Enter address or tap 📍 for GPS');
@@ -358,6 +361,18 @@ export default function OutboundSalesPage({ printedProducts = [] }) {
                 </button>
               </div>
               <p className="text-xs text-slate-500 mt-1">{locationStatus}</p>
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">
+                Phone <span className="text-slate-400 font-normal">(optional)</span>
+              </label>
+              <input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="Shop or contact phone"
+                className="w-full px-3 py-2.5 rounded-lg border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              />
             </div>
           </div>
 

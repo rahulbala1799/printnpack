@@ -14,6 +14,7 @@ async function handler(req, res) {
   const {
     idempotencyKey,
     shopName,
+    phone: bodyPhone,
     latitude,
     longitude,
     displayAddress,
@@ -40,9 +41,11 @@ async function handler(req, res) {
     return arr.map((x) => (typeof x === 'object' && x && 'id' in x ? { id: x.id, name: x.name || x.id } : { id: x, name: String(x) }));
   };
 
+  const phoneValue = (bodyPhone && typeof bodyPhone === 'string' && bodyPhone.trim()) ? bodyPhone.trim() : null;
   const visitPayload = {
     shopName: shopName.trim(),
     displayAddress: displayAddress.trim(),
+    phone: phoneValue,
     latitude: latitude != null ? latitude : null,
     longitude: longitude != null ? longitude : null,
     metOwnerOrKdm: !!metOwnerOrKdm,
@@ -81,8 +84,8 @@ async function handler(req, res) {
         const visits = Array.isArray(payload.visits) ? payload.visits : [];
         visits.push(visitPayload);
         await query(
-          `UPDATE leads SET message = COALESCE(message, '') || E'\n---\n' || $1, payload = $2, updated_at = now() WHERE id = $3`,
-          [messageSummary, JSON.stringify({ ...payload, visits }), existingLeadId]
+          `UPDATE leads SET message = COALESCE(message, '') || E'\n---\n' || $1, payload = $2, phone = COALESCE($4, phone), updated_at = now() WHERE id = $3`,
+          [messageSummary, JSON.stringify({ ...payload, visits }), existingLeadId, phoneValue]
         );
         return res.status(200).json({ leadId: existingLeadId, appended: true });
       }
@@ -97,7 +100,7 @@ async function handler(req, res) {
         SOURCE,
         shopName.trim(),
         PLACEHOLDER_EMAIL,
-        null,
+        phoneValue,
         displayAddress.trim(),
         `Outbound visit: ${shopName.trim()}`,
         messageSummary,
