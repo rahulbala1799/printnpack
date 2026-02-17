@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import AdminLayout from '../../components/admin/AdminLayout';
 import products from '../../data/products';
 import {
-  FiPackage, FiGrid, FiMail, FiArrowRight, FiUsers,
+  FiPackage, FiGrid, FiMail, FiArrowRight, FiUsers, FiUserPlus,
   FiTrendingUp, FiAlertCircle, FiCheckCircle,
 } from 'react-icons/fi';
 
@@ -32,6 +32,13 @@ const quickLinks = [
     label: 'Leads',
     desc: 'Contact & quote form pipeline',
     color: 'bg-cyan-500',
+  },
+  {
+    href: '/admin/staff',
+    icon: FiUserPlus,
+    label: 'Staff',
+    desc: 'Add and manage staff accounts',
+    color: 'bg-emerald-500',
   },
   {
     href: '/admin/email-config',

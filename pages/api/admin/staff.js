@@ -1,12 +1,25 @@
 import { withAuth } from '../../../lib/withAuth.js';
 import { hashPassword } from '../../../lib/auth.js';
-import { getRow, query } from '../../../lib/database.js';
+import { getRow, getRows, query } from '../../../lib/database.js';
 
 export const config = {
   api: { bodyParser: { sizeLimit: '1mb' } },
 };
 
 async function handler(req, res) {
+  if (req.method === 'GET') {
+    try {
+      const staff = await getRows(
+        `SELECT id, login_id, name, is_active, must_change_password, last_login_at, created_at
+         FROM users WHERE role = 'staff' ORDER BY created_at DESC`
+      );
+      return res.status(200).json({ staff });
+    } catch (error) {
+      console.error('List staff error:', error);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
