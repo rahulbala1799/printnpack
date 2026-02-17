@@ -553,6 +553,7 @@
 
 .staff-op.bl::before { background: var(--blue); }
 .staff-op.am::before { background: var(--amber); }
+.staff-op.g::before { background: var(--g); }
 .staff-op.sl::before { background: var(--ink); }
 .staff-op.vi::before { background: var(--violet); }
 
@@ -573,6 +574,7 @@
 
 .staff-op-icon.bl { background: var(--blue-bg); }
 .staff-op-icon.am { background: var(--amber-bg); }
+.staff-op-icon.g { background: var(--g-dim); }
 .staff-op-icon.sl { background: var(--canvas); border: 1px solid var(--line); }
 .staff-op-icon.vi { background: var(--violet-bg); }
 
@@ -587,6 +589,7 @@
 
 .staff-op-count.bl { background: var(--blue-bg); color: var(--blue); border-color: var(--blue-bd); }
 .staff-op-count.am { background: var(--amber-bg); color: var(--amber); border-color: var(--amber-bd); }
+.staff-op-count.g { background: var(--g-dim); color: var(--g-text); border-color: var(--g-mid); }
 .staff-op-count.sl { background: var(--canvas); color: var(--ink-2); border-color: var(--line); }
 .staff-op-count.vi { background: var(--violet-bg); color: var(--violet); border-color: var(--violet-bd); }
 

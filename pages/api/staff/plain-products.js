@@ -18,6 +18,7 @@ function toProduct(row) {
     images: row.images || [],
     is_active: row.is_active,
     sort_order: row.sort_order,
+    unit_label: 'per case',
   };
 }
 
@@ -27,12 +28,25 @@ async function handler(req, res) {
   }
 
   try {
-    const { category } = req.query;
+    const { category, search } = req.query;
+    const hasSearch = typeof search === 'string' && search.trim().length > 0;
+    const searchTerm = hasSearch ? `%${search.trim()}%` : null;
+
     let rows;
-    if (category && category !== 'All') {
+    if (category && category !== 'All' && !hasSearch) {
       rows = await getRows(
         'SELECT id, name, category, description, qty_per_case, case_tiers, image_src, images, is_active, sort_order FROM plain_products WHERE is_active = true AND category = $1 ORDER BY sort_order, name',
         [category]
+      );
+    } else if (hasSearch) {
+      rows = await getRows(
+        `SELECT id, name, category, description, qty_per_case, case_tiers, image_src, images, is_active, sort_order
+         FROM plain_products
+         WHERE is_active = true
+           AND (name ILIKE $1 OR category ILIKE $1 OR COALESCE(description, '') ILIKE $1)
+         ORDER BY sort_order, name
+         LIMIT 100`,
+        [searchTerm]
       );
     } else {
       rows = await getRows(
