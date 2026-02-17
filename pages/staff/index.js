@@ -1,117 +1,84 @@
 import React, { useEffect, useState } from 'react';
-import Layout from '../../components/layout/Layout';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { FaUserTie, FaBoxOpen, FaClipboardList, FaSignOutAlt } from 'react-icons/fa';
 import Link from 'next/link';
+import { FaBoxOpen, FaCubes, FaClipboardList, FaShoppingCart } from 'react-icons/fa';
+import StaffLayout from '../../components/staff/StaffLayout';
 
-const StaffDashboard = () => {
+export default function StaffDashboard() {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    checkAuth();
-  }, []);
-
-  const checkAuth = async () => {
-    try {
-      const response = await fetch('/api/auth/me', { credentials: 'include' });
-      if (!response.ok) {
+    (async () => {
+      try {
+        const res = await fetch('/api/auth/me', { credentials: 'include' });
+        if (!res.ok) {
+          router.replace('/staff/login');
+          return;
+        }
+        const data = await res.json();
+        if (data.user.role !== 'staff' && data.user.role !== 'admin') {
+          router.replace('/staff/login');
+          return;
+        }
+        if (data.user.role === 'staff' && data.user.must_change_password) {
+          router.replace('/staff/change-password');
+          return;
+        }
+        setUser(data.user);
+      } catch {
         router.replace('/staff/login');
-        return;
+      } finally {
+        setLoading(false);
       }
-      const data = await response.json();
-      if (data.user.role !== 'staff' && data.user.role !== 'admin') {
-        router.replace('/staff/login');
-        return;
-      }
-      if (data.user.role === 'staff' && data.user.must_change_password) {
-        router.replace('/staff/change-password');
-        return;
-      }
-      setUser(data.user);
-    } catch (error) {
-      router.replace('/staff/login');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleLogout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
-    router.replace('/staff/login');
-  };
+    })();
+  }, [router]);
 
   if (loading) {
     return (
-      <Layout>
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-        </div>
-      </Layout>
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600" aria-hidden />
+      </div>
     );
   }
 
+  const cards = [
+    { href: '/staff/products', icon: FaBoxOpen, label: 'Products', desc: 'Main product catalogue', color: 'bg-blue-500' },
+    { href: '/staff/plain-packaging', icon: FaCubes, label: 'Plain Packaging', desc: 'Plain packaging product list', color: 'bg-amber-500' },
+    { href: '/staff/orders', icon: FaShoppingCart, label: 'Orders', desc: 'Manage customer orders', color: 'bg-slate-600' },
+    { href: '/staff/quotes', icon: FaClipboardList, label: 'Quotes', desc: 'Process quote requests', color: 'bg-emerald-600' },
+  ];
+
   return (
-    <Layout>
+    <StaffLayout user={user} title="">
       <Head>
-        <title>Staff Dashboard - PrintNPack</title>
+        <title>Staff Dashboard — PrintNPack</title>
         <meta name="robots" content="noindex, nofollow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </Head>
 
-      <div className="min-h-screen bg-gray-50">
-        <div className="bg-gradient-to-r from-green-900 to-green-700 text-white">
-          <div className="container mx-auto px-4 py-6">
-            <div className="flex justify-between items-center">
-              <div className="flex items-center gap-3">
-                <FaUserTie className="text-3xl" />
-                <div>
-                  <h1 className="text-2xl font-bold">Staff Dashboard</h1>
-                  <p className="text-green-100">Welcome, {user?.name}</p>
-                </div>
+      <div className="space-y-3">
+        <p className="text-slate-600 text-sm">Welcome, {user?.name}. Choose an option below.</p>
+        <div className="grid grid-cols-1 gap-3">
+          {cards.map(({ href, icon: Icon, label, desc, color }) => (
+            <Link
+              key={href}
+              href={href}
+              className="flex items-center gap-4 p-4 bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md active:bg-slate-50 transition-all touch-manipulation min-h-[72px]"
+            >
+              <div className={`w-12 h-12 rounded-xl ${color} flex items-center justify-center shrink-0`}>
+                <Icon className="text-white text-xl" aria-hidden />
               </div>
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-colors"
-              >
-                <FaSignOutAlt />
-                Logout
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="container mx-auto px-4 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Link href="/staff/orders" className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
-              <div className="flex items-center gap-4">
-                <div className="bg-blue-100 p-4 rounded-lg">
-                  <FaBoxOpen className="text-3xl text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900">Orders</h3>
-                  <p className="text-gray-600">Manage customer orders</p>
-                </div>
+              <div className="min-w-0 flex-1">
+                <p className="font-semibold text-slate-900">{label}</p>
+                <p className="text-slate-500 text-sm truncate">{desc}</p>
               </div>
             </Link>
-
-            <Link href="/staff/quotes" className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
-              <div className="flex items-center gap-4">
-                <div className="bg-green-100 p-4 rounded-lg">
-                  <FaClipboardList className="text-3xl text-green-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900">Quotes</h3>
-                  <p className="text-gray-600">Process quote requests</p>
-                </div>
-              </div>
-            </Link>
-          </div>
+          ))}
         </div>
       </div>
-    </Layout>
+    </StaffLayout>
   );
-};
-
-export default StaffDashboard;
+}
