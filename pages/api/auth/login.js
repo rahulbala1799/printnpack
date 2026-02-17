@@ -31,21 +31,24 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { email, password } = req.body;
+    const emailStr = (req.body?.email ?? '').toString().toLowerCase().trim();
+    const passwordStr = (req.body?.password ?? '').toString().trim();
 
-    // Validate input
-    if (!email || !password) {
+    if (!emailStr || !passwordStr) {
       return res.status(400).json({ error: 'Email and password are required' });
     }
 
-    // Find user by email
     const user = await getRow(
       'SELECT id, email, password_hash, role, name, is_active FROM users WHERE email = $1',
-      [email.toLowerCase().trim()]
+      [emailStr]
     );
 
     if (!user) {
       return res.status(401).json({ error: 'Invalid email or password' });
+    }
+
+    if (user.role === 'staff') {
+      return res.status(401).json({ error: 'Staff must sign in at the staff login page.', code: 'STAFF_USE_STAFF_LOGIN' });
     }
 
     // Check if account is active
@@ -53,8 +56,7 @@ export default async function handler(req, res) {
       return res.status(401).json({ error: 'Account has been deactivated' });
     }
 
-    // Verify password
-    const isValid = await verifyPassword(password, user.password_hash);
+    const isValid = await verifyPassword(passwordStr, user.password_hash);
     if (!isValid) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }

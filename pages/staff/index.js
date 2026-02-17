@@ -16,27 +16,31 @@ const StaffDashboard = () => {
 
   const checkAuth = async () => {
     try {
-      const response = await fetch('/api/auth/me');
+      const response = await fetch('/api/auth/me', { credentials: 'include' });
       if (!response.ok) {
-        router.push('/login');
+        router.replace('/staff/login');
         return;
       }
       const data = await response.json();
       if (data.user.role !== 'staff' && data.user.role !== 'admin') {
-        router.push('/login');
+        router.replace('/staff/login');
+        return;
+      }
+      if (data.user.role === 'staff' && data.user.must_change_password) {
+        router.replace('/staff/change-password');
         return;
       }
       setUser(data.user);
     } catch (error) {
-      router.push('/login');
+      router.replace('/staff/login');
     } finally {
       setLoading(false);
     }
   };
 
   const handleLogout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST' });
-    router.push('/login');
+    await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
+    router.replace('/staff/login');
   };
 
   if (loading) {

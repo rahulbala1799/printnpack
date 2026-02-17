@@ -7,14 +7,15 @@ async function handler(req, res) {
 
   try {
     // User is already loaded by withAuth middleware
-    return res.status(200).json({
-      user: {
-        id: req.user.id,
-        email: req.user.email,
-        name: req.user.name,
-        role: req.user.role
-      }
-    });
+    const u = req.user;
+    const out = {
+      id: u.id,
+      name: u.name,
+      role: u.role,
+    };
+    if (u.email != null) out.email = u.email;
+    if (u.must_change_password != null) out.must_change_password = !!u.must_change_password;
+    return res.status(200).json({ user: out });
   } catch (error) {
     console.error('Get user error:', error);
     return res.status(500).json({ error: 'Internal server error' });
