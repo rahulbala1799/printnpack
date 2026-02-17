@@ -1,82 +1,130 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FaHome, FaBoxOpen, FaCubes, FaClipboardList, FaShoppingCart, FaSignOutAlt, FaMapMarkerAlt, FaListUl } from 'react-icons/fa';
+import '../../styles/staff-dashboard.css';
 
 const navItems = [
-  { href: '/staff', label: 'Home', icon: FaHome },
-  { href: '/staff/outbound-sales', label: 'Log visit', icon: FaMapMarkerAlt },
-  { href: '/staff/logged-visits', label: 'Visits', icon: FaListUl },
-  { href: '/staff/products', label: 'Products', icon: FaBoxOpen },
-  { href: '/staff/plain-packaging', label: 'Plain', icon: FaCubes },
-  { href: '/staff/orders', label: 'Orders', icon: FaShoppingCart },
-  { href: '/staff/quotes', label: 'Quotes', icon: FaClipboardList },
+  { href: '/staff', label: 'Home', icon: 'home' },
+  { href: '/staff/outbound-sales', label: 'Log Visit', icon: 'pin' },
+  { href: '/staff/orders', label: 'Orders', icon: 'cart' },
+  { href: '/staff/quotes', label: 'Quotes', icon: 'file' },
+  { href: '/staff/products', label: 'Products', icon: 'box' },
 ];
+
+const icons = {
+  home: (
+    <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+      <polyline points="9 22 9 12 15 12 15 22" />
+    </svg>
+  ),
+  pin: (
+    <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  ),
+  cart: (
+    <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="9" cy="21" r="1" />
+      <circle cx="20" cy="21" r="1" />
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+    </svg>
+  ),
+  file: (
+    <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <polyline points="14 2 14 8 20 8" />
+      <line x1="16" y1="13" x2="8" y2="13" />
+    </svg>
+  ),
+  box: (
+    <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+    </svg>
+  ),
+};
 
 export default function StaffLayout({ children, title = 'Staff', user }) {
   const router = useRouter();
+  const [liveTime, setLiveTime] = useState('--:--');
+
+  useEffect(() => {
+    const tick = () => {
+      setLiveTime(new Date().toLocaleTimeString('en-IE', { hour: '2-digit', minute: '2-digit', hour12: false }));
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
 
   const isActive = (href) => {
     if (href === '/staff') return router.pathname === '/staff';
     return router.pathname.startsWith(href);
   };
 
+  const initials = user?.name
+    ? user.name.split(' ').map((w) => w[0]).join('').slice(0, 2).toUpperCase()
+    : '—';
+
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50">
-      {/* Top bar: minimal, mobile-first */}
-      <header
-        className="sticky top-0 z-20 flex items-center justify-between px-4 py-3 bg-emerald-800 text-white"
-        style={{ paddingTop: 'max(0.75rem, env(safe-area-inset-top))' }}
-      >
-        <div className="flex items-center gap-2 min-w-0">
-          <span className="font-bold text-lg truncate">PrintNPack Staff</span>
-          {user?.name && (
-            <span className="text-emerald-200 text-sm truncate hidden xs:inline">· {user.name}</span>
-          )}
+    <div className="staff-dashboard flex flex-col min-h-screen">
+      <header className="staff-topbar">
+        <div className="staff-topbar-logo">
+          <div className="staff-logo-box">
+            <svg viewBox="0 0 15 15" width="15" height="15" fill="#fff">
+              <rect x="2" y="1" width="4" height="13" rx="1.2" />
+              <rect x="2" y="1" width="9" height="4" rx="1.2" />
+              <rect x="2" y="7" width="8" height="4" rx="1.2" />
+            </svg>
+          </div>
+          <span className="staff-logo-wordmark">PrintNPack <sup>Staff</sup></span>
         </div>
-        <button
-          type="button"
-          onClick={async () => {
-            await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
-            window.location.href = '/staff/login';
-          }}
-          className="flex items-center justify-center w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 active:bg-white/30 transition-colors touch-manipulation shrink-0"
-          aria-label="Log out"
-        >
-          <FaSignOutAlt className="text-lg" />
-        </button>
+        <div className="staff-topbar-right">
+          <div className="staff-topbar-pill">
+            <div className="staff-status-dot" />
+            <span>{liveTime}</span>
+          </div>
+          <div className="staff-avatar" aria-hidden>{initials}</div>
+          <button
+            type="button"
+            className="staff-sign-out"
+            onClick={async () => {
+              await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
+              window.location.href = '/staff/login';
+            }}
+            aria-label="Sign out"
+          >
+            <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            Out
+          </button>
+        </div>
       </header>
 
-      {/* Main content: scrollable, padding for bottom nav */}
-      <main
-        className="flex-1 w-full max-w-2xl mx-auto px-4 py-4 pb-24"
-        style={{ paddingBottom: 'calc(6rem + env(safe-area-inset-bottom, 0px))' }}
-      >
+      <main className="flex-1" style={{ paddingBottom: title ? undefined : 0 }}>
         {title && title !== 'Staff' && (
-          <h1 className="text-xl font-bold text-slate-900 mb-4">{title}</h1>
+          <div className="staff-body" style={{ paddingTop: 16 }}>
+            <h1 className="staff-hero-name" style={{ fontSize: 20, marginBottom: 12 }}>{title}</h1>
+          </div>
         )}
         {children}
       </main>
 
-      {/* Bottom nav: large touch targets, mobile-first */}
-      <nav
-        className="fixed bottom-0 left-0 right-0 z-20 bg-white border-t border-slate-200"
-        style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
-        aria-label="Staff navigation"
-      >
-        <div className="max-w-2xl mx-auto flex items-stretch justify-around h-14">
-          {navItems.map(({ href, label, icon: Icon }) => (
+      <nav className="staff-bnav" aria-label="Staff navigation">
+        <div className="staff-bnav-inner">
+          {navItems.map(({ href, label, icon }) => (
             <Link
               key={href}
               href={href}
-              className={`flex flex-col items-center justify-center flex-1 min-w-0 py-1 text-xs font-medium transition-colors touch-manipulation ${
-                isActive(href)
-                  ? 'text-emerald-600 bg-emerald-50'
-                  : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50 active:bg-slate-100'
-              }`}
+              className={`staff-bnav-item ${isActive(href) ? 'on' : ''}`}
             >
-              <Icon className="text-lg mb-0.5 shrink-0" aria-hidden />
-              <span className="truncate w-full text-center px-0.5">{label}</span>
+              <div className="staff-ni">{icons[icon]}</div>
+              <span className="staff-nl">{label}</span>
+              {href === '/staff/orders' && <span className="staff-pip" aria-hidden />}
             </Link>
           ))}
         </div>
