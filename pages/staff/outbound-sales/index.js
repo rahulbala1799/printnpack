@@ -38,7 +38,6 @@ export default function OutboundSalesPage({ printedProducts = [] }) {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitLabel, setSubmitLabel] = useState('Log This Visit →');
-  const [showAnother, setShowAnother] = useState(false);
 
   // Fetch plain products (staff API)
   useEffect(() => {
@@ -200,8 +199,8 @@ export default function OutboundSalesPage({ printedProducts = [] }) {
         setSubmitting(false);
         setSubmitted(true);
         setSubmitLabel('✓ Visit Logged!');
-        setShowAnother(true);
         setToast({ msg: 'Visit logged ✓', type: 'success' });
+        setTimeout(() => router.push('/staff'), 1000);
       } else {
         const newQueue = [...queue, payload];
         saveQueue(newQueue);
@@ -235,7 +234,6 @@ export default function OutboundSalesPage({ printedProducts = [] }) {
     setVisitAt(now.toISOString().slice(0, 16));
     setSubmitted(false);
     setSubmitLabel('Log This Visit →');
-    setShowAnother(false);
     if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -286,7 +284,7 @@ export default function OutboundSalesPage({ printedProducts = [] }) {
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </Head>
 
-      <div className="max-w-lg mx-auto pb-28">
+      <div className="max-w-lg mx-auto pb-[170px]">
         {/* Session + link to logged visits */}
         <div className="flex items-center justify-between gap-2 mb-4">
           <Link
@@ -519,12 +517,15 @@ export default function OutboundSalesPage({ printedProducts = [] }) {
         </div>
       </div>
 
-      {/* Submit area */}
-      <div className="fixed bottom-0 left-0 right-0 z-10 pt-4 pb-8 px-4 bg-gradient-to-t from-slate-50 to-transparent max-w-lg mx-auto">
+      {/* Submit area – above bottom nav */}
+      <div
+        className="fixed left-0 right-0 z-10 pt-4 pb-3 px-4 bg-gradient-to-t from-slate-50 to-transparent max-w-lg mx-auto"
+        style={{ bottom: 'calc(58px + env(safe-area-inset-bottom, 0px))' }}
+      >
         <button
           type="button"
           onClick={submitVisit}
-          disabled={submitting}
+          disabled={submitting || submitted}
           className="w-full py-3.5 rounded-xl bg-emerald-600 text-white font-bold text-center hover:bg-emerald-700 active:bg-emerald-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {submitting ? (
@@ -533,23 +534,15 @@ export default function OutboundSalesPage({ printedProducts = [] }) {
             submitLabel || 'Log This Visit →'
           )}
         </button>
-        {showAnother && (
-          <button
-            type="button"
-            onClick={resetForm}
-            className="w-full mt-2 py-3 rounded-xl border border-slate-200 bg-white text-slate-600 font-semibold hover:bg-slate-50"
-          >
-            + Log Another Visit
-          </button>
-        )}
       </div>
 
-      {/* Toast */}
+      {/* Toast – above submit bar */}
       {toast.msg && (
         <div
-          className={`fixed bottom-28 left-1/2 -translate-x-1/2 z-20 px-4 py-2 rounded-lg border text-sm font-semibold shadow-lg ${
+          className={`fixed left-1/2 -translate-x-1/2 z-20 px-4 py-2 rounded-lg border text-sm font-semibold shadow-lg ${
             toast.type === 'success' ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-amber-50 border-amber-200 text-amber-800'
           }`}
+          style={{ bottom: 'calc(58px + 72px + env(safe-area-inset-bottom, 0px))' }}
         >
           {toast.msg}
         </div>
