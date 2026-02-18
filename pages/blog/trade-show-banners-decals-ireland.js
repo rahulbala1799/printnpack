@@ -5,7 +5,20 @@ import Layout from '../../components/layout/Layout';
 
 const siteUrl = 'https://printnpack.ie';
 const slug = 'trade-show-banners-decals-ireland';
-const heroImage = '/ifa/product/vinylstk/Vinyl-Decals-_-Stickers.jpg';
+// Roll-up banners (roll-up-banners page)
+const heroImage = '/ifa/product/rollup/1.png';
+const rollUpImages = ['/ifa/product/rollup/2.png', '/ifa/product/rollup/3.png', '/ifa/product/rollup/4.png'];
+// Vinyl banners (vinyl-banners page)
+const bannerImages = [
+  '/ifa/product/banner/20221019_184306722822_e66498_Promo-banner.webp',
+  '/ifa/product/banner/20221019_184310980133_d01bb8_Real-Estate.webp',
+  '/ifa/product/banner/20221019_184301869688_fcc9a6_Automobiles.webp',
+];
+// Decals (vinyl-stickers)
+const decalImages = [
+  '/ifa/product/vinylstk/Window_Sticker_2_01041803202404.png.webp',
+  '/ifa/product/vinylstk/carstk.webp',
+];
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -134,7 +147,7 @@ export default function TradeShowBannersDecalsIreland() {
         <meta name="description" content={description} />
         <meta
           name="keywords"
-          content="trade show banners Ireland, custom decals Ireland, roll up banners Ireland, pull up banners Dublin, exhibition banners Ireland, window decals Ireland, vehicle decals Ireland, van graphics Ireland, retail window graphics Ireland"
+          content="trade show banners Ireland, custom decals Ireland, roll up banners Ireland, pull up banner printing Dublin, exhibition banners Ireland, portable exhibition banners Ireland, window decals Ireland, vehicle decals Ireland, van decals printing Ireland, custom window decals Ireland retail, shop window promotional decals Ireland, fleet branding decals Ireland, retail window graphics Ireland, business expo banners Dublin, conference display banners Ireland"
         />
         <meta name="author" content="PrintNPack Ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
@@ -182,7 +195,7 @@ export default function TradeShowBannersDecalsIreland() {
         <div className="relative rounded-2xl overflow-hidden h-64 sm:h-80 mb-8 border border-slate-100">
           <Image
             src={heroImage}
-            alt="Trade show banners and custom decals Ireland – high-impact marketing for SMEs"
+            alt="Roll-up banners and trade show displays Ireland – professional exhibition banner printing"
             fill
             className="object-cover"
             priority
@@ -190,7 +203,7 @@ export default function TradeShowBannersDecalsIreland() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
           <div className="absolute bottom-0 left-0 p-6">
-            <span className="text-white text-sm font-medium opacity-90">Banners &amp; decals — printed in Ireland, delivered nationwide</span>
+            <span className="text-white text-sm font-medium opacity-90">Trade show banners &amp; custom decals — printed in Ireland, delivered nationwide</span>
           </div>
         </div>
 
@@ -210,14 +223,14 @@ export default function TradeShowBannersDecalsIreland() {
         <div className="prose prose-slate max-w-none">
 
           <p className="text-lg text-slate-700 leading-relaxed mb-6">
-            In today&apos;s competitive Irish SME market, visibility is everything. Whether you are exhibiting at a trade show in Dublin,
-            promoting a retail offer in Cork, or branding a company van in Galway, two print products consistently deliver exceptional ROI:
-            <strong> trade show banners</strong> and <strong>custom decals</strong>.
+            In today&apos;s competitive Irish SME market, visibility is everything. Whether you need <strong>trade show banners Ireland</strong> for
+            a small business expo, <strong>pull up banner printing Dublin</strong> for a conference, or <strong>custom window decals Ireland</strong> for
+            a retail shopfront, two print products consistently deliver exceptional ROI: <strong>trade show banners</strong> and <strong>custom decals</strong>.
           </p>
           <p className="text-slate-700 leading-relaxed mb-8">
             These tools combine affordability, flexibility, and strong physical presence — which is exactly why Irish businesses continue
-            to rely on them despite the rise of digital advertising. This guide explains where they work best, why demand is rising in Ireland,
-            and how to choose the right option for your business.
+            to rely on <strong>affordable roll up banners Ireland</strong> and <strong>custom vinyl decals Dublin</strong> despite the rise of digital
+            advertising. This guide explains where they work best, why demand is rising in Ireland, and how to choose the right option for your business.
           </p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">
@@ -225,8 +238,19 @@ export default function TradeShowBannersDecalsIreland() {
           </h2>
           <p className="text-slate-700 leading-relaxed mb-4">
             Trade shows, local business expos, recruitment fairs, and hospitality events have rebounded strongly across Ireland in 2025 and 2026.
-            For SMEs attending even a few events per year, <strong>portable exhibition banners</strong> have become standard equipment.
+            For SMEs attending even a few events per year, <strong>portable exhibition banners Ireland</strong> and <strong>custom trade show banner stands Ireland</strong> have
+            become standard equipment. Whether you need <strong>pop up banner printing near me Ireland</strong> or <strong>budget exhibition banners for startups Ireland</strong>,
+            the right display makes the difference.
           </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            {rollUpImages.map((img, i) => (
+              <div key={img} className="relative rounded-xl overflow-hidden h-48 border border-slate-200">
+                <Image src={img} alt={`Roll-up banner display ${i + 1} – exhibition banners Ireland`} fill className="object-cover" sizes="(max-width: 640px) 100vw, 33vw" />
+                {i === 0 && <div className="absolute bottom-0 left-0 right-0 bg-slate-900/70 text-white text-xs p-2 text-center font-medium">Portable exhibition banners</div>}
+              </div>
+            ))}
+          </div>
 
           <div className="bg-white border border-slate-200 rounded-xl p-5 mb-8">
             <h3 className="font-bold text-slate-900 mb-3">Key advantages</h3>
@@ -241,29 +265,50 @@ export default function TradeShowBannersDecalsIreland() {
           </div>
 
           <p className="text-slate-700 leading-relaxed mb-8">
-            For many PrintNPack customers, a single well-designed <Link href="/roll-up-banners" className="text-purple-600 hover:text-purple-700 font-medium">roll-up banner</Link> pays
-            for itself after just one successful event.
+            For many PrintNPack customers, a single well-designed <Link href="/roll-up-banners" className="text-purple-600 hover:text-purple-700 font-medium">roll-up banner</Link> —
+            whether <strong>premium roll up banner printing Dublin</strong> or <strong>next day pull up banners Ireland</strong> — pays for itself after just one successful event.
+            We supply <strong>lightweight exhibition banner stands Ireland</strong>, <strong>retractable banner printing Ireland cheap</strong>, and
+            <strong> high quality roll up banners Ireland</strong> for indoor promotional use.
           </p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">
             Where Trade Show Banners Are Used in Ireland
           </h2>
 
+          <div className="relative rounded-2xl overflow-hidden h-56 mb-8 border border-slate-200">
+            <Image
+              src={bannerImages[0]}
+              alt="Trade show and exhibition display banners Ireland – business expo banners Dublin"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 768px"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent" />
+            <div className="absolute bottom-0 left-0 p-6">
+              <span className="text-white text-sm font-medium">Conference display banners Ireland · marketing display banners for events</span>
+            </div>
+          </div>
+
           <div className="space-y-6 mb-8">
             <div>
               <h3 className="font-bold text-slate-900 mb-2">Exhibitions and business expos</h3>
-              <p className="text-slate-700 text-sm mb-2">Common sectors include:</p>
+              <p className="text-slate-700 text-sm mb-2">
+                <strong>Business expo banners Dublin</strong>, <strong>event display systems Ireland</strong>, and <strong>conference booth banner printing</strong> are
+                common. Sectors include:
+              </p>
               <ul className="list-disc pl-5 text-slate-700 text-sm space-y-1">
-                <li>Food and hospitality</li>
-                <li>Recruitment and training</li>
-                <li>SaaS and tech startups</li>
+                <li>Food and hospitality — <strong>hospitality trade show banners Ireland</strong></li>
+                <li>Recruitment and training — <strong>recruitment fair banners Ireland</strong></li>
+                <li>SaaS and tech startups — <strong>startup exhibition display Ireland</strong></li>
                 <li>Local enterprise offices</li>
                 <li>Franchise shows</li>
               </ul>
             </div>
             <div>
               <h3 className="font-bold text-slate-900 mb-2">Retail environments</h3>
-              <p className="text-slate-700 text-sm mb-2">Irish retailers frequently use pull-up banners for:</p>
+              <p className="text-slate-700 text-sm mb-2">
+                Irish retailers frequently use <strong>retail promotional banner stands Ireland</strong> and <strong>pop up display banners Dublin</strong> for:
+              </p>
               <ul className="list-disc pl-5 text-slate-700 text-sm space-y-1">
                 <li>Seasonal promotions</li>
                 <li>Clearance events</li>
@@ -274,8 +319,8 @@ export default function TradeShowBannersDecalsIreland() {
             <div>
               <h3 className="font-bold text-slate-900 mb-2">Reception areas</h3>
               <p className="text-slate-700 text-sm">
-                Professional firms such as accountants, clinics, and agencies use <strong>premium roll-up banners</strong> to build
-                credibility in waiting areas.
+                Professional firms use <strong>office reception banner printing</strong> and <strong>professional trade show displays Ireland</strong> to build
+                credibility. <strong>Corporate event banners Ireland</strong> and <strong>exhibition stand graphics Ireland</strong> complete the picture.
               </p>
             </div>
           </div>
@@ -284,16 +329,31 @@ export default function TradeShowBannersDecalsIreland() {
             Custom Decals: Ireland&apos;s Most Versatile Branding Tool
           </h2>
           <p className="text-slate-700 leading-relaxed mb-4">
-            While banners dominate events, <strong>custom printed decals in Ireland</strong> are seeing explosive growth across retail,
-            fleet branding, and interior graphics. Decals are adhesive graphics that can be applied to almost any surface, including:
+            While <strong>trade fair banner printing Ireland</strong> dominates events, <strong>custom printed decals in Ireland</strong> are seeing
+            explosive growth across retail, fleet branding, and interior graphics. Whether you need <strong>custom window decals Ireland for retail shops</strong>,
+            <strong> business window stickers Dublin fast turnaround</strong>, or <strong>van decals printing Ireland</strong>, decals are adhesive graphics
+            that can be applied to almost any surface, including:
           </p>
-          <ul className="flex flex-wrap gap-2 mb-8">
+          <ul className="flex flex-wrap gap-2 mb-6">
             {decalSurfaces.map((s) => (
               <li key={s} className="bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg text-sm font-medium">{s}</li>
             ))}
           </ul>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+            <div className="relative rounded-xl overflow-hidden h-52">
+              <Image src={decalImages[0]} alt="Shop window promotional decals Ireland – storefront window graphics" fill className="object-cover" sizes="(max-width: 640px) 100vw, 50vw" />
+              <div className="absolute bottom-0 left-0 right-0 bg-slate-900/70 text-white text-xs p-2 text-center font-medium">Window decals · shop front window graphics Ireland</div>
+            </div>
+            <div className="relative rounded-xl overflow-hidden h-52">
+              <Image src={decalImages[1]} alt="Vehicle branding decals Ireland – company van graphics and fleet branding" fill className="object-cover" sizes="(max-width: 640px) 100vw, 50vw" />
+              <div className="absolute bottom-0 left-0 right-0 bg-slate-900/70 text-white text-xs p-2 text-center font-medium">Van decals · fleet branding decals Ireland</div>
+            </div>
+          </div>
+
           <p className="text-slate-700 leading-relaxed mb-8">
-            Their flexibility makes them one of the highest-ROI print products available. See our guide to{' '}
+            Their flexibility makes them one of the highest-ROI print products available. From <strong>removable wall decals Ireland offices</strong> to
+            <strong> custom adhesive graphics Ireland</strong> and <strong>high quality vinyl decals Ireland</strong>, see our guide to{' '}
             <Link href="/vinyl-stickers" className="text-purple-600 hover:text-purple-700 font-medium">custom vinyl stickers and decals</Link> for
             materials and ordering.
           </p>
@@ -306,47 +366,69 @@ export default function TradeShowBannersDecalsIreland() {
             <div className="border-l-4 border-purple-500 pl-5">
               <h3 className="font-bold text-slate-900 mb-2">Retail competition is intense</h3>
               <p className="text-slate-700 text-sm leading-relaxed mb-2">
-                Window decals help Irish shops increase walk-ins, highlight offers instantly, refresh storefronts cheaply, and create professional branding.
+                <strong>Shop window promotional decals Ireland</strong> and <strong>storefront window graphics Ireland</strong> help Irish shops increase walk-ins,
+                highlight offers instantly, and create <strong>professional window branding Ireland</strong>. <strong>Retail window sale stickers Ireland</strong> and
+                <strong> promotional window stickers Dublin</strong> refresh storefronts at low cost.
               </p>
             </div>
             <div className="border-l-4 border-purple-500 pl-5">
               <h3 className="font-bold text-slate-900 mb-2">Vehicle branding delivers long-term exposure</h3>
               <p className="text-slate-700 text-sm leading-relaxed">
-                Irish trades and service businesses heavily invest in van decals, fleet graphics, magnetic signage, and partial vehicle wraps.
-                One branded van can generate thousands of impressions weekly. Explore <Link href="/vehicle-decals" className="text-purple-600 hover:text-purple-700 font-medium">vehicle decals</Link> options.
+                Irish trades and service businesses invest in <strong>company van graphics Ireland</strong>, <strong>fleet branding decals Ireland</strong>,
+                and <strong>branded vehicle stickers Ireland</strong>. One <strong>long lasting vehicle decals Ireland</strong> van can generate thousands of
+                impressions weekly. Explore <Link href="/vinyl-stickers" className="text-purple-600 hover:text-purple-700 font-medium">vehicle decals</Link> and
+                <strong> commercial vinyl graphics Ireland</strong> options.
               </p>
             </div>
             <div className="border-l-4 border-purple-500 pl-5">
               <h3 className="font-bold text-slate-900 mb-2">Perfect for short-term promotions</h3>
               <p className="text-slate-700 text-sm leading-relaxed">
-                Unlike permanent signage, decals can be removed and updated easily, making them ideal for seasonal sales, pop-up shops, limited offers, and event promotions.
+                Unlike permanent signage, <strong>removable promotional decals Ireland</strong> can be updated easily — ideal for seasonal sales, pop-up shops,
+                and <strong>marketing decals for small business Ireland</strong>. <strong>Removable shop window decals Ireland</strong> and
+                <strong> fast delivery window decals Ireland</strong> keep campaigns flexible.
               </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+            <div className="relative rounded-xl overflow-hidden h-44 border border-slate-200">
+              <Image src={bannerImages[1]} alt="Indoor advertising banners Ireland – exhibition graphics printing Dublin" fill className="object-cover" sizes="(max-width: 640px) 100vw, 50vw" />
+              <div className="absolute bottom-0 left-0 right-0 bg-slate-900/60 text-white text-xs p-2 text-center">Vinyl banners · indoor promotional banners Ireland</div>
+            </div>
+            <div className="relative rounded-xl overflow-hidden h-44 border border-slate-200">
+              <Image src={bannerImages[2]} alt="Outdoor and vehicle graphics – custom printed vinyl Ireland" fill className="object-cover" sizes="(max-width: 640px) 100vw, 50vw" />
+              <div className="absolute bottom-0 left-0 right-0 bg-slate-900/60 text-white text-xs p-2 text-center">Custom printed vinyl Ireland · large format decals</div>
             </div>
           </div>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">
             Trade Show Banners vs Decals: Quick Decision Guide
           </h2>
+          <p className="text-slate-700 text-sm mb-6">
+            Whether you search for <strong>trade show banners Ireland for small business</strong>, <strong>custom trade show banner stands Ireland</strong>,
+            <strong> SME trade show banners Ireland</strong>, or <strong>best exhibition banners Ireland SMEs</strong> — or for <strong>custom window decals Ireland for retail shops</strong>,
+            <strong> floor graphics printing Ireland non slip</strong>, or <strong>wall graphics printing Dublin</strong> — use the guide below.
+          </p>
 
           <div className="grid sm:grid-cols-2 gap-4 mb-10">
             <div className="bg-purple-50 border border-purple-200 rounded-xl p-5">
               <h3 className="font-bold text-slate-900 mb-3">Choose trade show banners if you need:</h3>
               <ul className="text-slate-700 text-sm space-y-1">
-                <li>• Portable event display</li>
-                <li>• Fast setup</li>
-                <li>• Reusable marketing</li>
-                <li>• Indoor visibility</li>
-                <li>• Exhibition presence</li>
+                <li>• <strong>Portable event display</strong> — quick setup banner stands Ireland</li>
+                <li>• Fast setup — reusable exhibition banners Ireland</li>
+                <li>• Indoor visibility — conference marketing banners Ireland</li>
+                <li>• Exhibition presence — Dublin exhibition display printing</li>
+                <li>• <strong>Banner stand printing services Ireland</strong></li>
               </ul>
             </div>
             <div className="bg-slate-50 border border-slate-200 rounded-xl p-5">
               <h3 className="font-bold text-slate-900 mb-3">Choose decals if you need:</h3>
               <ul className="text-slate-700 text-sm space-y-1">
-                <li>• Window or vehicle branding</li>
-                <li>• Semi-permanent graphics</li>
-                <li>• High-volume low-cost units</li>
-                <li>• Surface application</li>
-                <li>• Retail visibility</li>
+                <li>• <strong>Window or vehicle branding</strong> — shop front window graphics Ireland</li>
+                <li>• Semi-permanent graphics — office wall branding decals Ireland</li>
+                <li>• <strong>Custom logo stickers Ireland business</strong></li>
+                <li>• Interior branding decals · floor safety decals Ireland</li>
+                <li>• <strong>High impact retail decals Ireland</strong></li>
               </ul>
             </div>
           </div>
@@ -385,6 +467,43 @@ export default function TradeShowBannersDecalsIreland() {
               For higher conversions, add real product photos, a bulk pricing table, a &quot;fast delivery in Ireland&quot; badge,
               an industries-served section, trust signals (Irish business, in-house printing), and a simple quote CTA above the fold.
             </p>
+          </div>
+
+          <div className="bg-slate-50 border border-slate-200 rounded-xl p-6 mb-10">
+            <h3 className="font-bold text-slate-900 mb-3">What Irish businesses search for</h3>
+            <p className="text-slate-600 text-sm mb-4">Common phrases we hear for <strong>trade show banner printing Ireland</strong> and <strong>custom decals Ireland</strong>:</p>
+            <div className="grid sm:grid-cols-2 gap-3 text-sm">
+              <div>
+                <p className="font-semibold text-slate-700 mb-2">Banners</p>
+                <ul className="text-slate-600 space-y-1">
+                  <li>· Trade show banners Ireland for small business</li>
+                  <li>· Pull up banner printing Dublin fast delivery</li>
+                  <li>· Affordable roll up banners Ireland</li>
+                  <li>· Portable exhibition banners Ireland</li>
+                  <li>· Pop up banner printing near me Ireland</li>
+                  <li>· Premium roll up banner printing Dublin</li>
+                  <li>· Next day pull up banners Ireland</li>
+                  <li>· Conference display banners Ireland</li>
+                  <li>· Business expo banners Dublin</li>
+                  <li>· Retractable banner printing Ireland cheap</li>
+                </ul>
+              </div>
+              <div>
+                <p className="font-semibold text-slate-700 mb-2">Decals</p>
+                <ul className="text-slate-600 space-y-1">
+                  <li>· Custom window decals Ireland for retail shops</li>
+                  <li>· Business window stickers Dublin fast turnaround</li>
+                  <li>· Van decals printing Ireland</li>
+                  <li>· Shop window promotional decals Ireland</li>
+                  <li>· Custom vinyl decals Dublin</li>
+                  <li>· Storefront window graphics Ireland</li>
+                  <li>· Company van graphics Ireland</li>
+                  <li>· Fleet branding decals Ireland</li>
+                  <li>· Removable wall decals Ireland offices</li>
+                  <li>· Custom adhesive graphics Ireland</li>
+                </ul>
+              </div>
+            </div>
           </div>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">

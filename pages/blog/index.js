@@ -11,8 +11,8 @@ const posts = [
       'High quality trade show banners and custom decals in Ireland. Where they work best, why demand is rising, and how to choose the right option for your business — fast turnaround and affordable pricing for SMEs.',
     date: '2026-02-18',
     readTime: '9 min read',
-    image: '/ifa/product/vinylstk/Vinyl-Decals-_-Stickers.jpg',
-    imageAlt: 'Trade show banners and custom decals Ireland – high-impact marketing for SMEs',
+    image: '/ifa/product/rollup/1.png',
+    imageAlt: 'Trade show banners and custom decals Ireland – roll-up banners and exhibition displays',
     category: 'Print Guide',
   },
   {
