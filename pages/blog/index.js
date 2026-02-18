@@ -5,6 +5,17 @@ import Layout from '../../components/layout/Layout';
 
 const posts = [
   {
+    slug: 'corriboard-boards-ireland',
+    title: 'Corriboard (Correx) Boards in Ireland: The Quiet Workhorse of Outdoor Marketing',
+    excerpt:
+      "If you've walked down any Irish street during an election, passed a property for sale, or attended a summer festival, you've already seen corriboard in action. This guide explains what it is, why it performs so well in Irish weather, and where businesses use it most.",
+    date: '2026-02-18',
+    readTime: '7 min read',
+    image: '/ifa/product/corriboard/corrugated-plastic-signs.jpg',
+    imageAlt: 'Corriboard (Correx) boards Ireland – outdoor signage printing',
+    category: 'Print Guide',
+  },
+  {
     slug: 'custom-vinyl-stickers-ireland',
     title: 'Custom Vinyl Stickers Ireland: The Complete Guide to Materials, Uses & Ordering',
     excerpt:
