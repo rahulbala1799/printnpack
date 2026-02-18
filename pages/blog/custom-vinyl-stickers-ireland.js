@@ -50,7 +50,7 @@ const faqLd = {
       name: 'What file format do I need for custom vinyl sticker printing?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'PDF or AI (Adobe Illustrator) with all text converted to outlines and 3mm bleed added is ideal. High-resolution PNG or TIFF (300dpi+) is also accepted. PrintNPack's team can advise if your artwork needs adjustments before printing.',
+        text: 'PDF or AI (Adobe Illustrator) with all text converted to outlines and 3mm bleed added is ideal. High-resolution PNG or TIFF (300dpi+) is also accepted. Our team can advise if your artwork needs adjustments before printing.',
       },
     },
     {
