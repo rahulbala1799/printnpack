@@ -256,14 +256,26 @@ export default function PricelistDetailPage() {
             <div className="pl-form-body">
               <div className="pl-form-section">
                 <div className="pl-form-label">Customer <span>*</span></div>
-                <button type="button" className="pl-customer-selector" onClick={() => setShowCustomerPicker(true)}>
-                  <div className="pl-customer-selector-avatar selected">{getInitials(form.customer_name)}</div>
-                  <div className="pl-customer-selector-text">
-                    <div className="pl-customer-selector-name">{form.customer_name || 'Select customer'}</div>
-                    <div className="pl-customer-selector-hint">Tap to change customer</div>
-                  </div>
-                  <div className="pl-customer-selector-action">Change</div>
-                </button>
+                <div style={{ display: 'flex', gap: 8, alignItems: 'stretch' }}>
+                  <button type="button" className="pl-customer-selector" style={{ flex: 1 }} onClick={() => setShowCustomerPicker(true)}>
+                    <div className={`pl-customer-selector-avatar ${form.customer_name ? 'selected' : ''}`}>{getInitials(form.customer_name)}</div>
+                    <div className="pl-customer-selector-text">
+                      <div className="pl-customer-selector-name">{form.customer_name || 'Select customer'}</div>
+                      <div className="pl-customer-selector-hint">Tap to change customer</div>
+                    </div>
+                    <div className="pl-customer-selector-action">Change</div>
+                  </button>
+                  {form.customer_name && (
+                    <button
+                      type="button"
+                      className="pl-customer-clear-btn"
+                      onClick={() => setForm((p) => ({ ...p, customer_id: null, customer_name: '' }))}
+                      aria-label="Clear customer"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                  )}
+                </div>
               </div>
               <div className="pl-form-section">
                 <div className="pl-form-label">Notes</div>
@@ -376,6 +388,12 @@ export default function PricelistDetailPage() {
                     <div className="pl-detail-item-price">{formatPrice(it.price)}</div>
                   </div>
                 ))}
+                {items.length > 0 && (
+                  <div className="pl-detail-summary-row">
+                    <span>{items.length} product{items.length !== 1 ? 's' : ''}</span>
+                    <span className="pl-detail-summary-note">Negotiated prices</span>
+                  </div>
+                )}
               </div>
             </div>
 

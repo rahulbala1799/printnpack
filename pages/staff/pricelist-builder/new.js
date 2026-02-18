@@ -28,6 +28,7 @@ export default function NewPricelistPage() {
   const [items, setItems] = useState([]);
   const [showProductPicker, setShowProductPicker] = useState(false);
   const [showCustomerPicker, setShowCustomerPicker] = useState(false);
+  const [customerError, setCustomerError] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -75,9 +76,10 @@ export default function NewPricelistPage() {
 
   const handleSave = async () => {
     if (!customer?.name) {
-      alert('Select a customer');
+      setCustomerError('Please select a customer');
       return;
     }
+    setCustomerError('');
     const lines = items.map((it) => ({
       id: it.id,
       product_type: it.product_type,
@@ -145,16 +147,29 @@ export default function NewPricelistPage() {
         <div className="pl-form-body">
           <div className="pl-form-section">
             <div className="pl-form-label">Customer <span>*</span></div>
-            <button type="button" className="pl-customer-selector" onClick={() => setShowCustomerPicker(true)}>
-              <div className={`pl-customer-selector-avatar ${customer ? 'selected' : ''}`}>
-                {customer ? getInitials(customer.name) : <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pl-ink3)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>}
-              </div>
-              <div className="pl-customer-selector-text">
-                <div className="pl-customer-selector-name" style={customer ? undefined : { color: 'var(--pl-ink4)' }}>{customer ? customer.name : 'Select customer'}</div>
-                <div className="pl-customer-selector-hint">{customer ? 'Tap to change customer' : 'Tap to search or add new'}</div>
-              </div>
-              <div className="pl-customer-selector-action">{customer ? 'Change' : 'Select'}</div>
-            </button>
+            <div style={{ display: 'flex', gap: 8, alignItems: 'stretch' }}>
+              <button type="button" className={`pl-customer-selector${customerError ? ' pl-customer-selector-invalid' : ''}`} style={{ flex: 1 }} onClick={() => { setShowCustomerPicker(true); setCustomerError(''); }}>
+                <div className={`pl-customer-selector-avatar ${customer ? 'selected' : ''}`}>
+                  {customer ? getInitials(customer.name) : <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pl-ink3)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>}
+                </div>
+                <div className="pl-customer-selector-text">
+                  <div className="pl-customer-selector-name" style={customer ? undefined : { color: 'var(--pl-ink4)' }}>{customer ? customer.name : 'Select customer'}</div>
+                  <div className="pl-customer-selector-hint">{customer ? 'Tap to change' : 'Tap to search or add new'}</div>
+                </div>
+                <div className="pl-customer-selector-action">{customer ? 'Change' : 'Select'}</div>
+              </button>
+              {customer && (
+                <button
+                  type="button"
+                  className="pl-customer-clear-btn"
+                  onClick={() => { setCustomer(null); setCustomerError(''); }}
+                  aria-label="Clear customer"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+              )}
+            </div>
+            {customerError && <div className="pl-form-error">{customerError}</div>}
           </div>
 
           <div className="pl-form-section">

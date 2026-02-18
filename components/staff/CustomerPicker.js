@@ -17,7 +17,22 @@ export default function CustomerPicker({ onSelect, onClose, open }) {
   const [newContact, setNewContact] = useState('');
   const [newPhone, setNewPhone] = useState('');
   const [newEmail, setNewEmail] = useState('');
+  const [nameError, setNameError] = useState('');
   const [creating, setCreating] = useState(false);
+
+  // Reset all form state when picker closes
+  useEffect(() => {
+    if (!open) {
+      setShowNewForm(false);
+      setSearch('');
+      setDebouncedSearch('');
+      setNewName('');
+      setNewContact('');
+      setNewPhone('');
+      setNewEmail('');
+      setNameError('');
+    }
+  }, [open]);
 
   useEffect(() => {
     const t = setTimeout(() => setDebouncedSearch(search.trim()), DEBOUNCE_MS);
@@ -46,9 +61,10 @@ export default function CustomerPicker({ onSelect, onClose, open }) {
   const handleCreateNew = async () => {
     const name = newName.trim();
     if (!name) {
-      alert('Enter customer name');
+      setNameError('Customer name is required');
       return;
     }
+    setNameError('');
     setCreating(true);
     try {
       const res = await fetch('/api/staff/customers', {
@@ -69,9 +85,25 @@ export default function CustomerPicker({ onSelect, onClose, open }) {
       const data = await res.json();
       handleSelect(data.customer);
     } catch (e) {
-      alert(e.message || 'Failed to create');
+      setNameError(e.message || 'Failed to create');
     } finally {
       setCreating(false);
+    }
+  };
+
+  const handleBackToList = () => {
+    setShowNewForm(false);
+    setNewName('');
+    setNewContact('');
+    setNewPhone('');
+    setNewEmail('');
+    setNameError('');
+  };
+
+  const handleFormKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleCreateNew();
     }
   };
 
@@ -88,48 +120,61 @@ export default function CustomerPicker({ onSelect, onClose, open }) {
       <div className="pl-sheet" onClick={(e) => e.stopPropagation()}>
         <div className="pl-sheet-handle" />
         <div className="pl-sheet-header">
-          <span className="pl-sheet-title">Select customer</span>
+          <span className="pl-sheet-title">{showNewForm ? 'New customer' : 'Select customer'}</span>
           <button type="button" className="pl-sheet-close" onClick={onClose} aria-label="Close">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
         </div>
-        <div className="pl-sheet-search-wrap">
-          <svg className="pl-sheet-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input
-            type="search"
-            className="pl-sheet-search"
-            placeholder="Search customers…"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            autoFocus
-            aria-label="Search customers"
-          />
-        </div>
+
+        {!showNewForm && (
+          <div className="pl-sheet-search-wrap">
+            <svg className="pl-sheet-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input
+              type="search"
+              className="pl-sheet-search"
+              placeholder="Search customers…"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              autoFocus
+              aria-label="Search customers"
+            />
+          </div>
+        )}
+
         <div className="pl-sheet-list">
           {showNewForm ? (
-            <div style={{ padding: 20 }}>
-              <p style={{ marginBottom: 12, fontSize: 14, color: 'var(--pl-ink2)' }}>New customer</p>
-              <div style={{ marginBottom: 12 }}>
-                <label className="pl-form-label">Name *</label>
-                <input type="text" className="pl-form-input" placeholder="Business name" value={newName} onChange={(e) => setNewName(e.target.value)} />
+            <div className="pl-new-customer-card">
+              <div style={{ marginBottom: 16 }}>
+                <label className="pl-form-label">Name <span style={{ color: 'var(--pl-red)' }}>*</span></label>
+                <input
+                  type="text"
+                  className={`pl-form-input${nameError ? ' pl-form-input-error' : ''}`}
+                  placeholder="Business name"
+                  value={newName}
+                  onChange={(e) => { setNewName(e.target.value); if (nameError) setNameError(''); }}
+                  onKeyDown={handleFormKeyDown}
+                  autoFocus
+                  style={{ marginTop: 6 }}
+                />
+                {nameError && <div className="pl-form-error">{nameError}</div>}
               </div>
               <div style={{ marginBottom: 12 }}>
                 <label className="pl-form-label">Contact name</label>
-                <input type="text" className="pl-form-input" placeholder="Optional" value={newContact} onChange={(e) => setNewContact(e.target.value)} />
+                <input type="text" className="pl-form-input" placeholder="Optional" value={newContact} onChange={(e) => setNewContact(e.target.value)} onKeyDown={handleFormKeyDown} style={{ marginTop: 6 }} />
               </div>
               <div style={{ marginBottom: 12 }}>
                 <label className="pl-form-label">Phone</label>
-                <input type="tel" className="pl-form-input" placeholder="Optional" value={newPhone} onChange={(e) => setNewPhone(e.target.value)} />
+                <input type="tel" className="pl-form-input" placeholder="Optional" value={newPhone} onChange={(e) => setNewPhone(e.target.value)} onKeyDown={handleFormKeyDown} style={{ marginTop: 6 }} />
               </div>
-              <div style={{ marginBottom: 16 }}>
+              <div style={{ marginBottom: 20 }}>
                 <label className="pl-form-label">Email</label>
-                <input type="email" className="pl-form-input" placeholder="Optional" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} />
+                <input type="email" className="pl-form-input" placeholder="Optional" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} onKeyDown={handleFormKeyDown} style={{ marginTop: 6 }} />
               </div>
               <div style={{ display: 'flex', gap: 10 }}>
                 <button type="button" className="pl-btn pl-btn-primary" onClick={handleCreateNew} disabled={creating || !newName.trim()}>
                   {creating ? 'Creating…' : 'Create & select'}
                 </button>
-                <button type="button" className="pl-btn pl-btn-secondary" onClick={() => setShowNewForm(false)}>Back</button>
+                <button type="button" className="pl-btn pl-btn-secondary" onClick={handleBackToList}>Back</button>
               </div>
             </div>
           ) : (
