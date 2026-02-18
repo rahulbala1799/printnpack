@@ -191,12 +191,12 @@ const orderSteps = [
   {
     num: '03',
     title: 'Get a quote',
-    desc: 'Use the online quote form or call us directly. We'll confirm size, quantity, material, finish, and turnaround time — and give you a final price.',
+    desc: "Use the online quote form or call us directly. We'll confirm size, quantity, material, finish, and turnaround time — and give you a final price.",
   },
   {
     num: '04',
     title: 'Approve your proof',
-    desc: 'We send a digital proof before printing. You check colours, layout, and cut line — and confirm it's exactly what you want.',
+    desc: "We send a digital proof before printing. You check colours, layout, and cut line — and confirm it's exactly what you want.",
   },
   {
     num: '05',
