@@ -42,8 +42,11 @@ const AboutPage = () => {
   return (
     <Layout>
       <Head>
-        <title>About Us - PrintNPack</title>
+        <title>About Us - PrintNPack Ireland</title>
         <meta name="description" content="Learn about PrintNPack's mission, vision, and commitment to providing high-quality packaging solutions in Ireland." />
+        <link rel="canonical" href="https://printnpack.ie/about" />
+        <meta property="og:title" content="About Us - PrintNPack Ireland" />
+        <meta property="og:url" content="https://printnpack.ie/about" />
       </Head>
 
       {/* Hero Section */}

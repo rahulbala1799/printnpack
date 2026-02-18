@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import StaffLayout from '../../../components/staff/StaffLayout';
 import PricelistProductPicker from '../../../components/staff/PricelistProductPicker';
+import CustomerPicker from '../../../components/staff/CustomerPicker';
+import '../../../styles/pricelist-builder.css';
 
 function lineId() {
   return typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `line-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
@@ -14,9 +16,21 @@ function formatDate(d) {
   return new Date(d).toISOString().slice(0, 10);
 }
 
+function formatDateRange(from, to) {
+  if (!from && !to) return '';
+  if (from && to) return `${formatDate(from).slice(0, 7)} – ${formatDate(to).slice(0, 7)}`;
+  if (from) return `From ${formatDate(from)}`;
+  return `To ${formatDate(to)}`;
+}
+
 function formatPrice(n) {
   if (n == null || n === '' || isNaN(Number(n))) return '';
   return new Intl.NumberFormat('en-IE', { style: 'currency', currency: 'EUR' }).format(Number(n));
+}
+
+function getInitials(name) {
+  if (!name || typeof name !== 'string') return '?';
+  return name.trim().split(/\s+/).map((w) => w[0]).join('').slice(0, 1).toUpperCase();
 }
 
 export default function PricelistDetailPage() {
@@ -27,8 +41,9 @@ export default function PricelistDetailPage() {
   const [pricelist, setPricelist] = useState(null);
   const [editing, setEditing] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [showPicker, setShowPicker] = useState(false);
-  const [form, setForm] = useState({ customer_name: '', notes: '', status: 'draft', valid_from: '', valid_to: '', items: [] });
+  const [showProductPicker, setShowProductPicker] = useState(false);
+  const [showCustomerPicker, setShowCustomerPicker] = useState(false);
+  const [form, setForm] = useState({ customer_id: null, customer_name: '', notes: '', status: 'draft', valid_from: '', valid_to: '', items: [] });
 
   const load = useCallback(() => {
     if (!id) return;
@@ -38,6 +53,7 @@ export default function PricelistDetailPage() {
         if (d?.pricelist) {
           setPricelist(d.pricelist);
           setForm({
+            customer_id: d.pricelist.customer_id || null,
             customer_name: d.pricelist.customer_name || '',
             notes: d.pricelist.notes || '',
             status: d.pricelist.status || 'draft',
@@ -94,15 +110,15 @@ export default function PricelistDetailPage() {
     }));
   }, []);
 
-  const setItemPrice = (lineId, value) => {
+  const setItemPrice = (lineIdVal, value) => {
     setForm((prev) => ({
       ...prev,
-      items: prev.items.map((it) => (it.id === lineId ? { ...it, price: value } : it)),
+      items: prev.items.map((it) => (it.id === lineIdVal ? { ...it, price: value } : it)),
     }));
   };
 
-  const removeItem = (lineId) => {
-    setForm((prev) => ({ ...prev, items: prev.items.filter((it) => it.id !== lineId) }));
+  const removeItem = (lineIdVal) => {
+    setForm((prev) => ({ ...prev, items: prev.items.filter((it) => it.id !== lineIdVal) }));
   };
 
   const handleSave = async () => {
@@ -114,6 +130,7 @@ export default function PricelistDetailPage() {
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify({
+          customer_id: form.customer_id || null,
           customer_name: form.customer_name.trim(),
           notes: form.notes.trim() || null,
           status: form.status,
@@ -136,6 +153,7 @@ export default function PricelistDetailPage() {
       const data = await res.json();
       setPricelist(data.pricelist);
       setForm({
+        customer_id: data.pricelist.customer_id || null,
         customer_name: data.pricelist.customer_name || '',
         notes: data.pricelist.notes || '',
         status: data.pricelist.status || 'draft',
@@ -180,8 +198,8 @@ export default function PricelistDetailPage() {
 
   if (loading || !user) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--canvas)' }}>
-        <div style={{ width: 32, height: 32, border: '2px solid var(--g-mid)', borderTopColor: 'var(--g)', borderRadius: '50%', animation: 'staff-spin 0.8s linear infinite' }} aria-hidden />
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--pl-cream)' }}>
+        <div style={{ width: 32, height: 32, border: '2px solid var(--pl-green-mid)', borderTopColor: 'var(--pl-green)', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} aria-hidden />
       </div>
     );
   }
@@ -189,163 +207,198 @@ export default function PricelistDetailPage() {
   if (!pricelist) {
     return (
       <StaffLayout user={user} title="Pricelist">
-        <div className="staff-body">
-          <p style={{ color: 'var(--ink-3)' }}>Pricelist not found.</p>
-          <Link href="/staff/pricelist-builder/list" className="staff-sec-more">← Back to list</Link>
+        <div className="pl-app pl-screen">
+          <div className="pl-topbar">
+            <Link href="/staff/pricelist-builder/list" className="pl-topbar-back">Back</Link>
+            <span className="pl-topbar-title">Pricelist</span>
+            <div style={{ width: 50 }} />
+          </div>
+          <div className="pl-empty-state">
+            <div className="pl-empty-state-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"/></div>
+            <p className="pl-empty-state-title">Pricelist not found</p>
+            <p className="pl-empty-state-sub">It may have been deleted.</p>
+            <Link href="/staff/pricelist-builder/list" className="pl-btn pl-btn-secondary" style={{ marginTop: 16 }}>Back to list</Link>
+          </div>
         </div>
       </StaffLayout>
     );
   }
 
+  const items = pricelist.items || [];
+  const refLabel = pricelist.id ? `PL-${String(pricelist.id).slice(0, 8)}` : '';
+  const updatedLabel = pricelist.updated_at ? `Updated ${new Date(pricelist.updated_at).toLocaleDateString()}` : '';
+
   return (
-    <StaffLayout user={user} title={editing ? 'Edit pricelist' : 'Pricelist'}>
+    <StaffLayout user={user} title="">
       <Head>
         <title>{form.customer_name || 'Pricelist'} — PrintNPack</title>
         <meta name="robots" content="noindex, nofollow" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
       </Head>
 
-      <div className="staff-body">
+      <div className="pl-app pl-screen">
+        <div className="pl-topbar">
+          <Link href="/staff/pricelist-builder/list" className="pl-topbar-back">
+            <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7l6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            Back
+          </Link>
+          <span className="pl-topbar-title">Pricelist</span>
+          {!editing ? (
+            <button type="button" className="pl-topbar-action" onClick={() => setEditing(true)}>Edit</button>
+          ) : (
+            <div style={{ width: 50 }} />
+          )}
+        </div>
+
         {editing ? (
           <>
-            <div style={{ marginBottom: 16 }}>
-              <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6 }}>Customer name</label>
-              <input
-                type="text"
-                value={form.customer_name}
-                onChange={(e) => setForm((p) => ({ ...p, customer_name: e.target.value }))}
-                style={{ width: '100%', padding: 12, borderRadius: 10, border: '1px solid var(--line)', fontSize: 16 }}
-              />
-            </div>
-            <div style={{ marginBottom: 16 }}>
-              <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6 }}>Notes</label>
-              <textarea
-                value={form.notes}
-                onChange={(e) => setForm((p) => ({ ...p, notes: e.target.value }))}
-                rows={2}
-                style={{ width: '100%', padding: 12, borderRadius: 10, border: '1px solid var(--line)', fontSize: 14 }}
-              />
-            </div>
-            <div style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
-              <div style={{ flex: 1 }}>
-                <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6 }}>Status</label>
-                <select
-                  value={form.status}
-                  onChange={(e) => setForm((p) => ({ ...p, status: e.target.value }))}
-                  style={{ width: '100%', padding: 12, borderRadius: 10, border: '1px solid var(--line)', fontSize: 14 }}
-                >
-                  <option value="draft">Draft</option>
-                  <option value="active">Active</option>
-                  <option value="archived">Archived</option>
-                </select>
-              </div>
-              <div style={{ flex: 1 }}>
-                <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6 }}>Valid from</label>
-                <input
-                  type="date"
-                  value={form.valid_from}
-                  onChange={(e) => setForm((p) => ({ ...p, valid_from: e.target.value }))}
-                  style={{ width: '100%', padding: 12, borderRadius: 10, border: '1px solid var(--line)', fontSize: 14 }}
-                />
-              </div>
-              <div style={{ flex: 1 }}>
-                <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6 }}>Valid to</label>
-                <input
-                  type="date"
-                  value={form.valid_to}
-                  onChange={(e) => setForm((p) => ({ ...p, valid_to: e.target.value }))}
-                  style={{ width: '100%', padding: 12, borderRadius: 10, border: '1px solid var(--line)', fontSize: 14 }}
-                />
-              </div>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-              <span style={{ fontSize: 14, fontWeight: 600 }}>Items</span>
-              <button type="button" onClick={() => setShowPicker(true)} style={{ padding: '8px 14px', background: 'var(--g)', color: 'white', border: 'none', borderRadius: 8, fontSize: 14 }}>
-                + Add product
-              </button>
-            </div>
-            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px' }}>
-              {form.items.map((it) => (
-                <li key={it.id} style={{ padding: 12, marginBottom: 8, background: 'var(--white)', border: '1px solid var(--line)', borderRadius: 10 }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8 }}>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontWeight: 600, fontSize: 14 }}>{it.product_name}</div>
-                      <div style={{ fontSize: 12, color: 'var(--ink-3)' }}>{it.unit_label} (locked)</div>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <input
-                        type="number"
-                        step="0.01"
-                        min="0"
-                        value={it.price}
-                        onChange={(e) => setItemPrice(it.id, e.target.value)}
-                        style={{ width: 90, padding: '8px 10px', borderRadius: 8, border: '1px solid var(--line)', fontSize: 14 }}
-                      />
-                      <button type="button" onClick={() => removeItem(it.id)} aria-label="Remove" style={{ padding: 6, background: 'none', border: 'none', color: 'var(--ink-3)' }}>
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
-                      </button>
-                    </div>
+            <div className="pl-form-body">
+              <div className="pl-form-section">
+                <div className="pl-form-label">Customer <span>*</span></div>
+                <button type="button" className="pl-customer-selector" onClick={() => setShowCustomerPicker(true)}>
+                  <div className="pl-customer-selector-avatar selected">{getInitials(form.customer_name)}</div>
+                  <div className="pl-customer-selector-text">
+                    <div className="pl-customer-selector-name">{form.customer_name || 'Select customer'}</div>
+                    <div className="pl-customer-selector-hint">Tap to change customer</div>
                   </div>
-                </li>
-              ))}
-            </ul>
-            <div style={{ display: 'flex', gap: 12 }}>
-              <button type="button" onClick={handleSave} disabled={saving} style={{ padding: 14, flex: 1, background: 'var(--g)', color: 'white', border: 'none', borderRadius: 10, fontSize: 16, fontWeight: 600 }}>
-                {saving ? 'Saving…' : 'Save'}
-              </button>
-              <button type="button" onClick={() => setEditing(false)} style={{ padding: 14, background: 'var(--white)', color: 'var(--ink-2)', border: '1px solid var(--line)', borderRadius: 10, fontSize: 16 }}>
-                Cancel
-              </button>
+                  <div className="pl-customer-selector-action">Change</div>
+                </button>
+              </div>
+              <div className="pl-form-section">
+                <div className="pl-form-label">Notes</div>
+                <textarea className="pl-form-textarea" placeholder="e.g. Volume discount..." rows={3} value={form.notes} onChange={(e) => setForm((p) => ({ ...p, notes: e.target.value }))} />
+              </div>
+              <div className="pl-form-section">
+                <div className="pl-form-label">Status</div>
+                <div className="pl-status-select-wrap">
+                  <select value={form.status} onChange={(e) => setForm((p) => ({ ...p, status: e.target.value }))}>
+                    <option value="draft">Draft</option>
+                    <option value="active">Active</option>
+                    <option value="archived">Archived</option>
+                  </select>
+                </div>
+              </div>
+              <div className="pl-form-section">
+                <div className="pl-form-label">Valid period</div>
+                <div className="pl-date-row">
+                  <div>
+                    <div style={{ fontSize: 11, color: 'var(--pl-ink4)', marginBottom: 6, fontWeight: 500 }}>From</div>
+                    <input type="date" className="pl-form-input" value={form.valid_from} onChange={(e) => setForm((p) => ({ ...p, valid_from: e.target.value }))} />
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 11, color: 'var(--pl-ink4)', marginBottom: 6, fontWeight: 500 }}>To</div>
+                    <input type="date" className="pl-form-input" value={form.valid_to} onChange={(e) => setForm((p) => ({ ...p, valid_to: e.target.value }))} />
+                  </div>
+                </div>
+              </div>
+              <div className="pl-form-section">
+                <div className="pl-form-label">Products & Prices</div>
+                <div className="pl-product-lines">
+                  {form.items.map((it) => (
+                    <div key={it.id} className="pl-product-line">
+                      <div className="pl-product-line-top">
+                        <div className="pl-product-line-icon">
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--pl-ink3)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <div className="pl-product-line-name">{it.product_name}</div>
+                        <button type="button" className="pl-product-line-remove" onClick={() => removeItem(it.id)} aria-label="Remove">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                        </button>
+                      </div>
+                      <div className="pl-product-line-bottom">
+                        <div className="pl-unit-badge">{it.unit_label}</div>
+                        <div className="pl-price-input-wrap">
+                          <input type="number" className="pl-price-input" placeholder="0.00" step="0.01" value={it.price} onChange={(e) => setItemPrice(it.id, e.target.value)} />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <button type="button" className="pl-add-product-btn" onClick={() => setShowProductPicker(true)}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  Add product
+                </button>
+              </div>
+            </div>
+            <div className="pl-bottom-bar">
+              <button type="button" className="pl-btn pl-btn-secondary" onClick={() => setEditing(false)}>Cancel</button>
+              <button type="button" className="pl-btn pl-btn-primary" onClick={handleSave} disabled={saving}>{saving ? 'Saving…' : 'Save'}</button>
             </div>
           </>
         ) : (
           <>
-            <div style={{ marginBottom: 16 }}>
-              <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--ink-3)', textTransform: 'uppercase', marginBottom: 4 }}>Customer</div>
-              <div className="staff-vc-title" style={{ marginBottom: 4 }}>{pricelist.customer_name}</div>
-              {pricelist.notes && <div className="staff-vc-sub" style={{ marginTop: 4 }}>{pricelist.notes}</div>}
-            </div>
-            <div style={{ display: 'flex', gap: 12, marginBottom: 16, flexWrap: 'wrap' }}>
-              <span style={{ fontSize: 12, padding: '4px 10px', background: form.status === 'active' ? 'var(--g-dim)' : form.status === 'archived' ? 'var(--line-2)' : 'var(--amber-bg)', color: form.status === 'active' ? 'var(--g-text)' : form.status === 'archived' ? 'var(--ink-3)' : 'var(--amber)', borderRadius: 6, fontWeight: 600 }}>{form.status}</span>
-              {pricelist.valid_from && <span style={{ fontSize: 12, color: 'var(--ink-3)' }}>From {formatDate(pricelist.valid_from)}</span>}
-              {pricelist.valid_to && <span style={{ fontSize: 12, color: 'var(--ink-3)' }}>To {formatDate(pricelist.valid_to)}</span>}
-            </div>
-            <div style={{ marginBottom: 16 }}>
-              <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--ink-3)', textTransform: 'uppercase', marginBottom: 8 }}>Items</div>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                {(pricelist.items || []).map((it) => (
-                  <li key={it.id} style={{ padding: '10px 0', borderBottom: '1px solid var(--line-2)' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <div>
-                        <span style={{ fontWeight: 500 }}>{it.product_name}</span>
-                        <span style={{ fontSize: 12, color: 'var(--ink-3)', marginLeft: 6 }}>{it.unit_label}</span>
-                      </div>
-                      <span style={{ fontWeight: 600 }}>{formatPrice(it.price)}</span>
+            <div style={{ overflowY: 'auto', flex: 1 }} className="pl-pb-safe">
+              <div className="pl-detail-hero">
+                <div className="pl-detail-customer-row">
+                  <div className="pl-detail-avatar" id="detail-avatar">{getInitials(pricelist.customer_name)}</div>
+                  <div>
+                    <div className="pl-detail-customer-name">{pricelist.customer_name}</div>
+                    <div className="pl-detail-customer-ref">{refLabel}{updatedLabel ? ` · ${updatedLabel}` : ''}</div>
+                  </div>
+                </div>
+                <div className="pl-detail-meta-row">
+                  <span className={`pl-status-badge ${(pricelist.status || 'draft')}`}>{(pricelist.status || 'draft').charAt(0).toUpperCase() + (pricelist.status || 'draft').slice(1)}</span>
+                  {(pricelist.valid_from || pricelist.valid_to) && (
+                    <div className="pl-detail-meta-chip">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                      {formatDateRange(pricelist.valid_from, pricelist.valid_to)}
                     </div>
-                  </li>
+                  )}
+                  <div className="pl-detail-meta-chip">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                    {items.length} product{items.length !== 1 ? 's' : ''}
+                  </div>
+                </div>
+              </div>
+
+              {pricelist.notes && (
+                <div className="pl-detail-notes">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--pl-amber)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 1 }}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  <div className="pl-detail-notes-text">{pricelist.notes}</div>
+                </div>
+              )}
+
+              <div className="pl-detail-items-section">
+                <div className="pl-detail-items-header">
+                  <span className="pl-detail-items-title">Products & Prices</span>
+                  <span className="pl-detail-items-count">{items.length} item{items.length !== 1 ? 's' : ''}</span>
+                </div>
+                {items.map((it) => (
+                  <div key={it.id} className="pl-detail-item-row">
+                    <div className="pl-detail-item-icon">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--pl-ink3)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    </div>
+                    <div className="pl-detail-item-text">
+                      <div className="pl-detail-item-name">{it.product_name}</div>
+                      <div className="pl-detail-item-unit">{it.unit_label}</div>
+                    </div>
+                    <div className="pl-detail-item-price">{formatPrice(it.price)}</div>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <button type="button" onClick={() => setEditing(true)} style={{ padding: 14, background: 'var(--g)', color: 'white', border: 'none', borderRadius: 10, fontSize: 16, fontWeight: 600 }}>
-                Edit pricelist
+
+            <div className="pl-bottom-bar">
+              <button type="button" className="pl-btn pl-btn-danger" onClick={handleDelete}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
               </button>
-              <button type="button" onClick={handleDuplicate} style={{ padding: 14, background: 'var(--white)', color: 'var(--ink-2)', border: '1px solid var(--line)', borderRadius: 10, fontSize: 16 }}>
-                Duplicate pricelist
-              </button>
-              <button type="button" onClick={handleDelete} style={{ padding: 14, background: 'none', color: 'var(--rose)', border: '1px solid var(--rose-bd)', borderRadius: 10, fontSize: 16 }}>
-                Delete pricelist
-              </button>
+              <button type="button" className="pl-btn pl-btn-secondary" onClick={handleDuplicate}>Duplicate</button>
+              <button type="button" className="pl-btn pl-btn-primary" onClick={() => setEditing(true)}>Edit</button>
             </div>
           </>
         )}
-
-        <div style={{ marginTop: 24 }}>
-          <Link href="/staff/pricelist-builder/list" className="staff-sec-more">← Back to list</Link>
-        </div>
       </div>
 
-      {showPicker && <PricelistProductPicker onSelect={handleAddProduct} onClose={() => setShowPicker(false)} />}
+      <CustomerPicker
+        open={showCustomerPicker}
+        onSelect={(c) => {
+          setForm((p) => ({ ...p, customer_id: c?.id || null, customer_name: c?.name || '' }));
+          setShowCustomerPicker(false);
+        }}
+        onClose={() => setShowCustomerPicker(false)}
+      />
+      <PricelistProductPicker open={showProductPicker} onSelect={handleAddProduct} onClose={() => setShowProductPicker(false)} />
     </StaffLayout>
   );
 }

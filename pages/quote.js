@@ -87,8 +87,11 @@ const QuotePage = () => {
   return (
     <Layout>
       <Head>
-        <title>Get a Quote - Print n Pack</title>
+        <title>Get a Quote - PrintNPack Ireland</title>
         <meta name="description" content="Request a quote for your custom packaging needs. We offer competitive prices for pizza boxes, paper bags, wide format products, and more." />
+        <link rel="canonical" href="https://printnpack.ie/quote" />
+        <meta property="og:title" content="Get a Quote - PrintNPack Ireland" />
+        <meta property="og:url" content="https://printnpack.ie/quote" />
       </Head>
 
       <div className="bg-white py-12">

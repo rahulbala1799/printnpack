@@ -3,11 +3,13 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import StaffLayout from '../../../components/staff/StaffLayout';
+import '../../../styles/pricelist-builder.css';
 
 export default function PricelistBuilderLanding() {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState({ active: 0, draft: 0, total: 0 });
 
   useEffect(() => {
     (async () => {
@@ -35,67 +37,93 @@ export default function PricelistBuilderLanding() {
     })();
   }, [router]);
 
+  useEffect(() => {
+    if (!user) return;
+    fetch('/api/staff/pricelists', { credentials: 'include' })
+      .then((r) => (r.ok ? r.json() : { pricelists: [] }))
+      .then((d) => {
+        const list = d.pricelists || [];
+        setStats({
+          active: list.filter((p) => p.status === 'active').length,
+          draft: list.filter((p) => p.status === 'draft').length,
+          total: list.length,
+        });
+      })
+      .catch(() => {});
+  }, [user]);
+
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--canvas)' }}>
-        <div className="staff-dashboard" style={{ width: 32, height: 32, border: '2px solid var(--g-mid)', borderTopColor: 'var(--g)', borderRadius: '50%', animation: 'staff-spin 0.8s linear infinite' }} aria-hidden />
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--pl-cream)' }}>
+        <div style={{ width: 32, height: 32, border: '2px solid var(--pl-green-mid)', borderTopColor: 'var(--pl-green)', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} aria-hidden />
       </div>
     );
   }
 
   return (
-    <StaffLayout user={user} title="Pricelist Builder">
+    <StaffLayout user={user} title="">
       <Head>
         <title>Pricelist Builder — Staff — PrintNPack</title>
         <meta name="robots" content="noindex, nofollow" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
       </Head>
 
-      <div className="staff-body">
-        <p className="staff-hero-sub" style={{ marginBottom: 24 }}>
-          Create and manage customer-specific price lists. Use search in the product picker to find products quickly.
-        </p>
+      <div className="pl-app pl-screen">
+        <div className="pl-topbar">
+          <Link href="/staff" className="pl-topbar-back">
+            <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7l6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            Staff
+          </Link>
+          <span className="pl-topbar-title">Pricelist</span>
+          <div style={{ width: 50 }} />
+        </div>
 
-        <div className="space-y-3" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <Link
-            href="/staff/pricelist-builder/list"
-            className="staff-visits-card"
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 16, background: 'var(--white)', borderRadius: 'var(--r)', border: '1px solid var(--line)', textDecoration: 'none', color: 'inherit' }}
-          >
-            <div className="staff-vc-left">
-              <div className="staff-vc-icon">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--g)" strokeWidth="1.8">
-                  <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
-                  <rect x="9" y="3" width="6" height="4" rx="1.5" />
-                  <path d="m9 12 2 2 4-4" />
-                </svg>
-              </div>
-              <div>
-                <div className="staff-vc-title">View price lists</div>
-                <div className="staff-vc-sub">See all pricelists, open detail and edit</div>
-              </div>
+        <div className="pl-landing-hero">
+          <div className="pl-landing-eyebrow">PrintNPack · Staff</div>
+          <div className="pl-landing-headline">Customer<br /><em>Price Lists</em></div>
+          <div className="pl-landing-sub">Create and manage negotiated pricing for each customer.</div>
+        </div>
+
+        <div className="pl-landing-stats">
+          <div className="pl-stat-chip">
+            <div className="pl-stat-chip-num green">{stats.active}</div>
+            <div className="pl-stat-chip-label">Active</div>
+          </div>
+          <div className="pl-stat-chip">
+            <div className="pl-stat-chip-num amber">{stats.draft}</div>
+            <div className="pl-stat-chip-label">Draft</div>
+          </div>
+          <div className="pl-stat-chip">
+            <div className="pl-stat-chip-num">{stats.total}</div>
+            <div className="pl-stat-chip-label">Total</div>
+          </div>
+        </div>
+
+        <div className="pl-landing-actions">
+          <Link href="/staff/pricelist-builder/new" className="pl-action-card primary">
+            <div className="pl-action-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
             </div>
-            <div className="staff-vc-arrow">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.2">
-                <polyline points="9 18 15 12 9 6" />
-              </svg>
+            <div className="pl-action-card-text">
+              <div className="pl-action-card-title">Create new pricelist</div>
+              <div className="pl-action-card-desc">New customer with negotiated product prices</div>
+            </div>
+            <div className="pl-action-card-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
             </div>
           </Link>
 
-          <Link
-            href="/staff/pricelist-builder/new"
-            className="staff-hero-action"
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 16, background: 'var(--g)', color: 'white', borderRadius: 'var(--r)', textDecoration: 'none' }}
-          >
-            <div>
-              <div className="staff-ha-title" style={{ color: 'white', marginBottom: 4 }}>Create new pricelist</div>
-              <div className="staff-ha-desc" style={{ color: 'rgba(255,255,255,0.9)', fontSize: 13 }}>New customer and add products with negotiated prices</div>
+          <Link href="/staff/pricelist-builder/list" className="pl-action-card">
+            <div className="pl-action-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--pl-ink3)" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
             </div>
-            <div className="staff-ha-btn">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="white" strokeWidth="2">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
+            <div className="pl-action-card-text">
+              <div className="pl-action-card-title">View all price lists</div>
+              <div className="pl-action-card-desc">Browse, filter, and manage existing pricelists</div>
+            </div>
+            <div className="pl-action-card-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
             </div>
           </Link>
         </div>

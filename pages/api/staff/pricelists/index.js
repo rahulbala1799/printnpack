@@ -5,6 +5,7 @@ function toPricelist(r) {
   return {
     id: r.id,
     staff_id: r.staff_id,
+    customer_id: r.customer_id || null,
     customer_name: r.customer_name,
     notes: r.notes || '',
     status: r.status || 'draft',
@@ -26,7 +27,7 @@ async function getHandler(req, res) {
     let rows;
     if (status && ['draft', 'active', 'archived'].includes(status)) {
       rows = await getRows(
-        `SELECT id, staff_id, customer_name, notes, status, valid_from, valid_to, items, created_at, updated_at
+        `SELECT id, staff_id, customer_id, customer_name, notes, status, valid_from, valid_to, items, created_at, updated_at
          FROM customer_pricelists
          WHERE staff_id = $1 AND status = $2
          ORDER BY updated_at DESC`,
@@ -34,7 +35,7 @@ async function getHandler(req, res) {
       );
     } else {
       rows = await getRows(
-        `SELECT id, staff_id, customer_name, notes, status, valid_from, valid_to, items, created_at, updated_at
+        `SELECT id, staff_id, customer_id, customer_name, notes, status, valid_from, valid_to, items, created_at, updated_at
          FROM customer_pricelists
          WHERE staff_id = $1
          ORDER BY updated_at DESC`,
@@ -60,7 +61,7 @@ async function postHandler(req, res) {
 
     if (duplicateFromId) {
       const source = await getRow(
-        'SELECT id, customer_name, notes, items FROM customer_pricelists WHERE id = $1 AND staff_id = $2',
+        'SELECT id, customer_id, customer_name, notes, items FROM customer_pricelists WHERE id = $1 AND staff_id = $2',
         [duplicateFromId, req.user.id]
       );
       if (!source) {
@@ -70,27 +71,36 @@ async function postHandler(req, res) {
         ? body.customer_name.trim()
         : `${source.customer_name} (copy)`;
       const row = await getRow(
-        `INSERT INTO customer_pricelists (staff_id, customer_name, notes, status, items, updated_at)
-         VALUES ($1, $2, $3, 'draft', $4, now())
-         RETURNING id, staff_id, customer_name, notes, status, valid_from, valid_to, items, created_at, updated_at`,
-        [req.user.id, customerName, source.notes || null, JSON.stringify(source.items || [])]
+        `INSERT INTO customer_pricelists (staff_id, customer_id, customer_name, notes, status, items, updated_at)
+         VALUES ($1, $2, $3, $4, 'draft', $5, now())
+         RETURNING id, staff_id, customer_id, customer_name, notes, status, valid_from, valid_to, items, created_at, updated_at`,
+        [req.user.id, source.customer_id || null, customerName, source.notes || null, JSON.stringify(source.items || [])]
       );
       return res.status(201).json({ pricelist: toPricelist(row) });
     }
 
-    const { customer_name, notes, status, valid_from, valid_to, items } = body;
-    if (!customer_name || typeof customer_name !== 'string' || !customer_name.trim()) {
-      return res.status(400).json({ error: 'customer_name is required' });
+    const { customer_id, customer_name, notes, status, valid_from, valid_to, items } = body;
+    let finalCustomerId = customer_id || null;
+    let finalCustomerName = typeof customer_name === 'string' ? customer_name.trim() : '';
+
+    if (finalCustomerId) {
+      const cust = await getRow('SELECT id, name FROM customers WHERE id = $1', [finalCustomerId]);
+      if (cust) finalCustomerName = cust.name;
     }
+    if (!finalCustomerName) {
+      return res.status(400).json({ error: 'customer_name or customer_id (with existing customer) is required' });
+    }
+
     const safeStatus = status && ['draft', 'active', 'archived'].includes(status) ? status : 'draft';
     const safeItems = Array.isArray(items) ? items : [];
     const row = await getRow(
-      `INSERT INTO customer_pricelists (staff_id, customer_name, notes, status, valid_from, valid_to, items, updated_at)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, now())
-       RETURNING id, staff_id, customer_name, notes, status, valid_from, valid_to, items, created_at, updated_at`,
+      `INSERT INTO customer_pricelists (staff_id, customer_id, customer_name, notes, status, valid_from, valid_to, items, updated_at)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, now())
+       RETURNING id, staff_id, customer_id, customer_name, notes, status, valid_from, valid_to, items, created_at, updated_at`,
       [
         req.user.id,
-        customer_name.trim(),
+        finalCustomerId,
+        finalCustomerName,
         notes && typeof notes === 'string' ? notes.trim() : null,
         safeStatus,
         valid_from || null,

@@ -4,14 +4,16 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import StaffLayout from '../../../components/staff/StaffLayout';
 import PricelistProductPicker from '../../../components/staff/PricelistProductPicker';
+import CustomerPicker from '../../../components/staff/CustomerPicker';
+import '../../../styles/pricelist-builder.css';
 
 function lineId() {
   return typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `line-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
 }
 
-function formatPrice(n) {
-  if (n == null || n === '' || isNaN(Number(n))) return '';
-  return new Intl.NumberFormat('en-IE', { style: 'currency', currency: 'EUR' }).format(Number(n));
+function getInitials(name) {
+  if (!name || typeof name !== 'string') return '?';
+  return name.trim().split(/\s+/).map((w) => w[0]).join('').slice(0, 1).toUpperCase();
 }
 
 export default function NewPricelistPage() {
@@ -19,10 +21,13 @@ export default function NewPricelistPage() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [customerName, setCustomerName] = useState('');
+  const [customer, setCustomer] = useState(null);
   const [notes, setNotes] = useState('');
+  const [validFrom, setValidFrom] = useState('');
+  const [validTo, setValidTo] = useState('');
   const [items, setItems] = useState([]);
-  const [showPicker, setShowPicker] = useState(false);
+  const [showProductPicker, setShowProductPicker] = useState(false);
+  const [showCustomerPicker, setShowCustomerPicker] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -69,9 +74,8 @@ export default function NewPricelistPage() {
   };
 
   const handleSave = async () => {
-    const name = customerName.trim();
-    if (!name) {
-      alert('Enter customer name');
+    if (!customer?.name) {
+      alert('Select a customer');
       return;
     }
     const lines = items.map((it) => ({
@@ -89,9 +93,12 @@ export default function NewPricelistPage() {
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify({
-          customer_name: name,
+          customer_id: customer.id || null,
+          customer_name: customer.name,
           notes: notes.trim() || null,
           status: 'draft',
+          valid_from: validFrom || null,
+          valid_to: validTo || null,
           items: lines,
         }),
       });
@@ -110,147 +117,103 @@ export default function NewPricelistPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--canvas)' }}>
-        <div style={{ width: 32, height: 32, border: '2px solid var(--g-mid)', borderTopColor: 'var(--g)', borderRadius: '50%', animation: 'staff-spin 0.8s linear infinite' }} aria-hidden />
+      <div className="min-h-screen flex items-center justify-center" style={{ background: '#FAF8F4' }}>
+        <div style={{ width: 32, height: 32, border: '2px solid #C3E4CC', borderTopColor: '#2A7A4B', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} aria-hidden />
       </div>
     );
   }
 
   return (
-    <StaffLayout user={user} title="New pricelist">
+    <StaffLayout user={user} title="">
       <Head>
-        <title>New pricelist — Pricelist Builder — PrintNPack</title>
+        <title>New Pricelist — PrintNPack</title>
         <meta name="robots" content="noindex, nofollow" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
       </Head>
 
-      <div className="staff-body">
-        <div style={{ marginBottom: 16 }}>
-          <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6, color: 'var(--ink-2)' }}>Customer name *</label>
-          <input
-            type="text"
-            value={customerName}
-            onChange={(e) => setCustomerName(e.target.value)}
-            placeholder="e.g. Centra Main St"
-            style={{ width: '100%', padding: 12, borderRadius: 10, border: '1px solid var(--line)', fontSize: 16 }}
-          />
-        </div>
-        <div style={{ marginBottom: 16 }}>
-          <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6, color: 'var(--ink-2)' }}>Notes (optional)</label>
-          <textarea
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            placeholder="Optional notes"
-            rows={2}
-            style={{ width: '100%', padding: 12, borderRadius: 10, border: '1px solid var(--line)', fontSize: 14, resize: 'vertical' }}
-          />
-        </div>
-
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-          <span style={{ fontSize: 14, fontWeight: 600 }}>Products & prices</span>
-          <button
-            type="button"
-            onClick={() => setShowPicker(true)}
-            style={{
-              padding: '8px 14px',
-              background: 'var(--g)',
-              color: 'white',
-              border: 'none',
-              borderRadius: 8,
-              fontSize: 14,
-              fontWeight: 500,
-            }}
-          >
-            + Add product
-          </button>
-        </div>
-
-        {items.length === 0 ? (
-          <p style={{ color: 'var(--ink-3)', fontSize: 14, marginBottom: 16 }}>Search and add products. Unit is fixed from product; you only set the price.</p>
-        ) : (
-          <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px' }}>
-            {items.map((it) => (
-              <li
-                key={it.id}
-                style={{
-                  padding: 12,
-                  marginBottom: 8,
-                  background: 'var(--white)',
-                  border: '1px solid var(--line)',
-                  borderRadius: 10,
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8 }}>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontWeight: 600, fontSize: 14 }}>{it.product_name}</div>
-                    <div style={{ fontSize: 12, color: 'var(--ink-3)', marginTop: 2 }}>{it.unit_label} (locked)</div>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <input
-                      type="number"
-                      step="0.01"
-                      min="0"
-                      value={it.price}
-                      onChange={(e) => setItemPrice(it.id, e.target.value)}
-                      placeholder="Price"
-                      style={{ width: 90, padding: '8px 10px', borderRadius: 8, border: '1px solid var(--line)', fontSize: 14 }}
-                    />
-                    <button type="button" onClick={() => removeItem(it.id)} aria-label="Remove" style={{ padding: 6, background: 'none', border: 'none', color: 'var(--ink-3)' }}>
-                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
-                        <line x1="18" y1="6" x2="6" y2="18" />
-                        <line x1="6" y1="6" x2="18" y2="18" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        <div style={{ display: 'flex', gap: 12, marginTop: 24 }}>
-          <button
-            type="button"
-            onClick={handleSave}
-            disabled={saving}
-            style={{
-              flex: 1,
-              padding: 14,
-              background: 'var(--g)',
-              color: 'white',
-              border: 'none',
-              borderRadius: 10,
-              fontSize: 16,
-              fontWeight: 600,
-            }}
-          >
-            {saving ? 'Saving…' : 'Save as draft'}
-          </button>
-          <Link
-            href="/staff/pricelist-builder"
-            style={{
-              padding: 14,
-              background: 'var(--white)',
-              color: 'var(--ink-2)',
-              border: '1px solid var(--line)',
-              borderRadius: 10,
-              fontSize: 16,
-              textDecoration: 'none',
-              display: 'inline-flex',
-              alignItems: 'center',
-            }}
-          >
+      <div className="pl-app pl-screen">
+        <div className="pl-topbar">
+          <Link href="/staff/pricelist-builder" className="pl-topbar-back">
+            <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7l6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
             Cancel
           </Link>
+          <span className="pl-topbar-title">New Pricelist</span>
+          <div style={{ width: 50 }} />
+        </div>
+
+        <div className="pl-form-body">
+          <div className="pl-form-section">
+            <div className="pl-form-label">Customer <span>*</span></div>
+            <button type="button" className="pl-customer-selector" onClick={() => setShowCustomerPicker(true)}>
+              <div className={`pl-customer-selector-avatar ${customer ? 'selected' : ''}`}>
+                {customer ? getInitials(customer.name) : <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pl-ink3)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>}
+              </div>
+              <div className="pl-customer-selector-text">
+                <div className="pl-customer-selector-name" style={customer ? undefined : { color: 'var(--pl-ink4)' }}>{customer ? customer.name : 'Select customer'}</div>
+                <div className="pl-customer-selector-hint">{customer ? 'Tap to change customer' : 'Tap to search or add new'}</div>
+              </div>
+              <div className="pl-customer-selector-action">{customer ? 'Change' : 'Select'}</div>
+            </button>
+          </div>
+
+          <div className="pl-form-section">
+            <div className="pl-form-label">Notes</div>
+            <textarea className="pl-form-textarea" placeholder="e.g. Volume discount, special terms..." rows={3} value={notes} onChange={(e) => setNotes(e.target.value)} />
+          </div>
+
+          <div className="pl-form-section">
+            <div className="pl-form-label">Valid period</div>
+            <div className="pl-date-row">
+              <div>
+                <div style={{ fontSize: 11, color: 'var(--pl-ink4)', marginBottom: 6, fontWeight: 500 }}>From</div>
+                <input type="date" className="pl-form-input" value={validFrom} onChange={(e) => setValidFrom(e.target.value)} />
+              </div>
+              <div>
+                <div style={{ fontSize: 11, color: 'var(--pl-ink4)', marginBottom: 6, fontWeight: 500 }}>To</div>
+                <input type="date" className="pl-form-input" value={validTo} onChange={(e) => setValidTo(e.target.value)} />
+              </div>
+            </div>
+          </div>
+
+          <div className="pl-form-section">
+            <div className="pl-form-label">Products & Prices</div>
+            <div className="pl-product-lines">
+              {items.map((it) => (
+                <div key={it.id} className="pl-product-line">
+                  <div className="pl-product-line-top">
+                    <div className="pl-product-line-icon">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--pl-ink3)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    </div>
+                    <div className="pl-product-line-name">{it.product_name}</div>
+                    <button type="button" className="pl-product-line-remove" onClick={() => removeItem(it.id)} aria-label="Remove">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                  </div>
+                  <div className="pl-product-line-bottom">
+                    <div className="pl-unit-badge">{it.unit_label}</div>
+                    <div className="pl-price-input-wrap">
+                      <input type="number" className="pl-price-input" placeholder="0.00" step="0.01" value={it.price} onChange={(e) => setItemPrice(it.id, e.target.value)} />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <button type="button" className="pl-add-product-btn" onClick={() => setShowProductPicker(true)}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add product
+            </button>
+          </div>
+        </div>
+
+        <div className="pl-bottom-bar">
+          <Link href="/staff/pricelist-builder" className="pl-btn pl-btn-secondary">Cancel</Link>
+          <button type="button" className="pl-btn pl-btn-primary" onClick={handleSave} disabled={saving}>{saving ? 'Saving…' : 'Save as draft'}</button>
         </div>
       </div>
 
-      {showPicker && (
-        <PricelistProductPicker
-          onSelect={handleAddProduct}
-          onClose={() => setShowPicker(false)}
-        />
-      )}
+      <CustomerPicker open={showCustomerPicker} onSelect={setCustomer} onClose={() => setShowCustomerPicker(false)} />
+      <PricelistProductPicker open={showProductPicker} onSelect={handleAddProduct} onClose={() => setShowProductPicker(false)} />
     </StaffLayout>
   );
 }

@@ -96,23 +96,18 @@ Design should follow the rest of the staff section: large touch targets, readabl
 
 ---
 
-## 6. Customers table (required)
+## 6. Customers table (implemented)
 
-**The application does not currently have a dedicated customers table.** For the Pricelist Builder (and for a consistent notion of “customer” across visits, quotes, and orders), we will need to **create a customers table**.
+The **customers** table exists and pricelists are linked to it via `customer_id`.
 
 - **Purpose**  
   Store B2B/shop customers (the businesses that staff visit and for whom they build pricelists). This is separate from the `users` table (which holds site accounts, including role `customer` for end users).
 
-- **Planned use**  
-  - Pricelists can optionally reference a customer by id (e.g. `customer_id` on `customer_pricelists`) instead of or in addition to a free-text customer name.  
-  - The same customer record can be reused for outbound visits (leads), quotes, and orders.  
-  - Staff can search/select an existing customer when creating a pricelist, or create a new customer when needed.
-
-- **Suggested fields (to be finalised in implementation)**  
-  - id (e.g. UUID or serial), name, contact name, phone, email, address (or address lines), optional notes, created_at, updated_at.  
-  - Optionally: which staff user “owns” or last contacted the customer.
-
-Implementation will add a migration to create the `customers` table and, when ready, link `customer_pricelists` (and other features) to it.
+- **Implementation**  
+  - **Table `customers`:** id (UUID), name, contact_name, phone, email, address, notes, created_at, updated_at.  
+  - **`customer_pricelists.customer_id`:** optional UUID FK to `customers`; when set, the pricelist is associated with that customer. `customer_name` is still stored for display and for pricelists created before linking or when no customer is selected.  
+  - **APIs:** `GET/POST /api/staff/customers` — list (with optional `?search=`) and create. Staff can search/select an existing customer when creating or editing a pricelist, or add a new customer from the picker.  
+  - **UI:** New pricelist and edit pricelist use a customer picker: search existing or “Add new customer” (name, contact, phone, email). Selected customer sets `customer_id` and `customer_name` on the pricelist.
 
 ---
 
@@ -231,7 +226,7 @@ This is a high ROI usability feature; reps will ask for it.
 | First screen? | Choose **View price lists** (list + detail/edit) or **Create new pricelist**. |
 | How are prices stored? | Per product, per customer, on the pricelist (each line has product ref + price). |
 | Mobile? | Yes; UI is mobile-friendly for use on the road. |
-| Customers table? | **No** — we will need to **create a customers table** for B2B/shop customers; see §6. |
+| Customers table? | **Yes.** `customers` table exists; pricelists link via `customer_id`. Staff select or create customer in picker; see §6. |
 | Product picker? | **Search-first, must-have:** search by name, fast results, mobile keyboard friendly, ideally debounce; no long scroll-only lists; see §7. |
 | Status & dates? | **Status** draft / active / archived; **valid_from** (date), optional **valid_to**; see §8.1–8.2. **One active per customer:** when activating, auto-archive previous active (Option A). |
 | Unit editable? | **No.** Unit pulled from product and **locked (read-only)**; staff edits **price only**; see §8.3. |
