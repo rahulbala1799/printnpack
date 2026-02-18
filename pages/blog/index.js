@@ -5,6 +5,17 @@ import Layout from '../../components/layout/Layout';
 
 const posts = [
   {
+    slug: 'custom-vinyl-stickers-ireland',
+    title: 'Custom Vinyl Stickers Ireland: The Complete Guide to Materials, Uses & Ordering',
+    excerpt:
+      'Window stickers, car decals, transparent labels, frosted vinyl — this guide covers every type of custom vinyl sticker available in Ireland, how to choose the right material, and how to order with fast nationwide delivery.',
+    date: '2026-02-18',
+    readTime: '8 min read',
+    image: '/ifa/product/vinylstk/Vinyl-Decals-_-Stickers.jpg',
+    imageAlt: 'Custom vinyl stickers and decals Ireland – window stickers and car graphics',
+    category: 'Print Guide',
+  },
+  {
     slug: 'pizza-box-sizes-ireland',
     title: 'Pizza Box Sizes Ireland: The Complete Guide for Takeaways & Restaurants',
     excerpt:
