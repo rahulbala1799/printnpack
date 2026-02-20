@@ -5,6 +5,17 @@ import Layout from '../../components/layout/Layout';
 
 const posts = [
   {
+    slug: 'eu-ppwr-packaging-regulation-ireland-2026',
+    title: 'EU Packaging Regulation Ireland 2026: What the PPWR Means for Irish Food Businesses',
+    excerpt:
+      'The EU Packaging and Packaging Waste Regulation (PPWR) becomes Irish law automatically on 12 August 2026. This guide explains the PFAS ban, recyclability mandates, EPR fee changes, and how Irish restaurants, takeaways, and retailers can get compliant packaging now — before the deadline rush.',
+    date: '2026-02-20',
+    readTime: '9 min read',
+    image: '/images/products/bagasse-burger-box/1.png',
+    imageAlt: 'PPWR-compliant bagasse burger boxes Ireland – PFAS-free eco food packaging',
+    category: 'Compliance Guide',
+  },
+  {
     slug: 'trade-show-banners-decals-ireland',
     title: 'Trade Show Banners and Custom Decals in Ireland: The Complete High-Impact Marketing Guide',
     excerpt:
