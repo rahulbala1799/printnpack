@@ -9,6 +9,23 @@ import { useRouter } from 'next/router';
 // ─── Category Config ──────────────────────────────────────────────────────────
 const mainGroups = [
   {
+    id: 'all',
+    name: 'All Products',
+    description: 'Everything we print and package',
+    categories: 'all',
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    ),
+    color: 'gray',
+    accentBg: 'bg-gray-900',
+    accentText: 'text-gray-900',
+    accentBorder: 'border-gray-900',
+    lightBg: 'bg-gray-50',
+    badge: 'bg-gray-100 text-gray-700',
+  },
+  {
     id: 'packaging',
     name: 'Packaging',
     description: 'Premium food, retail & hospitality packaging',
@@ -97,85 +114,97 @@ const mainGroups = [
   },
 ];
 
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+const parsePrice = (raw) => {
+  if (!raw) return null;
+  const quoteOnly = /quote|request/i.test(raw);
+  if (quoteOnly) return { quoteOnly: true };
+  const m = raw.match(/€\s*([\d.,]+)\s*(?:per\s+)?([a-zA-Z]+)?/i);
+  if (!m) return { label: raw };
+  return { amount: m[1], unit: m[2] ? m[2].toLowerCase() : null };
+};
+
+const shortLeadTime = (raw) => {
+  if (!raw) return null;
+  return raw.replace(/business\s+days?/i, 'days').replace(/\s+standard.*$/i, '').trim();
+};
+
 // ─── Product Card ─────────────────────────────────────────────────────────────
-const ProductCard = ({ product, groupConfig }) => {
-  const badge = groupConfig?.badge || 'bg-orange-100 text-orange-700';
-  const accent = groupConfig?.accentBg || 'bg-orange-500';
+const ProductCard = ({ product }) => {
+  const href = product.url || `/products/${product.id}`;
+  const price = parsePrice(product.price);
+  const lead = shortLeadTime(product.leadTime);
 
   return (
-    <div className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
-      {/* Image */}
-      <Link href={product.url || `/products/${product.id}`} className="relative block overflow-hidden bg-gray-50" style={{ paddingBottom: '66%' }}>
-        <div className="absolute inset-0">
-          {!product.imageSrc || product.imageSrc.includes('css-placeholder-image') ? (
-            <div className="absolute inset-0 css-placeholder banner flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
-              <span className="sr-only">{product.name}</span>
-            </div>
-          ) : (
-            <Image
-              src={product.imageSrc}
-              alt={product.name}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-          )}
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </div>
-
-        {/* Category badge */}
-        <div className="absolute top-3 left-3 z-10">
-          <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${badge}`}>
-            {product.category}
-          </span>
-        </div>
-
-        {/* MOQ badge */}
-        {product.moq && (
-          <div className="absolute top-3 right-3 z-10">
-            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-black/70 text-white backdrop-blur-sm">
-              MOQ {product.moq.toLocaleString()}
-            </span>
+    <Link
+      href={href}
+      className="group bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-orange-300 hover:shadow-lg transition-all duration-200 flex flex-col"
+    >
+      {/* Image — smaller aspect */}
+      <div className="relative block overflow-hidden bg-gray-50 aspect-[16/10]">
+        {!product.imageSrc || product.imageSrc.includes('css-placeholder-image') ? (
+          <div className="absolute inset-0 css-placeholder banner flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
+            <span className="sr-only">{product.name}</span>
           </div>
+        ) : (
+          <Image
+            src={product.imageSrc}
+            alt={product.name}
+            fill
+            className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+          />
         )}
-      </Link>
+
+        <span className="absolute top-2 left-2 z-10 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-white/95 text-gray-700 shadow-sm border border-gray-100">
+          {product.category}
+        </span>
+
+        {product.moq && (
+          <span className="absolute top-2 right-2 z-10 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-gray-900/80 text-white backdrop-blur-sm">
+            MOQ {product.moq.toLocaleString()}
+          </span>
+        )}
+      </div>
 
       {/* Content */}
-      <div className="p-4 flex-1 flex flex-col">
-        <h3 className="font-bold text-gray-900 text-base leading-snug mb-1.5 group-hover:text-orange-600 transition-colors line-clamp-2">
+      <div className="px-3.5 pt-3 pb-3 flex-1 flex flex-col">
+        <h3 className="font-semibold text-gray-900 text-[14px] leading-snug mb-1 group-hover:text-orange-600 transition-colors line-clamp-2 min-h-[2.6em]">
           {product.name}
         </h3>
-        <p className="text-gray-500 text-sm line-clamp-2 flex-1 mb-3">
+        <p className="text-gray-500 text-xs line-clamp-2 mb-3 leading-relaxed">
           {product.description}
         </p>
 
-        {/* Price + Lead time */}
-        <div className="flex items-center justify-between text-xs text-gray-400 mb-3 pb-3 border-b border-gray-100">
-          {product.price && (
-            <span className="font-medium text-gray-700">{product.price}</span>
-          )}
-          {product.leadTime && (
-            <span className="flex items-center gap-1">
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              {product.leadTime}
-            </span>
-          )}
+        {/* Price + Lead time strip */}
+        <div className="mt-auto grid grid-cols-2 divide-x divide-gray-100 border-t border-gray-100 -mx-3.5 px-0">
+          <div className="px-3 py-2.5">
+            <div className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">From</div>
+            {price?.quoteOnly ? (
+              <div className="font-bold text-gray-900 text-sm leading-tight mt-0.5">On quote</div>
+            ) : price?.amount ? (
+              <div className="leading-tight mt-0.5">
+                <span className="font-bold text-gray-900 text-base tabular-nums">€{price.amount}</span>
+                {price.unit && <span className="text-[11px] text-gray-500 ml-0.5">/{price.unit}</span>}
+              </div>
+            ) : price?.label ? (
+              <div className="font-semibold text-gray-900 text-xs leading-tight mt-0.5 line-clamp-1">{price.label}</div>
+            ) : (
+              <div className="font-bold text-gray-900 text-sm leading-tight mt-0.5">On quote</div>
+            )}
+          </div>
+          <div className="px-3 py-2.5">
+            <div className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider flex items-center gap-1">
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              Lead time
+            </div>
+            <div className="font-bold text-gray-900 text-sm leading-tight mt-0.5">
+              {lead || 'On request'}
+            </div>
+          </div>
         </div>
-
-        {/* CTA */}
-        <Link
-          href={product.url || `/products/${product.id}`}
-          className={`w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-sm font-semibold text-white transition-all duration-200 ${accent} hover:opacity-90 active:scale-95`}
-        >
-          View Product
-          <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </Link>
       </div>
-    </div>
+    </Link>
   );
 };
 
@@ -205,10 +234,10 @@ const CategoryTab = ({ group, isActive, onClick }) => (
 const ProductsPage = () => {
   const router = useRouter();
   const { group: groupParam, category: categoryParam } = router.query;
-  const [activeGroup, setActiveGroup] = useState('packaging');
+  const [activeGroup, setActiveGroup] = useState('all');
   const [activeCategory, setActiveCategory] = useState('all');
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(12);
+  const [visibleCount, setVisibleCount] = useState(15);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchFocused, setSearchFocused] = useState(false);
   const tabsRef = useRef(null);
@@ -221,37 +250,29 @@ const ProductsPage = () => {
     if (categoryParam) setActiveCategory(categoryParam);
   }, [groupParam, categoryParam]);
 
-  // Persist
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const sg = localStorage.getItem('activeProductGroup');
-      const sc = localStorage.getItem('activeProductCategory');
-      if (sg) setActiveGroup(sg);
-      if (sc) setActiveCategory(sc);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('activeProductGroup', activeGroup);
-      localStorage.setItem('activeProductCategory', activeCategory);
-    }
-  }, [activeGroup, activeCategory]);
 
   // Filter
   useEffect(() => {
     const visible = products.filter(p => !p.hidden);
-    const groupCats = mainGroups.find(g => g.id === activeGroup)?.categories || [];
+    const group = mainGroups.find(g => g.id === activeGroup);
+    const isAll = group?.categories === 'all';
+    const groupCats = isAll ? null : (group?.categories || []);
 
-    let filtered = activeCategory === 'all'
-      ? visible.filter(p => groupCats.includes(p.category))
-      : visible.filter(p => p.category === activeCategory);
+    let filtered;
+    if (isAll) {
+      filtered = visible;
+    } else if (activeCategory === 'all') {
+      filtered = visible.filter(p => groupCats.includes(p.category));
+    } else {
+      filtered = visible.filter(p => p.category === activeCategory);
+    }
 
     if (searchTerm) {
       const q = searchTerm.toLowerCase();
       filtered = filtered.filter(p =>
         p.name.toLowerCase().includes(q) ||
-        (p.description || '').toLowerCase().includes(q)
+        (p.description || '').toLowerCase().includes(q) ||
+        (p.category || '').toLowerCase().includes(q)
       );
     }
 
@@ -268,8 +289,8 @@ const ProductsPage = () => {
     }
   };
 
-  // Sub-categories for active group
-  const subCategories = activeGroupConfig?.categories || [];
+  // Sub-categories for active group ('all' group has no sub-pill bar)
+  const subCategories = Array.isArray(activeGroupConfig?.categories) ? activeGroupConfig.categories : [];
 
   return (
     <Layout>
@@ -465,13 +486,9 @@ const ProductsPage = () => {
           ) : (
             <>
               {/* Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
                 {filteredProducts.slice(0, visibleCount).map(product => (
-                  <ProductCard
-                    key={product.id}
-                    product={product}
-                    groupConfig={activeGroupConfig}
-                  />
+                  <ProductCard key={product.id} product={product} />
                 ))}
               </div>
 
@@ -479,7 +496,7 @@ const ProductsPage = () => {
               {visibleCount < filteredProducts.length && (
                 <div className="mt-10 text-center">
                   <button
-                    onClick={() => setVisibleCount(v => v + 8)}
+                    onClick={() => setVisibleCount(v => v + 10)}
                     className="inline-flex items-center gap-2 bg-white border-2 border-orange-500 text-orange-600 font-semibold text-sm px-6 py-3 rounded-xl hover:bg-orange-500 hover:text-white transition-all duration-200 shadow-sm"
                   >
                     Load More Products
