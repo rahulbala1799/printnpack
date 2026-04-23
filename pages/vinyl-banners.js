@@ -26,6 +26,32 @@ const features = [
   { title: 'Ireland delivery', description: 'Nationwide delivery. No minimum order.', icon: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" /></svg> },
 ];
 
+const pricingLeft = [
+  { size: '50×100 cm', price: 15, w: 50, h: 100 },
+  { size: '50×150 cm', price: 19, w: 50, h: 150 },
+  { size: '50×200 cm', price: 20, w: 50, h: 200 },
+  { size: '50×300 cm', price: 29, w: 50, h: 300 },
+  { size: '70×100 cm', price: 18, w: 70, h: 100 },
+  { size: '70×150 cm', price: 21, w: 70, h: 150, popular: true },
+  { size: '70×200 cm', price: 27, w: 70, h: 200 },
+  { size: '70×300 cm', price: 37, w: 70, h: 300 },
+  { size: '100×100 cm', price: 20, w: 100, h: 100 },
+  { size: '100×150 cm', price: 29, w: 100, h: 150 },
+];
+
+const pricingRight = [
+  { size: '100×200 cm', price: 36, w: 100, h: 200, popular: true },
+  { size: '100×300 cm', price: 48, w: 100, h: 300 },
+  { size: '120×150 cm', price: 33, w: 120, h: 150 },
+  { size: '120×200 cm', price: 41, w: 120, h: 200 },
+  { size: '120×300 cm', price: 55, w: 120, h: 300 },
+  { size: '120×400 cm', price: 68, w: 120, h: 400 },
+  { size: '150×150 cm', price: 39, w: 150, h: 150 },
+  { size: '150×300 cm', price: 65, w: 150, h: 300, popular: true },
+  { size: '150×500 cm', price: 98, w: 150, h: 500 },
+  { size: '150×600 cm', price: 112, w: 150, h: 600 },
+];
+
 const specs = [
   { label: 'Standard materials', value: '440gsm PVC (standard), 510gsm PVC (premium/outdoor)' },
   { label: 'Common sizes', value: "2'×4', 3'×6', 4'×8', 5'×10', custom up to 5m wide" },
@@ -214,6 +240,102 @@ export default function VinylBannersPage() {
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100">
               <Image src={heroImages[0]} alt="Vinyl banners" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing" className="bg-gradient-to-b from-white via-blue-50/30 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 rounded-full px-3 py-1 text-sm font-medium mb-4 border border-blue-200">
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" /></svg>
+              Transparent pricing
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3">Most Popular Sizes</h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">Banner printing prices for the most requested sizes. Need a different dimension? We print any custom size up to 5m wide.</p>
+            <p className="text-xs text-gray-400 mt-2">All prices exclude VAT (23%). Includes hemmed edges &amp; reinforced eyelets.</p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
+            {[pricingLeft, pricingRight].map((col, colIdx) => (
+              <div key={colIdx} className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                <div className="grid grid-cols-[1fr_auto] gap-4 px-5 py-3 bg-gradient-to-r from-gray-50 to-blue-50/50 border-b border-gray-200">
+                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Size</div>
+                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider text-right">Price</div>
+                </div>
+                <div className="divide-y divide-gray-100">
+                  {col.map((row) => {
+                    const maxDim = 600;
+                    const widthPct = (row.w / maxDim) * 100;
+                    const heightPct = (row.h / maxDim) * 100;
+                    return (
+                      <Link
+                        key={row.size}
+                        href={`${quoteUrl}&size=${encodeURIComponent(row.size)}`}
+                        className={`grid grid-cols-[auto_1fr_auto] gap-3 sm:gap-4 items-center px-4 sm:px-5 py-3.5 hover:bg-blue-50/40 transition-colors group ${row.popular ? 'bg-gradient-to-r from-amber-50/40 to-transparent' : ''}`}
+                      >
+                        <div className="relative w-10 h-10 flex items-center justify-center flex-shrink-0" aria-hidden="true">
+                          <div
+                            className={`border-2 rounded-sm transition-colors ${row.popular ? 'border-amber-400 bg-amber-100/60' : 'border-blue-300 bg-blue-50 group-hover:border-blue-500 group-hover:bg-blue-100'}`}
+                            style={{ width: `${widthPct}%`, height: `${heightPct}%`, minWidth: '6px', minHeight: '6px' }}
+                          />
+                        </div>
+                        <div className="flex items-center gap-2 min-w-0">
+                          <span className="font-semibold text-gray-900 text-sm sm:text-base tabular-nums">{row.size}</span>
+                          {row.popular && (
+                            <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full border border-amber-200">
+                              <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                              Popular
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-base sm:text-lg font-bold text-gray-900 tabular-nums">€{row.price}</span>
+                          <svg className="w-4 h-4 text-gray-300 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+            <div className="flex items-start gap-3 bg-white rounded-xl border border-gray-200 p-4">
+              <div className="w-9 h-9 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" /></svg>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-900 text-sm">Custom sizes</div>
+                <div className="text-xs text-gray-500 leading-relaxed">Any dimension up to 5m wide. Quote in minutes.</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 bg-white rounded-xl border border-gray-200 p-4">
+              <div className="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-900 text-sm">Bulk discounts</div>
+                <div className="text-xs text-gray-500 leading-relaxed">Ordering 3 or more? Request a tiered quote.</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 bg-white rounded-xl border border-gray-200 p-4">
+              <div className="w-9 h-9 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </div>
+              <div>
+                <div className="font-semibold text-gray-900 text-sm">Rush turnaround</div>
+                <div className="text-xs text-gray-500 leading-relaxed">24–48hr available on request.</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-8">
+            <Link href={quoteUrl} className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-xl transition-colors">
+              Get a Custom Size Quote
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" /></svg>
+            </Link>
           </div>
         </div>
       </section>
