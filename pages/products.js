@@ -324,7 +324,7 @@ const ProductsPage = () => {
                   Ireland B2B print partner
                 </span>
                 <span className="text-gray-300">•</span>
-                <span>22+ products</span>
+                <span>24+ products</span>
                 <span className="text-gray-300">•</span>
                 <span>5–7 day delivery</span>
                 <span className="text-gray-300 hidden sm:inline">•</span>
