@@ -10,8 +10,8 @@ export default async function handler(req, res) {
     const body = req.body || {};
     const { name, email, phone, message, productInterest, subject: bodySubject, source: bodySource, company } = body;
 
-    // Validate required fields
-    if (!name || !email || !message) {
+    // Validate required fields: need name, message, and at least one of email/phone
+    if (!name || !message || (!email && !phone)) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
@@ -68,7 +68,7 @@ export default async function handler(req, res) {
     const mailOptions = {
       from: `"${name}" <${process.env.GMAIL_USER}>`,
       to: 'info@printnpack.ie',
-      replyTo: email,
+      ...(email ? { replyTo: email } : {}),
       subject: emailSubject,
       text: `
 Name: ${name}

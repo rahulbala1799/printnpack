@@ -69,11 +69,119 @@ const CheckIcon = () => (
   </svg>
 );
 
+const allPricing = [...pricingLeft, ...pricingRight];
+const widths = Array.from(new Set(allPricing.map((p) => p.w))).sort((a, b) => a - b);
+const heightsByWidth = widths.reduce((acc, w) => {
+  acc[w] = allPricing.filter((p) => p.w === w).map((p) => p.h).sort((a, b) => a - b);
+  return acc;
+}, {});
+const findPrice = (w, h) => allPricing.find((p) => p.w === w && p.h === h);
+
 export default function VinylBannersPage() {
   const [currentImage, setCurrentImage] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const timeoutRef = useRef(null);
+
+  const [pricingOpen, setPricingOpen] = useState(true);
+  const [selW, setSelW] = useState(100);
+  const [selH, setSelH] = useState(200);
+  const currentSize = findPrice(selW, selH);
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [orderItems, setOrderItems] = useState([]);
+  const [form, setForm] = useState({ name: '', phone: '', email: '', message: '' });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState('idle');
+  const [submitError, setSubmitError] = useState('');
+
+  const onWidthChange = (w) => {
+    setSelW(w);
+    if (!heightsByWidth[w].includes(selH)) setSelH(heightsByWidth[w][0]);
+  };
+
+  const openModalWith = (item) => {
+    const base = item || currentSize;
+    if (!base) return;
+    setOrderItems([{ size: base.size, w: base.w, h: base.h, price: base.price, qty: 1 }]);
+    setSubmitStatus('idle');
+    setSubmitError('');
+    setModalOpen(true);
+  };
+
+  const addItemRow = () => {
+    const base = currentSize || allPricing[0];
+    setOrderItems((prev) => [...prev, { size: base.size, w: base.w, h: base.h, price: base.price, qty: 1 }]);
+  };
+
+  const updateItem = (idx, patch) => {
+    setOrderItems((prev) => prev.map((it, i) => {
+      if (i !== idx) return it;
+      const next = { ...it, ...patch };
+      if (patch.w !== undefined || patch.h !== undefined) {
+        const w = patch.w ?? it.w;
+        let h = patch.h ?? it.h;
+        if (!heightsByWidth[w].includes(h)) h = heightsByWidth[w][0];
+        const found = findPrice(w, h);
+        if (found) { next.w = w; next.h = h; next.price = found.price; next.size = found.size; }
+      }
+      return next;
+    }));
+  };
+
+  const removeItem = (idx) => setOrderItems((prev) => prev.filter((_, i) => i !== idx));
+
+  const orderTotal = orderItems.reduce((sum, it) => sum + it.price * it.qty, 0);
+
+  const submitOrder = async (e) => {
+    e.preventDefault();
+    if (!form.name.trim() || !form.phone.trim()) {
+      setSubmitError('Name and phone are required.');
+      setSubmitStatus('error');
+      return;
+    }
+    setSubmitting(true);
+    setSubmitError('');
+    try {
+      const itemsText = orderItems
+        .map((it) => `• ${it.size} × ${it.qty} = €${(it.price * it.qty).toFixed(0)}`)
+        .join('\n');
+      const message = `Quick order request:\n${itemsText}\n\nIndicative total (excl. VAT): €${orderTotal.toFixed(0)}\n\n${form.message ? `Notes:\n${form.message}` : ''}`.trim();
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          email: form.email.trim(),
+          phone: form.phone.trim(),
+          message,
+          productInterest: 'Vinyl Banners',
+          source: 'Vinyl Banners — Quick Order',
+          subject: `Vinyl Banners Quick Order — ${orderItems.length} item${orderItems.length > 1 ? 's' : ''}`,
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.message || 'Submission failed.');
+      }
+      setSubmitStatus('success');
+    } catch (err) {
+      setSubmitError(err.message || 'Something went wrong.');
+      setSubmitStatus('error');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setTimeout(() => {
+      setSubmitStatus('idle');
+      setSubmitError('');
+      setForm({ name: '', phone: '', email: '', message: '' });
+      setOrderItems([]);
+    }, 200);
+  };
 
   const goToImage = useCallback((nextIndex) => {
     if (nextIndex === currentImage) return;
@@ -142,10 +250,103 @@ export default function VinylBannersPage() {
               <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
                 High-impact vinyl banners for indoor and outdoor advertising. Premium material, UV printing, custom sizes up to 5m wide. Reinforced hems and eyelets standard.
               </p>
-              <div className="grid grid-cols-3 gap-3 mb-6">
-                <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">Quote</div><div className="text-xs text-gray-500">on request</div></div>
+              <div className="grid grid-cols-3 gap-3 mb-4">
                 <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">3–5 days</div><div className="text-xs text-gray-500">standard</div></div>
                 <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">No min.</div><div className="text-xs text-gray-500">order</div></div>
+                <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">Ireland</div><div className="text-xs text-gray-500">delivery</div></div>
+              </div>
+
+              <div className="mb-6 rounded-2xl border border-gray-200 bg-gradient-to-br from-white to-blue-50/40 overflow-hidden shadow-sm">
+                <button
+                  type="button"
+                  onClick={() => setPricingOpen((v) => !v)}
+                  className="w-full flex items-center justify-between gap-3 px-4 sm:px-5 py-3.5 hover:bg-blue-50/60 transition-colors"
+                  aria-expanded={pricingOpen}
+                >
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="w-9 h-9 rounded-lg bg-blue-600 text-white flex items-center justify-center flex-shrink-0">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <div className="text-left min-w-0">
+                      <div className="text-sm font-semibold text-gray-900">Get Instant Price</div>
+                      <div className="text-xs text-gray-500 truncate">
+                        {currentSize ? <>Currently <span className="font-medium text-gray-700">{currentSize.size}</span> — <span className="font-bold text-blue-700">€{currentSize.price}</span></> : 'Pick a size to see the price'}
+                      </div>
+                    </div>
+                  </div>
+                  <svg className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform ${pricingOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                </button>
+
+                {pricingOpen && (
+                  <div className="px-4 sm:px-5 pb-4 pt-1 border-t border-gray-100">
+                    <div className="mb-3">
+                      <div className="flex items-center justify-between mb-1.5">
+                        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Width</span>
+                        <span className="text-xs text-gray-400">cm</span>
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {widths.map((w) => (
+                          <button
+                            key={w}
+                            type="button"
+                            onClick={() => onWidthChange(w)}
+                            className={`min-w-[44px] px-3 py-1.5 rounded-lg text-sm font-semibold border transition-all ${selW === w ? 'bg-blue-600 text-white border-blue-600 shadow-sm' : 'bg-white text-gray-700 border-gray-200 hover:border-blue-300 hover:bg-blue-50'}`}
+                          >
+                            {w}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="mb-4">
+                      <div className="flex items-center justify-between mb-1.5">
+                        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Length</span>
+                        <span className="text-xs text-gray-400">cm</span>
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {(heightsByWidth[selW] || []).map((h) => (
+                          <button
+                            key={h}
+                            type="button"
+                            onClick={() => setSelH(h)}
+                            className={`min-w-[52px] px-3 py-1.5 rounded-lg text-sm font-semibold border transition-all ${selH === h ? 'bg-blue-600 text-white border-blue-600 shadow-sm' : 'bg-white text-gray-700 border-gray-200 hover:border-blue-300 hover:bg-blue-50'}`}
+                          >
+                            {h}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between gap-3 bg-white rounded-xl border border-gray-200 px-4 py-3 mb-3">
+                      <div className="min-w-0">
+                        <div className="text-xs text-gray-500">Your size</div>
+                        <div className="font-semibold text-gray-900 tabular-nums">
+                          {currentSize ? currentSize.size : '—'}
+                          {currentSize?.popular && (
+                            <span className="ml-2 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full border border-amber-200 align-middle">
+                              <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                              Popular
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-2xl sm:text-3xl font-bold text-gray-900 tabular-nums leading-none">€{currentSize ? currentSize.price : '—'}</div>
+                        <div className="text-[10px] text-gray-400 mt-1">excl. VAT (23%)</div>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => openModalWith()}
+                      disabled={!currentSize}
+                      className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white font-semibold py-3 px-5 rounded-xl transition-colors"
+                    >
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                      Quick Order
+                    </button>
+                  </div>
+                )}
               </div>
               <ul className="space-y-2.5 mb-6">
                 {['Premium 440gsm/510gsm vinyl', 'Vibrant, fade-resistant UV printing', 'Indoor and outdoor options', 'Custom sizes up to 5m wide', 'Reinforced hems and eyelets', 'Wind-slits for outdoor'].map((point) => (
@@ -269,10 +470,11 @@ export default function VinylBannersPage() {
                     const widthPct = (row.w / maxDim) * 100;
                     const heightPct = (row.h / maxDim) * 100;
                     return (
-                      <Link
+                      <button
                         key={row.size}
-                        href={`${quoteUrl}&size=${encodeURIComponent(row.size)}`}
-                        className={`grid grid-cols-[auto_1fr_auto] gap-3 sm:gap-4 items-center px-4 sm:px-5 py-3.5 hover:bg-blue-50/40 transition-colors group ${row.popular ? 'bg-gradient-to-r from-amber-50/40 to-transparent' : ''}`}
+                        type="button"
+                        onClick={() => openModalWith(row)}
+                        className={`w-full text-left grid grid-cols-[auto_1fr_auto] gap-3 sm:gap-4 items-center px-4 sm:px-5 py-3.5 hover:bg-blue-50/40 transition-colors group ${row.popular ? 'bg-gradient-to-r from-amber-50/40 to-transparent' : ''}`}
                       >
                         <div className="relative w-10 h-10 flex items-center justify-center flex-shrink-0" aria-hidden="true">
                           <div
@@ -293,7 +495,7 @@ export default function VinylBannersPage() {
                           <span className="text-base sm:text-lg font-bold text-gray-900 tabular-nums">€{row.price}</span>
                           <svg className="w-4 h-4 text-gray-300 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                         </div>
-                      </Link>
+                      </button>
                     );
                   })}
                 </div>
@@ -354,6 +556,170 @@ export default function VinylBannersPage() {
           </div>
         </div>
       </section>
+
+      {modalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 overflow-y-auto" onClick={closeModal}>
+          <div
+            className="relative w-full sm:max-w-lg bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl my-0 sm:my-8 max-h-[95vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between gap-3 px-5 py-4 border-b border-gray-100 flex-shrink-0">
+              <div>
+                <h3 className="text-lg font-bold text-gray-900">Quick Order</h3>
+                <p className="text-xs text-gray-500">We'll confirm stock and finishing within 1 business hour.</p>
+              </div>
+              <button type="button" onClick={closeModal} className="text-gray-400 hover:text-gray-600 p-1.5 -mr-1.5 rounded-lg hover:bg-gray-100">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
+            </div>
+
+            {submitStatus === 'success' ? (
+              <div className="px-6 py-10 text-center">
+                <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 mx-auto mb-4 flex items-center justify-center">
+                  <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                </div>
+                <h4 className="text-xl font-bold text-gray-900 mb-2">Order request sent</h4>
+                <p className="text-sm text-gray-500 mb-6">Thanks {form.name || 'there'} — we'll be in touch on {form.phone} shortly.</p>
+                <button type="button" onClick={closeModal} className="bg-gray-900 hover:bg-gray-800 text-white font-semibold py-2.5 px-6 rounded-xl transition-colors">Close</button>
+              </div>
+            ) : (
+              <form onSubmit={submitOrder} className="flex-1 overflow-y-auto">
+                <div className="px-5 py-4 space-y-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Items</label>
+                    <div className="space-y-2">
+                      {orderItems.map((it, idx) => (
+                        <div key={idx} className="rounded-xl border border-gray-200 bg-gray-50 p-3">
+                          <div className="flex items-center justify-between gap-2 mb-2">
+                            <div className="font-semibold text-gray-900 text-sm">{it.size}</div>
+                            <div className="flex items-center gap-3">
+                              <div className="text-sm font-bold text-gray-900 tabular-nums">€{(it.price * it.qty).toFixed(0)}</div>
+                              {orderItems.length > 1 && (
+                                <button type="button" onClick={() => removeItem(idx)} className="text-gray-400 hover:text-red-500 p-1 -mr-1">
+                                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                                </button>
+                              )}
+                            </div>
+                          </div>
+                          <div className="grid grid-cols-3 gap-2">
+                            <select
+                              value={it.w}
+                              onChange={(e) => updateItem(idx, { w: Number(e.target.value) })}
+                              className="text-sm bg-white border border-gray-200 rounded-lg px-2 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            >
+                              {widths.map((w) => <option key={w} value={w}>{w} cm</option>)}
+                            </select>
+                            <select
+                              value={it.h}
+                              onChange={(e) => updateItem(idx, { h: Number(e.target.value) })}
+                              className="text-sm bg-white border border-gray-200 rounded-lg px-2 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            >
+                              {(heightsByWidth[it.w] || []).map((h) => <option key={h} value={h}>{h} cm</option>)}
+                            </select>
+                            <div className="flex items-center bg-white border border-gray-200 rounded-lg overflow-hidden">
+                              <button type="button" onClick={() => updateItem(idx, { qty: Math.max(1, it.qty - 1) })} className="px-2.5 py-1.5 text-gray-500 hover:bg-gray-100">−</button>
+                              <input
+                                type="number"
+                                min="1"
+                                value={it.qty}
+                                onChange={(e) => updateItem(idx, { qty: Math.max(1, Number(e.target.value) || 1) })}
+                                className="w-full text-center text-sm border-0 focus:outline-none focus:ring-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                              />
+                              <button type="button" onClick={() => updateItem(idx, { qty: it.qty + 1 })} className="px-2.5 py-1.5 text-gray-500 hover:bg-gray-100">+</button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <button type="button" onClick={addItemRow} className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700">
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                      Add another size
+                    </button>
+                    <div className="mt-3 flex items-center justify-between text-sm bg-blue-50 border border-blue-100 rounded-lg px-3 py-2">
+                      <span className="text-gray-600">Indicative total</span>
+                      <span className="font-bold text-gray-900 tabular-nums">€{orderTotal.toFixed(0)} <span className="text-[10px] font-normal text-gray-500">excl. VAT</span></span>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label htmlFor="qo-name" className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">Name <span className="text-red-500">*</span></label>
+                      <input
+                        id="qo-name"
+                        type="text"
+                        value={form.name}
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        required
+                        className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="qo-phone" className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">Phone <span className="text-red-500">*</span></label>
+                      <input
+                        id="qo-phone"
+                        type="tel"
+                        value={form.phone}
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        required
+                        placeholder="+353 …"
+                        className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="qo-email" className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">Email <span className="text-gray-400 normal-case font-normal">(optional)</span></label>
+                    <input
+                      id="qo-email"
+                      type="email"
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="qo-message" className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">Message <span className="text-gray-400 normal-case font-normal">(optional)</span></label>
+                    <textarea
+                      id="qo-message"
+                      rows={3}
+                      value={form.message}
+                      onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      placeholder="Other products, finish notes, deadline…"
+                      className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+                    />
+                  </div>
+
+                  {submitStatus === 'error' && submitError && (
+                    <div className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">{submitError}</div>
+                  )}
+                </div>
+
+                <div className="px-5 py-4 border-t border-gray-100 bg-gray-50 sticky bottom-0 flex-shrink-0">
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-3 px-5 rounded-xl transition-colors"
+                  >
+                    {submitting ? (
+                      <>
+                        <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" /></svg>
+                        Sending…
+                      </>
+                    ) : (
+                      <>
+                        Send Order Request
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                      </>
+                    )}
+                  </button>
+                  <p className="text-[11px] text-gray-400 text-center mt-2">Prices indicative — final quote confirmed by our team.</p>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
     </Layout>
   );
 }
