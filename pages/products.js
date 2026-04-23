@@ -281,47 +281,39 @@ const ProductsPage = () => {
         />
       </Head>
 
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-gray-950 text-white">
-        {/* Background decoration */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -right-40 w-96 h-96 bg-orange-500 rounded-full opacity-10 blur-3xl" />
-          <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-orange-400 rounded-full opacity-8 blur-3xl" />
-          <svg className="absolute inset-0 w-full h-full opacity-5" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse">
-                <circle cx="2" cy="2" r="1.5" fill="white" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#dots)" />
-          </svg>
-        </div>
-
-        <div className="relative z-10 container mx-auto px-4 py-14 md:py-20">
-          {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-sm text-gray-400 mb-6">
-            <Link href="/" className="hover:text-orange-400 transition-colors">Home</Link>
-            <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
-            <span className="text-gray-200 font-medium">Products</span>
+      {/* ── Compact Page Header ──────────────────────────────────────────── */}
+      <section className="bg-white border-b border-gray-200">
+        <div className="container mx-auto px-4 py-4 md:py-5">
+          <nav className="flex items-center gap-1.5 text-xs text-gray-500 mb-2.5" aria-label="Breadcrumb">
+            <Link href="/" className="hover:text-orange-600 transition-colors">Home</Link>
+            <svg className="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7"/></svg>
+            <span className="text-gray-700 font-medium">Products</span>
           </nav>
 
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-500/30 text-orange-300 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full mb-5">
-              <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
-              Ireland&apos;s B2B Print Partner
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-6">
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 mb-1">
+                <h1 className="text-xl sm:text-2xl md:text-[28px] font-extrabold text-gray-900 leading-tight tracking-tight">
+                  Print &amp; Packaging <span className="text-orange-500">Catalogue</span>
+                </h1>
+              </div>
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-500">
+                <span className="inline-flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  Ireland B2B print partner
+                </span>
+                <span className="text-gray-300">•</span>
+                <span>22+ products</span>
+                <span className="text-gray-300">•</span>
+                <span>5–7 day delivery</span>
+                <span className="text-gray-300 hidden sm:inline">•</span>
+                <span className="hidden sm:inline">Volume pricing</span>
+              </div>
             </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-4 tracking-tight">
-              Print & Packaging{' '}
-              <span className="text-orange-400">Solutions</span>
-            </h1>
-            <p className="text-gray-300 text-lg md:text-xl max-w-2xl mb-8 leading-relaxed">
-              Premium quality products. Consistent supply. Expert support. Everything your business needs to look its best.
-            </p>
 
-            {/* Search */}
-            <div className={`relative max-w-lg transition-all duration-300 ${searchFocused ? 'scale-[1.02]' : ''}`}>
-              <div className={`flex items-center bg-white/10 backdrop-blur-sm border rounded-2xl overflow-hidden transition-all duration-200 ${searchFocused ? 'border-orange-400 ring-2 ring-orange-400/30 bg-white/15' : 'border-white/20'}`}>
-                <svg className="w-5 h-5 text-gray-300 ml-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="md:w-[360px] lg:w-[400px] w-full">
+              <div className={`relative flex items-center bg-gray-50 border rounded-xl overflow-hidden transition-all ${searchFocused ? 'border-orange-400 ring-2 ring-orange-400/20 bg-white' : 'border-gray-200 hover:border-gray-300'}`}>
+                <svg className="w-4 h-4 text-gray-400 ml-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
                 <input
@@ -331,32 +323,17 @@ const ProductsPage = () => {
                   onChange={e => setSearchTerm(e.target.value)}
                   onFocus={() => setSearchFocused(true)}
                   onBlur={() => setSearchFocused(false)}
-                  className="flex-1 bg-transparent px-4 py-4 text-white placeholder-gray-400 text-sm outline-none"
+                  className="flex-1 bg-transparent px-3 py-2.5 text-sm text-gray-900 placeholder-gray-400 outline-none"
                 />
                 {searchTerm && (
-                  <button onClick={() => setSearchTerm('')} className="mr-3 text-gray-400 hover:text-white transition-colors">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <button onClick={() => setSearchTerm('')} className="mr-2 p-1 text-gray-400 hover:text-gray-700 rounded-md hover:bg-gray-100" aria-label="Clear search">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
                   </button>
                 )}
               </div>
             </div>
-          </div>
-
-          {/* Stats bar */}
-          <div className="mt-10 pt-8 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8 max-w-2xl">
-            {[
-              { value: '22+', label: 'Products' },
-              { value: '500+', label: 'Min. Order Units' },
-              { value: '5–7', label: 'Day Delivery' },
-              { value: '100%', label: 'Irish Business' },
-            ].map(stat => (
-              <div key={stat.label}>
-                <div className="text-2xl sm:text-3xl font-extrabold text-orange-400">{stat.value}</div>
-                <div className="text-xs text-gray-400 mt-0.5 font-medium">{stat.label}</div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -380,61 +357,46 @@ const ProductsPage = () => {
         </div>
       </div>
 
-      {/* ── Category Banner ──────────────────────────────────────────────── */}
-      {activeGroupConfig && !activeGroupConfig.redirect && (
-        <div className={`${activeGroupConfig.lightBg} border-b border-gray-200`}>
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className={`w-9 h-9 rounded-xl ${activeGroupConfig.accentBg} text-white flex items-center justify-center flex-shrink-0 shadow-sm`}>
-                {activeGroupConfig.icon}
-              </div>
-              <div>
-                <div className="font-bold text-gray-900 text-sm">{activeGroupConfig.name}</div>
-                <div className="text-xs text-gray-500">{activeGroupConfig.description}</div>
-              </div>
-            </div>
-
-            {/* Sub-category pills */}
-            {subCategories.length > 1 && (
-              <div className="flex gap-2 overflow-x-auto no-scrollbar">
-                <button
-                  onClick={() => setActiveCategory('all')}
-                  className={`flex-shrink-0 text-xs font-semibold px-3 py-1.5 rounded-full transition-all ${
-                    activeCategory === 'all'
-                      ? `${activeGroupConfig.accentBg} text-white shadow-sm`
-                      : 'bg-white text-gray-600 border border-gray-200 hover:border-gray-300'
-                  }`}
-                >
-                  All
-                </button>
-                {subCategories.map(cat => (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(cat)}
-                    className={`flex-shrink-0 text-xs font-semibold px-3 py-1.5 rounded-full transition-all whitespace-nowrap ${
-                      activeCategory === cat
-                        ? `${activeGroupConfig.accentBg} text-white shadow-sm`
-                        : 'bg-white text-gray-600 border border-gray-200 hover:border-gray-300'
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
-            )}
+      {/* ── Sub-category bar (only when there are sub-categories) ────────── */}
+      {activeGroupConfig && !activeGroupConfig.redirect && subCategories.length > 1 && (
+        <div className="bg-white border-b border-gray-200">
+          <div className="container mx-auto px-4 py-2.5 flex gap-2 overflow-x-auto no-scrollbar">
+            <button
+              onClick={() => setActiveCategory('all')}
+              className={`flex-shrink-0 text-xs font-semibold px-3 py-1.5 rounded-full transition-all ${
+                activeCategory === 'all'
+                  ? `${activeGroupConfig.accentBg} text-white shadow-sm`
+                  : 'bg-gray-50 text-gray-600 border border-gray-200 hover:border-gray-300 hover:text-gray-900'
+              }`}
+            >
+              All {activeGroupConfig.name.toLowerCase()}
+            </button>
+            {subCategories.map(cat => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`flex-shrink-0 text-xs font-semibold px-3 py-1.5 rounded-full transition-all whitespace-nowrap ${
+                  activeCategory === cat
+                    ? `${activeGroupConfig.accentBg} text-white shadow-sm`
+                    : 'bg-gray-50 text-gray-600 border border-gray-200 hover:border-gray-300 hover:text-gray-900'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
           </div>
         </div>
       )}
 
       {/* ── Products Grid ────────────────────────────────────────────────── */}
       <main className="bg-gray-50 min-h-screen">
-        <div className="container mx-auto px-4 py-8 md:py-12">
+        <div className="container mx-auto px-4 py-5 md:py-7">
 
           {/* Plain packaging promo card — shown when Packaging tab is active */}
           {activeGroup === 'packaging' && !searchTerm && (
             <Link
               href="/plain-packaging"
-              className="flex items-center justify-between gap-4 bg-gray-950 text-white rounded-2xl px-5 py-4 mb-7 group hover:bg-gray-900 transition-colors border border-white/5 hover:border-orange-500/30"
+              className="flex items-center justify-between gap-4 bg-gray-950 text-white rounded-2xl px-5 py-3.5 mb-5 group hover:bg-gray-900 transition-colors border border-white/5 hover:border-orange-500/30"
             >
               <div className="flex items-center gap-3.5">
                 <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center flex-shrink-0">
@@ -460,7 +422,7 @@ const ProductsPage = () => {
           )}
 
           {/* Count + Sort row */}
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-4">
             <p className="text-sm text-gray-500">
               Showing{' '}
               <span className="font-semibold text-gray-900">
