@@ -4,6 +4,29 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 
+// ─── Pricing Data ────────────────────────────────────────────────────────────
+
+const POSTER_SIZES = ['A4', 'A3'];
+
+const POSTER_PRICES = {
+  A4: { label: 'A4 (210×297mm)', tiers: [
+    { qty: 10, price: 12 }, { qty: 20, price: 16 }, { qty: 50, price: 30 },
+    { qty: 100, price: 41 }, { qty: 200, price: 51 }, { qty: 300, price: 56 },
+    { qty: 400, price: 59 }, { qty: 500, price: 66 }, { qty: 1000, price: 94 },
+    { qty: 2000, price: 127 }, { qty: 3000, price: 189 }, { qty: 4000, price: 191 },
+    { qty: 5000, price: 318 },
+  ]},
+  A3: { label: 'A3 (297×420mm)', tiers: [
+    { qty: 10, price: 16 }, { qty: 20, price: 27 }, { qty: 50, price: 41 },
+    { qty: 100, price: 51 }, { qty: 200, price: 59 }, { qty: 300, price: 75 },
+    { qty: 400, price: 83 }, { qty: 500, price: 94 }, { qty: 1000, price: 127 },
+    { qty: 2000, price: 254 }, { qty: 3000, price: 381 }, { qty: 4000, price: 508 },
+    { qty: 5000, price: 635 },
+  ]},
+};
+
+const VAT_RATE = 0.23;
+
 // ─── Data ────────────────────────────────────────────────────────────────────
 
 const heroImages = [
@@ -57,6 +80,14 @@ export default function PostersPage() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const timeoutRef = useRef(null);
+  const [selectedSize, setSelectedSize] = useState('A4');
+  const [selectedQty, setSelectedQty] = useState(100);
+
+  const currentTier = POSTER_PRICES[selectedSize].tiers.find(t => t.qty === selectedQty);
+  const priceExVat = currentTier ? currentTier.price : 0;
+  const vatAmount = +(priceExVat * VAT_RATE).toFixed(2);
+  const priceIncVat = +(priceExVat + vatAmount).toFixed(2);
+  const pricePerUnit = selectedQty > 0 ? (priceExVat / selectedQty).toFixed(2) : '0.00';
 
   const goToImage = useCallback((nextIndex) => {
     if (nextIndex === currentImage) return;
@@ -125,8 +156,32 @@ export default function PostersPage() {
               <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
                 High-quality custom posters printed on premium paper with vibrant eco-solvent inks. Perfect for advertising, events, retail displays, and exhibitions.
               </p>
-              <div className="grid grid-cols-3 gap-3 mb-6">
-                <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">From €15</div><div className="text-xs text-gray-500">per poster</div></div>
+              {/* Pricing Calculator */}
+              <div className="bg-gray-50 rounded-2xl p-4 mb-6 border border-gray-200">
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Instant Price (170gsm Coated Gloss)</p>
+                <div className="flex gap-2 mb-3">
+                  {POSTER_SIZES.map(s => (
+                    <button key={s} onClick={() => setSelectedSize(s)} className={`flex-1 py-2 rounded-lg text-sm font-semibold border transition-all ${selectedSize === s ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:border-blue-400'}`}>{s} <span className="font-normal text-xs opacity-70">{s === 'A4' ? '210×297' : '297×420'}</span></button>
+                  ))}
+                </div>
+                <div className="mb-4">
+                  <label className="block text-xs text-gray-500 mb-1">Quantity</label>
+                  <select value={selectedQty} onChange={e => setSelectedQty(Number(e.target.value))} className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300">
+                    {POSTER_PRICES[selectedSize].tiers.map(t => (
+                      <option key={t.qty} value={t.qty}>{t.qty} posters</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="bg-white rounded-xl border border-gray-200 p-4">
+                  <div className="flex items-end justify-between mb-1">
+                    <span className="text-3xl font-bold text-gray-900">€{priceExVat}</span>
+                    <span className="text-sm text-gray-400 mb-1">excl. VAT</span>
+                  </div>
+                  <div className="text-xs text-gray-400 mb-3">€{pricePerUnit} per poster · VAT €{vatAmount} · Total incl. VAT <span className="font-semibold text-gray-600">€{priceIncVat}</span></div>
+                  <a href="#pricing-table" className="text-xs text-blue-600 hover:underline">View full pricing table ↓</a>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-3 mb-6">
                 <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">1+</div><div className="text-xs text-gray-500">min. order</div></div>
                 <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">1–3 days</div><div className="text-xs text-gray-500">production</div></div>
               </div>
@@ -224,6 +279,44 @@ export default function PostersPage() {
               <Image src={heroImages[0]} alt="Custom posters" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
             </div>
           </div>
+        </div>
+      </section>
+
+      <section id="pricing-table" className="bg-white border-t border-gray-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Poster Pricing</h2>
+            <p className="text-gray-500 text-sm">170gsm coated glossy paper · Prices excl. 23% VAT</p>
+          </div>
+          <div className="overflow-x-auto rounded-xl border border-gray-200">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-gray-50 border-b border-gray-200">
+                  <th className="text-left px-4 py-3 font-semibold text-gray-700">Qty</th>
+                  <th className="text-right px-4 py-3 font-semibold text-gray-700">A4 <span className="font-normal text-gray-400 text-xs">210×297mm</span></th>
+                  <th className="text-right px-4 py-3 font-semibold text-gray-700">A3 <span className="font-normal text-gray-400 text-xs">297×420mm</span></th>
+                  <th className="text-right px-4 py-3 font-semibold text-gray-700 hidden sm:table-cell">A4 per unit</th>
+                  <th className="text-right px-4 py-3 font-semibold text-gray-700 hidden sm:table-cell">A3 per unit</th>
+                </tr>
+              </thead>
+              <tbody>
+                {POSTER_PRICES.A4.tiers.map((t, i) => {
+                  const a3 = POSTER_PRICES.A3.tiers[i];
+                  const isActive = selectedQty === t.qty;
+                  return (
+                    <tr key={t.qty} onClick={() => setSelectedQty(t.qty)} className={`cursor-pointer border-b border-gray-100 transition-colors ${isActive ? 'bg-blue-50' : i % 2 === 0 ? 'bg-white hover:bg-gray-50' : 'bg-gray-50/50 hover:bg-gray-100'}`}>
+                      <td className={`px-4 py-3 font-medium ${isActive ? 'text-blue-700' : 'text-gray-800'}`}>{t.qty.toLocaleString()}</td>
+                      <td className={`px-4 py-3 text-right font-semibold ${isActive ? 'text-blue-700' : 'text-gray-900'}`}>€{t.price}</td>
+                      <td className={`px-4 py-3 text-right font-semibold ${isActive ? 'text-blue-700' : 'text-gray-900'}`}>€{a3.price}</td>
+                      <td className="px-4 py-3 text-right text-gray-400 hidden sm:table-cell">€{(t.price / t.qty).toFixed(3)}</td>
+                      <td className="px-4 py-3 text-right text-gray-400 hidden sm:table-cell">€{(a3.price / a3.qty).toFixed(3)}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-gray-400 mt-3 text-center">Click a row to update the price calculator above. All prices excl. VAT (23%).</p>
         </div>
       </section>
 
