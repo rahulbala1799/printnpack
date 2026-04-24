@@ -25,15 +25,15 @@ const POSTER_PRICES = {
   ]},
   // A2 = 3×A3 − 2×A4 (area doubles each step; max 500)
   A2: { label: 'A2 (420×594mm)', tiers: [
-    { qty: 10, price: 24 }, { qty: 20, price: 49 }, { qty: 50, price: 63 },
-    { qty: 100, price: 71 }, { qty: 200, price: 75 }, { qty: 300, price: 113 },
-    { qty: 400, price: 131 }, { qty: 500, price: 150 },
+    { qty: 1, price: 8 }, { qty: 10, price: 50 }, { qty: 20, price: 80 },
+    { qty: 50, price: 175 }, { qty: 100, price: 300 }, { qty: 200, price: 500 },
+    { qty: 300, price: 675 }, { qty: 400, price: 840 }, { qty: 500, price: 1000 },
   ]},
   // A1 = 7×A3 − 6×A4 (max 500); qty 200 floored to 115 to maintain ascending order
   A1: { label: 'A1 (594×841mm)', tiers: [
-    { qty: 10, price: 40 }, { qty: 20, price: 93 }, { qty: 50, price: 107 },
-    { qty: 100, price: 111 }, { qty: 200, price: 115 }, { qty: 300, price: 189 },
-    { qty: 400, price: 227 }, { qty: 500, price: 262 },
+    { qty: 1, price: 12 }, { qty: 10, price: 80 }, { qty: 20, price: 130 },
+    { qty: 50, price: 275 }, { qty: 100, price: 500 }, { qty: 200, price: 900 },
+    { qty: 300, price: 1275 }, { qty: 400, price: 1640 }, { qty: 500, price: 2000 },
   ]},
 };
 
