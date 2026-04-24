@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 // ─── Pricing Data ────────────────────────────────────────────────────────────
 
-const POSTER_SIZES = ['A4', 'A3'];
+const POSTER_SIZES = ['A4', 'A3', 'A2', 'A1'];
 
 const POSTER_PRICES = {
   A4: { label: 'A4 (210×297mm)', tiers: [
@@ -22,6 +22,18 @@ const POSTER_PRICES = {
     { qty: 400, price: 83 }, { qty: 500, price: 94 }, { qty: 1000, price: 127 },
     { qty: 2000, price: 254 }, { qty: 3000, price: 381 }, { qty: 4000, price: 508 },
     { qty: 5000, price: 635 },
+  ]},
+  // A2 = 3×A3 − 2×A4 (area doubles each step; max 500)
+  A2: { label: 'A2 (420×594mm)', tiers: [
+    { qty: 10, price: 24 }, { qty: 20, price: 49 }, { qty: 50, price: 63 },
+    { qty: 100, price: 71 }, { qty: 200, price: 75 }, { qty: 300, price: 113 },
+    { qty: 400, price: 131 }, { qty: 500, price: 150 },
+  ]},
+  // A1 = 7×A3 − 6×A4 (max 500); qty 200 floored to 115 to maintain ascending order
+  A1: { label: 'A1 (594×841mm)', tiers: [
+    { qty: 10, price: 40 }, { qty: 20, price: 93 }, { qty: 50, price: 107 },
+    { qty: 100, price: 111 }, { qty: 200, price: 115 }, { qty: 300, price: 189 },
+    { qty: 400, price: 227 }, { qty: 500, price: 262 },
   ]},
 };
 
@@ -159,9 +171,11 @@ export default function PostersPage() {
               {/* Pricing Calculator */}
               <div className="bg-gray-50 rounded-2xl p-4 mb-6 border border-gray-200">
                 <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Instant Price (170gsm Coated Gloss)</p>
-                <div className="flex gap-2 mb-3">
+                <div className="grid grid-cols-2 gap-2 mb-3">
                   {POSTER_SIZES.map(s => (
-                    <button key={s} onClick={() => setSelectedSize(s)} className={`flex-1 py-2 rounded-lg text-sm font-semibold border transition-all ${selectedSize === s ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:border-blue-400'}`}>{s} <span className="font-normal text-xs opacity-70">{s === 'A4' ? '210×297' : '297×420'}</span></button>
+                    <button key={s} onClick={() => { setSelectedSize(s); if (['A1','A2'].includes(s) && selectedQty > 500) setSelectedQty(500); }} className={`py-2 rounded-lg text-sm font-semibold border transition-all ${selectedSize === s ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:border-blue-400'}`}>
+                      {s} <span className="font-normal text-xs opacity-70">{POSTER_PRICES[s].label.match(/\(([^)]+)\)/)?.[1]}</span>
+                    </button>
                   ))}
                 </div>
                 <div className="mb-4">
@@ -283,40 +297,42 @@ export default function PostersPage() {
       </section>
 
       <section id="pricing-table" className="bg-white border-t border-gray-200">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <div className="text-center mb-8">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Poster Pricing</h2>
-            <p className="text-gray-500 text-sm">170gsm coated glossy paper · Prices excl. 23% VAT</p>
+            <p className="text-gray-500 text-sm">170gsm coated glossy paper · Prices excl. 23% VAT · A1 &amp; A2 max 500 pcs</p>
           </div>
           <div className="overflow-x-auto rounded-xl border border-gray-200">
-            <table className="w-full text-sm">
+            <table className="w-full text-sm min-w-[520px]">
               <thead>
                 <tr className="bg-gray-50 border-b border-gray-200">
                   <th className="text-left px-4 py-3 font-semibold text-gray-700">Qty</th>
-                  <th className="text-right px-4 py-3 font-semibold text-gray-700">A4 <span className="font-normal text-gray-400 text-xs">210×297mm</span></th>
-                  <th className="text-right px-4 py-3 font-semibold text-gray-700">A3 <span className="font-normal text-gray-400 text-xs">297×420mm</span></th>
-                  <th className="text-right px-4 py-3 font-semibold text-gray-700 hidden sm:table-cell">A4 per unit</th>
-                  <th className="text-right px-4 py-3 font-semibold text-gray-700 hidden sm:table-cell">A3 per unit</th>
+                  <th className="text-right px-4 py-3 font-semibold text-gray-700">A4 <span className="font-normal text-gray-400 text-xs block">210×297mm</span></th>
+                  <th className="text-right px-4 py-3 font-semibold text-gray-700">A3 <span className="font-normal text-gray-400 text-xs block">297×420mm</span></th>
+                  <th className="text-right px-4 py-3 font-semibold text-gray-700">A2 <span className="font-normal text-gray-400 text-xs block">420×594mm</span></th>
+                  <th className="text-right px-4 py-3 font-semibold text-gray-700">A1 <span className="font-normal text-gray-400 text-xs block">594×841mm</span></th>
                 </tr>
               </thead>
               <tbody>
                 {POSTER_PRICES.A4.tiers.map((t, i) => {
                   const a3 = POSTER_PRICES.A3.tiers[i];
+                  const a2 = POSTER_PRICES.A2.tiers.find(x => x.qty === t.qty);
+                  const a1 = POSTER_PRICES.A1.tiers.find(x => x.qty === t.qty);
                   const isActive = selectedQty === t.qty;
                   return (
                     <tr key={t.qty} onClick={() => setSelectedQty(t.qty)} className={`cursor-pointer border-b border-gray-100 transition-colors ${isActive ? 'bg-blue-50' : i % 2 === 0 ? 'bg-white hover:bg-gray-50' : 'bg-gray-50/50 hover:bg-gray-100'}`}>
                       <td className={`px-4 py-3 font-medium ${isActive ? 'text-blue-700' : 'text-gray-800'}`}>{t.qty.toLocaleString()}</td>
                       <td className={`px-4 py-3 text-right font-semibold ${isActive ? 'text-blue-700' : 'text-gray-900'}`}>€{t.price}</td>
                       <td className={`px-4 py-3 text-right font-semibold ${isActive ? 'text-blue-700' : 'text-gray-900'}`}>€{a3.price}</td>
-                      <td className="px-4 py-3 text-right text-gray-400 hidden sm:table-cell">€{(t.price / t.qty).toFixed(3)}</td>
-                      <td className="px-4 py-3 text-right text-gray-400 hidden sm:table-cell">€{(a3.price / a3.qty).toFixed(3)}</td>
+                      <td className={`px-4 py-3 text-right font-semibold ${isActive && a2 ? 'text-blue-700' : 'text-gray-900'}`}>{a2 ? `€${a2.price}` : <span className="text-gray-300">—</span>}</td>
+                      <td className={`px-4 py-3 text-right font-semibold ${isActive && a1 ? 'text-blue-700' : 'text-gray-900'}`}>{a1 ? `€${a1.price}` : <span className="text-gray-300">—</span>}</td>
                     </tr>
                   );
                 })}
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-gray-400 mt-3 text-center">Click a row to update the price calculator above. All prices excl. VAT (23%).</p>
+          <p className="text-xs text-gray-400 mt-3 text-center">Click a row to update the price calculator above. All prices excl. VAT (23%). — = not available at this quantity.</p>
         </div>
       </section>
 
