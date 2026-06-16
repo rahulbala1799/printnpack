@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import Layout from '../../components/layout/Layout';
+import PizzaPackagingPromo from '../../components/blog/PizzaPackagingPromo';
 
 import { SITE_URL } from '../../lib/site';
 const SLUG = 'eps-polystyrene-packaging-ireland-legal-2025';
@@ -905,6 +906,8 @@ export default function EpsPost() {
             ))}
           </div>
         </section>
+
+        <PizzaPackagingPromo />
 
         {/* ── CTA ── */}
         <div className="bg-green-700 text-white rounded-2xl p-8 text-center mb-14">

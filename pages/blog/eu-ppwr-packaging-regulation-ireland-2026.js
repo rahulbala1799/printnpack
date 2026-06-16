@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import Layout from '../../components/layout/Layout';
+import PizzaPackagingPromo from '../../components/blog/PizzaPackagingPromo';
 
 import { SITE_URL as siteUrl } from '../../lib/site';
 
@@ -156,7 +157,7 @@ const products = [
     alt: 'Custom pizza boxes Ireland – PFAS-free recyclable corrugated board',
     name: 'Custom Pizza Boxes',
     desc: 'Food-safe corrugated board with no PFAS chemical treatments. Custom print from 500 units.',
-    href: '/pizza-boxes',
+    href: '/custom-pizza-boxes-ireland',
     badge: 'PFAS-Free',
     badgeColour: 'blue',
   },
@@ -816,6 +817,8 @@ export default function PPWRPackagingRegulationIreland2026() {
           </div>
 
         </div>
+
+        <PizzaPackagingPromo />
 
         {/* CTA */}
         <div className="mt-14 bg-slate-900 rounded-2xl p-8 text-center text-white">

@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import Layout from '../../components/layout/Layout';
+import PizzaPackagingPromo from '../../components/blog/PizzaPackagingPromo';
 
 import { SITE_URL as siteUrl } from '../../lib/site';
 
@@ -413,6 +414,8 @@ export default function PlainPackagingWholesaleIreland() {
             </Link>
           </div>
 
+          <PizzaPackagingPromo />
+
           {/* FAQ */}
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-6">Frequently Asked Questions</h2>
           <div className="space-y-6">
@@ -445,6 +448,7 @@ export default function PlainPackagingWholesaleIreland() {
         {/* Related posts */}
         <div className="mt-12 grid sm:grid-cols-2 gap-4">
           {[
+            { href: '/blog/pizza-box-sizes-ireland', src: '/images/pizza-boxes/PIZZA_BOX_3.jpg', title: 'Pizza Box Sizes Ireland: 7″ vs 12″ vs 14″ for Takeaways' },
             { href: '/blog/eco-packaging-for-takeaways-ireland', src: '/images/products/bagasse-burger-box/1.png', title: 'Eco Packaging for Takeaways Ireland: Switching to Sustainable Food Packaging' },
             { href: '/blog/paper-bags-with-logo-ireland', src: '/images/products/twisted-handle-bags/1.png', title: 'Paper Bags with Logo Ireland: A Guide for Retailers, Cafés & Food Businesses' },
           ].map(({ href, src, title }) => (

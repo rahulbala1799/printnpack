@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import Layout from '../../components/layout/Layout';
+import PizzaPackagingPromo from '../../components/blog/PizzaPackagingPromo';
 
 import { SITE_URL } from '../../lib/site';
 const SLUG = 'packaging-costs-ireland-restaurants-2025-2026';
@@ -609,6 +610,8 @@ export default function PackagingCostsPost() {
           </div>
         </section>
 
+        <PizzaPackagingPromo />
+
         {/* ── CTA ── */}
         <div className="bg-blue-600 text-white rounded-2xl p-8 text-center mb-14">
           <h2 className="text-2xl font-bold mb-3">Ready to Cut Your Packaging Cost Per Order?</h2>
@@ -624,10 +627,10 @@ export default function PackagingCostsPost() {
               Get a Quote
             </Link>
             <Link
-              href="/plain-packaging"
+              href="/custom-pizza-boxes-ireland"
               className="border border-white text-white font-semibold px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors"
             >
-              Browse Plain Packaging
+              Custom Pizza Boxes
             </Link>
           </div>
         </div>

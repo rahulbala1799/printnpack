@@ -23,7 +23,7 @@ const jsonLd = {
     logo: { '@type': 'ImageObject', url: `${siteUrl}/favicon.ico` },
   },
   datePublished: '2026-02-12',
-  dateModified: '2026-02-12',
+  dateModified: '2026-06-17',
   mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/pizza-box-sizes-ireland` },
 };
 
@@ -49,10 +49,10 @@ const faqLd = {
     },
     {
       '@type': 'Question',
-      name: 'What is the best pizza box size for a 12-inch pizza?',
+      name: 'Should I stock 7 inch, 12 inch, or 14 inch pizza boxes for an Irish takeaway?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'A 12-inch pizza fits best in a 12" pizza box. However, if you want extra room for cheese or toppings to not touch the lid, sizing up to a 13" or 14" box is a common choice for takeaways.',
+        text: 'For most Irish takeaways, 12 inch is the essential core size for standard medium pizzas. Add 14 inch for large and family orders. Use 7 inch only if you sell personal portions or kids meals — it is not a primary stock size for full-menu pizzerias.',
       },
     },
   ],
@@ -149,7 +149,11 @@ export default function PizzaBoxSizesIreland() {
             This guide covers every standard <strong>pizza box size available in Ireland</strong>,
             explains what each size is best for, and walks you through the key decisions around material,
             printing, and ordering — whether you&apos;re a single-site chipper in Dublin or a multi-site
-            restaurant group shipping nationwide.
+            restaurant group shipping nationwide. Ready to order? See our{' '}
+            <Link href="/custom-pizza-boxes-ireland" className="text-blue-600 hover:underline font-medium">
+              custom pizza boxes Ireland
+            </Link>{' '}
+            page for printing, MOQ, and delivery details.
           </p>
 
           {/* Section 1 */}
@@ -196,6 +200,48 @@ export default function PizzaBoxSizesIreland() {
             The <strong>12-inch pizza box</strong> is by far the most popular for Irish takeaways,
             followed closely by 14-inch for weekend and family orders. If you&apos;re starting out and want
             to stock just two sizes, 12" and 14" will cover the vast majority of orders.
+          </p>
+
+          {/* 7 vs 12 vs 14 comparison */}
+          <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">
+            7&quot; vs 12&quot; vs 14&quot; Pizza Boxes for Irish Takeaways
+          </h2>
+          <p className="text-slate-700 leading-relaxed mb-4">
+            Operators often ask whether to stock personal 7&quot; boxes alongside their main run sizes.
+            Here is a practical comparison for Irish delivery and collection menus:
+          </p>
+          <div className="overflow-x-auto mb-8">
+            <table className="w-full text-sm border-collapse rounded-xl overflow-hidden">
+              <thead>
+                <tr className="bg-slate-900 text-white">
+                  <th className="text-left px-4 py-3 font-semibold">Size</th>
+                  <th className="text-left px-4 py-3 font-semibold">Best for</th>
+                  <th className="text-left px-4 py-3 font-semibold">Stock priority</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ['7"', 'Kids meals, lunch specials, single-slice deals', 'Optional — niche add-on'],
+                  ['12"', 'Standard medium pizzas — everyday takeaway orders', 'Essential — order first'],
+                  ['14"', 'Large pizzas, family boxes, weekend peaks', 'Essential — pair with 12"'],
+                ].map(([size, best, priority], i) => (
+                  <tr key={size} className={i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
+                    <td className="px-4 py-3 font-semibold text-slate-900">{size}</td>
+                    <td className="px-4 py-3 text-slate-700">{best}</td>
+                    <td className="px-4 py-3 text-slate-600">{priority}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-slate-700 leading-relaxed mb-8">
+            <strong>Rule of thumb:</strong> if budget or storage is tight, run 12&quot; + 14&quot; only.
+            Add 7&quot; when personal portions are a meaningful part of sales. For branded boxes with your
+            logo, see{' '}
+            <Link href="/custom-pizza-boxes-ireland" className="text-blue-600 hover:underline font-medium">
+              custom printed pizza boxes Ireland
+            </Link>
+            .
           </p>
 
           {/* Image 2 */}
@@ -303,7 +349,7 @@ export default function PizzaBoxSizesIreland() {
 
           <div className="grid sm:grid-cols-3 gap-4 mb-8">
             {[
-              { label: 'Low MOQs', desc: 'Order from as few as 100 boxes — ideal for new takeaways testing a design.' },
+              { label: 'Low MOQs', desc: 'Order from 500 custom printed boxes — suited to takeaways scaling branded packaging.' },
               { label: 'Full-colour print', desc: 'CMYK printing across the full box surface — your logo, brand colours, and artwork printed directly on the board.' },
               { label: 'Fast delivery', desc: 'Nationwide delivery across all 32 counties of Ireland, including next-day options.' },
             ].map((item) => (
@@ -378,6 +424,10 @@ export default function PizzaBoxSizesIreland() {
               {
                 q: 'Can I get custom printed pizza boxes in Ireland?',
                 a: 'Yes — PrintNPack prints custom pizza boxes in Ireland with your logo, brand colours, and artwork. We offer low minimum order quantities and fast nationwide delivery.',
+              },
+              {
+                q: 'Should I stock 7 inch, 12 inch, or 14 inch pizza boxes?',
+                a: 'Stock 12" and 14" as your core sizes. Add 7" only if you sell personal or kids portions regularly — most full-menu takeaways do not need 7" as primary stock.',
               },
               {
                 q: 'What is the best pizza box size for a 12-inch pizza?',

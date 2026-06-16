@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import Layout from '../../components/layout/Layout';
+import PizzaPackagingPromo from '../../components/blog/PizzaPackagingPromo';
 
 import { SITE_URL as siteUrl } from '../../lib/site';
 
@@ -714,6 +715,8 @@ export default function EcoFriendlyPizzaBoxPaperBagsBurgerBoxesIreland() {
           </div>
 
         </div>
+
+        <PizzaPackagingPromo />
 
         {/* CTA */}
         <div className="mt-14 bg-slate-900 rounded-2xl p-8 text-center text-white">

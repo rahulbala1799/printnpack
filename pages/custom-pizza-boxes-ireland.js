@@ -4,6 +4,122 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import PizzaBoxQuoteForm from '../components/PizzaBoxQuoteForm';
+import { SITE_URL } from '../lib/site';
+
+const PAGE_URL = `${SITE_URL}/custom-pizza-boxes-ireland`;
+
+const productLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Custom Pizza Boxes Ireland',
+  description:
+    'Premium custom printed pizza boxes for Irish restaurants and takeaways. Full-colour CMYK printing, food-safe corrugated board, sizes 7" to 20", MOQ from 500 units, nationwide delivery.',
+  image: `${SITE_URL}/images/pizza-boxes/PIZZA_BOX_1.jpg`,
+  brand: { '@type': 'Brand', name: 'PrintNPack Ireland' },
+  offers: {
+    '@type': 'Offer',
+    url: PAGE_URL,
+    priceCurrency: 'EUR',
+    availability: 'https://schema.org/InStock',
+    seller: { '@type': 'Organization', name: 'PrintNPack Ireland', url: SITE_URL },
+  },
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What pizza box sizes are available in Ireland?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'PrintNPack supplies custom pizza boxes from 7 inch (personal) up to 20 inch (party size), including popular Irish takeaway sizes 9", 12", 14", and 16". Custom dimensions are available on request.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the minimum order for custom printed pizza boxes?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Custom printed pizza boxes start from 500 units. This MOQ suits growing takeaways and multi-site restaurants ordering branded packaging in Ireland.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How long does pizza box printing and delivery take in Ireland?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Production typically takes 5–7 business days after artwork approval, with nationwide delivery across all counties in Ireland including Dublin, Cork, and Galway.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I get my logo printed on pizza boxes?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. We offer full-colour CMYK custom printing with food-safe inks, plus a free professional design service to prepare your logo and branding artwork.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which pizza box size is best for Irish takeaways — 7", 12", or 14"?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '7" suits personal and kids portions; 12" is the core size for standard medium pizzas in Irish takeaways; 14" is best for large and family orders, especially at weekends. Most operators stock 12" and 14" as their primary sizes.',
+      },
+    },
+  ],
+};
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Custom Pizza Boxes Ireland', item: PAGE_URL },
+  ],
+};
+
+const pageFaqs = [
+  {
+    q: 'What pizza box sizes are available in Ireland?',
+    a: 'We supply 7", 9", 12", 14", 16", 18", and 20" boxes, plus custom sizes. The most popular for Irish takeaways are 12" and 14".',
+  },
+  {
+    q: 'What is the minimum order quantity (MOQ)?',
+    a: 'Custom printed pizza boxes start from 500 units — ideal for restaurants and takeaways scaling branded packaging.',
+  },
+  {
+    q: 'How long is production and delivery?',
+    a: 'Allow 5–7 business days for printing after artwork sign-off. We deliver nationwide across Ireland.',
+  },
+  {
+    q: 'Do you include design support?',
+    a: 'Yes — our team prepares professional print-ready artwork for your boxes at no extra cost.',
+  },
+];
+
+const sizeComparison = [
+  {
+    size: '7"',
+    label: 'Personal',
+    bestFor: 'Kids meals, lunch specials, single slices',
+    irishUse: 'Side orders and meal-deal add-ons',
+  },
+  {
+    size: '12"',
+    label: 'Medium (most popular)',
+    bestFor: 'Standard medium pizzas — core takeaway size',
+    irishUse: 'Everyday orders; stock this first',
+  },
+  {
+    size: '14"',
+    label: 'Large',
+    bestFor: 'Large pizzas and family sharing boxes',
+    irishUse: 'Weekend peaks and family delivery orders',
+  },
+];
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -161,7 +277,10 @@ const CustomPizzaBoxesIreland = () => {
         <meta property="og:image" content="https://www.printnpack.ie/images/pizza-boxes/PIZZA_BOX_1.jpg" />
         <meta property="og:url" content="https://www.printnpack.ie/custom-pizza-boxes-ireland" />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://www.printnpack.ie/custom-pizza-boxes-ireland" />
+        <link rel="canonical" href={PAGE_URL} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       </Head>
 
       {/* ── Breadcrumb ── */}
@@ -237,11 +356,15 @@ const CustomPizzaBoxesIreland = () => {
               </div>
 
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">
-                Custom Printed Pizza Boxes
+                Custom Pizza Boxes Ireland
               </h1>
 
               <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
                 Premium food-safe pizza boxes with full-colour custom printing. Designed for Irish restaurants, takeaways, and food delivery services.
+                {' '}
+                <Link href="/blog/pizza-box-sizes-ireland" className="text-blue-600 hover:underline font-medium">
+                  Compare pizza box sizes (7&quot;, 12&quot;, 14&quot;) →
+                </Link>
               </p>
 
               {/* Quick stats */}
@@ -377,7 +500,50 @@ const CustomPizzaBoxesIreland = () => {
           </div>
 
           <p className="text-center text-sm text-gray-400 mt-6">
-            Need a size not listed? <button onClick={openQuote} className="text-blue-600 hover:underline font-medium">Request a custom size</button>
+            Need a size not listed?{' '}
+            <button onClick={openQuote} className="text-blue-600 hover:underline font-medium">Request a custom size</button>
+            {' · '}
+            <Link href="/blog/pizza-box-sizes-ireland" className="text-blue-600 hover:underline font-medium">
+              Full pizza box sizes guide
+            </Link>
+          </p>
+        </div>
+      </section>
+
+      {/* ── Size comparison: 7 vs 12 vs 14 ── */}
+      <section className="bg-gray-50 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+              7&quot; vs 12&quot; vs 14&quot; Pizza Boxes for Irish Takeaways
+            </h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">
+              Not sure which size to order? Most Irish operators run 12&quot; and 14&quot; as core stock — here is how the key sizes compare.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+            {sizeComparison.map((row) => (
+              <div
+                key={row.size}
+                className={`rounded-xl border-2 p-5 bg-white ${
+                  row.size === '12"' ? 'border-blue-300 ring-1 ring-blue-100' : 'border-gray-200'
+                }`}
+              >
+                <div className="text-2xl font-bold text-gray-900 mb-1">{row.size}</div>
+                <div className="text-sm font-medium text-blue-600 mb-3">{row.label}</div>
+                <p className="text-sm text-gray-600 mb-2"><strong>Best for:</strong> {row.bestFor}</p>
+                <p className="text-sm text-gray-500"><strong>In Ireland:</strong> {row.irishUse}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-center text-sm text-gray-500 mt-8 max-w-2xl mx-auto">
+            Deep-dive on every standard size, board weight, and ordering tips in our{' '}
+            <Link href="/blog/pizza-box-sizes-ireland" className="text-blue-600 hover:underline font-medium">
+              pizza box sizes Ireland guide
+            </Link>
+            .
           </p>
         </div>
       </section>
@@ -507,6 +673,23 @@ const CustomPizzaBoxesIreland = () => {
                 unoptimized={process.env.NODE_ENV === 'production'}
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="bg-gray-50 border-y border-gray-200">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">
+            Custom Pizza Boxes — FAQs
+          </h2>
+          <div className="space-y-6">
+            {pageFaqs.map(({ q, a }) => (
+              <div key={q} className="bg-white rounded-xl border border-gray-200 p-5">
+                <h3 className="font-semibold text-gray-900 mb-2">{q}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">{a}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

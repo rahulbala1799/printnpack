@@ -6,6 +6,7 @@ import HomepageHero from '../components/home/HomepageHero';
 import TrustBar from '../components/home/TrustBar';
 import CategoryGrid from '../components/home/CategoryGrid';
 import PopularProducts from '../components/home/PopularProducts';
+import PackagingGuides from '../components/home/PackagingGuides';
 import PlainPackagingShowcase from '../components/home/PlainPackagingShowcase';
 import AllProductsGrid from '../components/home/AllProductsGrid';
 import QuickServices from '../components/home/QuickServices';
@@ -249,6 +250,8 @@ export default function Home() {
 
       {/* Most popular products */}
       <PopularProducts />
+
+      <PackagingGuides />
 
       {/* Plain Packaging Wholesale Showcase */}
       <PlainPackagingShowcase />
