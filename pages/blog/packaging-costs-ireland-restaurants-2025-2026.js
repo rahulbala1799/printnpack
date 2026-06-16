@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Layout from '../../components/layout/Layout';
 
-const SITE_URL = 'https://printnpack.ie';
+import { SITE_URL } from '../../lib/site';
 const SLUG = 'packaging-costs-ireland-restaurants-2025-2026';
 const CANONICAL = `${SITE_URL}/blog/${SLUG}`;
 const PUBLISHED = '2026-02-13';

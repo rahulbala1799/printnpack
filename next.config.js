@@ -2,6 +2,17 @@
 const nextConfig = {
   // Basic configuration - keeping it simple
   reactStrictMode: true,
+
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'printnpack.ie' }],
+        destination: 'https://www.printnpack.ie/:path*',
+        permanent: true,
+      },
+    ];
+  },
   
   // Enable image optimization with better settings for Vercel
   images: {

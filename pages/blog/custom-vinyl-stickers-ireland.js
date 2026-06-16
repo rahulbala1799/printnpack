@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Layout from '../../components/layout/Layout';
 
-const siteUrl = 'https://printnpack.ie';
+import { SITE_URL as siteUrl } from '../../lib/site';
 const slug = 'custom-vinyl-stickers-ireland';
 const heroImage = '/ifa/product/vinylstk/Vinyl-Decals-_-Stickers.jpg';
 

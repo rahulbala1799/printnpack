@@ -77,15 +77,15 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
         <title>{product.name} — Plain Packaging | PrintNPack Ireland</title>
         <meta name="description" content={`${product.description?.slice(0, 155)} Fast delivery across Ireland.`} />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={`https://printnpack.ie/plain-packaging/${product.id}`} />
+        <link rel="canonical" href={`https://www.printnpack.ie/plain-packaging/${product.id}`} />
         <meta property="og:type" content="product" />
         <meta property="og:title" content={`${product.name} — Plain Packaging | PrintNPack Ireland`} />
         <meta property="og:description" content={product.description?.slice(0, 155) || product.name} />
-        <meta property="og:url" content={`https://printnpack.ie/plain-packaging/${product.id}`} />
+        <meta property="og:url" content={`https://www.printnpack.ie/plain-packaging/${product.id}`} />
         <meta property="og:site_name" content="PrintNPack Ireland" />
         <meta property="og:locale" content="en_IE" />
         {product.imageSrc && !product.imageSrc.includes('logo.png') && (
-          <meta property="og:image" content={`https://printnpack.ie${product.imageSrc}`} />
+          <meta property="og:image" content={`https://www.printnpack.ie${product.imageSrc}`} />
         )}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${product.name} — Plain Packaging | PrintNPack Ireland`} />

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Layout from '../../components/layout/Layout';
 
-const siteUrl = 'https://printnpack.ie';
+import { SITE_URL as siteUrl } from '../../lib/site';
 const slug = 'trade-show-banners-decals-ireland';
 // Roll-up banners (roll-up-banners page)
 const heroImage = '/ifa/product/rollup/1.png';

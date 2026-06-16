@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import products from '../data/products';
 import { useRouter } from 'next/router';
+import { SITE_URL } from '../lib/site';
 
 // ─── Category Config ──────────────────────────────────────────────────────────
 const mainGroups = [
@@ -201,13 +202,34 @@ const CategoryTab = ({ group, isActive, onClick }) => (
   </button>
 );
 
+function filterProducts(activeGroup, activeCategory, searchTerm = '') {
+  const visible = products.filter((p) => !p.hidden);
+  const groupCats = mainGroups.find((g) => g.id === activeGroup)?.categories || [];
+
+  let filtered =
+    activeCategory === 'all'
+      ? visible.filter((p) => groupCats.includes(p.category))
+      : visible.filter((p) => p.category === activeCategory);
+
+  if (searchTerm) {
+    const q = searchTerm.toLowerCase();
+    filtered = filtered.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) ||
+        (p.description || '').toLowerCase().includes(q)
+    );
+  }
+
+  return filtered;
+}
+
 // ─── Main Page ────────────────────────────────────────────────────────────────
-const ProductsPage = () => {
+const ProductsPage = ({ initialGroup, initialCategory, initialProducts }) => {
   const router = useRouter();
   const { group: groupParam, category: categoryParam } = router.query;
-  const [activeGroup, setActiveGroup] = useState('packaging');
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [activeGroup, setActiveGroup] = useState(initialGroup);
+  const [activeCategory, setActiveCategory] = useState(initialCategory);
+  const [filteredProducts, setFilteredProducts] = useState(initialProducts);
   const [visibleCount, setVisibleCount] = useState(12);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchFocused, setSearchFocused] = useState(false);
@@ -238,24 +260,9 @@ const ProductsPage = () => {
     }
   }, [activeGroup, activeCategory]);
 
-  // Filter
+  // Filter (client-side search and tab changes after hydration)
   useEffect(() => {
-    const visible = products.filter(p => !p.hidden);
-    const groupCats = mainGroups.find(g => g.id === activeGroup)?.categories || [];
-
-    let filtered = activeCategory === 'all'
-      ? visible.filter(p => groupCats.includes(p.category))
-      : visible.filter(p => p.category === activeCategory);
-
-    if (searchTerm) {
-      const q = searchTerm.toLowerCase();
-      filtered = filtered.filter(p =>
-        p.name.toLowerCase().includes(q) ||
-        (p.description || '').toLowerCase().includes(q)
-      );
-    }
-
-    setFilteredProducts(filtered);
+    setFilteredProducts(filterProducts(activeGroup, activeCategory, searchTerm));
     setVisibleCount(12);
   }, [activeGroup, activeCategory, searchTerm]);
 
@@ -279,6 +286,8 @@ const ProductsPage = () => {
           name="description"
           content="Browse PrintNPack's full range of B2B print and packaging products. Food packaging, wide format, leaflets, clothing and more. Fast delivery across Ireland."
         />
+        <link rel="canonical" href={`${SITE_URL}/products`} />
+        <meta property="og:url" content={`${SITE_URL}/products`} />
       </Head>
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
@@ -637,5 +646,24 @@ const ProductsPage = () => {
     </Layout>
   );
 };
+
+export async function getServerSideProps({ query }) {
+  const groupParam = typeof query.group === 'string' ? query.group : 'packaging';
+  const categoryParam = typeof query.category === 'string' ? query.category : 'all';
+  const initialGroup = mainGroups.some((g) => g.id === groupParam) ? groupParam : 'packaging';
+  const groupConfig = mainGroups.find((g) => g.id === initialGroup);
+  const initialCategory =
+    categoryParam === 'all' || groupConfig?.categories.includes(categoryParam)
+      ? categoryParam
+      : 'all';
+
+  return {
+    props: {
+      initialGroup,
+      initialCategory,
+      initialProducts: filterProducts(initialGroup, initialCategory),
+    },
+  };
+}
 
 export default ProductsPage;

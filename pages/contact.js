@@ -89,9 +89,9 @@ const ContactPage = () => {
           name="description"
           content="Get in touch with PrintNPack for all your packaging needs. Chat with us, call us, or send a WhatsApp message for immediate assistance."
         />
-        <link rel="canonical" href="https://printnpack.ie/contact" />
+        <link rel="canonical" href="https://www.printnpack.ie/contact" />
         <meta property="og:title" content="Contact Us - PrintNPack Ireland" />
-        <meta property="og:url" content="https://printnpack.ie/contact" />
+        <meta property="og:url" content="https://www.printnpack.ie/contact" />
       </Head>
 
       {/* Hero Section */}

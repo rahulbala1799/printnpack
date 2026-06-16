@@ -1,4 +1,12 @@
 {
   "version": 2,
-  "framework": "nextjs"
-} 
+  "framework": "nextjs",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "printnpack.ie" }],
+      "destination": "https://www.printnpack.ie/:path*",
+      "permanent": true
+    }
+  ]
+}

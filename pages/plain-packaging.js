@@ -822,11 +822,11 @@ export default function PlainPackagingPage() {
         <title>Plain Packaging — Wholesale Catering Supplies | PrintNPack Ireland</title>
         <meta name="description" content="841 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://printnpack.ie/plain-packaging" />
+        <link rel="canonical" href="https://www.printnpack.ie/plain-packaging" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Plain Packaging — Wholesale Catering Supplies | PrintNPack Ireland" />
         <meta property="og:description" content="841 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland." />
-        <meta property="og:url" content="https://printnpack.ie/plain-packaging" />
+        <meta property="og:url" content="https://www.printnpack.ie/plain-packaging" />
         <meta property="og:site_name" content="PrintNPack Ireland" />
         <meta property="og:locale" content="en_IE" />
         <meta name="twitter:card" content="summary_large_image" />

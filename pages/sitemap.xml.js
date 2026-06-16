@@ -1,7 +1,6 @@
 import products from '../data/products';
 import { TIERED_PLAIN_PRODUCTS } from '../data/plain-products-tiered';
-
-const SITE_URL = 'https://printnpack.ie';
+import { SITE_URL } from '../lib/site';
 
 // Static pages with their priorities and change frequencies
 const staticPages = [
@@ -35,6 +34,10 @@ const staticPages = [
   { path: '/blog/irish-restaurant-industry-delivery-2025',   priority: '0.8', changefreq: 'monthly' },
   { path: '/blog/packaging-costs-ireland-restaurants-2025-2026', priority: '0.8', changefreq: 'monthly' },
   { path: '/blog/eps-polystyrene-packaging-ireland-legal-2025', priority: '0.8', changefreq: 'monthly' },
+  { path: '/blog/eu-ppwr-packaging-regulation-ireland-2026',   priority: '0.8', changefreq: 'monthly' },
+  { path: '/blog/trade-show-banners-decals-ireland',           priority: '0.8', changefreq: 'monthly' },
+  { path: '/blog/corriboard-boards-ireland',                   priority: '0.8', changefreq: 'monthly' },
+  { path: '/blog/custom-vinyl-stickers-ireland',               priority: '0.8', changefreq: 'monthly' },
 ];
 
 function generateSitemap(productSlugs, plainPackagingIds) {

@@ -7,4 +7,4 @@ Disallow: /api/
 Disallow: /test-homepage
 
 # Sitemap location
-Sitemap: https://printnpack.ie/sitemap.xml
+Sitemap: https://www.printnpack.ie/sitemap.xml

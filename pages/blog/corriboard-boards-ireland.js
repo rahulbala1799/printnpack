@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Layout from '../../components/layout/Layout';
 
-const siteUrl = 'https://printnpack.ie';
+import { SITE_URL as siteUrl } from '../../lib/site';
 const slug = 'corriboard-boards-ireland';
 const heroImage = '/ifa/product/corriboard/corrugated-plastic-signs.jpg';
 

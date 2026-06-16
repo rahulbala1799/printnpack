@@ -76,9 +76,9 @@ const LoginPage = () => {
       <Head>
         <title>Login - PrintNPack Ireland</title>
         <meta name="description" content="Login to your PrintNPack account to manage orders, quotes, and account settings." />
-        <link rel="canonical" href="https://printnpack.ie/login" />
+        <link rel="canonical" href="https://www.printnpack.ie/login" />
         <meta property="og:title" content="Login - PrintNPack Ireland" />
-        <meta property="og:url" content="https://printnpack.ie/login" />
+        <meta property="og:url" content="https://www.printnpack.ie/login" />
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 

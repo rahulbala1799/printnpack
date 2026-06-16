@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import Layout from '../../components/layout/Layout';
+import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
@@ -150,7 +151,6 @@ const posts = [
 ];
 
 export default function BlogIndex() {
-  const siteUrl = 'https://printnpack.ie';
   const title = 'Resources & Guides | PrintNPack Ireland';
   const description =
     'Practical guides on packaging sizes, eco-friendly options, printing tips, and wholesale supplies for Irish takeaways, restaurants, and retailers.';

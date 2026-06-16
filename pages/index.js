@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '../components/layout/Layout';
 import Head from 'next/head';
+import { SITE_URL } from '../lib/site';
 import HomepageHero from '../components/home/HomepageHero';
 import TrustBar from '../components/home/TrustBar';
 import CategoryGrid from '../components/home/CategoryGrid';
@@ -11,7 +12,7 @@ import QuickServices from '../components/home/QuickServices';
 import HomepageCTA from '../components/home/HomepageCTA';
 
 export default function Home() {
-  const siteUrl = 'https://printnpack.ie';
+  const siteUrl = SITE_URL;
   const siteName = 'PrintNPack Ireland';
   const title = 'PrintNPack - Custom Packaging, Print Solutions & Wholesale Supplies Ireland';
   const description = "Ireland's leading custom packaging and print supplier. Pizza boxes, paper bags, leaflets, wide format printing, plain packaging wholesale and more. Low MOQs, fast delivery across Ireland, eco-friendly options. 100% Irish owned.";
