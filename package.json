@@ -11,6 +11,7 @@
     "start": "node node_modules/next/dist/bin/next start",
     "lint": "next lint",
     "sync-plain-products": "node scripts/sync-plain-products.js",
+    "sync-plain-catalog": "python3 scripts/sync-plain-catalog-from-cost-list.py",
     "import-cost-prices": "python3 scripts/export-cost-from-price-adj.py 2>/dev/null | node scripts/import-cost-to-db.js",
     "postinstall": "next telemetry disable"
   },

@@ -51,7 +51,7 @@ const PlainPackagingShowcase = () => {
           <div>
             <div className="inline-flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-3">
               <span className="text-amber-700 text-xs font-bold">B2B WHOLESALE</span>
-              <span className="text-amber-500 text-[10px]">841+ products</span>
+              <span className="text-amber-500 text-[10px]">736+ products</span>
             </div>
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-stone-900">
               Plain Packaging &amp; Catering Supplies
@@ -64,7 +64,7 @@ const PlainPackagingShowcase = () => {
             href="/plain-packaging"
             className="flex items-center gap-1.5 bg-stone-900 text-white font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-black transition-colors flex-shrink-0 self-start sm:self-auto"
           >
-            Browse All 841 Products
+            Browse All 736 Products
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
           </Link>
         </div>

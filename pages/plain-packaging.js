@@ -820,18 +820,18 @@ export default function PlainPackagingPage() {
     <Layout>
       <Head>
         <title>Plain Packaging — Wholesale Catering Supplies | PrintNPack Ireland</title>
-        <meta name="description" content="841 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland." />
+        <meta name="description" content="736 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://www.printnpack.ie/plain-packaging" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Plain Packaging — Wholesale Catering Supplies | PrintNPack Ireland" />
-        <meta property="og:description" content="841 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland." />
+        <meta property="og:description" content="736 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland." />
         <meta property="og:url" content="https://www.printnpack.ie/plain-packaging" />
         <meta property="og:site_name" content="PrintNPack Ireland" />
         <meta property="og:locale" content="en_IE" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Plain Packaging — Wholesale Catering Supplies | PrintNPack Ireland" />
-        <meta name="twitter:description" content="841 plain unbranded packaging products. Tiered case pricing, fast delivery Ireland." />
+        <meta name="twitter:description" content="736 plain unbranded packaging products. Tiered case pricing, fast delivery Ireland." />
       </Head>
 
       <div className="overflow-x-hidden min-w-0">
@@ -846,7 +846,7 @@ export default function PlainPackagingPage() {
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 sm:gap-3">
             <div>
               <h1 className="text-xl sm:text-2xl font-bold text-stone-900">Plain Packaging</h1>
-              <p className="text-xs sm:text-sm text-stone-500 mt-0.5 sm:mt-1">841 products · 57 categories · 4-tier volume pricing</p>
+              <p className="text-xs sm:text-sm text-stone-500 mt-0.5 sm:mt-1">736 products · 55 categories · 4-tier volume pricing</p>
             </div>
             <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
               <span className="text-[10px] sm:text-xs bg-amber-50 border border-amber-200 text-amber-700 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg font-semibold">B2B Wholesale</span>

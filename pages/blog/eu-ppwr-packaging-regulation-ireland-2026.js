@@ -671,11 +671,11 @@ export default function PPWRPackagingRegulationIreland2026() {
 
           {/* Wholesale section */}
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">
-            Plain Packaging Wholesale — 841+ Products Ready to Ship
+            Plain Packaging Wholesale — 736+ Products Ready to Ship
           </h2>
           <p className="text-slate-700 leading-relaxed mb-6">
             Not every business needs custom printing. Our plain packaging wholesale range covers
-            over 841 products — food trays, burger clamshells, kraft bowls, hot cups, lids, napkins,
+            over 736 products — food trays, burger clamshells, kraft bowls, hot cups, lids, napkins,
             cutlery, and more — all available in case quantities at competitive wholesale pricing,
             with nationwide delivery across Ireland.
           </p>
@@ -699,7 +699,7 @@ export default function PPWRPackagingRegulationIreland2026() {
               href="/plain-packaging"
               className="text-blue-600 text-sm font-medium hover:underline"
             >
-              Browse all 841+ wholesale products →
+              Browse all 736+ wholesale products →
             </Link>
           </div>
 
@@ -806,7 +806,7 @@ export default function PPWRPackagingRegulationIreland2026() {
               },
               {
                 q: 'Where can I buy PPWR-compliant packaging in Ireland?',
-                a: 'PrintNPack supplies PPWR-ready packaging across Ireland — including PFAS-free bagasse burger boxes, recyclable pizza boxes, kraft paper bags, and 841+ wholesale plain packaging products. Custom printing is available from low minimum orders. Get a free quote at printnpack.ie/quote.',
+                a: 'PrintNPack supplies PPWR-ready packaging across Ireland — including PFAS-free bagasse burger boxes, recyclable pizza boxes, kraft paper bags, and 736+ wholesale plain packaging products. Custom printing is available from low minimum orders. Get a free quote at printnpack.ie/quote.',
               },
             ].map(({ q, a }) => (
               <div key={q} className="border-l-4 border-green-600 pl-5">

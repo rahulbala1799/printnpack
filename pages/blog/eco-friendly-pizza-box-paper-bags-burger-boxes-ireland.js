@@ -74,7 +74,7 @@ const faqLd = {
       name: 'Where can I buy eco friendly paper bags for takeaway in Ireland?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'PrintNPack Ireland supplies eco friendly paper bags for takeaway including brown paper takeaway bags with logo, custom branded recyclable paper bags, and plain kraft SOS bags in bulk. All are recyclable and suitable for cafes, delis, and food businesses. Custom print from 500 units; plain wholesale options in our 841+ product plain packaging range.',
+        text: 'PrintNPack Ireland supplies eco friendly paper bags for takeaway including brown paper takeaway bags with logo, custom branded recyclable paper bags, and plain kraft SOS bags in bulk. All are recyclable and suitable for cafes, delis, and food businesses. Custom print from 500 units; plain wholesale options in our 736+ product plain packaging range.',
       },
     },
     {
@@ -555,7 +555,7 @@ export default function EcoFriendlyPizzaBoxPaperBagsBurgerBoxesIreland() {
               {
                 icon: '⚡',
                 title: 'Ready to ship today',
-                desc: 'Plain packaging wholesale (841+ products) and custom print with short lead times. “Give me takeaway packaging that is clearly eco-friendly, easy to buy online, and ready to ship today” — that’s the core search intent, and the catalogue delivers.',
+                desc: 'Plain packaging wholesale (736+ products) and custom print with short lead times. “Give me takeaway packaging that is clearly eco-friendly, easy to buy online, and ready to ship today” — that’s the core search intent, and the catalogue delivers.',
               },
             ].map(({ icon, title, desc }) => (
               <div key={title} className="flex gap-4 bg-slate-50 rounded-xl p-5 border border-slate-200">
@@ -599,7 +599,7 @@ export default function EcoFriendlyPizzaBoxPaperBagsBurgerBoxesIreland() {
               href="/plain-packaging"
               className="text-blue-600 text-sm font-medium hover:underline"
             >
-              Browse all 841+ wholesale products →
+              Browse all 736+ wholesale products →
             </Link>
           </div>
 
@@ -700,7 +700,7 @@ export default function EcoFriendlyPizzaBoxPaperBagsBurgerBoxesIreland() {
               },
               {
                 q: 'Where can I buy eco friendly paper bags for takeaway in Ireland?',
-                a: 'PrintNPack Ireland supplies eco friendly paper bags for takeaway including brown paper takeaway bags with logo, custom branded recyclable paper bags, and plain kraft SOS bags in bulk. All are recyclable; custom print from 500 units or plain wholesale in our 841+ product range.',
+                a: 'PrintNPack Ireland supplies eco friendly paper bags for takeaway including brown paper takeaway bags with logo, custom branded recyclable paper bags, and plain kraft SOS bags in bulk. All are recyclable; custom print from 500 units or plain wholesale in our 736+ product range.',
               },
               {
                 q: 'Why are Irish businesses switching to eco friendly packaging?',
@@ -724,7 +724,7 @@ export default function EcoFriendlyPizzaBoxPaperBagsBurgerBoxesIreland() {
             Get Eco Friendly Pizza Boxes, Paper Bags &amp; Burger Boxes in Ireland
           </h2>
           <p className="text-slate-400 mb-6 text-sm leading-relaxed max-w-md mx-auto">
-            From recyclable custom pizza boxes and paper bags with your logo to compostable burger boxes and 841+ plain wholesale products — PrintNPack supplies sustainable takeaway packaging to food businesses across Ireland.
+            From recyclable custom pizza boxes and paper bags with your logo to compostable burger boxes and 736+ plain wholesale products — PrintNPack supplies sustainable takeaway packaging to food businesses across Ireland.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
