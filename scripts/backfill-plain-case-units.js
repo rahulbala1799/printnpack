@@ -17,8 +17,9 @@ require('dotenv').config({ path: path.resolve(__dirname, '..', envFile) });
 
 const { Pool } = require('pg');
 
+const { parseCaseQty } = require('./lib/parse-case-qty.cjs');
+
 async function main() {
-  const { parseCaseQty } = await import('../lib/pricing/case-qty.js');
   const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: { rejectUnauthorized: false },

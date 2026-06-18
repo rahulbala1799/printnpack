@@ -68,7 +68,7 @@ async function run() {
     process.exit(1);
   }
 
-  const { parseCaseQty } = await import('../lib/pricing/case-qty.js');
+  const { parseCaseQty } = require('./lib/parse-case-qty.cjs');
   const products = loadPlainProducts();
   console.log(`Loaded ${products.length} products from data/plain-products-tiered.js + overrides`);
 
