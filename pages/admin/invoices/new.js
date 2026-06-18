@@ -209,6 +209,7 @@ export default function NewInvoiceQuotePage() {
           session_id: session.id,
           message: text,
           customer_id: customerId || quote?.customer_id,
+          document_type: documentType,
         }),
       });
       const data = await res.json();
@@ -320,6 +321,11 @@ export default function NewInvoiceQuotePage() {
             Cash (no VAT)
           </button>
         </div>
+        <p className="text-xs text-slate-500 w-full">
+          {documentType === 'cash'
+            ? 'Cash: material costs include 23% purchase VAT. Customer pays the cash total shown — no VAT added.'
+            : 'VAT invoice: materials priced ex-VAT. Customer pays subtotal + 23% VAT.'}
+        </p>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-4 min-h-[calc(100vh-12rem)]">

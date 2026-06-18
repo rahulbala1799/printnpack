@@ -87,7 +87,7 @@ async function handler(req, res) {
   }
 
   try {
-    const { session_id, message, customer_id } = req.body || {};
+    const { session_id, message, customer_id, document_type: bodyDocumentType } = req.body || {};
     if (!session_id || !message) {
       return res.status(400).json({ error: 'session_id and message required' });
     }
@@ -103,6 +103,8 @@ async function handler(req, res) {
     );
 
     const jobHints = extractJobHints(priorMessages, message);
+    const documentType = bodyDocumentType || quote?.document_type || 'vat';
+    const purchaseVatRate = quote?.vat_rate ?? 0.23;
 
     const ctx = {
       sessionId: session_id,
@@ -172,6 +174,8 @@ async function handler(req, res) {
         const merged = {
           quantity: 1,
           eyelets: 8,
+          document_type: documentType,
+          purchase_vat_rate: purchaseVatRate,
           ...ctx.jobHints,
           ...args,
           family,
@@ -180,6 +184,19 @@ async function handler(req, res) {
         const globalRules = await getRulesForFamily(getRows, 'global');
         const result = calculateCustomProduct(family, merged, rules, 0, globalRules);
         const breakdown_text = formatBreakdownForFamily(family, result, merged);
+        const pricingParams = {
+          family,
+          width_m: merged.width_m,
+          height_m: merged.height_m,
+          quantity: merged.quantity || 1,
+          eyelets: merged.eyelets,
+          name: merged.name,
+          thickness_mm: merged.thickness_mm,
+          piece_width_cm: merged.piece_width_cm,
+          piece_height_cm: merged.piece_height_cm,
+          size_spec: merged.size_spec,
+          laminated: merged.laminated,
+        };
         const line = buildPrintedLineItem({
           name: merged.name || result.suggested_name,
           category: result.category,
@@ -188,6 +205,7 @@ async function handler(req, res) {
           unit_price: result.unit_price,
           pricing_family: family,
           pricing_breakdown: result.breakdown,
+          pricing_params: pricingParams,
         });
         return { family, result, line, breakdown_text };
       },
@@ -259,16 +277,20 @@ async function handler(req, res) {
       customerContext = 'No customer linked yet.';
     }
 
-    const system = `You are PrintNPack admin quote assistant. Currency: EUR. Document type: ${quote?.document_type || 'vat'}.
+    const system = `You are PrintNPack admin quote assistant. Currency: EUR. Document type: ${documentType}.
 ${customerContext}
 ${PRICING_FAMILY_GUIDE}
+
+COSTING RULES (document type from quote — use current selection):
+- VAT INVOICE: material costs use ex-VAT supplier prices (input VAT recoverable). Sell prices are ex-VAT; customer pays +23% VAT on invoice.
+- CASH SALE: material costs = ex-VAT supplier price × 1.23 (you pay purchase VAT on goods). Labour unchanged. Sell price is cash total — no VAT added to customer.
 
 RULES:
 1. ALWAYS use tools to calculate prices — never invent numbers.
 2. When user gives product type + size + quantity, call calcCustom then upsertDraft in the same turn.
-3. For banners: PVC, vinyl, and outdoor banners are all family "vinyl_banner". Default eyelets=8, quantity=1 if not stated. Parse "5 banners" as quantity=5.
+3. For banners: PVC/vinyl = family "vinyl_banner". Default eyelets=8. Parse "5 banners" as quantity=5.
 4. Only ask a clarifying question if product type OR dimensions are genuinely missing.
-5. Every price answer MUST include the full breakdown_text from calcCustom (materials, labour, markup per unit and order total for qty > 1). Never reply with only a final euro amount.`;
+5. Every price answer MUST include the full breakdown_text from calcCustom (materials ex-VAT vs inc-VAT for cash, labour, markup, order totals). Never reply with only a final euro amount.`;
 
     const chatMessages = [
       ...priorMessages.map((m) => ({ role: m.role, content: m.content })),

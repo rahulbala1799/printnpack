@@ -1,7 +1,7 @@
 import { formatQtySize, calcQuoteTotals, recalcLineTotal } from '../../../lib/invoices/line-item';
 import { formatBreakdownForFamily } from '../../../lib/pricing/breakdown-format';
 
-function LineBreakdown({ line }) {
+function LineBreakdown({ line, documentType }) {
   if (!line.pricing_breakdown) return null;
   const text = formatBreakdownForFamily(
     line.pricing_family || 'vinyl_banner',
@@ -12,7 +12,7 @@ function LineBreakdown({ line }) {
       suggested_name: line.name,
       size_spec: line.size_spec,
     },
-    line
+    { ...line.pricing_params, document_type: documentType }
   );
   return (
     <details className="mt-1">
@@ -65,6 +65,11 @@ export default function QuotePreview({
       <div className="p-4 border-b border-slate-100">
         <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Quote preview</p>
         <p className="text-sm text-slate-600 mt-1">{quote.customer_name || 'No customer'}</p>
+        <p className="text-xs text-slate-500 mt-1">
+          {isCash
+            ? 'Cash sale — costs use VAT-inclusive materials; total is what the customer pays.'
+            : 'VAT invoice — line prices ex-VAT; 23% VAT added below.'}
+        </p>
         <textarea
           className="mt-2 w-full border border-slate-200 rounded-lg px-2 py-1.5 text-xs text-slate-600 resize-none"
           rows={2}
@@ -102,7 +107,7 @@ export default function QuotePreview({
                     {line.price_source === 'saved' && (
                       <span className="text-[10px] text-amber-600">saved price</span>
                     )}
-                    <LineBreakdown line={line} />
+                    <LineBreakdown line={line} documentType={quote.document_type} />
                   </td>
                   <td className="py-2 pr-2 text-slate-600">{line.category}</td>
                   <td className="py-2 pr-2">

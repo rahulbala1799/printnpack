@@ -1,6 +1,7 @@
 import { withAuth } from '../../../../lib/withAuth.js';
 import { getRow, query, transaction, getRows } from '../../../../lib/database.js';
 import { calcQuoteTotals, recalcLineTotal } from '../../../../lib/invoices/line-item.js';
+import { recalcPrintedLinesForDocument } from '../../../../lib/invoices/recalc-quote-lines.js';
 import { savePriceSnapshot, getCustomerPriceCatalog, applySavedPricesToItems } from '../../../../lib/invoices/customer-prices.js';
 import { generatePdfBuffer } from '../../../../lib/invoices/generate-pdf.js';
 import { formatQtySize } from '../../../../lib/invoices/line-item.js';
@@ -73,9 +74,15 @@ async function handler(req, res) {
       if (!quote) return res.status(404).json({ error: 'Quote not found' });
 
       const body = req.body || {};
-      const items = (body.items ?? quote.items ?? []).map(recalcLineTotal);
       const documentType = body.document_type ?? quote.document_type;
-      const totals = calcQuoteTotals(items, documentType, body.vat_rate ?? quote.vat_rate);
+      const vatRate = body.vat_rate ?? quote.vat_rate ?? 0.23;
+      let items = (body.items ?? quote.items ?? []).map(recalcLineTotal);
+
+      if (body.document_type && body.document_type !== quote.document_type) {
+        items = await recalcPrintedLinesForDocument(items, documentType, getRows, vatRate);
+      }
+
+      const totals = calcQuoteTotals(items, documentType, vatRate);
 
       const updated = await getRow(
         `UPDATE quotes SET
