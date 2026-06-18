@@ -4,12 +4,14 @@ import { useRouter } from 'next/router';
 import AdminLayout from '../../../components/admin/AdminLayout';
 import QuotePreview from '../../../components/admin/invoices/QuotePreview';
 import SavedPricePicker from '../../../components/admin/invoices/SavedPricePicker';
-import { ChatMessage, QuotedItemsPanel } from '../../../components/admin/invoices/ChatBreakdown';
+import { ChatMessage } from '../../../components/admin/invoices/ChatBreakdown';
+import QuoteCostTable from '../../../components/admin/invoices/QuoteCostTable';
 import CustomerPicker from '../../../components/staff/CustomerPicker';
+import { buildCostTableRows } from '../../../lib/invoices/cost-table.js';
 import '../../../styles/pricelist-builder.css';
 
 const WELCOME_FALLBACK =
-  'Hi! Ask for prices on multiple products in one message — e.g. large printed bags per case, 12" pizza box, and 1× A1 foamex. I\'ll price each and keep them in the session list below. When you\'re ready, say "add to invoice" and I\'ll confirm which items and margins to use.';
+  'Paste your product list — I\'ll fill the cost table below. Use Breakdown per row for details, Add to quote per line, or Add all when ready.';
 
 export default function NewInvoiceQuotePage() {
   const router = useRouter();
@@ -31,6 +33,8 @@ export default function NewInvoiceQuotePage() {
   const [savedPickerOpen, setSavedPickerOpen] = useState(false);
   const [applyingSaved, setApplyingSaved] = useState(false);
   const [quotedItems, setQuotedItems] = useState([]);
+  const [costTable, setCostTable] = useState([]);
+  const [tableBusy, setTableBusy] = useState(false);
   const bottomRef = useRef(null);
   const initRef = useRef(false);
 
@@ -64,6 +68,13 @@ export default function NewInvoiceQuotePage() {
         : [{ role: 'assistant', content: WELCOME_FALLBACK }]
     );
     setQuotedItems(data.quoted_items || data.session?.quoted_items || []);
+    setCostTable(
+      data.cost_table ||
+        buildCostTableRows(
+          data.quoted_items || data.session?.quoted_items || [],
+          data.quote?.items || []
+        )
+    );
     return data;
   }, []);
 
@@ -200,6 +211,35 @@ export default function NewInvoiceQuotePage() {
     }
   };
 
+  const syncSessionData = (data) => {
+    if (data.quote) setQuote(data.quote);
+    if (data.quoted_items) setQuotedItems(data.quoted_items);
+    if (data.cost_table) {
+      setCostTable(data.cost_table);
+    } else if (data.quoted_items) {
+      setCostTable(buildCostTableRows(data.quoted_items, data.quote?.items || []));
+    }
+  };
+
+  const runQuoteAction = async (body) => {
+    if (!session?.id) return;
+    setTableBusy(true);
+    try {
+      const res = await fetch('/api/admin/invoices/quote-actions', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ session_id: session.id, ...body }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Action failed');
+      syncSessionData(data);
+      return data;
+    } finally {
+      setTableBusy(false);
+    }
+  };
+
   const sendMessage = async (e) => {
     e.preventDefault();
     if (!input.trim() || !session?.id || chatLoading) return;
@@ -227,19 +267,15 @@ export default function NewInvoiceQuotePage() {
         throw new Error(raw?.slice(0, 300) || `Chat failed (${res.status})`);
       }
       if (!res.ok) throw new Error(data.error || 'Chat failed');
-      const breakdowns = data.breakdowns?.length
-        ? data.breakdowns
-        : data.metadata?.breakdowns;
       setMessages((m) => [
         ...m,
         {
           role: 'assistant',
           content: data.message,
-          metadata: { ...(data.metadata || {}), breakdowns: breakdowns || [] },
+          metadata: data.metadata || {},
         },
       ]);
-      if (data.quote) setQuote(data.quote);
-      if (data.quoted_items) setQuotedItems(data.quoted_items);
+      syncSessionData(data);
     } catch (err) {
       setMessages((m) => [...m, { role: 'assistant', content: `Error: ${err.message}` }]);
     } finally {
@@ -247,14 +283,46 @@ export default function NewInvoiceQuotePage() {
     }
   };
 
-  const handleAddQuotedPrompt = () => {
-    if (!quotedItems.length) return;
-    const lines = quotedItems
-      .map((it) => `#${it.index} ${it.label} — ${it.unit_label} @ €${Number(it.unit_sell).toFixed(2)}`)
-      .join('\n');
-    setInput(
-      `Add to invoice:\n${lines}\n\nUse default markup unless I specify margins below:\n`
-    );
+  const handleAddAllFromTable = async () => {
+    try {
+      await runQuoteAction({ action: 'add_all' });
+      setMessages((m) => [
+        ...m,
+        { role: 'assistant', content: 'Added all priced items to the quote at their invoice prices.' },
+      ]);
+    } catch (err) {
+      setMessages((m) => [...m, { role: 'assistant', content: `Error: ${err.message}` }]);
+    }
+  };
+
+  const handleAddItemFromTable = async (quotedId) => {
+    try {
+      const row = costTable.find((r) => r.id === quotedId);
+      await runQuoteAction({
+        action: 'add_item',
+        quoted_id: quotedId,
+        unit_price: row?.invoice_unit_price ?? row?.unit_sell,
+        quantity: row?.quantity,
+      });
+    } catch (err) {
+      setMessages((m) => [...m, { role: 'assistant', content: `Error: ${err.message}` }]);
+    }
+  };
+
+  const handleResolvePending = async (pendingId, values) => {
+    try {
+      await runQuoteAction({ action: 'resolve_pending', pending_id: pendingId, values });
+    } catch (err) {
+      setMessages((m) => [...m, { role: 'assistant', content: `Error: ${err.message}` }]);
+    }
+  };
+
+  const handleSetInvoicePrice = async (quotedId, unitPrice) => {
+    try {
+      await runQuoteAction({ action: 'set_invoice_price', quoted_id: quotedId, unit_price: unitPrice });
+    } catch (err) {
+      setMessages((m) => [...m, { role: 'assistant', content: `Error: ${err.message}` }]);
+    }
   };
 
   const handleFinalize = async () => {
@@ -365,7 +433,16 @@ export default function NewInvoiceQuotePage() {
       <div className="grid lg:grid-cols-2 gap-4 min-h-[calc(100vh-12rem)]">
         <div className="bg-white rounded-2xl border border-slate-200 flex flex-col">
           <div className="p-4 border-b border-slate-100 font-semibold text-slate-800">AI Quote Assistant</div>
-          <div className="flex-1 overflow-y-auto p-4 space-y-3 max-h-[60vh] lg:max-h-none">
+          <QuoteCostTable
+            rows={costTable}
+            documentType={documentType}
+            onAddItem={handleAddItemFromTable}
+            onAddAll={handleAddAllFromTable}
+            onResolvePending={handleResolvePending}
+            onSetInvoicePrice={handleSetInvoicePrice}
+            busy={tableBusy || chatLoading}
+          />
+          <div className="flex-1 overflow-y-auto p-4 space-y-3 max-h-[50vh] lg:max-h-none">
             {messages.map((m, i) => (
               <ChatMessage key={i} message={m} />
             ))}
@@ -377,11 +454,6 @@ export default function NewInvoiceQuotePage() {
             )}
             <div ref={bottomRef} />
           </div>
-          <QuotedItemsPanel
-            items={quotedItems}
-            onAddToInvoice={handleAddQuotedPrompt}
-            adding={chatLoading}
-          />
           <form onSubmit={sendMessage} className="p-4 border-t border-slate-100 flex gap-2">
             <input
               className="flex-1 border border-slate-200 rounded-xl px-3 py-2 text-sm"

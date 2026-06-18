@@ -78,52 +78,8 @@ export default function PriceBreakdownCard({ breakdown, compact = false }) {
   );
 }
 
-export function QuotedItemsPanel({ items, onAddToInvoice, adding }) {
-  if (!items?.length) return null;
-
-  return (
-    <div className="mx-4 mb-3 rounded-xl border border-amber-200 bg-amber-50/60 p-3">
-      <div className="flex items-center justify-between gap-2 mb-2">
-        <p className="text-xs font-semibold text-amber-900">
-          Priced this session ({items.length})
-        </p>
-        <button
-          type="button"
-          disabled={adding}
-          onClick={onAddToInvoice}
-          className="text-[11px] font-medium text-amber-900 underline hover:no-underline disabled:opacity-50"
-        >
-          Add to invoice…
-        </button>
-      </div>
-      <ul className="space-y-1.5">
-        {items.map((it) => (
-          <li
-            key={it.id}
-            className="flex justify-between gap-2 text-[11px] text-amber-950 bg-white/70 rounded-lg px-2 py-1.5"
-          >
-            <span>
-              <span className="font-medium text-amber-800">#{it.index}</span> {it.label}
-              {it.subtitle && <span className="text-amber-700/80"> · {it.subtitle}</span>}
-            </span>
-            <span className="tabular-nums font-medium shrink-0">
-              {eur(it.unit_sell)}
-              <span className="text-amber-700/70 font-normal"> {it.unit_label}</span>
-            </span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function eur(n) {
-  return `€${Number(n ?? 0).toFixed(2)}`;
-}
-
 export function ChatMessage({ message }) {
   const isUser = message.role === 'user';
-  const breakdowns = message.metadata?.breakdowns || [];
 
   return (
     <div className={`max-w-[95%] ${isUser ? 'ml-auto' : ''}`}>
@@ -136,10 +92,6 @@ export function ChatMessage({ message }) {
           {message.content.replace(/\*\*(.*?)\*\*/g, '$1')}
         </div>
       )}
-      {!isUser &&
-        breakdowns.map((b) => (
-          <PriceBreakdownCard key={b.id || `${b.title}-${b.index}`} breakdown={b} />
-        ))}
     </div>
   );
 }

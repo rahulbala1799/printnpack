@@ -1,6 +1,14 @@
 {
   "version": 2,
   "framework": "nextjs",
+  "functions": {
+    "pages/api/admin/invoices/chat.js": {
+      "maxDuration": 120
+    },
+    "pages/api/admin/invoices/quote-actions.js": {
+      "maxDuration": 60
+    }
+  },
   "redirects": [
     {
       "source": "/:path*",

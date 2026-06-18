@@ -11,26 +11,29 @@ import {
 } from '../../../../lib/invoices/customer-prices.js';
 import {
   buildPlainLineItem,
-  buildPrintedLineItem,
-  calcQuoteTotals,
-  recalcLineTotal,
 } from '../../../../lib/invoices/line-item.js';
-import { resolvePricingFamily, PRICING_FAMILY_GUIDE, PLAIN_PRINTED_FAMILIES } from '../../../../lib/invoices/pricing-families.js';
+import { resolvePricingFamily, PRICING_FAMILY_GUIDE } from '../../../../lib/invoices/pricing-families.js';
 import { formatBreakdownForFamily, collectBreakdownsFromSteps } from '../../../../lib/pricing/breakdown-format.js';
-import { resolvePlainMaterial } from '../../../../lib/pricing/plain-material.js';
 import { PLAIN_CASE_QTY_GUIDE, formatPlainProductForAi } from '../../../../lib/invoices/plain-packaging-ai-context.js';
 import {
   loadQuotedItems,
   saveQuotedItems,
-  createQuotedItem,
   upsertQuotedItem,
   summarizeQuotedItems,
   buildLinesFromSelections,
+  buildLineFromQuotedItem,
   collectStructuredBreakdownsFromSteps,
   getQuotedBreakdowns,
   userWantsBreakdown,
   parseQuotedIndexFromText,
+  createPendingItem,
+  upsertPendingItem,
+  setQuotedInvoicePrice,
+  createManualQuotedItem,
 } from '../../../../lib/invoices/quoted-items.js';
+import { buildCostTableRows } from '../../../../lib/invoices/cost-table.js';
+import { mergeLinesIntoQuote } from '../../../../lib/invoices/quote-merge.js';
+import { runCalcCustom } from '../../../../lib/invoices/run-calc-custom.js';
 import {
   parsePaperSizeFromText,
   parseThicknessMm,
@@ -38,6 +41,56 @@ import {
 } from '../../../../lib/pricing/paper-sizes.js';
 
 const MODEL = getInvoiceAiModel();
+const MAX_CHAT_HISTORY = 24;
+const MAX_AI_STEPS = 10;
+
+async function persistAssistantReply(sessionId, finalMessage, metadata) {
+  try {
+    await query(
+      `INSERT INTO invoice_session_messages (session_id, role, content, metadata) VALUES ($1, 'assistant', $2, $3)`,
+      [sessionId, finalMessage, JSON.stringify(metadata)]
+    );
+  } catch {
+    await query(
+      `INSERT INTO invoice_session_messages (session_id, role, content) VALUES ($1, 'assistant', $2)`,
+      [sessionId, finalMessage]
+    );
+  }
+}
+
+function breakdownMetadata(structuredBreakdowns) {
+  return {
+    breakdowns: structuredBreakdowns.map((b) => ({
+      ...b,
+      unitSell: b.totals?.unitSell,
+    })),
+  };
+}
+
+async function buildChatPayload(getRow, sessionId, session, finalMessage, structuredBreakdowns = []) {
+  const quotedItems = await loadQuotedItems(getRow, sessionId);
+  const freshQuote = await getRow(`SELECT * FROM quotes WHERE id = $1`, [session.quote_id]);
+  const cost_table = buildCostTableRows(quotedItems, freshQuote?.items || []);
+  const metadata = { cost_table };
+  await persistAssistantReply(sessionId, finalMessage, metadata);
+  return {
+    message: finalMessage,
+    quote: freshQuote,
+    quoted_items: quotedItems,
+    cost_table,
+    breakdowns: breakdownMetadata(structuredBreakdowns).breakdowns,
+    metadata,
+  };
+}
+
+function resolveLedgerBreakdowns(message, quotedItems) {
+  const index = parseQuotedIndexFromText(message);
+  let structured = getQuotedBreakdowns(quotedItems, { index: index ?? undefined });
+  if (!structured.length && index != null) {
+    structured = getQuotedBreakdowns(quotedItems);
+  }
+  return structured;
+}
 
 async function getQuoteForSession(sessionId, adminId) {
   const session = await getRow(
@@ -47,22 +100,6 @@ async function getQuoteForSession(sessionId, adminId) {
   if (!session?.quote_id) return { session, quote: null };
   const quote = await getRow(`SELECT * FROM quotes WHERE id = $1`, [session.quote_id]);
   return { session, quote };
-}
-
-async function mergeLinesIntoQuote(quoteId, lines, replace = false) {
-  const q = await getRow(`SELECT * FROM quotes WHERE id = $1`, [quoteId]);
-  let items = replace ? [] : [...(q.items || [])];
-  for (const line of lines) {
-    const n = recalcLineTotal(line);
-    const idx = items.findIndex((i) => i.id === n.id);
-    if (idx >= 0) items[idx] = n;
-    else items.push(n);
-  }
-  const totals = calcQuoteTotals(items, q.document_type, q.vat_rate);
-  return getRow(
-    `UPDATE quotes SET items = $1, subtotal = $2, vat_amount = $3, total = $4, updated_at = now() WHERE id = $5 RETURNING *`,
-    [JSON.stringify(items), totals.subtotal, totals.vat_amount, totals.total, q.id]
-  );
 }
 
 /** Parse "2m x 1m" style dimensions from user text when the model omits them. */
@@ -117,56 +154,14 @@ function enrichPrintParams(args, userText, jobHints) {
 }
 
 function parsePricePerFromText(text) {
-  if (/per\s+case/i.test(String(text || ''))) return { price_per: 'case', num_cases: 1 };
-  return {};
-}
-
-function applyPerCasePricing(merged, plainMaterial, result, line) {
-  const unitsPerCase = plainMaterial?.unitsPerCase ?? plainMaterial?.qtyPerCase;
-  if (merged.price_per !== 'case' || !unitsPerCase) {
-    return { merged, result, line };
+  const t = String(text || '');
+  if (/per\s+case/i.test(t)) {
+    const cases = t.match(/(\d+)\s+cases?\b/i);
+    return { price_per: 'case', num_cases: cases ? parseInt(cases[1], 10) : 1 };
   }
-  const numCases = merged.num_cases || 1;
-  const caseLabel = plainMaterial?.caseLabel || `${unitsPerCase} units/case`;
-  return {
-    merged,
-    result: {
-      ...result,
-      unit_price: result.line_total,
-      line_total: Math.round(result.line_total * numCases * 100) / 100,
-    },
-    line: {
-      ...line,
-      quantity: numCases,
-      unit_price: Math.round(result.line_total * 100) / 100,
-      unit_label: 'per case',
-      line_total: Math.round(result.line_total * numCases * 100) / 100,
-      size_spec: line.size_spec ? `${line.size_spec} · ${caseLabel}` : caseLabel,
-    },
-  };
-}
-
-function buildPricingParams(family, merged, plainMaterial) {
-  return {
-    family,
-    width_m: merged.width_m,
-    height_m: merged.height_m,
-    quantity: merged.quantity || 1,
-    eyelets: merged.eyelets,
-    name: merged.name,
-    thickness_mm: merged.thickness_mm,
-    piece_width_cm: merged.piece_width_cm,
-    piece_height_cm: merged.piece_height_cm,
-    paper_size: merged.paper_size,
-    size_spec: merged.size_spec,
-    laminated: merged.laminated,
-    pizza_size_inches: merged.pizza_size_inches,
-    plain_product_id: plainMaterial?.product?.id || merged.plain_product_id,
-    margin_percent: merged.margin_percent,
-    markup_percent: merged.markup_percent,
-    ink_per_unit: merged.ink_per_unit,
-    labour_rate: merged.labour_rate,
-  };
+  const casesOnly = t.match(/(\d+)\s+cases?\b/i);
+  if (casesOnly) return { num_cases: parseInt(casesOnly[1], 10), price_per: 'case' };
+  return {};
 }
 
 function extractJobHints(priorMessages, currentMessage) {
@@ -230,6 +225,17 @@ async function handler(req, res) {
       [session_id, message]
     );
 
+    if (userWantsBreakdown(message) && quotedItems.length) {
+      const structuredBreakdowns = resolveLedgerBreakdowns(message, quotedItems);
+      if (structuredBreakdowns.length) {
+        const finalMessage = structuredBreakdowns
+          .map((b) => `Cost breakdown — #${b.index} ${b.title}`)
+          .join('\n');
+        const payload = await buildChatPayload(getRow, session_id, session, finalMessage, structuredBreakdowns);
+        return res.status(200).json(payload);
+      }
+    }
+
     const searchPlain = tool({
       description:
         'Search plain packaging catalog. Returns units_per_case (e.g. 4x50=200), case price tier1, unit_price_ex per sellable unit.',
@@ -289,12 +295,11 @@ async function handler(req, res) {
         laminated: z.boolean().optional(),
       }),
       execute: async (args) => {
-        const family = resolvePricingFamily(args);
         const userText = [
           ...priorMessages.filter((m) => m.role === 'user').map((m) => m.content),
           ctx.userMessage,
         ].join(' ');
-        const merged = enrichPrintParams(
+        const enriched = enrichPrintParams(
           {
             quantity: 1,
             eyelets: 8,
@@ -302,54 +307,27 @@ async function handler(req, res) {
             purchase_vat_rate: purchaseVatRate,
             ...ctx.jobHints,
             ...args,
-            family,
           },
           userText,
           ctx.jobHints
         );
 
-        const rules = await getRulesForFamily(getRows, family);
-        const globalRules = await getRulesForFamily(getRows, 'global');
-
-        let plainMaterial = null;
-        if (PLAIN_PRINTED_FAMILIES.has(family)) {
-          plainMaterial = await resolvePlainMaterial(getRows, getRow, family, merged);
-          if (!plainMaterial?.unitCost && family === 'pizza_box_printed') {
-            return {
-              error: 'Could not find plain pizza box in catalog — specify pizza_size_inches (e.g. 12) or plain_product_id (e.g. 120762)',
-              family,
-            };
-          }
-          if (merged.price_per === 'case' && plainMaterial?.unitsPerCase) {
-            merged.quantity = plainMaterial.unitsPerCase;
-          }
-        }
-
-        let result = calculateCustomProduct(family, merged, rules, plainMaterial, globalRules);
-        const pricingParams = buildPricingParams(family, merged, plainMaterial);
-        let line = buildPrintedLineItem({
-          name: merged.name || result.suggested_name,
-          category: result.category,
-          quantity: merged.num_cases || merged.quantity || 1,
-          size_spec: result.size_spec,
-          unit_price: result.unit_price,
-          pricing_family: family,
-          pricing_breakdown: result.breakdown,
-          pricing_params: pricingParams,
+        const out = await runCalcCustom(getRows, getRow, enriched, {
+          document_type: documentType,
+          purchase_vat_rate: purchaseVatRate,
+          jobHints: ctx.jobHints,
         });
+        if (out.error) return out;
 
-        ({ result, line } = applyPerCasePricing(merged, plainMaterial, result, line));
-
-        const entry = createQuotedItem({
-          family,
-          merged,
-          result,
-          line,
-          plainProduct: plainMaterial?.product
-            ? { id: plainMaterial.product.id, name: plainMaterial.product.name }
-            : null,
-        });
+        const { family, merged, result, line, entry, plainMaterial } = out;
         quotedItems = upsertQuotedItem(quotedItems, entry);
+        quotedItems = quotedItems.filter(
+          (it) =>
+            !(
+              it.status === 'pending' &&
+              it.label?.toLowerCase().trim() === entry.label?.toLowerCase().trim()
+            )
+        );
         quotedItems = await saveQuotedItems(query, session_id, quotedItems);
         const saved = quotedItems.find((it) => it.id === entry.id);
         const breakdown_structured = {
@@ -370,6 +348,91 @@ async function handler(req, res) {
             ? { id: plainMaterial.product.id, name: plainMaterial.product.name, unit_cost: plainMaterial.unitCost }
             : null,
         };
+      },
+    });
+
+    const registerPendingItem = tool({
+      description:
+        'Register product awaiting user input — cost table shows inline form. Use when quantity/cases unknown or catalog product not found after searchPlain.',
+      inputSchema: z.object({
+        label: z.string(),
+        needs: z
+          .array(
+            z.object({
+              key: z.string(),
+              label: z.string(),
+              type: z.enum(['text', 'number']).optional(),
+              placeholder: z.string().optional(),
+            })
+          )
+          .min(1),
+        partial_params: z.record(z.string(), z.any()).optional(),
+        message: z.string().optional(),
+      }),
+      execute: async ({ label, needs, partial_params, message }) => {
+        const entry = createPendingItem({ label, needs, partial_params, message });
+        quotedItems = upsertPendingItem(quotedItems, entry);
+        quotedItems = await saveQuotedItems(query, session_id, quotedItems);
+        const saved = quotedItems.find((it) => it.id === entry.id);
+        return { pending_id: saved.id, index: saved.index, label };
+      },
+    });
+
+    const setInvoicePrices = tool({
+      description:
+        'Set invoice unit prices on quoted items. Use when user gives exact sell prices (e.g. "40 cents pizza, 25 cent bags").',
+      inputSchema: z.object({
+        prices: z
+          .array(
+            z.object({
+              index: z.number().optional(),
+              quoted_id: z.string().optional(),
+              label_match: z.string().optional(),
+              unit_price: z.number(),
+            })
+          )
+          .min(1),
+      }),
+      execute: async ({ prices }) => {
+        let updated = 0;
+        for (const p of prices) {
+          const match = quotedItems.find(
+            (it) =>
+              it.id === p.quoted_id ||
+              it.index === p.index ||
+              (p.label_match &&
+                it.label?.toLowerCase().includes(p.label_match.toLowerCase()))
+          );
+          if (!match) continue;
+          quotedItems = setQuotedInvoicePrice(quotedItems, {
+            quoted_id: match.id,
+            unit_price: p.unit_price,
+          });
+          updated += 1;
+        }
+        quotedItems = await saveQuotedItems(query, session_id, quotedItems);
+        return { updated };
+      },
+    });
+
+    const addManualQuoteLine = tool({
+      description:
+        'Manual line at user price when not in catalog. Creates cost-table row and optionally adds to invoice.',
+      inputSchema: z.object({
+        name: z.string(),
+        quantity: z.number(),
+        unit_price: z.number(),
+        add_to_invoice: z.boolean().optional(),
+      }),
+      execute: async ({ name, quantity, unit_price, add_to_invoice }) => {
+        const entry = createManualQuotedItem({ name, quantity, unit_price });
+        quotedItems = [...quotedItems, entry];
+        quotedItems = await saveQuotedItems(query, session_id, quotedItems);
+        if (add_to_invoice) {
+          const line = buildLineFromQuotedItem(entry, { unit_price, quantity });
+          await mergeLinesIntoQuote(ctx.quoteId, [line]);
+        }
+        return { quoted_id: entry.id, name, unit_price };
       },
     });
 
@@ -508,17 +571,15 @@ FOAMEX / CORREX: 240×120cm sheet → per sqm → piece area. A1 = 59.4×84.1cm.
 PRICING: margin_percent, markup_percent, price_per ("case"|"unit").
 DOCUMENT TYPE: VAT = ex-VAT materials + 23% on invoice. Cash = purchase VAT on goods.
 
-SESSION WORKFLOW (important):
-- When user asks prices for multiple products, call calcCustom once per product. Each result is stored in the session ledger (quoted items #1, #2, …).
-- Do NOT add to invoice automatically after pricing.
-- Keep replies concise — breakdown cards appear in the UI. Summarise sell prices in a short table.
-- When user asks to add/insert to invoice: if 2+ quoted items, call listQuotedItems then ask which items and what margin % or sell price (unless they specified clearly). Then call addToInvoice with selections.
-- Example: "add pizza and foamex at 45% margin" → addToInvoice with margin_percent: 45 for those quoted_ids.
+SESSION WORKFLOW (critical — UI has a Cost Table, not chat breakdowns):
+- Multi-product request → calcCustom for EACH product in ONE turn when possible.
+- Missing quantity/cases or unknown catalog product → registerPendingItem with specific form fields (never ask in chat prose).
+- Chat replies: max 2 sentences. Cost table shows costs; user expands Breakdown per row.
+- User gives invoice prices ("40c pizza", "25 cent bags") → setInvoicePrices. Unknown product at fixed price → addManualQuoteLine.
+- addToInvoice ONLY when user explicitly says add to quote/invoice.
+- "Need invoice" / "make invoice" / "add all" → addToInvoice for all priced items using invoice_unit_price if set else unit_sell.
 
-BREAKDOWN REQUESTS (critical):
-- "breakdown", "cost breakdown", "show details", "how did you calculate" → MUST call showQuotedBreakdowns (or calcCustom if not priced yet).
-- NEVER describe materials/labour/markup in prose from memory. The UI renders structured breakdown cards from tool output only.
-- If one item in ledger, showQuotedBreakdowns with no args. If user says "#2" or "item 2", pass index: 2.
+BREAKDOWN: User clicks Breakdown in cost table — do NOT paste breakdowns in chat unless explicitly asked in chat.
 
 RULES:
 1. ALWAYS use calcCustom for printed products — never invent prices.
@@ -528,7 +589,7 @@ RULES:
 5. Do NOT call upsertDraft unless user explicitly wants a raw line without going through the ledger.`;
 
     const chatMessages = [
-      ...priorMessages.map((m) => ({ role: m.role, content: m.content })),
+      ...priorMessages.slice(-MAX_CHAT_HISTORY).map((m) => ({ role: m.role, content: m.content })),
       { role: 'user', content: message },
     ];
 
@@ -540,6 +601,9 @@ RULES:
         searchPlain,
         pricePlain,
         calcCustom,
+        registerPendingItem,
+        setInvoicePrices,
+        addManualQuoteLine,
         listQuotedItems,
         showQuotedBreakdowns,
         addToInvoice,
@@ -547,17 +611,13 @@ RULES:
         applySavedPrices,
         upsertDraft,
       },
-      stopWhen: stepCountIs(15),
+      stopWhen: stepCountIs(MAX_AI_STEPS),
     });
 
     let structuredBreakdowns = collectStructuredBreakdownsFromSteps(steps);
 
     if (!structuredBreakdowns.length && userWantsBreakdown(message) && quotedItems.length) {
-      const index = parseQuotedIndexFromText(message);
-      structuredBreakdowns = getQuotedBreakdowns(quotedItems, { index: index ?? undefined });
-      if (!structuredBreakdowns.length && index != null) {
-        structuredBreakdowns = getQuotedBreakdowns(quotedItems);
-      }
+      structuredBreakdowns = resolveLedgerBreakdowns(message, quotedItems);
     }
 
     const breakdownBlocks = structuredBreakdowns.length ? [] : collectBreakdownsFromSteps(steps);
@@ -601,34 +661,8 @@ RULES:
           : block;
     }
 
-    const metadata = {
-      breakdowns: structuredBreakdowns.map((b) => ({
-        ...b,
-        unitSell: b.totals?.unitSell,
-      })),
-    };
-
-    try {
-      await query(
-        `INSERT INTO invoice_session_messages (session_id, role, content, metadata) VALUES ($1, 'assistant', $2, $3)`,
-        [session_id, finalMessage, JSON.stringify(metadata)]
-      );
-    } catch {
-      await query(
-        `INSERT INTO invoice_session_messages (session_id, role, content) VALUES ($1, 'assistant', $2)`,
-        [session_id, finalMessage]
-      );
-    }
-
-    quotedItems = await loadQuotedItems(getRow, session_id);
-    const freshQuote = await getRow(`SELECT * FROM quotes WHERE id = $1`, [session.quote_id]);
-    return res.status(200).json({
-      message: finalMessage,
-      quote: freshQuote,
-      quoted_items: quotedItems,
-      breakdowns: metadata.breakdowns,
-      metadata,
-    });
+    const payload = await buildChatPayload(getRow, session_id, session, finalMessage, structuredBreakdowns);
+    return res.status(200).json(payload);
   } catch (e) {
     console.error('Chat error:', e);
     return res.status(500).json({ error: e.message || 'Chat failed' });
