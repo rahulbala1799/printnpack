@@ -95,6 +95,13 @@ async function handler(req, res) {
     const { session, quote } = await getQuoteForSession(session_id, req.user.id);
     if (!session) return res.status(404).json({ error: 'Session not found' });
 
+    const priorMessages = await getRows(
+      `SELECT role, content FROM invoice_session_messages
+       WHERE session_id = $1 AND role IN ('user', 'assistant')
+       ORDER BY created_at ASC`,
+      [session_id]
+    );
+
     const jobHints = extractJobHints(priorMessages, message);
 
     const ctx = {
@@ -105,13 +112,6 @@ async function handler(req, res) {
       userMessage: message,
       jobHints,
     };
-
-    const priorMessages = await getRows(
-      `SELECT role, content FROM invoice_session_messages
-       WHERE session_id = $1 AND role IN ('user', 'assistant')
-       ORDER BY created_at ASC`,
-      [session_id]
-    );
 
     await query(
       `INSERT INTO invoice_session_messages (session_id, role, content) VALUES ($1, 'user', $2)`,
