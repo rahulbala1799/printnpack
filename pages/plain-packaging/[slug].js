@@ -65,6 +65,15 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
     ? `€${(numCases * discountedPrice(selectedTier.pricePerCase)).toFixed(2)}`
     : '—';
 
+  const isPizzaBox = product.category === 'Pizza Boxes';
+  const pageTitle = isPizzaBox
+    ? `${product.name} | Pizza Boxes Ireland | PrintNPack`
+    : `${product.name} — Plain Packaging | PrintNPack Ireland`;
+  const metaDescription = isPizzaBox
+    ? `${product.name} — wholesale kraft corrugated pizza box Ireland. Tiered case pricing, fast delivery to Dublin, Cork & nationwide. Order plain pizza boxes online.`
+    : `${product.description?.slice(0, 155)} Fast delivery across Ireland.`;
+  const canonicalUrl = `https://www.printnpack.ie/plain-packaging/${product.id}`;
+
   const handleAddToQuote = () => {
     if (!selectedTier) return;
     addToPlainQuoteAndGo(product, selectedTier, numCases);
@@ -74,21 +83,21 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
   return (
     <Layout>
       <Head>
-        <title>{product.name} — Plain Packaging | PrintNPack Ireland</title>
-        <meta name="description" content={`${product.description?.slice(0, 155)} Fast delivery across Ireland.`} />
+        <title>{pageTitle}</title>
+        <meta name="description" content={metaDescription} />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={`https://www.printnpack.ie/plain-packaging/${product.id}`} />
+        <link rel="canonical" href={canonicalUrl} />
         <meta property="og:type" content="product" />
-        <meta property="og:title" content={`${product.name} — Plain Packaging | PrintNPack Ireland`} />
-        <meta property="og:description" content={product.description?.slice(0, 155) || product.name} />
-        <meta property="og:url" content={`https://www.printnpack.ie/plain-packaging/${product.id}`} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:site_name" content="PrintNPack Ireland" />
         <meta property="og:locale" content="en_IE" />
         {product.imageSrc && !product.imageSrc.includes('logo.png') && (
           <meta property="og:image" content={`https://www.printnpack.ie${product.imageSrc}`} />
         )}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${product.name} — Plain Packaging | PrintNPack Ireland`} />
+        <meta name="twitter:title" content={pageTitle} />
       </Head>
 
       {/* ── Breadcrumb ─────────────────────────────────────────────────────── */}
@@ -97,7 +106,15 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
           <ol className="flex items-center gap-2 text-xs text-stone-400">
             <li><Link href="/" className="hover:text-stone-600 transition-colors">Home</Link></li>
             <li>/</li>
-            <li><Link href="/plain-packaging" className="hover:text-stone-600 transition-colors">Plain Packaging</Link></li>
+            {isPizzaBox ? (
+              <>
+                <li><Link href="/pizza-boxes-ireland" className="hover:text-stone-600 transition-colors">Pizza Boxes Ireland</Link></li>
+                <li>/</li>
+                <li><Link href="/plain-packaging?category=Pizza+Boxes" className="hover:text-stone-600 transition-colors">Wholesale</Link></li>
+              </>
+            ) : (
+              <li><Link href="/plain-packaging" className="hover:text-stone-600 transition-colors">Plain Packaging</Link></li>
+            )}
             <li>/</li>
             <li className="text-stone-700 font-medium truncate max-w-[200px]">{product.name}</li>
           </ol>
@@ -141,6 +158,19 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
                 </h1>
                 {product.qtyPerCase && (
                   <p className="text-sm text-stone-500 mt-1">{product.qtyPerCase} per case</p>
+                )}
+                {isPizzaBox && (
+                  <p className="text-sm text-stone-600 mt-3 leading-relaxed">
+                    Wholesale plain pizza box — part of our{' '}
+                    <Link href="/pizza-boxes-ireland" className="text-blue-600 hover:underline font-medium">
+                      pizza boxes Ireland
+                    </Link>{' '}
+                    range. Need branded boxes?{' '}
+                    <Link href="/custom-pizza-boxes-ireland" className="text-blue-600 hover:underline font-medium">
+                      Custom printing from 500 units
+                    </Link>
+                    .
+                  </p>
                 )}
               </div>
 

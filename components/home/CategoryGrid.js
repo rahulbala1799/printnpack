@@ -17,7 +17,7 @@ const categories = [
     icon: FaUtensils,
     color: 'bg-orange-50 text-orange-600 border-orange-200',
     iconBg: 'bg-orange-100',
-    href: '/products?group=packaging&category=Food+Packaging',
+    href: '/pizza-boxes-ireland',
     productCount: 3,
   },
   {

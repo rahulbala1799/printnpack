@@ -42,7 +42,10 @@ const PopularProducts = () => {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-6">
           {popularProducts.map((product) => {
-            const href = product.url || `/products/${product.id}`;
+            const href =
+              product.id === 'custom-pizza-boxes-ireland'
+                ? '/pizza-boxes-ireland'
+                : product.url || `/products/${product.id}`;
             return (
               <Link
                 key={product.id}

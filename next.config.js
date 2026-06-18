@@ -11,6 +11,21 @@ const nextConfig = {
         destination: 'https://www.printnpack.ie/:path*',
         permanent: true,
       },
+      {
+        source: '/pizza-boxes',
+        destination: '/pizza-boxes-ireland',
+        permanent: true,
+      },
+      {
+        source: '/pizza-box',
+        destination: '/pizza-boxes-ireland',
+        permanent: true,
+      },
+      {
+        source: '/products/custom-pizza-boxes-ireland',
+        destination: '/custom-pizza-boxes-ireland',
+        permanent: true,
+      },
     ];
   },
   

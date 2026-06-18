@@ -4,11 +4,18 @@ import Image from 'next/image';
 
 const guides = [
   {
-    href: '/custom-pizza-boxes-ireland',
-    title: 'Custom Pizza Boxes Ireland',
-    description: 'Full-colour branded boxes, MOQ from 500, 5–7 day production, nationwide delivery.',
+    href: '/pizza-boxes-ireland',
+    title: 'Pizza Boxes Ireland',
+    description: 'Custom printed & wholesale plain boxes — Ireland\'s complete pizza box hub.',
     image: '/images/pizza-boxes/PIZZA_BOX_1.jpg',
-    cta: 'View pizza boxes',
+    cta: 'Browse pizza boxes',
+  },
+  {
+    href: '/custom-pizza-boxes-ireland',
+    title: 'Custom Printed Pizza Boxes',
+    description: 'Full-colour branded boxes, MOQ from 500, 5–7 day production, nationwide delivery.',
+    image: '/images/pizza-boxes/PIZZA_BOX_5.jpg',
+    cta: 'View custom options',
   },
   {
     href: '/blog/pizza-box-sizes-ireland',
@@ -32,7 +39,7 @@ export default function PackagingGuides() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {guides.map((guide) => (
             <Link
               key={guide.href}
@@ -42,7 +49,7 @@ export default function PackagingGuides() {
               <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100">
                 <Image
                   src={guide.image}
-                  alt=""
+                  alt={guide.title}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                   sizes="96px"

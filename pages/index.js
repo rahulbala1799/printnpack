@@ -85,7 +85,8 @@ export default function Home() {
           '@type': 'OfferCatalog',
           name: 'Custom Printed Packaging',
           itemListElement: [
-            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Custom Pizza Boxes Ireland', url: `${siteUrl}/custom-pizza-boxes-ireland` } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Pizza Boxes Ireland', url: `${siteUrl}/pizza-boxes-ireland` } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Custom Printed Pizza Boxes', url: `${siteUrl}/custom-pizza-boxes-ireland` } },
             { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Paper Bags with Logo', url: `${siteUrl}/products/paper-bags` } },
             { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Eco-Friendly Packaging', url: `${siteUrl}/eco-bagasse-burger-boxes` } },
           ],
@@ -117,6 +118,14 @@ export default function Home() {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Where can I buy pizza boxes in Ireland?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'PrintNPack supplies pizza boxes across Ireland — custom printed boxes from 500 units and plain kraft wholesale boxes in all standard sizes. Visit our pizza boxes Ireland page for the full range with nationwide delivery.',
+        },
+      },
       {
         '@type': 'Question',
         name: 'Does PrintNPack deliver across all of Ireland?',

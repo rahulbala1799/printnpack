@@ -2,16 +2,32 @@ import products from '../data/products';
 import { TIERED_PLAIN_PRODUCTS } from '../data/plain-products-tiered';
 import { SITE_URL } from '../lib/site';
 
+// ── Pizza box cluster (page-1 priority) ─────────────────────────────────────
+const PIZZA_PLAIN_PRODUCT_IDS = new Set(
+  (TIERED_PLAIN_PRODUCTS || [])
+    .filter((p) => p.category === 'Pizza Boxes')
+    .map((p) => p.id)
+);
+
+// Products with dedicated pages — exclude duplicate /products/{id} URLs
+const DEDICATED_PRODUCT_IDS = new Set(
+  (products || [])
+    .filter((p) => p.url && p.url !== `/products/${p.id}`)
+    .map((p) => p.id)
+);
+
 // Static pages with their priorities and change frequencies
 const staticPages = [
   { path: '',             priority: '1.0', changefreq: 'weekly'  },
-  { path: '/products',   priority: '0.9', changefreq: 'weekly'  },
+  { path: '/products',    priority: '0.9', changefreq: 'weekly'  },
   { path: '/plain-packaging', priority: '0.9', changefreq: 'weekly' },
-  { path: '/about',      priority: '0.7', changefreq: 'monthly' },
-  { path: '/contact',    priority: '0.7', changefreq: 'monthly' },
-  { path: '/quote',      priority: '0.8', changefreq: 'monthly' },
-  { path: '/custom-pizza-boxes-ireland', priority: '0.8', changefreq: 'monthly' },
-  { path: '/eco-bagasse-burger-boxes',   priority: '0.8', changefreq: 'monthly' },
+  { path: '/about',       priority: '0.7', changefreq: 'monthly' },
+  { path: '/contact',     priority: '0.7', changefreq: 'monthly' },
+  { path: '/quote',       priority: '0.8', changefreq: 'monthly' },
+  // Pizza box hub — primary SEO target
+  { path: '/pizza-boxes-ireland',          priority: '0.95', changefreq: 'weekly' },
+  { path: '/custom-pizza-boxes-ireland',   priority: '0.9',  changefreq: 'weekly' },
+  { path: '/eco-bagasse-burger-boxes',    priority: '0.8',  changefreq: 'monthly' },
   { path: '/vinyl-stickers',  priority: '0.8', changefreq: 'monthly' },
   { path: '/vinyl-banners',   priority: '0.8', changefreq: 'monthly' },
   { path: '/posters',         priority: '0.8', changefreq: 'monthly' },
@@ -25,7 +41,9 @@ const staticPages = [
   { path: '/services/posters',  priority: '0.8', changefreq: 'monthly' },
   { path: '/services/vinyls',   priority: '0.8', changefreq: 'monthly' },
   { path: '/blog',              priority: '0.8', changefreq: 'weekly'  },
-  { path: '/blog/pizza-box-sizes-ireland',               priority: '0.8', changefreq: 'monthly' },
+  // Pizza box content cluster
+  { path: '/blog/pizza-box-sizes-ireland', priority: '0.85', changefreq: 'monthly' },
+  { path: '/blog/eco-friendly-pizza-box-paper-bags-burger-boxes-ireland', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/eco-packaging-for-takeaways-ireland',   priority: '0.8', changefreq: 'monthly' },
   { path: '/blog/leaflet-printing-ireland-guide',        priority: '0.8', changefreq: 'monthly' },
   { path: '/blog/paper-bags-with-logo-ireland',          priority: '0.8', changefreq: 'monthly' },
@@ -40,42 +58,42 @@ const staticPages = [
   { path: '/blog/custom-vinyl-stickers-ireland',               priority: '0.8', changefreq: 'monthly' },
 ];
 
-function generateSitemap(productSlugs, plainPackagingIds) {
+function urlEntry(loc, { lastmod, changefreq, priority }) {
+  return `
+  <url>
+    <loc>${loc}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
+}
+
+function generateSitemap(productIds, plainPackagingIds) {
   const today = new Date().toISOString().split('T')[0];
 
   const staticUrls = staticPages
-    .map(
-      ({ path, priority, changefreq }) => `
-  <url>
-    <loc>${SITE_URL}${path}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>${changefreq}</changefreq>
-    <priority>${priority}</priority>
-  </url>`
+    .map(({ path, priority, changefreq }) =>
+      urlEntry(`${SITE_URL}${path}`, { lastmod: today, changefreq, priority })
     )
     .join('');
 
-  const productUrls = productSlugs
-    .map(
-      (slug) => `
-  <url>
-    <loc>${SITE_URL}/products/${slug}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>`
+  const productUrls = productIds
+    .map((id) =>
+      urlEntry(`${SITE_URL}/products/${id}`, {
+        lastmod: today,
+        changefreq: 'monthly',
+        priority: '0.7',
+      })
     )
     .join('');
 
   const plainPackagingUrls = (plainPackagingIds || [])
-    .map(
-      (id) => `
-  <url>
-    <loc>${SITE_URL}/plain-packaging/${id}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>`
+    .map((id) =>
+      urlEntry(`${SITE_URL}/plain-packaging/${id}`, {
+        lastmod: today,
+        changefreq: 'monthly',
+        priority: PIZZA_PLAIN_PRODUCT_IDS.has(id) ? '0.8' : '0.7',
+      })
     )
     .join('');
 
@@ -88,10 +106,13 @@ ${plainPackagingUrls}
 }
 
 export async function getServerSideProps({ res }) {
-  const productSlugs = (products || []).map((p) => p.slug).filter(Boolean);
+  const productIds = (products || [])
+    .map((p) => p.id)
+    .filter((id) => id && !DEDICATED_PRODUCT_IDS.has(id));
+
   const plainPackagingIds = (TIERED_PLAIN_PRODUCTS || []).map((p) => p.id).filter(Boolean);
 
-  const sitemap = generateSitemap(productSlugs, plainPackagingIds);
+  const sitemap = generateSitemap(productIds, plainPackagingIds);
 
   res.setHeader('Content-Type', 'application/xml');
   res.setHeader('Cache-Control', 'public, s-maxage=86400, stale-while-revalidate=43200');

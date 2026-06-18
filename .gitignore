@@ -22,6 +22,8 @@
 # misc
 .DS_Store
 *.pem
+.venv-pdf/
+~$*.xlsx
 
 # debug
 npm-debug.log*
@@ -32,11 +34,12 @@ yarn-error.log*
 .env
 .env*.local
 .env.local
+.env.live
 
 # vercel
 .vercel
 
-# typescript
+/public/invoices/
 *.tsbuildinfo
 next-env.d.ts
 node_modules

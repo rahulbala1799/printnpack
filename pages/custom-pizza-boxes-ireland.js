@@ -77,7 +77,8 @@ const breadcrumbLd = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-    { '@type': 'ListItem', position: 2, name: 'Custom Pizza Boxes Ireland', item: PAGE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Pizza Boxes Ireland', item: `${SITE_URL}/pizza-boxes-ireland` },
+    { '@type': 'ListItem', position: 3, name: 'Custom Printed Pizza Boxes', item: PAGE_URL },
   ],
 };
 
@@ -269,10 +270,10 @@ const CustomPizzaBoxesIreland = () => {
   return (
     <Layout>
       <Head>
-        <title>Custom Pizza Boxes Ireland | Printed Pizza Box Packaging | Print n Pack</title>
-        <meta name="description" content="Premium custom pizza boxes in Ireland. Full-color printing, all sizes, fast delivery. Perfect for restaurants, takeaways & food delivery. Order your branded pizza boxes today!" />
-        <meta name="keywords" content="custom pizza boxes Ireland, printed pizza boxes, pizza box printing Dublin, food packaging Ireland, restaurant packaging, takeaway boxes, pizza delivery boxes" />
-        <meta property="og:title" content="Custom Pizza Boxes Ireland | Premium Printed Pizza Box Packaging" />
+        <title>Pizza Boxes Ireland | Custom Printed Pizza Box Packaging | Print n Pack</title>
+        <meta name="description" content="Order custom printed pizza boxes in Ireland — full-colour branding, all sizes from 7&quot; to 20&quot;, MOQ from 500. Part of our pizza boxes Ireland range. Fast nationwide delivery for restaurants & takeaways." />
+        <meta name="keywords" content="pizza boxes ireland, custom pizza boxes Ireland, printed pizza boxes, pizza box printing Dublin, pizza box ireland, food packaging Ireland, restaurant packaging, takeaway boxes, pizza delivery boxes" />
+        <meta property="og:title" content="Pizza Boxes Ireland | Custom Printed Pizza Box Packaging" />
         <meta property="og:description" content="High-quality custom pizza boxes with full-color printing. All sizes available. Fast delivery across Ireland." />
         <meta property="og:image" content="https://www.printnpack.ie/images/pizza-boxes/PIZZA_BOX_1.jpg" />
         <meta property="og:url" content="https://www.printnpack.ie/custom-pizza-boxes-ireland" />
@@ -291,7 +292,9 @@ const CustomPizzaBoxesIreland = () => {
             <li>/</li>
             <li><Link href="/#products" className="hover:text-gray-700">Products</Link></li>
             <li>/</li>
-            <li className="text-gray-800 font-medium">Custom Pizza Boxes</li>
+            <li><Link href="/pizza-boxes-ireland" className="hover:text-gray-700">Pizza Boxes Ireland</Link></li>
+            <li>/</li>
+            <li className="text-gray-800 font-medium">Custom Printed</li>
           </ol>
         </div>
       </nav>
@@ -362,8 +365,12 @@ const CustomPizzaBoxesIreland = () => {
               <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
                 Premium food-safe pizza boxes with full-colour custom printing. Designed for Irish restaurants, takeaways, and food delivery services.
                 {' '}
+                <Link href="/pizza-boxes-ireland" className="text-blue-600 hover:underline font-medium">
+                  View all pizza boxes Ireland
+                </Link>
+                {' '}or{' '}
                 <Link href="/blog/pizza-box-sizes-ireland" className="text-blue-600 hover:underline font-medium">
-                  Compare pizza box sizes (7&quot;, 12&quot;, 14&quot;) →
+                  compare sizes (7&quot;, 12&quot;, 14&quot;) →
                 </Link>
               </p>
 

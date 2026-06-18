@@ -3,12 +3,13 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import {
   FiGrid, FiPackage, FiMail, FiSettings, FiLogOut,
-  FiMenu, FiX, FiChevronRight, FiFileText, FiUsers, FiUserPlus,
+  FiMenu, FiX, FiChevronRight, FiFileText, FiUsers, FiUserPlus, FiFileMinus,
 } from 'react-icons/fi';
 
 const navItems = [
   { href: '/admin',               label: 'Dashboard',       icon: FiGrid },
   { href: '/admin/leads',         label: 'Leads',           icon: FiUsers },
+  { href: '/admin/invoices',      label: 'Invoices',        icon: FiFileMinus },
   { href: '/admin/staff',         label: 'Staff',           icon: FiUserPlus },
   { href: '/admin/products',     label: 'Products',        icon: FiPackage },
   { href: '/admin/plain-products', label: 'Plain Packaging', icon: FiPackage },

@@ -28,7 +28,7 @@ const slides = [
 ];
 
 const quickLinks = [
-  { label: 'Pizza Boxes', href: '/custom-pizza-boxes-ireland' },
+  { label: 'Pizza Boxes', href: '/pizza-boxes-ireland' },
   { label: 'Paper Bags', href: '/products/flat-handle-paper-bags' },
   { label: 'Plain Packaging', href: '/plain-packaging' },
   { label: 'Roll-Up Banners', href: '/roll-up-banners' },

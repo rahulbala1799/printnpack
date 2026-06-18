@@ -149,11 +149,15 @@ export default function PizzaBoxSizesIreland() {
             This guide covers every standard <strong>pizza box size available in Ireland</strong>,
             explains what each size is best for, and walks you through the key decisions around material,
             printing, and ordering — whether you&apos;re a single-site chipper in Dublin or a multi-site
-            restaurant group shipping nationwide. Ready to order? See our{' '}
-            <Link href="/custom-pizza-boxes-ireland" className="text-blue-600 hover:underline font-medium">
-              custom pizza boxes Ireland
+            restaurant group shipping nationwide.             Ready to order? Browse our{' '}
+            <Link href="/pizza-boxes-ireland" className="text-blue-600 hover:underline font-medium">
+              pizza boxes Ireland
             </Link>{' '}
-            page for printing, MOQ, and delivery details.
+            hub for custom printing and wholesale options, or see{' '}
+            <Link href="/custom-pizza-boxes-ireland" className="text-blue-600 hover:underline font-medium">
+              custom printed pizza boxes
+            </Link>{' '}
+            for MOQ and delivery details.
           </p>
 
           {/* Section 1 */}

@@ -50,6 +50,17 @@ const posts = [
     category: 'Print Guide',
   },
   {
+    slug: 'eco-friendly-pizza-box-paper-bags-burger-boxes-ireland',
+    title: 'Eco Friendly Pizza Box, Paper Bags & Burger Boxes Ireland',
+    excerpt:
+      'Where to buy eco friendly pizza box wholesale in Ireland, recyclable paper bags for takeaway, and compostable burger boxes — with product links and compliance tips for Irish restaurants.',
+    date: '2026-06-17',
+    readTime: '8 min read',
+    image: '/images/pizza-boxes/PIZZA_BOX_2.jpg',
+    imageAlt: 'Eco friendly pizza box Ireland – recyclable kraft corrugated wholesale',
+    category: 'Sustainability',
+  },
+  {
     slug: 'pizza-box-sizes-ireland',
     title: 'Pizza Box Sizes Ireland: The Complete Guide for Takeaways & Restaurants',
     excerpt:

@@ -1,0 +1,67 @@
+{
+  "markup_percent": 30,
+  "segments": {
+    "restaurants": {
+      "title": "Restaurants & Takeaways",
+      "subtitle": "Food packaging, cups, napkins, bags & kitchen essentials for eateries",
+      "output_filename": "PrintNPack Pricelist - Restaurants.pdf",
+      "compact": true,
+      "categories": [
+        "Bagasse Meal Box",
+        "Biobox",
+        "Cold Cups & Lids",
+        "Condiments",
+        "Containersandtaway",
+        "Corrugated Meal Box",
+        "Cutlery & Stirrers",
+        "Fish & Chip Boxes",
+        "Flat Kraft Food Bags",
+        "Foil Bags",
+        "Foil Containers",
+        "Foil,Film, Parchment",
+        "Food Cones",
+        "Food Trays",
+        "Food Wrap",
+        "Greaseproof Food Bag",
+        "Handled Carrier Bags",
+        "Hot Cup Extras",
+        "Hot Cups & Lids",
+        "Kids Meal Boxes",
+        "Napkins & Tableware",
+        "Nested Boxes",
+        "Noodle Containers",
+        "Paper Meal Container",
+        "Pizza Boxes",
+        "Plates & Bowls",
+        "Portion Pots",
+        "Round Kraft Bowls",
+        "Sandwich & Wraps",
+        "Soup Containers",
+        "SOS Bags",
+        "Straws"
+      ],
+      "exclude_categories_note": "Omitted vs full catalogue: cleaning (chemicals, mops, wipes), hotel amenities, bakery, paper hygiene, refuse sacks, platters, tamper-proof deli tubs, ice cream, PPE/aprons, catering equipment, popcorn",
+      "exclude_codes": [],
+      "exclude_name_patterns": [
+        "pint glass",
+        "flexi.*glass",
+        "wine glass",
+        "shot glass",
+        "watercone",
+        "CE-EU",
+        "CE label",
+        "doylie",
+        "doylies",
+        "placemat"
+      ]
+    },
+    "full": {
+      "title": "Plain Packaging",
+      "subtitle": "Complete non-branded wholesale catalogue",
+      "output_filename": "PrintNPack Plain Packaging Pricelist.pdf",
+      "categories": "*",
+      "exclude_codes": [],
+      "exclude_name_patterns": []
+    }
+  }
+}

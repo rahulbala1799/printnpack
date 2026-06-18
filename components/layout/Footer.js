@@ -11,7 +11,7 @@ const QUICK_LINKS = [
 ];
 
 const PRODUCT_LINKS = [
-  { label: 'Pizza Boxes', href: '/custom-pizza-boxes-ireland' },
+  { label: 'Pizza Boxes', href: '/pizza-boxes-ireland' },
   { label: 'Paper Bags', href: '/products' },
   { label: 'Burger Boxes', href: '/eco-bagasse-burger-boxes' },
   { label: 'Plain Packaging', href: '/plain-packaging' },

@@ -144,7 +144,7 @@ const products = [
     alt: 'Eco friendly pizza box Ireland – recyclable kraft corrugated custom pizza boxes wholesale',
     name: 'Custom Pizza Boxes',
     desc: 'Recyclable kraft board, PFAS-free. Custom print from 500 units. Keeps pizza hot; ideal for eco friendly pizza box wholesale Ireland.',
-    href: '/custom-pizza-boxes-ireland',
+    href: '/pizza-boxes-ireland',
     badge: 'Recyclable',
     badgeColour: 'blue',
   },

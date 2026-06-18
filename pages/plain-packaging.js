@@ -695,6 +695,16 @@ export default function PlainPackagingPage() {
     setQuoteHydrated(true);
   }, []);
 
+  // Deep-link category filter e.g. /plain-packaging?category=Pizza+Boxes
+  useEffect(() => {
+    const cat = router.query.category;
+    if (!cat || typeof cat !== 'string') return;
+    const decoded = decodeURIComponent(cat.replace(/\+/g, ' '));
+    if (decoded === 'All' || CATEGORIES.includes(decoded)) {
+      setActiveCategory(decoded);
+    }
+  }, [router.query.category]);
+
   // Persist quote whenever it changes (after initial hydration)
   useEffect(() => {
     if (!quoteHydrated) return;
@@ -816,17 +826,28 @@ export default function PlainPackagingPage() {
     return pages;
   }, [totalPages, safePage]);
 
+  const isPizzaCategory = activeCategory === 'Pizza Boxes';
+  const pageTitle = isPizzaCategory
+    ? 'Pizza Boxes Wholesale Ireland | Plain Kraft Corrugated | PrintNPack'
+    : 'Plain Packaging — Wholesale Catering Supplies | PrintNPack Ireland';
+  const pageDescription = isPizzaCategory
+    ? 'Wholesale plain pizza boxes Ireland — kraft corrugated boxes in 7", 9", 10", 12", 14" & 16". Tiered case pricing, fast delivery nationwide. Order online today.'
+    : '736 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland.';
+  const canonicalPath = isPizzaCategory
+    ? 'https://www.printnpack.ie/plain-packaging?category=Pizza+Boxes'
+    : 'https://www.printnpack.ie/plain-packaging';
+
   return (
     <Layout>
       <Head>
-        <title>Plain Packaging — Wholesale Catering Supplies | PrintNPack Ireland</title>
-        <meta name="description" content="736 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland." />
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://www.printnpack.ie/plain-packaging" />
+        <link rel="canonical" href={canonicalPath} />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Plain Packaging — Wholesale Catering Supplies | PrintNPack Ireland" />
-        <meta property="og:description" content="736 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland." />
-        <meta property="og:url" content="https://www.printnpack.ie/plain-packaging" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:url" content={canonicalPath} />
         <meta property="og:site_name" content="PrintNPack Ireland" />
         <meta property="og:locale" content="en_IE" />
         <meta name="twitter:card" content="summary_large_image" />

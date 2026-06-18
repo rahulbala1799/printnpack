@@ -1,13 +1,25 @@
 // Simple migration runner
 // Usage: node migrations/migrate.js
 
-require('dotenv').config({ path: '.env.local' });
+const envArg = process.argv.find((a) => a.startsWith('--env='));
+const envName = envArg ? envArg.split('=')[1] : process.env.MIGRATE_ENV || 'local';
+const envFile = envName === 'live' ? '.env.live' : envName === 'local' ? '.env.local' : `.env.${envName}`;
+const fs = require('fs');
+if (fs.existsSync(envFile)) {
+  require('dotenv').config({ path: envFile });
+  console.log(`📁 Using env file: ${envFile}`);
+} else if (envName === 'live' && fs.existsSync('.env.local')) {
+  require('dotenv').config({ path: '.env.local' });
+  console.log('📁 .env.live not found — using .env.local for live migration');
+} else {
+  require('dotenv').config({ path: '.env.local' });
+  console.log(`📁 ${envFile} not found — using .env.local`);
+}
 if (!process.env.DATABASE_URL) {
   console.log('⏭️  DATABASE_URL not set, skipping migrations');
   process.exit(0);
 }
 const { Pool } = require('pg');
-const fs = require('fs');
 const path = require('path');
 
 async function runMigrations() {
