@@ -27,6 +27,9 @@ import {
   summarizeQuotedItems,
   buildLinesFromSelections,
   collectStructuredBreakdownsFromSteps,
+  getQuotedBreakdowns,
+  userWantsBreakdown,
+  parseQuotedIndexFromText,
 } from '../../../../lib/invoices/quoted-items.js';
 import {
   parsePaperSizeFromText,
@@ -380,6 +383,26 @@ async function handler(req, res) {
       }),
     });
 
+    const showQuotedBreakdowns = tool({
+      description:
+        'Return full cost breakdown for items already priced in this session. REQUIRED when user asks for breakdown, cost details, or how the price was calculated — never describe breakdown from memory.',
+      inputSchema: z.object({
+        index: z.number().optional().describe('Quote ledger item # (e.g. 1 for #1)'),
+        quoted_id: z.string().optional(),
+      }),
+      execute: async ({ index, quoted_id }) => {
+        const breakdowns = getQuotedBreakdowns(quotedItems, { index, quoted_id });
+        if (!breakdowns.length) {
+          return {
+            error: 'No priced items in this session — run calcCustom first',
+            count: 0,
+            breakdowns: [],
+          };
+        }
+        return { count: breakdowns.length, breakdowns };
+      },
+    });
+
     const addToInvoice = tool({
       description:
         'Add selected quoted items to the invoice draft. Only call after user confirms which items and any margin/price overrides.',
@@ -492,6 +515,11 @@ SESSION WORKFLOW (important):
 - When user asks to add/insert to invoice: if 2+ quoted items, call listQuotedItems then ask which items and what margin % or sell price (unless they specified clearly). Then call addToInvoice with selections.
 - Example: "add pizza and foamex at 45% margin" → addToInvoice with margin_percent: 45 for those quoted_ids.
 
+BREAKDOWN REQUESTS (critical):
+- "breakdown", "cost breakdown", "show details", "how did you calculate" → MUST call showQuotedBreakdowns (or calcCustom if not priced yet).
+- NEVER describe materials/labour/markup in prose from memory. The UI renders structured breakdown cards from tool output only.
+- If one item in ledger, showQuotedBreakdowns with no args. If user says "#2" or "item 2", pass index: 2.
+
 RULES:
 1. ALWAYS use calcCustom for printed products — never invent prices.
 2. Multi-product requests: run calcCustom for EACH product in the same turn when possible.
@@ -513,6 +541,7 @@ RULES:
         pricePlain,
         calcCustom,
         listQuotedItems,
+        showQuotedBreakdowns,
         addToInvoice,
         savedPrices,
         applySavedPrices,
@@ -521,9 +550,28 @@ RULES:
       stopWhen: stepCountIs(15),
     });
 
-    const structuredBreakdowns = collectStructuredBreakdownsFromSteps(steps);
+    let structuredBreakdowns = collectStructuredBreakdownsFromSteps(steps);
+
+    if (!structuredBreakdowns.length && userWantsBreakdown(message) && quotedItems.length) {
+      const index = parseQuotedIndexFromText(message);
+      structuredBreakdowns = getQuotedBreakdowns(quotedItems, { index: index ?? undefined });
+      if (!structuredBreakdowns.length && index != null) {
+        structuredBreakdowns = getQuotedBreakdowns(quotedItems);
+      }
+    }
+
     const breakdownBlocks = structuredBreakdowns.length ? [] : collectBreakdownsFromSteps(steps);
     let finalMessage = text?.trim() || '';
+
+    if (
+      userWantsBreakdown(message) &&
+      structuredBreakdowns.length &&
+      /typically includes|material cost|labour cost for production/i.test(finalMessage)
+    ) {
+      finalMessage = structuredBreakdowns
+        .map((b) => `Cost breakdown — #${b.index} ${b.title}`)
+        .join('\n');
+    }
 
     if (!finalMessage && structuredBreakdowns.length) {
       finalMessage = structuredBreakdowns
@@ -532,6 +580,16 @@ RULES:
             `#${b.index} ${b.title}: ${b.summary?.find((s) => s.label?.includes('Sell'))?.value || b.totals?.unitSell}`
         )
         .join('\n');
+    }
+
+    if (
+      userWantsBreakdown(message) &&
+      !structuredBreakdowns.length &&
+      !quotedItems.length &&
+      (!finalMessage || /typically includes|material cost|labour cost for production/i.test(finalMessage))
+    ) {
+      finalMessage =
+        'Nothing priced in this session yet — ask me to price the product first (e.g. "price 5 vinyl banners 2m x 1m"), then ask for the breakdown again.';
     }
 
     if (breakdownBlocks.length && !structuredBreakdowns.length) {

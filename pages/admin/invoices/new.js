@@ -227,9 +227,16 @@ export default function NewInvoiceQuotePage() {
         throw new Error(raw?.slice(0, 300) || `Chat failed (${res.status})`);
       }
       if (!res.ok) throw new Error(data.error || 'Chat failed');
+      const breakdowns = data.breakdowns?.length
+        ? data.breakdowns
+        : data.metadata?.breakdowns;
       setMessages((m) => [
         ...m,
-        { role: 'assistant', content: data.message, metadata: data.metadata || {} },
+        {
+          role: 'assistant',
+          content: data.message,
+          metadata: { ...(data.metadata || {}), breakdowns: breakdowns || [] },
+        },
       ]);
       if (data.quote) setQuote(data.quote);
       if (data.quoted_items) setQuotedItems(data.quoted_items);
