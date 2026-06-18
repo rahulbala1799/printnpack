@@ -1,9 +1,11 @@
 import { formatQtySize, calcQuoteTotals, recalcLineTotal } from '../../../lib/invoices/line-item';
-import { formatBreakdownForFamily } from '../../../lib/pricing/breakdown-format';
+import { structuredBreakdownForFamily } from '../../../lib/pricing/breakdown-structured';
+import PriceBreakdownCard from './ChatBreakdown';
 
 function LineBreakdown({ line, documentType }) {
   if (!line.pricing_breakdown) return null;
-  const text = formatBreakdownForFamily(
+
+  const structured = structuredBreakdownForFamily(
     line.pricing_family || 'vinyl_banner',
     {
       breakdown: line.pricing_breakdown,
@@ -14,12 +16,11 @@ function LineBreakdown({ line, documentType }) {
     },
     { ...line.pricing_params, document_type: documentType }
   );
+
   return (
     <details className="mt-1">
       <summary className="text-[10px] text-blue-600 cursor-pointer select-none">View cost breakdown</summary>
-      <pre className="text-[10px] text-slate-500 whitespace-pre-wrap mt-1 font-mono leading-relaxed bg-slate-50 rounded p-2">
-        {text}
-      </pre>
+      <PriceBreakdownCard breakdown={structured} compact />
     </details>
   );
 }

@@ -4,11 +4,12 @@ import { useRouter } from 'next/router';
 import AdminLayout from '../../../components/admin/AdminLayout';
 import QuotePreview from '../../../components/admin/invoices/QuotePreview';
 import SavedPricePicker from '../../../components/admin/invoices/SavedPricePicker';
+import { ChatMessage, QuotedItemsPanel } from '../../../components/admin/invoices/ChatBreakdown';
 import CustomerPicker from '../../../components/staff/CustomerPicker';
 import '../../../styles/pricelist-builder.css';
 
 const WELCOME_FALLBACK =
-  'Hi! I can price plain packaging from the database and calculate custom printed products. Select a customer for saved pricing, choose VAT or Cash, then ask me anything.';
+  'Hi! Ask for prices on multiple products in one message — e.g. large printed bags per case, 12" pizza box, and 1× A1 foamex. I\'ll price each and keep them in the session list below. When you\'re ready, say "add to invoice" and I\'ll confirm which items and margins to use.';
 
 export default function NewInvoiceQuotePage() {
   const router = useRouter();
@@ -29,6 +30,7 @@ export default function NewInvoiceQuotePage() {
   const [customerPickerOpen, setCustomerPickerOpen] = useState(false);
   const [savedPickerOpen, setSavedPickerOpen] = useState(false);
   const [applyingSaved, setApplyingSaved] = useState(false);
+  const [quotedItems, setQuotedItems] = useState([]);
   const bottomRef = useRef(null);
   const initRef = useRef(false);
 
@@ -54,9 +56,14 @@ export default function NewInvoiceQuotePage() {
     setCustomerId(data.quote?.customer_id || data.session?.customer_id || null);
     setMessages(
       data.messages?.length
-        ? data.messages.map((m) => ({ role: m.role, content: m.content }))
+        ? data.messages.map((m) => ({
+            role: m.role,
+            content: m.content,
+            metadata: m.metadata || {},
+          }))
         : [{ role: 'assistant', content: WELCOME_FALLBACK }]
     );
+    setQuotedItems(data.quoted_items || data.session?.quoted_items || []);
     return data;
   }, []);
 
@@ -220,13 +227,27 @@ export default function NewInvoiceQuotePage() {
         throw new Error(raw?.slice(0, 300) || `Chat failed (${res.status})`);
       }
       if (!res.ok) throw new Error(data.error || 'Chat failed');
-      setMessages((m) => [...m, { role: 'assistant', content: data.message }]);
+      setMessages((m) => [
+        ...m,
+        { role: 'assistant', content: data.message, metadata: data.metadata || {} },
+      ]);
       if (data.quote) setQuote(data.quote);
+      if (data.quoted_items) setQuotedItems(data.quoted_items);
     } catch (err) {
       setMessages((m) => [...m, { role: 'assistant', content: `Error: ${err.message}` }]);
     } finally {
       setChatLoading(false);
     }
+  };
+
+  const handleAddQuotedPrompt = () => {
+    if (!quotedItems.length) return;
+    const lines = quotedItems
+      .map((it) => `#${it.index} ${it.label} — ${it.unit_label} @ €${Number(it.unit_sell).toFixed(2)}`)
+      .join('\n');
+    setInput(
+      `Add to invoice:\n${lines}\n\nUse default markup unless I specify margins below:\n`
+    );
   };
 
   const handleFinalize = async () => {
@@ -339,14 +360,7 @@ export default function NewInvoiceQuotePage() {
           <div className="p-4 border-b border-slate-100 font-semibold text-slate-800">AI Quote Assistant</div>
           <div className="flex-1 overflow-y-auto p-4 space-y-3 max-h-[60vh] lg:max-h-none">
             {messages.map((m, i) => (
-              <div
-                key={i}
-                className={`text-sm rounded-xl px-3 py-2 max-w-[90%] whitespace-pre-wrap ${
-                  m.role === 'user' ? 'ml-auto bg-blue-600 text-white' : 'bg-slate-100 text-slate-800'
-                }`}
-              >
-                {m.content.replace(/\*\*(.*?)\*\*/g, '$1')}
-              </div>
+              <ChatMessage key={i} message={m} />
             ))}
             {chatLoading && (
               <div className="flex items-center gap-2 text-xs text-slate-400">
@@ -356,6 +370,11 @@ export default function NewInvoiceQuotePage() {
             )}
             <div ref={bottomRef} />
           </div>
+          <QuotedItemsPanel
+            items={quotedItems}
+            onAddToInvoice={handleAddQuotedPrompt}
+            adding={chatLoading}
+          />
           <form onSubmit={sendMessage} className="p-4 border-t border-slate-100 flex gap-2">
             <input
               className="flex-1 border border-slate-200 rounded-xl px-3 py-2 text-sm"

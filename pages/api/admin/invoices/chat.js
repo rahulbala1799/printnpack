@@ -19,6 +19,15 @@ import { resolvePricingFamily, PRICING_FAMILY_GUIDE, PLAIN_PRINTED_FAMILIES } fr
 import { formatBreakdownForFamily, collectBreakdownsFromSteps } from '../../../../lib/pricing/breakdown-format.js';
 import { resolvePlainMaterial } from '../../../../lib/pricing/plain-material.js';
 import {
+  loadQuotedItems,
+  saveQuotedItems,
+  createQuotedItem,
+  upsertQuotedItem,
+  summarizeQuotedItems,
+  buildLinesFromSelections,
+  collectStructuredBreakdownsFromSteps,
+} from '../../../../lib/invoices/quoted-items.js';
+import {
   parsePaperSizeFromText,
   parseThicknessMm,
   parsePizzaSizeInches,
@@ -103,6 +112,37 @@ function enrichPrintParams(args, userText, jobHints) {
   };
 }
 
+function parsePricePerFromText(text) {
+  if (/per\s+case/i.test(String(text || ''))) return { price_per: 'case', num_cases: 1 };
+  return {};
+}
+
+function applyPerCasePricing(merged, plainMaterial, result, line) {
+  if (merged.price_per !== 'case' || !plainMaterial?.qtyPerCase) {
+    return { merged, result, line };
+  }
+  const perCase = plainMaterial.qtyPerCase;
+  const numCases = merged.num_cases || 1;
+  return {
+    merged,
+    result: {
+      ...result,
+      unit_price: result.line_total,
+      line_total: Math.round(result.line_total * numCases * 100) / 100,
+    },
+    line: {
+      ...line,
+      quantity: numCases,
+      unit_price: Math.round(result.line_total * 100) / 100,
+      unit_label: 'per case',
+      line_total: Math.round(result.line_total * numCases * 100) / 100,
+      size_spec: line.size_spec
+        ? `${line.size_spec} (${perCase}/case)`
+        : `${perCase} per case`,
+    },
+  };
+}
+
 function buildPricingParams(family, merged, plainMaterial) {
   return {
     family,
@@ -138,6 +178,7 @@ function extractJobHints(priorMessages, currentMessage) {
     ...parseDimsFromText(userText),
     ...parseQuantityFromText(userText),
     ...parseMarginMarkupFromText(userText),
+    ...parsePricePerFromText(userText),
     ...(paper || {}),
     ...(thickness ? { thickness_mm: thickness } : {}),
     ...(pizzaInches ? { pizza_size_inches: pizzaInches } : {}),
@@ -170,6 +211,7 @@ async function handler(req, res) {
     const jobHints = extractJobHints(priorMessages, message);
     const documentType = bodyDocumentType || quote?.document_type || 'vat';
     const purchaseVatRate = quote?.vat_rate ?? 0.23;
+    let quotedItems = await loadQuotedItems(getRow, session_id);
 
     const ctx = {
       sessionId: session_id,
@@ -237,6 +279,8 @@ async function handler(req, res) {
         pizza_size_inches: z.number().optional().describe('7, 9, 10, 12, 14, 16'),
         plain_product_id: z.string().optional().describe('Plain product id e.g. 120762 for 12" pizza box'),
         plain_search: z.string().optional(),
+        price_per: z.enum(['unit', 'case']).optional(),
+        num_cases: z.number().optional(),
         margin_percent: z.number().optional(),
         markup_percent: z.number().optional(),
         ink_per_unit: z.number().optional(),
@@ -275,30 +319,91 @@ async function handler(req, res) {
               family,
             };
           }
+          if (merged.price_per === 'case' && plainMaterial?.qtyPerCase) {
+            merged.quantity = plainMaterial.qtyPerCase;
+          }
         }
 
-        const result = calculateCustomProduct(family, merged, rules, plainMaterial, globalRules);
-        const breakdown_text = formatBreakdownForFamily(family, result, merged);
+        let result = calculateCustomProduct(family, merged, rules, plainMaterial, globalRules);
         const pricingParams = buildPricingParams(family, merged, plainMaterial);
-        const line = buildPrintedLineItem({
+        let line = buildPrintedLineItem({
           name: merged.name || result.suggested_name,
           category: result.category,
-          quantity: merged.quantity || 1,
+          quantity: merged.num_cases || merged.quantity || 1,
           size_spec: result.size_spec,
           unit_price: result.unit_price,
           pricing_family: family,
           pricing_breakdown: result.breakdown,
           pricing_params: pricingParams,
         });
-        return {
+
+        ({ result, line } = applyPerCasePricing(merged, plainMaterial, result, line));
+
+        const entry = createQuotedItem({
           family,
+          merged,
           result,
           line,
-          breakdown_text,
+          plainProduct: plainMaterial?.product
+            ? { id: plainMaterial.product.id, name: plainMaterial.product.name }
+            : null,
+        });
+        quotedItems = upsertQuotedItem(quotedItems, entry);
+        quotedItems = await saveQuotedItems(query, session_id, quotedItems);
+        const saved = quotedItems.find((it) => it.id === entry.id);
+        const breakdown_structured = {
+          ...saved.breakdown_structured,
+          id: saved.id,
+          index: saved.index,
+        };
+
+        return {
+          family,
+          quoted_id: saved.id,
+          quoted_index: saved.index,
+          result,
+          line,
+          breakdown_text: formatBreakdownForFamily(family, result, merged),
+          breakdown_structured,
           plain_product: plainMaterial?.product
             ? { id: plainMaterial.product.id, name: plainMaterial.product.name, unit_cost: plainMaterial.unitCost }
             : null,
         };
+      },
+    });
+
+    const listQuotedItems = tool({
+      description:
+        'List products already priced in this chat (session ledger). Use before adding to invoice when multiple items exist.',
+      inputSchema: z.object({}),
+      execute: async () => ({
+        items: summarizeQuotedItems(quotedItems),
+        count: quotedItems.length,
+      }),
+    });
+
+    const addToInvoice = tool({
+      description:
+        'Add selected quoted items to the invoice draft. Only call after user confirms which items and any margin/price overrides.',
+      inputSchema: z.object({
+        selections: z
+          .array(
+            z.object({
+              quoted_id: z.string().optional(),
+              index: z.number().optional(),
+              quantity: z.number().optional(),
+              margin_percent: z.number().optional(),
+              markup_percent: z.number().optional(),
+              unit_price: z.number().optional(),
+            })
+          )
+          .min(1),
+      }),
+      execute: async ({ selections }) => {
+        const lines = buildLinesFromSelections(quotedItems, selections);
+        if (!lines.length) return { error: 'No matching quoted items — use listQuotedItems' };
+        const updated = await mergeLinesIntoQuote(ctx.quoteId, lines);
+        return { added: lines.length, items: updated.items, total: Number(updated.total) };
       },
     });
 
@@ -347,7 +452,7 @@ async function handler(req, res) {
     });
 
     const upsertDraft = tool({
-      description: 'Add or update line items on the quote draft after pricing',
+      description: 'Legacy: add line items directly. Prefer addToInvoice with quoted item selections.',
       inputSchema: z.object({
         lines: z.array(z.record(z.any())).describe('Line items from calcCustom or pricePlain'),
       }),
@@ -387,12 +492,19 @@ PRICING: default 30% markup. User may ask margin_percent (45% margin) or markup_
 
 DOCUMENT TYPE: VAT invoice = materials ex-VAT, sell ex-VAT + 23% on invoice. Cash = materials include 23% purchase VAT, sell is cash total.
 
+SESSION WORKFLOW (important):
+- When user asks prices for multiple products, call calcCustom once per product. Each result is stored in the session ledger (quoted items #1, #2, …).
+- Do NOT add to invoice automatically after pricing.
+- Keep replies concise — breakdown cards appear in the UI. Summarise sell prices in a short table.
+- When user asks to add/insert to invoice: if 2+ quoted items, call listQuotedItems then ask which items and what margin % or sell price (unless they specified clearly). Then call addToInvoice with selections.
+- Example: "add pizza and foamex at 45% margin" → addToInvoice with margin_percent: 45 for those quoted_ids.
+
 RULES:
-1. ALWAYS use calcCustom — never invent prices.
-2. Printed pizza/bagasse/bags: calcCustom resolves plain product automatically when size given.
-3. Foamex/correx: pass thickness_mm, paper_size or piece dimensions, quantity.
-4. Include full breakdown_text in every price answer.
-5. After pricing, call upsertDraft with the line.`;
+1. ALWAYS use calcCustom for printed products — never invent prices.
+2. Multi-product requests: run calcCustom for EACH product in the same turn when possible.
+3. "Per case" → price_per: "case" (bags, boxes). "12 inch pizza box" → pizza_size_inches: 12.
+4. Foamex/correx: thickness_mm, paper_size (A1) or piece dimensions, quantity.
+5. Do NOT call upsertDraft unless user explicitly wants a raw line without going through the ledger.`;
 
     const chatMessages = [
       ...priorMessages.map((m) => ({ role: m.role, content: m.content })),
@@ -403,29 +515,69 @@ RULES:
       model: MODEL,
       system,
       messages: chatMessages,
-      tools: { searchPlain, pricePlain, calcCustom, savedPrices, applySavedPrices, upsertDraft },
-      stopWhen: stepCountIs(10),
+      tools: {
+        searchPlain,
+        pricePlain,
+        calcCustom,
+        listQuotedItems,
+        addToInvoice,
+        savedPrices,
+        applySavedPrices,
+        upsertDraft,
+      },
+      stopWhen: stepCountIs(15),
     });
 
-    const breakdownBlocks = collectBreakdownsFromSteps(steps);
-    let finalMessage = text;
-    if (breakdownBlocks.length) {
-      const block = breakdownBlocks.join('\n\n');
-      const summary = text.includes('PRICE BREAKDOWN')
-        ? text
-        : text.trim()
-          ? `${text.trim()}\n\n${block}`
-          : block;
-      finalMessage = summary.includes(block) ? summary : `${block}\n\n${text.trim()}`.trim();
+    const structuredBreakdowns = collectStructuredBreakdownsFromSteps(steps);
+    const breakdownBlocks = structuredBreakdowns.length ? [] : collectBreakdownsFromSteps(steps);
+    let finalMessage = text?.trim() || '';
+
+    if (!finalMessage && structuredBreakdowns.length) {
+      finalMessage = structuredBreakdowns
+        .map(
+          (b) =>
+            `#${b.index} ${b.title}: ${b.summary?.find((s) => s.label?.includes('Sell'))?.value || b.totals?.unitSell}`
+        )
+        .join('\n');
     }
 
-    await query(
-      `INSERT INTO invoice_session_messages (session_id, role, content) VALUES ($1, 'assistant', $2)`,
-      [session_id, finalMessage]
-    );
+    if (breakdownBlocks.length && !structuredBreakdowns.length) {
+      const block = breakdownBlocks.join('\n\n');
+      finalMessage = finalMessage.includes('PRICE BREAKDOWN')
+        ? finalMessage
+        : finalMessage
+          ? `${finalMessage}\n\n${block}`
+          : block;
+    }
 
+    const metadata = {
+      breakdowns: structuredBreakdowns.map((b) => ({
+        ...b,
+        unitSell: b.totals?.unitSell,
+      })),
+    };
+
+    try {
+      await query(
+        `INSERT INTO invoice_session_messages (session_id, role, content, metadata) VALUES ($1, 'assistant', $2, $3)`,
+        [session_id, finalMessage, JSON.stringify(metadata)]
+      );
+    } catch {
+      await query(
+        `INSERT INTO invoice_session_messages (session_id, role, content) VALUES ($1, 'assistant', $2)`,
+        [session_id, finalMessage]
+      );
+    }
+
+    quotedItems = await loadQuotedItems(getRow, session_id);
     const freshQuote = await getRow(`SELECT * FROM quotes WHERE id = $1`, [session.quote_id]);
-    return res.status(200).json({ message: finalMessage, quote: freshQuote });
+    return res.status(200).json({
+      message: finalMessage,
+      quote: freshQuote,
+      quoted_items: quotedItems,
+      breakdowns: metadata.breakdowns,
+      metadata,
+    });
   } catch (e) {
     console.error('Chat error:', e);
     return res.status(500).json({ error: e.message || 'Chat failed' });

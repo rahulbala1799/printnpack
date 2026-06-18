@@ -10,6 +10,7 @@ function mapSession(r) {
     document_type: r.document_type,
     status: r.status,
     quote_id: r.quote_id,
+    quoted_items: r.quoted_items || [],
     created_at: r.created_at,
     updated_at: r.updated_at,
   };
@@ -52,17 +53,33 @@ async function handler(req, res) {
       ? await getRow(`SELECT * FROM quotes WHERE id = $1`, [session.quote_id])
       : null;
 
-    const messages = await getRows(
-      `SELECT role, content, created_at FROM invoice_session_messages
-       WHERE session_id = $1 AND role IN ('user', 'assistant')
-       ORDER BY created_at ASC`,
-      [id]
-    );
+    let messages;
+    try {
+      messages = await getRows(
+        `SELECT role, content, metadata, created_at FROM invoice_session_messages
+         WHERE session_id = $1 AND role IN ('user', 'assistant')
+         ORDER BY created_at ASC`,
+        [id]
+      );
+    } catch {
+      messages = await getRows(
+        `SELECT role, content, created_at FROM invoice_session_messages
+         WHERE session_id = $1 AND role IN ('user', 'assistant')
+         ORDER BY created_at ASC`,
+        [id]
+      );
+    }
 
     return res.status(200).json({
       session: mapSession(session),
       quote: quote ? mapQuote(quote) : null,
-      messages: messages.map((m) => ({ role: m.role, content: m.content, created_at: m.created_at })),
+      quoted_items: session.quoted_items || [],
+      messages: messages.map((m) => ({
+        role: m.role,
+        content: m.content,
+        metadata: m.metadata || {},
+        created_at: m.created_at,
+      })),
     });
   } catch (e) {
     console.error('GET session:', e);
