@@ -34,6 +34,8 @@ const RULES = [
   { family: 'foamex_boards', rule_key: 'vinyl_roll', label: 'Print vinyl', rule_data: { cost: 90, length_m: 50, width_m: 1.3 } },
   { family: 'foamex_boards', rule_key: 'print', label: 'Print', rule_data: { mins_per_piece: 12 } },
   { family: 'foamex_boards', rule_key: 'apply', label: 'Apply vinyl', rule_data: { mins_per_piece: 15 } },
+  { family: 'corrugated_meal_box_printed', rule_key: 'ink', label: 'CMYK ink', rule_data: { cost_per_unit: 0.045 } },
+  { family: 'corrugated_meal_box_printed', rule_key: 'print_speed', label: 'Print speed', rule_data: { per_hour: 700, operators: 2 } },
   { family: 'bagasse_meal_box_printed', rule_key: 'ink', label: 'CMYK ink', rule_data: { cost_per_unit: 0.045 } },
   { family: 'bagasse_meal_box_printed', rule_key: 'print_speed', label: 'Print speed', rule_data: { per_hour: 700, operators: 2 } },
   { family: 'roll_up_banner', rule_key: 'cassette_roll', label: 'Cassette', rule_data: { cost: 130, length_m: 30, use_m_per_unit: 2 } },

@@ -79,7 +79,7 @@ async function handler(req, res) {
       let items = (body.items ?? quote.items ?? []).map(recalcLineTotal);
 
       if (body.document_type && body.document_type !== quote.document_type) {
-        items = await recalcPrintedLinesForDocument(items, documentType, getRows, vatRate);
+        items = await recalcPrintedLinesForDocument(items, documentType, getRows, getRow, vatRate);
       }
 
       const totals = calcQuoteTotals(items, documentType, vatRate);

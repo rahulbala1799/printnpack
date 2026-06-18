@@ -43,13 +43,16 @@ function loadPlainProducts() {
   });
 }
 
-function toDbRow(p, index) {
+function toDbRow(p, index, parseCaseQty) {
+  const detail = parseCaseQty(p.qtyPerCase);
   return {
     id: p.id || p.code,
     name: p.name || '',
     category: p.category || '',
     description: p.description || null,
     qty_per_case: p.qtyPerCase || null,
+    units_per_case: detail.unitsPerCase,
+    case_pack_detail: JSON.stringify(detail),
     case_tiers: JSON.stringify(p.caseTiers || []),
     image_src: p.imageSrc || null,
     images: Array.isArray(p.images) ? p.images : (p.imageSrc ? [p.imageSrc] : []),
@@ -65,6 +68,7 @@ async function run() {
     process.exit(1);
   }
 
+  const { parseCaseQty } = await import('../lib/pricing/case-qty.js');
   const products = loadPlainProducts();
   console.log(`Loaded ${products.length} products from data/plain-products-tiered.js + overrides`);
 
@@ -75,13 +79,15 @@ async function run() {
 
   const client = await pool.connect();
   const upsertSql = `
-    INSERT INTO plain_products (id, name, category, description, qty_per_case, case_tiers, image_src, images, is_active, sort_order, updated_at)
-    VALUES ($1, $2, $3, $4, $5, $6::jsonb, $7, $8, $9, $10, now())
+    INSERT INTO plain_products (id, name, category, description, qty_per_case, units_per_case, case_pack_detail, case_tiers, image_src, images, is_active, sort_order, updated_at)
+    VALUES ($1, $2, $3, $4, $5, $6, $7::jsonb, $8::jsonb, $9, $10, $11, $12, now())
     ON CONFLICT (id) DO UPDATE SET
       name = EXCLUDED.name,
       category = EXCLUDED.category,
       description = EXCLUDED.description,
       qty_per_case = EXCLUDED.qty_per_case,
+      units_per_case = EXCLUDED.units_per_case,
+      case_pack_detail = EXCLUDED.case_pack_detail,
       case_tiers = EXCLUDED.case_tiers,
       image_src = EXCLUDED.image_src,
       images = EXCLUDED.images,
@@ -94,7 +100,7 @@ async function run() {
   let err = 0;
   for (let i = 0; i < products.length; i++) {
     const p = products[i];
-    const row = toDbRow(p, i);
+    const row = toDbRow(p, i, parseCaseQty);
     try {
       await client.query(upsertSql, [
         row.id,
@@ -102,6 +108,8 @@ async function run() {
         row.category,
         row.description,
         row.qty_per_case,
+        row.units_per_case,
+        row.case_pack_detail,
         row.case_tiers,
         row.image_src,
         row.images,

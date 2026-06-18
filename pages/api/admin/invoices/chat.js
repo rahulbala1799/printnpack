@@ -3,7 +3,7 @@ import { getRows, getRow, query } from '../../../../lib/database.js';
 import { generateText, tool, stepCountIs } from 'ai';
 import { z } from 'zod';
 import { getInvoiceAiModel, getAiConfigError, isAiConfigured } from '../../../../lib/ai/gateway.js';
-import { searchPlainProducts, pricePlainProduct } from '../../../../lib/pricing/plain-product.js';
+import { searchPlainProducts, pricePlainProduct, mapPlainProductRow } from '../../../../lib/pricing/plain-product.js';
 import { calculateCustomProduct, getRulesForFamily } from '../../../../lib/pricing/custom-print.js';
 import {
   getCustomerPriceCatalog,
@@ -18,6 +18,7 @@ import {
 import { resolvePricingFamily, PRICING_FAMILY_GUIDE, PLAIN_PRINTED_FAMILIES } from '../../../../lib/invoices/pricing-families.js';
 import { formatBreakdownForFamily, collectBreakdownsFromSteps } from '../../../../lib/pricing/breakdown-format.js';
 import { resolvePlainMaterial } from '../../../../lib/pricing/plain-material.js';
+import { PLAIN_CASE_QTY_GUIDE, formatPlainProductForAi } from '../../../../lib/invoices/plain-packaging-ai-context.js';
 import {
   loadQuotedItems,
   saveQuotedItems,
@@ -118,11 +119,12 @@ function parsePricePerFromText(text) {
 }
 
 function applyPerCasePricing(merged, plainMaterial, result, line) {
-  if (merged.price_per !== 'case' || !plainMaterial?.qtyPerCase) {
+  const unitsPerCase = plainMaterial?.unitsPerCase ?? plainMaterial?.qtyPerCase;
+  if (merged.price_per !== 'case' || !unitsPerCase) {
     return { merged, result, line };
   }
-  const perCase = plainMaterial.qtyPerCase;
   const numCases = merged.num_cases || 1;
+  const caseLabel = plainMaterial?.caseLabel || `${unitsPerCase} units/case`;
   return {
     merged,
     result: {
@@ -136,9 +138,7 @@ function applyPerCasePricing(merged, plainMaterial, result, line) {
       unit_price: Math.round(result.line_total * 100) / 100,
       unit_label: 'per case',
       line_total: Math.round(result.line_total * numCases * 100) / 100,
-      size_spec: line.size_spec
-        ? `${line.size_spec} (${perCase}/case)`
-        : `${perCase} per case`,
+      size_spec: line.size_spec ? `${line.size_spec} · ${caseLabel}` : caseLabel,
     },
   };
 }
@@ -228,14 +228,18 @@ async function handler(req, res) {
     );
 
     const searchPlain = tool({
-      description: 'Search plain packaging products by name or category',
+      description:
+        'Search plain packaging catalog. Returns units_per_case (e.g. 4x50=200), case price tier1, unit_price_ex per sellable unit.',
       inputSchema: z.object({
         search: z.string().optional().describe('Product name search'),
-        category: z.string().optional().describe('Category filter'),
+        category: z.string().optional().describe('Category filter e.g. Corrugated Meal Box'),
       }),
       execute: async ({ search, category }) => {
-        const products = await searchPlainProducts(getRows, { search, category });
-        return { products: products.slice(0, 12) };
+        const products = await searchPlainProducts(getRows, { search, category, limit: 12 });
+        return {
+          products,
+          lines: products.map(formatPlainProductForAi),
+        };
       },
     });
 
@@ -248,13 +252,7 @@ async function handler(req, res) {
       execute: async ({ product_id, num_cases }) => {
         const product = await getRow(`SELECT * FROM plain_products WHERE id = $1`, [product_id]);
         if (!product) return { error: 'Not found' };
-        const shaped = {
-          id: product.id,
-          name: product.name,
-          category: product.category,
-          qtyPerCase: product.qty_per_case,
-          caseTiers: product.case_tiers,
-        };
+        const shaped = mapPlainProductRow(product);
         const priced = pricePlainProduct(shaped, num_cases);
         const tier = shaped.caseTiers.find((t) => t.casesLabel === priced.tier_label) || shaped.caseTiers[0];
         const line = buildPlainLineItem({ product: shaped, numCases: num_cases, tier, unitPrice: priced.unit_price });
@@ -312,15 +310,15 @@ async function handler(req, res) {
 
         let plainMaterial = null;
         if (PLAIN_PRINTED_FAMILIES.has(family)) {
-          plainMaterial = await resolvePlainMaterial(getRows, family, merged);
+          plainMaterial = await resolvePlainMaterial(getRows, getRow, family, merged);
           if (!plainMaterial?.unitCost && family === 'pizza_box_printed') {
             return {
               error: 'Could not find plain pizza box in catalog — specify pizza_size_inches (e.g. 12) or plain_product_id (e.g. 120762)',
               family,
             };
           }
-          if (merged.price_per === 'case' && plainMaterial?.qtyPerCase) {
-            merged.quantity = plainMaterial.qtyPerCase;
+          if (merged.price_per === 'case' && plainMaterial?.unitsPerCase) {
+            merged.quantity = plainMaterial.unitsPerCase;
           }
         }
 
@@ -475,22 +473,17 @@ async function handler(req, res) {
 
     const system = `You are PrintNPack admin quote assistant. Currency: EUR. Document type: ${documentType}.
 ${customerContext}
+${PLAIN_CASE_QTY_GUIDE}
 ${PRICING_FAMILY_GUIDE}
 
-PRINTED PACKAGING COSTING:
-- Material = plain packaging unit cost from plain_products (searchPlain / plain_product_id) + ink + labour.
-- Pizza boxes: match by size inches (12" → product 120762). Default ink €0.045/box unless admin overrides.
-- Bagasse meal boxes / burger boxes: plain bagasse product from catalog + ink + labour.
-- Bags: plain bag from catalog or pricing rules + ink + labour.
+PRINTED PACKAGING: plain unit cost = tier1 case price ÷ units_per_case. Then + ink + labour + markup.
+- Corrugated clamshell 120092: 4×50=200/case, €38.47/case → €0.192/unit.
+- Always searchPlain or plain_product_id — never guess unit counts.
 
-FOAMEX / CORREX:
-- Full master sheet 240cm × 120cm (2.88 sqm). Sheet price by thickness from rules (foamex 5mm = €28 ex-VAT).
-- Per-piece board cost = (sheet_price / sheet_sqm) × piece_sqm. Vinyl same way per sqm.
-- A1 = 59.4×84.1cm. Labour per piece from print + apply minutes.
+FOAMEX / CORREX: 240×120cm sheet → per sqm → piece area. A1 = 59.4×84.1cm.
 
-PRICING: default 30% markup. User may ask margin_percent (45% margin) or markup_percent (80% markup) — pass to calcCustom.
-
-DOCUMENT TYPE: VAT invoice = materials ex-VAT, sell ex-VAT + 23% on invoice. Cash = materials include 23% purchase VAT, sell is cash total.
+PRICING: margin_percent, markup_percent, price_per ("case"|"unit").
+DOCUMENT TYPE: VAT = ex-VAT materials + 23% on invoice. Cash = purchase VAT on goods.
 
 SESSION WORKFLOW (important):
 - When user asks prices for multiple products, call calcCustom once per product. Each result is stored in the session ledger (quoted items #1, #2, …).
