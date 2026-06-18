@@ -212,7 +212,13 @@ export default function NewInvoiceQuotePage() {
           document_type: documentType,
         }),
       });
-      const data = await res.json();
+      const raw = await res.text();
+      let data;
+      try {
+        data = JSON.parse(raw);
+      } catch {
+        throw new Error(raw?.slice(0, 300) || `Chat failed (${res.status})`);
+      }
       if (!res.ok) throw new Error(data.error || 'Chat failed');
       setMessages((m) => [...m, { role: 'assistant', content: data.message }]);
       if (data.quote) setQuote(data.quote);

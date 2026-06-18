@@ -15,8 +15,14 @@ import {
   calcQuoteTotals,
   recalcLineTotal,
 } from '../../../../lib/invoices/line-item.js';
-import { resolvePricingFamily, PRICING_FAMILY_GUIDE } from '../../../../lib/invoices/pricing-families.js';
+import { resolvePricingFamily, PRICING_FAMILY_GUIDE, PLAIN_PRINTED_FAMILIES } from '../../../../lib/invoices/pricing-families.js';
 import { formatBreakdownForFamily, collectBreakdownsFromSteps } from '../../../../lib/pricing/breakdown-format.js';
+import { resolvePlainMaterial } from '../../../../lib/pricing/plain-material.js';
+import {
+  parsePaperSizeFromText,
+  parseThicknessMm,
+  parsePizzaSizeInches,
+} from '../../../../lib/pricing/paper-sizes.js';
 
 const MODEL = getInvoiceAiModel();
 
@@ -61,6 +67,8 @@ function parseQuantityFromText(text) {
   const patterns = [
     /\b(\d+)\s+banners?\b/i,
     /\b(\d+)\s*(?:x|×)\s*\d+(?:\.\d+)?\s*m\s*banners?\b/i,
+    /\b(\d+)\s+(?:foamex|correx|corriboard|sheets?|boards?|boxes?|bags?)\b/i,
+    /\b(\d+)\s*(?:x|×)\s*(?:foamex|correx|sheets?)\b/i,
     /\b(?:qty|quantity)\s*[:\-]?\s*(\d+)/i,
     /^(\d+)\s+(?:pcs?|units?)\b/i,
   ];
@@ -71,12 +79,69 @@ function parseQuantityFromText(text) {
   return {};
 }
 
+function parseMarginMarkupFromText(text) {
+  const t = String(text || '');
+  const margin = t.match(/(\d+(?:\.\d+)?)\s*%\s*margin/i);
+  if (margin) return { margin_percent: parseFloat(margin[1]) };
+  const markup = t.match(/(\d+(?:\.\d+)?)\s*%\s*markup/i);
+  if (markup) return { markup_percent: parseFloat(markup[1]) };
+  return {};
+}
+
+function enrichPrintParams(args, userText, jobHints) {
+  const paper = parsePaperSizeFromText(userText);
+  const thickness = parseThicknessMm(userText);
+  const pizzaInches = parsePizzaSizeInches(userText);
+  const pricing = parseMarginMarkupFromText(userText);
+  return {
+    ...jobHints,
+    ...pricing,
+    ...args,
+    ...(paper || {}),
+    ...(thickness ? { thickness_mm: thickness } : {}),
+    ...(pizzaInches && !args.pizza_size_inches ? { pizza_size_inches: pizzaInches } : {}),
+  };
+}
+
+function buildPricingParams(family, merged, plainMaterial) {
+  return {
+    family,
+    width_m: merged.width_m,
+    height_m: merged.height_m,
+    quantity: merged.quantity || 1,
+    eyelets: merged.eyelets,
+    name: merged.name,
+    thickness_mm: merged.thickness_mm,
+    piece_width_cm: merged.piece_width_cm,
+    piece_height_cm: merged.piece_height_cm,
+    paper_size: merged.paper_size,
+    size_spec: merged.size_spec,
+    laminated: merged.laminated,
+    pizza_size_inches: merged.pizza_size_inches,
+    plain_product_id: plainMaterial?.product?.id || merged.plain_product_id,
+    margin_percent: merged.margin_percent,
+    markup_percent: merged.markup_percent,
+    ink_per_unit: merged.ink_per_unit,
+    labour_rate: merged.labour_rate,
+  };
+}
+
 function extractJobHints(priorMessages, currentMessage) {
   const userText = [
     ...priorMessages.filter((m) => m.role === 'user').map((m) => m.content),
     currentMessage,
   ].join(' ');
-  return { ...parseDimsFromText(userText), ...parseQuantityFromText(userText) };
+  const paper = parsePaperSizeFromText(userText);
+  const thickness = parseThicknessMm(userText);
+  const pizzaInches = parsePizzaSizeInches(userText);
+  return {
+    ...parseDimsFromText(userText),
+    ...parseQuantityFromText(userText),
+    ...parseMarginMarkupFromText(userText),
+    ...(paper || {}),
+    ...(thickness ? { thickness_mm: thickness } : {}),
+    ...(pizzaInches ? { pizza_size_inches: pizzaInches } : {}),
+  };
 }
 
 async function handler(req, res) {
@@ -157,46 +222,64 @@ async function handler(req, res) {
 
     const calcCustom = tool({
       description:
-        'Calculate price for a custom printed product. PVC/vinyl banners use family vinyl_banner. Always call this when user asks for a price.',
+        'Calculate printed product price. Pizza/bagasse/bags: plain box cost from DB + ink + labour. Foamex/correx: per-sqm from 240×120cm sheet + vinyl + labour. Banners: vinyl_banner.',
       inputSchema: z.object({
-        family: z.string().describe('Pricing family e.g. vinyl_banner, roll_up_banner'),
-        name: z.string().optional().describe('Line item display name'),
-        quantity: z.number().optional().describe('Quantity, default 1'),
-        width_m: z.number().optional().describe('Width in metres'),
-        height_m: z.number().optional().describe('Height in metres'),
-        eyelets: z.number().optional().describe('Number of eyelets, default 8'),
-        thickness_mm: z.string().optional(),
+        family: z.string().describe('e.g. vinyl_banner, pizza_box_printed, foamex_boards, bagasse_meal_box_printed'),
+        name: z.string().optional(),
+        quantity: z.number().optional(),
+        width_m: z.number().optional(),
+        height_m: z.number().optional(),
+        eyelets: z.number().optional(),
+        thickness_mm: z.union([z.string(), z.number()]).optional(),
         piece_width_cm: z.number().optional(),
         piece_height_cm: z.number().optional(),
+        paper_size: z.string().optional().describe('A1, A2, A3, A4'),
+        pizza_size_inches: z.number().optional().describe('7, 9, 10, 12, 14, 16'),
+        plain_product_id: z.string().optional().describe('Plain product id e.g. 120762 for 12" pizza box'),
+        plain_search: z.string().optional(),
+        margin_percent: z.number().optional(),
+        markup_percent: z.number().optional(),
+        ink_per_unit: z.number().optional(),
+        labour_rate: z.number().optional(),
+        laminated: z.boolean().optional(),
       }),
       execute: async (args) => {
         const family = resolvePricingFamily(args);
-        const merged = {
-          quantity: 1,
-          eyelets: 8,
-          document_type: documentType,
-          purchase_vat_rate: purchaseVatRate,
-          ...ctx.jobHints,
-          ...args,
-          family,
-        };
+        const userText = [
+          ...priorMessages.filter((m) => m.role === 'user').map((m) => m.content),
+          ctx.userMessage,
+        ].join(' ');
+        const merged = enrichPrintParams(
+          {
+            quantity: 1,
+            eyelets: 8,
+            document_type: documentType,
+            purchase_vat_rate: purchaseVatRate,
+            ...ctx.jobHints,
+            ...args,
+            family,
+          },
+          userText,
+          ctx.jobHints
+        );
+
         const rules = await getRulesForFamily(getRows, family);
         const globalRules = await getRulesForFamily(getRows, 'global');
-        const result = calculateCustomProduct(family, merged, rules, 0, globalRules);
+
+        let plainMaterial = null;
+        if (PLAIN_PRINTED_FAMILIES.has(family)) {
+          plainMaterial = await resolvePlainMaterial(getRows, family, merged);
+          if (!plainMaterial?.unitCost && family === 'pizza_box_printed') {
+            return {
+              error: 'Could not find plain pizza box in catalog — specify pizza_size_inches (e.g. 12) or plain_product_id (e.g. 120762)',
+              family,
+            };
+          }
+        }
+
+        const result = calculateCustomProduct(family, merged, rules, plainMaterial, globalRules);
         const breakdown_text = formatBreakdownForFamily(family, result, merged);
-        const pricingParams = {
-          family,
-          width_m: merged.width_m,
-          height_m: merged.height_m,
-          quantity: merged.quantity || 1,
-          eyelets: merged.eyelets,
-          name: merged.name,
-          thickness_mm: merged.thickness_mm,
-          piece_width_cm: merged.piece_width_cm,
-          piece_height_cm: merged.piece_height_cm,
-          size_spec: merged.size_spec,
-          laminated: merged.laminated,
-        };
+        const pricingParams = buildPricingParams(family, merged, plainMaterial);
         const line = buildPrintedLineItem({
           name: merged.name || result.suggested_name,
           category: result.category,
@@ -207,7 +290,15 @@ async function handler(req, res) {
           pricing_breakdown: result.breakdown,
           pricing_params: pricingParams,
         });
-        return { family, result, line, breakdown_text };
+        return {
+          family,
+          result,
+          line,
+          breakdown_text,
+          plain_product: plainMaterial?.product
+            ? { id: plainMaterial.product.id, name: plainMaterial.product.name, unit_cost: plainMaterial.unitCost }
+            : null,
+        };
       },
     });
 
@@ -281,16 +372,27 @@ async function handler(req, res) {
 ${customerContext}
 ${PRICING_FAMILY_GUIDE}
 
-COSTING RULES (document type from quote — use current selection):
-- VAT INVOICE: material costs use ex-VAT supplier prices (input VAT recoverable). Sell prices are ex-VAT; customer pays +23% VAT on invoice.
-- CASH SALE: material costs = ex-VAT supplier price × 1.23 (you pay purchase VAT on goods). Labour unchanged. Sell price is cash total — no VAT added to customer.
+PRINTED PACKAGING COSTING:
+- Material = plain packaging unit cost from plain_products (searchPlain / plain_product_id) + ink + labour.
+- Pizza boxes: match by size inches (12" → product 120762). Default ink €0.045/box unless admin overrides.
+- Bagasse meal boxes / burger boxes: plain bagasse product from catalog + ink + labour.
+- Bags: plain bag from catalog or pricing rules + ink + labour.
+
+FOAMEX / CORREX:
+- Full master sheet 240cm × 120cm (2.88 sqm). Sheet price by thickness from rules (foamex 5mm = €28 ex-VAT).
+- Per-piece board cost = (sheet_price / sheet_sqm) × piece_sqm. Vinyl same way per sqm.
+- A1 = 59.4×84.1cm. Labour per piece from print + apply minutes.
+
+PRICING: default 30% markup. User may ask margin_percent (45% margin) or markup_percent (80% markup) — pass to calcCustom.
+
+DOCUMENT TYPE: VAT invoice = materials ex-VAT, sell ex-VAT + 23% on invoice. Cash = materials include 23% purchase VAT, sell is cash total.
 
 RULES:
-1. ALWAYS use tools to calculate prices — never invent numbers.
-2. When user gives product type + size + quantity, call calcCustom then upsertDraft in the same turn.
-3. For banners: PVC/vinyl = family "vinyl_banner". Default eyelets=8. Parse "5 banners" as quantity=5.
-4. Only ask a clarifying question if product type OR dimensions are genuinely missing.
-5. Every price answer MUST include the full breakdown_text from calcCustom (materials ex-VAT vs inc-VAT for cash, labour, markup, order totals). Never reply with only a final euro amount.`;
+1. ALWAYS use calcCustom — never invent prices.
+2. Printed pizza/bagasse/bags: calcCustom resolves plain product automatically when size given.
+3. Foamex/correx: pass thickness_mm, paper_size or piece dimensions, quantity.
+4. Include full breakdown_text in every price answer.
+5. After pricing, call upsertDraft with the line.`;
 
     const chatMessages = [
       ...priorMessages.map((m) => ({ role: m.role, content: m.content })),
