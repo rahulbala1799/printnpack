@@ -45,7 +45,9 @@ const PopularProducts = () => {
             const href =
               product.id === 'custom-pizza-boxes-ireland'
                 ? '/pizza-boxes-ireland'
-                : product.url || `/products/${product.id}`;
+                : product.id === 'flat-handle-paper-bags'
+                  ? '/printed-flat-handle-bags-ireland'
+                  : product.url || `/products/${product.id}`;
             return (
               <Link
                 key={product.id}

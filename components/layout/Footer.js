@@ -12,7 +12,8 @@ const QUICK_LINKS = [
 
 const PRODUCT_LINKS = [
   { label: 'Pizza Boxes', href: '/pizza-boxes-ireland' },
-  { label: 'Paper Bags', href: '/products' },
+  { label: 'Printed Flat Handle Bags', href: '/printed-flat-handle-bags-ireland' },
+  { label: 'Paper Bags', href: '/products/twisted-handle-paper-bags' },
   { label: 'Burger Boxes', href: '/eco-bagasse-burger-boxes' },
   { label: 'Plain Packaging', href: '/plain-packaging' },
   { label: 'Foamex Boards', href: '/foamex-boards' },

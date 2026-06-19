@@ -26,6 +26,26 @@ const nextConfig = {
         destination: '/custom-pizza-boxes-ireland',
         permanent: true,
       },
+      {
+        source: '/flat-handle-bags',
+        destination: '/printed-flat-handle-bags-ireland',
+        permanent: true,
+      },
+      {
+        source: '/flat-handle-paper-bags',
+        destination: '/printed-flat-handle-bags-ireland',
+        permanent: true,
+      },
+      {
+        source: '/printed-flat-handle-bags',
+        destination: '/printed-flat-handle-bags-ireland',
+        permanent: true,
+      },
+      {
+        source: '/products/flat-handle-paper-bags',
+        destination: '/printed-flat-handle-bags-ireland',
+        permanent: true,
+      },
     ];
   },
   

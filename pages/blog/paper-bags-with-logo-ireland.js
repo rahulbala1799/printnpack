@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Layout from '../../components/layout/Layout';
 import PizzaPackagingPromo from '../../components/blog/PizzaPackagingPromo';
+import PaperBagsPromo from '../../components/blog/PaperBagsPromo';
 
 import { SITE_URL as siteUrl } from '../../lib/site';
 
@@ -20,7 +21,7 @@ const jsonLd = {
     logo: { '@type': 'ImageObject', url: `${siteUrl}/favicon.ico` },
   },
   datePublished: '2026-02-13',
-  dateModified: '2026-02-13',
+  dateModified: '2026-06-18',
   mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/paper-bags-with-logo-ireland` },
 };
 
@@ -186,7 +187,10 @@ export default function PaperBagsWithLogoIreland() {
           </p>
           <p className="text-slate-700 leading-relaxed mb-4">
             <strong>Best for:</strong> cafés, delis, bakeries, pharmacies, medium-weight retail items,
-            event merchandise.
+            event merchandise.{' '}
+            <Link href="/printed-flat-handle-bags-ireland" className="text-blue-600 hover:underline font-medium">
+              Order printed flat handle bags →
+            </Link>
           </p>
           <div className="grid grid-cols-3 gap-3 mb-8">
             {[
@@ -368,6 +372,8 @@ export default function PaperBagsWithLogoIreland() {
           </div>
         </div>
 
+        <PaperBagsPromo />
+
         <PizzaPackagingPromo />
 
         {/* CTA */}
@@ -378,10 +384,16 @@ export default function PaperBagsWithLogoIreland() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              href="/products"
+              href="/printed-flat-handle-bags-ireland"
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
             >
-              Browse Paper Bags →
+              Printed Flat Handle Bags →
+            </Link>
+            <Link
+              href="/products/twisted-handle-paper-bags"
+              className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+            >
+              Twisted Handle Bags
             </Link>
             <Link
               href="/quote"

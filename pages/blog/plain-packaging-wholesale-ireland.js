@@ -463,6 +463,7 @@ export default function PlainPackagingWholesaleIreland() {
             { href: '/pizza-boxes-ireland', src: '/images/pizza-boxes/PIZZA_BOX_1.jpg', title: 'Pizza Boxes Ireland: Custom Printed & Wholesale Supply' },
             { href: '/blog/pizza-box-sizes-ireland', src: '/images/pizza-boxes/PIZZA_BOX_3.jpg', title: 'Pizza Box Sizes Ireland: 7″ vs 12″ vs 14″ for Takeaways' },
             { href: '/blog/eco-packaging-for-takeaways-ireland', src: '/images/products/bagasse-burger-box/1.png', title: 'Eco Packaging for Takeaways Ireland: Switching to Sustainable Food Packaging' },
+            { href: '/printed-flat-handle-bags-ireland', src: '/images/products/flat-handle-bags/1.png', title: 'Printed Flat Handle Bags Ireland: Custom Logo Paper Bags' },
             { href: '/blog/paper-bags-with-logo-ireland', src: '/images/products/twisted-handle-bags/1.png', title: 'Paper Bags with Logo Ireland: A Guide for Retailers, Cafés & Food Businesses' },
           ].map(({ href, src, title }) => (
             <Link key={href} href={href} className="group flex items-start gap-3 p-4 bg-slate-50 rounded-xl border border-slate-200 hover:border-slate-300 transition-colors">

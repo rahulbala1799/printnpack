@@ -11,6 +11,13 @@ const guides = [
     cta: 'Browse pizza boxes',
   },
   {
+    href: '/printed-flat-handle-bags-ireland',
+    title: 'Printed Flat Handle Bags',
+    description: 'Custom logo paper bags from 500 units — kraft & white, three sizes, nationwide delivery.',
+    image: '/images/products/flat-handle-bags/1.png',
+    cta: 'View printed bags',
+  },
+  {
     href: '/custom-pizza-boxes-ireland',
     title: 'Custom Printed Pizza Boxes',
     description: 'Full-colour branded boxes, MOQ from 500, 5–7 day production, nationwide delivery.',
@@ -39,7 +46,7 @@ export default function PackagingGuides() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {guides.map((guide) => (
             <Link
               key={guide.href}

@@ -26,7 +26,7 @@ const categories = [
     icon: FaShoppingBag,
     color: 'bg-blue-50 text-blue-600 border-blue-200',
     iconBg: 'bg-blue-100',
-    href: '/products?group=packaging&category=Retail+Packaging',
+    href: '/printed-flat-handle-bags-ireland',
     productCount: 3,
   },
   {

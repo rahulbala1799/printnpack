@@ -87,7 +87,8 @@ export default function Home() {
           itemListElement: [
             { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Pizza Boxes Ireland', url: `${siteUrl}/pizza-boxes-ireland` } },
             { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Custom Printed Pizza Boxes', url: `${siteUrl}/custom-pizza-boxes-ireland` } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Paper Bags with Logo', url: `${siteUrl}/products/paper-bags` } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Printed Flat Handle Bags Ireland', url: `${siteUrl}/printed-flat-handle-bags-ireland` } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Paper Bags with Logo', url: `${siteUrl}/printed-flat-handle-bags-ireland` } },
             { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Eco-Friendly Packaging', url: `${siteUrl}/eco-bagasse-burger-boxes` } },
           ],
         },

@@ -44,6 +44,7 @@ const products = [
   {
     id: 'flat-handle-paper-bags',
     name: 'Flat Handle Paper Bags',
+    url: '/printed-flat-handle-bags-ireland',
     category: 'Retail Packaging',
     description: 'Premium paper bags with flat handles featuring company blue and white design elements for an elegant retail experience. Available in three convenient sizes with cost-effective digital printing.',
     features: [

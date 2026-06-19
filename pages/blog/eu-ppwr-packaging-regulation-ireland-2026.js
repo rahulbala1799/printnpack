@@ -166,7 +166,7 @@ const products = [
     alt: 'Flat handle paper bags Ireland – branded eco packaging',
     name: 'Flat Handle Paper Bags',
     desc: 'Sustainably sourced kraft paper, eco-friendly inks, fully recyclable. From MOQ 500.',
-    href: '/products',
+    href: '/printed-flat-handle-bags-ireland',
     badge: 'Recyclable',
     badgeColour: 'blue',
   },

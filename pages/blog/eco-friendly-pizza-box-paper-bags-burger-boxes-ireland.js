@@ -158,6 +158,15 @@ const products = [
     badgeColour: 'blue',
   },
   {
+    src: '/images/products/flat-handle-bags/3.png',
+    alt: 'Printed flat handle paper bags Ireland – recyclable branded takeaway bags',
+    name: 'Printed Flat Handle Bags',
+    desc: 'Die-cut flat handles, kraft or white, grease-proof lining available. Custom logo print from 500 units.',
+    href: '/printed-flat-handle-bags-ireland',
+    badge: 'Recyclable',
+    badgeColour: 'blue',
+  },
+  {
     src: '/images/products/bagasse-burger-box/3.png',
     alt: 'Compostable burger boxes Ireland – bagasse eco friendly burger box for takeaway',
     name: 'Bagasse Burger Boxes',
@@ -527,7 +536,11 @@ export default function EcoFriendlyPizzaBoxPaperBagsBurgerBoxesIreland() {
             </div>
           </div>
           <p className="text-slate-500 text-xs text-center mb-8">
-            Twisted handle and flat handle paper bags — recyclable, custom print or plain, for eco friendly paper bags for takeaway in Ireland.
+            Twisted handle and{' '}
+            <Link href="/printed-flat-handle-bags-ireland" className="text-blue-600 hover:underline font-medium">
+              printed flat handle paper bags
+            </Link>
+            {' '}— recyclable, custom print or plain, for eco friendly paper bags for takeaway in Ireland.
           </p>
 
           {/* Why your range */}
