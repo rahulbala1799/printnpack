@@ -41,6 +41,13 @@ const quickLinks = [
     color: 'bg-emerald-500',
   },
   {
+    href: '/admin/seo',
+    icon: FiTrendingUp,
+    label: 'SEO Automation',
+    desc: 'Search Console insights & actions',
+    color: 'bg-indigo-500',
+  },
+  {
     href: '/admin/email-config',
     icon: FiMail,
     label: 'Email Settings',
