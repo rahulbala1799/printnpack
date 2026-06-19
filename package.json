@@ -24,6 +24,8 @@
     "merge-env-after-pull": "node scripts/merge-env-after-pull.js",
     "env:pull:live": "vercel env pull .env.live --yes --environment=production && node scripts/merge-env-after-pull.js",
     "env:pull:local": "vercel env pull .env.local --yes --environment=development && node scripts/merge-env-after-pull.js",
+    "seo:import": "node scripts/import-search-console.js",
+    "seo:analyze": "node scripts/run-seo-analysis.js",
     "postinstall": "next telemetry disable"
   },
   "dependencies": {

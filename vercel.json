@@ -7,6 +7,9 @@
     },
     "pages/api/admin/invoices/quote-actions.js": {
       "maxDuration": 60
+    },
+    "pages/api/admin/seo/ai-recommendations.js": {
+      "maxDuration": 120
     }
   },
   "redirects": [
