@@ -18,6 +18,29 @@ const PRIORITY_STYLES = {
   low: 'bg-slate-100 text-slate-600 border-slate-200',
 };
 
+async function parseApiResponse(res) {
+  const text = await res.text();
+  if (!text) {
+    if (!res.ok) throw new Error(`Request failed (${res.status})`);
+    return {};
+  }
+
+  try {
+    return JSON.parse(text);
+  } catch {
+    const snippet = text.replace(/\s+/g, ' ').trim().slice(0, 160);
+    throw new Error(
+      res.ok
+        ? 'Server returned an invalid response'
+        : snippet || `Request failed (${res.status})`
+    );
+  }
+}
+
+function apiErrorMessage(json, fallback = 'Request failed') {
+  return [json?.error, json?.details].filter(Boolean).join(' — ') || fallback;
+}
+
 function StatCard({ label, value, sub, color = 'blue' }) {
   const colors = {
     blue: 'bg-blue-50 text-blue-700',
@@ -69,8 +92,8 @@ export default function SeoDashboard() {
     setError(null);
     try {
       const res = await fetch('/api/admin/seo/analyze', { credentials: 'include' });
-      const json = await res.json();
-      if (!res.ok) throw new Error(json.error || 'Failed to load');
+      const json = await parseApiResponse(res);
+      if (!res.ok) throw new Error(apiErrorMessage(json, 'Failed to load'));
       setData(json);
     } catch (err) {
       setError(err.message);
@@ -101,8 +124,8 @@ export default function SeoDashboard() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ files }),
       });
-      const json = await res.json();
-      if (!res.ok) throw new Error(json.error);
+      const json = await parseApiResponse(res);
+      if (!res.ok) throw new Error(apiErrorMessage(json, 'Upload failed'));
       alert(`Uploaded ${json.uploaded} files successfully`);
       setUploadFiles({});
       fetchAnalysis();
@@ -122,8 +145,8 @@ export default function SeoDashboard() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({}),
       });
-      const json = await res.json();
-      if (!res.ok) throw new Error(json.error);
+      const json = await parseApiResponse(res);
+      if (!res.ok) throw new Error(apiErrorMessage(json, 'Email failed'));
       alert(`SEO report sent to ${json.recipient}`);
     } catch (err) {
       alert(`Email failed: ${err.message}`);
@@ -142,8 +165,8 @@ export default function SeoDashboard() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({}),
       });
-      const json = await res.json();
-      if (!res.ok) throw new Error(json.error);
+      const json = await parseApiResponse(res);
+      if (!res.ok) throw new Error(apiErrorMessage(json, 'AI analysis failed'));
       setAiPlan(json.plan);
     } catch (err) {
       alert(`AI analysis failed: ${err.message}`);

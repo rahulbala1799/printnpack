@@ -6,19 +6,23 @@ import {
   hasSearchConsoleData,
 } from '../../../../lib/seo/search-console.js';
 import { generateRecommendations } from '../../../../lib/seo/recommendations.js';
-import { getInvoiceAiModel, getAiConfigError, isAiConfigured } from '../../../../lib/ai/gateway.js';
+import { resolveAiModel, getAiConfigError, isAiConfigured } from '../../../../lib/ai/gateway.js';
+
+function jsonError(res, status, error, details) {
+  return res.status(status).json({ success: false, error, details });
+}
 
 async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    return jsonError(res, 405, 'Method not allowed');
   }
 
   if (!isAiConfigured()) {
-    return res.status(503).json({ error: getAiConfigError() });
+    return jsonError(res, 503, getAiConfigError());
   }
 
   if (!hasSearchConsoleData()) {
-    return res.status(404).json({ error: 'No Search Console data found' });
+    return jsonError(res, 404, 'No Search Console data found');
   }
 
   try {
@@ -30,9 +34,7 @@ async function handler(req, res) {
     const zeroClick = analysis.highDemandZeroClicks.slice(0, 15);
     const lowCtrPages = analysis.lowCtrPages.slice(0, 10);
 
-    const prompt = `You are an SEO strategist for PrintNPack (printnpack.ie), an Irish printing and packaging company in Ashbourne, Meath.
-
-Analyze this Google Search Console data and provide actionable SEO recommendations.
+    const userPrompt = `Analyze this Google Search Console data and provide actionable SEO recommendations.
 
 PERIOD: ${analysis.meta.dateRange}
 SUMMARY: ${analysis.summary.totalImpressions} impressions, ${analysis.summary.totalClicks} clicks, ${analysis.summary.avgCtr}% CTR, avg position ${analysis.summary.avgPosition}
@@ -58,9 +60,11 @@ Provide a concise SEO action plan with:
 Be specific to Irish printing/packaging market. Reference actual page paths on printnpack.ie.`;
 
     const { text } = await generateText({
-      model: getInvoiceAiModel(),
-      prompt,
-      maxTokens: 2000,
+      model: resolveAiModel(),
+      system:
+        'You are an SEO strategist for PrintNPack (printnpack.ie), an Irish printing and packaging company in Ashbourne, Meath. Give clear, actionable recommendations.',
+      messages: [{ role: 'user', content: userPrompt }],
+      maxOutputTokens: 2000,
     });
 
     return res.status(200).json({
@@ -70,10 +74,20 @@ Be specific to Irish printing/packaging market. Reference actual page paths on p
     });
   } catch (error) {
     console.error('SEO AI recommendations error:', error);
-    return res.status(500).json({
-      error: 'Failed to generate AI recommendations',
-      details: process.env.NODE_ENV === 'development' ? error.message : undefined,
-    });
+
+    const message = error?.message || 'Failed to generate AI recommendations';
+    const isAuthError =
+      error?.name === 'GatewayAuthenticationError' ||
+      /unauthenticated|authentication failed|AI Gateway/i.test(message);
+
+    return jsonError(
+      res,
+      isAuthError ? 503 : 500,
+      isAuthError
+        ? 'AI authentication failed. Check AI_GATEWAY_API_KEY or GOOGLE_GENERATIVE_AI_API_KEY in Vercel environment variables.'
+        : 'Failed to generate AI recommendations',
+      message
+    );
   }
 }
 
