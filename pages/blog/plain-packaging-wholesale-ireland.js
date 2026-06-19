@@ -404,14 +404,26 @@ export default function PlainPackagingWholesaleIreland() {
           <div className="bg-slate-900 rounded-xl p-6 mb-8 text-white">
             <p className="font-semibold mb-1">Browse our plain packaging range</p>
             <p className="text-slate-400 text-sm mb-4">
-              Napkins, food containers, SOS bags, burger boxes, trays — all available at wholesale prices with fast Irish delivery.
+              Napkins, food containers, SOS bags,{' '}
+              <Link href="/pizza-boxes-ireland" className="text-blue-300 hover:underline">
+                pizza boxes
+              </Link>
+              , burger boxes, trays — all available at wholesale prices with fast Irish delivery.
             </p>
-            <Link
-              href="/plain-packaging"
-              className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
-            >
-              View Plain Packaging Wholesale →
-            </Link>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/plain-packaging"
+                className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+              >
+                View Plain Packaging Wholesale →
+              </Link>
+              <Link
+                href="/pizza-boxes-ireland"
+                className="inline-block bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+              >
+                Pizza Boxes Ireland →
+              </Link>
+            </div>
           </div>
 
           <PizzaPackagingPromo />
@@ -448,6 +460,7 @@ export default function PlainPackagingWholesaleIreland() {
         {/* Related posts */}
         <div className="mt-12 grid sm:grid-cols-2 gap-4">
           {[
+            { href: '/pizza-boxes-ireland', src: '/images/pizza-boxes/PIZZA_BOX_1.jpg', title: 'Pizza Boxes Ireland: Custom Printed & Wholesale Supply' },
             { href: '/blog/pizza-box-sizes-ireland', src: '/images/pizza-boxes/PIZZA_BOX_3.jpg', title: 'Pizza Box Sizes Ireland: 7″ vs 12″ vs 14″ for Takeaways' },
             { href: '/blog/eco-packaging-for-takeaways-ireland', src: '/images/products/bagasse-burger-box/1.png', title: 'Eco Packaging for Takeaways Ireland: Switching to Sustainable Food Packaging' },
             { href: '/blog/paper-bags-with-logo-ireland', src: '/images/products/twisted-handle-bags/1.png', title: 'Paper Bags with Logo Ireland: A Guide for Retailers, Cafés & Food Businesses' },

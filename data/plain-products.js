@@ -160,6 +160,7 @@ const PLAIN_IMAGE_OVERRIDES = {
   '120704': '/images/plain-packaging/120704.webp',
   '120705': '/images/plain-packaging/120705.webp',
   '120762': '/images/plain-packaging/120762.webp',
+  '120764': '/images/plain-packaging/120764.webp',
   '120853': '/images/plain-packaging/120853.webp',
   '120854': '/images/plain-packaging/120854.webp',
   '120856': '/images/plain-packaging/120856.webp',

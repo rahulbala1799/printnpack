@@ -619,8 +619,14 @@ The emerging model: use aggregators as "top of funnel" discovery, actively nudge
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
-              href="/custom-pizza-boxes-ireland"
+              href="/pizza-boxes-ireland"
               className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg text-sm font-medium transition-colors text-center"
+            >
+              Pizza Boxes Ireland →
+            </Link>
+            <Link
+              href="/custom-pizza-boxes-ireland"
+              className="bg-white/10 hover:bg-white/20 text-white px-5 py-3 rounded-lg text-sm font-medium transition-colors text-center"
             >
               Custom Pizza Boxes →
             </Link>

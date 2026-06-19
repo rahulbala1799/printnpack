@@ -4,11 +4,12 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
-import { TIERED_PLAIN_PRODUCTS } from '../data/plain-products-tiered';
+import { PLAIN_PRODUCTS } from '../data/plain-products';
+import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 
 const PAGE_URL = `${SITE_URL}/pizza-boxes-ireland`;
 
-const wholesaleBoxes = TIERED_PLAIN_PRODUCTS.filter((p) => p.category === 'Pizza Boxes').sort(
+const wholesaleBoxes = PLAIN_PRODUCTS.filter((p) => p.category === 'Pizza Boxes').sort(
   (a, b) => parseInt(a.name, 10) - parseInt(b.name, 10)
 );
 
@@ -60,6 +61,10 @@ const faqs = [
     q: 'Are your pizza boxes recyclable in Ireland?',
     a: 'Our kraft corrugated pizza boxes are fully recyclable through Irish household and commercial paper recycling streams. Custom printed boxes use food-safe, recyclable board.',
   },
+  {
+    q: 'Do you deliver pizza boxes to Dublin?',
+    a: 'Yes. We deliver pizza boxes to Dublin and the greater Dublin area, as well as Cork, Galway, Limerick, and all counties nationwide. Plain wholesale boxes ship quickly; custom printed boxes take 5–7 business days after artwork approval.',
+  },
 ];
 
 const faqLd = {
@@ -103,6 +108,9 @@ const itemListLd = {
         '@type': 'Product',
         name: p.name,
         url: `${SITE_URL}/plain-packaging/${p.id}`,
+        ...(p.imageSrc && !isPlaceholderImage(p.imageSrc)
+          ? { image: `${SITE_URL}${p.imageSrc}` }
+          : {}),
       },
     })),
   ],
@@ -121,7 +129,7 @@ const webPageLd = {
     '@type': 'Thing',
     name: 'Pizza box packaging Ireland',
   },
-  dateModified: '2026-06-17',
+  dateModified: '2026-06-18',
 };
 
 export default function PizzaBoxesIreland() {
@@ -350,10 +358,24 @@ export default function PizzaBoxesIreland() {
                   href={`/plain-packaging/${product.id}`}
                   className="group bg-white rounded-xl border border-gray-200 p-4 hover:border-blue-200 hover:shadow-md transition-all"
                 >
+                  <div className="relative aspect-square mb-3 rounded-lg overflow-hidden border border-gray-100 bg-gray-50">
+                    {isPlaceholderImage(product.imageSrc) ? (
+                      <PackagingIcon category={product.category} className="w-full h-full" />
+                    ) : (
+                      <Image
+                        src={product.imageSrc}
+                        alt={`${product.name} – wholesale pizza box Ireland`}
+                        fill
+                        className="object-contain p-2"
+                        sizes="200px"
+                        unoptimized={process.env.NODE_ENV === 'production'}
+                      />
+                    )}
+                  </div>
                   <h3 className="font-semibold text-gray-900 text-sm group-hover:text-blue-600 transition-colors leading-snug">
                     {product.name}
                   </h3>
-                  <p className="text-xs text-gray-500 mt-1">Kraft corrugated · Wholesale Ireland</p>
+                  <p className="text-xs text-gray-500 mt-1">Corrugated · Wholesale Ireland</p>
                   <span className="inline-block mt-3 text-xs font-medium text-blue-600">View product →</span>
                 </Link>
               ))}
@@ -361,6 +383,34 @@ export default function PizzaBoxesIreland() {
           </div>
         </section>
       )}
+
+      {/* Delivery across Ireland */}
+      <section className="py-12 lg:py-16 bg-white border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+            Pizza box delivery across Ireland
+          </h2>
+          <p className="text-gray-600 mb-8 max-w-3xl leading-relaxed">
+            PrintNPack supplies <strong>pizza boxes in Dublin</strong>, Cork, Galway, Limerick, Waterford,
+            and nationwide. Based in Ashbourne, Co. Meath, we deliver to restaurants, pizzerias, and
+            takeaways across all 26 counties — whether you need a single case of plain 12&quot; boxes or a
+            full custom print run with your branding.
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { city: 'Dublin', detail: 'Same-week delivery to Dublin city & county' },
+              { city: 'Cork & Munster', detail: 'Regular supply to Cork, Limerick & Kerry' },
+              { city: 'Galway & West', detail: 'Wholesale boxes to Connacht takeaways' },
+              { city: 'Nationwide', detail: 'All counties — Leinster, Ulster & beyond' },
+            ].map(({ city, detail }) => (
+              <div key={city} className="rounded-xl border border-gray-200 bg-slate-50 p-5">
+                <h3 className="font-bold text-gray-900 mb-1">{city}</h3>
+                <p className="text-sm text-gray-600">{detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Guides */}
       <section className="py-12 lg:py-16 bg-white">

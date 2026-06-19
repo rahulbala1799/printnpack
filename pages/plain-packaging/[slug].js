@@ -42,6 +42,35 @@ function getTierForCases(tiers, numCases) {
   return tiers[tiers.length - 1];
 }
 
+function buildProductLd(product, canonicalUrl) {
+  const basePrice = product.caseTiers?.[0]?.pricePerCase;
+  const image =
+    product.imageSrc && !isPlaceholderImage(product.imageSrc)
+      ? `https://www.printnpack.ie${product.imageSrc}`
+      : undefined;
+
+  return {
+    '@context': 'https://schema.org/',
+    '@type': 'Product',
+    name: product.name,
+    description: product.description,
+    sku: product.code,
+    image,
+    brand: { '@type': 'Brand', name: 'PrintNPack Ireland' },
+    category: product.category,
+    offers: basePrice
+      ? {
+          '@type': 'Offer',
+          url: canonicalUrl,
+          priceCurrency: 'EUR',
+          price: basePrice,
+          availability: 'https://schema.org/InStock',
+          seller: { '@type': 'Organization', name: 'PrintNPack Ireland' },
+        }
+      : undefined,
+  };
+}
+
 export default function PlainPackagingDetail({ product, relatedProducts }) {
   const router = useRouter();
   const [numCases, setNumCases] = useState(1);
@@ -73,6 +102,7 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
     ? `${product.name} — wholesale kraft corrugated pizza box Ireland. Tiered case pricing, fast delivery to Dublin, Cork & nationwide. Order plain pizza boxes online.`
     : `${product.description?.slice(0, 155)} Fast delivery across Ireland.`;
   const canonicalUrl = `https://www.printnpack.ie/plain-packaging/${product.id}`;
+  const productLd = buildProductLd(product, canonicalUrl);
 
   const handleAddToQuote = () => {
     if (!selectedTier) return;
@@ -98,6 +128,10 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
         )}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={pageTitle} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }}
+        />
       </Head>
 
       {/* ── Breadcrumb ─────────────────────────────────────────────────────── */}

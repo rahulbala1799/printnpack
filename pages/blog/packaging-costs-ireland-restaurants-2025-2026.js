@@ -627,8 +627,14 @@ export default function PackagingCostsPost() {
               Get a Quote
             </Link>
             <Link
-              href="/custom-pizza-boxes-ireland"
+              href="/pizza-boxes-ireland"
               className="border border-white text-white font-semibold px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors"
+            >
+              Pizza Boxes Ireland
+            </Link>
+            <Link
+              href="/custom-pizza-boxes-ireland"
+              className="border border-white/60 text-white font-semibold px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors"
             >
               Custom Pizza Boxes
             </Link>
