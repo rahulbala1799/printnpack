@@ -4,6 +4,34 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import RollUpBannerQuoteForm from '../components/RollUpBannerQuoteForm';
+import { SITE_URL } from '../lib/site';
+
+const PAGE_URL = `${SITE_URL}/roll-up-banners`;
+
+const pageFaqs = [
+  {
+    q: 'Where can I order pull up banners in Meath?',
+    a: 'PrintNPack supplies pull up banners and roll up banners across Meath, Dublin, and all of Ireland. We are based in Ashbourne, Co. Meath — order online or call for exhibition banners with fast nationwide delivery.',
+  },
+  {
+    q: 'What is the difference between pull up and roll up banners?',
+    a: 'Pull up banners and roll up banners are the same product — a portable banner that retracts into a base for easy transport. PrintNPack prints premium vinyl graphics on aluminium and lightweight frames for trade shows and retail.',
+  },
+  {
+    q: 'How much do roll up banners cost in Ireland?',
+    a: 'Roll up banners start from €35 depending on size and frame type. Contact PrintNPack for a quote on standard 850mm and 1200mm widths or custom exhibition sizes.',
+  },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: pageFaqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -69,15 +97,16 @@ const RollUpBannersPage = () => {
   return (
     <Layout>
       <Head>
-        <title>Roll Up Banners - Professional Exhibition & Trade Show Displays | Print n Pack Ireland</title>
-        <meta name="description" content="Professional roll-up banners for trade shows, exhibitions, and corporate displays. Premium vinyl printing with easy setup and transport across Ireland." />
-        <meta name="keywords" content="roll up banners, exhibition displays, trade show banners, corporate displays, Ireland" />
-        <meta property="og:title" content="Roll Up Banners - Exhibition & Trade Show Displays Ireland" />
-        <meta property="og:description" content="Professional roll-up banners. Easy setup, premium print, multiple sizes. Ireland delivery." />
+        <title>Pull Up Banners Meath &amp; Ireland | Roll Up Banner Printing | PrintNPack</title>
+        <meta name="description" content="Pull up banners Meath &amp; Ireland — professional roll up banner printing for trade shows, exhibitions &amp; retail. Based in Ashbourne, Co. Meath. Premium vinyl, fast nationwide delivery." />
+        <meta name="keywords" content="pull up banners meath, roll up banners ireland, pull up banners ireland, exhibition banners meath, trade show banners ireland, roll up banner printing dublin, portable banners ireland" />
+        <meta property="og:title" content="Pull Up Banners Meath & Ireland | Roll Up Banner Printing" />
+        <meta property="og:description" content="Pull up & roll up banners for trade shows and exhibitions. Based in Meath, delivering across Ireland." />
         <meta property="og:image" content="https://www.printnpack.ie/ifa/product/rollup/1.png" />
-        <meta property="og:url" content="https://www.printnpack.ie/roll-up-banners" />
+        <meta property="og:url" content={PAGE_URL} />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://www.printnpack.ie/roll-up-banners" />
+        <link rel="canonical" href={PAGE_URL} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       </Head>
 
       <nav className="bg-gray-50 border-b border-gray-200">
@@ -116,9 +145,9 @@ const RollUpBannersPage = () => {
                 <span className="w-2 h-2 bg-orange-500 rounded-full" />
                 Exhibitions & trade shows
               </div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">Roll Up Banners</h1>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">Pull Up &amp; Roll Up Banners — Meath &amp; Ireland</h1>
               <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
-                Professional roll-up banners for trade shows, exhibitions, and corporate displays. Easy setup, premium vinyl printing, multiple sizes.
+                Professional <strong>pull up banners in Meath</strong> and nationwide — ideal for trade shows, exhibitions, and corporate displays. Premium vinyl printing, easy setup, multiple sizes. Based in Ashbourne, Co. Meath.
               </p>
               <div className="grid grid-cols-3 gap-3 mb-6">
                 <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">From €35</div><div className="text-xs text-gray-500">starting</div></div>

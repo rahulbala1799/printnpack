@@ -15,8 +15,8 @@ import HomepageCTA from '../components/home/HomepageCTA';
 export default function Home() {
   const siteUrl = SITE_URL;
   const siteName = 'PrintNPack Ireland';
-  const title = 'PrintNPack - Custom Packaging, Print Solutions & Wholesale Supplies Ireland';
-  const description = "Ireland's leading custom packaging and print supplier. Pizza boxes, paper bags, leaflets, wide format printing, plain packaging wholesale and more. Low MOQs, fast delivery across Ireland, eco-friendly options. 100% Irish owned.";
+  const title = 'Print and Pack Ireland | PrintNPack - Custom Packaging & Print Solutions';
+  const description = "Print and Pack (PrintNPack) — Ireland's leading custom packaging and print supplier. Pizza boxes, printed flat handle bags, leaflets, wide format printing, plain packaging wholesale. Low MOQs, fast delivery, 100% Irish owned.";
   const ogImage = `${siteUrl}/images/og-homepage.jpg`;
 
   // ── WebSite schema (enables Google Sitelinks search box) ──────────────────
@@ -41,6 +41,7 @@ export default function Home() {
     '@type': ['LocalBusiness', 'Store'],
     '@id': `${siteUrl}/#business`,
     name: siteName,
+    alternateName: ['Print and Pack', 'Print n Pack', 'PrintNPack', 'printnpack'],
     url: siteUrl,
     logo: `${siteUrl}/favicon.ico`,
     image: ogImage,
@@ -121,6 +122,14 @@ export default function Home() {
     mainEntity: [
       {
         '@type': 'Question',
+        name: 'What is Print and Pack?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Print and Pack is PrintNPack (printnpack.ie) — an Irish-owned packaging and print company supplying custom pizza boxes, printed flat handle bags, leaflets, banners, stickers, and wholesale plain packaging with nationwide delivery.',
+        },
+      },
+      {
+        '@type': 'Question',
         name: 'Where can I buy pizza boxes in Ireland?',
         acceptedAnswer: {
           '@type': 'Answer',
@@ -190,7 +199,7 @@ export default function Home() {
         {/* ── Primary meta ──────────────────────────────────────────────── */}
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="keywords" content="packaging ireland, custom packaging dublin, pizza boxes ireland, paper bags wholesale, leaflets printing, wide format printing ireland, food packaging supplier, retail packaging, eco-friendly packaging ireland, plain packaging wholesale, catering supplies ireland, branded packaging, custom print solutions, takeaway packaging, disposable food containers, custom boxes ireland, printed packaging ireland" />
+        <meta name="keywords" content="print and pack, printnpack, packaging ireland, custom packaging dublin, pizza boxes ireland, printed flat handle bags, paper bags wholesale, leaflets ireland, wide format printing ireland, food packaging supplier, retail packaging, eco-friendly packaging ireland, plain packaging wholesale, catering supplies ireland, branded packaging, custom print solutions, takeaway packaging, disposable food containers, custom boxes ireland, printed packaging ireland" />
         <meta name="author" content="PrintNPack Ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 

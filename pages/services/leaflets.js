@@ -3,26 +3,57 @@ import Layout from '../../components/layout/Layout';
 import Head from 'next/head';
 import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
+import { SITE_URL } from '../../lib/site';
+
+const PAGE_URL = `${SITE_URL}/services/leaflets`;
+
+const pageFaqs = [
+  {
+    q: 'Where can I get leaflets printed in Ireland?',
+    a: 'PrintNPack provides professional leaflet printing across Ireland — flat leaflets, folded flyers, and promotional materials on premium paper stocks with fast turnaround and nationwide delivery.',
+  },
+  {
+    q: 'What is a flat leaflet?',
+    a: 'A flat leaflet is a single-sheet printed flyer without folds — ideal for handouts, door drops, and point-of-sale promotions. We print A6, A5, A4, and DL sizes with gloss or matt finishes.',
+  },
+  {
+    q: 'Do you offer leaflet design services?',
+    a: 'Yes. Our team can design eye-catching leaflets or print from your supplied artwork. Contact us for a quote on design and printing.',
+  },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: pageFaqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
 
 const LeafletsPage = () => {
   return (
     <Layout>
       <Head>
-        <title>Professional Leaflet Design & Printing Services | Print n Pack</title>
-        <meta name="description" content="Eye-catching leaflet design and printing services in Ireland. Create impactful marketing materials with our professional leaflet solutions. High-quality, fast turnaround." />
-        <meta name="keywords" content="leaflet printing, flyer design, marketing materials, business flyers, promotional leaflets, Ireland printing services" />
-        <meta property="og:title" content="Professional Leaflet Design & Printing Services | Print n Pack" />
-        <meta property="og:description" content="Eye-catching leaflet design and printing services in Ireland. Create impactful marketing materials with our professional leaflet solutions." />
+        <title>Leaflets Ireland | Flat Leaflet Printing &amp; Design | PrintNPack</title>
+        <meta name="description" content="Leaflets Ireland — flat leaflet printing, flyer design &amp; promotional materials. Premium paper, fast turnaround, nationwide delivery from PrintNPack." />
+        <meta name="keywords" content="leaflets ireland, flat leaflets, leaflet printing ireland, flyer printing ireland, promotional leaflets, business flyers ireland, print leaflets dublin" />
+        <meta property="og:title" content="Leaflets Ireland | Flat Leaflet Printing & Design" />
+        <meta property="og:description" content="Professional leaflet printing in Ireland. Flat leaflets, folded flyers, design services, fast delivery." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.printnpack.ie/services/leaflets" />
-        <link rel="canonical" href="https://www.printnpack.ie/services/leaflets" />
+        <meta property="og:url" content={PAGE_URL} />
+        <link rel="canonical" href={PAGE_URL} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       </Head>
 
       <div className="bg-gradient-to-b from-blue-50 to-white py-12 md:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Professional Leaflet Design & Printing</h1>
-            <p className="text-xl text-gray-600 mb-8">Create engaging leaflets that effectively communicate your message. Our professional design and printing services help you reach your target audience with impact.</p>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Leaflets Ireland — Flat Leaflet Printing &amp; Design</h1>
+            <p className="text-xl text-gray-600 mb-8">
+              Professional <strong>leaflets Ireland</strong> businesses trust — including <strong>flat leaflets</strong>, folded flyers, and promotional handouts. Eye-catching design, premium printing, and fast nationwide delivery.
+            </p>
             
             <Link 
               href="/quote"
@@ -61,73 +92,33 @@ const LeafletsPage = () => {
               </div>
             </div>
 
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Leaflet Sizes</h2>
-            <p className="text-gray-600 mb-8">Choose the size that fits your campaign. Each size has its own product page with full specs and quote options.</p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-              <Link href="/products/leaflets-a6" className="block p-5 rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:shadow-md transition-all bg-white">
-                <span className="text-2xl font-bold text-gray-900">A6</span>
-                <p className="text-sm text-gray-500 mt-1">Compact, pocket-sized</p>
-                <span className="inline-flex items-center text-blue-600 font-medium mt-2 text-sm">View product <FaArrowRight className="ml-1" /></span>
-              </Link>
-              <Link href="/products/leaflets-a5" className="block p-5 rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:shadow-md transition-all bg-white">
-                <span className="text-2xl font-bold text-gray-900">A5</span>
-                <p className="text-sm text-gray-500 mt-1">Versatile, mid-size</p>
-                <span className="inline-flex items-center text-blue-600 font-medium mt-2 text-sm">View product <FaArrowRight className="ml-1" /></span>
-              </Link>
-              <Link href="/products/leaflets-a4" className="block p-5 rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:shadow-md transition-all bg-white">
-                <span className="text-2xl font-bold text-gray-900">A4</span>
-                <p className="text-sm text-gray-500 mt-1">Detailed brochures</p>
-                <span className="inline-flex items-center text-blue-600 font-medium mt-2 text-sm">View product <FaArrowRight className="ml-1" /></span>
-              </Link>
-              <Link href="/products/leaflets-a3" className="block p-5 rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:shadow-md transition-all bg-white">
-                <span className="text-2xl font-bold text-gray-900">A3</span>
-                <p className="text-sm text-gray-500 mt-1">Large format, posters</p>
-                <span className="inline-flex items-center text-blue-600 font-medium mt-2 text-sm">View product <FaArrowRight className="ml-1" /></span>
-              </Link>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Leaflet Printing FAQs</h2>
+            <div className="space-y-4 mb-12">
+              {pageFaqs.map(({ q, a }) => (
+                <div key={q} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                  <h3 className="font-semibold text-gray-900 mb-2">{q}</h3>
+                  <p className="text-gray-600">{a}</p>
+                </div>
+              ))}
             </div>
 
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Our Leaflet Services Include:</h2>
-            
-            <ul className="space-y-4 mb-12">
-              <li className="flex items-start">
-                <span className="text-blue-600 mr-2">•</span>
-                <span>Marketing and promotional leaflets</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-blue-600 mr-2">•</span>
-                <span>Product catalogues and brochures</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-blue-600 mr-2">•</span>
-                <span>Event flyers and handouts</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-blue-600 mr-2">•</span>
-                <span>Information leaflets and guides</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-blue-600 mr-2">•</span>
-                <span>Direct mail and distribution materials</span>
-              </li>
-            </ul>
-
-            <div className="bg-gray-50 p-8 rounded-xl mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Ready to Create Your Leaflets?</h2>
-              <p className="text-gray-600 mb-6">Contact us today to discuss your leaflet requirements or get a quote. Our team is ready to help you create effective marketing materials.</p>
-              
-              <div className="flex flex-wrap gap-4">
+            <div className="bg-blue-50 p-8 rounded-lg">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Ready to Get Started?</h2>
+              <p className="text-gray-600 mb-6">
+                Contact us today to discuss your leaflet printing needs. We&apos;ll help you create marketing materials that get results.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Link 
                   href="/quote"
-                  className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                  className="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                 >
                   Request a Quote <FaArrowRight className="ml-2" />
                 </Link>
-                
                 <Link 
-                  href="/contact"
-                  className="inline-flex items-center bg-white text-blue-600 border-2 border-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+                  href="/blog/leaflet-printing-ireland-guide"
+                  className="inline-flex items-center justify-center bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold border border-blue-200 hover:bg-blue-50 transition-colors"
                 >
-                  Contact Us <FaArrowRight className="ml-2" />
+                  Read Leaflet Printing Guide
                 </Link>
               </div>
             </div>
@@ -138,4 +129,4 @@ const LeafletsPage = () => {
   );
 };
 
-export default LeafletsPage; 
+export default LeafletsPage;

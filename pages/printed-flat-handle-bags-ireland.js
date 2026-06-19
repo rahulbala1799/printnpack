@@ -131,9 +131,9 @@ const webPageLd = {
 };
 
 export default function PrintedFlatHandleBagsIreland() {
-  const title = 'Printed Flat Handle Bags Ireland | Custom Logo Paper Bags';
+  const title = 'Printed Flat Handle Bags Ireland | Custom Logo Paper Bags | PrintNPack';
   const description =
-    'Order printed flat handle paper bags in Ireland — custom logo printing from 500 units. Kraft & white bags in Small, Medium & Large. Fast delivery to Dublin, Cork & nationwide.';
+    'Printed flat handle bags & printed flat handle paper bags in Ireland — custom logo printing from 500 units. Kraft & white bags, three sizes, fast delivery to Dublin, Meath & nationwide.';
 
   return (
     <Layout>

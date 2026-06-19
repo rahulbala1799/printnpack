@@ -23,9 +23,9 @@ const decalImages = [
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Trade Show Banners and Custom Decals in Ireland: The Complete High-Impact Marketing Guide',
+  headline: 'Custom Decals Ireland | Trade Show Banners & Vinyl Graphics Guide',
   description:
-    'High quality trade show banners and custom decals in Ireland. Fast turnaround, durable print, and affordable pricing for SMEs and events. Where they work best and how to choose.',
+    'Order custom decals in Ireland — window, vehicle, and retail vinyl graphics. Plus trade show banners, pull up banners, and exhibition displays. Fast turnaround nationwide.',
   image: `${siteUrl}${heroImage}`,
   author: { '@type': 'Organization', name: 'PrintNPack Ireland', url: siteUrl },
   publisher: {
@@ -42,6 +42,14 @@ const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Where can I order custom decals in Ireland?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'PrintNPack supplies custom decals across Ireland for shop windows, vehicles, walls, floors, and retail displays. We print window decals, vehicle graphics, and promotional vinyl stickers with fast nationwide delivery from our Irish print facility.',
+      },
+    },
     {
       '@type': 'Question',
       name: 'Why are trade show banners essential for Irish businesses?',
@@ -136,9 +144,9 @@ const orderSteps = [
 ];
 
 export default function TradeShowBannersDecalsIreland() {
-  const title = 'Trade Show Banners and Custom Decals in Ireland: The Complete High-Impact Marketing Guide';
+  const title = 'Custom Decals Ireland | Trade Show Banners & Vinyl Graphics | PrintNPack';
   const description =
-    'High quality trade show banners and custom decals in Ireland. Fast turnaround, durable print, and affordable pricing for SMEs and events.';
+    'Order custom decals in Ireland for windows, vehicles & retail. Trade show banners, pull up banners & exhibition graphics. Fast turnaround, nationwide delivery.';
 
   return (
     <Layout>
@@ -147,7 +155,7 @@ export default function TradeShowBannersDecalsIreland() {
         <meta name="description" content={description} />
         <meta
           name="keywords"
-          content="trade show banners Ireland, custom decals Ireland, roll up banners Ireland, pull up banner printing Dublin, exhibition banners Ireland, portable exhibition banners Ireland, window decals Ireland, vehicle decals Ireland, van decals printing Ireland, custom window decals Ireland retail, shop window promotional decals Ireland, fleet branding decals Ireland, retail window graphics Ireland, business expo banners Dublin, conference display banners Ireland"
+          content="decals ireland, custom decals ireland, window decals ireland, vehicle decals ireland, trade show banners ireland, roll up banners ireland, pull up banners ireland, exhibition banners ireland, vinyl decals dublin, shop window decals ireland, retail decals ireland"
         />
         <meta name="author" content="PrintNPack Ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
@@ -189,8 +197,13 @@ export default function TradeShowBannersDecalsIreland() {
         </div>
 
         <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight mb-6">
-          Trade Show Banners and Custom Decals in Ireland: The Complete High-Impact Marketing Guide
+          Custom Decals Ireland — Trade Show Banners &amp; Vinyl Graphics
         </h1>
+
+        <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+          Searching for <strong>decals in Ireland</strong>? PrintNPack prints custom window decals, vehicle graphics,
+          and retail vinyl stickers — plus portable trade show banners and pull up banners for exhibitions nationwide.
+        </p>
 
         <div className="relative rounded-2xl overflow-hidden h-64 sm:h-80 mb-8 border border-slate-100">
           <Image

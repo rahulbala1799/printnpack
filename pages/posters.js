@@ -3,6 +3,34 @@ import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { SITE_URL } from '../lib/site';
+
+const PAGE_URL = `${SITE_URL}/posters`;
+
+const pageFaqs = [
+  {
+    q: 'Where can I get custom posters printed in Ireland?',
+    a: 'PrintNPack prints custom posters and customisable posters across Ireland on premium 170gsm and 200gsm paper. Sizes from A4 to A0 with eco-solvent inks, no minimum order, and fast nationwide delivery.',
+  },
+  {
+    q: 'What poster sizes are available?',
+    a: 'We print standard sizes A4, A3, A2, A1, and A0, plus custom dimensions up to 1.5m width. Matt or gloss lamination is available.',
+  },
+  {
+    q: 'Is there a minimum order for custom posters?',
+    a: 'No — single custom posters are available. Bulk discounts apply for larger orders.',
+  },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: pageFaqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -74,15 +102,16 @@ export default function PostersPage() {
   return (
     <Layout>
       <Head>
-        <title>Custom Posters - Premium Print | Print n Pack Ireland</title>
-        <meta name="description" content="High-quality custom posters on premium paper. Eco-solvent printing, A4 to A0 and custom sizes. Fast turnaround, no minimum order. Ireland delivery." />
-        <meta name="keywords" content="custom posters, poster printing, A4 A3 A2 A1 A0, events, retail, Ireland" />
-        <meta property="og:title" content="Custom Posters - Premium Print | Print n Pack Ireland" />
-        <meta property="og:description" content="High-quality custom posters. Premium paper, eco-solvent inks. From €15 per poster." />
+        <title>Custom Posters Ireland | Customisable Poster Printing | PrintNPack</title>
+        <meta name="description" content="Custom posters &amp; customisable posters Ireland — premium paper, eco-solvent printing, A4 to A0 sizes. No minimum order, fast turnaround, nationwide delivery." />
+        <meta name="keywords" content="custom posters, custom posters ireland, customisable posters, poster printing ireland, print posters ireland, A4 A3 A2 A1 A0 posters, event posters ireland" />
+        <meta property="og:title" content="Custom Posters Ireland | Customisable Poster Printing" />
+        <meta property="og:description" content="Custom & customisable posters on premium paper. Eco-solvent inks, no minimum order, Ireland delivery." />
         <meta property="og:image" content="https://www.printnpack.ie/ifa/product/Poster/single_poster.jpg" />
-        <meta property="og:url" content="https://www.printnpack.ie/posters" />
+        <meta property="og:url" content={PAGE_URL} />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://www.printnpack.ie/posters" />
+        <link rel="canonical" href={PAGE_URL} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       </Head>
 
       <nav className="bg-gray-50 border-b border-gray-200">
@@ -121,9 +150,9 @@ export default function PostersPage() {
                 <span className="w-2 h-2 bg-blue-500 rounded-full" />
                 Wide format
               </div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">Custom Posters</h1>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">Custom Posters Ireland</h1>
               <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
-                High-quality custom posters printed on premium paper with vibrant eco-solvent inks. Perfect for advertising, events, retail displays, and exhibitions.
+                <strong>Custom posters</strong> and <strong>customisable posters</strong> printed on premium paper with vibrant eco-solvent inks. Perfect for advertising, events, retail displays, and exhibitions across Ireland.
               </p>
               <div className="grid grid-cols-3 gap-3 mb-6">
                 <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">From €15</div><div className="text-xs text-gray-500">per poster</div></div>

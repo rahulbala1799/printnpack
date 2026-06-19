@@ -31,6 +31,14 @@ const faqLd = {
   mainEntity: [
     {
       '@type': 'Question',
+      name: 'Where can I order printed flat handle bags in Ireland?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'PrintNPack supplies printed flat handle paper bags across Ireland with custom logo printing from 500 units. Order online at printnpack.ie/printed-flat-handle-bags-ireland for kraft and white bags in three sizes with nationwide delivery.',
+      },
+    },
+    {
+      '@type': 'Question',
       name: 'What is the minimum order for custom paper bags in Ireland?',
       acceptedAnswer: {
         '@type': 'Answer',
@@ -67,16 +75,16 @@ const breadcrumbLd = {
 };
 
 export default function PaperBagsWithLogoIreland() {
-  const title = 'Paper Bags with Logo Ireland: A Guide for Retailers, Cafés & Food Businesses';
+  const title = 'Paper Bags with Logo Ireland | Printed Flat Handle Bags Guide';
   const description =
-    'Thinking about ordering custom paper bags with your logo in Ireland? This guide covers bag styles, handle types, paper weights, print options, and how to get the best wholesale price per unit.';
+    'Guide to paper bags with logo in Ireland — printed flat handle bags, twisted handle & SOS styles. Compare bag types, print options, MOQs and wholesale pricing from PrintNPack.';
 
   return (
     <Layout>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="keywords" content="paper bags with logo ireland, branded paper bags ireland, custom paper bags ireland, paper bags wholesale ireland, paper bags dublin, twisted handle paper bags ireland, flat handle paper bags ireland, sos paper bags ireland, printed paper bags ireland" />
+        <meta name="keywords" content="printed flat handle bags, printed flat handle paper bags ireland, paper bags with logo ireland, branded paper bags ireland, custom paper bags ireland, flat handle paper bags ireland, paper bags wholesale ireland, paper bags dublin, twisted handle paper bags ireland, sos paper bags ireland" />
         <meta name="author" content="PrintNPack Ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <link rel="canonical" href={`${siteUrl}/blog/paper-bags-with-logo-ireland`} />

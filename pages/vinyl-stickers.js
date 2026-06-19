@@ -4,6 +4,34 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import VinylStickerQuoteForm from '../components/VinylStickerQuoteForm';
+import { SITE_URL } from '../lib/site';
+
+const PAGE_URL = `${SITE_URL}/vinyl-stickers`;
+
+const pageFaqs = [
+  {
+    q: 'Where can I order custom vinyl stickers in Ireland?',
+    a: 'PrintNPack prints custom vinyl stickers across Ireland for windows, vehicles, walls, and packaging. Die-cut shapes, gloss or matte finish, outdoor-grade vinyl, and fast nationwide delivery.',
+  },
+  {
+    q: 'Do you supply stickers across all of Ireland?',
+    a: 'Yes — we deliver custom vinyl stickers and decals to Dublin, Cork, Galway, and every county in Ireland.',
+  },
+  {
+    q: 'What materials are available for vinyl stickers?',
+    a: 'We offer gloss, matte, transparent, and removable vinyl plus vehicle-grade and floor graphics materials.',
+  },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: pageFaqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -128,15 +156,16 @@ const VinylStickersPage = () => {
   return (
     <Layout>
       <Head>
-        <title>Vinyl Stickers - Custom Vinyl Graphics & Decals | Print n Pack Ireland</title>
-        <meta name="description" content="High-quality vinyl stickers, decals, and graphics for vehicles, windows, walls, and more. Custom designs with premium materials and professional installation across Ireland." />
-        <meta name="keywords" content="vinyl stickers, vinyl decals, vinyl graphics, vehicle wraps, window decals, wall graphics, Ireland" />
-        <meta property="og:title" content="Vinyl Stickers - Custom Graphics & Decals Ireland" />
-        <meta property="og:description" content="Premium vinyl stickers and decals. Vehicles, windows, walls. Custom shapes and materials. Fast delivery Ireland." />
+        <title>Custom Vinyl Stickers Ireland | Stickers &amp; Decals | PrintNPack</title>
+        <meta name="description" content="Custom vinyl stickers Ireland — window, vehicle &amp; wall decals with premium outdoor vinyl. Stickers Ireland with fast turnaround and nationwide delivery from PrintNPack." />
+        <meta name="keywords" content="custom vinyl stickers, custom vinyl stickers ireland, stickers ireland, vinyl stickers ireland, vinyl decals ireland, window decals, vehicle graphics ireland" />
+        <meta property="og:title" content="Custom Vinyl Stickers Ireland | Stickers & Decals" />
+        <meta property="og:description" content="Custom vinyl stickers & decals for vehicles, windows & walls. Premium materials, Ireland delivery." />
         <meta property="og:image" content="https://www.printnpack.ie/ifa/product/vinylstk/Window_Sticker_2_01041803202404.png.webp" />
-        <meta property="og:url" content="https://www.printnpack.ie/vinyl-stickers" />
+        <meta property="og:url" content={PAGE_URL} />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://www.printnpack.ie/vinyl-stickers" />
+        <link rel="canonical" href={PAGE_URL} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       </Head>
 
       <nav className="bg-gray-50 border-b border-gray-200">
@@ -175,9 +204,9 @@ const VinylStickersPage = () => {
                 <span className="w-2 h-2 bg-purple-500 rounded-full" />
                 Custom graphics & decals
               </div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">Vinyl Stickers & Decals</h1>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">Custom Vinyl Stickers Ireland</h1>
               <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
-                High-quality vinyl stickers, decals, and graphics for vehicles, windows, walls, and more. Custom designs with premium materials.
+                <strong>Custom vinyl stickers</strong> and decals for vehicles, windows, walls, and more — premium outdoor vinyl with vibrant colour. Trusted <strong>stickers Ireland</strong> supplier with fast nationwide delivery.
               </p>
               <div className="grid grid-cols-3 gap-3 mb-6">
                 <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">From €2</div><div className="text-xs text-gray-500">starting</div></div>
