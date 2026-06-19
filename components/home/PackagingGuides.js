@@ -31,6 +31,41 @@ const guides = [
     image: '/images/pizza-boxes/PIZZA_BOX_3.jpg',
     cta: 'Read the guide',
   },
+  {
+    href: '/vinyl-banners',
+    title: 'Printed Banners Ireland',
+    description: 'Vinyl banners for outdoor advertising & events — custom sizes, UV print.',
+    image: '/ifa/product/banner/20221019_184306722822_e66498_Promo-banner.webp',
+    cta: 'View banners',
+  },
+  {
+    href: '/roll-up-banners',
+    title: 'Pull Up Banners Meath',
+    description: 'Portable roll up banners for trade shows — based in Ashbourne, Co. Meath.',
+    image: '/ifa/product/rollup/1.png',
+    cta: 'View roll ups',
+  },
+  {
+    href: '/vinyl-stickers',
+    title: 'Custom Vinyl Stickers',
+    description: 'Stickers & decals for windows, vehicles, and retail across Ireland.',
+    image: '/ifa/product/vinylstk/Window_Sticker_2_01041803202404.png.webp',
+    cta: 'View stickers',
+  },
+  {
+    href: '/services/leaflets',
+    title: 'Leaflets Ireland',
+    description: 'Flat leaflet printing & design for Irish businesses.',
+    image: '/ifa/product/leaflet/leaflet-hero.jpg',
+    cta: 'View leaflets',
+  },
+  {
+    href: '/blog/trade-show-banners-decals-ireland',
+    title: 'Custom Decals Ireland',
+    description: 'Window, vehicle & retail decals — plus trade show banner guide.',
+    image: '/ifa/product/vinylstk/carstk.webp',
+    cta: 'Read guide',
+  },
 ];
 
 export default function PackagingGuides() {
@@ -39,10 +74,10 @@ export default function PackagingGuides() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-6 sm:mb-8">
           <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
-            Packaging guides
+            Products &amp; print guides
           </h2>
           <p className="mt-1 text-sm sm:text-base text-gray-500">
-            Practical advice for Irish restaurants and takeaways
+            Packaging, banners, stickers, leaflets &amp; more for Irish businesses
           </p>
         </div>
 

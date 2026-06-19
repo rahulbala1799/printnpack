@@ -3,6 +3,58 @@ import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
+import { SITE_URL } from '../lib/site';
+
+const PAGE_URL = `${SITE_URL}/vinyl-banners`;
+
+const pageFaqs = [
+  {
+    q: 'Where can I order printed banners in Ireland?',
+    a: 'PrintNPack prints custom printed banners and vinyl banners across Ireland — outdoor PVC banners, mesh banners, and indoor displays. No minimum order, fast turnaround, nationwide delivery.',
+  },
+  {
+    q: 'What is the difference between vinyl banners and roll up banners?',
+    a: 'Vinyl banners are large-format PVC sheets with eyelets for hanging on fences, buildings, and scaffolding. Roll up (pull up) banners are portable retractable displays for trade shows and indoor events.',
+  },
+  {
+    q: 'Do you print trade show banners?',
+    a: 'Yes. We print vinyl banners for outdoor advertising and supply roll up banners for trade shows, exhibitions, and retail. See our roll up banners page for portable display options.',
+  },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: pageFaqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+
+const productLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Printed Banners & Vinyl Banners Ireland',
+  description: 'Custom printed vinyl banners for indoor and outdoor advertising in Ireland. 440gsm/510gsm PVC, UV printing, custom sizes up to 5m wide.',
+  image: `${SITE_URL}/ifa/product/banner/20221019_184306722822_e66498_Promo-banner.webp`,
+  brand: { '@type': 'Brand', name: 'PrintNPack Ireland' },
+  offers: {
+    '@type': 'Offer',
+    url: PAGE_URL,
+    priceCurrency: 'EUR',
+    availability: 'https://schema.org/InStock',
+    seller: { '@type': 'Organization', name: 'PrintNPack Ireland', url: SITE_URL },
+  },
+};
+
+const relatedLinks = [
+  { href: '/roll-up-banners', label: 'Pull Up & Roll Up Banners', desc: 'Portable trade show displays' },
+  { href: '/blog/trade-show-banners-decals-ireland', label: 'Trade Show Banners & Decals', desc: 'Exhibition marketing guide' },
+  { href: '/posters', label: 'Custom Posters Ireland', desc: 'Premium poster printing' },
+  { href: '/vinyl-stickers', label: 'Custom Vinyl Stickers', desc: 'Window & vehicle decals' },
+];
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -65,15 +117,17 @@ export default function VinylBannersPage() {
   return (
     <Layout>
       <Head>
-        <title>Vinyl Banners - Indoor & Outdoor Advertising | Print n Pack Ireland</title>
-        <meta name="description" content="High-impact vinyl banners for indoor and outdoor advertising. Premium 440gsm/510gsm vinyl, UV printing, custom sizes up to 5m. Ireland delivery." />
-        <meta name="keywords" content="vinyl banners, outdoor banners, indoor banners, advertising banners, Ireland, custom print" />
-        <meta property="og:title" content="Vinyl Banners - Indoor & Outdoor | Print n Pack Ireland" />
-        <meta property="og:description" content="High-impact vinyl banners. Premium material, UV printing, custom sizes. No minimum order." />
+        <title>Printed Banners Ireland | Vinyl Banners &amp; Trade Show Banners | PrintNPack</title>
+        <meta name="description" content="Printed banners &amp; vinyl banners Ireland — outdoor PVC advertising, trade show banners, custom sizes up to 5m. UV printing, no minimum order, nationwide delivery." />
+        <meta name="keywords" content="printed banners, vinyl banners ireland, trade show banners, outdoor banners ireland, advertising banners, custom banner printing, printed banners ireland" />
+        <meta property="og:title" content="Printed Banners & Vinyl Banners Ireland | PrintNPack" />
+        <meta property="og:description" content="Custom printed vinyl banners for indoor & outdoor advertising. UV printing, custom sizes, Ireland delivery." />
         <meta property="og:image" content="https://www.printnpack.ie/ifa/product/banner/20221019_184306722822_e66498_Promo-banner.webp" />
-        <meta property="og:url" content="https://www.printnpack.ie/vinyl-banners" />
+        <meta property="og:url" content={PAGE_URL} />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://www.printnpack.ie/vinyl-banners" />
+        <link rel="canonical" href={PAGE_URL} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
       </Head>
 
       <nav className="bg-gray-50 border-b border-gray-200">
@@ -112,9 +166,11 @@ export default function VinylBannersPage() {
                 <span className="w-2 h-2 bg-blue-500 rounded-full" />
                 Wide format
               </div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">Vinyl Banners</h1>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">Printed Banners &amp; Vinyl Banners Ireland</h1>
               <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
-                High-impact vinyl banners for indoor and outdoor advertising. Premium material, UV printing, custom sizes up to 5m wide. Reinforced hems and eyelets standard.
+                <strong>Printed banners</strong> and <strong>vinyl banners</strong> for outdoor advertising, shop fronts, and events. Also see our{' '}
+                <Link href="/roll-up-banners" className="text-blue-600 hover:underline font-medium">pull up banners</Link>
+                {' '}for trade shows. Premium PVC, UV printing, custom sizes up to 5m wide.
               </p>
               <div className="grid grid-cols-3 gap-3 mb-6">
                 <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">Quote</div><div className="text-xs text-gray-500">on request</div></div>
@@ -217,6 +273,22 @@ export default function VinylBannersPage() {
           </div>
         </div>
       </section>
+
+      <section className="bg-white border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Printed banner FAQs</h2>
+          <div className="grid md:grid-cols-3 gap-4">
+            {pageFaqs.map(({ q, a }) => (
+              <div key={q} className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                <h3 className="font-semibold text-gray-900 text-sm mb-2">{q}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <RelatedSeoLinks links={relatedLinks} />
 
       <section className="bg-gray-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 text-center">

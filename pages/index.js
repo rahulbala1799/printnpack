@@ -50,13 +50,16 @@ export default function Home() {
     email: 'hello@printnpack.ie',
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Dublin',
+      streetAddress: 'Unit 14 Ashbourne Business Centre',
+      addressLocality: 'Ashbourne',
+      addressRegion: 'Co. Meath',
+      postalCode: 'A84 KV57',
       addressCountry: 'IE',
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: 53.3498,
-      longitude: -6.2603,
+      latitude: 53.511286,
+      longitude: -6.399544,
     },
     areaServed: {
       '@type': 'Country',
@@ -106,6 +109,11 @@ export default function Home() {
           '@type': 'OfferCatalog',
           name: 'Print Solutions',
           itemListElement: [
+            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Vinyl Banners Ireland', url: `${siteUrl}/vinyl-banners` } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Roll Up Banners Meath', url: `${siteUrl}/roll-up-banners` } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Custom Posters Ireland', url: `${siteUrl}/posters` } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Leaflets Ireland', url: `${siteUrl}/services/leaflets` } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Custom Decals Ireland', url: `${siteUrl}/blog/trade-show-banners-decals-ireland` } },
             { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Leaflets & Flyers', url: `${siteUrl}/services/leaflets` } },
             { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Vinyl Banners', url: `${siteUrl}/vinyl-banners` } },
             { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Vinyl Stickers Ireland', url: `${siteUrl}/vinyl-stickers` } },
@@ -120,6 +128,14 @@ export default function Home() {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Is there a printing shop in Ashbourne?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. PrintNPack is based at Unit 14 Ashbourne Business Centre, Ashbourne, Co. Meath. We offer professional printing and packaging with nationwide delivery across Ireland.',
+        },
+      },
       {
         '@type': 'Question',
         name: 'What is Print and Pack?',

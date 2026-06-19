@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import Layout from '../../components/layout/Layout';
+import RelatedSeoLinks from '../../components/seo/RelatedSeoLinks';
 
 import { SITE_URL as siteUrl } from '../../lib/site';
 const slug = 'trade-show-banners-decals-ireland';
@@ -553,6 +554,15 @@ export default function TradeShowBannersDecalsIreland() {
           </div>
 
         </div>
+
+        <RelatedSeoLinks
+          links={[
+            { href: '/vinyl-stickers', label: 'Custom Vinyl Stickers', desc: 'Window, vehicle & retail decals' },
+            { href: '/roll-up-banners', label: 'Pull Up Banners Meath', desc: 'Portable trade show displays' },
+            { href: '/vinyl-banners', label: 'Printed Banners Ireland', desc: 'Large format outdoor vinyl' },
+            { href: '/blog/custom-vinyl-stickers-ireland', label: 'Vinyl Stickers Guide', desc: 'Materials & applications' },
+          ]}
+        />
 
         <div className="mt-12 bg-gradient-to-br from-purple-700 to-purple-900 rounded-2xl p-8 sm:p-10 text-center text-white overflow-hidden relative">
           <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/20 rounded-full -translate-y-1/2 translate-x-1/2" />

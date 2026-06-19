@@ -3,6 +3,7 @@ import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 import { SITE_URL } from '../lib/site';
 
 const PAGE_URL = `${SITE_URL}/posters`;
@@ -255,6 +256,15 @@ export default function PostersPage() {
           </div>
         </div>
       </section>
+
+      <RelatedSeoLinks
+        links={[
+          { href: '/services/posters', label: 'Poster Printing Service', desc: 'Design & print service' },
+          { href: '/services/leaflets', label: 'Leaflets Ireland', desc: 'Flat leaflet printing' },
+          { href: '/vinyl-banners', label: 'Printed Banners', desc: 'Large format outdoor' },
+          { href: '/roll-up-banners', label: 'Roll Up Banners', desc: 'Trade show displays' },
+        ]}
+      />
 
       <section className="bg-gray-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 text-center">

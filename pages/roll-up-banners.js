@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import RollUpBannerQuoteForm from '../components/RollUpBannerQuoteForm';
+import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 import { SITE_URL } from '../lib/site';
 
 const PAGE_URL = `${SITE_URL}/roll-up-banners`;
@@ -273,6 +274,15 @@ const RollUpBannersPage = () => {
           </div>
         </div>
       </section>
+
+      <RelatedSeoLinks
+        links={[
+          { href: '/vinyl-banners', label: 'Printed Vinyl Banners', desc: 'Outdoor advertising banners' },
+          { href: '/blog/trade-show-banners-decals-ireland', label: 'Trade Show & Decals Guide', desc: 'Exhibition marketing' },
+          { href: '/posters', label: 'Custom Posters Ireland', desc: 'Event & retail posters' },
+          { href: '/contact', label: 'Printing Ashbourne', desc: 'Based in Co. Meath' },
+        ]}
+      />
 
       {quoteModalOpen && <RollUpBannerQuoteForm isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} productType="Roll Up Banners" />}
     </Layout>

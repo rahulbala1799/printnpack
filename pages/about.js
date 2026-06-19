@@ -42,10 +42,10 @@ const AboutPage = () => {
   return (
     <Layout>
       <Head>
-        <title>About Us - PrintNPack Ireland</title>
-        <meta name="description" content="Learn about PrintNPack's mission, vision, and commitment to providing high-quality packaging solutions in Ireland." />
+        <title>About PrintNPack | Printing &amp; Packaging in Ashbourne, Meath</title>
+        <meta name="description" content="PrintNPack is an Irish-owned printing & packaging company based in Ashbourne, Co. Meath. Custom pizza boxes, paper bags, banners, stickers & more — nationwide delivery." />
         <link rel="canonical" href="https://www.printnpack.ie/about" />
-        <meta property="og:title" content="About Us - PrintNPack Ireland" />
+        <meta property="og:title" content="About PrintNPack | Ashbourne, Co. Meath" />
         <meta property="og:url" content="https://www.printnpack.ie/about" />
       </Head>
 
@@ -54,7 +54,7 @@ const AboutPage = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-700 opacity-90"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">About PrintNPack</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">About PrintNPack — Ashbourne, Co. Meath</h1>
             <p className="text-xl text-blue-100">
               Your trusted partner for innovative and sustainable packaging solutions
             </p>
@@ -70,7 +70,7 @@ const AboutPage = () => {
             <div className="w-20 h-1 bg-blue-600 mb-6"></div>
             
             <p className="text-gray-700 text-lg mb-6">
-              PrintNPack is Ireland's premier packaging specialist, delivering high-quality <strong>printed pizza boxes</strong>, <strong>custom paper bags</strong>, and <strong>burger boxes</strong> with industry-leading turnaround times. Based in Dublin, we've revolutionized the Irish packaging industry by offering <strong>low minimum order quantities</strong> that make professional packaging accessible to businesses of all sizes.
+              PrintNPack is Ireland&apos;s premier packaging and print specialist, delivering high-quality <strong>printed pizza boxes</strong>, <strong>custom paper bags</strong>, and <strong>burger boxes</strong> with industry-leading turnaround times. Based in <strong>Ashbourne, Co. Meath</strong>, we serve businesses across Dublin, Meath, and all of Ireland with <strong>low minimum order quantities</strong> that make professional packaging accessible to businesses of all sizes.
             </p>
             
             <p className="text-gray-700 text-lg mb-6">
@@ -162,6 +162,31 @@ const AboutPage = () => {
             <div className="text-center">
               <div className="text-4xl font-bold mb-2">100</div>
               <div className="text-xl">MOQ for Custom Printing</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Popular products */}
+      <div className="py-12 bg-white border-t border-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">Popular products &amp; services</h2>
+            <div className="grid sm:grid-cols-2 gap-3 text-sm">
+              {[
+                { href: '/custom-pizza-boxes-ireland', label: 'Custom Pizza Boxes Ireland' },
+                { href: '/printed-flat-handle-bags-ireland', label: 'Printed Flat Handle Bags' },
+                { href: '/vinyl-banners', label: 'Printed Banners Ireland' },
+                { href: '/roll-up-banners', label: 'Pull Up Banners Meath' },
+                { href: '/vinyl-stickers', label: 'Custom Vinyl Stickers' },
+                { href: '/posters', label: 'Custom Posters Ireland' },
+                { href: '/services/leaflets', label: 'Leaflets Ireland' },
+                { href: '/contact', label: 'Printing Ashbourne — Contact Us' },
+              ].map(({ href, label }) => (
+                <Link key={href} href={href} className="text-blue-600 hover:underline font-medium">
+                  {label} →
+                </Link>
+              ))}
             </div>
           </div>
         </div>

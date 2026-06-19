@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
+import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 
 const PAGE_URL = `${SITE_URL}/printed-flat-handle-bags-ireland`;
 
@@ -434,6 +435,15 @@ export default function PrintedFlatHandleBagsIreland() {
           </div>
         </div>
       </section>
+
+      <RelatedSeoLinks
+        links={[
+          { href: '/blog/paper-bags-with-logo-ireland', label: 'Paper Bags with Logo', desc: 'Branding guide for Irish businesses' },
+          { href: '/products/twisted-handle-paper-bags', label: 'Twisted Handle Bags', desc: 'Premium retail paper bags' },
+          { href: '/custom-pizza-boxes-ireland', label: 'Custom Pizza Boxes', desc: 'Food packaging branding' },
+          { href: '/plain-packaging', label: 'Plain Packaging', desc: 'Kraft boxes & food containers' },
+        ]}
+      />
 
       {/* CTA */}
       <section className="py-12 lg:py-16 bg-blue-600">

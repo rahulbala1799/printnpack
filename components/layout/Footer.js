@@ -12,14 +12,15 @@ const QUICK_LINKS = [
 
 const PRODUCT_LINKS = [
   { label: 'Pizza Boxes', href: '/pizza-boxes-ireland' },
+  { label: 'Custom Pizza Boxes', href: '/custom-pizza-boxes-ireland' },
   { label: 'Printed Flat Handle Bags', href: '/printed-flat-handle-bags-ireland' },
-  { label: 'Paper Bags', href: '/products/twisted-handle-paper-bags' },
-  { label: 'Burger Boxes', href: '/eco-bagasse-burger-boxes' },
-  { label: 'Plain Packaging', href: '/plain-packaging' },
-  { label: 'Foamex Boards', href: '/foamex-boards' },
-  { label: 'Correx Boards', href: '/correx-boards' },
-  { label: 'Vinyl Stickers', href: '/vinyl-stickers' },
+  { label: 'Vinyl Banners', href: '/vinyl-banners' },
   { label: 'Roll Up Banners', href: '/roll-up-banners' },
+  { label: 'Custom Posters', href: '/posters' },
+  { label: 'Vinyl Stickers', href: '/vinyl-stickers' },
+  { label: 'Leaflets Ireland', href: '/services/leaflets' },
+  { label: 'Plain Packaging', href: '/plain-packaging' },
+  { label: 'Correx Boards', href: '/correx-boards' },
 ];
 
 // Accordion section for mobile

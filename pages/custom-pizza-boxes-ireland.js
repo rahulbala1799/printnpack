@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import PizzaBoxQuoteForm from '../components/PizzaBoxQuoteForm';
+import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 import { SITE_URL } from '../lib/site';
 
 const PAGE_URL = `${SITE_URL}/custom-pizza-boxes-ireland`;
@@ -712,6 +713,15 @@ const CustomPizzaBoxesIreland = () => {
           </div>
         </div>
       </section>
+
+      <RelatedSeoLinks
+        links={[
+          { href: '/pizza-boxes-ireland', label: 'Pizza Boxes Ireland', desc: 'Plain & wholesale options' },
+          { href: '/blog/pizza-box-sizes-ireland', label: 'Pizza Box Sizes Guide', desc: '7″ to 20″ sizing help' },
+          { href: '/plain-packaging', label: 'Custom Packaging', desc: 'Food-safe branded boxes' },
+          { href: '/printed-flat-handle-bags-ireland', label: 'Printed Paper Bags', desc: 'Takeaway bag branding' },
+        ]}
+      />
 
       {/* ── CTA ── */}
       <section className="bg-gray-900">

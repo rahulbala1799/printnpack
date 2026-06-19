@@ -5,6 +5,55 @@ import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock, FaWhatsapp, FaComment, Fa
 import Link from 'next/link';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { SITE_URL } from '../lib/site';
+
+const PAGE_URL = `${SITE_URL}/contact`;
+
+const localBusinessLd = {
+  '@context': 'https://schema.org',
+  '@type': 'PrintShop',
+  name: 'PrintNPack Ireland',
+  url: SITE_URL,
+  telephone: '+353894400155',
+  email: 'info@printnpack.ie',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Unit 14 Ashbourne Business Centre',
+    addressLocality: 'Ashbourne',
+    addressRegion: 'Co. Meath',
+    postalCode: 'A84 KV57',
+    addressCountry: 'IE',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 53.511286,
+    longitude: -6.399544,
+  },
+  areaServed: { '@type': 'Country', name: 'Ireland' },
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Where is PrintNPack located?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'PrintNPack is based at Unit 14 Ashbourne Business Centre, Ashbourne, Co. Meath, A84 KV57 — serving Meath, Dublin, and all of Ireland with printing and packaging.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is there a printing shop in Ashbourne?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. PrintNPack offers professional printing in Ashbourne, Co. Meath — including packaging, banners, stickers, leaflets, posters, and custom branded products with nationwide delivery.',
+      },
+    },
+  ],
+};
 
 const ContactPage = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -84,14 +133,18 @@ const ContactPage = () => {
   return (
     <Layout>
       <Head>
-        <title>Contact Us - PrintNPack Ireland</title>
+        <title>Printing Ashbourne &amp; Meath | Contact PrintNPack Ireland</title>
         <meta
           name="description"
-          content="Get in touch with PrintNPack for all your packaging needs. Chat with us, call us, or send a WhatsApp message for immediate assistance."
+          content="Printing in Ashbourne, Co. Meath — packaging, banners, stickers, leaflets &amp; custom print. Visit PrintNPack at Ashbourne Business Centre or call +353 89 440 0155."
         />
-        <link rel="canonical" href="https://www.printnpack.ie/contact" />
-        <meta property="og:title" content="Contact Us - PrintNPack Ireland" />
-        <meta property="og:url" content="https://www.printnpack.ie/contact" />
+        <meta name="keywords" content="printing ashbourne, printing meath, print shop ashbourne, printing near me meath, printnpack contact, packaging supplier ireland" />
+        <link rel="canonical" href={PAGE_URL} />
+        <meta property="og:title" content="Printing Ashbourne & Meath | Contact PrintNPack" />
+        <meta property="og:description" content="Professional printing & packaging in Ashbourne, Co. Meath. Nationwide delivery across Ireland." />
+        <meta property="og:url" content={PAGE_URL} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       </Head>
 
       {/* Hero Section */}
@@ -99,9 +152,9 @@ const ContactPage = () => {
         <div className="absolute inset-0 bg-particles opacity-20"></div>
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">We're Here to Help</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Printing in Ashbourne, Co. Meath</h1>
             <p className="text-xl mb-8">
-              Get fast answers and personalized packaging solutions 
+              Professional printing &amp; packaging from our Ashbourne base — serving Dublin, Meath &amp; all of Ireland
             </p>
             <div className="w-24 h-1 bg-white mx-auto rounded"></div>
           </div>
