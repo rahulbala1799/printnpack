@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import AdminLayout from '../../components/admin/AdminLayout';
-import SeoDashboard from '../../components/admin/SeoDashboard';
+import AdminLayout from '../../../components/admin/AdminLayout';
+import SeoDashboard from '../../../components/admin/SeoDashboard';
 
 export default function AdminSeoPage() {
   const router = useRouter();
