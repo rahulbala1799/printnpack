@@ -43,8 +43,6 @@ export default function Document() {
         {/* End Google Tag Manager (noscript) */}
         <Main />
         <NextScript />
-        {/* Tidio Live Chat Widget */}
-        <script src="//code.tidio.co/gm3mpxjjik3qz1bqfryswb0v63gjhuve.js" async></script>
       </body>
     </Html>
   )
