@@ -25,6 +25,13 @@ const guides = [
     cta: 'View custom options',
   },
   {
+    href: '/pizza-box-faq-ireland',
+    title: 'Pizza Box FAQ',
+    description: 'Instant answers on pricing, printing, sizes & delivery.',
+    image: '/images/pizza-boxes/PIZZA_BOX_2.jpg',
+    cta: 'Browse FAQ',
+  },
+  {
     href: '/blog/pizza-box-sizes-ireland',
     title: 'Pizza Box Sizes Guide',
     description: '7″ vs 12″ vs 14″ — which sizes Irish takeaways should stock first.',

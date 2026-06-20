@@ -13,8 +13,8 @@ export default function PizzaPackagingPromo() {
           Get a custom quote
         </Link>
         {' '}or{' '}
-        <Link href="/blog/pizza-box-sizes-ireland" className="text-blue-600 hover:underline font-medium">
-          compare 7&quot;, 12&quot;, and 14&quot; sizes →
+        <Link href="/pizza-box-faq-ireland" className="text-blue-600 hover:underline font-medium">
+          read the pizza box FAQ →
         </Link>
       </p>
     </div>

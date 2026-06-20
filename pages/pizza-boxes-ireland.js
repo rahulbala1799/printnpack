@@ -24,6 +24,11 @@ const sizeGuide = [
 
 const guides = [
   {
+    href: '/pizza-box-faq-ireland',
+    title: 'Pizza Box FAQ',
+    desc: 'Instant answers on pricing, printing, sizes & delivery.',
+  },
+  {
     href: '/blog/pizza-box-sizes-ireland',
     title: 'Pizza Box Sizes Ireland',
     desc: 'Which sizes Irish takeaways should stock first.',
@@ -209,6 +214,12 @@ export default function PizzaBoxesIreland() {
                   className="inline-flex items-center gap-2 bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors"
                 >
                   Wholesale Plain Boxes
+                </Link>
+                <Link
+                  href="/pizza-box-faq-ireland"
+                  className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 font-medium px-2 py-3 transition-colors text-sm"
+                >
+                  Pizza box FAQ →
                 </Link>
               </div>
             </div>
@@ -438,9 +449,25 @@ export default function PizzaBoxesIreland() {
       {/* FAQ */}
       <section className="py-12 lg:py-16 bg-slate-50 border-t border-gray-100">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">
-            Pizza box FAQs
-          </h2>
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                Pizza box FAQs
+              </h2>
+              <p className="text-gray-600 mt-2 text-sm">
+                Quick answers to the most common questions.{' '}
+                <Link href="/pizza-box-faq-ireland" className="text-blue-600 hover:underline font-medium">
+                  View all 30+ questions
+                </Link>
+              </p>
+            </div>
+            <Link
+              href="/pizza-box-faq-ireland"
+              className="inline-flex items-center justify-center bg-white text-blue-600 font-semibold px-5 py-2.5 rounded-xl border border-blue-200 hover:border-blue-300 hover:bg-blue-50 transition-colors text-sm shrink-0"
+            >
+              Full FAQ hub →
+            </Link>
+          </div>
           <div className="space-y-4">
             {faqs.map((faq) => (
               <details

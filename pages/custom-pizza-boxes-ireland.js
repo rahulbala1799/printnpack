@@ -700,9 +700,18 @@ const CustomPizzaBoxesIreland = () => {
       {/* ── FAQ ── */}
       <section className="bg-gray-50 border-y border-gray-200">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">
-            Custom Pizza Boxes — FAQs
-          </h2>
+          <div className="text-center mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+              Custom Pizza Boxes — FAQs
+            </h2>
+            <p className="text-gray-600 text-sm">
+              More on pricing, artwork, samples, and delivery in our{' '}
+              <Link href="/pizza-box-faq-ireland" className="text-blue-600 hover:underline font-medium">
+                full pizza box FAQ
+              </Link>
+              .
+            </p>
+          </div>
           <div className="space-y-6">
             {pageFaqs.map(({ q, a }) => (
               <div key={q} className="bg-white rounded-xl border border-gray-200 p-5">
@@ -711,14 +720,25 @@ const CustomPizzaBoxesIreland = () => {
               </div>
             ))}
           </div>
+          <div className="text-center mt-8">
+            <Link
+              href="/pizza-box-faq-ireland"
+              className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-blue-600 font-semibold py-3 px-6 rounded-xl border border-blue-200 transition-colors"
+            >
+              Browse all pizza box questions
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </section>
 
       <RelatedSeoLinks
         links={[
+          { href: '/pizza-box-faq-ireland', label: 'Pizza Box FAQ', desc: '30+ instant answers' },
           { href: '/pizza-boxes-ireland', label: 'Pizza Boxes Ireland', desc: 'Plain & wholesale options' },
           { href: '/blog/pizza-box-sizes-ireland', label: 'Pizza Box Sizes Guide', desc: '7″ to 20″ sizing help' },
-          { href: '/plain-packaging', label: 'Custom Packaging', desc: 'Food-safe branded boxes' },
           { href: '/printed-flat-handle-bags-ireland', label: 'Printed Paper Bags', desc: 'Takeaway bag branding' },
         ]}
       />

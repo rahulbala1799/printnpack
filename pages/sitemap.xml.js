@@ -27,6 +27,7 @@ const staticPages = [
   // Pizza box hub — primary SEO target
   { path: '/pizza-boxes-ireland',          priority: '0.95', changefreq: 'weekly' },
   { path: '/custom-pizza-boxes-ireland',   priority: '0.9',  changefreq: 'weekly' },
+  { path: '/pizza-box-faq-ireland',        priority: '0.88', changefreq: 'monthly' },
   { path: '/printed-flat-handle-bags-ireland', priority: '0.9', changefreq: 'weekly' },
   { path: '/eco-bagasse-burger-boxes',    priority: '0.8',  changefreq: 'monthly' },
   { path: '/vinyl-stickers',  priority: '0.8', changefreq: 'monthly' },
