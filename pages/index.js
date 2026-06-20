@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import { SITE_URL } from '../lib/site';
+import { buildCatalogOffer } from '../lib/schema';
 import HomepageHero from '../components/home/HomepageHero';
 import TrustBar from '../components/home/TrustBar';
 import CategoryGrid from '../components/home/CategoryGrid';
@@ -89,34 +90,34 @@ export default function Home() {
           '@type': 'OfferCatalog',
           name: 'Custom Printed Packaging',
           itemListElement: [
-            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Pizza Boxes Ireland', url: `${siteUrl}/pizza-boxes-ireland` } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Custom Printed Pizza Boxes', url: `${siteUrl}/custom-pizza-boxes-ireland` } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Printed Flat Handle Bags Ireland', url: `${siteUrl}/printed-flat-handle-bags-ireland` } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Paper Bags with Logo', url: `${siteUrl}/printed-flat-handle-bags-ireland` } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Eco-Friendly Packaging', url: `${siteUrl}/eco-bagasse-burger-boxes` } },
+            buildCatalogOffer('Pizza Boxes Ireland', `${siteUrl}/pizza-boxes-ireland`),
+            buildCatalogOffer('Custom Printed Pizza Boxes', `${siteUrl}/custom-pizza-boxes-ireland`),
+            buildCatalogOffer('Printed Flat Handle Bags Ireland', `${siteUrl}/printed-flat-handle-bags-ireland`),
+            buildCatalogOffer('Paper Bags with Logo', `${siteUrl}/printed-flat-handle-bags-ireland`),
+            buildCatalogOffer('Eco-Friendly Packaging', `${siteUrl}/eco-bagasse-burger-boxes`),
           ],
         },
         {
           '@type': 'OfferCatalog',
           name: 'Plain Packaging Wholesale',
           itemListElement: [
-            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Wholesale Food Containers', url: `${siteUrl}/plain-packaging` } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Catering Supplies Ireland', url: `${siteUrl}/plain-packaging` } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Disposable Packaging', url: `${siteUrl}/plain-packaging` } },
+            buildCatalogOffer('Wholesale Food Containers', `${siteUrl}/plain-packaging`),
+            buildCatalogOffer('Catering Supplies Ireland', `${siteUrl}/plain-packaging`),
+            buildCatalogOffer('Disposable Packaging', `${siteUrl}/plain-packaging`),
           ],
         },
         {
           '@type': 'OfferCatalog',
           name: 'Print Solutions',
           itemListElement: [
-            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Vinyl Banners Ireland', url: `${siteUrl}/vinyl-banners` } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Roll Up Banners Meath', url: `${siteUrl}/roll-up-banners` } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Custom Posters Ireland', url: `${siteUrl}/posters` } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Leaflets Ireland', url: `${siteUrl}/services/leaflets` } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Custom Decals Ireland', url: `${siteUrl}/blog/trade-show-banners-decals-ireland` } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Leaflets & Flyers', url: `${siteUrl}/services/leaflets` } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Vinyl Banners', url: `${siteUrl}/vinyl-banners` } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Vinyl Stickers Ireland', url: `${siteUrl}/vinyl-stickers` } },
+            buildCatalogOffer('Vinyl Banners Ireland', `${siteUrl}/vinyl-banners`),
+            buildCatalogOffer('Roll Up Banners Meath', `${siteUrl}/roll-up-banners`),
+            buildCatalogOffer('Custom Posters Ireland', `${siteUrl}/posters`),
+            buildCatalogOffer('Leaflets Ireland', `${siteUrl}/services/leaflets`),
+            buildCatalogOffer('Custom Decals Ireland', `${siteUrl}/blog/trade-show-banners-decals-ireland`),
+            buildCatalogOffer('Leaflets & Flyers', `${siteUrl}/services/leaflets`),
+            buildCatalogOffer('Vinyl Banners', `${siteUrl}/vinyl-banners`),
+            buildCatalogOffer('Vinyl Stickers Ireland', `${siteUrl}/vinyl-stickers`),
           ],
         },
       ],

@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PLAIN_PRODUCTS, getProductById, getRelatedProducts } from '../../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../../components/PackagingIcon';
+import { buildProductLd } from '../../lib/schema';
 
 const PLAIN_QUOTE_KEY = 'printnpack_plain_quote';
 
@@ -42,33 +43,22 @@ function getTierForCases(tiers, numCases) {
   return tiers[tiers.length - 1];
 }
 
-function buildProductLd(product, canonicalUrl) {
+function buildPlainProductLd(product, canonicalUrl) {
   const basePrice = product.caseTiers?.[0]?.pricePerCase;
   const image =
     product.imageSrc && !isPlaceholderImage(product.imageSrc)
       ? `https://www.printnpack.ie${product.imageSrc}`
       : undefined;
 
-  return {
-    '@context': 'https://schema.org/',
-    '@type': 'Product',
+  return buildProductLd({
     name: product.name,
     description: product.description,
-    sku: product.code,
     image,
-    brand: { '@type': 'Brand', name: 'PrintNPack Ireland' },
+    url: canonicalUrl,
+    price: basePrice,
+    sku: product.code,
     category: product.category,
-    offers: basePrice
-      ? {
-          '@type': 'Offer',
-          url: canonicalUrl,
-          priceCurrency: 'EUR',
-          price: basePrice,
-          availability: 'https://schema.org/InStock',
-          seller: { '@type': 'Organization', name: 'PrintNPack Ireland' },
-        }
-      : undefined,
-  };
+  });
 }
 
 export default function PlainPackagingDetail({ product, relatedProducts }) {
@@ -102,7 +92,7 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
     ? `${product.name} — wholesale kraft corrugated pizza box Ireland. Tiered case pricing, fast delivery to Dublin, Cork & nationwide. Order plain pizza boxes online.`
     : `${product.description?.slice(0, 155)} Fast delivery across Ireland.`;
   const canonicalUrl = `https://www.printnpack.ie/plain-packaging/${product.id}`;
-  const productLd = buildProductLd(product, canonicalUrl);
+  const productLd = buildPlainProductLd(product, canonicalUrl);
 
   const handleAddToQuote = () => {
     if (!selectedTier) return;

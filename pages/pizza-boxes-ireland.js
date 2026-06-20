@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
 import { PLAIN_PRODUCTS } from '../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
+import { buildOffer } from '../lib/schema';
 
 const PAGE_URL = `${SITE_URL}/pizza-boxes-ireland`;
 
@@ -104,20 +105,25 @@ const itemListLd = {
         '@type': 'Product',
         name: 'Custom Printed Pizza Boxes Ireland',
         url: `${SITE_URL}/custom-pizza-boxes-ireland`,
+        offers: buildOffer({ url: `${SITE_URL}/custom-pizza-boxes-ireland` }),
       },
     },
-    ...wholesaleBoxes.slice(0, 7).map((p, i) => ({
-      '@type': 'ListItem',
-      position: i + 2,
-      item: {
-        '@type': 'Product',
-        name: p.name,
-        url: `${SITE_URL}/plain-packaging/${p.id}`,
-        ...(p.imageSrc && !isPlaceholderImage(p.imageSrc)
-          ? { image: `${SITE_URL}${p.imageSrc}` }
-          : {}),
-      },
-    })),
+    ...wholesaleBoxes.slice(0, 7).map((p, i) => {
+      const productUrl = `${SITE_URL}/plain-packaging/${p.id}`;
+      return {
+        '@type': 'ListItem',
+        position: i + 2,
+        item: {
+          '@type': 'Product',
+          name: p.name,
+          url: productUrl,
+          ...(p.imageSrc && !isPlaceholderImage(p.imageSrc)
+            ? { image: `${SITE_URL}${p.imageSrc}` }
+            : {}),
+          offers: buildOffer({ url: productUrl }),
+        },
+      };
+    }),
   ],
 };
 
