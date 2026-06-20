@@ -115,7 +115,7 @@ const RollUpBannersPage = () => {
           <ol className="flex items-center gap-2 text-sm text-gray-500">
             <li><Link href="/" className="hover:text-gray-700">Home</Link></li>
             <li>/</li>
-            <li><Link href="/#products" className="hover:text-gray-700">Products</Link></li>
+            <li><Link href="/banners-ireland" className="hover:text-gray-700">Banners Ireland</Link></li>
             <li>/</li>
             <li className="text-gray-800 font-medium">Roll Up Banners</li>
           </ol>
@@ -277,10 +277,10 @@ const RollUpBannersPage = () => {
 
       <RelatedSeoLinks
         links={[
-          { href: '/vinyl-banners', label: 'Printed Vinyl Banners', desc: 'Outdoor advertising banners' },
-          { href: '/blog/trade-show-banners-decals-ireland', label: 'Trade Show & Decals Guide', desc: 'Exhibition marketing' },
-          { href: '/posters', label: 'Custom Posters Ireland', desc: 'Event & retail posters' },
-          { href: '/contact', label: 'Printing Ashbourne', desc: 'Based in Co. Meath' },
+          { href: '/banners-ireland', label: 'Banners Ireland', desc: 'Complete banner printing hub' },
+          { href: '/banner-faq-ireland', label: 'Banner FAQ', desc: '40+ instant answers' },
+          { href: '/vinyl-banners', label: 'PVC Banners', desc: 'Outdoor advertising banners' },
+          { href: '/banner-printing-meath', label: 'Banner Printing Meath', desc: 'Based in Ashbourne' },
         ]}
       />
 

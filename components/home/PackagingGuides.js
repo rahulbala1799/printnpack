@@ -39,6 +39,20 @@ const guides = [
     cta: 'Read the guide',
   },
   {
+    href: '/banners-ireland',
+    title: 'Banners Ireland',
+    description: 'Custom PVC & roll-up banner printing — Ashbourne, Dublin & Meath.',
+    image: '/ifa/product/banner/20221019_184306722822_e66498_Promo-banner.webp',
+    cta: 'Browse banners',
+  },
+  {
+    href: '/banner-faq-ireland',
+    title: 'Banner FAQ',
+    description: 'Instant answers on pricing, materials, artwork & delivery.',
+    image: '/ifa/product/banner/pvc-banner-media-500x500.webp',
+    cta: 'Browse FAQ',
+  },
+  {
     href: '/vinyl-banners',
     title: 'Printed Banners Ireland',
     description: 'Vinyl banners for outdoor advertising & events — custom sizes, UV print.',

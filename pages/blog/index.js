@@ -17,6 +17,17 @@ const posts = [
     category: 'Compliance Guide',
   },
   {
+    slug: 'banner-printing-ireland-guide',
+    title: 'Banner Printing in Ashbourne, Dublin and Meath: Cost, Materials and Turnaround Guide',
+    excerpt:
+      'How much does banner printing cost in Ireland? PVC vs mesh, roll-up sizes, artwork tips, eyelets, and urgent turnaround — a practical guide for shops, schools, and events.',
+    date: '2026-06-20',
+    readTime: '8 min read',
+    image: '/ifa/product/banner/20221019_184306722822_e66498_Promo-banner.webp',
+    imageAlt: 'Banner printing Ireland — custom PVC and roll-up banners',
+    category: 'Print Guide',
+  },
+  {
     slug: 'trade-show-banners-decals-ireland',
     title: 'Trade Show Banners and Custom Decals in Ireland: The Complete High-Impact Marketing Guide',
     excerpt:

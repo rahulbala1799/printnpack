@@ -13,6 +13,7 @@ const QUICK_LINKS = [
 const PRODUCT_LINKS = [
   { label: 'Pizza Boxes', href: '/pizza-boxes-ireland' },
   { label: 'Custom Pizza Boxes', href: '/custom-pizza-boxes-ireland' },
+  { label: 'Banners Ireland', href: '/banners-ireland' },
   { label: 'Printed Flat Handle Bags', href: '/printed-flat-handle-bags-ireland' },
   { label: 'Vinyl Banners', href: '/vinyl-banners' },
   { label: 'Roll Up Banners', href: '/roll-up-banners' },

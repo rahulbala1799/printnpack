@@ -50,10 +50,10 @@ const productLd = {
 };
 
 const relatedLinks = [
+  { href: '/banners-ireland', label: 'Banners Ireland', desc: 'Complete banner printing hub' },
+  { href: '/banner-faq-ireland', label: 'Banner FAQ', desc: '40+ instant answers' },
   { href: '/roll-up-banners', label: 'Pull Up & Roll Up Banners', desc: 'Portable trade show displays' },
-  { href: '/blog/trade-show-banners-decals-ireland', label: 'Trade Show Banners & Decals', desc: 'Exhibition marketing guide' },
-  { href: '/posters', label: 'Custom Posters Ireland', desc: 'Premium poster printing' },
-  { href: '/vinyl-stickers', label: 'Custom Vinyl Stickers', desc: 'Window & vehicle decals' },
+  { href: '/banner-printing-dublin', label: 'Banner Printing Dublin', desc: 'Delivery across Dublin' },
 ];
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -135,9 +135,9 @@ export default function VinylBannersPage() {
           <ol className="flex items-center gap-2 text-sm text-gray-500">
             <li><Link href="/" className="hover:text-gray-700">Home</Link></li>
             <li>/</li>
-            <li><Link href="/products" className="hover:text-gray-700">Products</Link></li>
+            <li><Link href="/banners-ireland" className="hover:text-gray-700">Banners Ireland</Link></li>
             <li>/</li>
-            <li className="text-gray-800 font-medium">Vinyl Banners</li>
+            <li className="text-gray-800 font-medium">PVC Banners</li>
           </ol>
         </div>
       </nav>
@@ -276,7 +276,11 @@ export default function VinylBannersPage() {
 
       <section className="bg-white border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Printed banner FAQs</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Printed banner FAQs</h2>
+          <p className="text-gray-600 text-sm mb-6">
+            More on pricing, materials, and artwork in our{' '}
+            <Link href="/banner-faq-ireland" className="text-blue-600 hover:underline font-medium">full banner FAQ</Link>.
+          </p>
           <div className="grid md:grid-cols-3 gap-4">
             {pageFaqs.map(({ q, a }) => (
               <div key={q} className="bg-gray-50 rounded-xl p-5 border border-gray-100">
