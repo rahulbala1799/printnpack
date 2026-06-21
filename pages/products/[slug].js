@@ -5,7 +5,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import products, { getProductBySlug, getRelatedProducts } from '../../data/products';
 import ProductPageTemplate from '../../components/ProductPageTemplate';
-import { buildOffer } from '../../lib/schema';
+import { buildProductLd, parsePriceString } from '../../lib/schema';
 
 /**
  * Dynamic product page. Uses ProductPageTemplate for all products so every
@@ -66,19 +66,13 @@ const ProductDetail = ({ product, relatedProducts }) => {
     ? (product.images[0].startsWith('http') ? product.images[0] : `${baseUrl}${product.images[0]}`)
     : '';
 
-  const structuredData = {
-    '@context': 'https://schema.org/',
-    '@type': 'Product',
+  const structuredData = buildProductLd({
     name: product.name,
     description: product.description,
     image: product.images?.[0] ? `${baseUrl}${product.images[0]}` : undefined,
     url: `${baseUrl}${productPath}`,
-    brand: { '@type': 'Brand', name: 'Print n Pack' },
-    offers: buildOffer({
-      url: `${baseUrl}${productPath}`,
-      price: product.price ? product.price.replace(/[^\d.-]/g, '') || undefined : undefined,
-    }),
-  };
+    price: parsePriceString(product.price),
+  });
 
   return (
     <Layout>

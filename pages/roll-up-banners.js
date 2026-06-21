@@ -6,6 +6,7 @@ import Link from 'next/link';
 import RollUpBannerQuoteForm from '../components/RollUpBannerQuoteForm';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 import { SITE_URL } from '../lib/site';
+import { buildProductLd } from '../lib/schema';
 
 const PAGE_URL = `${SITE_URL}/roll-up-banners`;
 
@@ -23,6 +24,15 @@ const pageFaqs = [
     a: 'Roll up banners start from €35 depending on size and frame type. Contact PrintNPack for a quote on standard 850mm and 1200mm widths or custom exhibition sizes.',
   },
 ];
+
+const productLd = buildProductLd({
+  name: 'Pull Up & Roll Up Banners Ireland',
+  description:
+    'Professional roll-up banner printing for trade shows, exhibitions, and retail across Ireland. Premium vinyl graphics, aluminium stands, and nationwide delivery from Ashbourne, Co. Meath.',
+  image: `${SITE_URL}/ifa/product/rollup/1.png`,
+  url: PAGE_URL,
+  price: '35.00',
+});
 
 const faqLd = {
   '@context': 'https://schema.org',
@@ -107,6 +117,7 @@ const RollUpBannersPage = () => {
         <meta property="og:url" content={PAGE_URL} />
         <meta property="og:type" content="website" />
         <link rel="canonical" href={PAGE_URL} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       </Head>
 

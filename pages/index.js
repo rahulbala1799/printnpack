@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import { SITE_URL } from '../lib/site';
-import { buildCatalogOffer } from '../lib/schema';
+import { buildCatalogOffer, startingPriceForUrl } from '../lib/schema';
 import HomepageHero from '../components/home/HomepageHero';
 import TrustBar from '../components/home/TrustBar';
 import CategoryGrid from '../components/home/CategoryGrid';
@@ -15,6 +15,8 @@ import HomepageCTA from '../components/home/HomepageCTA';
 
 export default function Home() {
   const siteUrl = SITE_URL;
+  const catalogOffer = (name, path) =>
+    buildCatalogOffer(name, `${siteUrl}${path}`, { price: startingPriceForUrl(path) });
   const siteName = 'PrintNPack Ireland';
   const title = 'Print and Pack Ireland | PrintNPack - Custom Packaging & Print Solutions';
   const description = "Print and Pack (PrintNPack) — Ireland's leading custom packaging and print supplier. Pizza boxes, printed flat handle bags, leaflets, wide format printing, plain packaging wholesale. Low MOQs, fast delivery, 100% Irish owned.";
@@ -90,34 +92,34 @@ export default function Home() {
           '@type': 'OfferCatalog',
           name: 'Custom Printed Packaging',
           itemListElement: [
-            buildCatalogOffer('Pizza Boxes Ireland', `${siteUrl}/pizza-boxes-ireland`),
-            buildCatalogOffer('Custom Printed Pizza Boxes', `${siteUrl}/custom-pizza-boxes-ireland`),
-            buildCatalogOffer('Printed Flat Handle Bags Ireland', `${siteUrl}/printed-flat-handle-bags-ireland`),
-            buildCatalogOffer('Paper Bags with Logo', `${siteUrl}/printed-flat-handle-bags-ireland`),
-            buildCatalogOffer('Eco-Friendly Packaging', `${siteUrl}/eco-bagasse-burger-boxes`),
+            catalogOffer('Pizza Boxes Ireland', '/pizza-boxes-ireland'),
+            catalogOffer('Custom Printed Pizza Boxes', '/custom-pizza-boxes-ireland'),
+            catalogOffer('Printed Flat Handle Bags Ireland', '/printed-flat-handle-bags-ireland'),
+            catalogOffer('Paper Bags with Logo', '/printed-flat-handle-bags-ireland'),
+            catalogOffer('Eco-Friendly Packaging', '/eco-bagasse-burger-boxes'),
           ],
         },
         {
           '@type': 'OfferCatalog',
           name: 'Plain Packaging Wholesale',
           itemListElement: [
-            buildCatalogOffer('Wholesale Food Containers', `${siteUrl}/plain-packaging`),
-            buildCatalogOffer('Catering Supplies Ireland', `${siteUrl}/plain-packaging`),
-            buildCatalogOffer('Disposable Packaging', `${siteUrl}/plain-packaging`),
+            catalogOffer('Wholesale Food Containers', '/plain-packaging'),
+            catalogOffer('Catering Supplies Ireland', '/plain-packaging'),
+            catalogOffer('Disposable Packaging', '/plain-packaging'),
           ],
         },
         {
           '@type': 'OfferCatalog',
           name: 'Print Solutions',
           itemListElement: [
-            buildCatalogOffer('Vinyl Banners Ireland', `${siteUrl}/vinyl-banners`),
-            buildCatalogOffer('Roll Up Banners Meath', `${siteUrl}/roll-up-banners`),
-            buildCatalogOffer('Custom Posters Ireland', `${siteUrl}/posters`),
-            buildCatalogOffer('Leaflets Ireland', `${siteUrl}/services/leaflets`),
-            buildCatalogOffer('Custom Decals Ireland', `${siteUrl}/blog/trade-show-banners-decals-ireland`),
-            buildCatalogOffer('Leaflets & Flyers', `${siteUrl}/services/leaflets`),
-            buildCatalogOffer('Vinyl Banners', `${siteUrl}/vinyl-banners`),
-            buildCatalogOffer('Vinyl Stickers Ireland', `${siteUrl}/vinyl-stickers`),
+            catalogOffer('Vinyl Banners Ireland', '/vinyl-banners'),
+            catalogOffer('Roll Up Banners Meath', '/roll-up-banners'),
+            catalogOffer('Custom Posters Ireland', '/posters'),
+            catalogOffer('Leaflets Ireland', '/services/leaflets'),
+            catalogOffer('Custom Decals Ireland', '/blog/trade-show-banners-decals-ireland'),
+            catalogOffer('Leaflets & Flyers', '/services/leaflets'),
+            catalogOffer('Vinyl Banners', '/vinyl-banners'),
+            catalogOffer('Vinyl Stickers Ireland', '/vinyl-stickers'),
           ],
         },
       ],

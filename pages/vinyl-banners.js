@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 import { SITE_URL } from '../lib/site';
+import { buildProductLd } from '../lib/schema';
 
 const PAGE_URL = `${SITE_URL}/vinyl-banners`;
 
@@ -33,21 +34,13 @@ const faqLd = {
   })),
 };
 
-const productLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Product',
+const productLd = buildProductLd({
   name: 'Printed Banners & Vinyl Banners Ireland',
   description: 'Custom printed vinyl banners for indoor and outdoor advertising in Ireland. 440gsm/510gsm PVC, UV printing, custom sizes up to 5m wide.',
   image: `${SITE_URL}/ifa/product/banner/20221019_184306722822_e66498_Promo-banner.webp`,
-  brand: { '@type': 'Brand', name: 'PrintNPack Ireland' },
-  offers: {
-    '@type': 'Offer',
-    url: PAGE_URL,
-    priceCurrency: 'EUR',
-    availability: 'https://schema.org/InStock',
-    seller: { '@type': 'Organization', name: 'PrintNPack Ireland', url: SITE_URL },
-  },
-};
+  url: PAGE_URL,
+  price: '25.00',
+});
 
 const relatedLinks = [
   { href: '/banners-ireland', label: 'Banners Ireland', desc: 'Complete banner printing hub' },

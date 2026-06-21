@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 import { SITE_URL } from '../lib/site';
+import { buildProductLd } from '../lib/schema';
 
 const PAGE_URL = `${SITE_URL}/posters`;
 
@@ -22,6 +23,15 @@ const pageFaqs = [
     a: 'No — single custom posters are available. Bulk discounts apply for larger orders.',
   },
 ];
+
+const productLd = buildProductLd({
+  name: 'Custom Posters Ireland',
+  description:
+    'Custom posters and customisable posters printed in Ireland on premium 170gsm and 200gsm paper with eco-solvent inks. Sizes from A4 to A0, no minimum order.',
+  image: `${SITE_URL}/ifa/product/Poster/single_poster.jpg`,
+  url: PAGE_URL,
+  price: '8.00',
+});
 
 const faqLd = {
   '@context': 'https://schema.org',
@@ -112,6 +122,7 @@ export default function PostersPage() {
         <meta property="og:url" content={PAGE_URL} />
         <meta property="og:type" content="website" />
         <link rel="canonical" href={PAGE_URL} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       </Head>
 

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 import { SITE_URL } from '../lib/site';
+import { buildProductLd } from '../lib/schema';
 import VinylStickerQuoteForm from '../components/VinylStickerQuoteForm';
 
 const PAGE_URL = `${SITE_URL}/vinyl-stickers`;
@@ -23,6 +24,15 @@ const pageFaqs = [
     a: 'We offer gloss, matte, transparent, and removable vinyl plus vehicle-grade and floor graphics materials.',
   },
 ];
+
+const productLd = buildProductLd({
+  name: 'Custom Vinyl Stickers Ireland',
+  description:
+    'Custom vinyl stickers and decals for windows, vehicles, walls, and packaging across Ireland. Die-cut shapes, outdoor-grade vinyl, and fast nationwide delivery.',
+  image: `${SITE_URL}/ifa/product/vinylstk/Window_Sticker_2_01041803202404.png.webp`,
+  url: PAGE_URL,
+  price: '15.00',
+});
 
 const faqLd = {
   '@context': 'https://schema.org',
@@ -166,6 +176,7 @@ const VinylStickersPage = () => {
         <meta property="og:url" content={PAGE_URL} />
         <meta property="og:type" content="website" />
         <link rel="canonical" href={PAGE_URL} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       </Head>
 

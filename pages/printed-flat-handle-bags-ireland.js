@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
+import { buildProductLd } from '../lib/schema';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 
 const PAGE_URL = `${SITE_URL}/printed-flat-handle-bags-ireland`;
@@ -100,23 +101,14 @@ const breadcrumbLd = {
   ],
 };
 
-const productLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Product',
+const productLd = buildProductLd({
   name: 'Printed Flat Handle Paper Bags Ireland',
   description:
     'Custom printed flat handle paper bags for Irish retailers, cafés, and food businesses. Digital CMYK logo printing, three sizes, MOQ from 500 units, nationwide delivery.',
   image: `${SITE_URL}/images/products/flat-handle-bags/1.png`,
-  brand: { '@type': 'Brand', name: 'PrintNPack Ireland' },
-  offers: {
-    '@type': 'Offer',
-    url: PAGE_URL,
-    priceCurrency: 'EUR',
-    price: '0.28',
-    availability: 'https://schema.org/InStock',
-    seller: { '@type': 'Organization', name: 'PrintNPack Ireland', url: SITE_URL },
-  },
-};
+  url: PAGE_URL,
+  price: '0.28',
+});
 
 const webPageLd = {
   '@context': 'https://schema.org',

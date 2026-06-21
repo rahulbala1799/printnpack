@@ -6,25 +6,18 @@ import Link from 'next/link';
 import PizzaBoxQuoteForm from '../components/PizzaBoxQuoteForm';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 import { SITE_URL } from '../lib/site';
+import { buildProductLd } from '../lib/schema';
 
 const PAGE_URL = `${SITE_URL}/custom-pizza-boxes-ireland`;
 
-const productLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Product',
+const productLd = buildProductLd({
   name: 'Custom Pizza Boxes Ireland',
   description:
     'Premium custom printed pizza boxes for Irish restaurants and takeaways. Full-colour CMYK printing, food-safe corrugated board, sizes 7" to 20", MOQ from 500 units, nationwide delivery.',
   image: `${SITE_URL}/images/pizza-boxes/PIZZA_BOX_1.jpg`,
-  brand: { '@type': 'Brand', name: 'PrintNPack Ireland' },
-  offers: {
-    '@type': 'Offer',
-    url: PAGE_URL,
-    priceCurrency: 'EUR',
-    availability: 'https://schema.org/InStock',
-    seller: { '@type': 'Organization', name: 'PrintNPack Ireland', url: SITE_URL },
-  },
-};
+  url: PAGE_URL,
+  price: '0.45',
+});
 
 const faqLd = {
   '@context': 'https://schema.org',

@@ -54,9 +54,13 @@ const itemListLd = {
   '@type': 'ItemList',
   name: 'Banner Printing Ireland',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, item: buildCatalogOffer('PVC Banners Ireland', `${SITE_URL}/vinyl-banners`).itemOffered },
-    { '@type': 'ListItem', position: 2, item: buildCatalogOffer('Roll Up Banners Ireland', `${SITE_URL}/roll-up-banners`).itemOffered },
-  ],
+    buildCatalogOffer('PVC Banners Ireland', `${SITE_URL}/vinyl-banners`, { price: '25.00' }).itemOffered,
+    buildCatalogOffer('Roll Up Banners Ireland', `${SITE_URL}/roll-up-banners`, { price: '35.00' }).itemOffered,
+  ].map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    item,
+  })),
 };
 
 export default function BannersIreland() {
