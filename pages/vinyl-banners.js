@@ -35,16 +35,27 @@ const faqLd = {
 };
 
 const productLd = buildProductLd({
-  name: 'Printed Banners & Vinyl Banners Ireland',
-  description: 'Custom printed vinyl banners for indoor and outdoor advertising in Ireland. 440gsm/510gsm PVC, UV printing, custom sizes up to 5m wide.',
+  name: 'PVC Banners & Printed Outdoor Banners Ireland',
+  description: 'Custom printed PVC banners for outdoor advertising in Ireland. 440gsm/510gsm PVC, mesh options, UV printing, standard sizes 2×4 to 5×10, custom up to 5m wide. From €25.',
   image: `${SITE_URL}/ifa/product/banner/20221019_184306722822_e66498_Promo-banner.webp`,
   url: PAGE_URL,
   price: '25.00',
 });
 
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Banners Ireland', item: `${SITE_URL}/banners-ireland` },
+    { '@type': 'ListItem', position: 3, name: 'PVC Banners', item: PAGE_URL },
+  ],
+};
+
 const relatedLinks = [
   { href: '/banners-ireland', label: 'Banners Ireland', desc: 'Complete banner printing hub' },
   { href: '/banner-faq-ireland', label: 'Banner FAQ', desc: '40+ instant answers' },
+  { href: '/blog/banner-sizes-ireland', label: 'Banner Sizes Guide', desc: '2×4, 3×6, 4×8 & roll-up dimensions' },
   { href: '/roll-up-banners', label: 'Pull Up & Roll Up Banners', desc: 'Portable trade show displays' },
   { href: '/banner-printing-dublin', label: 'Banner Printing Dublin', desc: 'Delivery across Dublin' },
 ];
@@ -110,17 +121,23 @@ export default function VinylBannersPage() {
   return (
     <Layout>
       <Head>
-        <title>Printed Banners Ireland | Vinyl Banners &amp; Trade Show Banners | PrintNPack</title>
-        <meta name="description" content="Printed banners &amp; vinyl banners Ireland — outdoor PVC advertising, trade show banners, custom sizes up to 5m. UV printing, no minimum order, nationwide delivery." />
-        <meta name="keywords" content="printed banners, vinyl banners ireland, trade show banners, outdoor banners ireland, advertising banners, custom banner printing, printed banners ireland" />
-        <meta property="og:title" content="Printed Banners & Vinyl Banners Ireland | PrintNPack" />
-        <meta property="og:description" content="Custom printed vinyl banners for indoor & outdoor advertising. UV printing, custom sizes, Ireland delivery." />
+        <title>PVC Banners Ireland | Printed Outdoor Banners from €25 | PrintNPack</title>
+        <meta name="description" content="PVC banners Ireland from €25 — printed outdoor banners for shop fronts, events &amp; advertising. 440gsm/510gsm PVC, mesh options, eyelets included. No minimum order, nationwide delivery from Ashbourne." />
+        <meta name="keywords" content="pvc banners ireland, printed banners ireland, outdoor banners ireland, vinyl banners ireland, custom banner printing ireland, advertising banners ireland, mesh banners ireland" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        <meta property="og:title" content="PVC Banners Ireland | Printed Outdoor Banners from €25" />
+        <meta property="og:description" content="Custom printed PVC banners for outdoor advertising. Standard sizes 2×4 to 5×10, mesh options, UV printing, nationwide delivery." />
         <meta property="og:image" content="https://www.printnpack.ie/ifa/product/banner/20221019_184306722822_e66498_Promo-banner.webp" />
         <meta property="og:url" content={PAGE_URL} />
         <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="PVC Banners Ireland | Printed Outdoor Banners from €25" />
+        <meta name="twitter:description" content="Custom PVC banners from €25. Outdoor advertising, shop fronts, events — no minimum order." />
+        <meta name="twitter:image" content="https://www.printnpack.ie/ifa/product/banner/20221019_184306722822_e66498_Promo-banner.webp" />
         <link rel="canonical" href={PAGE_URL} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       </Head>
 
       <nav className="bg-gray-50 border-b border-gray-200">
@@ -159,14 +176,16 @@ export default function VinylBannersPage() {
                 <span className="w-2 h-2 bg-blue-500 rounded-full" />
                 Wide format
               </div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">Printed Banners &amp; Vinyl Banners Ireland</h1>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">PVC Banners &amp; Printed Outdoor Banners Ireland</h1>
               <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
-                <strong>Printed banners</strong> and <strong>vinyl banners</strong> for outdoor advertising, shop fronts, and events. Also see our{' '}
-                <Link href="/roll-up-banners" className="text-blue-600 hover:underline font-medium">pull up banners</Link>
-                {' '}for trade shows. Premium PVC, UV printing, custom sizes up to 5m wide.
+                <strong>PVC banners</strong> and <strong>printed outdoor banners</strong> for shop fronts, events, and advertising across Ireland.
+                Standard sizes from 2×4 to 5×10 — see our{' '}
+                <Link href="/blog/banner-sizes-ireland" className="text-blue-600 hover:underline font-medium">banner sizes guide</Link>.
+                For portable displays, see{' '}
+                <Link href="/roll-up-banners" className="text-blue-600 hover:underline font-medium">pull up banners</Link>.
               </p>
               <div className="grid grid-cols-3 gap-3 mb-6">
-                <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">Quote</div><div className="text-xs text-gray-500">on request</div></div>
+                <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">From €25</div><div className="text-xs text-gray-500">small PVC</div></div>
                 <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">3–5 days</div><div className="text-xs text-gray-500">standard</div></div>
                 <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">No min.</div><div className="text-xs text-gray-500">order</div></div>
               </div>
@@ -201,6 +220,32 @@ export default function VinylBannersPage() {
                 <p className="text-sm text-gray-500 leading-relaxed">{f.description}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Mesh Banners for Windy Outdoor Locations</h2>
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Standard PVC banners work well on shop fronts and solid walls. For fences, scaffolding,
+                GAA grounds, and exposed coastal locations, <strong>mesh PVC banners</strong> let wind
+                pass through — reducing strain on eyelets and extending banner life.
+              </p>
+              <ul className="space-y-2 mb-6">
+                {['Perforated mesh PVC — wind passes through', 'Ideal for fences, hoarding & scaffolding', 'Same UV printing as solid PVC', 'Hemmed edges and eyelets included'].map((point) => (
+                  <li key={point} className="flex items-start gap-2.5 text-sm text-gray-600"><CheckIcon />{point}</li>
+                ))}
+              </ul>
+              <Link href="/banner-faq-ireland" className="text-blue-600 hover:underline font-medium text-sm">
+                PVC vs mesh — read the full comparison in our banner FAQ →
+              </Link>
+            </div>
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100">
+              <Image src="/ifa/product/banner/pvc-banner-media-500x500.webp" alt="Mesh PVC banner for windy outdoor locations Ireland" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+            </div>
           </div>
         </div>
       </section>

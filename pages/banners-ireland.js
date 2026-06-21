@@ -17,6 +17,7 @@ const localPages = [
 
 const guides = [
   { href: '/banner-faq-ireland', title: 'Banner FAQ', desc: '40+ instant answers on cost, materials, artwork & delivery.' },
+  { href: '/blog/banner-sizes-ireland', title: 'Banner Sizes Guide', desc: '2×4, 3×6, 4×8 PVC & roll-up dimensions for Irish businesses.' },
   { href: '/blog/banner-printing-ireland-guide', title: 'Banner Printing Guide', desc: 'Cost, materials, turnaround & design tips for Irish businesses.' },
   { href: '/blog/trade-show-banners-decals-ireland', title: 'Trade Show Banners & Decals', desc: 'Exhibition marketing and custom decals guide.' },
 ];

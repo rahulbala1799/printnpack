@@ -17,6 +17,17 @@ const posts = [
     category: 'Compliance Guide',
   },
   {
+    slug: 'banner-sizes-ireland',
+    title: 'Banner Sizes Ireland: PVC Outdoor & Roll-Up Banner Size Guide',
+    excerpt:
+      'Standard PVC banner sizes (2×4, 3×6, 4×8, 5×10) and roll-up dimensions for Irish shops, schools, and events — with pricing from €25.',
+    date: '2026-06-21',
+    readTime: '6 min read',
+    image: '/ifa/product/banner/1666183881.webp',
+    imageAlt: 'Standard banner sizes Ireland — PVC outdoor and roll-up banners',
+    category: 'Print Guide',
+  },
+  {
     slug: 'banner-printing-ireland-guide',
     title: 'Banner Printing in Ashbourne, Dublin and Meath: Cost, Materials and Turnaround Guide',
     excerpt:

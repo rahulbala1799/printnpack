@@ -203,7 +203,12 @@ export default function TradeShowBannersDecalsIreland() {
 
         <p className="text-lg text-slate-600 mb-8 leading-relaxed">
           Searching for <strong>decals in Ireland</strong>? PrintNPack prints custom window decals, vehicle graphics,
-          and retail vinyl stickers — plus portable trade show banners and pull up banners for exhibitions nationwide.
+          and retail vinyl stickers — plus portable{' '}
+          <Link href="/roll-up-banners" className="text-purple-600 hover:text-purple-700 font-medium">trade show banners</Link>{' '}
+          and pull up banners for exhibitions nationwide. Browse our{' '}
+          <Link href="/banners-ireland" className="text-purple-600 hover:text-purple-700 font-medium">banners Ireland</Link>{' '}
+          hub or read the{' '}
+          <Link href="/banner-faq-ireland" className="text-purple-600 hover:text-purple-700 font-medium">banner FAQ</Link>.
         </p>
 
         <div className="relative rounded-2xl overflow-hidden h-64 sm:h-80 mb-8 border border-slate-100">
@@ -527,12 +532,14 @@ export default function TradeShowBannersDecalsIreland() {
             To maximise SEO and conversions, we link to related product pages. Use natural anchor text when linking from this post:
           </p>
           <ul className="space-y-2 mb-10">
-            <li><Link href="/plain-packaging" className="text-purple-600 hover:text-purple-700 font-medium">Corriboard / Correx boards</Link> — outdoor signage</li>
+            <li><Link href="/banners-ireland" className="text-purple-600 hover:text-purple-700 font-medium">Banners Ireland</Link> — complete banner printing hub</li>
+            <li><Link href="/banner-faq-ireland" className="text-purple-600 hover:text-purple-700 font-medium">Banner FAQ</Link> — pricing, materials &amp; artwork answers</li>
+            <li><Link href="/blog/banner-sizes-ireland" className="text-purple-600 hover:text-purple-700 font-medium">Banner sizes guide</Link> — PVC &amp; roll-up dimensions</li>
+            <li><Link href="/correx-boards" className="text-purple-600 hover:text-purple-700 font-medium">Corriboard / Correx boards</Link> — outdoor signage</li>
             <li><Link href="/roll-up-banners" className="text-purple-600 hover:text-purple-700 font-medium">Roll-up banners</Link> — trade show banner printing Ireland</li>
-            <li><Link href="/vehicle-decals" className="text-purple-600 hover:text-purple-700 font-medium">Vehicle decals</Link> — vehicle branding solutions</li>
-            <li><Link href="/vinyl-stickers" className="text-purple-600 hover:text-purple-700 font-medium">Window graphics</Link> — custom window decals for shops</li>
+            <li><Link href="/vinyl-stickers" className="text-purple-600 hover:text-purple-700 font-medium">Vehicle decals &amp; window graphics</Link> — custom vinyl stickers Ireland</li>
             <li><Link href="/foamex-boards" className="text-purple-600 hover:text-purple-700 font-medium">Foamex boards</Link> — exhibition display printing</li>
-            <li><Link href="/packaging" className="text-purple-600 hover:text-purple-700 font-medium">Packaging printing services</Link></li>
+            <li><Link href="/products" className="text-purple-600 hover:text-purple-700 font-medium">Custom packaging &amp; print products</Link></li>
           </ul>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-6">

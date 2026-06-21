@@ -44,6 +44,16 @@ const faqLd = {
   })),
 };
 
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Banners Ireland', item: `${SITE_URL}/banners-ireland` },
+    { '@type': 'ListItem', position: 3, name: 'Roll Up Banners', item: PAGE_URL },
+  ],
+};
+
 // ─── Data ────────────────────────────────────────────────────────────────────
 
 const heroImages = [
@@ -111,14 +121,20 @@ const RollUpBannersPage = () => {
         <title>Pull Up Banners Meath &amp; Ireland | Roll Up Banner Printing | PrintNPack</title>
         <meta name="description" content="Pull up banners Meath &amp; Ireland — professional roll up banner printing for trade shows, exhibitions &amp; retail. Based in Ashbourne, Co. Meath. Premium vinyl, fast nationwide delivery." />
         <meta name="keywords" content="pull up banners meath, roll up banners ireland, pull up banners ireland, exhibition banners meath, trade show banners ireland, roll up banner printing dublin, portable banners ireland" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta property="og:title" content="Pull Up Banners Meath & Ireland | Roll Up Banner Printing" />
         <meta property="og:description" content="Pull up & roll up banners for trade shows and exhibitions. Based in Meath, delivering across Ireland." />
         <meta property="og:image" content="https://www.printnpack.ie/ifa/product/rollup/1.png" />
         <meta property="og:url" content={PAGE_URL} />
         <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Pull Up Banners Meath & Ireland | From €35" />
+        <meta name="twitter:description" content="Portable roll-up banners for trade shows, exhibitions & retail. Nationwide delivery." />
+        <meta name="twitter:image" content="https://www.printnpack.ie/ifa/product/rollup/1.png" />
         <link rel="canonical" href={PAGE_URL} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       </Head>
 
       <nav className="bg-gray-50 border-b border-gray-200">

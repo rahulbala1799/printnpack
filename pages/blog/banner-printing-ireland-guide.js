@@ -102,6 +102,8 @@ export default function BannerPrintingIrelandGuide() {
             <Link href="/roll-up-banners" className="text-blue-600 hover:underline font-medium">roll-up banners</Link>, or
             read the full{' '}
             <Link href="/banner-faq-ireland" className="text-blue-600 hover:underline font-medium">banner FAQ</Link>.
+            See also our{' '}
+            <Link href="/blog/banner-sizes-ireland" className="text-blue-600 hover:underline font-medium">banner sizes guide</Link>.
           </p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">How much does banner printing cost in Ireland?</h2>

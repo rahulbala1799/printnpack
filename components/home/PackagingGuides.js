@@ -53,6 +53,20 @@ const guides = [
     cta: 'Browse FAQ',
   },
   {
+    href: '/blog/banner-sizes-ireland',
+    title: 'Banner Sizes Guide',
+    description: '2×4, 3×6, 4×8 PVC & roll-up dimensions — which size to order.',
+    image: '/ifa/product/banner/1666183881.webp',
+    cta: 'Read the guide',
+  },
+  {
+    href: '/blog/banner-printing-ireland-guide',
+    title: 'Banner Printing Guide',
+    description: 'Cost, materials, turnaround & design tips for Irish businesses.',
+    image: '/ifa/product/banner/20221019_184310980133_d01bb8_Real-Estate.webp',
+    cta: 'Read the guide',
+  },
+  {
     href: '/vinyl-banners',
     title: 'Printed Banners Ireland',
     description: 'Vinyl banners for outdoor advertising & events — custom sizes, UV print.',

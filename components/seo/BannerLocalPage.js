@@ -6,6 +6,7 @@ import Layout from '../layout/Layout';
 import RelatedSeoLinks from './RelatedSeoLinks';
 import { SITE_URL } from '../../lib/site';
 import { buildOffer } from '../../lib/schema';
+import { BANNER_LOCAL_PAGES } from '../../data/banner-local';
 
 const HERO_IMAGE = '/ifa/product/banner/20221019_184306722822_e66498_Promo-banner.webp';
 
@@ -76,8 +77,16 @@ export default function BannerLocalPage({ config }) {
       },
     },
     areaServed: config.localAreas.map((name) => ({ '@type': 'Place', name })),
-    offers: buildOffer({ url: pageUrl }),
+    offers: buildOffer({ url: pageUrl, price: '25.00' }),
   };
+
+  const siblingLinks = Object.values(BANNER_LOCAL_PAGES)
+    .filter((p) => p.slug !== config.slug)
+    .map((p) => ({
+      href: `/${p.slug}`,
+      label: p.title,
+      desc: p.metaDescription.split('.')[0],
+    }));
 
   return (
     <Layout>
@@ -208,9 +217,11 @@ export default function BannerLocalPage({ config }) {
         title="Related banner pages"
         links={[
           { href: '/banners-ireland', label: 'Banners Ireland', desc: 'Complete banner printing hub' },
+          { href: '/blog/banner-sizes-ireland', label: 'Banner Sizes Guide', desc: '2×4, 3×6, 4×8 & roll-up dimensions' },
           { href: '/vinyl-banners', label: 'PVC Banners', desc: 'Outdoor & shop-front banners' },
           { href: '/roll-up-banners', label: 'Roll-Up Banners', desc: 'Portable trade show displays' },
           { href: '/banner-faq-ireland', label: 'Banner FAQ', desc: '40+ instant answers' },
+          ...siblingLinks,
         ]}
       />
     </Layout>

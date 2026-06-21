@@ -112,6 +112,7 @@ export default function Home() {
           '@type': 'OfferCatalog',
           name: 'Print Solutions',
           itemListElement: [
+            catalogOffer('Banners Ireland', '/banners-ireland'),
             catalogOffer('Vinyl Banners Ireland', '/vinyl-banners'),
             catalogOffer('Roll Up Banners Meath', '/roll-up-banners'),
             catalogOffer('Custom Posters Ireland', '/posters'),
