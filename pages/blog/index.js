@@ -17,6 +17,17 @@ const posts = [
     category: 'Compliance Guide',
   },
   {
+    slug: 'business-stamps-ireland-guide',
+    title: 'Business Stamps Ireland: Company Stamps, Invoice Stamps & Logo Stamps Guide',
+    excerpt:
+      'Everything Irish businesses need to know about company stamps — what to include, self-inking vs traditional, and how to order custom rubber stamps.',
+    date: '2026-06-21',
+    readTime: '7 min read',
+    image: '/images/rubber-stamps/RubberStamp_10.jpg',
+    imageAlt: 'Business stamps Ireland — custom company and invoice rubber stamps',
+    category: 'Print Guide',
+  },
+  {
     slug: 'banner-sizes-ireland',
     title: 'Banner Sizes Ireland: PVC Outdoor & Roll-Up Banner Size Guide',
     excerpt:

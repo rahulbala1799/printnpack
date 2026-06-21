@@ -101,6 +101,27 @@ const guides = [
     image: '/ifa/product/vinylstk/carstk.webp',
     cta: 'Read guide',
   },
+  {
+    href: '/rubber-stamps-ireland',
+    title: 'Rubber Stamps Ireland',
+    description: 'Business stamps, signature stamps & company logo stamps — same-day service.',
+    image: '/images/rubber-stamps/RubberStamp_10.jpg',
+    cta: 'Browse stamps',
+  },
+  {
+    href: '/rubber-stamp-faq-ireland',
+    title: 'Rubber Stamp FAQ',
+    description: 'Instant answers on pricing, types, turnaround & delivery.',
+    image: '/images/rubber-stamps/Rubberstam_6.jpg',
+    cta: 'Browse FAQ',
+  },
+  {
+    href: '/blog/business-stamps-ireland-guide',
+    title: 'Business Stamps Guide',
+    description: 'Company stamps, invoice stamps & logo stamps for Irish businesses.',
+    image: '/images/rubber-stamps/RubberStamp_11.jpg',
+    cta: 'Read the guide',
+  },
 ];
 
 export default function PackagingGuides() {

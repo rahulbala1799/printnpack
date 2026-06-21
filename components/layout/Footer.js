@@ -18,6 +18,8 @@ const PRODUCT_LINKS = [
   { label: 'Printed Flat Handle Bags', href: '/printed-flat-handle-bags-ireland' },
   { label: 'Vinyl Banners', href: '/vinyl-banners' },
   { label: 'Roll Up Banners', href: '/roll-up-banners' },
+  { label: 'Rubber Stamps', href: '/rubber-stamps-ireland' },
+  { label: 'Stamp FAQ', href: '/rubber-stamp-faq-ireland' },
   { label: 'Custom Posters', href: '/posters' },
   { label: 'Vinyl Stickers', href: '/vinyl-stickers' },
   { label: 'Leaflets Ireland', href: '/services/leaflets' },
