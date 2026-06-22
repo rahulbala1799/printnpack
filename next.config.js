@@ -6,12 +6,6 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'printnpack.ie' }],
-        destination: 'https://www.printnpack.ie/:path*',
-        permanent: true,
-      },
-      {
         source: '/pizza-boxes',
         destination: '/pizza-boxes-ireland',
         permanent: true,

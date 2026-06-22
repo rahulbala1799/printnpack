@@ -18,6 +18,13 @@
       "has": [{ "type": "host", "value": "printnpack.ie" }],
       "destination": "https://www.printnpack.ie/:path*",
       "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.printnpack.ie" }],
+      "missing": [{ "type": "header", "key": "x-forwarded-proto", "value": "https" }],
+      "destination": "https://www.printnpack.ie/:path*",
+      "permanent": true
     }
   ]
 }
