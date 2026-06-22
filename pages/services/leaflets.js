@@ -4,8 +4,18 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
 import { SITE_URL } from '../../lib/site';
+import { buildProductLd } from '../../lib/schema';
 
 const PAGE_URL = `${SITE_URL}/services/leaflets`;
+
+const productLd = buildProductLd({
+  name: 'Leaflets Ireland',
+  description:
+    'Professional leaflet printing across Ireland — flat leaflets, folded flyers, and promotional materials on premium paper stocks with fast turnaround and nationwide delivery.',
+  image: `${SITE_URL}/images/hero/leaflet.svg`,
+  url: PAGE_URL,
+  price: '0.05',
+});
 
 const pageFaqs = [
   {
@@ -44,6 +54,7 @@ const LeafletsPage = () => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content={PAGE_URL} />
         <link rel="canonical" href={PAGE_URL} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       </Head>
 
@@ -54,6 +65,13 @@ const LeafletsPage = () => {
             <p className="text-xl text-gray-600 mb-8">
               Professional <strong>leaflets Ireland</strong> businesses trust — including <strong>flat leaflets</strong>, folded flyers, and promotional handouts. Eye-catching design, premium printing, and fast nationwide delivery.
             </p>
+
+            <div className="flex flex-wrap gap-3 mb-8">
+              <div className="bg-white border border-blue-100 rounded-xl px-4 py-2 text-center shadow-sm">
+                <div className="text-sm font-bold text-gray-900">From €0.05</div>
+                <div className="text-xs text-gray-500">per leaflet</div>
+              </div>
+            </div>
             
             <Link 
               href="/quote"

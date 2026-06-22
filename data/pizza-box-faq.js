@@ -38,7 +38,7 @@ export const PIZZA_BOX_FAQS = [
     category: 'pricing-ordering',
     q: 'How much does custom pizza box printing cost?',
     subtitle: 'Budget planning for branded boxes',
-    a: 'Custom printed pizza box pricing depends on size, quantity, and print type. Full-colour CMYK printing on standard 12" boxes typically starts from around €0.45–€0.65 per unit at 500 units, with lower per-unit costs at higher volumes. Single-colour printing is more economical for budget-conscious operators. Contact PrintNPack for an exact quote based on your size, quantity, and design.',
+    a: 'Custom printed pizza box pricing depends on size, quantity, and print type. Full-colour CMYK printing on standard 12" boxes typically starts from around €0.17 per unit at 500 units, with lower per-unit costs at higher volumes. Single-colour printing is more economical for budget-conscious operators. Contact PrintNPack for an exact quote based on your size, quantity, and design.',
     link: { href: '/custom-pizza-boxes-ireland', label: 'Get a custom pizza box quote' },
   },
   {
@@ -46,7 +46,7 @@ export const PIZZA_BOX_FAQS = [
     category: 'pricing-ordering',
     q: 'How much do pizza boxes cost per unit?',
     subtitle: 'Unit pricing at different order volumes',
-    a: 'Plain kraft corrugated pizza boxes start from around €0.30–€0.50 per box depending on size and case quantity. Custom printed boxes cost more due to printing setup — expect €0.45–€1.20+ per unit depending on size, colours, and volume. Ordering 1,000+ units significantly reduces the per-box price. Our online quote form gives tailored pricing for your exact requirements.',
+    a: 'Plain kraft corrugated pizza boxes start from around €0.17 per box depending on size and case quantity. Custom printed boxes cost more due to printing setup at higher volumes. Ordering 1,000+ units significantly reduces the per-box price. Our online quote form gives tailored pricing for your exact requirements.',
     link: { href: '/plain-packaging?category=Pizza+Boxes', label: 'Browse plain wholesale pizza boxes' },
   },
   {

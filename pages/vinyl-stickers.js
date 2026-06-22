@@ -31,7 +31,7 @@ const productLd = buildProductLd({
     'Custom vinyl stickers and decals for windows, vehicles, walls, and packaging across Ireland. Die-cut shapes, outdoor-grade vinyl, and fast nationwide delivery.',
   image: `${SITE_URL}/ifa/product/vinylstk/Window_Sticker_2_01041803202404.png.webp`,
   url: PAGE_URL,
-  price: '15.00',
+  price: '2.00',
 });
 
 const faqLd = {

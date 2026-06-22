@@ -16,7 +16,7 @@ const productLd = buildProductLd({
     'Premium custom printed pizza boxes for Irish restaurants and takeaways. Full-colour CMYK printing, food-safe corrugated board, sizes 7" to 20", MOQ from 500 units, nationwide delivery.',
   image: `${SITE_URL}/images/pizza-boxes/PIZZA_BOX_1.jpg`,
   url: PAGE_URL,
-  price: '0.45',
+  price: '0.17',
 });
 
 const faqLd = {
@@ -383,7 +383,7 @@ const CustomPizzaBoxesIreland = () => {
               {/* Quick stats */}
               <div className="grid grid-cols-3 gap-3 mb-6">
                 <div className="bg-gray-50 rounded-xl p-3 text-center">
-                  <div className="text-lg sm:text-xl font-bold text-gray-900">From €0.35</div>
+                  <div className="text-lg sm:text-xl font-bold text-gray-900">From €0.17</div>
                   <div className="text-xs text-gray-500">per box</div>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-3 text-center">

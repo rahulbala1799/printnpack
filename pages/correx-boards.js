@@ -4,6 +4,19 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import CorrexQuoteForm from '../components/CorrexQuoteForm';
+import { SITE_URL } from '../lib/site';
+import { buildProductLd } from '../lib/schema';
+
+const PAGE_URL = `${SITE_URL}/correx-boards`;
+
+const productLd = buildProductLd({
+  name: 'Correx Boards Ireland',
+  description:
+    'Weather-resistant correx boards for durable outdoor signage. Available in 2mm to 8mm thicknesses with UV printing. Perfect for elections, construction, real estate, and outdoor events across Ireland.',
+  image: `${SITE_URL}/ifa/product/corriboard/4-x-8-corrugated-plastic-sheets.jpg`,
+  url: PAGE_URL,
+  price: '10.00',
+});
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -140,7 +153,8 @@ const CorrexBoardsPage = () => {
         <meta property="og:image" content="https://www.printnpack.ie/ifa/product/corriboard/4-x-8-corrugated-plastic-sheets.jpg" />
         <meta property="og:url" content="https://www.printnpack.ie/correx-boards" />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://www.printnpack.ie/correx-boards" />
+        <link rel="canonical" href={PAGE_URL} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
       </Head>
 
       {/* ── Breadcrumb ── */}
@@ -201,7 +215,7 @@ const CorrexBoardsPage = () => {
 
               <div className="grid grid-cols-3 gap-3 mb-6">
                 <div className="bg-gray-50 rounded-xl p-3 text-center">
-                  <div className="text-lg sm:text-xl font-bold text-gray-900">From €15</div>
+                  <div className="text-lg sm:text-xl font-bold text-gray-900">From €10</div>
                   <div className="text-xs text-gray-500">starting price</div>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-3 text-center">

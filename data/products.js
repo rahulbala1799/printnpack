@@ -35,7 +35,7 @@ const products = [
       '/images/pizza-boxes/PIZZA_BOX_6.jpg'
     ],
     imageSrc: '/images/pizza-boxes/PIZZA_BOX_1.jpg',
-    price: 'Starting at €0.45 per box',
+    price: 'Starting at €0.17 per box',
     moq: 500,
     leadTime: '5-7 business days',
     weeklyDelivery: 'Our weekly delivery service is perfect for busy restaurants and takeaways that need a reliable supply of custom pizza boxes. We establish a regular delivery schedule based on your needs, ensuring you never run out of branded packaging. Our team monitors your usage patterns and adjusts quantities to optimize efficiency and reduce costs. This service helps maintain consistent branding while simplifying your operations and inventory management.'
@@ -78,7 +78,7 @@ const products = [
       '/images/products/flat-handle-bags/7.png'
     ],
     imageSrc: '/images/products/flat-handle-bags/1.png',
-    price: 'Starting at €0.28 per unit',
+    price: 'Starting at €0.18 per unit',
     moq: 500,
     leadTime: '10-14 business days',
     weeklyDelivery: 'Our weekly delivery service provides a consistent supply of branded packaging materials tailored to your business needs. This service is especially valuable for retail and food businesses that require regular packaging without maintaining large storage areas. Our team tracks your usage patterns to optimize delivery quantities, ensuring you never run short while minimizing waste. This premium service elevates your professional image while streamlining operations.'
@@ -272,7 +272,7 @@ const products = [
       '/images/products/bagasse-burger-box/6.png'
     ],
     imageSrc: '/images/products/bagasse-burger-box/1.png',
-    price: 'Starting at €0.32 per unit',
+    price: 'Starting at €0.22 per unit',
     moq: 500,
     leadTime: '7-10 business days',
     weeklyDelivery: 'Our weekly delivery service is perfect for food service businesses that require a consistent supply of eco-friendly packaging. We establish a regular delivery schedule tailored to your needs, ensuring you always have sufficient stock without requiring large storage areas. Our account team monitors your usage patterns to optimize order quantities, helping you maintain efficiency and reduce costs. This reliable service of sustainable packaging enhances your green credentials while simplifying operations.'
@@ -717,7 +717,7 @@ const products = [
       '/ifa/product/Poster/aluminum_board_posters_cross_sell.jpg',
       '/ifa/product/Poster/100-GSM-Map-Print-Spot-Vertical-Poster_05-1024x1024.webp'
     ],
-    price: 'Starting at €15 per poster',
+    price: 'Starting at €8 per poster',
     moq: 1,
     leadTime: '1-3 business days',
     applications: [
@@ -775,7 +775,7 @@ const products = [
     category: 'Wide Format',
     url: '/foamex-boards',
     imageSrc: '/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif',
-    price: 'Starting at €25 per board',
+    price: 'Starting at €15 per board',
     quoteRequired: false,
     description: 'Premium quality foamex PVC boards that are perfect for indoor signage, exhibitions, and displays. Durable, lightweight, and available in multiple thicknesses.',
     features: [
@@ -1049,7 +1049,7 @@ const products = [
       '/ifa/product/corriboard/4-x-8-corrugated-plastic-sheets-1.jpg'
     ],
     imageSrc: '/ifa/product/corriboard/4-x-8-corrugated-plastic-sheets.jpg',
-    price: 'Starting at €15 per board',
+    price: 'Starting at €10 per board',
     quoteRequired: false,
     leadTime: '1-3 business days standard',
     faq: [
@@ -1170,7 +1170,7 @@ const products = [
       '/ifa/product/vinylstk/Vinyl-Decals-_-Stickers.jpg'
     ],
     imageSrc: '/ifa/product/vinylstk/Window_Sticker_2_01041803202404.png.webp',
-    price: 'Starting at €0.50 per sticker',
+    price: 'Starting at €2 per sticker',
     quoteRequired: false,
     leadTime: '2-5 business days standard',
     faq: [

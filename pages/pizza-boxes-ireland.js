@@ -102,7 +102,7 @@ const itemListLd = {
       position: 1,
       name: 'Custom Printed Pizza Boxes Ireland',
       url: `${SITE_URL}/custom-pizza-boxes-ireland`,
-      price: '0.45',
+      price: '0.17',
     }),
     ...wholesaleBoxes.slice(0, 7).map((p, i) => {
       const productUrl = `${SITE_URL}/plain-packaging/${p.id}`;
@@ -199,6 +199,20 @@ export default function PizzaBoxesIreland() {
                 go-to supplier for restaurants, pizzerias, and takeaways. All standard sizes, fast
                 nationwide delivery, and competitive pricing.
               </p>
+              <div className="flex flex-wrap gap-3 mb-6">
+                <div className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-center">
+                  <div className="text-sm font-bold text-gray-900">From €0.17</div>
+                  <div className="text-xs text-gray-500">per box</div>
+                </div>
+                <div className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-center">
+                  <div className="text-sm font-bold text-gray-900">500+ units</div>
+                  <div className="text-xs text-gray-500">custom MOQ</div>
+                </div>
+                <div className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-center">
+                  <div className="text-sm font-bold text-gray-900">Nationwide</div>
+                  <div className="text-xs text-gray-500">delivery</div>
+                </div>
+              </div>
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/custom-pizza-boxes-ireland"

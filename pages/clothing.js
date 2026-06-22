@@ -4,6 +4,19 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import ClothingQuoteForm from '../components/ClothingQuoteForm';
+import { SITE_URL } from '../lib/site';
+import { buildProductLd } from '../lib/schema';
+
+const PAGE_URL = `${SITE_URL}/clothing`;
+
+const productLd = buildProductLd({
+  name: 'Custom Clothing Ireland',
+  description:
+    'Custom printed and embroidered clothing in Ireland. T-shirts, polos, hoodies, workwear. Corporate events, teams, promotions. Fast turnaround, bulk discounts.',
+  image: `${SITE_URL}/images/apparel/TSHIRT MOCK UP 1.jpg`,
+  url: PAGE_URL,
+  price: '8.50',
+});
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -85,7 +98,8 @@ const CustomClothingIreland = () => {
         <meta property="og:image" content="https://www.printnpack.ie/images/apparel/TSHIRT MOCK UP 1.jpg" />
         <meta property="og:url" content="https://www.printnpack.ie/clothing" />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://www.printnpack.ie/clothing" />
+        <link rel="canonical" href={PAGE_URL} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
       </Head>
 
       <nav className="bg-gray-50 border-b border-gray-200">

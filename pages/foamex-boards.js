@@ -4,6 +4,19 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import FoamexQuoteForm from '../components/FoamexQuoteForm';
+import { SITE_URL } from '../lib/site';
+import { buildProductLd } from '../lib/schema';
+
+const PAGE_URL = `${SITE_URL}/foamex-boards`;
+
+const productLd = buildProductLd({
+  name: 'Foamex Boards Ireland',
+  description:
+    'Premium quality foamex PVC boards for indoor signage, exhibitions, and displays. Available in 3mm, 5mm, 5.5mm, and 10mm thicknesses with custom sizes and finishing options.',
+  image: `${SITE_URL}/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif`,
+  url: PAGE_URL,
+  price: '15.00',
+});
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -143,7 +156,8 @@ const FoamexBoardsPage = () => {
         <meta property="og:image" content="https://www.printnpack.ie/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif" />
         <meta property="og:url" content="https://www.printnpack.ie/foamex-boards" />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://www.printnpack.ie/foamex-boards" />
+        <link rel="canonical" href={PAGE_URL} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
       </Head>
 
       {/* ── Breadcrumb ── */}
@@ -216,7 +230,7 @@ const FoamexBoardsPage = () => {
 
               <div className="grid grid-cols-3 gap-3 mb-6">
                 <div className="bg-gray-50 rounded-xl p-3 text-center">
-                  <div className="text-lg sm:text-xl font-bold text-gray-900">From €25</div>
+                  <div className="text-lg sm:text-xl font-bold text-gray-900">From €15</div>
                   <div className="text-xs text-gray-500">starting price</div>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-3 text-center">

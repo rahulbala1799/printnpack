@@ -107,7 +107,7 @@ const productLd = buildProductLd({
     'Custom printed flat handle paper bags for Irish retailers, cafés, and food businesses. Digital CMYK logo printing, three sizes, MOQ from 500 units, nationwide delivery.',
   image: `${SITE_URL}/images/products/flat-handle-bags/1.png`,
   url: PAGE_URL,
-  price: '0.28',
+  price: '0.18',
 });
 
 const webPageLd = {
@@ -189,7 +189,7 @@ export default function PrintedFlatHandleBagsIreland() {
               </p>
               <div className="flex flex-wrap gap-3 mb-6">
                 <div className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-center">
-                  <div className="text-sm font-bold text-gray-900">From €0.28</div>
+                  <div className="text-sm font-bold text-gray-900">From €0.18</div>
                   <div className="text-xs text-gray-500">per unit</div>
                 </div>
                 <div className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-center">

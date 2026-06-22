@@ -4,6 +4,19 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import BagasseQuoteForm from '../components/BagasseQuoteForm';
+import { SITE_URL } from '../lib/site';
+import { buildProductLd } from '../lib/schema';
+
+const PAGE_URL = `${SITE_URL}/eco-bagasse-burger-boxes`;
+
+const productLd = buildProductLd({
+  name: 'Eco-Friendly Bagasse Burger Boxes Ireland',
+  description:
+    'Premium biodegradable bagasse burger boxes made from sugarcane fibre. Microwave safe, oil resistant, 100% compostable. Perfect for eco-conscious food businesses in Ireland.',
+  image: `${SITE_URL}/images/products/bagasse-burger-box/1.png`,
+  url: PAGE_URL,
+  price: '0.22',
+});
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -141,7 +154,8 @@ const EcoBagasseBurgerBoxes = () => {
         <meta property="og:image" content="https://www.printnpack.ie/images/products/bagasse-burger-box/1.png" />
         <meta property="og:url" content="https://www.printnpack.ie/eco-bagasse-burger-boxes" />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://www.printnpack.ie/eco-bagasse-burger-boxes" />
+        <link rel="canonical" href={PAGE_URL} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
       </Head>
 
       {/* ── Breadcrumb ── */}
@@ -214,7 +228,7 @@ const EcoBagasseBurgerBoxes = () => {
 
               <div className="grid grid-cols-3 gap-3 mb-6">
                 <div className="bg-gray-50 rounded-xl p-3 text-center">
-                  <div className="text-lg sm:text-xl font-bold text-gray-900">From €0.32</div>
+                  <div className="text-lg sm:text-xl font-bold text-gray-900">From €0.22</div>
                   <div className="text-xs text-gray-500">per unit</div>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-3 text-center">
