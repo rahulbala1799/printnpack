@@ -11,67 +11,53 @@ import { buildProductLd } from '../lib/schema';
 const PAGE_URL = `${SITE_URL}/custom-pizza-boxes-ireland`;
 
 const productLd = buildProductLd({
-  name: 'Custom Pizza Boxes Ireland',
+  name: 'Custom Printed Pizza Boxes with Logo Ireland',
   description:
-    'Premium custom printed pizza boxes for Irish restaurants and takeaways. Full-colour CMYK printing, food-safe corrugated board, sizes 7" to 20", MOQ from 500 units, nationwide delivery.',
+    'Custom printed pizza boxes with logo for Irish takeaways, pizzerias and restaurants. Personalised branding, food-safe corrugated cardboard, sizes 10" to 14", MOQ from 500 units, nationwide delivery.',
   image: `${SITE_URL}/images/pizza-boxes/PIZZA_BOX_1.jpg`,
   url: PAGE_URL,
   price: '0.17',
 });
 
+const pageFaqs = [
+  {
+    q: 'Can I get pizza boxes with my logo in Ireland?',
+    a: 'Yes. PrintNPack supplies custom printed pizza boxes with your logo for takeaways, pizzerias, restaurants and food businesses across Ireland.',
+  },
+  {
+    q: 'What is the minimum order for custom printed pizza boxes?',
+    a: 'Custom printed pizza boxes usually start from 500 units. For smaller quantities, ask about plain or stock pizza box options on our plain pizza boxes page.',
+  },
+  {
+    q: 'Do you sell plain pizza boxes in 100 packs?',
+    a: 'Plain and stock pizza box case quantities are available depending on size and stock — commonly 100 boxes per case on popular kraft sizes. See plain pizza boxes Ireland for current case pricing.',
+  },
+  {
+    q: 'What pizza box sizes are most popular?',
+    a: 'Popular pizza box sizes include 10 inch, 12 inch and 14 inch, with 12 inch and 14 inch commonly used by Irish takeaways and pizzerias.',
+  },
+  {
+    q: 'Can you print personalised pizza boxes?',
+    a: 'Yes. Personalised pizza boxes can include your logo, brand colours, QR code, social media handle, offer message or campaign artwork.',
+  },
+  {
+    q: 'Are the boxes suitable for takeaway and delivery?',
+    a: 'Yes. Printed cardboard pizza boxes are intended for takeaway, collection and delivery use by restaurants, pizzerias, catering businesses and food service operators.',
+  },
+  {
+    q: 'Do you deliver pizza boxes across Ireland?',
+    a: 'Yes. PrintNPack arranges delivery across Ireland for custom printed and plain pizza box orders.',
+  },
+];
+
 const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'Where can I buy a custom pizza box in Ireland?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'PrintNPack supplies custom pizza boxes across Ireland with full-colour logo printing from 500 units. Sizes from 7 inch to 20 inch, food-safe corrugated board, and nationwide delivery for restaurants and takeaways.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What pizza box sizes are available in Ireland?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'PrintNPack supplies custom pizza boxes from 7 inch (personal) up to 20 inch (party size), including popular Irish takeaway sizes 9", 12", 14", and 16". Custom dimensions are available on request.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What is the minimum order for custom printed pizza boxes?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Custom printed pizza boxes start from 500 units. This MOQ suits growing takeaways and multi-site restaurants ordering branded packaging in Ireland.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'How long does pizza box printing and delivery take in Ireland?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Production typically takes 5–7 business days after artwork approval, with nationwide delivery across all counties in Ireland including Dublin, Cork, and Galway.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Can I get my logo printed on pizza boxes?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Yes. We offer full-colour CMYK custom printing with food-safe inks, plus a free professional design service to prepare your logo and branding artwork.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Which pizza box size is best for Irish takeaways — 7", 12", or 14"?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: '7" suits personal and kids portions; 12" is the core size for standard medium pizzas in Irish takeaways; 14" is best for large and family orders, especially at weekends. Most operators stock 12" and 14" as their primary sizes.',
-      },
-    },
-  ],
+  mainEntity: pageFaqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
 };
 
 const breadcrumbLd = {
@@ -84,26 +70,36 @@ const breadcrumbLd = {
   ],
 };
 
-const pageFaqs = [
+const seoSections = [
   {
-    q: 'Where can I buy a custom pizza box in Ireland?',
-    a: 'PrintNPack prints custom pizza boxes for Irish restaurants and takeaways — full-colour branding, food-safe board, MOQ from 500 units, and nationwide delivery.',
+    title: 'Pizza Boxes with Logo for Takeaways and Restaurants',
+    body: 'Custom pizza boxes with logo help every takeaway order carry your brand from the kitchen to the customer. PrintNPack supplies branded pizza boxes for pizzerias, restaurants, food trucks, event caterers and takeaway businesses across Ireland.',
   },
   {
-    q: 'What pizza box sizes are available in Ireland?',
-    a: 'We supply 7", 9", 12", 14", 16", 18", and 20" boxes, plus custom sizes. The most popular for Irish takeaways are 12" and 14".',
+    title: 'Personalised Pizza Boxes for Irish Food Businesses',
+    body: 'Personalised pizza boxes are ideal when you want more than a plain box. Add your logo, colours, QR code, social media handle, offer message or campaign artwork to turn every delivery box into local advertising.',
   },
   {
-    q: 'What is the minimum order quantity (MOQ)?',
-    a: 'Custom printed pizza boxes start from 500 units — ideal for restaurants and takeaways scaling branded packaging.',
+    title: 'Printed Cardboard Pizza Boxes in Popular Sizes',
+    body: 'Our printed cardboard pizza boxes are made for food service use, with corrugated board options suitable for takeaway, collection and delivery. Popular sizes include 10 inch, 12 inch and 14 inch, with other sizes available on request.',
   },
   {
-    q: 'How long is production and delivery?',
-    a: 'Allow 5–7 business days for printing after artwork sign-off. We deliver nationwide across Ireland.',
+    title: 'Pizza Boxes for Delivery, Takeaway, Pizzerias and Catering',
+    body: 'Whether you run a single-site takeaway or a multi-location brand, printed pizza boxes keep delivery and collection orders looking professional. Food-safe board and full-colour print help your packaging match the quality of your food.',
   },
   {
-    q: 'Do you include design support?',
-    a: 'Yes — our team prepares professional print-ready artwork for your boxes at no extra cost.',
+    title: 'Kraft, Brown and Eco-Friendly Pizza Box Options',
+    body: 'Custom print runs use food-safe corrugated board. For everyday stock without print, kraft brown plain pizza boxes are available by the case — see our plain pizza boxes page for 100-pack case options.',
+    link: { href: '/plain-pizza-boxes-ireland', label: 'plain kraft pizza boxes' },
+  },
+  {
+    title: 'Custom Pizza Box Printing from 500 Units',
+    body: 'Custom printed pizza boxes start from 500 units with full-colour CMYK print, free artwork support and 5–7 business day production after approval. Higher volumes reduce the per-unit cost for growing brands.',
+  },
+  {
+    title: 'Need 100 Pizza Boxes? Ask About Plain and Stock Options',
+    body: 'For custom printed pizza boxes, minimum order quantities usually start from 500 units. If you need 100 pizza boxes or a smaller case quantity, plain kraft corrugated options are available to order online.',
+    link: { href: '/plain-pizza-boxes-ireland', label: 'plain pizza boxes in 100 packs' },
   },
 ];
 
@@ -276,11 +272,11 @@ const CustomPizzaBoxesIreland = () => {
   return (
     <Layout>
       <Head>
-        <title>Custom Pizza Box Ireland | Printed Pizza Boxes | PrintNPack</title>
-        <meta name="description" content="Custom pizza box Ireland — printed pizza boxes with your logo from 500 units. All sizes 7&quot; to 20&quot;, food-safe board, fast nationwide delivery for restaurants &amp; takeaways." />
-        <meta name="keywords" content="pizza box, pizza box ireland, custom pizza box ireland, printed pizza boxes, custom pizza boxes Ireland, pizza box printing Dublin, food packaging Ireland, restaurant packaging, takeaway boxes" />
-        <meta property="og:title" content="Pizza Boxes Ireland | Custom Printed Pizza Box Packaging" />
-        <meta property="og:description" content="High-quality custom pizza boxes with full-color printing. All sizes available. Fast delivery across Ireland." />
+        <title>Custom Printed Pizza Boxes Ireland | Pizza Boxes with Logo from 500 Units</title>
+        <meta name="description" content="Custom printed pizza boxes Ireland for takeaways, pizzerias and restaurants. Pizza boxes with logo, food-safe corrugated board, popular sizes and nationwide delivery from 500 units." />
+        <meta name="keywords" content="custom printed pizza boxes, custom pizza boxes Ireland, pizza boxes with logo, branded pizza boxes, personalised pizza boxes, logo printed pizza boxes, pizza box printing Ireland" />
+        <meta property="og:title" content="Custom Printed Pizza Boxes Ireland | Pizza Boxes with Logo" />
+        <meta property="og:description" content="Pizza boxes with logo for Irish takeaways and restaurants. Food-safe corrugated board, popular 10&quot;, 12&quot; and 14&quot; sizes, delivery from 500 units." />
         <meta property="og:image" content="https://www.printnpack.ie/images/pizza-boxes/PIZZA_BOX_1.jpg" />
         <meta property="og:url" content="https://www.printnpack.ie/custom-pizza-boxes-ireland" />
         <meta property="og:type" content="website" />
@@ -365,18 +361,18 @@ const CustomPizzaBoxesIreland = () => {
               </div>
 
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">
-                Custom Pizza Box Ireland — Printed Pizza Boxes
+                Custom Printed Pizza Boxes Ireland — Pizza Boxes with Logo
               </h1>
 
               <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
-                Order a <strong>custom pizza box</strong> with full-colour branding for your Irish restaurant or takeaway. Food-safe corrugated board, sizes 7&quot;–20&quot;, MOQ from 500 units.
+                Order <strong>personalised pizza boxes with your logo</strong> for your takeaway, restaurant, pizzeria or food delivery brand. Food-safe corrugated cardboard, popular 10&quot;, 12&quot; and 14&quot; sizes, artwork support and delivery across Ireland from 500 units.
                 {' '}
-                <Link href="/pizza-boxes-ireland" className="text-blue-600 hover:underline font-medium">
-                  View all pizza boxes Ireland
+                <Link href="/plain-pizza-boxes-ireland" className="text-blue-600 hover:underline font-medium">
+                  Need 100 plain boxes?
                 </Link>
-                {' '}or{' '}
+                {' · '}
                 <Link href="/blog/pizza-box-sizes-ireland" className="text-blue-600 hover:underline font-medium">
-                  compare sizes (7&quot;, 12&quot;, 14&quot;) →
+                  Compare sizes →
                 </Link>
               </p>
 
@@ -445,6 +441,28 @@ const CustomPizzaBoxesIreland = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ── Buyer-intent SEO sections ── */}
+      <section className="bg-white border-b border-gray-100">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          {seoSections.map((section) => (
+            <div key={section.title} className="mb-10 last:mb-0">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">{section.title}</h2>
+              <p className="text-gray-600 leading-relaxed">
+                {section.body}
+                {section.link && (
+                  <>
+                    {' '}
+                    <Link href={section.link.href} className="text-blue-600 hover:underline font-medium">
+                      View {section.link.label} →
+                    </Link>
+                  </>
+                )}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -729,10 +747,12 @@ const CustomPizzaBoxesIreland = () => {
 
       <RelatedSeoLinks
         links={[
-          { href: '/pizza-box-faq-ireland', label: 'Pizza Box FAQ', desc: '30+ instant answers' },
-          { href: '/pizza-boxes-ireland', label: 'Pizza Boxes Ireland', desc: 'Plain & wholesale options' },
+          { href: '/pizza-boxes-ireland', label: 'Pizza Boxes Ireland', desc: 'Plain, printed & wholesale hub' },
+          { href: '/plain-pizza-boxes-ireland', label: 'Plain Pizza Boxes', desc: 'Kraft boxes in 100-pack cases' },
+          { href: '/pizza-boxes-wholesale-ireland', label: 'Wholesale Pizza Boxes', desc: 'Bulk supply for takeaways' },
           { href: '/blog/pizza-box-sizes-ireland', label: 'Pizza Box Sizes Guide', desc: '7″ to 20″ sizing help' },
-          { href: '/printed-flat-handle-bags-ireland', label: 'Printed Paper Bags', desc: 'Takeaway bag branding' },
+          { href: '/blog/custom-pizza-box-cost-ireland', label: 'Custom Pizza Box Cost Guide', desc: 'Pricing before you quote' },
+          { href: '/pizza-box-faq-ireland', label: 'Pizza Box FAQ', desc: '30+ instant answers' },
         ]}
       />
 

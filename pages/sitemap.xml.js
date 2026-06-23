@@ -27,6 +27,8 @@ const staticPages = [
   // Pizza box hub — primary SEO target
   { path: '/pizza-boxes-ireland',          priority: '0.95', changefreq: 'weekly' },
   { path: '/custom-pizza-boxes-ireland',   priority: '0.9',  changefreq: 'weekly' },
+  { path: '/plain-pizza-boxes-ireland',    priority: '0.88', changefreq: 'weekly' },
+  { path: '/pizza-boxes-wholesale-ireland', priority: '0.88', changefreq: 'weekly' },
   { path: '/pizza-box-faq-ireland',        priority: '0.88', changefreq: 'monthly' },
   { path: '/printed-flat-handle-bags-ireland', priority: '0.9', changefreq: 'weekly' },
   { path: '/eco-bagasse-burger-boxes',    priority: '0.8',  changefreq: 'monthly' },
@@ -59,6 +61,7 @@ const staticPages = [
   { path: '/blog',              priority: '0.8', changefreq: 'weekly'  },
   // Pizza box content cluster
   { path: '/blog/pizza-box-sizes-ireland', priority: '0.85', changefreq: 'monthly' },
+  { path: '/blog/custom-pizza-box-cost-ireland', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/banner-sizes-ireland', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/business-stamps-ireland-guide', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/banner-printing-ireland-guide', priority: '0.85', changefreq: 'monthly' },

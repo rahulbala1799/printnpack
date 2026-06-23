@@ -14,6 +14,7 @@ const PRODUCT_LINKS = [
   { label: 'Printing Ireland', href: '/printing-ireland' },
   { label: 'Printing Ashbourne', href: '/printing-ashbourne' },
   { label: 'Pizza Boxes', href: '/pizza-boxes-ireland' },
+  { label: 'Plain Pizza Boxes', href: '/plain-pizza-boxes-ireland' },
   { label: 'Custom Pizza Boxes', href: '/custom-pizza-boxes-ireland' },
   { label: 'Banners Ireland', href: '/banners-ireland' },
   { label: 'Banner FAQ', href: '/banner-faq-ireland' },

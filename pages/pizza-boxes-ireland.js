@@ -25,24 +25,34 @@ const sizeGuide = [
 
 const guides = [
   {
+    href: '/custom-pizza-boxes-ireland',
+    title: 'Custom Printed Pizza Boxes',
+    desc: 'Pizza boxes with logo from 500 units.',
+  },
+  {
+    href: '/plain-pizza-boxes-ireland',
+    title: 'Plain Pizza Boxes',
+    desc: 'Kraft boxes in 100-pack cases.',
+  },
+  {
+    href: '/pizza-boxes-wholesale-ireland',
+    title: 'Wholesale Pizza Boxes',
+    desc: 'Bulk supply for takeaways & restaurants.',
+  },
+  {
     href: '/pizza-box-faq-ireland',
     title: 'Pizza Box FAQ',
     desc: 'Instant answers on pricing, printing, sizes & delivery.',
   },
   {
     href: '/blog/pizza-box-sizes-ireland',
-    title: 'Pizza Box Sizes Ireland',
+    title: 'Pizza Box Sizes Guide',
     desc: 'Which sizes Irish takeaways should stock first.',
   },
   {
-    href: '/blog/eco-friendly-pizza-box-paper-bags-burger-boxes-ireland',
-    title: 'Eco-Friendly Pizza Boxes',
-    desc: 'Recyclable kraft options for sustainable takeaway.',
-  },
-  {
-    href: '/blog/irish-restaurant-industry-delivery-2025',
-    title: 'Delivery Packaging for Restaurants',
-    desc: 'How Irish operators manage delivery costs.',
+    href: '/blog/custom-pizza-box-cost-ireland',
+    title: 'Custom Pizza Box Cost Guide',
+    desc: 'How pricing works before you request a quote.',
   },
 ];
 
@@ -135,9 +145,9 @@ const webPageLd = {
 };
 
 export default function PizzaBoxesIreland() {
-  const title = 'Pizza Boxes Ireland | Custom Printed & Wholesale Pizza Box Supply';
+  const title = 'Pizza Boxes Ireland | Plain, Printed & Custom Pizza Boxes';
   const description =
-    'Buy pizza boxes in Ireland — custom printed branded boxes from 500 units, or plain kraft wholesale from 7" to 16". Fast delivery to Dublin, Cork & nationwide. Ireland\'s pizza box supplier for restaurants & takeaways.';
+    'Buy pizza boxes in Ireland — custom printed boxes with logo from 500 units, plain kraft wholesale in 100-pack cases, and bulk supply for takeaways. Fast delivery nationwide.';
 
   return (
     <Layout>
@@ -221,10 +231,16 @@ export default function PizzaBoxesIreland() {
                   Custom Printed Boxes
                 </Link>
                 <Link
-                  href="/plain-packaging?category=Pizza+Boxes"
+                  href="/plain-pizza-boxes-ireland"
                   className="inline-flex items-center gap-2 bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors"
                 >
-                  Wholesale Plain Boxes
+                  Plain Pizza Boxes
+                </Link>
+                <Link
+                  href="/pizza-boxes-wholesale-ireland"
+                  className="inline-flex items-center gap-2 bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors"
+                >
+                  Wholesale Bulk
                 </Link>
                 <Link
                   href="/pizza-box-faq-ireland"
@@ -253,13 +269,12 @@ export default function PizzaBoxesIreland() {
       <section className="py-12 lg:py-16 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
-            Two ways to order pizza boxes
+            Choose your pizza box option
           </h2>
           <p className="text-gray-600 mb-8 max-w-2xl">
-            Choose the option that fits your business — branded custom printing for marketing impact,
-            or plain wholesale for everyday operations.
+            Branded custom print, plain kraft case packs, or wholesale bulk supply — each page covers a different buying path.
           </p>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             <Link
               href="/custom-pizza-boxes-ireland"
               className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-blue-300 hover:shadow-lg transition-all"
@@ -275,23 +290,23 @@ export default function PizzaBoxesIreland() {
                 />
               </div>
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">
-                Custom Printed Pizza Boxes
+                Custom Printed — Pizza Boxes with Logo
               </h3>
               <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                Full-colour CMYK printing with your logo and branding. MOQ from 500 units, free design
+                Personalised pizza boxes with full-colour logo print. MOQ from 500 units, free design
                 service, 5–7 day production. Sizes 7&quot; to 20&quot;.
               </p>
-              <span className="text-blue-600 font-semibold text-sm">View custom options →</span>
+              <span className="text-blue-600 font-semibold text-sm">View custom printed →</span>
             </Link>
 
             <Link
-              href="/plain-packaging?category=Pizza+Boxes"
+              href="/plain-pizza-boxes-ireland"
               className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-orange-300 hover:shadow-lg transition-all"
             >
               <div className="relative h-48 rounded-xl overflow-hidden mb-5">
                 <Image
                   src="/images/pizza-boxes/PIZZA_BOX_7.jpg"
-                  alt="Wholesale plain kraft pizza boxes Ireland – corrugated takeaway boxes"
+                  alt="Plain kraft pizza boxes Ireland – 100 pack case quantities"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                   sizes="400px"
@@ -299,13 +314,37 @@ export default function PizzaBoxesIreland() {
                 />
               </div>
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-orange-600 transition-colors mb-2">
-                Plain Wholesale Pizza Boxes
+                Plain Kraft Pizza Boxes
               </h3>
               <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                Kraft corrugated pizza boxes in standard sizes. Tiered case pricing, no minimum print
-                run. Order online and get fast delivery across Ireland.
+                Brown kraft corrugated boxes in case quantities — typically 100 per case on popular sizes.
+                Order online with tiered case pricing.
               </p>
-              <span className="text-orange-600 font-semibold text-sm">Browse wholesale range →</span>
+              <span className="text-orange-600 font-semibold text-sm">View plain boxes →</span>
+            </Link>
+
+            <Link
+              href="/pizza-boxes-wholesale-ireland"
+              className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-slate-400 hover:shadow-lg transition-all"
+            >
+              <div className="relative h-48 rounded-xl overflow-hidden mb-5 bg-slate-100 flex items-center justify-center">
+                <Image
+                  src="/images/pizza-boxes/PIZZA_BOX_3.jpg"
+                  alt="Wholesale pizza boxes Ireland – bulk takeaway supply"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  sizes="400px"
+                  unoptimized={process.env.NODE_ENV === 'production'}
+                />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 group-hover:text-slate-700 transition-colors mb-2">
+                Wholesale Pizza Boxes
+              </h3>
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                Bulk plain and custom printed supply for busy takeaways, pizzerias and restaurant groups.
+                Tiered case pricing and nationwide delivery.
+              </p>
+              <span className="text-slate-700 font-semibold text-sm">View wholesale →</span>
             </Link>
           </div>
         </div>
@@ -369,8 +408,12 @@ export default function PizzaBoxesIreland() {
             </h2>
             <p className="text-gray-600 mb-8">
               Order kraft corrugated pizza boxes online with tiered case pricing.{' '}
+              <Link href="/plain-pizza-boxes-ireland" className="text-blue-600 hover:underline font-medium">
+                View plain pizza boxes Ireland
+              </Link>
+              {' '}or{' '}
               <Link href="/plain-packaging?category=Pizza+Boxes" className="text-blue-600 hover:underline font-medium">
-                View all pizza box products
+                browse all case SKUs
               </Link>
             </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -440,7 +483,7 @@ export default function PizzaBoxesIreland() {
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
             Pizza box guides &amp; resources
           </h2>
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {guides.map((guide) => (
               <Link
                 key={guide.href}

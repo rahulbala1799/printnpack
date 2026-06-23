@@ -137,6 +137,17 @@ export default function PizzaBoxSizesIreland() {
           />
         </div>
 
+        <div className="rounded-xl bg-blue-50 border border-blue-100 p-6 mb-8 not-prose">
+          <p className="text-slate-700 text-sm leading-relaxed mb-4">
+            Ordering boxes? See{' '}
+            <Link href="/custom-pizza-boxes-ireland" className="text-blue-600 hover:underline font-semibold">custom printed pizza boxes with logo</Link>
+            ,{' '}
+            <Link href="/plain-pizza-boxes-ireland" className="text-blue-600 hover:underline font-semibold">plain 100-pack cases</Link>
+            , or the{' '}
+            <Link href="/pizza-boxes-ireland" className="text-blue-600 hover:underline font-semibold">pizza boxes Ireland hub</Link>.
+          </p>
+        </div>
+
         {/* Intro */}
         <div className="prose prose-slate max-w-none">
           <p className="text-lg text-slate-700 leading-relaxed mb-6">

@@ -11,6 +11,13 @@ const guides = [
     cta: 'Browse pizza boxes',
   },
   {
+    href: '/custom-pizza-boxes-ireland',
+    title: 'Pizza Boxes with Logo',
+    description: 'Custom printed branded boxes from 500 units — personalised for your takeaway.',
+    image: '/images/pizza-boxes/PIZZA_BOX_5.jpg',
+    cta: 'View custom print',
+  },
+  {
     href: '/printed-flat-handle-bags-ireland',
     title: 'Printed Flat Handle Bags',
     description: 'Custom logo paper bags from 500 units — kraft & white, three sizes, nationwide delivery.',
@@ -18,11 +25,25 @@ const guides = [
     cta: 'View printed bags',
   },
   {
-    href: '/custom-pizza-boxes-ireland',
-    title: 'Custom Printed Pizza Boxes',
-    description: 'Full-colour branded boxes, MOQ from 500, 5–7 day production, nationwide delivery.',
+    href: '/plain-pizza-boxes-ireland',
+    title: 'Plain Pizza Boxes',
+    description: 'Kraft brown boxes in 100-pack cases — order online.',
+    image: '/images/pizza-boxes/PIZZA_BOX_7.jpg',
+    cta: 'View plain boxes',
+  },
+  {
+    href: '/pizza-boxes-wholesale-ireland',
+    title: 'Wholesale Pizza Boxes',
+    description: 'Bulk plain & printed supply for takeaways & restaurants.',
+    image: '/images/pizza-boxes/PIZZA_BOX_3.jpg',
+    cta: 'View wholesale',
+  },
+  {
+    href: '/blog/custom-pizza-box-cost-ireland',
+    title: 'Pizza Box Cost Guide',
+    description: 'How custom printed pizza box pricing works in Ireland.',
     image: '/images/pizza-boxes/PIZZA_BOX_5.jpg',
-    cta: 'View custom options',
+    cta: 'Read the guide',
   },
   {
     href: '/pizza-box-faq-ireland',

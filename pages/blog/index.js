@@ -105,6 +105,17 @@ const posts = [
     category: 'Sustainability',
   },
   {
+    slug: 'custom-pizza-box-cost-ireland',
+    title: 'How Much Do Custom Printed Pizza Boxes Cost in Ireland?',
+    excerpt:
+      'Custom pizza box pricing explained — per-unit costs, MOQ from 500 units, what affects print price, and when plain case packs are the better option.',
+    date: '2026-06-23',
+    readTime: '5 min read',
+    image: '/images/pizza-boxes/PIZZA_BOX_5.jpg',
+    imageAlt: 'Custom printed pizza box cost Ireland – pricing guide',
+    category: 'Pricing Guide',
+  },
+  {
     slug: 'pizza-box-sizes-ireland',
     title: 'Pizza Box Sizes Ireland: The Complete Guide for Takeaways & Restaurants',
     excerpt:
