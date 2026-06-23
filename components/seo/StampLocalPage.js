@@ -217,6 +217,7 @@ export default function StampLocalPage({ config }) {
       <RelatedSeoLinks
         title="Related stamp pages"
         links={[
+          { href: '/blog/printing-ashbourne-guide', label: 'Printing Ashbourne Guide', desc: 'Local print shop — posters, flyers, stickers & more' },
           { href: '/rubber-stamps-ireland', label: 'Rubber Stamps Ireland', desc: 'Complete stamp printing hub' },
           { href: '/rubber-stamps', label: 'Order Custom Stamps', desc: 'Business, signature & hand stamps' },
           { href: '/blog/business-stamps-ireland-guide', label: 'Business Stamps Guide', desc: 'Company stamps for Irish businesses' },

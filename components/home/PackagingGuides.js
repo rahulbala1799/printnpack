@@ -122,6 +122,13 @@ const guides = [
     image: '/images/rubber-stamps/RubberStamp_11.jpg',
     cta: 'Read the guide',
   },
+  {
+    href: '/blog/printing-ashbourne-guide',
+    title: 'Printing Ashbourne Guide',
+    description: 'Local print shop for posters, flyers, stickers, certificates & business cards.',
+    image: '/ifa/product/Poster/single_poster.jpg',
+    cta: 'Read the guide',
+  },
 ];
 
 export default function PackagingGuides() {

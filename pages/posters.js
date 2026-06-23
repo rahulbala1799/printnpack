@@ -270,6 +270,7 @@ export default function PostersPage() {
 
       <RelatedSeoLinks
         links={[
+          { href: '/blog/printing-ashbourne-guide', label: 'Printing Ashbourne Guide', desc: 'Local print shop for posters, flyers & more' },
           { href: '/services/posters', label: 'Poster Printing Service', desc: 'Design & print service' },
           { href: '/services/leaflets', label: 'Leaflets Ireland', desc: 'Flat leaflet printing' },
           { href: '/vinyl-banners', label: 'Printed Banners', desc: 'Large format outdoor' },

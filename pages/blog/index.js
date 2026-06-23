@@ -6,6 +6,17 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'printing-ashbourne-guide',
+    title: 'Printing in Ashbourne: Local Print Services for Businesses, Events and Everyday Jobs',
+    excerpt:
+      'Looking for printing in Ashbourne? Posters, certificates, flyers, stickers, business cards, banners and more from Unit 14 Ashbourne Business Centre — with artwork tips and fast turnaround.',
+    date: '2026-06-23',
+    readTime: '10 min read',
+    image: '/ifa/product/Poster/single_poster.jpg',
+    imageAlt: 'Poster printing in Ashbourne at PrintNPack',
+    category: 'Local Print Guide',
+  },
+  {
     slug: 'eu-ppwr-packaging-regulation-ireland-2026',
     title: 'EU Packaging Regulation Ireland 2026: What the PPWR Means for Irish Food Businesses',
     excerpt:
