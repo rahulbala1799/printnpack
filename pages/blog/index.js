@@ -7,9 +7,9 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 const posts = [
   {
     slug: 'printing-ashbourne-guide',
-    title: 'Printing in Ashbourne: Local Print Services for Businesses, Events and Everyday Jobs',
+    title: 'Printing in Ashbourne Guide: Artwork Tips & What to Print Locally',
     excerpt:
-      'Looking for printing in Ashbourne? Posters, certificates, flyers, stickers, business cards, banners and more from Unit 14 Ashbourne Business Centre — with artwork tips and fast turnaround.',
+      'What you can print locally in Ashbourne, how to prepare artwork, fast turnaround tips, and practical advice for posters, certificates, flyers and business print.',
     date: '2026-06-23',
     readTime: '10 min read',
     image: '/ifa/product/Poster/single_poster.jpg',

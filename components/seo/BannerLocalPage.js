@@ -216,7 +216,7 @@ export default function BannerLocalPage({ config }) {
       <RelatedSeoLinks
         title="Related banner pages"
         links={[
-          { href: '/blog/printing-ashbourne-guide', label: 'Printing Ashbourne Guide', desc: 'Local print shop — posters, flyers, stickers & more' },
+          { href: '/printing-ashbourne', label: 'Printing Ashbourne', desc: 'Local print shop — posters, flyers, stickers & more' },
           { href: '/banners-ireland', label: 'Banners Ireland', desc: 'Complete banner printing hub' },
           { href: '/blog/banner-sizes-ireland', label: 'Banner Sizes Guide', desc: '2×4, 3×6, 4×8 & roll-up dimensions' },
           { href: '/vinyl-banners', label: 'PVC Banners', desc: 'Outdoor & shop-front banners' },

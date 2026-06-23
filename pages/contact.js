@@ -153,8 +153,13 @@ const ContactPage = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Printing in Ashbourne, Co. Meath</h1>
-            <p className="text-xl mb-8">
+            <p className="text-xl mb-4">
               Professional printing &amp; packaging from our Ashbourne base — serving Dublin, Meath &amp; all of Ireland
+            </p>
+            <p className="text-blue-100 text-sm mb-8">
+              <Link href="/printing-ashbourne" className="underline hover:text-white">Local printing in Ashbourne</Link>
+              {' · '}
+              <Link href="/printing-ireland" className="underline hover:text-white">Printing across Ireland</Link>
             </p>
             <div className="w-24 h-1 bg-white mx-auto rounded"></div>
           </div>

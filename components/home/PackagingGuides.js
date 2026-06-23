@@ -123,11 +123,18 @@ const guides = [
     cta: 'Read the guide',
   },
   {
-    href: '/blog/printing-ashbourne-guide',
-    title: 'Printing Ashbourne Guide',
-    description: 'Local print shop for posters, flyers, stickers, certificates & business cards.',
+    href: '/printing-ireland',
+    title: 'Printing Ireland',
+    description: 'Posters, flyers, stickers, stamps & packaging — nationwide from Ashbourne.',
     image: '/ifa/product/Poster/single_poster.jpg',
-    cta: 'Read the guide',
+    cta: 'View printing',
+  },
+  {
+    href: '/printing-ashbourne',
+    title: 'Printing Ashbourne',
+    description: 'Local print shop — posters, flyers, certificates & business cards.',
+    image: '/ifa/product/leaflet/leaflet-hero.jpg',
+    cta: 'View local printing',
   },
 ];
 

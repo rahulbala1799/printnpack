@@ -45,6 +45,10 @@ const staticPages = [
   { path: '/rubber-stamp-faq-ireland',     priority: '0.88', changefreq: 'monthly' },
   { path: '/rubber-stamp-printing-ashbourne', priority: '0.88', changefreq: 'monthly' },
   { path: '/rubber-stamp-printing-dublin', priority: '0.88', changefreq: 'monthly' },
+  // Printing cluster
+  { path: '/printing-ireland',           priority: '0.9',  changefreq: 'weekly' },
+  { path: '/printing-ashbourne',        priority: '0.9',  changefreq: 'weekly' },
+  { path: '/printing-dublin',           priority: '0.88', changefreq: 'monthly' },
   { path: '/foamex-boards',   priority: '0.8', changefreq: 'monthly' },
   { path: '/correx-boards',   priority: '0.8', changefreq: 'monthly' },
   { path: '/clothing',        priority: '0.8', changefreq: 'monthly' },

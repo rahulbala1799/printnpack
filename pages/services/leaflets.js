@@ -133,10 +133,10 @@ const LeafletsPage = () => {
                   Request a Quote <FaArrowRight className="ml-2" />
                 </Link>
                 <Link 
-                  href="/blog/leaflet-printing-ireland-guide"
+                  href="/printing-ashbourne"
                   className="inline-flex items-center justify-center bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold border border-blue-200 hover:bg-blue-50 transition-colors"
                 >
-                  Read Leaflet Printing Guide
+                  Flyer Printing Ashbourne
                 </Link>
               </div>
             </div>

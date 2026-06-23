@@ -54,6 +54,7 @@ const breadcrumbLd = {
 };
 
 const relatedLinks = [
+  { href: '/printing-ashbourne', label: 'Printing Ashbourne', desc: 'Local print shop — posters, flyers & stamps' },
   { href: '/rubber-stamps-ireland', label: 'Rubber Stamps Ireland', desc: 'Complete stamp printing hub' },
   { href: '/rubber-stamp-faq-ireland', label: 'Stamp FAQ', desc: '25+ instant answers' },
   { href: '/blog/business-stamps-ireland-guide', label: 'Business Stamps Guide', desc: 'Company & invoice stamps' },

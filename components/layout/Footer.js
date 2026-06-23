@@ -11,6 +11,8 @@ const QUICK_LINKS = [
 ];
 
 const PRODUCT_LINKS = [
+  { label: 'Printing Ireland', href: '/printing-ireland' },
+  { label: 'Printing Ashbourne', href: '/printing-ashbourne' },
   { label: 'Pizza Boxes', href: '/pizza-boxes-ireland' },
   { label: 'Custom Pizza Boxes', href: '/custom-pizza-boxes-ireland' },
   { label: 'Banners Ireland', href: '/banners-ireland' },

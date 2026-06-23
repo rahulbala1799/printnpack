@@ -80,9 +80,9 @@ const faqLd = {
 };
 
 export default function PrintingAshbourneGuide() {
-  const title = 'Printing Ashbourne | Local Print Shop for Posters, Flyers, Stickers & Certificates';
+  const title = 'Printing in Ashbourne Guide | Artwork Tips & What to Print Locally';
   const description =
-    'Looking for printing in Ashbourne? PrintNPack prints posters, certificates, flyers, stickers, business cards, banners, menus and more from Unit 14 Ashbourne Business Centre.';
+    'A practical guide to printing in Ashbourne — what you can print locally, how to prepare artwork, fast turnaround tips, and when to collect from Unit 14 Ashbourne Business Centre.';
 
   return (
     <Layout>
@@ -131,6 +131,28 @@ export default function PrintingAshbourneGuide() {
             priority
             sizes="(max-width: 768px) 100vw, 768px"
           />
+        </div>
+
+        <div className="rounded-xl bg-blue-50 border border-blue-100 p-6 mb-8 not-prose">
+          <p className="text-slate-700 text-sm leading-relaxed mb-4">
+            Ready to order? Visit our{' '}
+            <Link href="/printing-ashbourne" className="text-blue-600 hover:underline font-semibold">
+              printing Ashbourne
+            </Link>{' '}
+            service page to request a quote, call, or send artwork — or see{' '}
+            <Link href="/printing-ireland" className="text-blue-600 hover:underline font-semibold">
+              printing across Ireland
+            </Link>{' '}
+            for nationwide delivery.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Link href="/printing-ashbourne" className="inline-flex items-center bg-blue-600 text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-700 transition-colors text-sm">
+              Order Printing Ashbourne
+            </Link>
+            <Link href="/quote" className="inline-flex items-center bg-white text-blue-600 font-semibold px-5 py-2.5 rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors text-sm">
+              Request a Quote
+            </Link>
+          </div>
         </div>
 
         <div className="prose prose-slate max-w-none">
