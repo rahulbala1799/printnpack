@@ -39,6 +39,17 @@ const posts = [
     category: 'Print Guide',
   },
   {
+    slug: 'personalised-napkins-ireland-guide',
+    title: 'Personalised Napkins Ireland: Sizes, Materials & Wedding Napkin Guide',
+    excerpt:
+      'Cocktail vs dinner napkin sizes, paper vs linen-feel, wedding napkins, restaurant branding, and how to order custom printed napkins in Ireland.',
+    date: '2026-06-21',
+    readTime: '8 min read',
+    image: '/images/hero/napkin.svg',
+    imageAlt: 'Personalised napkins Ireland — branded restaurant and wedding napkins',
+    category: 'Hospitality Guide',
+  },
+  {
     slug: 'banner-sizes-ireland',
     title: 'Banner Sizes Ireland: PVC Outdoor & Roll-Up Banner Size Guide',
     excerpt:

@@ -144,6 +144,27 @@ const guides = [
     cta: 'Read the guide',
   },
   {
+    href: '/napkins-ireland',
+    title: 'Napkins Ireland',
+    description: 'Custom printed & linen-feel napkins — restaurants, weddings & catering.',
+    image: '/images/hero/napkin.svg',
+    cta: 'Browse napkins',
+  },
+  {
+    href: '/napkin-faq-ireland',
+    title: 'Napkin FAQ',
+    description: 'Instant answers on pricing, sizes, materials & delivery.',
+    image: '/images/hero/napkin.svg',
+    cta: 'Browse FAQ',
+  },
+  {
+    href: '/blog/personalised-napkins-ireland-guide',
+    title: 'Personalised Napkins Guide',
+    description: 'Cocktail vs dinner sizes, linen-feel vs paper, wedding napkins.',
+    image: '/images/hero/napkin.svg',
+    cta: 'Read the guide',
+  },
+  {
     href: '/printing-ireland',
     title: 'Printing Ireland',
     description: 'Posters, flyers, stickers, stamps & packaging — nationwide from Ashbourne.',

@@ -18,7 +18,7 @@ const FeatureIcon = () => (
   </svg>
 );
 
-export default function ProductPageTemplate({ product }) {
+export default function ProductPageTemplate({ product, seoOverride, skipBreadcrumb = false }) {
   const [currentImage, setCurrentImage] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(null);
@@ -51,9 +51,13 @@ export default function ProductPageTemplate({ product }) {
   const productUrl = `${baseUrl}/products/${product.id}`;
   const ogImage = images[0] ? (images[0].startsWith('http') ? images[0] : `${baseUrl}${images[0]}`) : '';
 
+  const displayName = seoOverride?.h1 || product.name;
+  const heroIntro = seoOverride?.intro;
+
   return (
     <>
       {/* Breadcrumb */}
+      {!skipBreadcrumb && (
       <nav className="bg-gray-50 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <ol className="flex items-center gap-2 text-sm text-gray-500">
@@ -65,6 +69,7 @@ export default function ProductPageTemplate({ product }) {
           </ol>
         </div>
       </nav>
+      )}
 
       {/* Hero / Product Overview */}
       <section className="bg-white">
@@ -124,8 +129,11 @@ export default function ProductPageTemplate({ product }) {
               </div>
 
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">
-                {product.name}
+                {displayName}
               </h1>
+              {heroIntro && (
+                <p className="text-gray-600 leading-relaxed mb-4">{heroIntro}</p>
+              )}
 
               <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
                 {product.description}

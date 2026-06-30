@@ -114,6 +114,8 @@ export default function Home() {
           itemListElement: [
             catalogOffer('Banners Ireland', '/banners-ireland'),
             catalogOffer('Rubber Stamps Ireland', '/rubber-stamps'),
+            catalogOffer('Napkins Ireland', '/napkins-ireland'),
+            catalogOffer('Printed Napkins Ireland', '/products/printed-napkins'),
             catalogOffer('Vinyl Banners Ireland', '/vinyl-banners'),
             catalogOffer('Roll Up Banners Meath', '/roll-up-banners'),
             catalogOffer('Custom Posters Ireland', '/posters'),

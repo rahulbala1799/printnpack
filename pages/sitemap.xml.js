@@ -47,6 +47,11 @@ const staticPages = [
   { path: '/rubber-stamp-faq-ireland',     priority: '0.88', changefreq: 'monthly' },
   { path: '/rubber-stamp-printing-ashbourne', priority: '0.88', changefreq: 'monthly' },
   { path: '/rubber-stamp-printing-dublin', priority: '0.88', changefreq: 'monthly' },
+  // Napkin cluster
+  { path: '/napkins-ireland',              priority: '0.9',  changefreq: 'weekly' },
+  { path: '/napkin-faq-ireland',           priority: '0.88', changefreq: 'monthly' },
+  { path: '/napkin-printing-ashbourne',   priority: '0.88', changefreq: 'monthly' },
+  { path: '/napkin-printing-dublin',      priority: '0.88', changefreq: 'monthly' },
   // Printing cluster
   { path: '/printing-ireland',           priority: '0.9',  changefreq: 'weekly' },
   { path: '/printing-ashbourne',        priority: '0.9',  changefreq: 'weekly' },
@@ -64,6 +69,7 @@ const staticPages = [
   { path: '/blog/custom-pizza-box-cost-ireland', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/banner-sizes-ireland', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/business-stamps-ireland-guide', priority: '0.85', changefreq: 'monthly' },
+  { path: '/blog/personalised-napkins-ireland-guide', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/banner-printing-ireland-guide', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/printing-ashbourne-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/eco-friendly-pizza-box-paper-bags-burger-boxes-ireland', priority: '0.85', changefreq: 'monthly' },

@@ -5,6 +5,9 @@ import Head from 'next/head';
 import Link from 'next/link';
 import products, { getProductBySlug, getRelatedProducts } from '../../data/products';
 import ProductPageTemplate from '../../components/ProductPageTemplate';
+import RelatedSeoLinks from '../../components/seo/RelatedSeoLinks';
+import { NAPKIN_PRODUCT_SEO } from '../../data/napkin-product-seo';
+import { SITE_URL } from '../../lib/site';
 import { buildProductLd, parsePriceString } from '../../lib/schema';
 
 /**
@@ -60,39 +63,107 @@ const ProductDetail = ({ product, relatedProducts }) => {
     );
   }
 
-  const baseUrl = 'https://www.printnpack.ie';
+  const napkinSeo = NAPKIN_PRODUCT_SEO[product.id];
   const productPath = `/products/${product.id}`;
+  const pageUrl = `${SITE_URL}${productPath}`;
   const ogImage = product.images?.[0]
-    ? (product.images[0].startsWith('http') ? product.images[0] : `${baseUrl}${product.images[0]}`)
+    ? (product.images[0].startsWith('http') ? product.images[0] : `${SITE_URL}${product.images[0]}`)
     : '';
 
+  const pageTitle = napkinSeo?.title || `${product.name} - Premium Packaging & Print | Print n Pack`;
+  const pageDescription = napkinSeo?.description || `${product.description} Custom branding, multiple sizes, fast delivery across Ireland.`;
+  const pageKeywords = napkinSeo?.keywords || `${product.name}, packaging, print, Ireland, custom, branded`;
+
   const structuredData = buildProductLd({
-    name: product.name,
-    description: product.description,
-    image: product.images?.[0] ? `${baseUrl}${product.images[0]}` : undefined,
-    url: `${baseUrl}${productPath}`,
-    price: parsePriceString(product.price),
+    name: napkinSeo?.h1 || product.name,
+    description: napkinSeo?.description || product.description,
+    image: product.images?.[0] ? `${SITE_URL}${product.images[0]}` : undefined,
+    url: pageUrl,
+    price: napkinSeo?.price || parsePriceString(product.price),
   });
+
+  const breadcrumbLd = napkinSeo ? {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Napkins Ireland', item: `${SITE_URL}/napkins-ireland` },
+      { '@type': 'ListItem', position: 3, name: product.name, item: pageUrl },
+    ],
+  } : null;
+
+  const faqLd = napkinSeo?.productFaqs?.length ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: napkinSeo.productFaqs.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  } : null;
 
   return (
     <Layout>
       <Head>
-        <title>{`${product.name} - Premium Packaging & Print | Print n Pack`}</title>
-        <meta name="description" content={`${product.description} Custom branding, multiple sizes, fast delivery across Ireland.`} />
-        <meta name="keywords" content={`${product.name}, packaging, print, Ireland, custom, branded`} />
-        <meta property="og:title" content={`${product.name} - Print n Pack`} />
-        <meta property="og:description" content={product.description} />
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta name="keywords" content={pageKeywords} />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
         <meta property="og:image" content={ogImage} />
-        <meta property="og:url" content={`${baseUrl}${productPath}`} />
+        <meta property="og:url" content={pageUrl} />
         <meta property="og:type" content="product" />
-        <link rel="canonical" href={`${baseUrl}${productPath}`} />
+        <link rel="canonical" href={pageUrl} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        {breadcrumbLd && (
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+        )}
+        {faqLd && (
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+        )}
       </Head>
 
-      <ProductPageTemplate product={product} />
+      {napkinSeo && (
+        <nav className="bg-gray-50 border-b border-gray-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <ol className="flex flex-wrap items-center gap-2 text-sm text-gray-500">
+              <li><Link href="/" className="hover:text-gray-700">Home</Link></li>
+              <li>/</li>
+              <li><Link href="/napkins-ireland" className="hover:text-gray-700">Napkins Ireland</Link></li>
+              <li>/</li>
+              <li className="text-gray-800 font-medium">{product.name}</li>
+            </ol>
+          </div>
+        </nav>
+      )}
+
+      <ProductPageTemplate product={product} seoOverride={napkinSeo} skipBreadcrumb={!!napkinSeo} />
+
+      {napkinSeo?.productFaqs?.length > 0 && (
+        <section className="bg-white border-t border-gray-100">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Most asked questions</h2>
+            <p className="text-gray-500 text-sm mb-6">
+              <Link href="/napkin-faq-ireland" className="text-amber-600 hover:underline">View detailed FAQ →</Link>
+            </p>
+            <div className="space-y-4">
+              {napkinSeo.productFaqs.map((faq) => (
+                <details key={faq.q} className="group bg-slate-50 rounded-xl border border-gray-200 p-5 open:shadow-sm">
+                  <summary className="font-semibold text-gray-900 cursor-pointer list-none flex justify-between items-center gap-4">
+                    {faq.q}
+                    <span className="text-gray-400 group-open:rotate-180 transition-transform">▼</span>
+                  </summary>
+                  <p className="text-gray-600 mt-3 text-sm leading-relaxed">{faq.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {relatedProducts && relatedProducts.length > 0 && (
         <section className="bg-gray-50 border-t border-gray-200">
@@ -111,6 +182,10 @@ const ProductDetail = ({ product, relatedProducts }) => {
             </div>
           </div>
         </section>
+      )}
+
+      {napkinSeo?.relatedLinks && (
+        <RelatedSeoLinks title="Related napkin pages" links={napkinSeo.relatedLinks} />
       )}
     </Layout>
   );

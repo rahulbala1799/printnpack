@@ -81,6 +81,12 @@ export const PRINTING_SERVICES = [
     cta: 'View stamps',
   },
   {
+    title: 'Printed Napkins',
+    desc: 'Custom branded napkins for restaurants, cafes, weddings and catering.',
+    href: '/napkins-ireland',
+    cta: 'View napkins',
+  },
+  {
     title: 'Packaging',
     desc: 'Custom and plain packaging for restaurants, retail and catering.',
     href: '/plain-packaging',
