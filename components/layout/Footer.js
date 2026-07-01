@@ -23,6 +23,8 @@ const PRODUCT_LINKS = [
   { label: 'Roll Up Banners', href: '/roll-up-banners' },
   { label: 'Rubber Stamps', href: '/rubber-stamps-ireland' },
   { label: 'Stamp FAQ', href: '/rubber-stamp-faq-ireland' },
+  { label: 'Foamex Ireland', href: '/foamex-ireland' },
+  { label: 'Foamex FAQ', href: '/foamex-faq-ireland' },
   { label: 'Custom Posters', href: '/posters' },
   { label: 'Vinyl Stickers', href: '/vinyl-stickers' },
   { label: 'Leaflets Ireland', href: '/services/leaflets' },

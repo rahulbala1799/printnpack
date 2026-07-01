@@ -144,6 +144,27 @@ const guides = [
     cta: 'Read the guide',
   },
   {
+    href: '/foamex-ireland',
+    title: 'Foamex Ireland',
+    description: 'Custom foamex board printing — exhibitions, retail & indoor signage.',
+    image: '/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif',
+    cta: 'Browse foamex',
+  },
+  {
+    href: '/foamex-faq-ireland',
+    title: 'Foamex FAQ',
+    description: 'Instant answers on thickness, pricing, printing & delivery.',
+    image: '/ifa/product/foamex/foam-board-printing-1000x1000.webp',
+    cta: 'Browse FAQ',
+  },
+  {
+    href: '/blog/foamex-boards-ireland-guide',
+    title: 'Foamex Boards Guide',
+    description: '3mm vs 5mm vs 10mm, sizes, indoor vs outdoor, foamex vs correx.',
+    image: '/ifa/product/foamex/sign-boards-1000x1000.webp',
+    cta: 'Read the guide',
+  },
+  {
     href: '/printing-ireland',
     title: 'Printing Ireland',
     description: 'Posters, flyers, stickers, stamps & packaging — nationwide from Ashbourne.',
