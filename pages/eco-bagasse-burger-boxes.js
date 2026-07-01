@@ -4,10 +4,24 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import BagasseQuoteForm from '../components/BagasseQuoteForm';
+import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 import { SITE_URL } from '../lib/site';
 import { buildProductLd } from '../lib/schema';
+import { MOST_ASKED_BURGER_BOX_FAQS } from '../data/burger-box-faq';
 
 const PAGE_URL = `${SITE_URL}/eco-bagasse-burger-boxes`;
+
+const pageFaqs = MOST_ASKED_BURGER_BOX_FAQS.slice(0, 4);
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: pageFaqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
 
 const productLd = buildProductLd({
   name: 'Eco-Friendly Bagasse Burger Boxes Ireland',
@@ -17,6 +31,25 @@ const productLd = buildProductLd({
   url: PAGE_URL,
   price: '0.22',
 });
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Burger Boxes Ireland', item: `${SITE_URL}/burger-boxes-ireland` },
+    { '@type': 'ListItem', position: 3, name: 'Bagasse Burger Boxes', item: PAGE_URL },
+  ],
+};
+
+const relatedLinks = [
+  { href: '/burger-boxes-ireland', label: 'Burger Boxes Ireland', desc: 'Complete burger box hub' },
+  { href: '/plain-burger-boxes-ireland', label: 'Plain Burger Boxes', desc: 'Wholesale bagasse & corrugated' },
+  { href: '/custom-burger-boxes-ireland', label: 'Custom Printed Boxes', desc: 'Branded bagasse from 500 units' },
+  { href: '/burger-box-faq-ireland', label: 'Burger Box FAQ', desc: '20+ instant answers' },
+  { href: '/blog/burger-boxes-ireland-guide', label: 'Burger Boxes Guide', desc: 'Plain vs printed, materials' },
+  { href: '/burger-box-printing-dublin', label: 'Burger Boxes Dublin', desc: 'Delivery across Dublin' },
+];
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -146,16 +179,21 @@ const EcoBagasseBurgerBoxes = () => {
   return (
     <Layout>
       <Head>
-        <title>Eco-Friendly Bagasse Burger Boxes Ireland | Sustainable Food Packaging | Print n Pack</title>
-        <meta name="description" content="Premium biodegradable bagasse burger boxes made from sugarcane fibre. Microwave safe, oil resistant, 100% compostable. Perfect for eco-conscious food businesses in Ireland." />
-        <meta name="keywords" content="bagasse burger boxes Ireland, eco-friendly food packaging, biodegradable burger boxes, sugarcane fibre packaging, compostable food containers, sustainable packaging Dublin, green food packaging, eco burger boxes" />
-        <meta property="og:title" content="Eco-Friendly Bagasse Burger Boxes | Sustainable Food Packaging Ireland" />
-        <meta property="og:description" content="Premium biodegradable bagasse burger boxes. 100% compostable, microwave safe, oil resistant. Perfect for eco-conscious restaurants and food services." />
-        <meta property="og:image" content="https://www.printnpack.ie/images/products/bagasse-burger-box/1.png" />
-        <meta property="og:url" content="https://www.printnpack.ie/eco-bagasse-burger-boxes" />
+        <title>Bagasse Burger Boxes Ireland | Biodegradable & Compostable | Print n Pack</title>
+        <meta name="description" content="Bagasse burger boxes Ireland — 100% compostable sugarcane fibre packaging. Plain wholesale or custom printed from 500 units. Microwave safe, oil resistant. Free quote, nationwide delivery." />
+        <meta name="keywords" content="bagasse burger boxes ireland, biodegradable burger boxes, compostable burger boxes, eco-friendly food packaging, sugarcane fibre packaging, custom printed burger boxes, sustainable packaging dublin" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+        <meta property="og:title" content="Bagasse Burger Boxes Ireland | Biodegradable Food Packaging" />
+        <meta property="og:description" content="Compostable bagasse burger boxes made from sugarcane fibre. Plain wholesale or custom printed with your logo. Microwave safe, oil resistant, Ireland-wide delivery." />
+        <meta property="og:image" content={`${SITE_URL}/images/products/bagasse-burger-box/1.png`} />
+        <meta property="og:url" content={PAGE_URL} />
         <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content={`${SITE_URL}/images/products/bagasse-burger-box/1.png`} />
         <link rel="canonical" href={PAGE_URL} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       </Head>
 
       {/* ── Breadcrumb ── */}
@@ -164,7 +202,7 @@ const EcoBagasseBurgerBoxes = () => {
           <ol className="flex items-center gap-2 text-sm text-gray-500">
             <li><Link href="/" className="hover:text-gray-700">Home</Link></li>
             <li>/</li>
-            <li><Link href="/#products" className="hover:text-gray-700">Products</Link></li>
+            <li><Link href="/burger-boxes-ireland" className="hover:text-gray-700">Burger Boxes Ireland</Link></li>
             <li>/</li>
             <li className="text-gray-800 font-medium">Bagasse Burger Boxes</li>
           </ol>
@@ -219,11 +257,14 @@ const EcoBagasseBurgerBoxes = () => {
               </div>
 
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">
-                Bagasse Burger Boxes
+                Bagasse Burger Boxes Ireland
               </h1>
 
               <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
-                Premium biodegradable burger boxes made from sugarcane fibre. The perfect eco-friendly packaging for environmentally conscious food businesses across Ireland.
+                Compostable burger boxes made from sugarcane fibre — plain wholesale or custom printed with your logo.{' '}
+                <Link href="/burger-box-faq-ireland" className="text-emerald-600 hover:underline font-medium">Burger box FAQ</Link>{' '}
+                ·{' '}
+                <Link href="/blog/burger-boxes-ireland-guide" className="text-emerald-600 hover:underline font-medium">materials guide</Link>
               </p>
 
               <div className="grid grid-cols-3 gap-3 mb-6">
@@ -477,6 +518,27 @@ const EcoBagasseBurgerBoxes = () => {
         </div>
       </section>
 
+      {/* ── FAQ ── */}
+      <section className="bg-white border-t border-gray-100">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Most asked questions</h2>
+          <p className="text-gray-500 text-sm mb-6">
+            <Link href="/burger-box-faq-ireland" className="text-emerald-600 hover:underline">View detailed FAQ →</Link>
+          </p>
+          <div className="space-y-4">
+            {pageFaqs.map((faq) => (
+              <details key={faq.q} className="group bg-emerald-50/50 rounded-xl border border-gray-200 p-5 open:shadow-sm">
+                <summary className="font-semibold text-gray-900 cursor-pointer list-none flex justify-between items-center gap-4">
+                  {faq.q}
+                  <span className="text-gray-400 group-open:rotate-180 transition-transform">▼</span>
+                </summary>
+                <p className="text-gray-600 mt-3 text-sm leading-relaxed">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── CTA ── */}
       <section className="bg-gray-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 text-center">
@@ -518,6 +580,8 @@ const EcoBagasseBurgerBoxes = () => {
           </div>
         </div>
       </section>
+
+      <RelatedSeoLinks title="Related burger box pages" links={relatedLinks} />
 
       {/* ── Quote Modal ── */}
       {quoteModalOpen && (

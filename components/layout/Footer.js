@@ -27,6 +27,8 @@ const PRODUCT_LINKS = [
   { label: 'Napkin FAQ', href: '/napkin-faq-ireland' },
   { label: 'Foamex Ireland', href: '/foamex-ireland' },
   { label: 'Foamex FAQ', href: '/foamex-faq-ireland' },
+  { label: 'Burger Boxes Ireland', href: '/burger-boxes-ireland' },
+  { label: 'Burger Box FAQ', href: '/burger-box-faq-ireland' },
   { label: 'Custom Posters', href: '/posters' },
   { label: 'Vinyl Stickers', href: '/vinyl-stickers' },
   { label: 'Leaflets Ireland', href: '/services/leaflets' },

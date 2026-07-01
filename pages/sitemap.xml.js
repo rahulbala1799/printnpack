@@ -31,7 +31,14 @@ const staticPages = [
   { path: '/pizza-boxes-wholesale-ireland', priority: '0.88', changefreq: 'weekly' },
   { path: '/pizza-box-faq-ireland',        priority: '0.88', changefreq: 'monthly' },
   { path: '/printed-flat-handle-bags-ireland', priority: '0.9', changefreq: 'weekly' },
-  { path: '/eco-bagasse-burger-boxes',    priority: '0.8',  changefreq: 'monthly' },
+  { path: '/eco-bagasse-burger-boxes',    priority: '0.85', changefreq: 'weekly' },
+  // Burger box cluster
+  { path: '/burger-boxes-ireland',           priority: '0.9',  changefreq: 'weekly' },
+  { path: '/plain-burger-boxes-ireland',     priority: '0.88', changefreq: 'weekly' },
+  { path: '/custom-burger-boxes-ireland',    priority: '0.88', changefreq: 'weekly' },
+  { path: '/burger-box-faq-ireland',         priority: '0.88', changefreq: 'monthly' },
+  { path: '/burger-box-printing-ashbourne',  priority: '0.88', changefreq: 'monthly' },
+  { path: '/burger-box-printing-dublin',      priority: '0.88', changefreq: 'monthly' },
   { path: '/vinyl-stickers',  priority: '0.8', changefreq: 'monthly' },
   // Banner cluster
   { path: '/banners-ireland',              priority: '0.9',  changefreq: 'weekly' },
@@ -76,6 +83,7 @@ const staticPages = [
   { path: '/blog/business-stamps-ireland-guide', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/personalised-napkins-ireland-guide', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/foamex-boards-ireland-guide', priority: '0.85', changefreq: 'monthly' },
+  { path: '/blog/burger-boxes-ireland-guide', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/banner-printing-ireland-guide', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/printing-ashbourne-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/eco-friendly-pizza-box-paper-bags-burger-boxes-ireland', priority: '0.85', changefreq: 'monthly' },

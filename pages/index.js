@@ -96,7 +96,10 @@ export default function Home() {
             catalogOffer('Custom Printed Pizza Boxes', '/custom-pizza-boxes-ireland'),
             catalogOffer('Printed Flat Handle Bags Ireland', '/printed-flat-handle-bags-ireland'),
             catalogOffer('Paper Bags with Logo', '/printed-flat-handle-bags-ireland'),
-            catalogOffer('Eco-Friendly Packaging', '/eco-bagasse-burger-boxes'),
+            catalogOffer('Burger Boxes Ireland', '/burger-boxes-ireland'),
+            catalogOffer('Plain Burger Boxes', '/plain-burger-boxes-ireland'),
+            catalogOffer('Custom Burger Boxes', '/custom-burger-boxes-ireland'),
+            catalogOffer('Bagasse Burger Boxes', '/eco-bagasse-burger-boxes'),
           ],
         },
         {

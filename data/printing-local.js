@@ -93,6 +93,12 @@ export const PRINTING_SERVICES = [
     cta: 'View foamex',
   },
   {
+    title: 'Burger Boxes',
+    desc: 'Plain wholesale and custom printed bagasse burger boxes for takeaways.',
+    href: '/burger-boxes-ireland',
+    cta: 'View burger boxes',
+  },
+  {
     title: 'Packaging',
     desc: 'Custom and plain packaging for restaurants, retail and catering.',
     href: '/plain-packaging',

@@ -186,6 +186,27 @@ const guides = [
     cta: 'Read the guide',
   },
   {
+    href: '/burger-boxes-ireland',
+    title: 'Burger Boxes Ireland',
+    description: 'Plain wholesale & custom printed bagasse burger boxes for takeaways.',
+    image: '/images/products/bagasse-burger-box/1.png',
+    cta: 'Browse burger boxes',
+  },
+  {
+    href: '/burger-box-faq-ireland',
+    title: 'Burger Box FAQ',
+    description: 'Instant answers on pricing, materials, sizes & delivery.',
+    image: '/images/products/bagasse-burger-box/2.png',
+    cta: 'Browse FAQ',
+  },
+  {
+    href: '/blog/burger-boxes-ireland-guide',
+    title: 'Burger Boxes Guide',
+    description: 'Plain vs printed, bagasse vs corrugated, and eco options.',
+    image: '/images/products/bagasse-burger-box/3.png',
+    cta: 'Read the guide',
+  },
+  {
     href: '/printing-ireland',
     title: 'Printing Ireland',
     description: 'Posters, flyers, stickers, stamps & packaging — nationwide from Ashbourne.',

@@ -61,6 +61,17 @@ const posts = [
     category: 'Signage Guide',
   },
   {
+    slug: 'burger-boxes-ireland-guide',
+    title: 'Burger Boxes Ireland: Plain vs Printed, Bagasse & Eco Options',
+    excerpt:
+      'Plain wholesale vs custom printed burger boxes, bagasse vs corrugated, biodegradable options, sizes, and how to order burger packaging in Ireland.',
+    date: '2026-06-21',
+    readTime: '8 min read',
+    image: '/images/products/bagasse-burger-box/1.png',
+    imageAlt: 'Burger boxes Ireland — plain and custom printed bagasse packaging',
+    category: 'Hospitality Guide',
+  },
+  {
     slug: 'banner-sizes-ireland',
     title: 'Banner Sizes Ireland: PVC Outdoor & Roll-Up Banner Size Guide',
     excerpt:
