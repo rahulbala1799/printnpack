@@ -42,6 +42,14 @@ const guides = [
 
 const irelandFaqs = [
   {
+    q: 'Where can I find printing services near me?',
+    a: 'PrintNPack is based at Unit 14 Ashbourne Business Centre, Ashbourne, Co. Meath — serving as your local print shop for Meath and north Dublin with collection available. We deliver printing services across Dublin and all Irish counties.',
+  },
+  {
+    q: 'What printing services do you offer?',
+    a: 'We offer posters, flyers, leaflets, certificates, business cards, stickers, banners, rubber stamps, menus, signs, foamex boards, packaging and business print — with practical advice, good print quality and reliable delivery.',
+  },
+  {
     q: 'Do you offer printing across Ireland?',
     a: 'Yes. PrintNPack is based in Ashbourne, Co. Meath and delivers posters, flyers, banners, stickers, stamps, packaging and business print nationwide.',
   },
@@ -91,9 +99,9 @@ const serviceLd = {
 };
 
 export default function PrintingIreland() {
-  const title = 'Printing Ireland | Posters, Flyers, Packaging & Business Print Nationwide';
+  const title = 'Printing Services Ireland | Print Shop Near Me — Posters, Flyers & Banners';
   const description =
-    'Business printing across Ireland — posters, flyers, certificates, stickers, banners, rubber stamps and packaging. Based in Ashbourne, Co. Meath with delivery nationwide.';
+    'Printing services Ireland — posters, flyers, certificates, stickers, banners, rubber stamps and packaging. Print shop near me in Ashbourne with delivery across Dublin and nationwide.';
 
   return (
     <Layout>
@@ -102,7 +110,7 @@ export default function PrintingIreland() {
         <meta name="description" content={description} />
         <meta
           name="keywords"
-          content="printing ireland, print shop ireland, poster printing ireland, flyer printing ireland, business printing ireland, printing near me, printing dublin, printing ashbourne"
+          content="printing services, printing services ireland, printing services near me, printing near me, print shop ireland, poster printing ireland, flyer printing ireland, business printing ireland, printing dublin, printing ashbourne"
         />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href={PAGE_URL} />
@@ -131,12 +139,11 @@ export default function PrintingIreland() {
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <div>
               <p className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-3">Ireland&apos;s print &amp; packaging specialist</p>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">Printing Ireland</h1>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">Printing Services Ireland — Print Shop Near Me</h1>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                PrintNPack supplies posters, flyers, leaflets, certificates, business cards, stickers, banners, rubber stamps,
+                PrintNPack is your local <strong>printing services</strong> supplier — posters, flyers, leaflets, certificates, business cards, stickers, banners, rubber stamps,
                 menus, signs and packaging for businesses across <strong>Ireland</strong>. Based at Unit 14 Ashbourne Business
-                Centre in Co. Meath, we serve <strong>Ashbourne, Dublin, Meath</strong> and every county with practical advice,
-                good print quality and reliable delivery.
+                Centre in Co. Meath, we are the <strong>print shop near me</strong> for Ashbourne, Dublin and Meath with delivery to every county.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/quote" className="inline-flex items-center gap-2 bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors">

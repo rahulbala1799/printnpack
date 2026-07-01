@@ -13,7 +13,7 @@ const HERO_IMAGE = '/ifa/product/banner/20221019_184306722822_e66498_Promo-banne
 export default function BannerLocalPage({ config }) {
   const pageUrl = `${SITE_URL}/${config.slug}`;
 
-  const faqs = [
+  const defaultFaqs = [
     {
       q: `How much does banner printing cost in ${config.title.replace('Banner Printing ', '')}?`,
       a: 'PVC banners start from around €25–€45 for small sizes, with larger outdoor banners from €60–€150+. Roll-up banners with stands start from around €35. We provide free quotes with no minimum order.',
@@ -35,6 +35,8 @@ export default function BannerLocalPage({ config }) {
       a: '510gsm PVC with hemmed edges and eyelets is best for most outdoor use. Mesh PVC is recommended for very windy locations like fences and scaffolding.',
     },
   ];
+
+  const faqs = config.faqs || defaultFaqs;
 
   const faqLd = {
     '@context': 'https://schema.org',

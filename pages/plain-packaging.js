@@ -827,15 +827,22 @@ export default function PlainPackagingPage() {
   }, [totalPages, safePage]);
 
   const isPizzaCategory = activeCategory === 'Pizza Boxes';
+  const isCateringEquipment = activeCategory === 'Catering Equipment';
   const pageTitle = isPizzaCategory
     ? 'Pizza Boxes Wholesale Ireland | Plain Kraft Corrugated | PrintNPack'
-    : 'Plain Packaging — Wholesale Catering Supplies | PrintNPack Ireland';
+    : isCateringEquipment
+      ? 'Catering Equipment Ireland | Heat Sealer Bar & Wholesale Supplies | PrintNPack'
+      : 'Plain Packaging — Wholesale Catering Supplies | PrintNPack Ireland';
   const pageDescription = isPizzaCategory
     ? 'Wholesale plain pizza boxes Ireland — kraft corrugated boxes in 7", 9", 10", 12", 14" & 16". Tiered case pricing, fast delivery nationwide. Order online today.'
-    : '736 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland.';
+    : isCateringEquipment
+      ? 'Wholesale catering equipment Ireland — sealer bar heat sealers, chafing fuel, and kitchen supplies. Tiered case pricing with fast delivery across Dublin and nationwide.'
+      : '736 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland.';
   const canonicalPath = isPizzaCategory
     ? 'https://www.printnpack.ie/plain-packaging?category=Pizza+Boxes'
-    : 'https://www.printnpack.ie/plain-packaging';
+    : isCateringEquipment
+      ? 'https://www.printnpack.ie/plain-packaging?category=Catering+Equipment'
+      : 'https://www.printnpack.ie/plain-packaging';
 
   return (
     <Layout>

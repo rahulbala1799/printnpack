@@ -490,10 +490,10 @@ export const TIERED_PLAIN_PRODUCTS = [
   {
     id: "220021",
     code: "220021",
-    name: "300mm Single Bar Heat Sealer (1)",
+    name: "300mm Single Bar Heat Sealer — Sealer Bar Ireland",
     category: "Catering Equipment",
     qtyPerCase: "1",
-    description: "300mm Single Bar Heat Sealer (1) | 1 per case | Catering Equipment | Bulk wholesale Ireland",
+    description: "300mm single bar heat sealer (sealer bar) for catering and food packaging — seals film bags and pouches. Wholesale catering equipment Ireland with tiered case pricing and nationwide delivery.",
     caseTiers: [{ casesLabel: "1-3 cases", pricePerCase: 181.02 }, { casesLabel: "4-6 cases", pricePerCase: 171.49 }, { casesLabel: "7-9 cases", pricePerCase: 161.96 }, { casesLabel: "10+ cases", pricePerCase: 139.73 }],
     imageSrc: "/images/ifa/heroh/logos/logo.png",
     images: ['/images/ifa/heroh/logos/logo.png'],

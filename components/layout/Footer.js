@@ -17,6 +17,7 @@ const PRODUCT_LINKS = [
   { label: 'Plain Pizza Boxes', href: '/plain-pizza-boxes-ireland' },
   { label: 'Custom Pizza Boxes', href: '/custom-pizza-boxes-ireland' },
   { label: 'Banners Ireland', href: '/banners-ireland' },
+  { label: 'Banner Printing Dublin', href: '/banner-printing-dublin' },
   { label: 'Banner FAQ', href: '/banner-faq-ireland' },
   { label: 'Printed Flat Handle Bags', href: '/printed-flat-handle-bags-ireland' },
   { label: 'Vinyl Banners', href: '/vinyl-banners' },

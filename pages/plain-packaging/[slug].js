@@ -85,12 +85,17 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
     : '—';
 
   const isPizzaBox = product.category === 'Pizza Boxes';
+  const isHeatSealer = product.id === '220021';
   const pageTitle = isPizzaBox
     ? `${product.name} | Pizza Boxes Ireland | PrintNPack`
-    : `${product.name} — Plain Packaging | PrintNPack Ireland`;
+    : isHeatSealer
+      ? 'Sealer Bar Ireland | 300mm Heat Sealer Bar — Catering Equipment'
+      : `${product.name} — Plain Packaging | PrintNPack Ireland`;
   const metaDescription = isPizzaBox
     ? `${product.name} — wholesale kraft corrugated pizza box Ireland. Tiered case pricing, fast delivery to Dublin, Cork & nationwide. Order plain pizza boxes online.`
-    : `${product.description?.slice(0, 155)} Fast delivery across Ireland.`;
+    : isHeatSealer
+      ? 'Sealer bar Ireland — 300mm single bar heat sealer for catering and food packaging. Seals film bags and pouches. Wholesale catering equipment with tiered pricing and nationwide delivery.'
+      : `${product.description?.slice(0, 155)} Fast delivery across Ireland.`;
   const canonicalUrl = `https://www.printnpack.ie/plain-packaging/${product.id}`;
   const productLd = buildPlainProductLd(product, canonicalUrl);
 

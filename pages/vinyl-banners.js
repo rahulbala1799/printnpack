@@ -35,7 +35,7 @@ const faqLd = {
 };
 
 const productLd = buildProductLd({
-  name: 'PVC Banners & Printed Outdoor Banners Ireland',
+  name: 'Printed Banners Ireland — PVC Outdoor Banners',
   description: 'Custom printed PVC banners for outdoor advertising in Ireland. 440gsm/510gsm PVC, mesh options, UV printing, standard sizes 2×4 to 5×10, custom up to 5m wide. From €25.',
   image: `${SITE_URL}/ifa/product/banner/20221019_184306722822_e66498_Promo-banner.webp`,
   url: PAGE_URL,
@@ -121,17 +121,17 @@ export default function VinylBannersPage() {
   return (
     <Layout>
       <Head>
-        <title>PVC Banners Ireland | Printed Outdoor Banners from €25 | PrintNPack</title>
-        <meta name="description" content="PVC banners Ireland from €25 — printed outdoor banners for shop fronts, events &amp; advertising. 440gsm/510gsm PVC, mesh options, eyelets included. No minimum order, nationwide delivery from Ashbourne." />
-        <meta name="keywords" content="pvc banners ireland, printed banners ireland, outdoor banners ireland, vinyl banners ireland, custom banner printing ireland, advertising banners ireland, mesh banners ireland" />
+        <title>Printed Banners Ireland | PVC Outdoor Banners from €25 | PrintNPack</title>
+        <meta name="description" content="Printed banners Ireland from €25 — custom PVC outdoor banners for shop fronts, events and advertising. 440gsm/510gsm PVC, mesh options, eyelets included. No minimum order, nationwide delivery." />
+        <meta name="keywords" content="printed banners, printed banners ireland, pvc banners ireland, outdoor banners ireland, vinyl banners ireland, custom banner printing ireland, advertising banners ireland, mesh banners ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-        <meta property="og:title" content="PVC Banners Ireland | Printed Outdoor Banners from €25" />
+        <meta property="og:title" content="Printed Banners Ireland | PVC Outdoor Banners from €25" />
         <meta property="og:description" content="Custom printed PVC banners for outdoor advertising. Standard sizes 2×4 to 5×10, mesh options, UV printing, nationwide delivery." />
         <meta property="og:image" content="https://www.printnpack.ie/ifa/product/banner/20221019_184306722822_e66498_Promo-banner.webp" />
         <meta property="og:url" content={PAGE_URL} />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="PVC Banners Ireland | Printed Outdoor Banners from €25" />
+        <meta name="twitter:title" content="Printed Banners Ireland | From €25" />
         <meta name="twitter:description" content="Custom PVC banners from €25. Outdoor advertising, shop fronts, events — no minimum order." />
         <meta name="twitter:image" content="https://www.printnpack.ie/ifa/product/banner/20221019_184306722822_e66498_Promo-banner.webp" />
         <link rel="canonical" href={PAGE_URL} />
@@ -176,7 +176,7 @@ export default function VinylBannersPage() {
                 <span className="w-2 h-2 bg-blue-500 rounded-full" />
                 Wide format
               </div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">PVC Banners &amp; Printed Outdoor Banners Ireland</h1>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">Printed Banners Ireland — PVC &amp; Outdoor Advertising</h1>
               <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
                 <strong>PVC banners</strong> and <strong>printed outdoor banners</strong> for shop fronts, events, and advertising across Ireland.
                 Standard sizes from 2×4 to 5×10 — see our{' '}

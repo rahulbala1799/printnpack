@@ -11,7 +11,7 @@ const HERO_IMAGE = '/ifa/product/banner/20221019_184306722822_e66498_Promo-banne
 
 const localPages = [
   { href: '/banner-printing-ashbourne', title: 'Banner Printing Ashbourne', desc: 'Local collection, schools, sports clubs, shops & events in Ashbourne and Ratoath.' },
-  { href: '/banner-printing-dublin', title: 'Banner Printing Dublin', desc: 'Retail, corporate, restaurants, exhibitions & pop-up promotions across Dublin.' },
+  { href: '/banner-printing-dublin', title: 'Banner Printing Dublin', desc: 'Banners Dublin — retail, corporate, restaurants, exhibitions & pop-up promotions.' },
   { href: '/banner-printing-meath', title: 'Banner Printing Meath', desc: 'Navan, Trim, Ashbourne, Dunboyne — schools, GAA clubs & community events.' },
 ];
 
@@ -23,6 +23,8 @@ const guides = [
 ];
 
 const faqs = [
+  { q: 'Where can I get banner printing near me?', a: 'PrintNPack is based in Ashbourne, Co. Meath — your local banner printer for Meath and north Dublin with collection available. We also deliver banner printing across Dublin, Cork, Galway and all Irish counties.' },
+  { q: 'Where can I get banner printing in Dublin?', a: 'We provide banner printing Dublin with delivery across the city and county — PVC banners, roll-up banners, and event graphics for shops, restaurants, schools and exhibitions. See our Dublin banner printing page for local delivery details.' },
   { q: 'How much does banner printing cost?', a: 'PVC banners start from around €25–€45 for small sizes, with larger outdoor banners from €60–€150+. Roll-up banners with stands start from around €35. No minimum order — get a free quote for your exact size.' },
   { q: 'Can I order one banner?', a: 'Yes. Single banners for shop sales, school events, sports matches, and parties are welcome. We help with artwork and finishing.' },
   { q: 'How quickly can you print a banner?', a: 'Standard turnaround is 3–5 business days after artwork approval. Rush options (24–48 hours) may be available — tell us your deadline.' },
@@ -65,16 +67,16 @@ const itemListLd = {
 };
 
 export default function BannersIreland() {
-  const title = 'Banner Printing Ireland | PVC & Roll-Up Banners | Print n Pack';
+  const title = 'Banner Printing Ireland | Custom PVC & Roll-Up Banners | Print n Pack';
   const description =
-    'Custom banner printing in Ireland — PVC banners, roll-up banners, event & shop-front banners. Design help, eyelets, local collection in Ashbourne, delivery across Dublin & Meath.';
+    'Banner printing Ireland — custom PVC banners, printed banners, roll-up banners and trade show displays. Banner printing near me from Ashbourne with delivery across Dublin, Meath and nationwide.';
 
   return (
     <Layout>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="keywords" content="banner printing ireland, banners ireland, PVC banners ireland, roll up banners ireland, custom banners ireland, banner printing ashbourne, banner printing dublin" />
+        <meta name="keywords" content="banner printing, banner printing ireland, banners ireland, banner printing near me, banner printing dublin, banners dublin, PVC banners ireland, roll up banners ireland, printed banners ireland, trade show banners ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href={PAGE_URL} />
         <meta property="og:type" content="website" />

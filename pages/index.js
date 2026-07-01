@@ -115,7 +115,12 @@ export default function Home() {
           '@type': 'OfferCatalog',
           name: 'Print Solutions',
           itemListElement: [
+            catalogOffer('Printing Services Ireland', '/printing-ireland'),
             catalogOffer('Banners Ireland', '/banners-ireland'),
+            catalogOffer('Banner Printing Dublin', '/banner-printing-dublin'),
+            catalogOffer('Printed Banners Ireland', '/vinyl-banners'),
+            catalogOffer('Trade Show Banners', '/roll-up-banners'),
+            catalogOffer('Business Stamps Ireland', '/rubber-stamps'),
             catalogOffer('Rubber Stamps Ireland', '/rubber-stamps'),
             catalogOffer('Napkins Ireland', '/napkins-ireland'),
             catalogOffer('Printed Napkins Ireland', '/products/printed-napkins'),

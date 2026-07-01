@@ -108,6 +108,10 @@ export const PRINTING_SERVICES = [
 
 export const PRINTING_LOCAL_FAQS = [
   {
+    q: 'Where can I find printing services near me in Ireland?',
+    a: 'PrintNPack is based at Unit 14 Ashbourne Business Centre, Ashbourne, Co. Meath — your local print shop for Meath and north Dublin. We deliver printing services across Dublin and all Irish counties.',
+  },
+  {
     q: 'Where can I get printing done in Ashbourne?',
     a: 'PrintNPack is based at Unit 14 Ashbourne Business Centre, Ashbourne, Co. Meath, A84 KV57. We print posters, certificates, flyers, business cards, stickers, banners, signs, rubber stamps and packaging.',
   },
