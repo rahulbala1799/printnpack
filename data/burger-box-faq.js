@@ -163,7 +163,7 @@ export const BURGER_BOX_FAQS = [
     category: 'use-cases',
     q: 'Where can I buy burger boxes in Ireland?',
     subtitle: 'Plain and printed burger packaging',
-    a: 'PrintNPack supplies burger boxes across Ireland from our Ashbourne unit — plain wholesale bagasse and corrugated boxes by the case, plus custom printed bagasse burger boxes from 500 units. Order online or call +353 89 440 0155.',
+    a: 'PrintNPack supplies burger boxes across Ireland from our Ashbourne unit — plain wholesale bagasse and corrugated boxes by the case, plus custom printed bagasse burger boxes from 500 units. Order online or call +353 89 415 7369.',
     link: { href: '/burger-boxes-ireland', label: 'Burger boxes Ireland' },
   },
 ];

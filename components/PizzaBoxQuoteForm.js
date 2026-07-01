@@ -301,7 +301,7 @@ Submitted via Custom Pizza Boxes quote form.
         <p className="text-gray-500 mb-2 max-w-sm">
           We couldn't send your request. Please try again or call us directly.
         </p>
-        <a href="tel:+353894400155" className="text-blue-600 font-medium mb-8">+353 89 440 0155</a>
+        <a href="tel:+353894157369" className="text-blue-600 font-medium mb-8">+353 89 415 7369</a>
         <div className="flex gap-3">
           <button
             onClick={() => setSubmitStatus(null)}

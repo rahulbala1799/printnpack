@@ -90,14 +90,14 @@ export const BANNER_LOCAL_PAGES = {
       { title: 'Shops & retail', desc: 'In-store pull up banners for promotions, new arrivals and seasonal campaigns.' },
       { title: 'Offices & reception', desc: 'Professional roll-up displays for reception areas, open days and corporate presentations.' },
     ],
-    deliveryNote: 'Collect from our Ashbourne unit or arrange delivery across Meath and Dublin. Order online or call +353 89 440 0155 for exhibition banners.',
+    deliveryNote: 'Collect from our Ashbourne unit or arrange delivery across Meath and Dublin. Order online or call +353 89 415 7369 for exhibition banners.',
     keywords: 'pull up banners meath, roll up banners meath, trade show banners meath, pull up banner printing meath, exhibition banners meath, roll up banners ashbourne',
     quoteHref: '/roll-up-banners',
     quoteLabel: 'Order Pull Up Banners',
     faqs: [
       {
         q: 'Where can I order pull up banners in Meath?',
-        a: 'PrintNPack supplies pull up banners and roll up banners across Meath from our Ashbourne print unit. We deliver to Navan, Trim, Ratoath, Dunboyne, Dunshaughlin and all County Meath — order online or call +353 89 440 0155.',
+        a: 'PrintNPack supplies pull up banners and roll up banners across Meath from our Ashbourne print unit. We deliver to Navan, Trim, Ratoath, Dunboyne, Dunshaughlin and all County Meath — order online or call +353 89 415 7369.',
       },
       {
         q: 'How much do pull up banners cost in Meath?',

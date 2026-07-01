@@ -186,7 +186,7 @@ export default function BurgerBoxesIreland() {
           <p className="text-emerald-100 mb-6">Plain wholesale cases from €0.15/box. Custom printed bagasse from 500 units.</p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link href="/plain-burger-boxes-ireland" className="inline-flex items-center bg-white text-emerald-600 font-semibold px-6 py-3 rounded-xl hover:bg-emerald-50 transition-colors">Plain Burger Boxes</Link>
-            <a href="tel:+353894400155" className="inline-flex items-center bg-emerald-500 text-white font-semibold px-6 py-3 rounded-xl border border-emerald-400 hover:bg-emerald-400 transition-colors">Call +353 89 440 0155</a>
+            <a href="tel:+353894157369" className="inline-flex items-center bg-emerald-500 text-white font-semibold px-6 py-3 rounded-xl border border-emerald-400 hover:bg-emerald-400 transition-colors">Call +353 89 415 7369</a>
           </div>
         </div>
       </section>

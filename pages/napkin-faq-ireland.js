@@ -99,7 +99,7 @@ export default function NapkinFaqIreland() {
             Everything Irish businesses ask about printed napkins — pricing, sizes, materials, wedding napkins,
             and local delivery in Ashbourne and Dublin.{' '}
             <Link href="/products/printed-napkins" className="text-amber-600 hover:underline font-medium">Order printed napkins</Link>{' '}
-            or call <a href="tel:+353894400155" className="text-amber-600 hover:underline font-medium">+353 89 440 0155</a>.
+            or call <a href="tel:+353894157369" className="text-amber-600 hover:underline font-medium">+353 89 415 7369</a>.
           </p>
 
           <div className="relative mb-6">

@@ -96,10 +96,10 @@ const HeroSection = () => {
                 <FaArrowRight className="ml-2 text-xs" />
               </Link>
               <a
-                href="tel:+353894400155"
+                href="tel:+353894157369"
                 className="inline-flex items-center justify-center border border-white/20 text-white hover:bg-white/5 px-6 py-3 rounded-md text-sm font-medium transition-colors"
               >
-                Call +353 89 440 0155
+                Call +353 89 415 7369
               </a>
             </div>
           </div>

@@ -309,10 +309,10 @@ const FoamexBoardsPage = () => {
                   Get Custom Quote
                 </button>
                 <a
-                  href="tel:+353894400155"
+                  href="tel:+353894157369"
                   className="flex-1 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3.5 px-6 rounded-xl border border-gray-300 transition-colors text-center"
                 >
-                  Call +353 89 440 0155
+                  Call +353 89 415 7369
                 </a>
               </div>
 
@@ -562,10 +562,10 @@ const FoamexBoardsPage = () => {
               Get Free Quote
             </button>
             <a
-              href="tel:+353894400155"
+              href="tel:+353894157369"
               className="bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-3.5 px-8 rounded-xl border border-gray-700 transition-colors"
             >
-              Call +353 89 440 0155
+              Call +353 89 415 7369
             </a>
           </div>
 

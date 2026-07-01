@@ -66,7 +66,7 @@ export default function BurgerBoxLocalPage({ config }) {
       '@type': 'LocalBusiness',
       name: 'PrintNPack Ireland',
       url: SITE_URL,
-      telephone: '+353894400155',
+      telephone: '+353894157369',
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Unit 14 Ashbourne Business Centre',

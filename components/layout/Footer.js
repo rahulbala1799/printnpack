@@ -76,7 +76,7 @@ const Footer = () => {
 
           <div className="flex gap-2">
             <a
-              href="tel:+353894400155"
+              href="tel:+353894157369"
               className="flex-1 flex items-center justify-center gap-2 bg-white text-slate-900 font-bold text-sm py-3 rounded-xl active:scale-[0.97] transition-transform"
             >
               <FaPhone className="text-xs" />
@@ -153,7 +153,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center text-sm">
                 <FaPhone className="text-slate-500 mr-3 flex-shrink-0 text-xs" />
-                <a href="tel:+353894400155" className="text-slate-400 hover:text-white transition-colors">+353 89 440 0155</a>
+                <a href="tel:+353894157369" className="text-slate-400 hover:text-white transition-colors">+353 89 415 7369</a>
               </li>
               <li className="flex items-center text-sm">
                 <FaEnvelope className="text-slate-500 mr-3 flex-shrink-0 text-xs" />
@@ -202,7 +202,7 @@ const Footer = () => {
         <div className="border-t border-slate-800 py-4 sm:py-6 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-[10px] sm:text-xs text-slate-500">&copy; {new Date().getFullYear()} PrintNPack. All rights reserved.</p>
           <div className="flex items-center gap-3">
-            <a href="tel:+353894400155" className="text-[10px] sm:text-xs text-slate-500 hover:text-slate-300 transition-colors hidden sm:inline">+353 89 440 0155</a>
+            <a href="tel:+353894157369" className="text-[10px] sm:text-xs text-slate-500 hover:text-slate-300 transition-colors hidden sm:inline">+353 89 415 7369</a>
             <span className="text-slate-700 hidden sm:inline">·</span>
             <a href="mailto:info@printnpack.ie" className="text-[10px] sm:text-xs text-slate-500 hover:text-slate-300 transition-colors hidden sm:inline">info@printnpack.ie</a>
           </div>

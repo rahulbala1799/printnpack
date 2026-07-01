@@ -99,7 +99,7 @@ export default function BurgerBoxFaqIreland() {
             Everything Irish food businesses ask about burger boxes — plain wholesale, printed bagasse,
             compostable materials, and delivery in Ashbourne and Dublin.{' '}
             <Link href="/plain-burger-boxes-ireland" className="text-emerald-600 hover:underline font-medium">Plain burger boxes</Link>{' '}
-            or call <a href="tel:+353894400155" className="text-emerald-600 hover:underline font-medium">+353 89 440 0155</a>.
+            or call <a href="tel:+353894157369" className="text-emerald-600 hover:underline font-medium">+353 89 415 7369</a>.
           </p>
 
           <div className="relative mb-6">

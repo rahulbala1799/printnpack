@@ -19,7 +19,7 @@ export default function Home() {
     buildCatalogOffer(name, `${siteUrl}${path}`, { price: startingPriceForUrl(path) });
   const siteName = 'PrintNPack Ireland';
   const title = 'PrintNPack Ireland | Print Shop Near Me — Ashbourne, Co. Meath';
-  const description = "Print shop near me in Ashbourne, Co. Meath — PrintNPack prints posters, photo printing, flyers, banners, rubber stamps, stickers and custom packaging. Call +353 89 440 0155 or visit Unit 14 Ashbourne Business Centre. Nationwide delivery across Ireland.";
+  const description = "Print shop near me in Ashbourne, Co. Meath — PrintNPack prints posters, photo printing, flyers, banners, rubber stamps, stickers and custom packaging. Call +353 89 415 7369 or visit Unit 14 Ashbourne Business Centre. Nationwide delivery across Ireland.";
   const ogImage = `${siteUrl}/images/og-homepage.jpg`;
 
   // ── WebSite schema (enables Google Sitelinks search box) ──────────────────
@@ -49,7 +49,7 @@ export default function Home() {
     logo: `${siteUrl}/favicon.ico`,
     image: ogImage,
     description,
-    telephone: '+353894400155',
+    telephone: '+353894157369',
     email: 'hello@printnpack.ie',
     address: {
       '@type': 'PostalAddress',
@@ -150,7 +150,7 @@ export default function Home() {
         name: 'Where is the nearest print shop near me in Meath?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'PrintNPack is your local print shop at Unit 14 Ashbourne Business Centre, Ashbourne, Co. Meath — A84 KV57. We print posters, photo printing, flyers, banners, rubber stamps, stickers and packaging. Call +353 89 440 0155 or visit our printing Ashbourne page for local collection.',
+          text: 'PrintNPack is your local print shop at Unit 14 Ashbourne Business Centre, Ashbourne, Co. Meath — A84 KV57. We print posters, photo printing, flyers, banners, rubber stamps, stickers and packaging. Call +353 89 415 7369 or visit our printing Ashbourne page for local collection.',
         },
       },
       {
@@ -158,7 +158,7 @@ export default function Home() {
         name: 'Do you offer photo printing in Ashbourne?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Yes. PrintNPack offers photo printing and poster printing in Ashbourne — including A4, A3, A2 and larger sizes for events, gifts, schools and businesses. Visit our printing Ashbourne page or call +353 89 440 0155.',
+          text: 'Yes. PrintNPack offers photo printing and poster printing in Ashbourne — including A4, A3, A2 and larger sizes for events, gifts, schools and businesses. Visit our printing Ashbourne page or call +353 89 415 7369.',
         },
       },
       {

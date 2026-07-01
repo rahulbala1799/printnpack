@@ -193,7 +193,7 @@ export default function RubberStampsIreland() {
           <p className="text-indigo-100 mb-6">Business stamps from €15. Same-day express available. No minimum order.</p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link href="/rubber-stamps" className="inline-flex items-center bg-white text-indigo-600 font-semibold px-6 py-3 rounded-xl hover:bg-indigo-50 transition-colors">Order Custom Stamps</Link>
-            <a href="tel:+353894400155" className="inline-flex items-center bg-indigo-500 text-white font-semibold px-6 py-3 rounded-xl border border-indigo-400 hover:bg-indigo-400 transition-colors">Call +353 89 440 0155</a>
+            <a href="tel:+353894157369" className="inline-flex items-center bg-indigo-500 text-white font-semibold px-6 py-3 rounded-xl border border-indigo-400 hover:bg-indigo-400 transition-colors">Call +353 89 415 7369</a>
           </div>
         </div>
       </section>

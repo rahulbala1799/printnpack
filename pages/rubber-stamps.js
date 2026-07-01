@@ -17,7 +17,7 @@ const pageFaqs = [
   },
   {
     q: 'Do you offer same-day rubber stamp printing?',
-    a: 'Yes. Same-day and next-day express service is available for urgent business stamp orders when artwork is ready. Call +353 89 440 0155 with your deadline.',
+    a: 'Yes. Same-day and next-day express service is available for urgent business stamp orders when artwork is ready. Call +353 89 415 7369 with your deadline.',
   },
   {
     q: 'What is the difference between self-inking and hand stamps?',
@@ -259,7 +259,7 @@ const RubberStampsPage = () => {
               </ul>
               <div className="flex flex-col sm:flex-row gap-3 mb-6">
                 <button onClick={openQuote} className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3.5 px-6 rounded-xl transition-colors text-center">Get Custom Quote</button>
-                <a href="tel:+353894400155" className="flex-1 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3.5 px-6 rounded-xl border border-gray-300 transition-colors text-center">Call +353 89 440 0155</a>
+                <a href="tel:+353894157369" className="flex-1 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3.5 px-6 rounded-xl border border-gray-300 transition-colors text-center">Call +353 89 415 7369</a>
               </div>
             </div>
           </div>
@@ -392,7 +392,7 @@ const RubberStampsPage = () => {
           <p className="text-gray-400 mb-8 max-w-xl mx-auto">Get professional rubber stamps made to your exact specifications. Fast turnaround and competitive prices.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button onClick={openQuote} className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3.5 px-8 rounded-xl transition-colors">Get Custom Quote</button>
-            <a href="tel:+353894400155" className="bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-3.5 px-8 rounded-xl border border-gray-700 transition-colors">Call +353 89 440 0155</a>
+            <a href="tel:+353894157369" className="bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-3.5 px-8 rounded-xl border border-gray-700 transition-colors">Call +353 89 415 7369</a>
           </div>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-8 text-sm text-gray-500">
             <span className="flex items-center gap-1.5"><CheckIcon /> No obligation</span>

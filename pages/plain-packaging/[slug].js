@@ -356,10 +356,10 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
               View Plain Packaging
             </Link>
             <a
-              href="tel:+353894400155"
+              href="tel:+353894157369"
               className="bg-stone-800 hover:bg-stone-700 text-stone-200 font-semibold py-3 px-8 rounded-xl border border-stone-700 transition-colors text-sm"
             >
-              Call +353 89 440 0155
+              Call +353 89 415 7369
             </a>
           </div>
         </div>

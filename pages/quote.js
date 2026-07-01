@@ -142,10 +142,10 @@ const QuotePage = () => {
               <h3 className="text-xl font-bold mb-3">Call Us</h3>
               <p className="text-gray-600 mb-5">Get an immediate quote over the phone</p>
               <a 
-                href="tel:+353894400155" 
+                href="tel:+353894157369" 
                 className="bg-amber-500 hover:bg-amber-600 text-white font-medium py-3 px-6 rounded-lg transition-colors inline-flex items-center"
               >
-                +353 89 440 0155
+                +353 89 415 7369
                 <FaArrowRight className="ml-2" />
               </a>
             </div>
@@ -184,7 +184,7 @@ const QuotePage = () => {
                   <FaPhone className="text-blue-300 mr-4 mt-1 text-xl" />
                   <div>
                     <h3 className="font-semibold mb-1">Phone</h3>
-                    <p>+353 89 440 0155</p>
+                    <p>+353 89 415 7369</p>
                   </div>
                 </div>
                 

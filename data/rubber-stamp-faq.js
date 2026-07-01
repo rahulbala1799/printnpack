@@ -61,7 +61,7 @@ export const RUBBER_STAMP_FAQS = [
     category: 'turnaround',
     q: 'Do you offer same-day rubber stamp printing?',
     subtitle: 'Express stamp service in Ireland',
-    a: 'Yes. Same-day and next-day rubber stamp service is available for urgent business stamp orders when artwork is ready. Call +353 89 440 0155 with your deadline — we will confirm availability based on current workload.',
+    a: 'Yes. Same-day and next-day rubber stamp service is available for urgent business stamp orders when artwork is ready. Call +353 89 415 7369 with your deadline — we will confirm availability based on current workload.',
   },
   {
     id: 'delivery',
@@ -199,7 +199,7 @@ export const RUBBER_STAMP_FAQS = [
     category: 'local',
     q: 'Where can I get a logo stamp near me in Ireland?',
     subtitle: 'Local and online stamp ordering',
-    a: 'PrintNPack makes custom logo stamps from our Ashbourne print unit with delivery across Ireland. If you are in Meath or north Dublin, you can collect in person. Order online via our quote form or call +353 89 440 0155.',
+    a: 'PrintNPack makes custom logo stamps from our Ashbourne print unit with delivery across Ireland. If you are in Meath or north Dublin, you can collect in person. Order online via our quote form or call +353 89 415 7369.',
     link: { href: '/rubber-stamps', label: 'Order custom stamps' },
   },
   {

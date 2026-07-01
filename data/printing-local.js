@@ -6,9 +6,9 @@ export const PRINTING_LOCAL_PAGES = {
     title: 'Printing Ashbourne',
     metaTitle: 'Printing Ashbourne | Print Shop Near Me — Posters, Photo Printing & Flyers',
     metaDescription:
-      'Print shop near me in Ashbourne — posters, photo printing, flyers, certificates, banners, rubber stamps and stickers. Unit 14 Ashbourne Business Centre. Call +353 89 440 0155.',
+      'Print shop near me in Ashbourne — posters, photo printing, flyers, certificates, banners, rubber stamps and stickers. Unit 14 Ashbourne Business Centre. Call +353 89 415 7369.',
     h1: 'Printing Ashbourne — Print Shop Near Me for Posters, Photo Printing & Flyers',
-    heroLabel: 'Local print shop · Ashbourne, Co. Meath · +353 89 440 0155',
+    heroLabel: 'Local print shop · Ashbourne, Co. Meath · +353 89 415 7369',
     intro:
       'Looking for a print shop near me in Ashbourne? PrintNPack is based at Unit 14 Ashbourne Business Centre and offers local printing for posters, photo printing, certificates, flyers, leaflets, business cards, stickers, banners, rubber stamps, menus, signs and packaging. Collection is available for urgent jobs — we also deliver across Meath, Dublin and nationwide.',
     localAreas: ['Ashbourne', 'Ratoath', 'Dunboyne', 'Dunshaughlin', 'Swords', 'Clonee', 'Navan', 'Meath'],
@@ -19,7 +19,7 @@ export const PRINTING_LOCAL_PAGES = {
     faqs: [
       {
         q: 'Where is the nearest print shop near me in Ashbourne?',
-        a: 'PrintNPack is at Unit 14 Ashbourne Business Centre, Ashbourne, Co. Meath, A84 KV57. We print posters, photo printing, flyers, banners, rubber stamps, stickers and packaging — call +353 89 440 0155.',
+        a: 'PrintNPack is at Unit 14 Ashbourne Business Centre, Ashbourne, Co. Meath, A84 KV57. We print posters, photo printing, flyers, banners, rubber stamps, stickers and packaging — call +353 89 415 7369.',
       },
       {
         q: 'Do you offer photo printing in Ashbourne?',

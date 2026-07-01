@@ -186,7 +186,7 @@ export default function NapkinsIreland() {
           <p className="text-amber-100 mb-6">Printed napkins from €0.05 per unit. 1,000 MOQ. Weekly delivery available.</p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link href="/products/printed-napkins" className="inline-flex items-center bg-white text-amber-600 font-semibold px-6 py-3 rounded-xl hover:bg-amber-50 transition-colors">Order Printed Napkins</Link>
-            <a href="tel:+353894400155" className="inline-flex items-center bg-amber-500 text-white font-semibold px-6 py-3 rounded-xl border border-amber-400 hover:bg-amber-400 transition-colors">Call +353 89 440 0155</a>
+            <a href="tel:+353894157369" className="inline-flex items-center bg-amber-500 text-white font-semibold px-6 py-3 rounded-xl border border-amber-400 hover:bg-amber-400 transition-colors">Call +353 89 415 7369</a>
           </div>
         </div>
       </section>

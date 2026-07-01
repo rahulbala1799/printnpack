@@ -163,7 +163,7 @@ export const NAPKIN_FAQS = [
     category: 'use-cases',
     q: 'Where can I get personalised napkins in Ireland?',
     subtitle: 'Custom printed napkins nationwide',
-    a: 'PrintNPack prints personalised napkins for businesses and events across Ireland from our Ashbourne print unit. Order online via our quote form or call +353 89 440 0155. We serve Dublin, Meath, and all counties with delivery or local collection.',
+    a: 'PrintNPack prints personalised napkins for businesses and events across Ireland from our Ashbourne print unit. Order online via our quote form or call +353 89 415 7369. We serve Dublin, Meath, and all counties with delivery or local collection.',
     link: { href: '/napkins-ireland', label: 'Napkins Ireland hub' },
   },
 

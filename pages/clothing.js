@@ -154,7 +154,7 @@ const CustomClothingIreland = () => {
               </ul>
               <div className="flex flex-col sm:flex-row gap-3 mb-6">
                 <button onClick={openQuote} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-6 rounded-xl transition-colors text-center">Get Custom Quote</button>
-                <a href="tel:+353894400155" className="flex-1 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3.5 px-6 rounded-xl border border-gray-300 transition-colors text-center">Call +353 89 440 0155</a>
+                <a href="tel:+353894157369" className="flex-1 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3.5 px-6 rounded-xl border border-gray-300 transition-colors text-center">Call +353 89 415 7369</a>
               </div>
             </div>
           </div>
@@ -264,7 +264,7 @@ const CustomClothingIreland = () => {
           <p className="text-gray-400 mb-8 max-w-xl mx-auto">Get a free quote. We’ll help with product, print, and quantities.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button onClick={openQuote} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-8 rounded-xl transition-colors">Get Free Quote</button>
-            <a href="tel:+353894400155" className="bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-3.5 px-8 rounded-xl border border-gray-700 transition-colors">Call +353 89 440 0155</a>
+            <a href="tel:+353894157369" className="bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-3.5 px-8 rounded-xl border border-gray-700 transition-colors">Call +353 89 415 7369</a>
           </div>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-8 text-sm text-gray-500">
             <span className="flex items-center gap-1.5"><CheckIcon /> No obligation</span>

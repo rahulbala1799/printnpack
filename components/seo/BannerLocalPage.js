@@ -68,7 +68,7 @@ export default function BannerLocalPage({ config }) {
       '@type': 'LocalBusiness',
       name: 'PrintNPack Ireland',
       url: SITE_URL,
-      telephone: '+353894400155',
+      telephone: '+353894157369',
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Unit 14 Ashbourne Business Centre',
@@ -131,8 +131,8 @@ export default function BannerLocalPage({ config }) {
                 <Link href={config.quoteHref || '/quote?product=Vinyl+Banners'} className="inline-flex items-center bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors">
                   {config.quoteLabel || 'Get a Free Quote'}
                 </Link>
-                <a href="tel:+353894400155" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
-                  Call +353 89 440 0155
+                <a href="tel:+353894157369" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
+                  Call +353 89 415 7369
                 </a>
               </div>
             </div>

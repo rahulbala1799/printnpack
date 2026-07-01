@@ -75,9 +75,9 @@ const Header = () => {
       <div className="hidden lg:block bg-slate-900 text-white">
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center h-9 text-sm">
           <div className="flex items-center gap-6">
-            <a href="tel:+353894400155" className="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors">
+            <a href="tel:+353894157369" className="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors">
               <FaPhone className="text-xs" />
-              <span>+353 89 440 0155</span>
+              <span>+353 89 415 7369</span>
             </a>
             <a href="mailto:info@printnpack.ie" className="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors">
               <FaEnvelope className="text-xs" />
@@ -132,7 +132,7 @@ const Header = () => {
 
           {/* Mobile actions */}
           <div className="md:hidden flex items-center gap-2">
-            <a href="tel:+353894400155" className="p-2 text-slate-600" aria-label="Call Us">
+            <a href="tel:+353894157369" className="p-2 text-slate-600" aria-label="Call Us">
               <FaPhone className="text-base" />
             </a>
             <button
@@ -214,9 +214,9 @@ const Header = () => {
 
         <div className="border-t border-slate-200 p-5 mt-2">
           <div className="space-y-3">
-            <a href="tel:+353894400155" className="flex items-center text-sm text-slate-600 hover:text-slate-900">
+            <a href="tel:+353894157369" className="flex items-center text-sm text-slate-600 hover:text-slate-900">
               <FaPhone className="text-slate-400 mr-3 text-xs" />
-              +353 89 440 0155
+              +353 89 415 7369
             </a>
             <a href="mailto:info@printnpack.ie" className="flex items-center text-sm text-slate-600 hover:text-slate-900">
               <FaEnvelope className="text-slate-400 mr-3 text-xs" />

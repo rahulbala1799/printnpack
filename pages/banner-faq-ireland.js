@@ -99,7 +99,7 @@ export default function BannerFaqIreland() {
             Everything Irish businesses ask about banner printing — pricing, materials, artwork, eyelets, roll-up stands,
             and local service in Ashbourne, Dublin and Meath.{' '}
             <Link href="/quote?product=Vinyl+Banners" className="text-blue-600 hover:underline font-medium">Get a free quote</Link>{' '}
-            or call <a href="tel:+353894400155" className="text-blue-600 hover:underline font-medium">+353 89 440 0155</a>.
+            or call <a href="tel:+353894157369" className="text-blue-600 hover:underline font-medium">+353 89 415 7369</a>.
           </p>
 
           <div className="relative mb-6">

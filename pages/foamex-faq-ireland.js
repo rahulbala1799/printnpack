@@ -99,7 +99,7 @@ export default function FoamexFaqIreland() {
             Everything Irish businesses ask about foamex boards — pricing, thickness, printing, indoor vs outdoor use,
             and local delivery in Ashbourne and Dublin.{' '}
             <Link href="/foamex-boards" className="text-violet-600 hover:underline font-medium">Order foamex boards</Link>{' '}
-            or call <a href="tel:+353894400155" className="text-violet-600 hover:underline font-medium">+353 89 440 0155</a>.
+            or call <a href="tel:+353894157369" className="text-violet-600 hover:underline font-medium">+353 89 415 7369</a>.
           </p>
 
           <div className="relative mb-6">

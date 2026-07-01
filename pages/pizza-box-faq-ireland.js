@@ -133,7 +133,7 @@ export default function PizzaBoxFaqIreland() {
             minimum orders, sizes, artwork, delivery, and sustainability. Can&apos;t find your answer?{' '}
             <Link href="/quote" className="text-blue-600 hover:underline font-medium">Get a free quote</Link>{' '}
             or call{' '}
-            <a href="tel:+353894400155" className="text-blue-600 hover:underline font-medium">+353 89 440 0155</a>.
+            <a href="tel:+353894157369" className="text-blue-600 hover:underline font-medium">+353 89 415 7369</a>.
           </p>
 
           <div className="relative mb-6">

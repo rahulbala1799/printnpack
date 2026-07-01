@@ -99,7 +99,7 @@ export default function RubberStampFaqIreland() {
             Everything Irish businesses ask about rubber stamps — pricing, types, artwork, same-day service,
             and local collection in Ashbourne and Dublin.{' '}
             <Link href="/rubber-stamps" className="text-indigo-600 hover:underline font-medium">Order custom stamps</Link>{' '}
-            or call <a href="tel:+353894400155" className="text-indigo-600 hover:underline font-medium">+353 89 440 0155</a>.
+            or call <a href="tel:+353894157369" className="text-indigo-600 hover:underline font-medium">+353 89 415 7369</a>.
           </p>
 
           <div className="relative mb-6">

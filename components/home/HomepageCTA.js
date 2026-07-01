@@ -30,7 +30,7 @@ const HomepageCTA = () => {
             </svg>
           </Link>
           <a
-            href="tel:+353894400155"
+            href="tel:+353894157369"
             className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-3.5 border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 transition-colors text-sm sm:text-base"
           >
             <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

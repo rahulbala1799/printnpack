@@ -188,7 +188,7 @@ export const FOAMEX_FAQS = [
     category: 'local',
     q: 'Where can I get foamex boards in Ireland?',
     subtitle: 'Ordering foamex nationwide',
-    a: 'PrintNPack supplies printed foamex boards across Ireland from our Ashbourne print unit. Order via our quote form or call +353 89 440 0155. We print 3mm, 5mm, 5.5mm, and 10mm foamex with UV print and optional laminate.',
+    a: 'PrintNPack supplies printed foamex boards across Ireland from our Ashbourne print unit. Order via our quote form or call +353 89 415 7369. We print 3mm, 5mm, 5.5mm, and 10mm foamex with UV print and optional laminate.',
     link: { href: '/foamex-ireland', label: 'Foamex Ireland' },
   },
   {
