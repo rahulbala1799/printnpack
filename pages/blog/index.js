@@ -50,6 +50,17 @@ const posts = [
     category: 'Hospitality Guide',
   },
   {
+    slug: 'foamex-boards-ireland-guide',
+    title: 'Foamex Boards Ireland: Thickness, Sizes & Signage Guide',
+    excerpt:
+      '3mm vs 5mm vs 10mm foamex, standard sheet sizes, indoor vs outdoor use, foamex vs correx, and how to order custom PVC foam signage.',
+    date: '2026-06-21',
+    readTime: '7 min read',
+    image: '/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif',
+    imageAlt: 'Foamex boards Ireland — custom PVC foam board signage',
+    category: 'Signage Guide',
+  },
+  {
     slug: 'banner-sizes-ireland',
     title: 'Banner Sizes Ireland: PVC Outdoor & Roll-Up Banner Size Guide',
     excerpt:

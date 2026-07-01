@@ -116,6 +116,8 @@ export default function Home() {
             catalogOffer('Rubber Stamps Ireland', '/rubber-stamps'),
             catalogOffer('Napkins Ireland', '/napkins-ireland'),
             catalogOffer('Printed Napkins Ireland', '/products/printed-napkins'),
+            catalogOffer('Foamex Ireland', '/foamex-ireland'),
+            catalogOffer('Foamex Boards Ireland', '/foamex-boards'),
             catalogOffer('Vinyl Banners Ireland', '/vinyl-banners'),
             catalogOffer('Roll Up Banners Meath', '/roll-up-banners'),
             catalogOffer('Custom Posters Ireland', '/posters'),

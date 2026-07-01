@@ -25,6 +25,8 @@ const PRODUCT_LINKS = [
   { label: 'Stamp FAQ', href: '/rubber-stamp-faq-ireland' },
   { label: 'Napkins Ireland', href: '/napkins-ireland' },
   { label: 'Napkin FAQ', href: '/napkin-faq-ireland' },
+  { label: 'Foamex Ireland', href: '/foamex-ireland' },
+  { label: 'Foamex FAQ', href: '/foamex-faq-ireland' },
   { label: 'Custom Posters', href: '/posters' },
   { label: 'Vinyl Stickers', href: '/vinyl-stickers' },
   { label: 'Leaflets Ireland', href: '/services/leaflets' },

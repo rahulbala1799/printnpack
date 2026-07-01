@@ -4,19 +4,52 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import FoamexQuoteForm from '../components/FoamexQuoteForm';
+import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 import { SITE_URL } from '../lib/site';
 import { buildProductLd } from '../lib/schema';
+import { MOST_ASKED_FOAMEX_FAQS } from '../data/foamex-faq';
 
 const PAGE_URL = `${SITE_URL}/foamex-boards`;
 
+const pageFaqs = MOST_ASKED_FOAMEX_FAQS.slice(0, 4);
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: pageFaqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+
 const productLd = buildProductLd({
-  name: 'Foamex Boards Ireland',
+  name: 'Foamex Boards Ireland — Custom PVC Foam Signage',
   description:
-    'Premium quality foamex PVC boards for indoor signage, exhibitions, and displays. Available in 3mm, 5mm, 5.5mm, and 10mm thicknesses with custom sizes and finishing options.',
+    'Custom foamex board printing in Ireland — 3mm, 5mm, 5.5mm, and 10mm PVC foam signage for exhibitions, retail, and indoor displays. UV print, custom sizes up to 8ft × 4ft.',
   image: `${SITE_URL}/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif`,
   url: PAGE_URL,
   price: '15.00',
 });
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Foamex Ireland', item: `${SITE_URL}/foamex-ireland` },
+    { '@type': 'ListItem', position: 3, name: 'Foamex Boards', item: PAGE_URL },
+  ],
+};
+
+const relatedLinks = [
+  { href: '/foamex-ireland', label: 'Foamex Ireland', desc: 'Complete foamex printing hub' },
+  { href: '/foamex-faq-ireland', label: 'Foamex FAQ', desc: '25+ instant answers' },
+  { href: '/blog/foamex-boards-ireland-guide', label: 'Foamex Boards Guide', desc: 'Thickness, sizes & materials' },
+  { href: '/foamex-printing-ashbourne', label: 'Foamex Printing Ashbourne', desc: 'Local collection' },
+  { href: '/foamex-printing-dublin', label: 'Foamex Printing Dublin', desc: 'Delivery across Dublin' },
+  { href: '/correx-boards', label: 'Correx Boards', desc: 'Outdoor signage alternative' },
+];
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -148,16 +181,21 @@ const FoamexBoardsPage = () => {
   return (
     <Layout>
       <Head>
-        <title>Foamex Boards - Premium PVC Signage | Print n Pack Ireland</title>
-        <meta name="description" content="Premium quality foamex PVC boards for indoor signage, exhibitions, and displays. Available in 3mm, 5mm, 5.5mm, and 10mm thicknesses. Custom sizes and finishing options available." />
-        <meta name="keywords" content="foamex boards, PVC signage, indoor displays, exhibition graphics, retail signage, Ireland" />
-        <meta property="og:title" content="Foamex Boards - Premium PVC Signage Ireland" />
-        <meta property="og:description" content="High-quality foamex PVC boards for indoor signage, exhibitions, and displays. Multiple thicknesses, custom sizes, professional finishing." />
+        <title>Foamex Boards Ireland | Custom PVC Foam Signage & Printing | Print n Pack</title>
+        <meta name="description" content="Custom foamex board printing in Ireland — 3mm, 5mm & 10mm PVC foam signage for exhibitions, retail & indoor displays. UV print, sizes up to 8ft × 4ft. Free quote, nationwide delivery." />
+        <meta name="keywords" content="foamex boards ireland, foamex printing, foam board printing, pvc foamex, foamex signs, foamex panels, 5mm foamex, foamex board printing, exhibition panels ireland" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+        <meta property="og:title" content="Foamex Boards Ireland | Custom PVC Foam Signage" />
+        <meta property="og:description" content="UV-printed foamex boards for exhibitions, shop signage, and indoor displays. 3mm, 5mm, 5.5mm, and 10mm thicknesses. Custom sizes, Ireland-wide delivery." />
         <meta property="og:image" content="https://www.printnpack.ie/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif" />
-        <meta property="og:url" content="https://www.printnpack.ie/foamex-boards" />
+        <meta property="og:url" content={PAGE_URL} />
         <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://www.printnpack.ie/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif" />
         <link rel="canonical" href={PAGE_URL} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       </Head>
 
       {/* ── Breadcrumb ── */}
@@ -166,7 +204,7 @@ const FoamexBoardsPage = () => {
           <ol className="flex items-center gap-2 text-sm text-gray-500">
             <li><Link href="/" className="hover:text-gray-700">Home</Link></li>
             <li>/</li>
-            <li><Link href="/#products" className="hover:text-gray-700">Products</Link></li>
+            <li><Link href="/foamex-ireland" className="hover:text-gray-700">Foamex Ireland</Link></li>
             <li>/</li>
             <li className="text-gray-800 font-medium">Foamex Boards</li>
           </ol>
@@ -221,11 +259,15 @@ const FoamexBoardsPage = () => {
               </div>
 
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">
-                Foamex Boards
+                Foamex Boards Ireland
               </h1>
 
               <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
-                Premium PVC foamex boards for indoor signage, exhibitions, and displays. Multiple thicknesses, custom sizes, and professional finishing options.
+                Custom foamex board printing for exhibitions, retail signage, and indoor displays —
+                UV-printed PVC foam in 3mm, 5mm, 5.5mm, and 10mm.{' '}
+                <Link href="/foamex-faq-ireland" className="text-blue-600 hover:underline font-medium">Foamex FAQ</Link>{' '}
+                ·{' '}
+                <Link href="/blog/foamex-boards-ireland-guide" className="text-blue-600 hover:underline font-medium">thickness guide</Link>
               </p>
 
               <div className="grid grid-cols-3 gap-3 mb-6">
@@ -483,6 +525,26 @@ const FoamexBoardsPage = () => {
       </section>
 
       {/* ── CTA ── */}
+      <section className="bg-white border-t border-gray-100">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Most asked questions</h2>
+          <p className="text-gray-500 text-sm mb-6">
+            <Link href="/foamex-faq-ireland" className="text-blue-600 hover:underline">View detailed FAQ →</Link>
+          </p>
+          <div className="space-y-4">
+            {pageFaqs.map((faq) => (
+              <details key={faq.q} className="group bg-slate-50 rounded-xl border border-gray-200 p-5 open:shadow-sm">
+                <summary className="font-semibold text-gray-900 cursor-pointer list-none flex justify-between items-center gap-4">
+                  {faq.q}
+                  <span className="text-gray-400 group-open:rotate-180 transition-transform">▼</span>
+                </summary>
+                <p className="text-gray-600 mt-3 text-sm leading-relaxed">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="bg-gray-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
@@ -523,6 +585,8 @@ const FoamexBoardsPage = () => {
           </div>
         </div>
       </section>
+
+      <RelatedSeoLinks title="Related foamex pages" links={relatedLinks} />
 
       {/* ── Quote Modal ── */}
       {quoteModalOpen && (

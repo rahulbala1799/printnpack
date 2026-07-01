@@ -87,6 +87,12 @@ export const PRINTING_SERVICES = [
     cta: 'View napkins',
   },
   {
+    title: 'Foamex Boards',
+    desc: 'PVC foam board printing for exhibitions, shop signage, and indoor displays.',
+    href: '/foamex-ireland',
+    cta: 'View foamex',
+  },
+  {
     title: 'Packaging',
     desc: 'Custom and plain packaging for restaurants, retail and catering.',
     href: '/plain-packaging',
