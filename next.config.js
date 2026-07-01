@@ -40,6 +40,41 @@ const nextConfig = {
         destination: '/printed-flat-handle-bags-ireland',
         permanent: true,
       },
+      {
+        source: '/products/eco-bagasse-burger-boxes',
+        destination: '/eco-bagasse-burger-boxes',
+        permanent: true,
+      },
+      {
+        source: '/products/roll-up-banner-stands',
+        destination: '/roll-up-banners',
+        permanent: true,
+      },
+      {
+        source: '/products/vinyl-banners',
+        destination: '/vinyl-banners',
+        permanent: true,
+      },
+      {
+        source: '/products/posters',
+        destination: '/posters',
+        permanent: true,
+      },
+      {
+        source: '/products/foamex-boards',
+        destination: '/foamex-boards',
+        permanent: true,
+      },
+      {
+        source: '/products/correx-boards',
+        destination: '/correx-boards',
+        permanent: true,
+      },
+      {
+        source: '/products/vinyl-stickers',
+        destination: '/vinyl-stickers',
+        permanent: true,
+      },
     ];
   },
   

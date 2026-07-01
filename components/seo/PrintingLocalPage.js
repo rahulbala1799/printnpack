@@ -13,10 +13,12 @@ const HERO_IMAGE = '/ifa/product/Poster/single_poster.jpg';
 export default function PrintingLocalPage({ config }) {
   const pageUrl = `${SITE_URL}/${config.slug}`;
 
+  const faqs = config.faqs || PRINTING_LOCAL_FAQS;
+
   const faqLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: PRINTING_LOCAL_FAQS.map(({ q, a }) => ({
+    mainEntity: faqs.map(({ q, a }) => ({
       '@type': 'Question',
       name: q,
       acceptedAnswer: { '@type': 'Answer', text: a },
@@ -188,7 +190,7 @@ export default function PrintingLocalPage({ config }) {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">Frequently asked questions</h2>
           <div className="space-y-4">
-            {PRINTING_LOCAL_FAQS.map((faq) => (
+            {faqs.map((faq) => (
               <details key={faq.q} className="group bg-white rounded-xl border border-gray-200 p-5 open:shadow-sm">
                 <summary className="font-semibold text-gray-900 cursor-pointer list-none flex justify-between items-center gap-4">
                   {faq.q}

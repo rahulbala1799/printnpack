@@ -18,8 +18,8 @@ export default function Home() {
   const catalogOffer = (name, path) =>
     buildCatalogOffer(name, `${siteUrl}${path}`, { price: startingPriceForUrl(path) });
   const siteName = 'PrintNPack Ireland';
-  const title = 'Print and Pack Ireland | PrintNPack - Custom Packaging & Print Solutions';
-  const description = "Print and Pack (PrintNPack) — Ireland's leading custom packaging and print supplier. Pizza boxes, printed flat handle bags, leaflets, wide format printing, plain packaging wholesale. Low MOQs, fast delivery, 100% Irish owned.";
+  const title = 'PrintNPack Ireland | Print Shop Near Me — Ashbourne, Co. Meath';
+  const description = "Print shop near me in Ashbourne, Co. Meath — PrintNPack prints posters, photo printing, flyers, banners, rubber stamps, stickers and custom packaging. Call +353 89 440 0155 or visit Unit 14 Ashbourne Business Centre. Nationwide delivery across Ireland.";
   const ogImage = `${siteUrl}/images/og-homepage.jpg`;
 
   // ── WebSite schema (enables Google Sitelinks search box) ──────────────────
@@ -127,10 +127,10 @@ export default function Home() {
             catalogOffer('Foamex Ireland', '/foamex-ireland'),
             catalogOffer('Foamex Boards Ireland', '/foamex-boards'),
             catalogOffer('Vinyl Banners Ireland', '/vinyl-banners'),
-            catalogOffer('Roll Up Banners Meath', '/roll-up-banners'),
+            catalogOffer('Pull Up Banners Meath', '/pull-up-banners-meath'),
             catalogOffer('Custom Posters Ireland', '/posters'),
             catalogOffer('Leaflets Ireland', '/services/leaflets'),
-            catalogOffer('Custom Decals Ireland', '/blog/trade-show-banners-decals-ireland'),
+            catalogOffer('Custom Decals Ireland', '/vinyl-stickers'),
             catalogOffer('Leaflets & Flyers', '/services/leaflets'),
             catalogOffer('Vinyl Banners', '/vinyl-banners'),
             catalogOffer('Vinyl Stickers Ireland', '/vinyl-stickers'),
@@ -145,6 +145,22 @@ export default function Home() {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Where is the nearest print shop near me in Meath?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'PrintNPack is your local print shop at Unit 14 Ashbourne Business Centre, Ashbourne, Co. Meath — A84 KV57. We print posters, photo printing, flyers, banners, rubber stamps, stickers and packaging. Call +353 89 440 0155 or visit our printing Ashbourne page for local collection.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Do you offer photo printing in Ashbourne?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. PrintNPack offers photo printing and poster printing in Ashbourne — including A4, A3, A2 and larger sizes for events, gifts, schools and businesses. Visit our printing Ashbourne page or call +353 89 440 0155.',
+        },
+      },
       {
         '@type': 'Question',
         name: 'Is there a printing shop in Ashbourne?',
@@ -232,7 +248,7 @@ export default function Home() {
         {/* ── Primary meta ──────────────────────────────────────────────── */}
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="keywords" content="print and pack, printnpack, packaging ireland, custom packaging dublin, pizza boxes ireland, printed flat handle bags, paper bags wholesale, leaflets ireland, wide format printing ireland, food packaging supplier, retail packaging, eco-friendly packaging ireland, plain packaging wholesale, catering supplies ireland, branded packaging, custom print solutions, takeaway packaging, disposable food containers, custom boxes ireland, printed packaging ireland" />
+        <meta name="keywords" content="print shop near me, printing services near me, photo printing ashbourne, print and pack, printnpack, packaging ireland, custom packaging dublin, pizza boxes ireland, printed flat handle bags, paper bags wholesale, leaflets ireland, wide format printing ireland, food packaging supplier, retail packaging, eco-friendly packaging ireland, plain packaging wholesale, catering supplies ireland, branded packaging, custom print solutions, takeaway packaging, disposable food containers, custom boxes ireland, printed packaging ireland, printing ashbourne" />
         <meta name="author" content="PrintNPack Ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 
@@ -261,7 +277,7 @@ export default function Home() {
 
         {/* ── Geo / local ───────────────────────────────────────────────── */}
         <meta name="geo.region" content="IE" />
-        <meta name="geo.placename" content="Dublin, Ireland" />
+        <meta name="geo.placename" content="Ashbourne, Co. Meath, Ireland" />
         <meta name="geo.position" content="53.3498;-6.2603" />
         <meta name="ICBM" content="53.3498, -6.2603" />
 

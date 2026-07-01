@@ -21,6 +21,7 @@ const PRODUCT_LINKS = [
   { label: 'Banner FAQ', href: '/banner-faq-ireland' },
   { label: 'Printed Flat Handle Bags', href: '/printed-flat-handle-bags-ireland' },
   { label: 'Vinyl Banners', href: '/vinyl-banners' },
+  { label: 'Pull Up Banners Meath', href: '/pull-up-banners-meath' },
   { label: 'Roll Up Banners', href: '/roll-up-banners' },
   { label: 'Rubber Stamps', href: '/rubber-stamps-ireland' },
   { label: 'Stamp FAQ', href: '/rubber-stamp-faq-ireland' },

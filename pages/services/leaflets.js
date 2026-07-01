@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
 import { SITE_URL } from '../../lib/site';
 import { buildProductLd } from '../../lib/schema';
+import RelatedSeoLinks from '../../components/seo/RelatedSeoLinks';
 
 const PAGE_URL = `${SITE_URL}/services/leaflets`;
 
@@ -138,11 +139,27 @@ const LeafletsPage = () => {
                 >
                   Flyer Printing Ashbourne
                 </Link>
+                <Link 
+                  href="/blog/leaflet-printing-ireland-guide"
+                  className="inline-flex items-center justify-center bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold border border-blue-200 hover:bg-blue-50 transition-colors"
+                >
+                  Leaflet Printing Guide
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <RelatedSeoLinks
+        title="Related printing pages"
+        links={[
+          { href: '/printing-ireland', label: 'Printing Ireland', desc: 'Complete print services hub' },
+          { href: '/printing-ashbourne', label: 'Printing Ashbourne', desc: 'Local flyer & leaflet printing' },
+          { href: '/blog/leaflet-printing-ireland-guide', label: 'Leaflet Printing Guide', desc: 'Sizes, paper & design tips' },
+          { href: '/posters', label: 'Poster Printing', desc: 'A4 to A0 posters' },
+        ]}
+      />
     </Layout>
   );
 };

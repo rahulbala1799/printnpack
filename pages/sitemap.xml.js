@@ -46,6 +46,7 @@ const staticPages = [
   { path: '/banner-printing-ashbourne',   priority: '0.88', changefreq: 'monthly' },
   { path: '/banner-printing-dublin',       priority: '0.88', changefreq: 'monthly' },
   { path: '/banner-printing-meath',       priority: '0.88', changefreq: 'monthly' },
+  { path: '/pull-up-banners-meath',      priority: '0.88', changefreq: 'monthly' },
   { path: '/vinyl-banners',   priority: '0.85', changefreq: 'weekly' },
   { path: '/posters',         priority: '0.85', changefreq: 'weekly' },
   { path: '/roll-up-banners', priority: '0.85', changefreq: 'weekly' },

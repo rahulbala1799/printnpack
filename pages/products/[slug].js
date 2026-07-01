@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import React from 'react';
 import Layout from '../../components/layout/Layout';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -16,26 +15,6 @@ import { buildProductLd, parsePriceString } from '../../lib/schema';
  * page (e.g. custom-pizza-boxes-ireland) redirect to that page.
  */
 const ProductDetail = ({ product, relatedProducts }) => {
-  const router = useRouter();
-
-  // Redirect to dedicated page when product has a custom URL (e.g. /custom-pizza-boxes-ireland)
-  useEffect(() => {
-    if (!product) return;
-    if (product.url && product.url !== `/products/${product.id}`) {
-      router.replace(product.url);
-    }
-  }, [product, router]);
-
-  if (router.isFallback) {
-    return (
-      <Layout>
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600" />
-        </div>
-      </Layout>
-    );
-  }
-
   if (!product) {
     return (
       <Layout>
@@ -46,18 +25,6 @@ const ProductDetail = ({ product, relatedProducts }) => {
           <Link href="/products" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700">
             Browse all products
           </Link>
-        </div>
-      </Layout>
-    );
-  }
-
-  // If we're redirecting to dedicated page, show minimal content while redirect happens
-  if (product.url && product.url !== `/products/${product.id}`) {
-    return (
-      <Layout>
-        <Head><title>Redirecting... | Print n Pack</title></Head>
-        <div className="min-h-screen flex items-center justify-center">
-          <p className="text-gray-500">Redirecting to {product.name}…</p>
         </div>
       </Layout>
     );
@@ -192,19 +159,22 @@ const ProductDetail = ({ product, relatedProducts }) => {
 };
 
 export async function getStaticPaths() {
-  const paths = products.map((product) => ({
-    params: { slug: product.id },
-  }));
-  return { paths, fallback: true };
+  const paths = products
+    .filter((product) => !product.url || product.url === `/products/${product.id}`)
+    .map((product) => ({
+      params: { slug: product.id },
+    }));
+  return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
   const product = getProductBySlug(params.slug);
-  const relatedProducts = product ? getRelatedProducts(product.id) : [];
 
   if (!product) {
     return { notFound: true };
   }
+
+  const relatedProducts = getRelatedProducts(product.id);
 
   return {
     props: { product, relatedProducts },

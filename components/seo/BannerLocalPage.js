@@ -128,8 +128,8 @@ export default function BannerLocalPage({ config }) {
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">{config.h1}</h1>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">{config.intro}</p>
               <div className="flex flex-wrap gap-3">
-                <Link href="/quote?product=Vinyl+Banners" className="inline-flex items-center bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors">
-                  Get a Free Quote
+                <Link href={config.quoteHref || '/quote?product=Vinyl+Banners'} className="inline-flex items-center bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors">
+                  {config.quoteLabel || 'Get a Free Quote'}
                 </Link>
                 <a href="tel:+353894400155" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
                   Call +353 89 440 0155
@@ -209,7 +209,7 @@ export default function BannerLocalPage({ config }) {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Ready to order your banner?</h2>
           <p className="text-blue-100 mb-6">Tell us your size, deadline, and indoor/outdoor use — we will help with artwork and material choice.</p>
           <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/quote?product=Vinyl+Banners" className="inline-flex items-center bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors">Get a Free Quote</Link>
+            <Link href={config.quoteHref || '/quote?product=Vinyl+Banners'} className="inline-flex items-center bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors">{config.quoteLabel || 'Get a Free Quote'}</Link>
             <Link href="/banner-faq-ireland" className="inline-flex items-center bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl border border-blue-400 hover:bg-blue-400 transition-colors">Banner FAQ</Link>
           </div>
         </div>

@@ -312,6 +312,7 @@ const RollUpBannersPage = () => {
           { href: '/banners-ireland', label: 'Banners Ireland', desc: 'Complete banner printing hub' },
           { href: '/banner-faq-ireland', label: 'Banner FAQ', desc: '40+ instant answers' },
           { href: '/vinyl-banners', label: 'PVC Banners', desc: 'Outdoor advertising banners' },
+          { href: '/pull-up-banners-meath', label: 'Pull Up Banners Meath', desc: 'Roll-up displays across County Meath' },
           { href: '/banner-printing-meath', label: 'Banner Printing Meath', desc: 'Based in Ashbourne' },
         ]}
       />
