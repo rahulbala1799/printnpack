@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import Link from 'next/link';
 import {
   FiPhone,
   FiRefreshCw,
@@ -6,6 +7,7 @@ import {
   FiSmartphone,
   FiMapPin,
   FiClock,
+  FiEye,
 } from 'react-icons/fi';
 
 const PERIODS = [
@@ -158,6 +160,13 @@ export default function PhoneClickDashboard() {
             <FiRefreshCw size={14} className={loading ? 'animate-spin' : ''} />
             Refresh
           </button>
+          <Link
+            href="/admin/page-views"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium border border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100"
+          >
+            <FiEye size={14} />
+            Page views
+          </Link>
         </div>
       </div>
 
