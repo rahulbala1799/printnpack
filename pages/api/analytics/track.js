@@ -177,9 +177,13 @@ export default async function handler(req, res) {
           );
         }
       }
-
-      await client.query(`SELECT analytics.update_daily_summary(CURRENT_DATE)`);
     });
+
+    try {
+      await query(`SELECT analytics.update_daily_summary(CURRENT_DATE)`);
+    } catch (summaryError) {
+      console.error('Daily summary update failed (page visit still recorded):', summaryError);
+    }
 
     return res.status(200).json({
       success: true,
