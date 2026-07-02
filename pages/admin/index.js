@@ -6,7 +6,7 @@ import AdminLayout from '../../components/admin/AdminLayout';
 import products from '../../data/products';
 import {
   FiPackage, FiGrid, FiMail, FiArrowRight, FiUsers, FiUserPlus,
-  FiTrendingUp, FiAlertCircle, FiCheckCircle,
+  FiTrendingUp, FiAlertCircle, FiCheckCircle, FiPhone,
 } from 'react-icons/fi';
 
 const categories = [...new Set(products.map((p) => p.category))];
@@ -46,6 +46,13 @@ const quickLinks = [
     label: 'SEO Automation',
     desc: 'Search Console insights & actions',
     color: 'bg-indigo-500',
+  },
+  {
+    href: '/admin/phone-clicks',
+    icon: FiPhone,
+    label: 'Phone Clicks',
+    desc: 'Track call-link taps across the site',
+    color: 'bg-emerald-500',
   },
   {
     href: '/admin/email-config',

@@ -64,6 +64,23 @@ CREATE TABLE IF NOT EXISTS analytics.performance_metrics (
     country VARCHAR(2)
 );
 
+-- Phone click events (tel: link taps)
+CREATE TABLE IF NOT EXISTS analytics.phone_click_events (
+    id SERIAL PRIMARY KEY,
+    page_url VARCHAR(500) NOT NULL,
+    page_path VARCHAR(200),
+    page_title VARCHAR(200),
+    phone_href VARCHAR(80) NOT NULL,
+    link_text VARCHAR(300),
+    location VARCHAR(100),
+    session_id VARCHAR(64),
+    device_type VARCHAR(20),
+    referrer VARCHAR(500),
+    user_agent TEXT,
+    ip_address_hash VARCHAR(64),
+    clicked_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 -- Create indexes for better performance
 CREATE INDEX IF NOT EXISTS idx_page_visits_timestamp ON analytics.page_visits(visit_timestamp);
 CREATE INDEX IF NOT EXISTS idx_page_visits_url ON analytics.page_visits(page_url);
@@ -71,6 +88,9 @@ CREATE INDEX IF NOT EXISTS idx_page_visits_session ON analytics.page_visits(sess
 CREATE INDEX IF NOT EXISTS idx_user_sessions_session ON analytics.user_sessions(session_id);
 CREATE INDEX IF NOT EXISTS idx_user_sessions_timestamp ON analytics.user_sessions(session_start);
 CREATE INDEX IF NOT EXISTS idx_daily_summaries_date ON analytics.daily_summaries(report_date);
+CREATE INDEX IF NOT EXISTS idx_phone_click_events_clicked_at ON analytics.phone_click_events(clicked_at DESC);
+CREATE INDEX IF NOT EXISTS idx_phone_click_events_page_path ON analytics.phone_click_events(page_path);
+CREATE INDEX IF NOT EXISTS idx_phone_click_events_location ON analytics.phone_click_events(location);
 
 -- Create function to anonymize IP addresses
 CREATE OR REPLACE FUNCTION analytics.hash_ip(ip_address INET)

@@ -33,6 +33,9 @@
       
       // Set up beforeunload tracking
       setupBeforeUnloadTracking();
+
+      // Track all tel: link clicks site-wide
+      trackPhoneClicks();
       
       isTracking = true;
       console.log('📊 Analytics tracking initialized');
@@ -160,7 +163,7 @@
   }
   
   // Track custom events
-  function trackEvent(eventName, eventData = {}) {
+  function trackEvent(eventName, eventData = {}, options = {}) {
     const eventTrackingData = {
       pageUrl: window.location.href,
       pageTitle: document.title || 'Unknown Page',
@@ -174,8 +177,39 @@
       eventName: eventName,
       eventData: eventData
     };
-    
+
+    if (options.useBeacon && navigator.sendBeacon) {
+      const blob = new Blob([JSON.stringify(eventTrackingData)], { type: 'application/json' });
+      navigator.sendBeacon(ANALYTICS_ENDPOINT, blob);
+      return;
+    }
+
     sendAnalyticsData(eventTrackingData);
+  }
+
+  function inferPhoneLinkLocation(link) {
+    if (link.dataset.phoneLocation) return link.dataset.phoneLocation;
+    if (link.closest('header')) return 'header';
+    if (link.closest('footer')) return 'footer';
+    if (link.closest('nav')) return 'navigation';
+    const section = link.closest('section[id]');
+    if (section?.id) return section.id;
+    if (link.closest('main')) return 'page-content';
+    return 'other';
+  }
+
+  function trackPhoneClicks() {
+    document.addEventListener('click', (event) => {
+      const link = event.target.closest('a[href^="tel:"]');
+      if (!link) return;
+
+      trackEvent('phone_click', {
+        phoneHref: link.getAttribute('href') || 'tel:unknown',
+        linkText: (link.textContent || '').trim().slice(0, 300) || 'unknown',
+        location: inferPhoneLinkLocation(link),
+        pagePath: window.location.pathname,
+      }, { useBeacon: true });
+    }, true);
   }
   
   // Track form submissions
@@ -249,7 +283,8 @@
     trackFormSubmission: trackFormSubmission,
     trackButtonClicks: trackButtonClicks,
     trackExternalLinks: trackExternalLinks,
-    trackScrollDepth: trackScrollDepth
+    trackScrollDepth: trackScrollDepth,
+    trackPhoneClicks: trackPhoneClicks,
   };
   
   // Auto-initialize when DOM is ready
