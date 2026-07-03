@@ -35,6 +35,7 @@ const PRODUCT_LINKS = [
   { label: 'Vinyl Stickers', href: '/vinyl-stickers' },
   { label: 'Leaflets Ireland', href: '/services/leaflets' },
   { label: 'Plain Packaging', href: '/plain-packaging' },
+  { label: 'Biobox Containers', href: '/biobox-containers-ireland' },
   { label: 'Correx Boards', href: '/correx-boards' },
 ];
 

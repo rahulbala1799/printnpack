@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { PLAIN_PRODUCTS, getProductById, getRelatedProducts } from '../../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../../components/PackagingIcon';
 import { buildProductLd } from '../../lib/schema';
+import { getBioboxProductSeo } from '../../data/biobox-cluster';
 
 const PLAIN_QUOTE_KEY = 'printnpack_plain_quote';
 
@@ -86,16 +87,18 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
 
   const isPizzaBox = product.category === 'Pizza Boxes';
   const isHeatSealer = product.id === '220021';
+  const isBiobox = product.category === 'Biobox';
+  const bioboxSeo = isBiobox ? getBioboxProductSeo(product) : null;
   const pageTitle = isPizzaBox
     ? `${product.name} | Pizza Boxes Ireland | PrintNPack`
     : isHeatSealer
       ? 'Sealer Bar Ireland | 300mm Heat Sealer Bar — Catering Equipment'
-      : `${product.name} — Plain Packaging | PrintNPack Ireland`;
+      : bioboxSeo?.pageTitle || `${product.name} — Plain Packaging | PrintNPack Ireland`;
   const metaDescription = isPizzaBox
     ? `${product.name} — wholesale kraft corrugated pizza box Ireland. Tiered case pricing, fast delivery to Dublin, Cork & nationwide. Order plain pizza boxes online.`
     : isHeatSealer
       ? 'Sealer bar Ireland — 300mm single bar heat sealer for catering and food packaging. Seals film bags and pouches. Wholesale catering equipment with tiered pricing and nationwide delivery.'
-      : `${product.description?.slice(0, 155)} Fast delivery across Ireland.`;
+      : bioboxSeo?.metaDescription || `${product.description?.slice(0, 155)} Fast delivery across Ireland.`;
   const canonicalUrl = `https://www.printnpack.ie/plain-packaging/${product.id}`;
   const productLd = buildPlainProductLd(product, canonicalUrl);
 
@@ -140,6 +143,12 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
                 <li><Link href="/pizza-boxes-ireland" className="hover:text-stone-600 transition-colors">Pizza Boxes Ireland</Link></li>
                 <li>/</li>
                 <li><Link href="/plain-packaging?category=Pizza+Boxes" className="hover:text-stone-600 transition-colors">Wholesale</Link></li>
+              </>
+            ) : isBiobox ? (
+              <>
+                <li><Link href="/biobox-containers-ireland" className="hover:text-stone-600 transition-colors">Biobox Containers Ireland</Link></li>
+                <li>/</li>
+                <li><Link href="/plain-packaging?category=Biobox" className="hover:text-stone-600 transition-colors">Wholesale</Link></li>
               </>
             ) : (
               <li><Link href="/plain-packaging" className="hover:text-stone-600 transition-colors">Plain Packaging</Link></li>
@@ -199,6 +208,15 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
                       Custom printing from 500 units
                     </Link>
                     .
+                  </p>
+                )}
+                {isBiobox && (
+                  <p className="text-sm text-stone-600 mt-3 leading-relaxed">
+                    Wholesale biobox takeaway container — browse all sizes on our{' '}
+                    <Link href="/biobox-containers-ireland" className="text-lime-700 hover:underline font-medium">
+                      biobox containers Ireland
+                    </Link>{' '}
+                    hub. Order by the case with tiered B2B pricing and nationwide delivery.
                   </p>
                 )}
               </div>

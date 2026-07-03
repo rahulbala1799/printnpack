@@ -828,21 +828,42 @@ export default function PlainPackagingPage() {
 
   const isPizzaCategory = activeCategory === 'Pizza Boxes';
   const isCateringEquipment = activeCategory === 'Catering Equipment';
+  const isBioboxCategory = activeCategory === 'Biobox';
   const pageTitle = isPizzaCategory
     ? 'Pizza Boxes Wholesale Ireland | Plain Kraft Corrugated | PrintNPack'
     : isCateringEquipment
       ? 'Catering Equipment Ireland | Heat Sealer Bar & Wholesale Supplies | PrintNPack'
-      : 'Plain Packaging — Wholesale Catering Supplies | PrintNPack Ireland';
+      : isBioboxCategory
+        ? 'Biobox Containers Wholesale Ireland | Kraft Takeaway Food Boxes | PrintNPack'
+        : 'Plain Packaging — Wholesale Catering Supplies | PrintNPack Ireland';
   const pageDescription = isPizzaCategory
     ? 'Wholesale plain pizza boxes Ireland — kraft corrugated boxes in 7", 9", 10", 12", 14" & 16". Tiered case pricing, fast delivery nationwide. Order online today.'
     : isCateringEquipment
       ? 'Wholesale catering equipment Ireland — sealer bar heat sealers, chafing fuel, and kitchen supplies. Tiered case pricing with fast delivery across Dublin and nationwide.'
-      : '736 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland.';
+      : isBioboxCategory
+        ? 'Wholesale biobox containers Ireland — kraft and white leak-proof takeaway food boxes in No.1–No.12 sizes. Case packs, tiered B2B pricing, delivery nationwide.'
+        : '736 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland.';
   const canonicalPath = isPizzaCategory
     ? 'https://www.printnpack.ie/plain-packaging?category=Pizza+Boxes'
     : isCateringEquipment
       ? 'https://www.printnpack.ie/plain-packaging?category=Catering+Equipment'
-      : 'https://www.printnpack.ie/plain-packaging';
+      : isBioboxCategory
+        ? 'https://www.printnpack.ie/plain-packaging?category=Biobox'
+        : 'https://www.printnpack.ie/plain-packaging';
+  const pageHeading = isBioboxCategory
+    ? 'Biobox Containers Wholesale'
+    : isPizzaCategory
+      ? 'Pizza Boxes Wholesale'
+      : isCateringEquipment
+        ? 'Catering Equipment Wholesale'
+        : 'Plain Packaging';
+  const pageSubheading = isBioboxCategory
+    ? '9 kraft & white biobox SKUs · case packs · tiered B2B pricing'
+    : isPizzaCategory
+      ? 'Kraft corrugated pizza boxes · case packs · tiered pricing'
+      : isCateringEquipment
+        ? 'Heat sealers, chafing fuel & kitchen supplies · wholesale'
+        : '736 products · 55 categories · 4-tier volume pricing';
 
   return (
     <Layout>
@@ -869,12 +890,29 @@ export default function PlainPackagingPage() {
           <nav className="flex items-center gap-2 text-[10px] sm:text-xs text-stone-400 mb-2 sm:mb-4">
             <Link href="/" className="hover:text-stone-700 transition-colors">Home</Link>
             <span>/</span>
-            <span className="text-stone-700 font-medium">Plain Packaging</span>
+            {isBioboxCategory ? (
+              <>
+                <Link href="/biobox-containers-ireland" className="hover:text-stone-700 transition-colors">Biobox Containers</Link>
+                <span>/</span>
+                <span className="text-stone-700 font-medium">Wholesale</span>
+              </>
+            ) : (
+              <span className="text-stone-700 font-medium">Plain Packaging</span>
+            )}
           </nav>
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 sm:gap-3">
             <div>
-              <h1 className="text-xl sm:text-2xl font-bold text-stone-900">Plain Packaging</h1>
-              <p className="text-xs sm:text-sm text-stone-500 mt-0.5 sm:mt-1">736 products · 55 categories · 4-tier volume pricing</p>
+              <h1 className="text-xl sm:text-2xl font-bold text-stone-900">{pageHeading}</h1>
+              <p className="text-xs sm:text-sm text-stone-500 mt-0.5 sm:mt-1">{pageSubheading}</p>
+              {isBioboxCategory && (
+                <p className="text-xs sm:text-sm text-stone-600 mt-2 max-w-2xl leading-relaxed">
+                  Wholesale kraft and white biobox takeaway food boxes for Irish restaurants, delis, and caterers.
+                  {' '}
+                  <Link href="/biobox-containers-ireland" className="text-lime-700 font-medium hover:underline">
+                    Read our biobox size guide →
+                  </Link>
+                </p>
+              )}
             </div>
             <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
               <span className="text-[10px] sm:text-xs bg-amber-50 border border-amber-200 text-amber-700 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg font-semibold">B2B Wholesale</span>

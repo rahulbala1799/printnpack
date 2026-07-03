@@ -21,6 +21,7 @@ const staticPages = [
   { path: '',             priority: '1.0', changefreq: 'weekly'  },
   { path: '/products',    priority: '0.9', changefreq: 'weekly'  },
   { path: '/plain-packaging', priority: '0.9', changefreq: 'weekly' },
+  { path: '/biobox-containers-ireland', priority: '0.88', changefreq: 'weekly' },
   { path: '/about',       priority: '0.7', changefreq: 'monthly' },
   { path: '/contact',     priority: '0.7', changefreq: 'monthly' },
   { path: '/quote',       priority: '0.8', changefreq: 'monthly' },
