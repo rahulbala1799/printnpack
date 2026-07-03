@@ -20,7 +20,9 @@ async function handler(req, res) {
   } catch (error) {
     console.error('Page view stats error:', error);
 
-    const missingTable = error.message?.includes('page_visits');
+    const missingTable =
+      error.code === '42P01' ||
+      /relation "analytics\.page_visits" does not exist/i.test(error.message || '');
     return res.status(missingTable ? 503 : 500).json({
       error: missingTable
         ? 'Page view tracking tables not set up. Run analytics DB setup or migrations.'
@@ -44,7 +46,6 @@ async function handler(req, res) {
       byReferrerDomain: [],
       byProductSource: [],
       byPage: [],
-      byReferrer: [],
       byDevice: [],
       byCountry: [],
       recentViews: [],
