@@ -6,6 +6,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PLAIN_PRODUCTS, CATEGORIES, getProductById } from '../data/plain-products';
+import { REFUSE_SACK_CATEGORY_SEO } from '../data/refuse-sacks-seo';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 
 // ─── Quote persistence (shared with detail page) ───────────────────────────────
@@ -829,41 +830,52 @@ export default function PlainPackagingPage() {
   const isPizzaCategory = activeCategory === 'Pizza Boxes';
   const isCateringEquipment = activeCategory === 'Catering Equipment';
   const isBioboxCategory = activeCategory === 'Biobox';
+  const isRefuseSackCategory = activeCategory === 'Refuse Sack';
   const pageTitle = isPizzaCategory
     ? 'Pizza Boxes Wholesale Ireland | Plain Kraft Corrugated | PrintNPack'
     : isCateringEquipment
       ? 'Catering Equipment Ireland | Heat Sealer Bar & Wholesale Supplies | PrintNPack'
       : isBioboxCategory
         ? 'Biobox Containers Wholesale Ireland | Kraft Takeaway Food Boxes | PrintNPack'
-        : 'Plain Packaging — Wholesale Catering Supplies | PrintNPack Ireland';
+        : isRefuseSackCategory
+          ? REFUSE_SACK_CATEGORY_SEO.pageTitle
+          : 'Plain Packaging — Wholesale Catering Supplies | PrintNPack Ireland';
   const pageDescription = isPizzaCategory
     ? 'Wholesale plain pizza boxes Ireland — kraft corrugated boxes in 7", 9", 10", 12", 14" & 16". Tiered case pricing, fast delivery nationwide. Order online today.'
     : isCateringEquipment
       ? 'Wholesale catering equipment Ireland — sealer bar heat sealers, chafing fuel, and kitchen supplies. Tiered case pricing with fast delivery across Dublin and nationwide.'
       : isBioboxCategory
         ? 'Wholesale biobox containers Ireland — kraft and white leak-proof takeaway food boxes in No.1–No.12 sizes. Case packs, tiered B2B pricing, delivery nationwide.'
-        : '736 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland.';
+        : isRefuseSackCategory
+          ? REFUSE_SACK_CATEGORY_SEO.pageDescription
+          : '736 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland.';
   const canonicalPath = isPizzaCategory
     ? 'https://www.printnpack.ie/plain-packaging?category=Pizza+Boxes'
     : isCateringEquipment
       ? 'https://www.printnpack.ie/plain-packaging?category=Catering+Equipment'
       : isBioboxCategory
         ? 'https://www.printnpack.ie/plain-packaging?category=Biobox'
-        : 'https://www.printnpack.ie/plain-packaging';
+        : isRefuseSackCategory
+          ? REFUSE_SACK_CATEGORY_SEO.canonicalPath
+          : 'https://www.printnpack.ie/plain-packaging';
   const pageHeading = isBioboxCategory
     ? 'Biobox Containers Wholesale'
     : isPizzaCategory
       ? 'Pizza Boxes Wholesale'
       : isCateringEquipment
         ? 'Catering Equipment Wholesale'
-        : 'Plain Packaging';
+        : isRefuseSackCategory
+          ? 'Refuse Sacks & Bin Bags Wholesale'
+          : 'Plain Packaging';
   const pageSubheading = isBioboxCategory
     ? '9 kraft & white biobox SKUs · case packs · tiered B2B pricing'
     : isPizzaCategory
       ? 'Kraft corrugated pizza boxes · case packs · tiered pricing'
       : isCateringEquipment
         ? 'Heat sealers, chafing fuel & kitchen supplies · wholesale'
-        : '736 products · 55 categories · 4-tier volume pricing';
+        : isRefuseSackCategory
+          ? '21 refuse sack SKUs · black, clear & compactor bags · tiered pricing'
+          : '736 products · 55 categories · 4-tier volume pricing';
 
   return (
     <Layout>
@@ -896,6 +908,12 @@ export default function PlainPackagingPage() {
                 <span>/</span>
                 <span className="text-stone-700 font-medium">Wholesale</span>
               </>
+            ) : isRefuseSackCategory ? (
+              <>
+                <Link href="/refuse-sacks-ireland" className="hover:text-stone-700 transition-colors">Refuse Sacks</Link>
+                <span>/</span>
+                <span className="text-stone-700 font-medium">Wholesale</span>
+              </>
             ) : (
               <span className="text-stone-700 font-medium">Plain Packaging</span>
             )}
@@ -910,6 +928,15 @@ export default function PlainPackagingPage() {
                   {' '}
                   <Link href="/biobox-containers-ireland" className="text-lime-700 font-medium hover:underline">
                     Read our biobox size guide →
+                  </Link>
+                </p>
+              )}
+              {isRefuseSackCategory && (
+                <p className="text-xs sm:text-sm text-stone-600 mt-2 max-w-2xl leading-relaxed">
+                  Wholesale black, clear and Greensack refuse sacks, compactor bags and bin liners for Irish businesses.
+                  {' '}
+                  <Link href="/refuse-sacks-ireland" className="text-emerald-700 font-medium hover:underline">
+                    Browse refuse sacks Ireland →
                   </Link>
                 </p>
               )}

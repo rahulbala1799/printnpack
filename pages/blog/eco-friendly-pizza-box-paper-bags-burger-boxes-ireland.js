@@ -153,7 +153,7 @@ const products = [
     alt: 'Recyclable paper bags Ireland takeaway – custom branded paper bags with logo',
     name: 'Twisted Handle Paper Bags',
     desc: 'Kraft or white, recyclable, strong for hot food. Eco friendly paper bags for takeaway in Ireland from 500 units.',
-    href: '/products/twisted-handle-paper-bags',
+    href: '/twisted-handle-paper-bags-ireland',
     badge: 'Recyclable',
     badgeColour: 'blue',
   },

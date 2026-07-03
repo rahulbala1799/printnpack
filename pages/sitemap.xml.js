@@ -1,5 +1,6 @@
 import products from '../data/products';
 import { TIERED_PLAIN_PRODUCTS } from '../data/plain-products-tiered';
+import { REFUSE_SACK_PRODUCT_IDS } from '../data/refuse-sacks-seo';
 import { SITE_URL } from '../lib/site';
 
 // ── Pizza box cluster (page-1 priority) ─────────────────────────────────────
@@ -8,6 +9,8 @@ const PIZZA_PLAIN_PRODUCT_IDS = new Set(
     .filter((p) => p.category === 'Pizza Boxes')
     .map((p) => p.id)
 );
+
+const REFUSE_SACK_PLAIN_PRODUCT_IDS = new Set(REFUSE_SACK_PRODUCT_IDS);
 
 // Products with dedicated pages — exclude duplicate /products/{id} URLs
 const DEDICATED_PRODUCT_IDS = new Set(
@@ -31,7 +34,13 @@ const staticPages = [
   { path: '/plain-pizza-boxes-ireland',    priority: '0.88', changefreq: 'weekly' },
   { path: '/pizza-boxes-wholesale-ireland', priority: '0.88', changefreq: 'weekly' },
   { path: '/pizza-box-faq-ireland',        priority: '0.88', changefreq: 'monthly' },
+  { path: '/refuse-sacks-ireland',         priority: '0.95', changefreq: 'weekly' },
   { path: '/printed-flat-handle-bags-ireland', priority: '0.9', changefreq: 'weekly' },
+  // Paper bag cluster
+  { path: '/paper-bags-ireland',              priority: '0.95', changefreq: 'weekly' },
+  { path: '/plain-paper-bags-ireland',       priority: '0.88', changefreq: 'weekly' },
+  { path: '/wholesale-paper-bags-ireland',   priority: '0.88', changefreq: 'weekly' },
+  { path: '/twisted-handle-paper-bags-ireland', priority: '0.9', changefreq: 'weekly' },
   { path: '/eco-bagasse-burger-boxes',    priority: '0.85', changefreq: 'weekly' },
   // Burger box cluster
   { path: '/burger-boxes-ireland',           priority: '0.9',  changefreq: 'weekly' },
@@ -92,6 +101,7 @@ const staticPages = [
   { path: '/blog/eco-packaging-for-takeaways-ireland',   priority: '0.8', changefreq: 'monthly' },
   { path: '/blog/leaflet-printing-ireland-guide',        priority: '0.8', changefreq: 'monthly' },
   { path: '/blog/paper-bags-with-logo-ireland',          priority: '0.85', changefreq: 'monthly' },
+  { path: '/blog/printed-paper-bag-cost-ireland',       priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/plain-packaging-wholesale-ireland',         priority: '0.8', changefreq: 'monthly' },
   { path: '/blog/packaging-prices-ireland-covid-shipping',    priority: '0.8', changefreq: 'monthly' },
   { path: '/blog/irish-restaurant-industry-delivery-2025',   priority: '0.8', changefreq: 'monthly' },
@@ -137,7 +147,7 @@ function generateSitemap(productIds, plainPackagingIds) {
       urlEntry(`${SITE_URL}/plain-packaging/${id}`, {
         lastmod: today,
         changefreq: 'monthly',
-        priority: PIZZA_PLAIN_PRODUCT_IDS.has(id) ? '0.8' : '0.7',
+        priority: PIZZA_PLAIN_PRODUCT_IDS.has(id) || REFUSE_SACK_PLAIN_PRODUCT_IDS.has(id) ? '0.8' : '0.7',
       })
     )
     .join('');

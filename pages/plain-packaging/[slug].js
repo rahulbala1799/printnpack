@@ -6,9 +6,16 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PLAIN_PRODUCTS, getProductById, getRelatedProducts } from '../../data/plain-products';
+import { REFUSE_SACK_PRODUCT_IDS } from '../../data/refuse-sacks-seo';
 import PackagingIcon, { isPlaceholderImage } from '../../components/PackagingIcon';
 import { buildProductLd } from '../../lib/schema';
 import { getBioboxProductSeo } from '../../data/biobox-cluster';
+import {
+  REFUSE_SACK_HUB_PATH,
+  getRefuseSackDisplayName,
+  getRefuseSackProductSeo,
+  isRefuseSackProduct,
+} from '../../data/refuse-sacks-seo';
 
 const PLAIN_QUOTE_KEY = 'printnpack_plain_quote';
 
@@ -51,9 +58,13 @@ function buildPlainProductLd(product, canonicalUrl) {
       ? `https://www.printnpack.ie${product.imageSrc}`
       : undefined;
 
+  const seoDescription = isRefuseSackProduct(product)
+    ? getRefuseSackProductSeo(product).pageDescription
+    : product.description;
+
   return buildProductLd({
-    name: product.name,
-    description: product.description,
+    name: isRefuseSackProduct(product) ? getRefuseSackDisplayName(product) : product.name,
+    description: seoDescription,
     image,
     url: canonicalUrl,
     price: basePrice,
@@ -88,17 +99,25 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
   const isPizzaBox = product.category === 'Pizza Boxes';
   const isHeatSealer = product.id === '220021';
   const isBiobox = product.category === 'Biobox';
+  const isRefuseSack = isRefuseSackProduct(product);
   const bioboxSeo = isBiobox ? getBioboxProductSeo(product) : null;
+  const refuseSackSeo = isRefuseSack ? getRefuseSackProductSeo(product) : null;
+  const displayName = isRefuseSack ? getRefuseSackDisplayName(product) : product.name;
   const pageTitle = isPizzaBox
     ? `${product.name} | Pizza Boxes Ireland | PrintNPack`
     : isHeatSealer
       ? 'Sealer Bar Ireland | 300mm Heat Sealer Bar — Catering Equipment'
-      : bioboxSeo?.pageTitle || `${product.name} — Plain Packaging | PrintNPack Ireland`;
+      : isRefuseSack
+        ? refuseSackSeo.pageTitle
+        : bioboxSeo?.pageTitle || `${product.name} — Plain Packaging | PrintNPack Ireland`;
   const metaDescription = isPizzaBox
     ? `${product.name} — wholesale kraft corrugated pizza box Ireland. Tiered case pricing, fast delivery to Dublin, Cork & nationwide. Order plain pizza boxes online.`
     : isHeatSealer
       ? 'Sealer bar Ireland — 300mm single bar heat sealer for catering and food packaging. Seals film bags and pouches. Wholesale catering equipment with tiered pricing and nationwide delivery.'
-      : bioboxSeo?.metaDescription || `${product.description?.slice(0, 155)} Fast delivery across Ireland.`;
+      : isRefuseSack
+        ? refuseSackSeo.metaDescription
+        : bioboxSeo?.metaDescription || `${product.description?.slice(0, 155)} Fast delivery across Ireland.`;
+  const visibleDescription = isRefuseSack ? refuseSackSeo.pageDescription : product.description;
   const canonicalUrl = `https://www.printnpack.ie/plain-packaging/${product.id}`;
   const productLd = buildPlainProductLd(product, canonicalUrl);
 
@@ -114,6 +133,9 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
         <title>{pageTitle}</title>
         <meta name="description" content={metaDescription} />
         <meta name="robots" content="index, follow" />
+        {isRefuseSack && (
+          <meta name="keywords" content={refuseSackSeo.keywords} />
+        )}
         <link rel="canonical" href={canonicalUrl} />
         <meta property="og:type" content="product" />
         <meta property="og:title" content={pageTitle} />
@@ -150,11 +172,18 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
                 <li>/</li>
                 <li><Link href="/plain-packaging?category=Biobox" className="hover:text-stone-600 transition-colors">Wholesale</Link></li>
               </>
+            ) : isRefuseSack ? (
+              <>
+                <li><Link href={REFUSE_SACK_HUB_PATH} className="hover:text-stone-600 transition-colors">Refuse Sacks Ireland</Link></li>
+                <li>/</li>
+                <li><Link href="/plain-packaging?category=Refuse+Sack" className="hover:text-stone-600 transition-colors">Wholesale</Link></li>
+              </>
+              </>
             ) : (
               <li><Link href="/plain-packaging" className="hover:text-stone-600 transition-colors">Plain Packaging</Link></li>
             )}
             <li>/</li>
-            <li className="text-stone-700 font-medium truncate max-w-[200px]">{product.name}</li>
+            <li className="text-stone-700 font-medium truncate max-w-[200px]">{displayName}</li>
           </ol>
         </div>
       </nav>
@@ -192,7 +221,7 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
               <div>
                 <p className="text-xs text-stone-400 mb-1">Code: {product.code}</p>
                 <h1 className="text-2xl sm:text-3xl font-bold text-stone-900 leading-tight">
-                  {product.name}
+                  {displayName}
                 </h1>
                 {product.qtyPerCase && (
                   <p className="text-sm text-stone-500 mt-1">{product.qtyPerCase} per case</p>
@@ -219,6 +248,19 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
                     hub. Order by the case with tiered B2B pricing and nationwide delivery.
                   </p>
                 )}
+                {isRefuseSack && (
+                  <p className="text-sm text-stone-600 mt-3 leading-relaxed">
+                    Wholesale refuse sack — part of our{' '}
+                    <Link href={REFUSE_SACK_HUB_PATH} className="text-emerald-700 hover:underline font-medium">
+                      refuse sacks Ireland
+                    </Link>{' '}
+                    range. Browse all{' '}
+                    <Link href="/plain-packaging?category=Refuse+Sack" className="text-emerald-700 hover:underline font-medium">
+                      refuse sacks &amp; bin bags
+                    </Link>
+                    .
+                  </p>
+                )}
               </div>
 
               {/* Stats */}
@@ -243,8 +285,8 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
               </div>
 
               {/* Description */}
-              {product.description && (
-                <p className="text-stone-600 text-sm leading-relaxed">{product.description}</p>
+              {visibleDescription && (
+                <p className="text-stone-600 text-sm leading-relaxed">{visibleDescription}</p>
               )}
 
               {/* Case tier pricing — selecting a tier sets numCases so tier stays in sync */}
@@ -408,8 +450,12 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
 }
 
 export async function getStaticPaths() {
-  // Pre-build first 100 most-visited products; the rest build on-demand
-  const paths = PLAIN_PRODUCTS.slice(0, 100).map(p => ({ params: { slug: p.id } }));
+  // Pre-build first 100 most-visited products plus priority SEO categories
+  const priorityIds = new Set([
+    ...PLAIN_PRODUCTS.slice(0, 100).map((p) => p.id),
+    ...REFUSE_SACK_PRODUCT_IDS,
+  ]);
+  const paths = [...priorityIds].map((id) => ({ params: { slug: id } }));
   return { paths, fallback: 'blocking' };
 }
 

@@ -193,6 +193,17 @@ const posts = [
     category: 'Packaging Guide',
   },
   {
+    slug: 'printed-paper-bag-cost-ireland',
+    title: 'How Much Do Printed Paper Bags Cost in Ireland?',
+    excerpt:
+      'Printed paper bag pricing explained — flat handle from €0.18/unit, twisted handle from €0.35/unit, MOQ 500, and when plain case bags are cheaper.',
+    date: '2026-06-23',
+    readTime: '5 min read',
+    image: '/images/products/flat-handle-bags/1.png',
+    imageAlt: 'Printed paper bag cost Ireland – pricing guide',
+    category: 'Pricing Guide',
+  },
+  {
     slug: 'plain-packaging-wholesale-ireland',
     title: 'Plain Packaging Wholesale Ireland: How to Buy Catering Supplies in Bulk',
     excerpt:

@@ -86,6 +86,7 @@ const products = [
   {
     id: 'twisted-handle-paper-bags',
     name: 'Twisted Handle Paper Bags',
+    url: '/twisted-handle-paper-bags-ireland',
     category: 'Retail Packaging',
     description: 'Premium twisted handle paper bags with elegant design and exceptional durability, perfect for upscale retail packaging and branded shopping experiences. Available in three sizes with cost-effective digital printing.',
     features: [

@@ -140,6 +140,24 @@ export default function PaperBagsWithLogoIreland() {
           />
         </div>
 
+        <div className="rounded-xl bg-emerald-50 border border-emerald-100 p-6 mb-8 not-prose">
+          <p className="text-slate-700 text-sm leading-relaxed mb-4">
+            <strong>Educational guide</strong> — for ordering, start at our{' '}
+            <Link href="/paper-bags-ireland" className="text-emerald-700 hover:underline font-semibold">
+              paper bags Ireland hub
+            </Link>
+            {' '}or go straight to{' '}
+            <Link href="/printed-flat-handle-bags-ireland" className="text-emerald-700 hover:underline font-semibold">
+              printed flat handle bags
+            </Link>
+            {' '}and{' '}
+            <Link href="/twisted-handle-paper-bags-ireland" className="text-emerald-700 hover:underline font-semibold">
+              twisted handle bags
+            </Link>
+            .
+          </p>
+        </div>
+
         <div className="prose prose-slate max-w-none">
           <p className="text-lg text-slate-700 leading-relaxed mb-6">
             Every time a customer walks out of your shop, café, or takeaway carrying your bag, they
@@ -386,28 +404,28 @@ export default function PaperBagsWithLogoIreland() {
 
         {/* CTA */}
         <div className="mt-14 bg-slate-900 rounded-2xl p-8 text-center text-white">
-          <h2 className="text-2xl font-bold mb-3">Order custom paper bags for your business</h2>
+          <h2 className="text-2xl font-bold mb-3">Ready to order paper bags?</h2>
           <p className="text-slate-400 mb-6">
-            Twisted handle, flat handle, SOS grab bags — printed with your logo and delivered across Ireland.
+            Start at our paper bags hub for printed, plain and wholesale options — or jump to your bag style below.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              href="/printed-flat-handle-bags-ireland"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+              href="/paper-bags-ireland"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
             >
-              Printed Flat Handle Bags →
+              Paper Bags Ireland →
             </Link>
             <Link
-              href="/products/twisted-handle-paper-bags"
+              href="/printed-flat-handle-bags-ireland"
+              className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+            >
+              Flat Handle Bags
+            </Link>
+            <Link
+              href="/twisted-handle-paper-bags-ireland"
               className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Twisted Handle Bags
-            </Link>
-            <Link
-              href="/quote"
-              className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-            >
-              Get a Free Quote
             </Link>
           </div>
         </div>
