@@ -1,5 +1,6 @@
 import crypto from 'crypto';
 import { query, transaction } from '../../../lib/database';
+import { enrichPageVisit, getPagePath } from '../../../lib/analytics-page-classifier';
 
 function getClientIp(req) {
   const forwarded = req.headers['x-forwarded-for'];
@@ -19,12 +20,8 @@ function getDeviceType(userAgent = '') {
   return 'desktop';
 }
 
-function getPagePath(pageUrl = '') {
-  try {
-    return new URL(pageUrl).pathname || '/';
-  } catch {
-    return '/';
-  }
+function getPagePathFromUrl(pageUrl = '') {
+  return getPagePath(pageUrl);
 }
 
 async function recordPhoneClick({
@@ -38,7 +35,7 @@ async function recordPhoneClick({
 }) {
   const ipHash = hashIp(ipAddress);
   const deviceType = getDeviceType(userAgent);
-  const pagePath = eventData.pagePath || getPagePath(pageUrl);
+  const pagePath = eventData.pagePath || getPagePathFromUrl(pageUrl);
 
   await query(
     `
@@ -81,6 +78,9 @@ export default async function handler(req, res) {
       isBounce = true,
       eventName,
       eventData,
+      utmSource,
+      utmMedium,
+      utmCampaign,
     } = req.body;
 
     const ipAddress = getClientIp(req) || bodyIp || '127.0.0.1';
@@ -113,14 +113,37 @@ export default async function handler(req, res) {
     const ipHash = hashIp(ipAddress);
     const deviceType = getDeviceType(userAgent);
     const country = 'IE';
+    const enriched = enrichPageVisit({
+      pageUrl,
+      pageTitle,
+      referrer,
+      utmSource,
+      utmMedium,
+      utmCampaign,
+    });
+
+    let isLandingPage = false;
 
     await transaction(async (client) => {
+      if (sessionId) {
+        const sessionExists = await client.query(
+          `SELECT id FROM analytics.user_sessions WHERE session_id = $1`,
+          [sessionId]
+        );
+        isLandingPage = sessionExists.rows.length === 0;
+      }
+
       await client.query(
         `
         INSERT INTO analytics.page_visits (
           page_url, page_title, referrer, user_agent, ip_address_hash,
-          device_type, country, session_id, load_time_ms, time_on_page_seconds, is_bounce
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+          device_type, country, session_id, load_time_ms, time_on_page_seconds, is_bounce,
+          page_path, page_type, product_family, product_slug, product_name,
+          traffic_source, referrer_domain, utm_source, utm_medium, utm_campaign, is_landing_page
+        ) VALUES (
+          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,
+          $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22
+        )
         `,
         [
           pageUrl,
@@ -134,6 +157,17 @@ export default async function handler(req, res) {
           loadTime,
           timeOnPage,
           isBounce,
+          enriched.page_path,
+          enriched.page_type,
+          enriched.product_family,
+          enriched.product_slug,
+          enriched.product_name,
+          enriched.traffic_source,
+          enriched.referrer_domain,
+          enriched.utm_source,
+          enriched.utm_medium,
+          enriched.utm_campaign,
+          isLandingPage,
         ]
       );
 
@@ -161,8 +195,10 @@ export default async function handler(req, res) {
             `
             INSERT INTO analytics.user_sessions (
               session_id, ip_address_hash, user_agent, device_type, country,
-              first_page, last_page, pages_visited, total_time_seconds
-            ) VALUES ($1, $2, $3, $4, $5, $6, $7, 1, $8)
+              first_page, last_page, pages_visited, total_time_seconds,
+              entry_page_path, entry_traffic_source, entry_referrer_domain, entry_product_family,
+              utm_source, utm_medium, utm_campaign
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, 1, $8, $9, $10, $11, $12, $13, $14, $15)
             `,
             [
               sessionId,
@@ -173,6 +209,13 @@ export default async function handler(req, res) {
               pageUrl,
               pageUrl,
               timeOnPage || 0,
+              enriched.page_path,
+              enriched.traffic_source,
+              enriched.referrer_domain,
+              enriched.product_family,
+              enriched.utm_source,
+              enriched.utm_medium,
+              enriched.utm_campaign,
             ]
           );
         }

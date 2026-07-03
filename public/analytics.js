@@ -81,6 +81,7 @@
   
   // Track page visit
   function trackPageVisit() {
+    const utm = getUtmParams();
     const trackingData = {
       pageUrl: window.location.href,
       pageTitle: document.title || 'Unknown Page',
@@ -90,13 +91,29 @@
       sessionId: sessionId,
       loadTime: pageLoadTime,
       timeOnPage: 0,
-      isBounce: true
+      isBounce: true,
+      utmSource: utm.utmSource,
+      utmMedium: utm.utmMedium,
+      utmCampaign: utm.utmCampaign,
     };
     
     // Send tracking data
     sendAnalyticsData(trackingData);
   }
   
+  function getUtmParams() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        utmSource: params.get('utm_source') || '',
+        utmMedium: params.get('utm_medium') || '',
+        utmCampaign: params.get('utm_campaign') || '',
+      };
+    } catch {
+      return { utmSource: '', utmMedium: '', utmCampaign: '' };
+    }
+  }
+
   // Track page visibility changes
   function setupVisibilityTracking() {
     let hiddenTime = 0;
@@ -121,6 +138,7 @@
       const timeOnPage = Math.round((Date.now() - pageStartTime) / 1000);
       
       // Send final tracking data (navigator.sendBeacon for reliability)
+      const utm = getUtmParams();
       const finalData = {
         pageUrl: window.location.href,
         pageTitle: document.title || 'Unknown Page',
@@ -130,7 +148,10 @@
         sessionId: sessionId,
         loadTime: pageLoadTime,
         timeOnPage: timeOnPage,
-        isBounce: false
+        isBounce: false,
+        utmSource: utm.utmSource,
+        utmMedium: utm.utmMedium,
+        utmCampaign: utm.utmCampaign,
       };
       
       // Use sendBeacon for reliable data transmission on page exit
@@ -164,6 +185,7 @@
   
   // Track custom events
   function trackEvent(eventName, eventData = {}, options = {}) {
+    const utm = getUtmParams();
     const eventTrackingData = {
       pageUrl: window.location.href,
       pageTitle: document.title || 'Unknown Page',
@@ -174,6 +196,9 @@
       loadTime: pageLoadTime,
       timeOnPage: Math.round((Date.now() - pageStartTime) / 1000),
       isBounce: false,
+      utmSource: utm.utmSource,
+      utmMedium: utm.utmMedium,
+      utmCampaign: utm.utmCampaign,
       eventName: eventName,
       eventData: eventData
     };

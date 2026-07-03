@@ -9,6 +9,9 @@ import {
   FiGlobe,
   FiClock,
   FiPhone,
+  FiTrendingUp,
+  FiMapPin,
+  FiPackage,
 } from 'react-icons/fi';
 
 const PERIODS = [
@@ -74,6 +77,38 @@ function MiniBarChart({ data }) {
   );
 }
 
+function SourceBars({ rows, total }) {
+  if (!rows?.length) {
+    return <p className="text-sm text-slate-400">No traffic source data yet.</p>;
+  }
+
+  const denom = total || Math.max(...rows.map((r) => r.views), 1);
+
+  return (
+    <div className="space-y-3">
+      {rows.map((row) => {
+        const pct = Math.round((row.views / denom) * 100);
+        return (
+          <div key={`${row.source}-${row.views}`}>
+            <div className="flex justify-between text-sm mb-1">
+              <span className="text-slate-700">{row.source}</span>
+              <span className="font-medium text-slate-900">
+                {row.views}
+                {row.visitors != null && (
+                  <span className="text-slate-400 font-normal"> · {row.visitors} visitors</span>
+                )}
+              </span>
+            </div>
+            <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+              <div className="h-full bg-blue-500 rounded-full" style={{ width: `${pct}%` }} />
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 function formatWhen(value) {
   if (!value) return '—';
   return new Date(value).toLocaleString('en-IE', {
@@ -135,10 +170,10 @@ export default function PageViewDashboard() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <p className="text-sm text-slate-500">
-            Anonymous visitor tracking — every page load on the public site is recorded
+            Product views, landing pages, and traffic sources across the public site
           </p>
           <p className="text-slate-600 text-sm mt-1">
-            Visitors are identified by session ID (not personal name). IP addresses are hashed for privacy.
+            See which products get attention, where visitors land first, and how they found you.
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -186,7 +221,7 @@ export default function PageViewDashboard() {
         </div>
       ) : (
         <>
-          <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
+          <div className="grid sm:grid-cols-2 xl:grid-cols-5 gap-4">
             <StatCard
               label="Page views"
               value={data?.totals?.total_views ?? 0}
@@ -201,15 +236,23 @@ export default function PageViewDashboard() {
               color="green"
             />
             <StatCard
-              label="Pages viewed"
-              value={data?.totals?.unique_pages ?? 0}
-              sub="Different URLs"
+              label="Landing sessions"
+              value={data?.totals?.landing_sessions ?? 0}
+              sub="First page in a visit"
+              icon={FiMapPin}
               color="purple"
+            />
+            <StatCard
+              label="Product families"
+              value={data?.byProductFamily?.length ?? 0}
+              sub="With tracked views"
+              icon={FiPackage}
+              color="amber"
             />
             <StatCard
               label="Avg. time on page"
               value={`${data?.totals?.avg_time_on_page ?? 0}s`}
-              sub={`Bounce rate: ${data?.totals?.bounce_rate ?? 0}% · Today: ${periodMap.today?.total_views ?? 0} views`}
+              sub={`Bounce: ${data?.totals?.bounce_rate ?? 0}% · Today: ${periodMap.today?.total_views ?? 0} views`}
               icon={FiClock}
               color="amber"
             />
@@ -217,42 +260,95 @@ export default function PageViewDashboard() {
 
           <div className="grid lg:grid-cols-2 gap-6">
             <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
-              <h3 className="font-semibold text-slate-900 mb-1">Views over time</h3>
-              <p className="text-xs text-slate-500 mb-4">Daily page views (hover for visitor count)</p>
-              <MiniBarChart data={data?.byDay} />
+              <h3 className="font-semibold text-slate-900 mb-1 flex items-center gap-2">
+                <FiPackage size={16} />
+                Top product families
+              </h3>
+              <p className="text-xs text-slate-500 mb-4">Which product lines get the most attention</p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="text-left text-slate-500 border-b border-slate-100">
+                      <th className="pb-2 pr-3 font-medium">Product family</th>
+                      <th className="pb-2 pr-3 font-medium text-right">Views</th>
+                      <th className="pb-2 pr-3 font-medium text-right">Visitors</th>
+                      <th className="pb-2 font-medium text-right">Avg time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(data?.byProductFamily || []).map((row) => (
+                      <tr key={row.product_family} className="border-b border-slate-50">
+                        <td className="py-2 pr-3 font-medium text-slate-800">{row.product_family}</td>
+                        <td className="py-2 pr-3 text-right font-semibold text-blue-700">{row.views}</td>
+                        <td className="py-2 pr-3 text-right text-slate-600">{row.visitors}</td>
+                        <td className="py-2 text-right text-slate-600">{row.avg_time_on_page || 0}s</td>
+                      </tr>
+                    ))}
+                    {(data?.byProductFamily || []).length === 0 && (
+                      <tr>
+                        <td colSpan={4} className="py-6 text-center text-slate-400">
+                          No product views yet — data appears as visitors browse product pages.
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
 
             <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
-              <h3 className="font-semibold text-slate-900 mb-4">Traffic sources</h3>
-              <div className="space-y-3">
-                {(data?.byReferrer || []).length === 0 && (
-                  <p className="text-sm text-slate-400">No referrer data yet.</p>
-                )}
-                {(data?.byReferrer || []).map((row) => {
-                  const total = data?.totals?.total_views || 1;
-                  const pct = Math.round((row.views / total) * 100);
-                  return (
-                    <div key={row.source}>
-                      <div className="flex justify-between text-sm mb-1">
-                        <span className="text-slate-700">{row.source}</span>
-                        <span className="font-medium text-slate-900">{row.views}</span>
-                      </div>
-                      <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                        <div className="h-full bg-blue-500 rounded-full" style={{ width: `${pct}%` }} />
-                      </div>
-                    </div>
-                  );
-                })}
+              <h3 className="font-semibold text-slate-900 mb-1 flex items-center gap-2">
+                <FiMapPin size={16} />
+                Top landing pages
+              </h3>
+              <p className="text-xs text-slate-500 mb-4">Where customers first arrive on your site</p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="text-left text-slate-500 border-b border-slate-100">
+                      <th className="pb-2 pr-3 font-medium">Landing page</th>
+                      <th className="pb-2 pr-3 font-medium">Source</th>
+                      <th className="pb-2 pr-3 font-medium text-right">Sessions</th>
+                      <th className="pb-2 font-medium text-right">Pages/session</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(data?.byLandingPage || []).map((row, index) => (
+                      <tr key={`${row.landing_page}-${row.traffic_source}-${index}`} className="border-b border-slate-50">
+                        <td className="py-2 pr-3">
+                          <p className="font-medium text-slate-800">{row.landing_page}</p>
+                          {row.product_family && row.product_family !== 'Uncategorised' && (
+                            <p className="text-xs text-slate-400">{row.product_family}</p>
+                          )}
+                        </td>
+                        <td className="py-2 pr-3 text-slate-600">{row.traffic_source}</td>
+                        <td className="py-2 pr-3 text-right font-semibold text-blue-700">{row.sessions}</td>
+                        <td className="py-2 text-right text-slate-600">{row.avg_pages_per_session || '—'}</td>
+                      </tr>
+                    ))}
+                    {(data?.byLandingPage || []).length === 0 && (
+                      <tr>
+                        <td colSpan={4} className="py-6 text-center text-slate-400">
+                          No landing page data yet.
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-6">
-            <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm overflow-hidden">
-              <h3 className="font-semibold text-slate-900 mb-4">Top pages</h3>
-              <div className="overflow-x-auto">
+            <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+              <h3 className="font-semibold text-slate-900 mb-1 flex items-center gap-2">
+                <FiTrendingUp size={16} />
+                Top product pages
+              </h3>
+              <p className="text-xs text-slate-500 mb-4">Individual product and hub pages ranked by views</p>
+              <div className="overflow-x-auto max-h-80 overflow-y-auto">
                 <table className="w-full text-sm">
-                  <thead>
+                  <thead className="sticky top-0 bg-white">
                     <tr className="text-left text-slate-500 border-b border-slate-100">
                       <th className="pb-2 pr-3 font-medium">Page</th>
                       <th className="pb-2 pr-3 font-medium text-right">Views</th>
@@ -260,28 +356,93 @@ export default function PageViewDashboard() {
                     </tr>
                   </thead>
                   <tbody>
-                    {(data?.byPage || []).map((row) => (
+                    {(data?.byProductPage || []).map((row) => (
                       <tr key={row.page_path} className="border-b border-slate-50">
                         <td className="py-2 pr-3">
                           <p className="font-medium text-slate-800">{row.page_path}</p>
-                          {row.page_title && (
-                            <p className="text-xs text-slate-400 truncate max-w-xs">{row.page_title}</p>
-                          )}
+                          <p className="text-xs text-slate-400 truncate max-w-xs">
+                            {row.product_name}
+                            {row.product_family ? ` · ${row.product_family}` : ''}
+                          </p>
                         </td>
                         <td className="py-2 pr-3 text-right font-semibold text-blue-700">{row.views}</td>
                         <td className="py-2 text-right text-slate-600">{row.visitors}</td>
                       </tr>
                     ))}
-                    {(data?.byPage || []).length === 0 && (
-                      <tr>
-                        <td colSpan={3} className="py-6 text-center text-slate-400">
-                          No page views recorded yet.
-                        </td>
-                      </tr>
-                    )}
                   </tbody>
                 </table>
               </div>
+            </div>
+
+            <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+              <h3 className="font-semibold text-slate-900 mb-4">Where traffic comes from</h3>
+              <SourceBars rows={data?.byReferrer} total={data?.totals?.total_views} />
+              <div className="mt-6 pt-4 border-t border-slate-100">
+                <p className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-3">
+                  Referring domains
+                </p>
+                <div className="space-y-2 max-h-40 overflow-y-auto">
+                  {(data?.byReferrerDomain || []).map((row, index) => (
+                    <div
+                      key={`${row.referrer_domain}-${index}`}
+                      className="flex items-center justify-between text-sm"
+                    >
+                      <span className="text-slate-700 truncate pr-3">
+                        {row.referrer_domain}
+                        <span className="text-slate-400"> · {row.traffic_source}</span>
+                      </span>
+                      <span className="font-semibold shrink-0">{row.views}</span>
+                    </div>
+                  ))}
+                  {(data?.byReferrerDomain || []).length === 0 && (
+                    <p className="text-sm text-slate-400">No referrer domains yet.</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm overflow-hidden">
+            <h3 className="font-semibold text-slate-900 mb-1">Product views by traffic source</h3>
+            <p className="text-xs text-slate-500 mb-4">
+              See which channels drive interest in each product line
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="text-left text-slate-500 border-b border-slate-100">
+                    <th className="pb-2 pr-4 font-medium">Product family</th>
+                    <th className="pb-2 pr-4 font-medium">Source</th>
+                    <th className="pb-2 pr-4 font-medium text-right">Views</th>
+                    <th className="pb-2 font-medium text-right">Visitors</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(data?.byProductSource || []).map((row, index) => (
+                    <tr key={`${row.product_family}-${row.traffic_source}-${index}`} className="border-b border-slate-50">
+                      <td className="py-2 pr-4 font-medium text-slate-800">{row.product_family}</td>
+                      <td className="py-2 pr-4 text-slate-600">{row.traffic_source}</td>
+                      <td className="py-2 pr-4 text-right font-semibold text-blue-700">{row.views}</td>
+                      <td className="py-2 text-right text-slate-600">{row.visitors}</td>
+                    </tr>
+                  ))}
+                  {(data?.byProductSource || []).length === 0 && (
+                    <tr>
+                      <td colSpan={4} className="py-6 text-center text-slate-400">
+                        No product × source data yet.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-6">
+            <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+              <h3 className="font-semibold text-slate-900 mb-1">Views over time</h3>
+              <p className="text-xs text-slate-500 mb-4">Daily page views (hover for visitor count)</p>
+              <MiniBarChart data={data?.byDay} />
             </div>
 
             <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
@@ -317,17 +478,19 @@ export default function PageViewDashboard() {
 
           <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm overflow-hidden">
             <h3 className="font-semibold text-slate-900 mb-1">Visitors (sessions)</h3>
-            <p className="text-xs text-slate-500 mb-4">Each row is one browsing session — entry page, exit page, and pages viewed</p>
+            <p className="text-xs text-slate-500 mb-4">
+              Entry page, traffic source, and browsing path per session
+            </p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="text-left text-slate-500 border-b border-slate-100">
                     <th className="pb-2 pr-4 font-medium">When</th>
-                    <th className="pb-2 pr-4 font-medium">Session</th>
-                    <th className="pb-2 pr-4 font-medium">Entry → Exit</th>
+                    <th className="pb-2 pr-4 font-medium">Landed on</th>
+                    <th className="pb-2 pr-4 font-medium">Source</th>
+                    <th className="pb-2 pr-4 font-medium">Exit page</th>
                     <th className="pb-2 pr-4 font-medium">Pages</th>
-                    <th className="pb-2 pr-4 font-medium">Time</th>
-                    <th className="pb-2 font-medium">Device</th>
+                    <th className="pb-2 font-medium">Time</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -336,16 +499,21 @@ export default function PageViewDashboard() {
                       <td className="py-2 pr-4 text-slate-500 whitespace-nowrap">
                         {formatWhen(row.session_start)}
                       </td>
-                      <td className="py-2 pr-4 font-mono text-xs text-slate-600">
-                        {shortSession(row.session_id)}
-                      </td>
                       <td className="py-2 pr-4">
                         <p className="text-slate-800">{row.entry_page}</p>
-                        <p className="text-xs text-slate-400">→ {row.exit_page}</p>
+                        {row.entry_product_family && row.entry_product_family !== '—' && (
+                          <p className="text-xs text-slate-400">{row.entry_product_family}</p>
+                        )}
                       </td>
+                      <td className="py-2 pr-4 text-slate-600">
+                        <p>{row.entry_source}</p>
+                        {row.entry_referrer_domain && row.entry_referrer_domain !== '—' && (
+                          <p className="text-xs text-slate-400">{row.entry_referrer_domain}</p>
+                        )}
+                      </td>
+                      <td className="py-2 pr-4 text-slate-600">{row.exit_page}</td>
                       <td className="py-2 pr-4 text-slate-700">{row.pages_visited}</td>
-                      <td className="py-2 pr-4 text-slate-600">{formatDuration(row.total_time_seconds)}</td>
-                      <td className="py-2 capitalize text-slate-600">{row.device_type || '—'}</td>
+                      <td className="py-2 text-slate-600">{formatDuration(row.total_time_seconds)}</td>
                     </tr>
                   ))}
                   {(data?.visitors || []).length === 0 && (
@@ -367,11 +535,10 @@ export default function PageViewDashboard() {
                 <thead>
                   <tr className="text-left text-slate-500 border-b border-slate-100">
                     <th className="pb-2 pr-4 font-medium">When</th>
-                    <th className="pb-2 pr-4 font-medium">Page</th>
+                    <th className="pb-2 pr-4 font-medium">Page / Product</th>
                     <th className="pb-2 pr-4 font-medium">Source</th>
-                    <th className="pb-2 pr-4 font-medium">Session</th>
-                    <th className="pb-2 pr-4 font-medium">On page</th>
-                    <th className="pb-2 font-medium">Device</th>
+                    <th className="pb-2 pr-4 font-medium">Landing?</th>
+                    <th className="pb-2 font-medium">On page</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -382,23 +549,32 @@ export default function PageViewDashboard() {
                       </td>
                       <td className="py-2 pr-4">
                         <p className="font-medium text-slate-800">{row.page_path}</p>
-                        {row.page_title && (
-                          <p className="text-xs text-slate-400 truncate max-w-[200px]">{row.page_title}</p>
-                        )}
-                      </td>
-                      <td className="py-2 pr-4 text-slate-600">{row.referrer_source}</td>
-                      <td className="py-2 pr-4 font-mono text-xs text-slate-500">
-                        {shortSession(row.session_id)}
+                        <p className="text-xs text-slate-400">
+                          {row.product_name || row.page_title}
+                          {row.product_family && row.product_family !== '—' ? ` · ${row.product_family}` : ''}
+                        </p>
                       </td>
                       <td className="py-2 pr-4 text-slate-600">
+                        <p>{row.referrer_source}</p>
+                        {row.referrer_domain && row.referrer_domain !== '—' && (
+                          <p className="text-xs text-slate-400">{row.referrer_domain}</p>
+                        )}
+                      </td>
+                      <td className="py-2 pr-4 text-slate-600">
+                        {row.is_landing_page ? (
+                          <span className="inline-flex px-2 py-0.5 rounded-full text-xs bg-purple-50 text-purple-700">
+                            Landing
+                          </span>
+                        ) : '—'}
+                      </td>
+                      <td className="py-2 text-slate-600">
                         {row.time_on_page_seconds ? `${row.time_on_page_seconds}s` : '—'}
                       </td>
-                      <td className="py-2 capitalize text-slate-600">{row.device_type || '—'}</td>
                     </tr>
                   ))}
                   {(data?.recentViews || []).length === 0 && (
                     <tr>
-                      <td colSpan={6} className="py-8 text-center text-slate-400">
+                      <td colSpan={5} className="py-8 text-center text-slate-400">
                         No recent page views. Tracking is active on all public pages via analytics.js.
                       </td>
                     </tr>
