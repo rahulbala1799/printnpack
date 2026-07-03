@@ -148,7 +148,7 @@ export default function NapkinLocalPage({ config }) {
             {[
               { title: 'Printed Paper Napkins', desc: 'Custom logo napkins in cocktail, lunch, and dinner sizes — from €0.05 per unit.', href: '/products/printed-napkins' },
               { title: 'Linen-Feel Napkins', desc: 'Premium airlaid napkins with cloth-like texture for upscale dining and weddings.', href: '/products/premium-linen-feel-napkins' },
-              { title: 'Plain Wholesale Napkins', desc: 'Bulk white napkins without printing — economical for high-volume catering.', href: '/plain-packaging' },
+              { title: 'Plain Wholesale Napkins', desc: 'Bulk white napkins without printing — economical for high-volume catering.', href: '/plain-napkins-tableware-ireland' },
             ].map((item) => (
               <Link key={item.title} href={item.href} className="group bg-white rounded-2xl border border-gray-200 p-6 hover:border-amber-300 hover:shadow-lg transition-all">
                 <h3 className="text-xl font-bold text-gray-900 group-hover:text-amber-600 mb-2">{item.title}</h3>

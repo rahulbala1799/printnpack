@@ -13,7 +13,7 @@ const HERO_IMAGE = '/images/hero/napkin.svg';
 const napkinTypes = [
   { title: 'Printed Paper Napkins', desc: 'Custom logo napkins for restaurants, cafes, and takeaways — cocktail, lunch, and dinner sizes.', href: '/products/printed-napkins', price: '0.05' },
   { title: 'Premium Linen-Feel Napkins', desc: 'Cloth-like airlaid napkins for upscale dining, hotels, and weddings.', href: '/products/premium-linen-feel-napkins', price: '0.10' },
-  { title: 'Plain Wholesale Napkins', desc: 'Bulk white napkins without printing — economical for high-volume catering.', href: '/plain-packaging', price: '0.03' },
+  { title: 'Plain Wholesale Napkins', desc: 'Bulk white napkins without printing — economical for high-volume catering.', href: '/plain-napkins-tableware-ireland', price: '0.03' },
 ];
 
 const localPages = [

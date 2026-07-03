@@ -1,6 +1,7 @@
 import products from '../data/products';
 import { TIERED_PLAIN_PRODUCTS } from '../data/plain-products-tiered';
 import { REFUSE_SACK_PRODUCT_IDS } from '../data/refuse-sacks-seo';
+import { NAPKINS_TABLEWARE_PRODUCT_IDS } from '../data/napkins-tableware-seo';
 import { SITE_URL } from '../lib/site';
 
 // ── Pizza box cluster (page-1 priority) ─────────────────────────────────────
@@ -11,6 +12,15 @@ const PIZZA_PLAIN_PRODUCT_IDS = new Set(
 );
 
 const REFUSE_SACK_PLAIN_PRODUCT_IDS = new Set(REFUSE_SACK_PRODUCT_IDS);
+const NAPKINS_TABLEWARE_PLAIN_PRODUCT_IDS = new Set(NAPKINS_TABLEWARE_PRODUCT_IDS);
+
+function isPriorityPlainProduct(id) {
+  return (
+    PIZZA_PLAIN_PRODUCT_IDS.has(id) ||
+    REFUSE_SACK_PLAIN_PRODUCT_IDS.has(id) ||
+    NAPKINS_TABLEWARE_PLAIN_PRODUCT_IDS.has(id)
+  );
+}
 
 // Products with dedicated pages — exclude duplicate /products/{id} URLs
 const DEDICATED_PRODUCT_IDS = new Set(
@@ -35,6 +45,7 @@ const staticPages = [
   { path: '/pizza-boxes-wholesale-ireland', priority: '0.88', changefreq: 'weekly' },
   { path: '/pizza-box-faq-ireland',        priority: '0.88', changefreq: 'monthly' },
   { path: '/refuse-sacks-ireland',         priority: '0.95', changefreq: 'weekly' },
+  { path: '/plain-napkins-tableware-ireland', priority: '0.95', changefreq: 'weekly' },
   { path: '/printed-flat-handle-bags-ireland', priority: '0.9', changefreq: 'weekly' },
   // Paper bag cluster
   { path: '/paper-bags-ireland',              priority: '0.95', changefreq: 'weekly' },
@@ -147,7 +158,7 @@ function generateSitemap(productIds, plainPackagingIds) {
       urlEntry(`${SITE_URL}/plain-packaging/${id}`, {
         lastmod: today,
         changefreq: 'monthly',
-        priority: PIZZA_PLAIN_PRODUCT_IDS.has(id) || REFUSE_SACK_PLAIN_PRODUCT_IDS.has(id) ? '0.8' : '0.7',
+        priority: isPriorityPlainProduct(id) ? '0.8' : '0.7',
       })
     )
     .join('');

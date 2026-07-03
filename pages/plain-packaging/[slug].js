@@ -7,6 +7,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PLAIN_PRODUCTS, getProductById, getRelatedProducts } from '../../data/plain-products';
 import { REFUSE_SACK_PRODUCT_IDS } from '../../data/refuse-sacks-seo';
+import {
+  NAPKINS_TABLEWARE_CATEGORY_QUERY,
+  NAPKINS_TABLEWARE_HUB_PATH,
+  NAPKINS_TABLEWARE_PRODUCT_IDS,
+  getNapkinsTablewareDisplayName,
+  getNapkinsTablewareProductSeo,
+  isNapkinsTablewareProduct,
+} from '../../data/napkins-tableware-seo';
 import PackagingIcon, { isPlaceholderImage } from '../../components/PackagingIcon';
 import { buildProductLd } from '../../lib/schema';
 import { getBioboxProductSeo } from '../../data/biobox-cluster';
@@ -58,12 +66,19 @@ function buildPlainProductLd(product, canonicalUrl) {
       ? `https://www.printnpack.ie${product.imageSrc}`
       : undefined;
 
-  const seoDescription = isRefuseSackProduct(product)
-    ? getRefuseSackProductSeo(product).pageDescription
-    : product.description;
+  let seoDescription = product.description;
+  let seoName = product.name;
+
+  if (isRefuseSackProduct(product)) {
+    seoDescription = getRefuseSackProductSeo(product).pageDescription;
+    seoName = getRefuseSackDisplayName(product);
+  } else if (isNapkinsTablewareProduct(product)) {
+    seoDescription = getNapkinsTablewareProductSeo(product).pageDescription;
+    seoName = getNapkinsTablewareDisplayName(product);
+  }
 
   return buildProductLd({
-    name: isRefuseSackProduct(product) ? getRefuseSackDisplayName(product) : product.name,
+    name: seoName,
     description: seoDescription,
     image,
     url: canonicalUrl,
@@ -100,24 +115,43 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
   const isHeatSealer = product.id === '220021';
   const isBiobox = product.category === 'Biobox';
   const isRefuseSack = isRefuseSackProduct(product);
+  const isNapkinsTableware = isNapkinsTablewareProduct(product);
   const bioboxSeo = isBiobox ? getBioboxProductSeo(product) : null;
   const refuseSackSeo = isRefuseSack ? getRefuseSackProductSeo(product) : null;
-  const displayName = isRefuseSack ? getRefuseSackDisplayName(product) : product.name;
+  const napkinsTablewareSeo = isNapkinsTableware ? getNapkinsTablewareProductSeo(product) : null;
+  const displayName = isRefuseSack
+    ? getRefuseSackDisplayName(product)
+    : isNapkinsTableware
+      ? getNapkinsTablewareDisplayName(product)
+      : product.name;
   const pageTitle = isPizzaBox
     ? `${product.name} | Pizza Boxes Ireland | PrintNPack`
     : isHeatSealer
       ? 'Sealer Bar Ireland | 300mm Heat Sealer Bar — Catering Equipment'
       : isRefuseSack
         ? refuseSackSeo.pageTitle
-        : bioboxSeo?.pageTitle || `${product.name} — Plain Packaging | PrintNPack Ireland`;
+        : isNapkinsTableware
+          ? napkinsTablewareSeo.pageTitle
+          : bioboxSeo?.pageTitle || `${product.name} — Plain Packaging | PrintNPack Ireland`;
   const metaDescription = isPizzaBox
     ? `${product.name} — wholesale kraft corrugated pizza box Ireland. Tiered case pricing, fast delivery to Dublin, Cork & nationwide. Order plain pizza boxes online.`
     : isHeatSealer
       ? 'Sealer bar Ireland — 300mm single bar heat sealer for catering and food packaging. Seals film bags and pouches. Wholesale catering equipment with tiered pricing and nationwide delivery.'
       : isRefuseSack
         ? refuseSackSeo.metaDescription
-        : bioboxSeo?.metaDescription || `${product.description?.slice(0, 155)} Fast delivery across Ireland.`;
-  const visibleDescription = isRefuseSack ? refuseSackSeo.pageDescription : product.description;
+        : isNapkinsTableware
+          ? napkinsTablewareSeo.metaDescription
+          : bioboxSeo?.metaDescription || `${product.description?.slice(0, 155)} Fast delivery across Ireland.`;
+  const visibleDescription = isRefuseSack
+    ? refuseSackSeo.pageDescription
+    : isNapkinsTableware
+      ? napkinsTablewareSeo.pageDescription
+      : product.description;
+  const seoKeywords = isRefuseSack
+    ? refuseSackSeo.keywords
+    : isNapkinsTableware
+      ? napkinsTablewareSeo.keywords
+      : null;
   const canonicalUrl = `https://www.printnpack.ie/plain-packaging/${product.id}`;
   const productLd = buildPlainProductLd(product, canonicalUrl);
 
@@ -133,8 +167,8 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
         <title>{pageTitle}</title>
         <meta name="description" content={metaDescription} />
         <meta name="robots" content="index, follow" />
-        {isRefuseSack && (
-          <meta name="keywords" content={refuseSackSeo.keywords} />
+        {seoKeywords && (
+          <meta name="keywords" content={seoKeywords} />
         )}
         <link rel="canonical" href={canonicalUrl} />
         <meta property="og:type" content="product" />
@@ -178,6 +212,11 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
                 <li>/</li>
                 <li><Link href="/plain-packaging?category=Refuse+Sack" className="hover:text-stone-600 transition-colors">Wholesale</Link></li>
               </>
+            ) : isNapkinsTableware ? (
+              <>
+                <li><Link href={NAPKINS_TABLEWARE_HUB_PATH} className="hover:text-stone-600 transition-colors">Plain Napkins &amp; Tableware</Link></li>
+                <li>/</li>
+                <li><Link href={`/plain-packaging?category=${NAPKINS_TABLEWARE_CATEGORY_QUERY}`} className="hover:text-stone-600 transition-colors">Wholesale</Link></li>
               </>
             ) : (
               <li><Link href="/plain-packaging" className="hover:text-stone-600 transition-colors">Plain Packaging</Link></li>
@@ -200,7 +239,7 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
               ) : (
                 <Image
                   src={product.imageSrc}
-                  alt={product.name}
+                  alt={displayName}
                   fill
                   className="object-contain p-8"
                   priority
@@ -257,6 +296,19 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
                     range. Browse all{' '}
                     <Link href="/plain-packaging?category=Refuse+Sack" className="text-emerald-700 hover:underline font-medium">
                       refuse sacks &amp; bin bags
+                    </Link>
+                    .
+                  </p>
+                )}
+                {isNapkinsTableware && (
+                  <p className="text-sm text-stone-600 mt-3 leading-relaxed">
+                    Wholesale napkins &amp; tableware — part of our{' '}
+                    <Link href={NAPKINS_TABLEWARE_HUB_PATH} className="text-amber-700 hover:underline font-medium">
+                      plain napkins Ireland
+                    </Link>{' '}
+                    range. Need branded napkins?{' '}
+                    <Link href="/napkins-ireland" className="text-amber-700 hover:underline font-medium">
+                      Custom printed napkins
                     </Link>
                     .
                   </p>
@@ -454,6 +506,7 @@ export async function getStaticPaths() {
   const priorityIds = new Set([
     ...PLAIN_PRODUCTS.slice(0, 100).map((p) => p.id),
     ...REFUSE_SACK_PRODUCT_IDS,
+    ...NAPKINS_TABLEWARE_PRODUCT_IDS,
   ]);
   const paths = [...priorityIds].map((id) => ({ params: { slug: id } }));
   return { paths, fallback: 'blocking' };

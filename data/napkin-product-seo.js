@@ -8,7 +8,7 @@ const SHARED_LINKS = [
   { href: '/blog/personalised-napkins-ireland-guide', label: 'Personalised Napkins Guide', desc: 'Sizes, materials & wedding tips' },
   { href: '/napkin-printing-ashbourne', label: 'Napkin Printing Ashbourne', desc: 'Local collection & delivery' },
   { href: '/napkin-printing-dublin', label: 'Napkin Printing Dublin', desc: 'Delivery across Dublin' },
-  { href: '/plain-packaging', label: 'Plain Napkins Wholesale', desc: 'Bulk white napkins without printing' },
+  { href: '/plain-napkins-tableware-ireland', label: 'Plain Napkins Wholesale', desc: 'Bulk white napkins without printing' },
 ];
 
 export const NAPKIN_PRODUCT_SEO = {

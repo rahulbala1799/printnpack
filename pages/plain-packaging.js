@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PLAIN_PRODUCTS, CATEGORIES, getProductById } from '../data/plain-products';
 import { REFUSE_SACK_CATEGORY_SEO } from '../data/refuse-sacks-seo';
+import { NAPKINS_TABLEWARE_CATEGORY_SEO } from '../data/napkins-tableware-seo';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 
 // ─── Quote persistence (shared with detail page) ───────────────────────────────
@@ -831,6 +832,7 @@ export default function PlainPackagingPage() {
   const isCateringEquipment = activeCategory === 'Catering Equipment';
   const isBioboxCategory = activeCategory === 'Biobox';
   const isRefuseSackCategory = activeCategory === 'Refuse Sack';
+  const isNapkinsTablewareCategory = activeCategory === 'Napkins & Tableware';
   const pageTitle = isPizzaCategory
     ? 'Pizza Boxes Wholesale Ireland | Plain Kraft Corrugated | PrintNPack'
     : isCateringEquipment
@@ -839,7 +841,9 @@ export default function PlainPackagingPage() {
         ? 'Biobox Containers Wholesale Ireland | Kraft Takeaway Food Boxes | PrintNPack'
         : isRefuseSackCategory
           ? REFUSE_SACK_CATEGORY_SEO.pageTitle
-          : 'Plain Packaging — Wholesale Catering Supplies | PrintNPack Ireland';
+          : isNapkinsTablewareCategory
+            ? NAPKINS_TABLEWARE_CATEGORY_SEO.pageTitle
+            : 'Plain Packaging — Wholesale Catering Supplies | PrintNPack Ireland';
   const pageDescription = isPizzaCategory
     ? 'Wholesale plain pizza boxes Ireland — kraft corrugated boxes in 7", 9", 10", 12", 14" & 16". Tiered case pricing, fast delivery nationwide. Order online today.'
     : isCateringEquipment
@@ -848,7 +852,9 @@ export default function PlainPackagingPage() {
         ? 'Wholesale biobox containers Ireland — kraft and white leak-proof takeaway food boxes in No.1–No.12 sizes. Case packs, tiered B2B pricing, delivery nationwide.'
         : isRefuseSackCategory
           ? REFUSE_SACK_CATEGORY_SEO.pageDescription
-          : '736 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland.';
+          : isNapkinsTablewareCategory
+            ? NAPKINS_TABLEWARE_CATEGORY_SEO.pageDescription
+            : '736 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland.';
   const canonicalPath = isPizzaCategory
     ? 'https://www.printnpack.ie/plain-packaging?category=Pizza+Boxes'
     : isCateringEquipment
@@ -857,7 +863,9 @@ export default function PlainPackagingPage() {
         ? 'https://www.printnpack.ie/plain-packaging?category=Biobox'
         : isRefuseSackCategory
           ? REFUSE_SACK_CATEGORY_SEO.canonicalPath
-          : 'https://www.printnpack.ie/plain-packaging';
+          : isNapkinsTablewareCategory
+            ? NAPKINS_TABLEWARE_CATEGORY_SEO.canonicalPath
+            : 'https://www.printnpack.ie/plain-packaging';
   const pageHeading = isBioboxCategory
     ? 'Biobox Containers Wholesale'
     : isPizzaCategory
@@ -866,7 +874,9 @@ export default function PlainPackagingPage() {
         ? 'Catering Equipment Wholesale'
         : isRefuseSackCategory
           ? 'Refuse Sacks & Bin Bags Wholesale'
-          : 'Plain Packaging';
+          : isNapkinsTablewareCategory
+            ? 'Napkins & Tableware Wholesale'
+            : 'Plain Packaging';
   const pageSubheading = isBioboxCategory
     ? '9 kraft & white biobox SKUs · case packs · tiered B2B pricing'
     : isPizzaCategory
@@ -875,7 +885,9 @@ export default function PlainPackagingPage() {
         ? 'Heat sealers, chafing fuel & kitchen supplies · wholesale'
         : isRefuseSackCategory
           ? '21 refuse sack SKUs · black, clear & compactor bags · tiered pricing'
-          : '736 products · 55 categories · 4-tier volume pricing';
+          : isNapkinsTablewareCategory
+            ? '58 napkin & tableware SKUs · white, kraft & airlaid · tiered pricing'
+            : '736 products · 55 categories · 4-tier volume pricing';
 
   return (
     <Layout>
@@ -914,6 +926,12 @@ export default function PlainPackagingPage() {
                 <span>/</span>
                 <span className="text-stone-700 font-medium">Wholesale</span>
               </>
+            ) : isNapkinsTablewareCategory ? (
+              <>
+                <Link href="/plain-napkins-tableware-ireland" className="hover:text-stone-700 transition-colors">Napkins &amp; Tableware</Link>
+                <span>/</span>
+                <span className="text-stone-700 font-medium">Wholesale</span>
+              </>
             ) : (
               <span className="text-stone-700 font-medium">Plain Packaging</span>
             )}
@@ -937,6 +955,15 @@ export default function PlainPackagingPage() {
                   {' '}
                   <Link href="/refuse-sacks-ireland" className="text-emerald-700 font-medium hover:underline">
                     Browse refuse sacks Ireland →
+                  </Link>
+                </p>
+              )}
+              {isNapkinsTablewareCategory && (
+                <p className="text-xs sm:text-sm text-stone-600 mt-2 max-w-2xl leading-relaxed">
+                  Wholesale plain napkins, doilies, placemats, table covers and banquet rolls for restaurants and caterers.
+                  {' '}
+                  <Link href="/plain-napkins-tableware-ireland" className="text-amber-700 font-medium hover:underline">
+                    Browse plain napkins &amp; tableware →
                   </Link>
                 </p>
               )}
