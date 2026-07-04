@@ -75,6 +75,26 @@ const nextConfig = {
         destination: '/vinyl-stickers',
         permanent: true,
       },
+      {
+        source: '/disposable-coffee-cups-ireland',
+        destination: '/hot-cups-ireland',
+        permanent: true,
+      },
+      {
+        source: '/coffee-cups-ireland',
+        destination: '/hot-cups-ireland',
+        permanent: true,
+      },
+      {
+        source: '/takeaway-coffee-cups-ireland',
+        destination: '/hot-cups-ireland',
+        permanent: true,
+      },
+      {
+        source: '/paper-cups-ireland',
+        destination: '/hot-cups-ireland',
+        permanent: true,
+      },
     ];
   },
   

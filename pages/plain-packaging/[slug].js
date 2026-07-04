@@ -24,6 +24,14 @@ import {
   getRefuseSackProductSeo,
   isRefuseSackProduct,
 } from '../../data/refuse-sacks-seo';
+import {
+  HOT_CUPS_CATEGORY_QUERY,
+  HOT_CUPS_HUB_PATH,
+  HOT_CUPS_PRODUCT_IDS,
+  getHotCupDisplayName,
+  getHotCupProductSeo,
+  isHotCupProduct,
+} from '../../data/hot-cups-seo';
 
 const PLAIN_QUOTE_KEY = 'printnpack_plain_quote';
 
@@ -75,6 +83,9 @@ function buildPlainProductLd(product, canonicalUrl) {
   } else if (isNapkinsTablewareProduct(product)) {
     seoDescription = getNapkinsTablewareProductSeo(product).pageDescription;
     seoName = getNapkinsTablewareDisplayName(product);
+  } else if (isHotCupProduct(product)) {
+    seoDescription = getHotCupProductSeo(product).pageDescription;
+    seoName = getHotCupDisplayName(product);
   }
 
   return buildProductLd({
@@ -116,14 +127,18 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
   const isBiobox = product.category === 'Biobox';
   const isRefuseSack = isRefuseSackProduct(product);
   const isNapkinsTableware = isNapkinsTablewareProduct(product);
+  const isHotCup = isHotCupProduct(product);
   const bioboxSeo = isBiobox ? getBioboxProductSeo(product) : null;
   const refuseSackSeo = isRefuseSack ? getRefuseSackProductSeo(product) : null;
   const napkinsTablewareSeo = isNapkinsTableware ? getNapkinsTablewareProductSeo(product) : null;
+  const hotCupSeo = isHotCup ? getHotCupProductSeo(product) : null;
   const displayName = isRefuseSack
     ? getRefuseSackDisplayName(product)
     : isNapkinsTableware
       ? getNapkinsTablewareDisplayName(product)
-      : product.name;
+      : isHotCup
+        ? getHotCupDisplayName(product)
+        : product.name;
   const pageTitle = isPizzaBox
     ? `${product.name} | Pizza Boxes Ireland | PrintNPack`
     : isHeatSealer
@@ -132,7 +147,9 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
         ? refuseSackSeo.pageTitle
         : isNapkinsTableware
           ? napkinsTablewareSeo.pageTitle
-          : bioboxSeo?.pageTitle || `${product.name} — Plain Packaging | PrintNPack Ireland`;
+          : isHotCup
+            ? hotCupSeo.pageTitle
+            : bioboxSeo?.pageTitle || `${product.name} — Plain Packaging | PrintNPack Ireland`;
   const metaDescription = isPizzaBox
     ? `${product.name} — wholesale kraft corrugated pizza box Ireland. Tiered case pricing, fast delivery to Dublin, Cork & nationwide. Order plain pizza boxes online.`
     : isHeatSealer
@@ -141,17 +158,23 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
         ? refuseSackSeo.metaDescription
         : isNapkinsTableware
           ? napkinsTablewareSeo.metaDescription
-          : bioboxSeo?.metaDescription || `${product.description?.slice(0, 155)} Fast delivery across Ireland.`;
+          : isHotCup
+            ? hotCupSeo.metaDescription
+            : bioboxSeo?.metaDescription || `${product.description?.slice(0, 155)} Fast delivery across Ireland.`;
   const visibleDescription = isRefuseSack
     ? refuseSackSeo.pageDescription
     : isNapkinsTableware
       ? napkinsTablewareSeo.pageDescription
-      : product.description;
+      : isHotCup
+        ? hotCupSeo.pageDescription
+        : product.description;
   const seoKeywords = isRefuseSack
     ? refuseSackSeo.keywords
     : isNapkinsTableware
       ? napkinsTablewareSeo.keywords
-      : null;
+      : isHotCup
+        ? hotCupSeo.keywords
+        : null;
   const canonicalUrl = `https://www.printnpack.ie/plain-packaging/${product.id}`;
   const productLd = buildPlainProductLd(product, canonicalUrl);
 
@@ -217,6 +240,12 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
                 <li><Link href={NAPKINS_TABLEWARE_HUB_PATH} className="hover:text-stone-600 transition-colors">Plain Napkins &amp; Tableware</Link></li>
                 <li>/</li>
                 <li><Link href={`/plain-packaging?category=${NAPKINS_TABLEWARE_CATEGORY_QUERY}`} className="hover:text-stone-600 transition-colors">Wholesale</Link></li>
+              </>
+            ) : isHotCup ? (
+              <>
+                <li><Link href={HOT_CUPS_HUB_PATH} className="hover:text-stone-600 transition-colors">Disposable Coffee Cups Ireland</Link></li>
+                <li>/</li>
+                <li><Link href={`/plain-packaging?category=${HOT_CUPS_CATEGORY_QUERY}`} className="hover:text-stone-600 transition-colors">Wholesale</Link></li>
               </>
             ) : (
               <li><Link href="/plain-packaging" className="hover:text-stone-600 transition-colors">Plain Packaging</Link></li>
@@ -309,6 +338,19 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
                     range. Need branded napkins?{' '}
                     <Link href="/napkins-ireland" className="text-amber-700 hover:underline font-medium">
                       Custom printed napkins
+                    </Link>
+                    .
+                  </p>
+                )}
+                {isHotCup && (
+                  <p className="text-sm text-stone-600 mt-3 leading-relaxed">
+                    Wholesale disposable hot cup — part of our{' '}
+                    <Link href={HOT_CUPS_HUB_PATH} className="text-amber-700 hover:underline font-medium">
+                      disposable coffee cups Ireland
+                    </Link>{' '}
+                    range. Browse all{' '}
+                    <Link href={`/plain-packaging?category=${HOT_CUPS_CATEGORY_QUERY}`} className="text-amber-700 hover:underline font-medium">
+                      hot cups &amp; lids
                     </Link>
                     .
                   </p>
@@ -507,6 +549,7 @@ export async function getStaticPaths() {
     ...PLAIN_PRODUCTS.slice(0, 100).map((p) => p.id),
     ...REFUSE_SACK_PRODUCT_IDS,
     ...NAPKINS_TABLEWARE_PRODUCT_IDS,
+    ...HOT_CUPS_PRODUCT_IDS,
   ]);
   const paths = [...priorityIds].map((id) => ({ params: { slug: id } }));
   return { paths, fallback: 'blocking' };

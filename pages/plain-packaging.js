@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { PLAIN_PRODUCTS, CATEGORIES, getProductById } from '../data/plain-products';
 import { REFUSE_SACK_CATEGORY_SEO } from '../data/refuse-sacks-seo';
 import { NAPKINS_TABLEWARE_CATEGORY_SEO } from '../data/napkins-tableware-seo';
+import { HOT_CUPS_CATEGORY_SEO } from '../data/hot-cups-seo';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 
 // ─── Quote persistence (shared with detail page) ───────────────────────────────
@@ -833,6 +834,7 @@ export default function PlainPackagingPage() {
   const isBioboxCategory = activeCategory === 'Biobox';
   const isRefuseSackCategory = activeCategory === 'Refuse Sack';
   const isNapkinsTablewareCategory = activeCategory === 'Napkins & Tableware';
+  const isHotCupsCategory = activeCategory === 'Hot Cups & Lids';
   const pageTitle = isPizzaCategory
     ? 'Pizza Boxes Wholesale Ireland | Plain Kraft Corrugated | PrintNPack'
     : isCateringEquipment
@@ -843,7 +845,9 @@ export default function PlainPackagingPage() {
           ? REFUSE_SACK_CATEGORY_SEO.pageTitle
           : isNapkinsTablewareCategory
             ? NAPKINS_TABLEWARE_CATEGORY_SEO.pageTitle
-            : 'Plain Packaging — Wholesale Catering Supplies | PrintNPack Ireland';
+            : isHotCupsCategory
+              ? HOT_CUPS_CATEGORY_SEO.pageTitle
+              : 'Plain Packaging — Wholesale Catering Supplies | PrintNPack Ireland';
   const pageDescription = isPizzaCategory
     ? 'Wholesale plain pizza boxes Ireland — kraft corrugated boxes in 7", 9", 10", 12", 14" & 16". Tiered case pricing, fast delivery nationwide. Order online today.'
     : isCateringEquipment
@@ -854,7 +858,9 @@ export default function PlainPackagingPage() {
           ? REFUSE_SACK_CATEGORY_SEO.pageDescription
           : isNapkinsTablewareCategory
             ? NAPKINS_TABLEWARE_CATEGORY_SEO.pageDescription
-            : '736 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland.';
+            : isHotCupsCategory
+              ? HOT_CUPS_CATEGORY_SEO.pageDescription
+              : '736 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland.';
   const canonicalPath = isPizzaCategory
     ? 'https://www.printnpack.ie/plain-packaging?category=Pizza+Boxes'
     : isCateringEquipment
@@ -865,7 +871,9 @@ export default function PlainPackagingPage() {
           ? REFUSE_SACK_CATEGORY_SEO.canonicalPath
           : isNapkinsTablewareCategory
             ? NAPKINS_TABLEWARE_CATEGORY_SEO.canonicalPath
-            : 'https://www.printnpack.ie/plain-packaging';
+            : isHotCupsCategory
+              ? HOT_CUPS_CATEGORY_SEO.canonicalPath
+              : 'https://www.printnpack.ie/plain-packaging';
   const pageHeading = isBioboxCategory
     ? 'Biobox Containers Wholesale'
     : isPizzaCategory
@@ -876,7 +884,9 @@ export default function PlainPackagingPage() {
           ? 'Refuse Sacks & Bin Bags Wholesale'
           : isNapkinsTablewareCategory
             ? 'Napkins & Tableware Wholesale'
-            : 'Plain Packaging';
+            : isHotCupsCategory
+              ? 'Hot Cups & Lids Wholesale'
+              : 'Plain Packaging';
   const pageSubheading = isBioboxCategory
     ? '9 kraft & white biobox SKUs · case packs · tiered B2B pricing'
     : isPizzaCategory
@@ -887,7 +897,9 @@ export default function PlainPackagingPage() {
           ? '21 refuse sack SKUs · black, clear & compactor bags · tiered pricing'
           : isNapkinsTablewareCategory
             ? '58 napkin & tableware SKUs · white, kraft & airlaid · tiered pricing'
-            : '736 products · 55 categories · 4-tier volume pricing';
+            : isHotCupsCategory
+              ? '71 hot cup & lid SKUs · 8oz to 16oz · double wall & compostable · tiered pricing'
+              : '736 products · 55 categories · 4-tier volume pricing';
 
   return (
     <Layout>
@@ -932,6 +944,12 @@ export default function PlainPackagingPage() {
                 <span>/</span>
                 <span className="text-stone-700 font-medium">Wholesale</span>
               </>
+            ) : isHotCupsCategory ? (
+              <>
+                <Link href="/hot-cups-ireland" className="hover:text-stone-700 transition-colors">Hot Cups &amp; Lids</Link>
+                <span>/</span>
+                <span className="text-stone-700 font-medium">Wholesale</span>
+              </>
             ) : (
               <span className="text-stone-700 font-medium">Plain Packaging</span>
             )}
@@ -964,6 +982,15 @@ export default function PlainPackagingPage() {
                   {' '}
                   <Link href="/plain-napkins-tableware-ireland" className="text-amber-700 font-medium hover:underline">
                     Browse plain napkins &amp; tableware →
+                  </Link>
+                </p>
+              )}
+              {isHotCupsCategory && (
+                <p className="text-xs sm:text-sm text-stone-600 mt-2 max-w-2xl leading-relaxed">
+                  Wholesale disposable coffee cups and lids — 8oz, 12oz and 16oz double wall, compostable and kraft options for Irish cafes.
+                  {' '}
+                  <Link href="/hot-cups-ireland" className="text-amber-700 font-medium hover:underline">
+                    Browse disposable coffee cups Ireland →
                   </Link>
                 </p>
               )}
