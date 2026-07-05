@@ -3,6 +3,7 @@ import { TIERED_PLAIN_PRODUCTS } from '../data/plain-products-tiered';
 import { REFUSE_SACK_PRODUCT_IDS } from '../data/refuse-sacks-seo';
 import { NAPKINS_TABLEWARE_PRODUCT_IDS } from '../data/napkins-tableware-seo';
 import { HOT_CUPS_PRODUCT_IDS } from '../data/hot-cups-seo';
+import { GLOVES_PRODUCT_IDS } from '../data/gloves-seo';
 import { SITE_URL } from '../lib/site';
 
 // ── Pizza box cluster (page-1 priority) ─────────────────────────────────────
@@ -15,13 +16,15 @@ const PIZZA_PLAIN_PRODUCT_IDS = new Set(
 const REFUSE_SACK_PLAIN_PRODUCT_IDS = new Set(REFUSE_SACK_PRODUCT_IDS);
 const NAPKINS_TABLEWARE_PLAIN_PRODUCT_IDS = new Set(NAPKINS_TABLEWARE_PRODUCT_IDS);
 const HOT_CUPS_PLAIN_PRODUCT_IDS = new Set(HOT_CUPS_PRODUCT_IDS);
+const GLOVES_PLAIN_PRODUCT_IDS = new Set(GLOVES_PRODUCT_IDS);
 
 function isPriorityPlainProduct(id) {
   return (
     PIZZA_PLAIN_PRODUCT_IDS.has(id) ||
     REFUSE_SACK_PLAIN_PRODUCT_IDS.has(id) ||
     NAPKINS_TABLEWARE_PLAIN_PRODUCT_IDS.has(id) ||
-    HOT_CUPS_PLAIN_PRODUCT_IDS.has(id)
+    HOT_CUPS_PLAIN_PRODUCT_IDS.has(id) ||
+    GLOVES_PLAIN_PRODUCT_IDS.has(id)
   );
 }
 
@@ -51,6 +54,9 @@ const staticPages = [
   { path: '/plain-napkins-tableware-ireland', priority: '0.95', changefreq: 'weekly' },
   { path: '/hot-cups-ireland',              priority: '0.95', changefreq: 'weekly' },
   { path: '/plain-hot-cups-ireland',        priority: '0.88', changefreq: 'weekly' },
+  { path: '/gloves-ireland',                priority: '0.95', changefreq: 'weekly' },
+  { path: '/nitrile-gloves-ireland',        priority: '0.88', changefreq: 'weekly' },
+  { path: '/vinyl-gloves-ireland',          priority: '0.88', changefreq: 'weekly' },
   { path: '/printed-flat-handle-bags-ireland', priority: '0.9', changefreq: 'weekly' },
   // Paper bag cluster
   { path: '/paper-bags-ireland',              priority: '0.95', changefreq: 'weekly' },

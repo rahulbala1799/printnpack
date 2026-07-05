@@ -95,6 +95,21 @@ const nextConfig = {
         destination: '/hot-cups-ireland',
         permanent: true,
       },
+      {
+        source: '/disposable-gloves-ireland',
+        destination: '/gloves-ireland',
+        permanent: true,
+      },
+      {
+        source: '/catering-gloves-ireland',
+        destination: '/gloves-ireland',
+        permanent: true,
+      },
+      {
+        source: '/food-handling-gloves-ireland',
+        destination: '/gloves-ireland',
+        permanent: true,
+      },
     ];
   },
   

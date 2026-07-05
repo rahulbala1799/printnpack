@@ -32,6 +32,14 @@ import {
   getHotCupProductSeo,
   isHotCupProduct,
 } from '../../data/hot-cups-seo';
+import {
+  GLOVES_CATEGORY_QUERY,
+  GLOVES_HUB_PATH,
+  GLOVES_PRODUCT_IDS,
+  getGloveDisplayName,
+  getGloveProductSeo,
+  isGloveProduct,
+} from '../../data/gloves-seo';
 
 const PLAIN_QUOTE_KEY = 'printnpack_plain_quote';
 
@@ -86,6 +94,9 @@ function buildPlainProductLd(product, canonicalUrl) {
   } else if (isHotCupProduct(product)) {
     seoDescription = getHotCupProductSeo(product).pageDescription;
     seoName = getHotCupDisplayName(product);
+  } else if (isGloveProduct(product)) {
+    seoDescription = getGloveProductSeo(product).pageDescription;
+    seoName = getGloveDisplayName(product);
   }
 
   return buildProductLd({
@@ -128,17 +139,21 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
   const isRefuseSack = isRefuseSackProduct(product);
   const isNapkinsTableware = isNapkinsTablewareProduct(product);
   const isHotCup = isHotCupProduct(product);
+  const isGlove = isGloveProduct(product);
   const bioboxSeo = isBiobox ? getBioboxProductSeo(product) : null;
   const refuseSackSeo = isRefuseSack ? getRefuseSackProductSeo(product) : null;
   const napkinsTablewareSeo = isNapkinsTableware ? getNapkinsTablewareProductSeo(product) : null;
   const hotCupSeo = isHotCup ? getHotCupProductSeo(product) : null;
+  const gloveSeo = isGlove ? getGloveProductSeo(product) : null;
   const displayName = isRefuseSack
     ? getRefuseSackDisplayName(product)
     : isNapkinsTableware
       ? getNapkinsTablewareDisplayName(product)
       : isHotCup
         ? getHotCupDisplayName(product)
-        : product.name;
+        : isGlove
+          ? getGloveDisplayName(product)
+          : product.name;
   const pageTitle = isPizzaBox
     ? `${product.name} | Pizza Boxes Ireland | PrintNPack`
     : isHeatSealer
@@ -149,7 +164,9 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
           ? napkinsTablewareSeo.pageTitle
           : isHotCup
             ? hotCupSeo.pageTitle
-            : bioboxSeo?.pageTitle || `${product.name} — Plain Packaging | PrintNPack Ireland`;
+            : isGlove
+              ? gloveSeo.pageTitle
+              : bioboxSeo?.pageTitle || `${product.name} — Plain Packaging | PrintNPack Ireland`;
   const metaDescription = isPizzaBox
     ? `${product.name} — wholesale kraft corrugated pizza box Ireland. Tiered case pricing, fast delivery to Dublin, Cork & nationwide. Order plain pizza boxes online.`
     : isHeatSealer
@@ -160,21 +177,27 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
           ? napkinsTablewareSeo.metaDescription
           : isHotCup
             ? hotCupSeo.metaDescription
-            : bioboxSeo?.metaDescription || `${product.description?.slice(0, 155)} Fast delivery across Ireland.`;
+            : isGlove
+              ? gloveSeo.metaDescription
+              : bioboxSeo?.metaDescription || `${product.description?.slice(0, 155)} Fast delivery across Ireland.`;
   const visibleDescription = isRefuseSack
     ? refuseSackSeo.pageDescription
     : isNapkinsTableware
       ? napkinsTablewareSeo.pageDescription
       : isHotCup
         ? hotCupSeo.pageDescription
-        : product.description;
+        : isGlove
+          ? gloveSeo.pageDescription
+          : product.description;
   const seoKeywords = isRefuseSack
     ? refuseSackSeo.keywords
     : isNapkinsTableware
       ? napkinsTablewareSeo.keywords
       : isHotCup
         ? hotCupSeo.keywords
-        : null;
+        : isGlove
+          ? gloveSeo.keywords
+          : null;
   const canonicalUrl = `https://www.printnpack.ie/plain-packaging/${product.id}`;
   const productLd = buildPlainProductLd(product, canonicalUrl);
 
@@ -246,6 +269,12 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
                 <li><Link href={HOT_CUPS_HUB_PATH} className="hover:text-stone-600 transition-colors">Disposable Coffee Cups Ireland</Link></li>
                 <li>/</li>
                 <li><Link href={`/plain-packaging?category=${HOT_CUPS_CATEGORY_QUERY}`} className="hover:text-stone-600 transition-colors">Wholesale</Link></li>
+              </>
+            ) : isGlove ? (
+              <>
+                <li><Link href={GLOVES_HUB_PATH} className="hover:text-stone-600 transition-colors">Disposable Gloves Ireland</Link></li>
+                <li>/</li>
+                <li><Link href={`/plain-packaging?category=${GLOVES_CATEGORY_QUERY}`} className="hover:text-stone-600 transition-colors">Wholesale</Link></li>
               </>
             ) : (
               <li><Link href="/plain-packaging" className="hover:text-stone-600 transition-colors">Plain Packaging</Link></li>
@@ -351,6 +380,19 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
                     range. Browse all{' '}
                     <Link href={`/plain-packaging?category=${HOT_CUPS_CATEGORY_QUERY}`} className="text-amber-700 hover:underline font-medium">
                       hot cups &amp; lids
+                    </Link>
+                    .
+                  </p>
+                )}
+                {isGlove && (
+                  <p className="text-sm text-stone-600 mt-3 leading-relaxed">
+                    Wholesale disposable glove — part of our{' '}
+                    <Link href={GLOVES_HUB_PATH} className="text-sky-700 hover:underline font-medium">
+                      disposable gloves Ireland
+                    </Link>{' '}
+                    range. Browse all{' '}
+                    <Link href={`/plain-packaging?category=${GLOVES_CATEGORY_QUERY}`} className="text-sky-700 hover:underline font-medium">
+                      nitrile &amp; vinyl gloves
                     </Link>
                     .
                   </p>
@@ -550,6 +592,7 @@ export async function getStaticPaths() {
     ...REFUSE_SACK_PRODUCT_IDS,
     ...NAPKINS_TABLEWARE_PRODUCT_IDS,
     ...HOT_CUPS_PRODUCT_IDS,
+    ...GLOVES_PRODUCT_IDS,
   ]);
   const paths = [...priorityIds].map((id) => ({ params: { slug: id } }));
   return { paths, fallback: 'blocking' };
