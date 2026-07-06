@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { PLAIN_PRODUCTS, CATEGORIES } from '../../data/plain-products';
 import { isPlaceholderImage } from '../PackagingIcon';
+import { getCategoryHubHref, PRIMARY_WHOLESALE_HUBS } from '../../data/wholesale-hub-links';
 
 // Pick products that have real images, spread across different categories
 const getFeaturedPlainProducts = () => {
@@ -69,17 +70,36 @@ const PlainPackagingShowcase = () => {
           </Link>
         </div>
 
+        {/* Wholesale hub links */}
+        <div className="mb-6 sm:mb-8">
+          <p className="text-xs font-semibold text-stone-500 uppercase tracking-wide mb-2">Popular wholesale categories</p>
+          <div className="flex flex-wrap gap-2">
+            {PRIMARY_WHOLESALE_HUBS.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className="text-xs font-medium bg-white border border-stone-200 text-stone-700 px-3 py-1.5 rounded-full hover:border-amber-300 hover:text-amber-800 hover:shadow-sm transition-all"
+              >
+                {label}
+              </Link>
+            ))}
+          </div>
+        </div>
+
         {/* Category pills */}
         <div className="flex flex-wrap gap-2 mb-6 sm:mb-8">
-          {topCategories.map(({ name, count }) => (
+          {topCategories.map(({ name, count }) => {
+            const hubHref = getCategoryHubHref(name);
+            return (
             <Link
               key={name}
-              href={`/plain-packaging`}
+              href={hubHref || `/plain-packaging?category=${encodeURIComponent(name)}`}
               className="text-xs font-medium bg-white border border-stone-200 text-stone-600 px-3 py-1.5 rounded-full hover:border-stone-400 hover:shadow-sm transition-all"
             >
               {name} <span className="text-stone-400">({count})</span>
             </Link>
-          ))}
+            );
+          })}
           <Link
             href="/plain-packaging"
             className="text-xs font-medium bg-stone-100 text-stone-500 px-3 py-1.5 rounded-full hover:bg-stone-200 transition-colors"

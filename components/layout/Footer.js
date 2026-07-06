@@ -39,6 +39,11 @@ const PRODUCT_LINKS = [
   { label: 'Vinyl Stickers', href: '/vinyl-stickers' },
   { label: 'Leaflets Ireland', href: '/services/leaflets' },
   { label: 'Plain Packaging', href: '/plain-packaging' },
+  { label: 'Hot Cups & Lids', href: '/hot-cups-ireland' },
+  { label: 'Disposable Gloves', href: '/gloves-ireland' },
+  { label: 'Nitrile Gloves', href: '/nitrile-gloves-ireland' },
+  { label: 'Refuse Sacks', href: '/refuse-sacks-ireland' },
+  { label: 'Plain Napkins & Tableware', href: '/plain-napkins-tableware-ireland' },
   { label: 'Biobox Containers', href: '/biobox-containers-ireland' },
   { label: 'Correx Boards', href: '/correx-boards' },
 ];

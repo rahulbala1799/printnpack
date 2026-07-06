@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../layout/Layout';
 import RelatedSeoLinks from './RelatedSeoLinks';
+import { getRelatedWholesaleLinks } from '../../data/wholesale-hub-links';
 import PackagingIcon, { isPlaceholderImage } from '../PackagingIcon';
 import { SITE_URL } from '../../lib/site';
 import { PLAIN_PRODUCTS } from '../../data/plain-products';
@@ -242,14 +243,7 @@ export default function BioboxClusterPage({ config }) {
 
       <RelatedSeoLinks
         title="Related wholesale packaging"
-        links={[
-          { href: '/plain-packaging?category=Biobox', label: 'Biobox category', desc: 'All biobox SKUs with live case pricing' },
-          { href: '/plain-packaging', label: 'Plain Packaging', desc: '736 wholesale catering products' },
-          { href: '/plain-burger-boxes-ireland', label: 'Plain Burger Boxes', desc: 'Bagasse & corrugated takeaway boxes' },
-          { href: '/plain-pizza-boxes-ireland', label: 'Plain Pizza Boxes', desc: 'Kraft pizza boxes by the case' },
-          { href: '/eco-bagasse-burger-boxes', label: 'Bagasse Meal Boxes', desc: 'Compostable takeaway containers' },
-          { href: '/blog/plain-packaging-wholesale-ireland', label: 'Wholesale Guide', desc: 'How plain packaging pricing works' },
-        ]}
+        links={getRelatedWholesaleLinks('/biobox-containers-ireland')}
       />
     </Layout>
   );

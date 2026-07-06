@@ -7,12 +7,15 @@ import { SITE_URL } from '../lib/site';
 import { PLAIN_PRODUCTS } from '../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 import { buildProductListItem } from '../lib/schema';
+import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
+import { getRelatedWholesaleLinks } from '../data/wholesale-hub-links';
 import {
   NAPKINS_TABLEWARE_CATEGORY,
   NAPKINS_TABLEWARE_CATEGORY_QUERY,
   NAPKINS_TABLEWARE_FEATURED_IDS,
   NAPKINS_TABLEWARE_HUB_CONFIG,
   NAPKINS_TABLEWARE_HUB_FAQS,
+  NAPKINS_TABLEWARE_HUB_PATH,
   getNapkinsTablewareDisplayName,
 } from '../data/napkins-tableware-seo';
 
@@ -368,6 +371,11 @@ export default function PlainNapkinsTablewareIreland() {
           </div>
         </div>
       </section>
+
+      <RelatedSeoLinks
+        title="More wholesale catering supplies"
+        links={getRelatedWholesaleLinks(NAPKINS_TABLEWARE_HUB_PATH)}
+      />
 
       <section className="bg-gray-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 text-center">

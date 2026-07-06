@@ -7,10 +7,13 @@ import { SITE_URL } from '../lib/site';
 import { PLAIN_PRODUCTS } from '../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 import { buildProductListItem } from '../lib/schema';
+import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
+import { getRelatedWholesaleLinks } from '../data/wholesale-hub-links';
 import {
   REFUSE_SACK_CATEGORY,
   REFUSE_SACK_HUB_CONFIG,
   REFUSE_SACK_HUB_FAQS,
+  REFUSE_SACK_HUB_PATH,
   getRefuseSackDisplayName,
 } from '../data/refuse-sacks-seo';
 
@@ -367,6 +370,11 @@ export default function RefuseSacksIreland() {
           </div>
         </div>
       </section>
+
+      <RelatedSeoLinks
+        title="More wholesale catering supplies"
+        links={getRelatedWholesaleLinks(REFUSE_SACK_HUB_PATH)}
+      />
 
       {/* CTA */}
       <section className="bg-gray-900">

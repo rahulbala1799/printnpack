@@ -7,6 +7,8 @@ import { SITE_URL } from '../lib/site';
 import { PLAIN_PRODUCTS } from '../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 import { buildProductListItem } from '../lib/schema';
+import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
+import { getRelatedWholesaleLinks } from '../data/wholesale-hub-links';
 import {
   GLOVES_CATEGORY,
   GLOVES_CATEGORY_QUERY,
@@ -471,6 +473,11 @@ export default function GlovesIreland() {
           </div>
         </div>
       </section>
+
+      <RelatedSeoLinks
+        title="More wholesale catering supplies"
+        links={getRelatedWholesaleLinks(GLOVES_HUB_PATH)}
+      />
 
       <section className="py-12 bg-sky-800">
         <div className="max-w-4xl mx-auto px-4 text-center">

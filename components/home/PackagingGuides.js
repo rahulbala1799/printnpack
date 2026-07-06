@@ -255,6 +255,55 @@ const guides = [
     image: '/ifa/product/leaflet/leaflet-hero.jpg',
     cta: 'View local printing',
   },
+  {
+    href: '/hot-cups-ireland',
+    title: 'Hot Cups & Lids Ireland',
+    description: 'Wholesale disposable coffee cups — 8oz to 16oz, compostable & plain.',
+    image: '/images/plain-packaging/100070.webp',
+    cta: 'Browse hot cups',
+  },
+  {
+    href: '/gloves-ireland',
+    title: 'Disposable Gloves Ireland',
+    description: 'Nitrile, vinyl & poly gloves for catering — S to XL, case pricing.',
+    image: '/images/plain-packaging/170054.webp',
+    cta: 'Browse gloves',
+  },
+  {
+    href: '/refuse-sacks-ireland',
+    title: 'Refuse Sacks Ireland',
+    description: 'Black, clear & Greensack bin bags — wheelie bin & compactor sizes.',
+    image: '/images/plain-packaging/150003.webp',
+    cta: 'Browse refuse sacks',
+  },
+  {
+    href: '/plain-napkins-tableware-ireland',
+    title: 'Plain Napkins & Tableware',
+    description: 'Wholesale napkins, placemats, table covers & banquet rolls.',
+    image: '/images/hero/napkin.svg',
+    cta: 'Browse napkins',
+  },
+  {
+    href: '/biobox-containers-ireland',
+    title: 'Biobox Containers',
+    description: 'Kraft & white leak-proof takeaway food boxes — No.1 to No.12.',
+    image: '/images/ifa/heroh/logos/logo.png',
+    cta: 'Browse biobox',
+  },
+  {
+    href: '/plain-packaging',
+    title: 'Plain Packaging Wholesale',
+    description: '736+ unbranded catering products — cups, gloves, bags & more.',
+    image: '/images/ifa/heroh/logos/logo.png',
+    cta: 'Browse catalogue',
+  },
+  {
+    href: '/blog/plain-packaging-wholesale-ireland',
+    title: 'Wholesale Packaging Guide',
+    description: 'How plain packaging case pricing works for Irish businesses.',
+    image: '/images/ifa/heroh/logos/logo.png',
+    cta: 'Read the guide',
+  },
 ];
 
 export default function PackagingGuides() {

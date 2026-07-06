@@ -11,6 +11,8 @@ import { NAPKINS_TABLEWARE_CATEGORY_SEO } from '../data/napkins-tableware-seo';
 import { HOT_CUPS_CATEGORY_SEO } from '../data/hot-cups-seo';
 import { GLOVES_CATEGORY_SEO } from '../data/gloves-seo';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
+import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
+import { getRelatedWholesaleLinks, PRIMARY_WHOLESALE_HUBS } from '../data/wholesale-hub-links';
 
 // ─── Quote persistence (shared with detail page) ───────────────────────────────
 const PLAIN_QUOTE_KEY = 'printnpack_plain_quote';
@@ -1031,6 +1033,27 @@ export default function PlainPackagingPage() {
         </div>
       </div>
 
+      {activeCategory === 'All' && (
+        <div className="bg-stone-50 border-b border-stone-200">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-4">
+            <h2 className="text-sm font-bold text-stone-900 mb-1">Wholesale category hubs</h2>
+            <p className="text-xs text-stone-500 mb-3">Guides, FAQs &amp; full SKU lists for popular catering lines</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+              {PRIMARY_WHOLESALE_HUBS.map(({ href, label, desc }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="bg-white border border-stone-200 rounded-xl px-3 py-2.5 hover:border-stone-400 hover:shadow-sm transition-all"
+                >
+                  <p className="text-xs font-semibold text-stone-900 leading-snug">{label}</p>
+                  {desc && <p className="text-[10px] text-stone-500 mt-0.5 line-clamp-2">{desc}</p>}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* ── Browse by category: 4 visible, then "Show 4 more" (max 12), then "View all" → modal ── */}
       <div className="bg-white border-b border-stone-200">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
@@ -1409,6 +1432,11 @@ export default function PlainPackagingPage() {
       )}
 
       </div>
+
+      <RelatedSeoLinks
+        title="More wholesale packaging &amp; catering supplies"
+        links={getRelatedWholesaleLinks('/plain-packaging', { limit: 8 })}
+      />
 
       {/* ── Quote Drawer ───────────────────────────────────────────────────────── */}
       {drawerOpen && (

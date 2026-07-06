@@ -7,6 +7,8 @@ import { SITE_URL } from '../lib/site';
 import { PLAIN_PRODUCTS } from '../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 import { buildProductListItem } from '../lib/schema';
+import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
+import { getRelatedWholesaleLinks } from '../data/wholesale-hub-links';
 import {
   HOT_CUPS_CATEGORY,
   HOT_CUPS_CATEGORY_QUERY,
@@ -505,6 +507,11 @@ export default function HotCupsIreland() {
           </div>
         </div>
       </section>
+
+      <RelatedSeoLinks
+        title="More wholesale catering supplies"
+        links={getRelatedWholesaleLinks(HOT_CUPS_HUB_PATH)}
+      />
 
       <section className="py-12 bg-amber-800">
         <div className="max-w-4xl mx-auto px-4 text-center">

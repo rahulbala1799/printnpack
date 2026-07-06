@@ -7,6 +7,8 @@ import { SITE_URL } from '../lib/site';
 import { PLAIN_PRODUCTS } from '../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 import { buildProductListItem } from '../lib/schema';
+import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
+import { getRelatedWholesaleLinks } from '../data/wholesale-hub-links';
 import {
   GLOVES_CATEGORY,
   GLOVES_CATEGORY_QUERY,
@@ -201,6 +203,11 @@ export default function VinylGlovesIreland() {
           </p>
         </div>
       </section>
+
+      <RelatedSeoLinks
+        title="More wholesale catering supplies"
+        links={getRelatedWholesaleLinks(VINYL_GLOVES_HUB_PATH)}
+      />
     </Layout>
   );
 }

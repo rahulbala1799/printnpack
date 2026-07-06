@@ -222,6 +222,9 @@ export default function NapkinLocalPage({ config }) {
           { href: '/products/printed-napkins', label: 'Printed Napkins', desc: 'Custom logo napkins from €0.05' },
           { href: '/blog/personalised-napkins-ireland-guide', label: 'Personalised Napkins Guide', desc: 'Sizes, materials & wedding tips' },
           { href: '/napkin-faq-ireland', label: 'Napkin FAQ', desc: '25+ instant answers' },
+          { href: '/hot-cups-ireland', label: 'Hot Cups & Lids', desc: 'Disposable coffee cups wholesale' },
+          { href: '/gloves-ireland', label: 'Disposable Gloves', desc: 'Nitrile & vinyl catering gloves' },
+          { href: '/plain-packaging', label: 'Plain Packaging', desc: '736+ wholesale catering SKUs' },
           ...siblingLinks,
         ]}
       />

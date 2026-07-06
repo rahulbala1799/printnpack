@@ -7,6 +7,8 @@ import { SITE_URL } from '../lib/site';
 import { PLAIN_PRODUCTS } from '../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 import { buildProductListItem } from '../lib/schema';
+import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
+import { getRelatedWholesaleLinks } from '../data/wholesale-hub-links';
 import {
   HOT_CUPS_CATEGORY,
   HOT_CUPS_CATEGORY_QUERY,
@@ -219,6 +221,11 @@ export default function PlainHotCupsIreland() {
           </div>
         </div>
       </section>
+
+      <RelatedSeoLinks
+        title="More wholesale catering supplies"
+        links={getRelatedWholesaleLinks(PLAIN_HOT_CUPS_HUB_PATH)}
+      />
     </Layout>
   );
 }

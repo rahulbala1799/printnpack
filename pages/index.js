@@ -107,6 +107,11 @@ export default function Home() {
           name: 'Plain Packaging Wholesale',
           itemListElement: [
             catalogOffer('Wholesale Food Containers', '/plain-packaging'),
+            catalogOffer('Hot Cups & Lids Ireland', '/hot-cups-ireland'),
+            catalogOffer('Disposable Gloves Ireland', '/gloves-ireland'),
+            catalogOffer('Refuse Sacks Ireland', '/refuse-sacks-ireland'),
+            catalogOffer('Plain Napkins & Tableware', '/plain-napkins-tableware-ireland'),
+            catalogOffer('Biobox Containers', '/biobox-containers-ireland'),
             catalogOffer('Catering Supplies Ireland', '/plain-packaging'),
             catalogOffer('Disposable Packaging', '/plain-packaging'),
           ],

@@ -58,12 +58,21 @@ const categories = [
   },
   {
     name: 'Hospitality',
-    description: 'Napkins & branded items',
+    description: 'Napkins, cups, gloves & tableware',
     icon: FaBoxOpen,
     color: 'bg-amber-50 text-amber-600 border-amber-200',
     iconBg: 'bg-amber-100',
-    href: '/products?group=packaging&category=Hospitality+Products',
-    productCount: 2,
+    href: '/plain-napkins-tableware-ireland',
+    productCount: 58,
+  },
+  {
+    name: 'Catering Supplies',
+    description: 'Hot cups, gloves, refuse sacks & more',
+    icon: FaUtensils,
+    color: 'bg-stone-50 text-stone-700 border-stone-200',
+    iconBg: 'bg-stone-100',
+    href: '/plain-packaging',
+    productCount: 736,
   },
 ];
 
@@ -80,7 +89,7 @@ const CategoryGrid = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4">
+        <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-2 sm:gap-4">
           {categories.map((cat) => {
             const IconComponent = cat.icon;
             return (

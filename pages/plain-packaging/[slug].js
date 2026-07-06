@@ -16,6 +16,8 @@ import {
   isNapkinsTablewareProduct,
 } from '../../data/napkins-tableware-seo';
 import PackagingIcon, { isPlaceholderImage } from '../../components/PackagingIcon';
+import RelatedSeoLinks from '../../components/seo/RelatedSeoLinks';
+import { getCategoryHubHref, getRelatedWholesaleLinks } from '../../data/wholesale-hub-links';
 import { buildProductLd } from '../../lib/schema';
 import { getBioboxProductSeo } from '../../data/biobox-cluster';
 import {
@@ -535,6 +537,13 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
             </div>
           </div>
         </section>
+      )}
+
+      {(isHotCup || isGlove || isRefuseSack || isNapkinsTableware) && (
+        <RelatedSeoLinks
+          title="More wholesale catering supplies"
+          links={getRelatedWholesaleLinks(getCategoryHubHref(product.category))}
+        />
       )}
 
       {/* ── CTA Banner ───────────────────────────────────────────────────────── */}
