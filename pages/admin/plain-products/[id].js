@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { getPlainProductPath, getPlainProductPathById } from '../../../data/plain-products';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -156,7 +157,7 @@ export default function AdminPlainProductDetail() {
                     {product.is_active !== false ? 'Active' : 'Inactive'}
                   </span>
                   <Link
-                    href={`/plain-packaging/${product.id}`}
+                    href={getPlainProductPath(product)}
                     target="_blank"
                     className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-white transition-colors"
                   >

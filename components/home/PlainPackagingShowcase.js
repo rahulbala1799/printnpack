@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { PLAIN_PRODUCTS, CATEGORIES } from '../../data/plain-products';
+import { PLAIN_PRODUCTS, CATEGORIES, getPlainProductPath } from '../../data/plain-products';
 import { isPlaceholderImage } from '../PackagingIcon';
 import { getCategoryHubHref, PRIMARY_WHOLESALE_HUBS } from '../../data/wholesale-hub-links';
 
@@ -117,7 +117,7 @@ const PlainPackagingShowcase = () => {
             return (
               <Link
                 key={product.id}
-                href={`/plain-packaging/${product.id}`}
+                href={getPlainProductPath(product)}
                 className="group block bg-white rounded-xl border border-stone-200 overflow-hidden hover:shadow-lg hover:border-stone-300 transition-all duration-200"
               >
                 {/* Image */}

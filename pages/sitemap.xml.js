@@ -1,5 +1,6 @@
 import products from '../data/products';
 import { TIERED_PLAIN_PRODUCTS } from '../data/plain-products-tiered';
+import { PLAIN_PRODUCTS, getPlainProductPath } from '../data/plain-products';
 import { REFUSE_SACK_PRODUCT_IDS } from '../data/refuse-sacks-seo';
 import { NAPKINS_TABLEWARE_PRODUCT_IDS } from '../data/napkins-tableware-seo';
 import { HOT_CUPS_PRODUCT_IDS } from '../data/hot-cups-seo';
@@ -145,7 +146,7 @@ function urlEntry(loc, { lastmod, changefreq, priority }) {
   </url>`;
 }
 
-function generateSitemap(productIds, plainPackagingIds) {
+function generateSitemap(productIds) {
   const today = new Date().toISOString().split('T')[0];
 
   const staticUrls = staticPages
@@ -164,12 +165,12 @@ function generateSitemap(productIds, plainPackagingIds) {
     )
     .join('');
 
-  const plainPackagingUrls = (plainPackagingIds || [])
-    .map((id) =>
-      urlEntry(`${SITE_URL}/plain-packaging/${id}`, {
+  const plainPackagingUrls = (PLAIN_PRODUCTS || [])
+    .map((product) =>
+      urlEntry(`${SITE_URL}${getPlainProductPath(product)}`, {
         lastmod: today,
         changefreq: 'monthly',
-        priority: isPriorityPlainProduct(id) ? '0.8' : '0.7',
+        priority: isPriorityPlainProduct(product.id) ? '0.8' : '0.7',
       })
     )
     .join('');
@@ -187,9 +188,7 @@ export async function getServerSideProps({ res }) {
     .map((p) => p.id)
     .filter((id) => id && !DEDICATED_PRODUCT_IDS.has(id));
 
-  const plainPackagingIds = (TIERED_PLAIN_PRODUCTS || []).map((p) => p.id).filter(Boolean);
-
-  const sitemap = generateSitemap(productIds, plainPackagingIds);
+  const sitemap = generateSitemap(productIds);
 
   res.setHeader('Content-Type', 'application/xml');
   res.setHeader('Cache-Control', 'public, s-maxage=86400, stale-while-revalidate=43200');

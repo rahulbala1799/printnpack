@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
-import { PLAIN_PRODUCTS } from '../data/plain-products';
+import { PLAIN_PRODUCTS, getPlainProductPath, getPlainProductPathById } from '../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 import { buildProductListItem } from '../lib/schema';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
@@ -53,7 +53,7 @@ const itemListLd = {
   name: 'Vinyl Gloves Ireland',
   description: VINYL_GLOVES_CONFIG.metaDescription,
   itemListElement: vinylGloves.map((p, i) => {
-    const productUrl = `${SITE_URL}/plain-packaging/${p.id}`;
+    const productUrl = `${SITE_URL}${getPlainProductPath(p)}`;
     return buildProductListItem({
       position: i + 1,
       name: getGloveDisplayName(p),
@@ -123,7 +123,7 @@ export default function VinylGlovesIreland() {
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">{intro}</p>
               <div className="flex flex-wrap gap-3">
                 <Link
-                  href="/plain-packaging/122090"
+                  href={getPlainProductPathById('122090')}
                   className="inline-flex bg-sky-700 text-white font-semibold px-6 py-3 rounded-xl hover:bg-sky-800 transition-colors"
                 >
                   Blue Vinyl Medium
@@ -161,7 +161,7 @@ export default function VinylGlovesIreland() {
             {blueVinyl.map((p) => (
               <Link
                 key={p.id}
-                href={`/plain-packaging/${p.id}`}
+                href={getPlainProductPath(p)}
                 className="group bg-white rounded-2xl border border-gray-200 p-5 hover:border-sky-300 hover:shadow-lg transition-all"
               >
                 <h3 className="font-bold text-gray-900 text-sm leading-snug group-hover:text-sky-700 mb-2">
@@ -178,7 +178,7 @@ export default function VinylGlovesIreland() {
             {clearVinyl.map((p) => (
               <Link
                 key={p.id}
-                href={`/plain-packaging/${p.id}`}
+                href={getPlainProductPath(p)}
                 className="group bg-white rounded-2xl border border-gray-200 p-5 hover:border-sky-300 hover:shadow-lg transition-all"
               >
                 <h3 className="font-bold text-gray-900 text-sm leading-snug group-hover:text-sky-700 mb-2">

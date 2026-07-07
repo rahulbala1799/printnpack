@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
-import { PLAIN_PRODUCTS } from '../data/plain-products';
+import { PLAIN_PRODUCTS, getPlainProductPath, getPlainProductPathById } from '../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 import { buildProductListItem } from '../lib/schema';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
@@ -77,7 +77,7 @@ const itemListLd = {
     .filter((p) => NAPKINS_TABLEWARE_FEATURED_IDS.has(p.id))
     .slice(0, 12)
     .map((p, i) => {
-      const productUrl = `${SITE_URL}/plain-packaging/${p.id}`;
+      const productUrl = `${SITE_URL}${getPlainProductPath(p)}`;
       return buildProductListItem({
         position: i + 1,
         name: getNapkinsTablewareDisplayName(p),
@@ -104,7 +104,7 @@ const webPageLd = {
 function ProductCard({ product }) {
   return (
     <Link
-      href={`/plain-packaging/${product.id}`}
+      href={getPlainProductPath(product)}
       className="group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-amber-300 hover:shadow-lg transition-all"
     >
       <div className="relative h-44 bg-stone-50">
@@ -325,7 +325,7 @@ export default function PlainNapkinsTablewareIreland() {
             {napkinProducts.map((p) => (
               <Link
                 key={p.id}
-                href={`/plain-packaging/${p.id}`}
+                href={getPlainProductPath(p)}
                 className="bg-white border border-gray-200 rounded-xl p-4 hover:border-amber-300 hover:shadow-md transition-all group"
               >
                 <p className="text-xs text-gray-400">#{p.code}</p>
@@ -343,7 +343,7 @@ export default function PlainNapkinsTablewareIreland() {
             {tablewareProducts.map((p) => (
               <Link
                 key={p.id}
-                href={`/plain-packaging/${p.id}`}
+                href={getPlainProductPath(p)}
                 className="bg-white border border-gray-200 rounded-xl p-4 hover:border-amber-300 hover:shadow-md transition-all group"
               >
                 <p className="text-xs text-gray-400">#{p.code}</p>

@@ -6,7 +6,7 @@ import Layout from '../layout/Layout';
 import RelatedSeoLinks from './RelatedSeoLinks';
 import PackagingIcon, { isPlaceholderImage } from '../PackagingIcon';
 import { SITE_URL } from '../../lib/site';
-import { PLAIN_PRODUCTS } from '../../data/plain-products';
+import { PLAIN_PRODUCTS, getPlainProductPath, getPlainProductPathById } from '../../data/plain-products';
 import { PLAIN_BAG_CATEGORIES } from '../../data/paper-bags-cluster';
 
 const HUB = '/paper-bags-ireland';
@@ -129,7 +129,7 @@ export default function PaperBagsClusterPage({ config }) {
             </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {plainBagProducts.map((product) => (
-                <Link key={product.id} href={`/plain-packaging/${product.id}`} className="group bg-white rounded-xl border border-gray-200 p-4 hover:border-emerald-200 hover:shadow-md transition-all">
+                <Link key={product.id} href={getPlainProductPath(product)} className="group bg-white rounded-xl border border-gray-200 p-4 hover:border-emerald-200 hover:shadow-md transition-all">
                   <div className="relative aspect-square mb-3 rounded-lg overflow-hidden border border-gray-100 bg-gray-50">
                     {isPlaceholderImage(product.imageSrc) ? (
                       <PackagingIcon category={product.category} className="w-full h-full" />

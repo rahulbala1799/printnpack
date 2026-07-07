@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
-import { PLAIN_PRODUCTS } from '../data/plain-products';
+import { PLAIN_PRODUCTS, getPlainProductPath, getPlainProductPathById } from '../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 import { buildProductListItem } from '../lib/schema';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
@@ -75,7 +75,7 @@ const itemListLd = {
   name: 'Refuse Sacks Ireland',
   description: REFUSE_SACK_HUB_CONFIG.metaDescription,
   itemListElement: refuseSacks.slice(0, 12).map((p, i) => {
-    const productUrl = `${SITE_URL}/plain-packaging/${p.id}`;
+    const productUrl = `${SITE_URL}${getPlainProductPath(p)}`;
     return buildProductListItem({
       position: i + 1,
       name: getRefuseSackDisplayName(p),
@@ -184,7 +184,7 @@ export default function RefuseSacksIreland() {
                   Browse All Refuse Sacks
                 </Link>
                 <Link
-                  href="/plain-packaging/150003"
+                  href={getPlainProductPathById('150003')}
                   className="inline-flex items-center gap-2 bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors"
                 >
                   26×44 Black Hi-Grade
@@ -218,7 +218,7 @@ export default function RefuseSacksIreland() {
             {refuseSacks.filter((p) => featuredIds.has(p.id)).map((p) => (
                 <Link
                   key={p.id}
-                  href={`/plain-packaging/${p.id}`}
+                  href={getPlainProductPath(p)}
                   className="group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-emerald-300 hover:shadow-lg transition-all"
                 >
                   <div className="relative h-44 bg-stone-50">
@@ -299,7 +299,7 @@ export default function RefuseSacksIreland() {
             {refuseSacks.map((p) => (
               <Link
                 key={p.id}
-                href={`/plain-packaging/${p.id}`}
+                href={getPlainProductPath(p)}
                 className="bg-white border border-gray-200 rounded-xl p-4 hover:border-emerald-300 hover:shadow-md transition-all group"
               >
                 <p className="text-xs text-gray-400">#{p.code}</p>

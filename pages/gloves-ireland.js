@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
-import { PLAIN_PRODUCTS } from '../data/plain-products';
+import { PLAIN_PRODUCTS, getPlainProductPath, getPlainProductPathById } from '../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 import { buildProductListItem } from '../lib/schema';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
@@ -62,13 +62,13 @@ const gloveTypes = [
   {
     title: 'Deli-fit & poly',
     desc: 'Loose-fit deli gloves and embossed poly gloves for sandwich counters and quick tasks.',
-    link: '/plain-packaging/122175',
+    link: getPlainProductPathById('122175'),
     ids: ['122175', '122176', '122177', '122178', '122173', '122174'],
   },
   {
     title: 'Heavy-duty rubber',
     desc: 'Long-sleeve black rubber gloves for washing up and heavy kitchen tasks.',
-    link: '/plain-packaging/122180',
+    link: getPlainProductPathById('122180'),
     ids: ['122180'],
   },
 ];
@@ -108,7 +108,7 @@ const itemListLd = {
   name: 'Disposable Gloves Ireland',
   description: GLOVES_HUB_CONFIG.metaDescription,
   itemListElement: gloves.slice(0, 12).map((p, i) => {
-    const productUrl = `${SITE_URL}/plain-packaging/${p.id}`;
+    const productUrl = `${SITE_URL}${getPlainProductPath(p)}`;
     return buildProductListItem({
       position: i + 1,
       name: getGloveDisplayName(p),
@@ -253,7 +253,7 @@ export default function GlovesIreland() {
             {gloves.filter((p) => GLOVES_FEATURED_IDS.has(p.id)).map((p) => (
               <Link
                 key={p.id}
-                href={`/plain-packaging/${p.id}`}
+                href={getPlainProductPath(p)}
                 className="group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-sky-300 hover:shadow-lg transition-all"
               >
                 <div className="relative h-44 bg-stone-50">
@@ -331,7 +331,7 @@ export default function GlovesIreland() {
                     return (
                       <Link
                         key={id}
-                        href={`/plain-packaging/${id}`}
+                        href={getPlainProductPathById(id)}
                         className="text-xs bg-sky-50 text-sky-800 px-2 py-1 rounded-lg hover:bg-sky-100 transition-colors"
                       >
                         {getGloveDisplayName(p).slice(0, 36)}
@@ -392,7 +392,7 @@ export default function GlovesIreland() {
             {nitrileProducts.map((p) => (
               <Link
                 key={p.id}
-                href={`/plain-packaging/${p.id}`}
+                href={getPlainProductPath(p)}
                 className="bg-white border border-gray-200 rounded-xl p-4 hover:border-sky-300 hover:shadow-md transition-all group"
               >
                 <p className="text-xs text-gray-400">#{p.code}</p>
@@ -415,7 +415,7 @@ export default function GlovesIreland() {
             {vinylProducts.map((p) => (
               <Link
                 key={p.id}
-                href={`/plain-packaging/${p.id}`}
+                href={getPlainProductPath(p)}
                 className="bg-white border border-gray-200 rounded-xl p-4 hover:border-sky-300 hover:shadow-md transition-all group"
               >
                 <p className="text-xs text-gray-400">#{p.code}</p>
@@ -443,7 +443,7 @@ export default function GlovesIreland() {
                 {otherProducts.map((p) => (
                   <Link
                     key={p.id}
-                    href={`/plain-packaging/${p.id}`}
+                    href={getPlainProductPath(p)}
                     className="bg-white border border-gray-200 rounded-xl p-4 hover:border-sky-300 hover:shadow-md transition-all group"
                   >
                     <p className="text-xs text-gray-400">#{p.code}</p>

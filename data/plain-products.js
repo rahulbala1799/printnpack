@@ -2,6 +2,12 @@
 // 736 non-branded products — synced from New Cost list.xlsx via scripts/sync-plain-catalog-from-cost-list.py
 // Do not add manual products here — re-run the sync script after cost list updates.
 import { TIERED_PLAIN_PRODUCTS, TIERED_CATEGORIES } from './plain-products-tiered';
+import {
+  getPlainProductPath,
+  getPlainProductSlug,
+} from '../lib/plain-product-urls';
+
+export { getPlainProductPath, getPlainProductSlug } from '../lib/plain-product-urls';
 
 // Product images in public/images/plain-packaging/ — assign by product code (overrides placeholder logo)
 const PLAIN_IMAGE_OVERRIDES = {
@@ -288,8 +294,32 @@ function applyImageOverrides(products) {
 export const PLAIN_PRODUCTS = applyImageOverrides(TIERED_PLAIN_PRODUCTS);
 export const CATEGORIES = ['All', ...TIERED_CATEGORIES];
 
+const SLUG_INDEX = new Map();
+PLAIN_PRODUCTS.forEach((product) => {
+  SLUG_INDEX.set(getPlainProductSlug(product), product);
+  SLUG_INDEX.set(product.id, product);
+});
+
 export function getProductById(id) {
   return PLAIN_PRODUCTS.find(p => p.id === id) || null;
+}
+
+export function getProductBySlug(slug) {
+  if (!slug) return null;
+  return SLUG_INDEX.get(slug) ?? null;
+}
+
+export function resolvePlainProduct(slugOrId) {
+  return getProductBySlug(slugOrId);
+}
+
+export function getPlainProductPathById(id) {
+  const product = getProductById(id);
+  return product ? getPlainProductPath(product) : `/plain-packaging/${id}`;
+}
+
+export function getAllPlainProductSlugs() {
+  return PLAIN_PRODUCTS.map((p) => getPlainProductSlug(p));
 }
 
 export function getRelatedProducts(id) {

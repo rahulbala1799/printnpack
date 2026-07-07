@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { getPlainProductPathById } from '../../data/plain-products';
 import Link from 'next/link';
 import Image from 'next/image';
 import Layout from '../../components/layout/Layout';
@@ -193,7 +194,7 @@ const wholesaleProducts = [
     name: '8oz Kraft Hot Cups',
     price: 'From €26.65 / case',
     badge: 'Recyclable',
-    href: '/plain-packaging/100396',
+    href: getPlainProductPathById('100396'),
   },
   {
     src: '/images/plain-packaging/10928.webp',
@@ -201,7 +202,7 @@ const wholesaleProducts = [
     name: 'Foil Takeaway Trays',
     price: 'Case pricing',
     badge: 'Recyclable',
-    href: '/plain-packaging/10928',
+    href: getPlainProductPathById('10928'),
   },
   {
     src: '/images/plain-packaging/100103.webp',
@@ -209,7 +210,7 @@ const wholesaleProducts = [
     name: '12oz Aqueous Hot Cups',
     price: 'From €21.27 / case',
     badge: 'PFAS-Free',
-    href: '/plain-packaging/100103',
+    href: getPlainProductPathById('100103'),
   },
   {
     src: '/images/plain-packaging/120074.webp',
@@ -217,7 +218,7 @@ const wholesaleProducts = [
     name: '750ml Kraft Bowls',
     price: 'From €24.67 / case',
     badge: 'Recyclable',
-    href: '/plain-packaging/120074',
+    href: getPlainProductPathById('120074'),
   },
 ];
 

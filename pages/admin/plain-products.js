@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
+import { getPlainProductPath, getPlainProductPathById } from '../../data/plain-products';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -252,7 +253,7 @@ export default function AdminPlainProducts() {
                         Details
                       </Link>
                       <Link
-                        href={`/plain-packaging/${p.id}`}
+                        href={getPlainProductPath(p)}
                         target="_blank"
                         className="text-slate-500 hover:text-blue-600 hover:underline inline-flex items-center gap-1 text-xs"
                       >

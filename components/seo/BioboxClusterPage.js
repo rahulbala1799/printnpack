@@ -6,7 +6,7 @@ import RelatedSeoLinks from './RelatedSeoLinks';
 import { getRelatedWholesaleLinks } from '../../data/wholesale-hub-links';
 import PackagingIcon, { isPlaceholderImage } from '../PackagingIcon';
 import { SITE_URL } from '../../lib/site';
-import { PLAIN_PRODUCTS } from '../../data/plain-products';
+import { PLAIN_PRODUCTS, getPlainProductPath, getPlainProductPathById } from '../../data/plain-products';
 
 const HUB = '/biobox-containers-ireland';
 
@@ -55,7 +55,7 @@ export default function BioboxClusterPage({ config }) {
           '@type': 'ListItem',
           position: index + 1,
           name: product.name,
-          url: `${SITE_URL}/plain-packaging/${product.id}`,
+          url: `${SITE_URL}${getPlainProductPath(product)}`,
         })),
       }
     : null;
@@ -185,7 +185,7 @@ export default function BioboxClusterPage({ config }) {
               {plainProducts.map((product) => (
                 <Link
                   key={product.id}
-                  href={`/plain-packaging/${product.id}`}
+                  href={getPlainProductPath(product)}
                   className="group bg-white rounded-xl border border-stone-200 p-4 hover:border-lime-300 hover:shadow-md transition-all"
                 >
                   <div className="relative aspect-square mb-3 rounded-lg overflow-hidden border border-stone-100 bg-lime-50/50">

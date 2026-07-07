@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
-import { PLAIN_PRODUCTS } from '../data/plain-products';
+import { PLAIN_PRODUCTS, getPlainProductPath, getPlainProductPathById } from '../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 import { buildProductListItem } from '../lib/schema';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
@@ -53,7 +53,7 @@ const itemListLd = {
   name: 'Plain Hot Cups Ireland',
   description: PLAIN_HOT_CUPS_CONFIG.metaDescription,
   itemListElement: plainCups.map((p, i) => {
-    const productUrl = `${SITE_URL}/plain-packaging/${p.id}`;
+    const productUrl = `${SITE_URL}${getPlainProductPath(p)}`;
     return buildProductListItem({
       position: i + 1,
       name: getHotCupDisplayName(p),
@@ -132,7 +132,7 @@ export default function PlainHotCupsIreland() {
               )}
               <div className="flex flex-wrap gap-3">
                 <Link
-                  href="/plain-packaging/100070"
+                  href={getPlainProductPathById('100070')}
                   className="inline-flex bg-amber-700 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-800 transition-colors"
                 >
                   8oz Double Wall Cups
@@ -166,7 +166,7 @@ export default function PlainHotCupsIreland() {
             {plainCups.map((p) => (
               <Link
                 key={p.id}
-                href={`/plain-packaging/${p.id}`}
+                href={getPlainProductPath(p)}
                 className="group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-amber-300 hover:shadow-lg transition-all"
               >
                 <div className="relative h-40 bg-stone-50">
@@ -209,10 +209,10 @@ export default function PlainHotCupsIreland() {
             Pair 80mm lids with 8oz cups and 90mm lids with 12oz and 16oz cups.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/plain-packaging/cl8wl" className="text-sm font-semibold text-amber-700 hover:underline">
+            <Link href={getPlainProductPathById('cl8wl')} className="text-sm font-semibold text-amber-700 hover:underline">
               80mm White Lids
             </Link>
-            <Link href="/plain-packaging/cl12wl" className="text-sm font-semibold text-amber-700 hover:underline">
+            <Link href={getPlainProductPathById('cl12wl')} className="text-sm font-semibold text-amber-700 hover:underline">
               90mm White Lids
             </Link>
             <Link href={`/plain-packaging?category=${HOT_CUPS_CATEGORY_QUERY}`} className="text-sm font-semibold text-amber-700 hover:underline">

@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
-import { PLAIN_PRODUCTS } from '../data/plain-products';
+import { PLAIN_PRODUCTS, getPlainProductPath, getPlainProductPathById } from '../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 import { buildProductListItem } from '../lib/schema';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
@@ -52,19 +52,19 @@ const cupTypes = [
   {
     title: 'Compostable Greenspirit aqueous',
     desc: 'Aqueous-coated double wall cups — eco takeaway option for Irish food service.',
-    link: '/plain-packaging/100102',
+    link: getPlainProductPathById('100102'),
     ids: ['100102', '100103', '100104', '100253'],
   },
   {
     title: 'Kraft ripple & embossed',
     desc: 'Triple ripple and embossed kraft cups — premium look with extra insulation.',
-    link: '/plain-packaging/100396',
+    link: getPlainProductPathById('100396'),
     ids: ['100396', '100397', '100389', '100390'],
   },
   {
     title: 'Single wall economical',
     desc: 'Lower-cost single wall paper cups for high-volume or budget-conscious outlets.',
-    link: '/plain-packaging/104391',
+    link: getPlainProductPathById('104391'),
     ids: ['104391', '104392', '104393', '104394'],
   },
 ];
@@ -115,7 +115,7 @@ const itemListLd = {
   name: 'Disposable Coffee Cups Ireland',
   description: HOT_CUPS_HUB_CONFIG.metaDescription,
   itemListElement: hotCups.slice(0, 12).map((p, i) => {
-    const productUrl = `${SITE_URL}/plain-packaging/${p.id}`;
+    const productUrl = `${SITE_URL}${getPlainProductPath(p)}`;
     return buildProductListItem({
       position: i + 1,
       name: getHotCupDisplayName(p),
@@ -232,7 +232,7 @@ export default function HotCupsIreland() {
                   Plain White Cups
                 </Link>
                 <Link
-                  href="/plain-packaging/100070"
+                  href={getPlainProductPathById('100070')}
                   className="inline-flex items-center gap-2 bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors"
                 >
                   8oz Double Wall
@@ -265,7 +265,7 @@ export default function HotCupsIreland() {
             {hotCups.filter((p) => HOT_CUPS_FEATURED_IDS.has(p.id)).map((p) => (
               <Link
                 key={p.id}
-                href={`/plain-packaging/${p.id}`}
+                href={getPlainProductPath(p)}
                 className="group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-amber-300 hover:shadow-lg transition-all"
               >
                 <div className="relative h-44 bg-stone-50">
@@ -347,7 +347,7 @@ export default function HotCupsIreland() {
                     return (
                       <Link
                         key={id}
-                        href={`/plain-packaging/${id}`}
+                        href={getPlainProductPathById(id)}
                         className="text-xs bg-amber-50 text-amber-800 px-2 py-1 rounded-lg hover:bg-amber-100 transition-colors"
                       >
                         {getHotCupDisplayName(p).replace(/\(.*\)/, '').trim().slice(0, 40)}
@@ -389,7 +389,7 @@ export default function HotCupsIreland() {
                         {ids.map((id) => (
                           <Link
                             key={id}
-                            href={`/plain-packaging/${id}`}
+                            href={getPlainProductPathById(id)}
                             className="text-amber-700 hover:underline text-xs font-medium"
                           >
                             #{id}
@@ -453,7 +453,7 @@ export default function HotCupsIreland() {
             {cupProducts.map((p) => (
               <Link
                 key={p.id}
-                href={`/plain-packaging/${p.id}`}
+                href={getPlainProductPath(p)}
                 className="bg-slate-50 border border-gray-200 rounded-xl p-4 hover:border-amber-300 hover:shadow-md transition-all group"
               >
                 <p className="text-xs text-gray-400">#{p.code}</p>
@@ -477,7 +477,7 @@ export default function HotCupsIreland() {
             {lidProducts.map((p) => (
               <Link
                 key={p.id}
-                href={`/plain-packaging/${p.id}`}
+                href={getPlainProductPath(p)}
                 className="bg-white border border-gray-200 rounded-xl p-4 hover:border-amber-300 hover:shadow-md transition-all group"
               >
                 <p className="text-xs text-gray-400">#{p.code}</p>

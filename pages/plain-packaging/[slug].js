@@ -5,12 +5,11 @@ import Layout from '../../components/layout/Layout';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { PLAIN_PRODUCTS, getProductById, getRelatedProducts } from '../../data/plain-products';
-import { REFUSE_SACK_PRODUCT_IDS } from '../../data/refuse-sacks-seo';
+import { getPlainProductSlug } from '../../lib/plain-product-urls';
+import { PLAIN_PRODUCTS, getRelatedProducts, getPlainProductPath, resolvePlainProduct } from '../../data/plain-products';
 import {
   NAPKINS_TABLEWARE_CATEGORY_QUERY,
   NAPKINS_TABLEWARE_HUB_PATH,
-  NAPKINS_TABLEWARE_PRODUCT_IDS,
   getNapkinsTablewareDisplayName,
   getNapkinsTablewareProductSeo,
   isNapkinsTablewareProduct,
@@ -29,7 +28,6 @@ import {
 import {
   HOT_CUPS_CATEGORY_QUERY,
   HOT_CUPS_HUB_PATH,
-  HOT_CUPS_PRODUCT_IDS,
   getHotCupDisplayName,
   getHotCupProductSeo,
   isHotCupProduct,
@@ -37,7 +35,6 @@ import {
 import {
   GLOVES_CATEGORY_QUERY,
   GLOVES_HUB_PATH,
-  GLOVES_PRODUCT_IDS,
   getGloveDisplayName,
   getGloveProductSeo,
   isGloveProduct,
@@ -200,7 +197,7 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
         : isGlove
           ? gloveSeo.keywords
           : null;
-  const canonicalUrl = `https://www.printnpack.ie/plain-packaging/${product.id}`;
+  const canonicalUrl = `https://www.printnpack.ie${getPlainProductPath(product)}`;
   const productLd = buildPlainProductLd(product, canonicalUrl);
 
   const handleAddToQuote = () => {
@@ -510,7 +507,7 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
               {relatedProducts.map(p => (
                 <Link
                   key={p.id}
-                  href={`/plain-packaging/${p.id}`}
+                  href={getPlainProductPath(p)}
                   className="bg-white border border-stone-200 rounded-2xl overflow-hidden hover:border-stone-300 hover:shadow-md transition-all group"
                 >
                   <div className="relative overflow-hidden" style={{ paddingBottom: '60%' }}>
@@ -595,21 +592,26 @@ export default function PlainPackagingDetail({ product, relatedProducts }) {
 }
 
 export async function getStaticPaths() {
-  // Pre-build first 100 most-visited products plus priority SEO categories
-  const priorityIds = new Set([
-    ...PLAIN_PRODUCTS.slice(0, 100).map((p) => p.id),
-    ...REFUSE_SACK_PRODUCT_IDS,
-    ...NAPKINS_TABLEWARE_PRODUCT_IDS,
-    ...HOT_CUPS_PRODUCT_IDS,
-    ...GLOVES_PRODUCT_IDS,
-  ]);
-  const paths = [...priorityIds].map((id) => ({ params: { slug: id } }));
+  const paths = PLAIN_PRODUCTS.map((product) => ({
+    params: { slug: getPlainProductSlug(product) },
+  }));
   return { paths, fallback: 'blocking' };
 }
 
 export async function getStaticProps({ params }) {
-  const product = getProductById(params.slug);
+  const product = resolvePlainProduct(params.slug);
   if (!product) return { notFound: true };
-  const relatedProducts = getRelatedProducts(params.slug);
+
+  const canonicalSlug = getPlainProductSlug(product);
+  if (params.slug !== canonicalSlug) {
+    return {
+      redirect: {
+        destination: `/plain-packaging/${canonicalSlug}`,
+        permanent: true,
+      },
+    };
+  }
+
+  const relatedProducts = getRelatedProducts(product.id);
   return { props: { product, relatedProducts } };
 }

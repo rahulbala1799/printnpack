@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
-import { PLAIN_PRODUCTS } from '../data/plain-products';
+import { PLAIN_PRODUCTS, getPlainProductPath, getPlainProductPathById } from '../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 import { buildProductListItem } from '../lib/schema';
 
@@ -115,7 +115,7 @@ const itemListLd = {
       price: '0.17',
     }),
     ...wholesaleBoxes.slice(0, 7).map((p, i) => {
-      const productUrl = `${SITE_URL}/plain-packaging/${p.id}`;
+      const productUrl = `${SITE_URL}${getPlainProductPath(p)}`;
       return buildProductListItem({
         position: i + 2,
         name: p.name,
@@ -420,7 +420,7 @@ export default function PizzaBoxesIreland() {
               {wholesaleBoxes.map((product) => (
                 <Link
                   key={product.id}
-                  href={`/plain-packaging/${product.id}`}
+                  href={getPlainProductPath(product)}
                   className="group bg-white rounded-xl border border-gray-200 p-4 hover:border-blue-200 hover:shadow-md transition-all"
                 >
                   <div className="relative aspect-square mb-3 rounded-lg overflow-hidden border border-gray-100 bg-gray-50">

@@ -5,7 +5,7 @@ import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { PLAIN_PRODUCTS, CATEGORIES, getProductById } from '../data/plain-products';
+import { PLAIN_PRODUCTS, CATEGORIES, getProductById, getPlainProductPath } from '../data/plain-products';
 import { REFUSE_SACK_CATEGORY_SEO } from '../data/refuse-sacks-seo';
 import { NAPKINS_TABLEWARE_CATEGORY_SEO } from '../data/napkins-tableware-seo';
 import { HOT_CUPS_CATEGORY_SEO } from '../data/hot-cups-seo';
@@ -194,7 +194,7 @@ const ProductCard = ({ product, onAdd, inQuote }) => {
     <div className={`bg-white rounded-xl border flex flex-col transition-all duration-200 hover:shadow-md ${inQuote ? 'border-amber-300 ring-2 ring-amber-100' : 'border-stone-200 hover:border-stone-300'}`}>
 
       {/* Image / Icon */}
-      <Link href={`/plain-packaging/${product.id}`} className="block relative rounded-t-xl overflow-hidden flex-shrink-0" style={{ paddingBottom: '48%' }}>
+      <Link href={getPlainProductPath(product)} className="block relative rounded-t-xl overflow-hidden flex-shrink-0" style={{ paddingBottom: '48%' }}>
         {isPlaceholderImage(product.imageSrc) ? (
           <PackagingIcon
             category={product.category}
@@ -222,7 +222,7 @@ const ProductCard = ({ product, onAdd, inQuote }) => {
         {/* Name */}
         <div className="flex items-start justify-between gap-1">
           <h3 className="font-semibold text-stone-900 text-xs sm:text-sm leading-snug line-clamp-2 flex-1">{product.name}</h3>
-          <Link href={`/plain-packaging/${product.id}`} className="flex-shrink-0 text-stone-300 hover:text-stone-600 transition-colors mt-0.5 hidden sm:block" title="Full details">
+          <Link href={getPlainProductPath(product)} className="flex-shrink-0 text-stone-300 hover:text-stone-600 transition-colors mt-0.5 hidden sm:block" title="Full details">
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
           </Link>
         </div>
