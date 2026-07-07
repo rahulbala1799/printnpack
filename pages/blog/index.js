@@ -127,6 +127,17 @@ const posts = [
     category: 'Print Guide',
   },
   {
+    slug: 'greenspirit-eco-packaging-ireland',
+    title: 'Greenspirit Eco Packaging Ireland: Compostable Cups, Cutlery & Nationwide Delivery',
+    excerpt:
+      'PrintNPack stocks 50+ Greenspirit compostable and eco-friendly products — aqueous hot cups, bagasse lids, wooden cutlery, greaseproof sheets and kraft trays. Plain wholesale case pricing with delivery across Ireland.',
+    date: '2026-07-07',
+    readTime: '9 min read',
+    image: '/images/plain-packaging/100103.webp',
+    imageAlt: 'Greenspirit compostable hot cups Ireland – eco-friendly wholesale packaging',
+    category: 'Sustainability',
+  },
+  {
     slug: 'eco-friendly-pizza-box-paper-bags-burger-boxes-ireland',
     title: 'Eco Friendly Pizza Box, Paper Bags & Burger Boxes Ireland',
     excerpt:

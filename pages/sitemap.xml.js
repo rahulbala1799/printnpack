@@ -120,6 +120,7 @@ const staticPages = [
   { path: '/blog/burger-boxes-ireland-guide', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/banner-printing-ireland-guide', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/printing-ashbourne-guide', priority: '0.88', changefreq: 'monthly' },
+  { path: '/blog/greenspirit-eco-packaging-ireland', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/eco-friendly-pizza-box-paper-bags-burger-boxes-ireland', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/eco-packaging-for-takeaways-ireland',   priority: '0.8', changefreq: 'monthly' },
   { path: '/blog/leaflet-printing-ireland-guide',        priority: '0.8', changefreq: 'monthly' },
