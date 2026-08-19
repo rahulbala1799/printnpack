@@ -151,6 +151,31 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/custom-printed-tissue-paper',
+        destination: '/custom-printed-tissue-paper-ireland',
+        permanent: true,
+      },
+      {
+        source: '/branded-tissue-paper-ireland',
+        destination: '/custom-printed-tissue-paper-ireland',
+        permanent: true,
+      },
+      {
+        source: '/personalised-tissue-paper-ireland',
+        destination: '/custom-printed-tissue-paper-ireland',
+        permanent: true,
+      },
+      {
+        source: '/logo-tissue-paper-ireland',
+        destination: '/custom-printed-tissue-paper-ireland',
+        permanent: true,
+      },
+      {
+        source: '/luxury-tissue-paper-ireland',
+        destination: '/custom-printed-tissue-paper-ireland',
+        permanent: true,
+      },
+      {
         source: '/disposable-gloves-ireland',
         destination: '/gloves-ireland',
         permanent: true,

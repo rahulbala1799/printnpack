@@ -337,6 +337,58 @@ const products = [
     weeklyDelivery: 'Our delivery service ensures retail brands and corporate clients receive premium magnetic closure boxes on schedule — with account management to support repeat orders and ongoing packaging requirements.'
   },
   {
+    id: 'custom-printed-tissue-paper-ireland',
+    name: 'Custom Printed Tissue Paper',
+    url: '/custom-printed-tissue-paper-ireland',
+    category: 'Retail Packaging',
+    description: 'High-quality custom printed tissue paper in Ireland — branded logo tissue for ecommerce, boutiques, jewellery, cosmetics and luxury retail packaging with eco-friendly options.',
+    features: [
+      'Custom printed with your logo, pattern or artwork',
+      'Creates a premium branded unboxing experience',
+      'Lightweight protection for delicate products',
+      'Available in a wide range of colours and print styles',
+      'Recyclable and eco-friendly options available',
+      'Ideal for ecommerce, retail, gifting and luxury packaging',
+    ],
+    detailedDescription: 'PrintNPack supplies high-quality custom printed tissue paper in Ireland, helping businesses protect their products while creating a polished and memorable unboxing experience. Printed with your logo, pattern or bespoke artwork, branded tissue paper adds a premium finishing touch to every order.\n\nOur personalised tissue paper is ideal for ecommerce stores, fashion boutiques, jewellery brands, cosmetics, gift shops, corporate gifting and luxury retail packaging. It can be used to wrap clothing, accessories, beauty products, gifts and other delicate items while keeping your packaging consistent with your brand identity.\n\nChoose from a wide selection of tissue paper colours and custom printing options to create packaging that complements your boxes, bags, stickers and ribbons. Whether you want a simple repeated logo or a fully bespoke pattern, PrintNPack can produce tissue paper tailored to your business. Eco-friendly and recyclable tissue paper options are also available for brands seeking more sustainable packaging solutions.',
+    specifications: [
+      { name: 'Printing', value: 'Logo, pattern or bespoke artwork — repeated logo or full custom design' },
+      { name: 'Colour Options', value: 'Wide range of tissue paper colours available' },
+      { name: 'Eco Options', value: 'Recyclable and eco-friendly tissue paper available' },
+      { name: 'Applications', value: 'Ecommerce, fashion, jewellery, cosmetics, gifting and luxury retail' },
+      { name: 'Delivery', value: 'Nationwide across Ireland — Dublin, Cork, Galway & all counties' },
+    ],
+    images: [
+      '/images/products/custom-printed-tissue-paper/luxury-custom-printed-tissue-paper-black-gold-ireland.jpg',
+      '/images/products/custom-printed-tissue-paper/custom-printed-tissue-paper-ireland-branded-pattern.jpg',
+    ],
+    imageSrc: '/images/products/custom-printed-tissue-paper/luxury-custom-printed-tissue-paper-black-gold-ireland.jpg',
+    price: 'Contact for quote',
+    applications: [
+      'E-commerce & Online Retail',
+      'Fashion Boutiques',
+      'Jewellery Brands',
+      'Cosmetics & Beauty',
+      'Gift Shops',
+      'Corporate Gifting',
+    ],
+    faq: [
+      {
+        question: 'What can branded tissue paper be used for?',
+        answer: 'Personalised tissue paper wraps clothing, accessories, beauty products, gifts and delicate items while creating a premium branded unboxing experience for ecommerce, retail and luxury packaging.',
+      },
+      {
+        question: 'What printing options are available?',
+        answer: 'We offer custom printing with your logo, pattern or bespoke artwork — from a simple repeated logo to a fully bespoke pattern in a wide range of colours and print styles.',
+      },
+      {
+        question: 'Are eco-friendly options available?',
+        answer: 'Yes. Eco-friendly and recyclable tissue paper options are available for brands seeking more sustainable packaging solutions.',
+      },
+    ],
+    weeklyDelivery: 'Our delivery service keeps ecommerce and retail brands stocked with branded tissue paper on a schedule that suits your operation — with account management for repeat orders.'
+  },
+  {
     id: 'sos-grab-bags',
     name: 'SOS Grab Bags',
     category: 'Food Packaging',

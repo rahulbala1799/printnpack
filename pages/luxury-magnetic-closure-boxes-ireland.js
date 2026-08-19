@@ -518,6 +518,7 @@ export default function LuxuryMagneticClosureBoxesIreland() {
       <RelatedSeoLinks
         title="More packaging for Irish brands"
         links={[
+          { href: '/custom-printed-tissue-paper-ireland', label: 'Custom Tissue Paper', desc: 'Branded logo tissue for luxury unboxing' },
           { href: '/luxury-paper-bags-ireland', label: 'Luxury Paper Bags', desc: 'Premium die-cut bags for luxury brands' },
           { href: '/twisted-handle-paper-bags-ireland', label: 'Twisted Handle Bags', desc: 'Premium retail paper bags' },
           { href: '/printed-flat-handle-bags-ireland', label: 'Printed Paper Bags', desc: 'Branded bags for cafés and retail' },
