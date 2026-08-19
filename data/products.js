@@ -224,6 +224,66 @@ const products = [
     weeklyDelivery: 'Our weekly delivery service keeps flagship stores, boutiques and hospitality brands stocked with premium branded packaging without the need for large on-site storage. A dedicated account manager tailors your delivery schedule and monitors usage to recommend the right order quantities, protecting your brand image while simplifying inventory management.'
   },
   {
+    id: 'custom-printed-coffee-cups-ireland',
+    name: 'Custom Printed Coffee Cups',
+    url: '/custom-printed-coffee-cups-ireland',
+    category: 'Food Packaging',
+    description: 'High-quality custom printed coffee cups for cafés, coffee shops, restaurants, hotels and events across Ireland and Northern Ireland — low MOQ, logo printing and nationwide delivery.',
+    features: [
+      'Custom printed coffee cups with your logo or artwork',
+      'Low minimum order quantities available',
+      'Delivery throughout Ireland and Northern Ireland',
+      'Multiple cup sizes, styles and finishes',
+      'One-colour and full-colour printing options',
+      'Premium food-safe materials',
+      'Eco-friendly and recyclable options available',
+    ],
+    detailedDescription: 'PrintNPack supplies high-quality custom printed coffee cups to cafés, coffee shops, restaurants, hotels, events and takeaway businesses throughout Ireland and Northern Ireland. With low minimum order quantities available, businesses of every size can order professionally branded coffee cups without committing to excessively large volumes.\n\nOur bespoke coffee cups can be customised with your logo, brand colours, artwork and promotional messaging. Whether you run an independent Dublin café, a growing restaurant group, a mobile coffee business or a one-off event, we can help you create printed takeaway cups that make your brand more visible with every drink served.\n\nOur custom coffee cups are available in a range of popular sizes, styles and finishes suitable for coffee, tea, hot chocolate and other takeaway drinks. Each cup is produced using food-safe materials and designed to provide reliable heat retention, comfortable handling and dependable everyday performance.',
+    specifications: [
+      { name: 'Printing', value: 'One-colour logo and full-colour custom artwork' },
+      { name: 'Sizes Available', value: 'Popular takeaway sizes — 8oz, 10oz, 12oz, 16oz and more' },
+      { name: 'Material', value: 'Premium food-safe paper cups with reliable heat insulation' },
+      { name: 'Finishes', value: 'Range of cup styles and finishes to match your branding' },
+      { name: 'Eco Options', value: 'Eco-friendly and recyclable cup options available' },
+      { name: 'Minimum Order', value: 'Low MOQ available — contact for quote' },
+      { name: 'Delivery', value: 'Ireland and Northern Ireland — Dublin, Cork, Galway, Belfast & nationwide' },
+    ],
+    images: [
+      '/images/products/custom-printed-coffee-cups/branded-coffee-cups-dublin-ireland-matte-black-gold.jpg',
+      '/images/products/custom-printed-coffee-cups/custom-printed-coffee-cups-dublin-ireland-orange.jpg',
+      '/images/products/custom-printed-coffee-cups/printed-takeaway-coffee-cups-dublin-kraft.jpg',
+    ],
+    imageSrc: '/images/products/custom-printed-coffee-cups/branded-coffee-cups-dublin-ireland-matte-black-gold.jpg',
+    price: 'Contact for quote',
+    applications: [
+      'Cafés & Coffee Shops',
+      'Restaurants & Takeaway',
+      'Hotels & Hospitality',
+      'Corporate Events & Exhibitions',
+      'Mobile Coffee Businesses',
+      'Pop-up Shops & Seasonal Promotions',
+    ],
+    faq: [
+      {
+        question: 'Where can I order branded coffee cups in Dublin and Ireland?',
+        answer: 'PrintNPack supplies custom printed coffee cups to cafés, coffee shops, restaurants, hotels and events throughout Ireland and Northern Ireland. Send us your logo, preferred cup size and quantity for a tailored quote.',
+      },
+      {
+        question: 'Do you offer low minimum order quantities?',
+        answer: 'Yes. We offer low-MOQ custom printed coffee cups so smaller cafés, start-ups, pop-up shops and event organisers can order professionally branded takeaway cups without committing to excessively large volumes.',
+      },
+      {
+        question: 'Do you deliver to Northern Ireland?',
+        answer: 'Yes. We supply and deliver branded disposable coffee cups throughout the Republic of Ireland and Northern Ireland, including Belfast, Derry, Newry and surrounding areas.',
+      },
+      {
+        question: 'What printing options are available?',
+        answer: 'We offer one-colour logo printing and premium full-colour designs. Cups can be customised with your logo, brand colours, artwork and promotional messaging.',
+      },
+    ],
+    weeklyDelivery: 'Our weekly delivery service keeps busy cafés and restaurants stocked with branded takeaway cups on a schedule that suits your operation — without the need for large on-site storage. A dedicated account manager monitors your usage and recommends optimal order quantities.'
+  },
+  {
     id: 'sos-grab-bags',
     name: 'SOS Grab Bags',
     category: 'Food Packaging',

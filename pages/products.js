@@ -75,6 +75,8 @@ const STAT_PILLS = [
 const POPULAR_LINKS = [
   { label: 'Pizza Boxes', href: '/pizza-boxes-ireland' },
   { label: 'Paper Bags', href: '/printed-flat-handle-bags-ireland' },
+  { label: 'Hot Cups', href: '/hot-cups-ireland' },
+  { label: 'Custom Coffee Cups', href: '/custom-printed-coffee-cups-ireland' },
   { label: 'Luxury Paper Bags', href: '/luxury-paper-bags-ireland' },
   { label: 'Plain Packaging', href: '/plain-packaging' },
   { label: 'Roll-Up Banners', href: '/roll-up-banners' },
@@ -132,6 +134,8 @@ const RELATED_LINKS = [
   { href: '/printing-ireland', label: 'Printing Services Ireland', desc: 'Posters, flyers, stickers and business print.' },
   { href: '/pizza-boxes-ireland', label: 'Pizza Boxes Ireland', desc: 'Plain and custom printed pizza boxes for takeaways.' },
   { href: '/printed-flat-handle-bags-ireland', label: 'Printed Paper Bags', desc: 'Flat handle bags with your logo, from 500 units.' },
+  { href: '/hot-cups-ireland', label: 'Hot Cups & Lids Ireland', desc: 'Plain disposable coffee cups wholesale.' },
+  { href: '/custom-printed-coffee-cups-ireland', label: 'Custom Printed Coffee Cups', desc: 'Branded takeaway cups Dublin & Ireland, low MOQ.' },
   { href: '/luxury-paper-bags-ireland', label: 'Luxury Paper Bags', desc: 'Premium die-cut bags for luxury brands nationwide.' },
   { href: '/banners-ireland', label: 'Banners Ireland', desc: 'Vinyl banners, roll-ups and extra-wide stands.' },
   { href: '/plain-packaging', label: 'Plain Packaging', desc: 'Stock cups, boxes, bags and gloves with volume pricing.' },

@@ -54,6 +54,7 @@ const staticPages = [
   { path: '/refuse-sacks-ireland',         priority: '0.95', changefreq: 'weekly' },
   { path: '/plain-napkins-tableware-ireland', priority: '0.95', changefreq: 'weekly' },
   { path: '/hot-cups-ireland',              priority: '0.95', changefreq: 'weekly' },
+  { path: '/custom-printed-coffee-cups-ireland', priority: '0.93', changefreq: 'weekly' },
   { path: '/plain-hot-cups-ireland',        priority: '0.88', changefreq: 'weekly' },
   { path: '/gloves-ireland',                priority: '0.95', changefreq: 'weekly' },
   { path: '/nitrile-gloves-ireland',        priority: '0.88', changefreq: 'weekly' },

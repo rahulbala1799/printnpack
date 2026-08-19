@@ -101,6 +101,31 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/branded-coffee-cups-dublin',
+        destination: '/custom-printed-coffee-cups-ireland',
+        permanent: true,
+      },
+      {
+        source: '/branded-coffee-cups-ireland',
+        destination: '/custom-printed-coffee-cups-ireland',
+        permanent: true,
+      },
+      {
+        source: '/printed-coffee-cups-ireland',
+        destination: '/custom-printed-coffee-cups-ireland',
+        permanent: true,
+      },
+      {
+        source: '/custom-coffee-cups-ireland',
+        destination: '/custom-printed-coffee-cups-ireland',
+        permanent: true,
+      },
+      {
+        source: '/personalised-coffee-cups-ireland',
+        destination: '/custom-printed-coffee-cups-ireland',
+        permanent: true,
+      },
+      {
         source: '/disposable-gloves-ireland',
         destination: '/gloves-ireland',
         permanent: true,

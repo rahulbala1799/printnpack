@@ -168,7 +168,7 @@ export const HOT_CUPS_HUB_FAQS = [
   },
   {
     q: 'Can I order plain cups without custom printing?',
-    a: 'Yes. Our hot cups range is plain wholesale stock for immediate dispatch — white matt double wall, embossed, kraft ripple and compostable options. No minimum print run. For branded custom printed cups, contact us for a quote on larger print orders.',
+    a: 'Yes. Our hot cups range is plain wholesale stock for immediate dispatch — white matt double wall, embossed, kraft ripple and compostable options. No minimum print run. For branded custom printed cups with your logo, see our custom printed coffee cups page or contact us for a quote.',
   },
   {
     q: 'Do you deliver coffee cups to Dublin and nationwide?',

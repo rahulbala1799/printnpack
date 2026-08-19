@@ -220,8 +220,14 @@ export default function HotCupsIreland() {
               </div>
               <div className="flex flex-wrap gap-3">
                 <Link
-                  href={`/plain-packaging?category=${HOT_CUPS_CATEGORY_QUERY}`}
+                  href="/custom-printed-coffee-cups-ireland"
                   className="inline-flex items-center gap-2 bg-amber-700 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-800 transition-colors"
+                >
+                  Custom Printed Cups
+                </Link>
+                <Link
+                  href={`/plain-packaging?category=${HOT_CUPS_CATEGORY_QUERY}`}
+                  className="inline-flex items-center gap-2 bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors"
                 >
                   Browse All Hot Cups
                 </Link>
@@ -249,6 +255,39 @@ export default function HotCupsIreland() {
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-amber-50 border-b border-amber-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-6">
+            <div className="relative w-full lg:w-48 h-36 flex-shrink-0 rounded-xl overflow-hidden shadow-md">
+              <Image
+                src="/images/products/custom-printed-coffee-cups/branded-coffee-cups-dublin-ireland-matte-black-gold.jpg"
+                alt="Branded coffee cups Dublin Ireland — custom printed takeaway cups"
+                fill
+                className="object-cover"
+                sizes="192px"
+                unoptimized={process.env.NODE_ENV === 'production'}
+              />
+            </div>
+            <div className="flex-1">
+              <p className="text-xs font-semibold text-amber-700 uppercase tracking-wider mb-1">Custom printing</p>
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
+                Need branded coffee cups with your logo?
+              </h2>
+              <p className="text-gray-600 text-sm leading-relaxed max-w-2xl">
+                Low-MOQ custom printed coffee cups for Dublin cafés, restaurants and events — full-colour and
+                one-colour logo printing with delivery across Ireland and Northern Ireland.
+              </p>
+            </div>
+            <Link
+              href="/custom-printed-coffee-cups-ireland"
+              className="inline-flex items-center justify-center bg-amber-700 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-800 transition-colors whitespace-nowrap"
+            >
+              Custom Printed Cups →
+            </Link>
           </div>
         </div>
       </section>

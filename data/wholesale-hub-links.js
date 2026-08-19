@@ -36,6 +36,7 @@ export const CATEGORY_HUB_LINKS = {
 /** Primary wholesale hub pages — use for footer, homepage & cross-linking. */
 export const WHOLESALE_HUB_LINKS = [
   { href: '/hot-cups-ireland', label: 'Hot Cups & Lids', desc: 'Disposable coffee cups Ireland' },
+  { href: '/custom-printed-coffee-cups-ireland', label: 'Custom Printed Coffee Cups', desc: 'Branded takeaway cups Dublin & Ireland' },
   { href: '/plain-hot-cups-ireland', label: 'Plain Hot Cups', desc: 'White takeaway coffee cups' },
   { href: '/gloves-ireland', label: 'Disposable Gloves', desc: 'Nitrile & vinyl wholesale' },
   { href: '/nitrile-gloves-ireland', label: 'Nitrile Gloves', desc: 'Blue & black powder-free' },
