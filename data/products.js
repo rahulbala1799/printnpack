@@ -559,6 +559,42 @@ const products = [
     ]
   },
   {
+    id: 'extra-wide-roll-up-banners',
+    name: 'Extra Wide Roll Up Banners',
+    category: 'Wide Format',
+    url: '/extra-wide-roll-up-banners-ireland',
+    description: '200 cm extra-wide XL roller banners up to 3 metres high — UV print on Airtex 330 with Silver XL stand for exhibitions and trade shows.',
+    features: [
+      '200 cm extra-wide format — XL, XXL and XXXL',
+      'Heights up to 3 metres (200 × 300 cm)',
+      'Wrinkle-free, scratch-resistant Airtex 330',
+      'Single-sided UV full-colour print',
+      'Silver XL heavy-duty aluminium stand',
+      'Carry bag included — B1 fire certified indoor use',
+      'Order from 1 piece with nationwide Ireland delivery'
+    ],
+    detailedDescription: 'Attract attention at events and exhibitions with extra wide roll up banners from PrintNPack. At 200 cm wide and up to 3 metres tall, these XL roller banners dominate exhibition halls, retail atriums and corporate reception areas — far beyond a standard 85 cm pull-up display.\n\nChoose XL (200×200 cm), XXL (200×250 cm) or XXXL (200×300 cm). All sizes print UV full colour on wrinkle-free Airtex 330, include a Silver XL stand and carry bag, and are B1 fire certified for indoor venues. No minimum order — from 1 piece with delivery across Ireland.',
+    specifications: [
+      { name: 'Sizes', value: 'XL 200×200 cm, XXL 200×250 cm, XXXL 200×300 cm' },
+      { name: 'Material', value: 'Airtex 330 — wrinkle-free, scratch-resistant' },
+      { name: 'Print', value: 'Single-sided UV, full colour' },
+      { name: 'Base', value: 'Silver XL aluminium stand (heavy duty)' },
+      { name: 'Min. Order', value: 'From 1 piece' },
+      { name: 'Fire Certificate', value: 'B1 certified (indoor use only)' },
+      { name: 'Weight', value: 'Approx. 14 kg per unit' },
+      { name: 'Included', value: 'Carry bag and assembly guide' },
+      { name: 'Delivery', value: 'Nationwide Ireland from Ashbourne, Co. Meath' }
+    ],
+    images: [
+      '/ifa/product/extra-wide-rollup/hero-standout-3m.jpg',
+      '/ifa/product/extra-wide-rollup/hero-standout-detail.jpg'
+    ],
+    imageSrc: '/ifa/product/extra-wide-rollup/hero-standout-3m.jpg',
+    price: 'From €398.96',
+    quoteRequired: true,
+    leadTime: 'Nationwide delivery'
+  },
+  {
     id: 'vinyl-banners',
     name: 'Vinyl Banners',
     category: 'Wide Format',

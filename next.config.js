@@ -51,6 +51,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/products/extra-wide-roll-up-banners',
+        destination: '/extra-wide-roll-up-banners-ireland',
+        permanent: true,
+      },
+      {
         source: '/products/vinyl-banners',
         destination: '/vinyl-banners',
         permanent: true,
