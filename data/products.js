@@ -165,20 +165,18 @@ const products = [
     name: 'Luxury Die-Cut Paper Bags',
     url: '/luxury-paper-bags-ireland',
     category: 'Retail Packaging',
-    description: 'Pure luxury die-cut printed paper bags with built-in handles and a flawless, premium finish — the sleek, modern packaging choice for luxury brands, boutiques and high-end events across Ireland.',
+    description: 'Die-cut printed paper bags with built-in handles and a clean finish — a sleek, modern packaging choice for brands, events and exhibitions across Ireland.',
     features: [
+      'Unique design to help your brand stand out',
+      'Ideal for promotional packaging, events, and exhibitions',
+      'Fully customisable with your branding and print',
       'Die-cut integrated handles for a seamless, modern look',
-      'Premium heavyweight paper stock with a flawless finish',
-      'Luxury finishing options: matte or gloss lamination, foil stamping, embossing and spot UV',
-      'Fully customisable branding, colours and print',
-      'Ideal for luxury retail, exhibitions, product launches and promotional campaigns',
       'Digital CMYK printing with no plate fees, from 500 units'
     ],
-    detailedDescription: 'Our die-cut printed luxury paper bags are a sleek, modern option for brands that want something a bit different. With built-in handles and a clean finish, they are especially popular for events, exhibitions, and promotional packaging across Ireland.\n\nThese custom printed luxury paper bags are a great way to turn simple packaging into a walking advert for your brand — perfect for trade shows, product launches, and premium retail campaigns. They are strong, easy to carry, and available in colours and finishes to match your brand identity.\n\nUnlike standard carrier bags, our luxury paper bags are built for brands that never compromise on presentation. Choose from matte or gloss lamination, gold or silver foil stamping, embossing and debossing, and spot UV highlights to create a truly premium unboxing experience. The die-cut handle design gives a clean, minimalist silhouette that boutiques, fashion houses, jewellers and hospitality brands across Ireland use to elevate their in-store and event packaging.\n\nWhether you are a luxury fashion label in Dublin, a boutique hotel in Cork, a jeweller in Galway, or a premium brand launching nationwide, our luxury paper bags are fully customised with your branding and print — from 500 units with nationwide delivery from our Ashbourne, Co. Meath production facility.',
+    detailedDescription: 'Our die-cut printed paper bags are a sleek, modern option for brands that want something a bit different. With built-in handles and a clean finish, they\'re especially popular for events, exhibitions, and promotional packaging.\n\nThese custom printed paper bags are a great way to turn simple packaging into a walking advert — perfect for trade shows, product launches, and campaigns. They\'re strong, easy to carry, and available in a range of colours and finishes to match your brand.\n\nWhether you are a fashion label in Dublin, a boutique in Cork, a retailer in Galway, or a brand launching nationwide, our die-cut paper bags are fully customised with your branding and print — from 500 units with nationwide delivery from our Ashbourne, Co. Meath production facility.',
     specifications: [
       { name: 'Material', value: 'Premium heavyweight paper stock (170-250gsm)' },
       { name: 'Handle Type', value: 'Integrated die-cut handle — no rope or twisted attachments' },
-      { name: 'Finish Options', value: 'Matte lamination, gloss lamination, foil stamping (gold/silver), embossing, spot UV' },
       { name: 'Color Options', value: 'Full CMYK plus custom Pantone colour matching' },
       { name: 'Print Method', value: 'Digital CMYK printing (no plates required)' },
       { name: 'Minimum Order', value: '500 units' },
@@ -208,23 +206,15 @@ const products = [
     faq: [
       {
         question: 'What makes these different from standard printed paper bags?',
-        answer: 'Our luxury paper bags use a die-cut integrated handle rather than a rope or twisted attachment, giving a seamless, modern look. Combined with premium heavyweight paper and finishes like foil stamping, embossing and lamination, they are designed for brands that want a genuinely premium unboxing experience.'
-      },
-      {
-        question: 'What luxury finishes can I add?',
-        answer: 'We offer matte and gloss lamination, gold or silver foil stamping, embossing and debossing, and spot UV highlights. These can be combined to create a truly bespoke luxury finish for your brand.'
+        answer: 'Our die-cut paper bags use an integrated handle cut directly from the bag rather than a rope or twisted attachment, giving a seamless, modern look. They are strong, easy to carry, and fully customisable with your branding and print.'
       },
       {
         question: 'What is the minimum order quantity?',
         answer: 'Luxury die-cut paper bags start from 500 units.'
       },
       {
-        question: 'Can I get a fully custom finish for my brand?',
-        answer: 'Yes. We work with luxury brands on colours and finishes to match exact brand guidelines.'
-      },
-      {
         question: 'How long does production take?',
-        answer: 'Production typically takes 10-14 business days after artwork and finish approval, with nationwide delivery across Ireland.'
+        answer: 'Production typically takes 10-14 business days after artwork approval, with nationwide delivery across Ireland.'
       },
       {
         question: 'Do you deliver luxury paper bags nationwide in Ireland?',

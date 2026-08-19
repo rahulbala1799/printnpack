@@ -28,7 +28,7 @@ const galleryImages = [
 const keyBenefits = [
   {
     title: 'Unique Design That Stands Out',
-    desc: 'A die-cut, modern silhouette that instantly signals quality — no brand looks the same twice.',
+    desc: 'Unique design to help your brand stand out.',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
@@ -38,7 +38,7 @@ const keyBenefits = [
   },
   {
     title: 'Built for Events & Exhibitions',
-    desc: 'Ideal for promotional packaging, trade shows, product launches and brand campaigns nationwide.',
+    desc: 'Ideal for promotional packaging, events, and exhibitions.',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2M19 21h-2m0 0h-4m4 0v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4m0 0H5m2 0h4m0-16h2m-2 4h2m-2 4h2" />
@@ -47,22 +47,13 @@ const keyBenefits = [
   },
   {
     title: 'Fully Customisable',
-    desc: 'Your branding, colours and print — plus premium finishes like foil, emboss and lamination.',
+    desc: 'Fully customisable with your branding and print.',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
       </svg>
     ),
   },
-];
-
-const finishOptions = [
-  { title: 'Matte Lamination', desc: 'A soft-touch, non-reflective finish for an understated, premium feel.' },
-  { title: 'Gloss Lamination', desc: 'A sleek, reflective finish that makes colours and logos pop.' },
-  { title: 'Foil Stamping', desc: 'Gold or silver foil detailing on your logo for a genuine luxury statement.' },
-  { title: 'Embossing & Debossing', desc: 'Raised or pressed detailing that adds tactile depth to your branding.' },
-  { title: 'Spot UV', desc: 'Glossy highlights over a matte base to make key design elements stand out.' },
-  { title: 'Die-Cut Handles', desc: 'Seamless, integrated handles cut directly from the bag — no rope or twist attachments.' },
 ];
 
 const applications = [
@@ -79,20 +70,11 @@ const applications = [
 const seoSections = [
   {
     title: 'Luxury Die-Cut Paper Bags for Premium Irish Brands',
-    body: 'Our die-cut printed luxury paper bags are a sleek, modern option for brands that want something a bit different. With built-in handles and a flawless, clean finish, they are the packaging of choice for luxury retailers, boutiques, exhibitions and premium promotional campaigns right across Ireland.',
-  },
-  {
-    title: 'Pure Luxury Packaging for Fashion, Jewellery & Boutique Retail',
-    body: 'From Dublin flagship stores to boutiques in Cork, Galway and Limerick, luxury brands trust die-cut paper bags to turn every purchase into a branded experience. Strong, easy to carry, and available in colours and finishes to match your exact brand identity.',
-    link: { href: '/twisted-handle-paper-bags-ireland', label: 'premium twisted handle bags' },
+    body: 'Our die-cut printed paper bags are a sleek, modern option for brands that want something a bit different. With built-in handles and a clean finish, they\'re especially popular for events, exhibitions, and promotional packaging.',
   },
   {
     title: 'A Walking Advert for Trade Shows, Launches & Campaigns',
-    body: 'Custom printed luxury paper bags are a great way to turn simple packaging into a walking advertisement for your brand — perfect for trade shows, product launches and nationwide promotional campaigns.',
-  },
-  {
-    title: 'Bespoke Finishes: Foil Stamping, Embossing & Lamination',
-    body: 'True luxury is in the detail. Choose matte or gloss lamination, gold or silver foil stamping, embossing, debossing and spot UV to create a genuinely premium unboxing experience for your customers.',
+    body: 'These custom printed paper bags are a great way to turn simple packaging into a walking advert — perfect for trade shows, product launches, and campaigns. They\'re strong, easy to carry, and available in a range of colours and finishes to match your brand.',
   },
   {
     title: 'Luxury Paper Bags with Logo — Fully Customisable',
@@ -110,15 +92,11 @@ const guides = [
 const faqs = [
   {
     q: 'Where can I order luxury paper bags in Ireland for my brand?',
-    a: 'PrintNPack supplies luxury die-cut printed paper bags to premium brands, boutiques and retailers all across Ireland — full-colour and foil branding from 500 units, with nationwide delivery from Ashbourne, Co. Meath.',
+    a: 'PrintNPack supplies luxury die-cut printed paper bags to premium brands, boutiques and retailers all across Ireland — full-colour logo printing from 500 units, with nationwide delivery from Ashbourne, Co. Meath.',
   },
   {
     q: 'What is the minimum order quantity for luxury paper bags?',
     a: 'Luxury die-cut paper bags start from 500 units.',
-  },
-  {
-    q: 'What luxury finishes are available?',
-    a: 'We offer matte and gloss lamination, gold or silver foil stamping, embossing and debossing, and spot UV highlights — often combined for a genuinely premium finish.',
   },
   {
     q: 'What makes die-cut paper bags different from twisted or flat handle bags?',
@@ -126,7 +104,7 @@ const faqs = [
   },
   {
     q: 'How long does production and delivery take?',
-    a: 'Production typically takes 10–14 business days after artwork and finish approval, with nationwide delivery across Ireland including Dublin, Cork, Galway and Limerick.',
+    a: 'Production typically takes 10–14 business days after artwork approval, with nationwide delivery across Ireland including Dublin, Cork, Galway and Limerick.',
   },
   {
     q: 'Do you deliver luxury paper bags nationwide in Ireland?',
@@ -157,7 +135,7 @@ const breadcrumbLd = {
 const productLd = buildProductLd({
   name: 'Luxury Die-Cut Paper Bags Ireland',
   description:
-    'Pure luxury die-cut printed paper bags for premium Irish brands. Built-in handles, bespoke foil and lamination finishes, MOQ from 500 units, nationwide delivery.',
+    'Luxury die-cut printed paper bags for premium Irish brands. Built-in handles, custom logo printing, MOQ from 500 units, nationwide delivery.',
   image: `${SITE_URL}${HERO_IMAGE}`,
   url: PAGE_URL,
   price: '0.55',
@@ -168,7 +146,7 @@ const webPageLd = {
   '@type': 'WebPage',
   name: 'Luxury Paper Bags Ireland | Premium Die-Cut Carrier Bags',
   description:
-    'Luxury paper bags Ireland for premium brands — die-cut printed carrier bags with built-in handles, foil stamping, embossing and lamination finishes. Nationwide delivery from 500 units.',
+    'Luxury paper bags Ireland for premium brands — die-cut printed carrier bags with built-in handles and custom logo printing. Nationwide delivery from 500 units.',
   url: PAGE_URL,
   inLanguage: 'en-IE',
   isPartOf: { '@type': 'WebSite', name: 'PrintNPack Ireland', url: SITE_URL },
@@ -179,7 +157,7 @@ const webPageLd = {
 export default function LuxuryPaperBagsIreland() {
   const title = 'Luxury Paper Bags Ireland | Premium Die-Cut Carrier Bags for Luxury Brands';
   const description =
-    'Luxury paper bags Ireland for premium brands — die-cut printed carrier bags with built-in handles, foil stamping, embossing & lamination. Nationwide delivery, from 500 units.';
+    'Luxury paper bags Ireland for premium brands — die-cut printed carrier bags with built-in handles and custom logo printing. Nationwide delivery, from 500 units.';
 
   return (
     <Layout>
@@ -188,7 +166,7 @@ export default function LuxuryPaperBagsIreland() {
         <meta name="description" content={description} />
         <meta
           name="keywords"
-          content="luxury paper bags ireland, luxury paper bags, premium paper bags ireland, die cut paper bags ireland, luxury brand packaging ireland, printed luxury carrier bags, boutique paper bags ireland, luxury retail packaging ireland, high end paper bags ireland, bespoke paper bags ireland, foil stamped paper bags"
+          content="luxury paper bags ireland, luxury paper bags, premium paper bags ireland, die cut paper bags ireland, luxury brand packaging ireland, printed luxury carrier bags, boutique paper bags ireland, luxury retail packaging ireland, high end paper bags ireland, bespoke paper bags ireland"
         />
         <meta name="author" content="PrintNPack Ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
@@ -239,21 +217,20 @@ export default function LuxuryPaperBagsIreland() {
                 Luxury Paper Bags Ireland — Premium Die-Cut Carrier Bags for Brands That Never Compromise
               </h1>
               <p className="text-lg text-gray-300 mb-4 leading-relaxed">
-                Our <strong className="text-white">die-cut printed luxury paper bags</strong> are a sleek, modern
-                option for brands that want something a bit different. With built-in handles and a clean,
-                flawless finish, they&apos;re especially popular for events, exhibitions and promotional
-                packaging across Ireland.
+                Our <strong className="text-white">die-cut printed paper bags</strong> are a sleek, modern
+                option for brands that want something a bit different. With built-in handles and a clean
+                finish, they&apos;re especially popular for events, exhibitions, and promotional packaging.
               </p>
               <p className="text-gray-400 mb-8 leading-relaxed">
-                Turn simple packaging into a walking advert for your brand — perfect for trade shows,
-                product launches and premium campaigns. Strong, easy to carry, and fully customisable in
-                colour and finish to match your brand.
+                These custom printed paper bags are a great way to turn simple packaging into a walking
+                advert — perfect for trade shows, product launches, and campaigns. They&apos;re strong, easy
+                to carry, and available in a range of colours and finishes to match your brand.
               </p>
 
               <div className="flex flex-wrap gap-3 mb-8">
                 <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-center">
-                  <div className="text-sm font-bold text-amber-400">Premium</div>
-                  <div className="text-xs text-gray-400">bespoke finishes</div>
+                  <div className="text-sm font-bold text-amber-400">Custom</div>
+                  <div className="text-xs text-gray-400">branding &amp; print</div>
                 </div>
                 <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-center">
                   <div className="text-sm font-bold text-white">500 units</div>
@@ -342,29 +319,11 @@ export default function LuxuryPaperBagsIreland() {
         </div>
       </section>
 
-      {/* Finishes */}
-      <section className="py-12 lg:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Bespoke luxury finishes</h2>
-          <p className="text-gray-600 mb-8 max-w-2xl">
-            Combine finishes to create packaging that feels as premium as what&apos;s inside it.
-          </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {finishOptions.map((item) => (
-              <div key={item.title} className="rounded-xl border border-gray-200 p-5 hover:border-amber-200 hover:shadow-md transition-all">
-                <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Gallery */}
       <section className="py-12 lg:py-16 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Luxury paper bag examples</h2>
-          <p className="text-gray-600 mb-8">Premium die-cut handle bags with bespoke finishes for Irish brands.</p>
+          <p className="text-gray-600 mb-8">Die-cut printed paper bags with custom branding for Irish brands.</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {galleryImages.map((img) => (
               <div key={img.src} className="relative aspect-square rounded-xl overflow-hidden border border-gray-200 bg-slate-50">
@@ -532,7 +491,7 @@ export default function LuxuryPaperBagsIreland() {
             Ready to elevate your brand&apos;s packaging?
           </h2>
           <p className="text-gray-400 mb-6">
-            Luxury die-cut paper bags with bespoke finishes, from 500 units, delivered nationwide across
+            Die-cut printed paper bags with custom branding, from 500 units, delivered nationwide across
             Ireland.
           </p>
           <div className="flex flex-wrap justify-center gap-3">

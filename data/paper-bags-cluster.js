@@ -127,7 +127,7 @@ export const HUB_FAQS = [
   },
   {
     q: 'Do you supply luxury paper bags for premium brands?',
-    a: 'Yes. Our luxury die-cut paper bags feature built-in handles and bespoke finishes — foil stamping, embossing and lamination — for fashion, jewellery, beauty and hospitality brands across Ireland.',
+    a: 'Yes. Our luxury die-cut paper bags feature built-in handles and custom branding — ideal for fashion, jewellery, beauty and hospitality brands across Ireland.',
   },
   {
     q: 'Can I get paper bags printed with my logo?',
