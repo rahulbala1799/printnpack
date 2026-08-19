@@ -82,6 +82,7 @@ const POPULAR_LINKS = [
   { label: 'Tissue Paper', href: '/custom-printed-tissue-paper-ireland' },
   { label: 'Plain Packaging', href: '/plain-packaging' },
   { label: 'Roll-Up Banners', href: '/roll-up-banners' },
+  { label: 'Custom Flags', href: '/custom-printed-flags-ireland' },
   { label: 'Leaflets', href: '/services/leaflets' },
   { label: 'Printing Services', href: '/printing-ireland' },
 ];
@@ -142,6 +143,7 @@ const RELATED_LINKS = [
   { href: '/luxury-magnetic-closure-boxes-ireland', label: 'Magnetic Closure Boxes', desc: 'Luxury rigid gift boxes with custom logo printing.' },
   { href: '/custom-printed-tissue-paper-ireland', label: 'Custom Tissue Paper', desc: 'Branded logo tissue for ecommerce and luxury retail.' },
   { href: '/banners-ireland', label: 'Banners Ireland', desc: 'Vinyl banners, roll-ups and extra-wide stands.' },
+  { href: '/custom-printed-flags-ireland', label: 'Custom Printed Flags', desc: 'Full-colour flags for clubs & events, from 1 flag.' },
   { href: '/plain-packaging', label: 'Plain Packaging', desc: 'Stock cups, boxes, bags and gloves with volume pricing.' },
   { href: '/foamex-ireland', label: 'Foamex Boards', desc: 'Rigid display boards for retail and events.' },
   { href: '/services/leaflets', label: 'Leaflet Printing', desc: 'A6 to A3 flyers for restaurants and retail.' },

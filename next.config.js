@@ -176,6 +176,31 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/flag-poles-ireland',
+        destination: '/custom-printed-flags-ireland',
+        permanent: true,
+      },
+      {
+        source: '/custom-flags-ireland',
+        destination: '/custom-printed-flags-ireland',
+        permanent: true,
+      },
+      {
+        source: '/printed-flags-ireland',
+        destination: '/custom-printed-flags-ireland',
+        permanent: true,
+      },
+      {
+        source: '/personalised-flags-ireland',
+        destination: '/custom-printed-flags-ireland',
+        permanent: true,
+      },
+      {
+        source: '/gaa-flags-ireland',
+        destination: '/custom-printed-flags-ireland',
+        permanent: true,
+      },
+      {
         source: '/disposable-gloves-ireland',
         destination: '/gloves-ireland',
         permanent: true,

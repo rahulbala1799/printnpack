@@ -652,6 +652,63 @@ const products = [
     leadTime: '5-7 business days'
   },
   {
+    id: 'custom-printed-flags-ireland',
+    name: 'Custom Printed Flags',
+    category: 'Wide Format',
+    url: '/custom-printed-flags-ireland',
+    description: 'High-quality custom printed flags in Ireland for businesses, GAA clubs, schools and events — vibrant full-colour sublimation printing, order from one flag, nationwide delivery.',
+    features: [
+      'Custom printed in any size',
+      'Full-colour, single-sided sublimation printing',
+      'Approximately 95% show-through on the reverse',
+      'Durable and suitable for outdoor use',
+      'Standard and recycled polyester options available',
+      'Multiple finishing options including eyelets and pole sleeves',
+      'Available to order from one flag',
+    ],
+    detailedDescription: 'Make your business, club or event stand out with high-quality custom printed flags from PrintNPack Ireland. Designed in any size and printed in vibrant full colour, our personalised flags are ideal for businesses, GAA clubs, cricket clubs, schools, community organisations, festivals, sporting events and promotional displays.\n\nOur standard flags are made from durable 110gsm polyester, with recycled polyester and mesh options also available. Each flag is printed using high-quality sublimation printing for bright, long-lasting colours. The material offers approximately 95% show-through, allowing your design to remain visible from the reverse side.\n\nChoose from a range of sizes, shapes and finishing options, including reinforced edges, eyelets and pole sleeves. Flags can be ordered from just one piece. For oversized flags, multiple printed sections can be professionally stitched together to create a bespoke solution. Please note: the flagpole is not included.',
+    specifications: [
+      { name: 'Material', value: 'Polyester 110gsm, recycled polyester 110gsm or mesh polyester 115gsm' },
+      { name: 'Printing', value: 'Single-sided, full colour dye sublimation' },
+      { name: 'Transparency', value: 'Approximately 95% show-through' },
+      { name: 'Minimum Order', value: 'From one flag' },
+      { name: 'Finishing Options', value: 'Eyelets, reinforced edges, pole sleeves and outrigger tunnels' },
+      { name: 'Washing', value: 'Machine wash max 30°C; do not tumble dry' },
+      { name: 'Outdoor Use', value: 'Suitable for rain; take indoors during very strong winds' },
+      { name: 'Delivery', value: 'Nationwide across Ireland' },
+    ],
+    images: [
+      '/images/products/custom-printed-flags/custom-printed-flags-ireland-gaa-club.jpg',
+      '/images/products/custom-printed-flags/custom-printed-flags-ireland-cricket-club.jpg',
+    ],
+    imageSrc: '/images/products/custom-printed-flags/custom-printed-flags-ireland-gaa-club.jpg',
+    price: 'From €25.87 per flag',
+    moq: 1,
+    leadTime: 'Contact for lead time',
+    applications: [
+      'GAA Clubs & Sports Teams',
+      'Cricket & Rugby Clubs',
+      'Schools & Colleges',
+      'Community Organisations',
+      'Businesses & Retail',
+      'Festivals & Events',
+    ],
+    faq: [
+      {
+        question: 'What is the minimum order for custom flags?',
+        answer: 'Flags can be ordered from just one piece, suitable for individual clubs and small businesses.',
+      },
+      {
+        question: 'Is the flagpole included?',
+        answer: 'No. The flagpole is not included — we supply the custom printed flag only.',
+      },
+      {
+        question: 'What materials are available?',
+        answer: 'Polyester 110gsm, recycled polyester 110gsm and mesh polyester 115gsm, all printed with dye sublimation.',
+      },
+    ],
+  },
+  {
     id: 'roll-up-banner-stands',
     name: 'Roll-Up Banner Stands',
     category: 'Wide Format',

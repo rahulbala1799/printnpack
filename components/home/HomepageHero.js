@@ -32,6 +32,7 @@ const quickLinks = [
   { label: 'Paper Bags', href: '/printed-flat-handle-bags-ireland' },
   { label: 'Plain Packaging', href: '/plain-packaging' },
   { label: 'Roll-Up Banners', href: '/roll-up-banners' },
+  { label: 'Custom Flags', href: '/custom-printed-flags-ireland' },
   { label: 'Foamex Boards', href: '/foamex-boards' },
 ];
 

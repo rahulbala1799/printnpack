@@ -137,6 +137,13 @@ const guides = [
     cta: 'View roll ups',
   },
   {
+    href: '/custom-printed-flags-ireland',
+    title: 'Custom Printed Flags Ireland',
+    description: 'Full-colour flags for GAA clubs, businesses & events — order from 1 flag.',
+    image: '/images/products/custom-printed-flags/custom-printed-flags-ireland-gaa-club.jpg',
+    cta: 'View flags',
+  },
+  {
     href: '/extra-wide-roll-up-banners-ireland',
     title: 'Extra Wide Roll Up Banners',
     description: '2m XL roller banners up to 3m high — Ireland, NI, UK & EU delivery.',
