@@ -27,6 +27,7 @@ const PRODUCT_LINKS = [
   { label: 'Vinyl Banners', href: '/vinyl-banners' },
   { label: 'Pull Up Banners Meath', href: '/pull-up-banners-meath' },
   { label: 'Roll Up Banners', href: '/roll-up-banners' },
+  { label: 'Extra Wide Roll Ups', href: '/extra-wide-roll-up-banners-ireland' },
   { label: 'Rubber Stamps', href: '/rubber-stamps-ireland' },
   { label: 'Stamp FAQ', href: '/rubber-stamp-faq-ireland' },
   { label: 'Napkins Ireland', href: '/napkins-ireland' },

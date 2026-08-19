@@ -25,7 +25,7 @@ const pageFaqs = [
   },
   {
     q: 'How much do roll up banners cost in Ireland?',
-    a: 'Roll up banners start from €35 depending on size and frame type. Contact PrintNPack for a quote on standard 850mm and 1200mm widths or custom exhibition sizes.',
+    a: 'Roll up banners start from €35 depending on size and frame type. Contact PrintNPack for a quote on standard 850mm and 1200mm widths. Extra wide 2 metre roller banners start from €398.96.',
   },
 ];
 

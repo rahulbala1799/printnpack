@@ -6,9 +6,20 @@ import Link from 'next/link';
 import ExtraWideRollUpBannerQuoteForm from '../components/ExtraWideRollUpBannerQuoteForm';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 import { SITE_URL } from '../lib/site';
-import { buildProductLd } from '../lib/schema';
+import { buildOffer } from '../lib/schema';
+import {
+  EXTRA_WIDE_TITLE,
+  EXTRA_WIDE_DESCRIPTION,
+  EXTRA_WIDE_KEYWORDS,
+  seoSections,
+  pageFaqs,
+  deliveryAreas,
+  comparisonRows,
+} from '../data/extra-wide-rollup-seo';
 
 const PAGE_URL = `${SITE_URL}/extra-wide-roll-up-banners-ireland`;
+const HERO_IMG = `${SITE_URL}/ifa/product/extra-wide-rollup/hero-standout-3m.jpg`;
+const DETAIL_IMG = `${SITE_URL}/ifa/product/extra-wide-rollup/hero-standout-detail.jpg`;
 
 const sizeOptions = [
   {
@@ -103,8 +114,8 @@ const features = [
     ),
   },
   {
-    title: 'Nationwide Ireland delivery',
-    description: 'PrintNPack is based in Ashbourne, Co. Meath — we deliver extra-wide roller banners across Dublin, Meath and all Irish counties.',
+    title: 'Nationwide Ireland, NI & Europe delivery',
+    description: 'Deliver extra-wide roller banners across Ireland, Northern Ireland, the UK and EU exhibition addresses from Ashbourne, Co. Meath.',
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
@@ -123,76 +134,52 @@ const specs = [
   { label: 'Weight', value: 'Approx. 14 kg per unit' },
   { label: 'Use', value: 'Indoor exhibitions, trade shows, retail, corporate events' },
   { label: 'Included', value: 'Carry bag, assembly guide' },
-  { label: 'Delivery', value: 'Nationwide Ireland' },
+  { label: 'Delivery', value: 'Ireland, Northern Ireland, UK & EU (quoted)' },
 ];
 
-const seoSections = [
-  {
-    title: 'Extra Wide Roll Up Banners for Irish Exhibitions & Trade Shows',
-    body: 'Make a commanding first impression at exhibitions, conferences and product launches with extra wide roll up banners from PrintNPack. At 200 cm wide and up to 3 metres tall, these XL roller banners dominate exhibition aisles, retail atriums and corporate reception areas — far beyond standard 85 cm pull up displays.',
-  },
-  {
-    title: 'XL, XXL & XXXL Roller Banner Sizes',
-    body: 'Choose XL (200×200 cm) for medium exhibition booths, XXL (200×250 cm) for taller backdrops, or XXXL (200×300 cm) — our tallest extra-wide format at 3 metres high. All sizes use the same 2-metre width for consistent branding across a multi-banner stand.',
-  },
-  {
-    title: 'Large Format Pull Up Banners for Dublin, Meath & Nationwide',
-    body: 'PrintNPack supplies extra wide pull up banners across Dublin, Meath, Cork, Galway and every Irish county. Based at Unit 14 Ashbourne Business Centre, we print UV full-colour graphics on B1-certified Airtex 330 material with nationwide delivery or local collection.',
-  },
-  {
-    title: 'Why Choose Extra Wide Over Standard Roll Up Banners?',
-    body: 'Standard roll up banners are typically 80–100 cm wide. Extra wide roller banners at 200 cm width give you roughly double the visual impact — ideal when you need a backdrop visible from across a busy exhibition hall, shopping centre or conference foyer.',
-  },
-  {
-    title: 'Indoor Exhibition Banners — B1 Fire Certified',
-    body: 'Extra wide roll up banners are designed for indoor use only. Airtex 330 material is B1 fire certified, making it suitable for exhibition centres, hotels, conference venues and retail environments that require flame-retardant display materials.',
-  },
+const areaServed = [
+  { '@type': 'Country', name: 'Ireland' },
+  { '@type': 'Country', name: 'United Kingdom' },
+  { '@type': 'AdministrativeArea', name: 'Northern Ireland' },
 ];
 
-const pageFaqs = [
-  {
-    q: 'What sizes do extra wide roll up banners come in?',
-    a: 'PrintNPack supplies three extra wide roll up banner sizes: XL (200×200 cm), XXL (200×250 cm) and XXXL (200×300 cm). All are 200 cm (2 metres) wide with varying heights up to 3 metres.',
-  },
-  {
-    q: 'How much do extra wide roll up banners cost in Ireland?',
-    a: 'Extra wide roll up banners start from €398.96 for the XL size (200×200 cm) with Silver XL stand included. XXL is €418.49 and XXXL is €436.62. Prices include UV full-colour print on Airtex 330 material.',
-  },
-  {
-    q: 'What is the difference between extra wide and standard roll up banners?',
-    a: 'Standard roll up banners are typically 80–100 cm wide and 200 cm tall. Extra wide roller banners are 200 cm wide — double the width — with heights up to 300 cm for maximum visual impact at exhibitions and large indoor venues.',
-  },
-  {
-    q: 'Can I order just one extra wide roll up banner?',
-    a: 'Yes. There is no minimum order quantity — you can order from 1 piece. This makes extra wide roll up banners ideal for single exhibitions, corporate events or testing a new display before ordering multiples.',
-  },
-  {
-    q: 'Are extra wide roll up banners suitable for outdoor use?',
-    a: 'No. Extra wide roll up banners are for indoor use only. The Airtex 330 material is B1 fire certified for indoor exhibition and conference venues. For outdoor advertising, see our PVC vinyl banners.',
-    link: { href: '/vinyl-banners', label: 'PVC vinyl banners' },
-  },
-  {
-    q: 'What base comes with the extra wide roll up banner?',
-    a: 'All extra wide roll up banners include the Silver XL stand — a heavy-duty silver aluminium cassette base designed for the wider 200 cm graphic panel. A carry bag is included for transport.',
-  },
-  {
-    q: 'How heavy are extra wide roll up banners?',
-    a: 'Each extra wide roll up banner weighs approximately 14 kg. The included carry bag makes transport between venues manageable, though two people are recommended for setup of the tallest XXXL size.',
-  },
-  {
-    q: 'Do you deliver extra wide roll up banners across Ireland?',
-    a: 'Yes. PrintNPack delivers extra wide roller banners nationwide across all Irish counties from our base in Ashbourne, Co. Meath. Local collection is also available for Meath and north Dublin customers.',
-  },
-];
+function variantOffer(size) {
+  const offer = buildOffer({ url: PAGE_URL, price: size.price.toFixed(2) });
+  return {
+    '@type': 'Product',
+    '@id': `${PAGE_URL}#${size.id}`,
+    name: `Extra Wide Roll Up Banner ${size.label} ${size.dimensions}`,
+    sku: `EWRB-${size.label}`,
+    size: size.dimensions,
+    image: [HERO_IMG, DETAIL_IMG],
+    offers: { ...offer, areaServed, itemCondition: 'https://schema.org/NewCondition' },
+  };
+}
 
-const productLd = buildProductLd({
-  name: 'Extra Wide Roll Up Banners Ireland — XL 2m Wide Roller Banners',
-  description:
-    'Extra wide roll up banners Ireland — 200 cm wide XL, XXL and XXXL roller banners up to 3 metres high. UV full-colour print on Airtex 330, Silver XL stand, B1 certified. Order from 1 piece with nationwide delivery.',
-  image: `${SITE_URL}/ifa/product/extra-wide-rollup/hero-standout-3m.jpg`,
+const productLd = {
+  '@context': 'https://schema.org/',
+  '@type': 'ProductGroup',
+  name: 'Extra Wide Roll Up Banners — 2m XL Roller Banners',
+  description: EXTRA_WIDE_DESCRIPTION,
   url: PAGE_URL,
-  price: '398.96',
-});
+  image: [HERO_IMG, DETAIL_IMG],
+  brand: { '@type': 'Brand', name: 'PrintNPack Ireland' },
+  material: 'Airtex 330',
+  category: 'Roll Up Banners',
+  productGroupID: 'extra-wide-roll-up-banners',
+  variesBy: ['https://schema.org/size'],
+  hasVariant: sizeOptions.map(variantOffer),
+  offers: {
+    '@type': 'AggregateOffer',
+    url: PAGE_URL,
+    priceCurrency: 'EUR',
+    lowPrice: '398.96',
+    highPrice: '436.62',
+    offerCount: String(sizeOptions.length),
+    availability: 'https://schema.org/InStock',
+    areaServed,
+  },
+};
 
 const faqLd = {
   '@context': 'https://schema.org',
@@ -259,28 +246,25 @@ const ExtraWideRollUpBannersPage = () => {
   return (
     <Layout>
       <Head>
-        <title>Extra Wide Roll Up Banners Ireland | XL 2m Wide Roller Banners | PrintNPack</title>
-        <meta
-          name="description"
-          content="Extra wide roll up banners Ireland — 200 cm wide XL, XXL & XXXL roller banners up to 3m high. UV print on Airtex 330, Silver XL stand, B1 certified. From €398.96, order from 1 piece. Nationwide delivery."
-        />
-        <meta
-          name="keywords"
-          content="extra wide roll up banner, extra wide roll up banners ireland, xl roll up banner, xl roller banner, wide roll up banner, 2 metre roll up banner, large format pull up banner, extra wide pull up banner ireland, exhibition roll up banner, trade show roller banner, 200cm roll up banner, 3 metre roll up banner, xl banner stand ireland, wide format roll up banner dublin, roller banner printing ireland, large pull up banner, extra wide banner stand, indoor exhibition banner, b1 certified roll up banner, airtex roll up banner"
-        />
+        <title>{EXTRA_WIDE_TITLE}</title>
+        <meta name="description" content={EXTRA_WIDE_DESCRIPTION} />
+        <meta name="keywords" content={EXTRA_WIDE_KEYWORDS} />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-        <meta property="og:title" content="Extra Wide Roll Up Banners Ireland | XL 2m Wide Roller Banners" />
-        <meta
-          property="og:description"
-          content="200 cm wide extra wide roll up banners — XL, XXL and XXXL sizes up to 3 metres. UV full-colour print, Silver XL stand, nationwide delivery from Meath."
-        />
-        <meta property="og:image" content={`${SITE_URL}/ifa/product/extra-wide-rollup/hero-standout-3m.jpg`} />
+        <meta name="geo.region" content="IE" />
+        <meta name="geo.placename" content="Ashbourne, Co. Meath, Ireland" />
+        <meta property="og:locale" content="en_IE" />
+        <meta property="og:locale:alternate" content="en_GB" />
+        <meta property="og:title" content={EXTRA_WIDE_TITLE} />
+        <meta property="og:description" content={EXTRA_WIDE_DESCRIPTION} />
+        <meta property="og:image" content={HERO_IMG} />
+        <meta property="og:image:alt" content="Extra wide 2m x 3m roll up banner Ireland with Silver XL stand" />
         <meta property="og:url" content={PAGE_URL} />
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="product" />
+        <meta property="og:site_name" content="PrintNPack Ireland" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Extra Wide Roll Up Banners Ireland | From €398.96" />
-        <meta name="twitter:description" content="XL 2m wide roller banners for exhibitions and trade shows. Order from 1 piece with nationwide delivery." />
-        <meta name="twitter:image" content={`${SITE_URL}/ifa/product/extra-wide-rollup/hero-standout-3m.jpg`} />
+        <meta name="twitter:title" content="Extra Wide Roll Up Banners | From €398.96 | Ireland, NI & UK" />
+        <meta name="twitter:description" content="2m-wide XL roller banners up to 3m. UV print, Silver XL stand. Delivery across Ireland, Northern Ireland, UK and EU." />
+        <meta name="twitter:image" content={HERO_IMG} />
         <link rel="canonical" href={PAGE_URL} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
@@ -314,7 +298,9 @@ const ExtraWideRollUpBannersPage = () => {
                   >
                     <Image
                       src={img}
-                      alt={`Extra wide roll up banner ${i + 1}`}
+                      alt={i === 0
+                        ? 'Extra wide 2 metre by 3 metre roll up banner Ireland — XXXL roller banner with Silver XL stand'
+                        : 'Extra wide XL roller banner cassette close-up — silver aluminium Silver XL stand'}
                       fill
                       className="object-contain"
                       priority={i === 0}
@@ -346,13 +332,14 @@ const ExtraWideRollUpBannersPage = () => {
               </div>
 
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">
-                Extra Wide Roll Up Banners Ireland — XL 2 Metre Roller Banners
+                Extra Wide Roll Up Banners Ireland — 2m XL Roller Banners for NI &amp; the UK
               </h1>
 
               <p className="text-gray-500 text-base sm:text-lg mb-4 leading-relaxed">
-                Attract attention and convey your message easily at events and exhibitions with our{' '}
-                <strong>extra wide roll up banners</strong>. Three sizes to choose from — the largest being 3 metres high — with a{' '}
-                <strong>Silver XL stand</strong>, carry bag, and UV full-colour print on wrinkle-free Airtex 330 material.
+                Attract attention at events and exhibitions with our{' '}
+                <strong>extra wide roll up banners</strong>. Three sizes — the largest 3 metres high — with a{' '}
+                <strong>Silver XL stand</strong>, carry bag, and UV full-colour print on wrinkle-free Airtex 330.
+                Delivery across Ireland, <strong>Northern Ireland</strong>, the UK and EU on request.
               </p>
 
               <p className="text-gray-500 text-sm mb-6 leading-relaxed">
@@ -453,7 +440,7 @@ const ExtraWideRollUpBannersPage = () => {
                   'Silver XL heavy-duty aluminium stand',
                   'Carry bag included — approx. 14 kg per unit',
                   'B1 fire certified — indoor use only',
-                  'Order from 1 piece — nationwide delivery',
+                  'Order from 1 piece — Ireland, NI, UK & EU delivery',
                 ].map((point) => (
                   <li key={point} className="flex items-start gap-2.5 text-sm text-gray-600">
                     <CheckIcon />
@@ -516,9 +503,65 @@ const ExtraWideRollUpBannersPage = () => {
             {seoSections.map((section) => (
               <div key={section.title}>
                 <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">{section.title}</h2>
-                <p className="text-gray-600 leading-relaxed">{section.body}</p>
+                <p className="text-gray-600 leading-relaxed">
+                  {section.body}
+                  {section.link && (
+                    <>
+                      {' '}
+                      <Link href={section.link.href} className="text-orange-600 hover:underline font-medium">
+                        {section.link.label}
+                      </Link>
+                      .
+                    </>
+                  )}
+                </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-gray-50 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Extra Wide vs Standard Roll Up Banners</h2>
+              <p className="text-gray-500 mb-6">Compare 2 metre XL roller banners with standard Irish roll ups before you order.</p>
+              <div className="border border-gray-200 rounded-xl overflow-hidden bg-white">
+                <div className="grid grid-cols-3 bg-gray-100 px-4 py-2 text-xs font-semibold text-gray-600 uppercase tracking-wide">
+                  <span>Feature</span>
+                  <span>Extra wide</span>
+                  <span>Standard</span>
+                </div>
+                {comparisonRows.map((row, i) => (
+                  <div key={row.feature} className={`grid grid-cols-3 px-4 py-3 text-sm ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+                    <span className="font-medium text-gray-800">{row.feature}</span>
+                    <span className="text-gray-600">{row.extra}</span>
+                    <span className="text-gray-500">{row.standard}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-sm text-gray-500 mt-4">
+                Need a compact stand?{' '}
+                <Link href="/roll-up-banners" className="text-orange-600 hover:underline font-medium">Order standard roll up banners</Link>
+                {' '}from €35. Size guide:{' '}
+                <Link href="/blog/banner-sizes-ireland" className="text-orange-600 hover:underline font-medium">banner sizes Ireland</Link>.
+              </p>
+            </div>
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Delivery: Ireland, NI, UK &amp; Europe</h2>
+              <p className="text-gray-500 mb-6">
+                Extra wide roller banners ship from Ashbourne, Co. Meath. Confirm carriage on your quote — units weigh about 14 kg.
+              </p>
+              <div className="space-y-3">
+                {deliveryAreas.map((area) => (
+                  <div key={area.region} className="bg-white border border-gray-200 rounded-xl p-4">
+                    <h3 className="font-semibold text-gray-900 text-sm mb-1">{area.region}</h3>
+                    <p className="text-sm text-gray-600">{area.places}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -627,12 +670,14 @@ const ExtraWideRollUpBannersPage = () => {
 
       <RelatedSeoLinks
         links={[
+          { href: '/blog/extra-wide-roll-up-banners-ireland-guide', label: 'XL Roller Banner Guide', desc: 'Sizes, venues, NI & UK shipping' },
           { href: '/roll-up-banners', label: 'Standard Roll Up Banners', desc: 'Portable trade show displays from €35' },
           { href: '/banners-ireland', label: 'Banners Ireland', desc: 'Complete banner printing hub' },
           { href: '/banner-faq-ireland', label: 'Banner FAQ', desc: '40+ instant answers' },
           { href: '/vinyl-banners', label: 'PVC Banners', desc: 'Outdoor advertising banners' },
           { href: '/pull-up-banners-meath', label: 'Pull Up Banners Meath', desc: 'Roll-up displays across County Meath' },
           { href: '/blog/trade-show-banners-decals-ireland', label: 'Trade Show Guide', desc: 'Exhibition marketing tips' },
+          { href: '/banner-printing-dublin', label: 'Banner Printing Dublin', desc: 'Delivery across Dublin city & county' },
         ]}
       />
 

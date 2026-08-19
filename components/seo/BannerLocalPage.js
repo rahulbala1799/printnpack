@@ -223,6 +223,7 @@ export default function BannerLocalPage({ config }) {
           { href: '/blog/banner-sizes-ireland', label: 'Banner Sizes Guide', desc: '2×4, 3×6, 4×8 & roll-up dimensions' },
           { href: '/vinyl-banners', label: 'PVC Banners', desc: 'Outdoor & shop-front banners' },
           { href: '/roll-up-banners', label: 'Roll-Up Banners', desc: 'Portable trade show displays' },
+          { href: '/extra-wide-roll-up-banners-ireland', label: 'Extra Wide Roll Ups', desc: '2m XL roller banners up to 3m' },
           { href: '/banner-faq-ireland', label: 'Banner FAQ', desc: '40+ instant answers' },
           ...siblingLinks,
         ]}

@@ -563,7 +563,7 @@ const products = [
     name: 'Extra Wide Roll Up Banners',
     category: 'Wide Format',
     url: '/extra-wide-roll-up-banners-ireland',
-    description: '200 cm extra-wide XL roller banners up to 3 metres high — UV print on Airtex 330 with Silver XL stand for exhibitions and trade shows.',
+    description: '200 cm extra-wide XL roller banners up to 3 metres high — UV print on Airtex 330 with Silver XL stand. Delivery across Ireland, Northern Ireland, UK and EU.',
     features: [
       '200 cm extra-wide format — XL, XXL and XXXL',
       'Heights up to 3 metres (200 × 300 cm)',

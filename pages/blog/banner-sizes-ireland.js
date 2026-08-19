@@ -18,7 +18,8 @@ const rollUpSizes = [
   { size: '850mm × 2000mm', use: 'Compact roll-up — reception desks, small exhibitions', from: '€35' },
   { size: '1000mm × 2000mm', use: 'Standard trade show width — most popular', from: '€45' },
   { size: '1200mm × 2000mm', use: 'Wide roll-up — corporate events, retail displays', from: '€55' },
-  { size: 'Custom up to 1500 × 3000mm', use: 'Bespoke exhibition displays — quote on request', from: 'Quote' },
+  { size: '2000 × 2000 mm (XL extra wide)', use: '2m extra-wide exhibition backdrop', from: '€398.96' },
+  { size: '2000 × 3000 mm (XXXL extra wide)', use: '3m-high extra-wide hall backdrop', from: '€436.62' },
 ];
 
 const jsonLd = {
@@ -221,7 +222,7 @@ export default function BannerSizesIreland() {
             <li><strong>Shop sale or window sign:</strong> 2ft × 4ft — readable from the pavement</li>
             <li><strong>Shop front or event entrance:</strong> 3ft × 6ft — the most versatile outdoor size</li>
             <li><strong>Large building or festival:</strong> 4ft × 8ft or 5ft × 10ft</li>
-            <li><strong>Trade show or exhibition:</strong> 1000mm roll-up — standard booth width</li>
+            <li><strong>Trade show or exhibition:</strong> 1000mm roll-up — or a 2m extra wide roll up for large booths</li>
             <li><strong>Reception desk or clinic:</strong> 850mm roll-up — compact and portable</li>
             <li><strong>GAA club or sports sponsor board:</strong> 3ft × 6ft PVC or 4ft × 8ft mesh for windy pitches</li>
           </ul>
@@ -253,6 +254,8 @@ export default function BannerSizesIreland() {
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">Related guides</h2>
           <ul className="list-disc pl-6 text-slate-700 mb-8 space-y-2">
             <li><Link href="/blog/banner-printing-ireland-guide" className="text-blue-600 hover:underline font-medium">Banner printing cost, materials &amp; turnaround guide</Link></li>
+            <li><Link href="/extra-wide-roll-up-banners-ireland" className="text-blue-600 hover:underline font-medium">Extra wide 2m roll up banners</Link> — XL to 3m high for exhibitions</li>
+            <li><Link href="/blog/extra-wide-roll-up-banners-ireland-guide" className="text-blue-600 hover:underline font-medium">Extra wide roll up banner size &amp; delivery guide</Link></li>
             <li><Link href="/blog/trade-show-banners-decals-ireland" className="text-blue-600 hover:underline font-medium">Trade show banners &amp; custom decals guide</Link></li>
             <li><Link href="/banner-printing-ashbourne" className="text-blue-600 hover:underline font-medium">Banner printing Ashbourne</Link> — local collection from our Meath unit</li>
             <li><Link href="/banner-printing-dublin" className="text-blue-600 hover:underline font-medium">Banner printing Dublin</Link> — delivery across Dublin city &amp; county</li>

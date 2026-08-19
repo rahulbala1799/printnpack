@@ -137,6 +137,13 @@ const guides = [
     cta: 'View roll ups',
   },
   {
+    href: '/extra-wide-roll-up-banners-ireland',
+    title: 'Extra Wide Roll Up Banners',
+    description: '2m XL roller banners up to 3m high — Ireland, NI, UK & EU delivery.',
+    image: '/ifa/product/extra-wide-rollup/hero-standout-3m.jpg',
+    cta: 'View extra wide',
+  },
+  {
     href: '/vinyl-stickers',
     title: 'Custom Vinyl Stickers',
     description: 'Stickers & decals for windows, vehicles, and retail across Ireland.',

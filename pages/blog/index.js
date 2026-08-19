@@ -6,6 +6,17 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'extra-wide-roll-up-banners-ireland-guide',
+    title: 'Extra Wide Roll Up Banners Ireland: 2m XL Sizes, NI Delivery & Trade Show Guide',
+    excerpt:
+      'How to choose XL, XXL and XXXL extra wide roll up banners in Ireland — 2m width, 3m height, B1 indoor venues, Northern Ireland and UK shipping.',
+    date: '2026-08-19',
+    readTime: '7 min read',
+    image: '/ifa/product/extra-wide-rollup/hero-standout-3m.jpg',
+    imageAlt: 'Extra wide 2m x 3m roll up banner Ireland with Silver XL stand',
+    category: 'Print Guide',
+  },
+  {
     slug: 'printing-ashbourne-guide',
     title: 'Printing in Ashbourne Guide: Artwork Tips & What to Print Locally',
     excerpt:

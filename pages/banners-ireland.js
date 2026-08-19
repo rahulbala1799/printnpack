@@ -70,14 +70,14 @@ const itemListLd = {
 export default function BannersIreland() {
   const title = 'Banner Printing Ireland | Custom PVC & Roll-Up Banners | Print n Pack';
   const description =
-    'Banner printing Ireland — custom PVC banners, printed banners, roll-up banners and trade show displays. Banner printing near me from Ashbourne with delivery across Dublin, Meath and nationwide.';
+    'Banner printing Ireland — custom PVC banners, printed banners, roll-up banners, extra wide 2m roller banners and trade show displays. From Ashbourne with delivery across Dublin, Meath, Northern Ireland and nationwide.';
 
   return (
     <Layout>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="keywords" content="banner printing, banner printing ireland, banners ireland, banner printing near me, banner printing dublin, banners dublin, PVC banners ireland, roll up banners ireland, printed banners ireland, trade show banners ireland" />
+        <meta name="keywords" content="banner printing, banner printing ireland, banners ireland, banner printing near me, banner printing dublin, banners dublin, PVC banners ireland, roll up banners ireland, extra wide roll up banners, printed banners ireland, trade show banners ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href={PAGE_URL} />
         <meta property="og:type" content="website" />

@@ -537,6 +537,7 @@ export default function TradeShowBannersDecalsIreland() {
             <li><Link href="/blog/banner-sizes-ireland" className="text-purple-600 hover:text-purple-700 font-medium">Banner sizes guide</Link> — PVC &amp; roll-up dimensions</li>
             <li><Link href="/correx-boards" className="text-purple-600 hover:text-purple-700 font-medium">Corriboard / Correx boards</Link> — outdoor signage</li>
             <li><Link href="/roll-up-banners" className="text-purple-600 hover:text-purple-700 font-medium">Roll-up banners</Link> — trade show banner printing Ireland</li>
+            <li><Link href="/extra-wide-roll-up-banners-ireland" className="text-purple-600 hover:text-purple-700 font-medium">Extra wide roll up banners</Link> — 2m XL roller banners up to 3m</li>
             <li><Link href="/vinyl-stickers" className="text-purple-600 hover:text-purple-700 font-medium">Vehicle decals &amp; window graphics</Link> — custom vinyl stickers Ireland</li>
             <li><Link href="/foamex-boards" className="text-purple-600 hover:text-purple-700 font-medium">Foamex boards</Link> — exhibition display printing</li>
             <li><Link href="/products" className="text-purple-600 hover:text-purple-700 font-medium">Custom packaging &amp; print products</Link></li>

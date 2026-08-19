@@ -31,7 +31,7 @@ export const BANNER_FAQS = [
     category: 'pricing',
     q: 'How much does a roll-up banner cost?',
     subtitle: 'Comparing roll-up banner prices in Ireland',
-    a: 'Roll-up banners in Ireland typically start from €35 for a basic economy stand with printed graphic, rising to €80–€150+ for premium aluminium cassettes with carry cases. Standard widths are 850mm and 1200mm. Replacement graphics for existing stands are also available. Contact us with your size and deadline for an exact quote.',
+    a: 'Roll-up banners in Ireland typically start from €35 for a basic economy stand with printed graphic, rising to €80–€150+ for premium aluminium cassettes with carry cases. Extra wide 2m roller banners start from €398.96. Standard widths are 850mm and 1200mm. Contact us with your size and deadline for an exact quote.',
     link: { href: '/roll-up-banners', label: 'View roll-up banners' },
   },
   {
@@ -263,8 +263,8 @@ export const BANNER_FAQS = [
     category: 'finishing',
     q: 'Can I get a roll-up banner with a stand?',
     subtitle: 'Portable display with carry case',
-    a: 'Yes. Roll-up banners include a retractable aluminium base, printed graphic, support pole, and carry bag. Setup takes under a minute. Standard widths are 850mm and 1200mm — ideal for reception areas, trade shows, clinics, and school events.',
-    link: { href: '/roll-up-banners', label: 'Order roll-up banners' },
+    a: 'Yes. Roll-up banners include a retractable aluminium base, printed graphic, support pole, and carry bag. Setup takes under a minute. Standard widths are 850mm and 1200mm. Extra wide 2m stands are available separately.',
+    link: { href: '/extra-wide-roll-up-banners-ireland', label: 'Extra wide roll up banners' },
   },
   {
     id: 'double-sided',
@@ -280,8 +280,8 @@ export const BANNER_FAQS = [
     category: 'products',
     q: 'What size is a standard roll-up banner?',
     subtitle: 'Standard vs premium roll-up dimensions',
-    a: 'The most common roll-up banner widths are 850mm and 1200mm, with heights around 2000mm. Desktop mini roll-ups (A4/A3) are available for counters. Custom sizes up to 1500mm wide can be quoted on request.',
-    link: { href: '/roll-up-banners', label: 'Roll-up banner sizes' },
+    a: 'The most common roll-up banner widths are 850mm and 1200mm, with heights around 2000mm. Desktop mini roll-ups (A4/A3) are available for counters. For 2 metre extra-wide displays (200 cm wide, up to 3 m high) see extra wide roll up banners.',
+    link: { href: '/extra-wide-roll-up-banners-ireland', label: 'Extra wide 2m roll up banners' },
   },
   {
     id: 'school-event',
