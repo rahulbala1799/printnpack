@@ -64,6 +64,7 @@ const staticPages = [
   { path: '/plain-paper-bags-ireland',       priority: '0.88', changefreq: 'weekly' },
   { path: '/wholesale-paper-bags-ireland',   priority: '0.88', changefreq: 'weekly' },
   { path: '/twisted-handle-paper-bags-ireland', priority: '0.9', changefreq: 'weekly' },
+  { path: '/luxury-paper-bags-ireland',      priority: '0.92', changefreq: 'weekly' },
   { path: '/eco-bagasse-burger-boxes',    priority: '0.85', changefreq: 'weekly' },
   // Burger box cluster
   { path: '/burger-boxes-ireland',           priority: '0.9',  changefreq: 'weekly' },

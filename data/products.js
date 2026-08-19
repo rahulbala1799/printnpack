@@ -161,6 +161,80 @@ const products = [
     weeklyDelivery: 'Our premium weekly delivery service ensures your business always has the right amount of branded packaging on hand. We establish a consistent delivery schedule tailored to your specific needs, helping you maintain adequate inventory without requiring large storage areas. Our account managers monitor your usage patterns to recommend optimal order quantities, reducing waste and controlling costs. This reliable service enhances your professional image while simplifying operations.'
   },
   {
+    id: 'luxury-paper-bags',
+    name: 'Luxury Die-Cut Paper Bags',
+    url: '/luxury-paper-bags-ireland',
+    category: 'Retail Packaging',
+    description: 'Pure luxury die-cut printed paper bags with built-in handles and a flawless, premium finish — the sleek, modern packaging choice for luxury brands, boutiques and high-end events across Ireland.',
+    features: [
+      'Die-cut integrated handles for a seamless, modern look',
+      'Premium heavyweight paper stock with a flawless finish',
+      'Luxury finishing options: matte or gloss lamination, foil stamping, embossing and spot UV',
+      'Fully customisable branding, colours and sizes',
+      'Ideal for luxury retail, exhibitions, product launches and promotional campaigns',
+      'Digital CMYK printing with no plate fees, from 500 units'
+    ],
+    detailedDescription: 'Our die-cut printed luxury paper bags are a sleek, modern option for brands that want something a bit different. With built-in handles and a clean finish, they are especially popular for events, exhibitions, and promotional packaging across Ireland.\n\nThese custom printed luxury paper bags are a great way to turn simple packaging into a walking advert for your brand — perfect for trade shows, product launches, and premium retail campaigns. They are strong, easy to carry, and available in a range of sizes, colours, and finishes to match your brand identity.\n\nUnlike standard carrier bags, our luxury paper bags are built for brands that never compromise on presentation. Choose from matte or gloss lamination, gold or silver foil stamping, embossing and debossing, and spot UV highlights to create a truly premium unboxing experience. The die-cut handle design gives a clean, minimalist silhouette that boutiques, fashion houses, jewellers and hospitality brands across Ireland use to elevate their in-store and event packaging.\n\nWhether you are a luxury fashion label in Dublin, a boutique hotel in Cork, a jeweller in Galway, or a premium brand launching nationwide, our luxury paper bags are fully customised with your branding and print — from 500 units with nationwide delivery from our Ashbourne, Co. Meath production facility.',
+    specifications: [
+      { name: 'Material', value: 'Premium heavyweight paper stock (170-250gsm)' },
+      { name: 'Handle Type', value: 'Integrated die-cut handle — no rope or twisted attachments' },
+      { name: 'Finish Options', value: 'Matte lamination, gloss lamination, foil stamping (gold/silver), embossing, spot UV' },
+      { name: 'Color Options', value: 'Full CMYK plus custom Pantone colour matching' },
+      { name: 'Size Options', value: 'Small (8"×4"×10"), Medium (10"×5"×13"), Large (13"×6"×16")' },
+      { name: 'Print Method', value: 'Digital CMYK printing (no plates required)' },
+      { name: 'Minimum Order', value: '500 units (mixed sizes available)' },
+      { name: 'Production Time', value: '10-14 business days' },
+      { name: 'Special Features', value: 'Die-cut seamless handles, reinforced base, premium luxury finish' },
+      { name: 'Delivery Options', value: 'Nationwide delivery across Ireland, weekly scheduled delivery available' },
+    ],
+    images: [
+      '/images/products/luxury-paper-bags/luxury-paper-bags-ireland-premium-die-cut.jpg',
+      '/images/products/luxury-paper-bags/luxury-kraft-paper-bags-ireland-custom-printed.jpg',
+      '/images/products/luxury-paper-bags/luxury-printed-paper-bags-ireland-navy-die-cut.jpg'
+    ],
+    imageSrc: '/images/products/luxury-paper-bags/luxury-paper-bags-ireland-premium-die-cut.jpg',
+    price: 'Starting at €0.55 per unit',
+    moq: 500,
+    leadTime: '10-14 business days',
+    applications: [
+      'Luxury Fashion & Apparel Brands',
+      'Boutiques & Concept Stores',
+      'Jewellery & Watch Retailers',
+      'Beauty & Cosmetics Brands',
+      'Hotels & Hospitality',
+      'Trade Shows & Exhibitions',
+      'Product Launches & Corporate Events',
+      'Premium Gifting & Department Stores'
+    ],
+    faq: [
+      {
+        question: 'What makes these different from standard printed paper bags?',
+        answer: 'Our luxury paper bags use a die-cut integrated handle rather than a rope or twisted attachment, giving a seamless, modern look. Combined with premium heavyweight paper and finishes like foil stamping, embossing and lamination, they are designed for brands that want a genuinely premium unboxing experience.'
+      },
+      {
+        question: 'What luxury finishes can I add?',
+        answer: 'We offer matte and gloss lamination, gold or silver foil stamping, embossing and debossing, and spot UV highlights. These can be combined to create a truly bespoke luxury finish for your brand.'
+      },
+      {
+        question: 'What is the minimum order quantity?',
+        answer: 'Luxury die-cut paper bags start from 500 units, and you can mix sizes within the same order to suit different product ranges.'
+      },
+      {
+        question: 'Can I get a fully custom size or finish for my brand?',
+        answer: 'Yes. Beyond our standard Small, Medium and Large sizes, we work with luxury brands on bespoke dimensions, colours and finishes to match exact brand guidelines.'
+      },
+      {
+        question: 'How long does production take?',
+        answer: 'Production typically takes 10-14 business days after artwork and finish approval, with nationwide delivery across Ireland.'
+      },
+      {
+        question: 'Do you deliver luxury paper bags nationwide in Ireland?',
+        answer: 'Yes. We deliver to luxury brands, boutiques and retailers across Dublin, Cork, Galway, Limerick and every county in Ireland.'
+      }
+    ],
+    weeklyDelivery: 'Our weekly delivery service keeps flagship stores, boutiques and hospitality brands stocked with premium branded packaging without the need for large on-site storage. A dedicated account manager tailors your delivery schedule and monitors usage to recommend the right order quantities, protecting your brand image while simplifying inventory management.'
+  },
+  {
     id: 'sos-grab-bags',
     name: 'SOS Grab Bags',
     category: 'Food Packaging',

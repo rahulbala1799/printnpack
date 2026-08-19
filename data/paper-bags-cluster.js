@@ -123,7 +123,11 @@ export const WHOLESALE_PAPER_BAGS_CONFIG = {
 export const HUB_FAQS = [
   {
     q: 'Where can I buy paper bags in Ireland?',
-    a: 'PrintNPack supplies paper bags across Ireland — printed bags with logo, plain kraft stock bags, SOS takeaway bags and wholesale case options with delivery nationwide.',
+    a: 'PrintNPack supplies paper bags across Ireland — printed bags with logo, luxury die-cut bags for premium brands, plain kraft stock bags, SOS takeaway bags and wholesale case options with delivery nationwide.',
+  },
+  {
+    q: 'Do you supply luxury paper bags for premium brands?',
+    a: 'Yes. Our luxury die-cut paper bags feature built-in handles and bespoke finishes — foil stamping, embossing and lamination — for fashion, jewellery, beauty and hospitality brands across Ireland.',
   },
   {
     q: 'Can I get paper bags printed with my logo?',

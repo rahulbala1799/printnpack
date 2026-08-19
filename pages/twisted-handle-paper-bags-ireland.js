@@ -259,6 +259,7 @@ export default function TwistedHandlePaperBagsIreland() {
         title="Related paper bag pages"
         links={[
           { href: '/paper-bags-ireland', label: 'Paper Bags Ireland', desc: 'Printed, plain & wholesale hub' },
+          { href: '/luxury-paper-bags-ireland', label: 'Luxury Paper Bags', desc: 'Premium die-cut bags for luxury brands' },
           { href: '/printed-flat-handle-bags-ireland', label: 'Printed Flat Handle Bags', desc: 'Takeaway & café logo bags' },
           { href: '/plain-paper-bags-ireland', label: 'Plain Paper Bags', desc: 'Kraft SOS stock cases' },
           { href: '/wholesale-paper-bags-ireland', label: 'Wholesale Paper Bags', desc: 'Bulk case pricing' },

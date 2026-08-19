@@ -24,6 +24,12 @@ const galleryImages = [
 
 const relatedBags = [
   {
+    href: '/luxury-paper-bags-ireland',
+    title: 'Luxury Paper Bags',
+    desc: 'Die-cut premium bags with bespoke finishes for luxury brands.',
+    image: '/images/products/luxury-paper-bags/luxury-paper-bags-ireland-premium-die-cut.jpg',
+  },
+  {
     href: '/twisted-handle-paper-bags-ireland',
     title: 'Twisted Handle Paper Bags',
     desc: 'Premium rope-style handles for boutiques and gift retail.',
@@ -386,7 +392,7 @@ export default function PrintedFlatHandleBagsIreland() {
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">
             Other paper bag options
           </h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             {relatedBags.map((bag) => (
               <Link
                 key={bag.href}
@@ -482,6 +488,7 @@ export default function PrintedFlatHandleBagsIreland() {
         title="Related paper bag pages"
         links={[
           { href: '/paper-bags-ireland', label: 'Paper Bags Ireland', desc: 'Printed, plain & wholesale hub' },
+          { href: '/luxury-paper-bags-ireland', label: 'Luxury Paper Bags', desc: 'Premium die-cut bags for luxury brands' },
           { href: '/twisted-handle-paper-bags-ireland', label: 'Twisted Handle Bags', desc: 'Premium retail paper bags' },
           { href: '/plain-paper-bags-ireland', label: 'Plain Paper Bags', desc: 'Kraft SOS stock cases' },
           { href: '/wholesale-paper-bags-ireland', label: 'Wholesale Paper Bags', desc: 'Bulk case pricing' },

@@ -11,6 +11,14 @@ const HERO_IMAGE = '/images/products/flat-handle-bags/1.png';
 
 const childPages = [
   {
+    href: '/luxury-paper-bags-ireland',
+    title: 'Luxury Paper Bags',
+    desc: 'Die-cut premium carrier bags with bespoke finishes for luxury brands.',
+    image: '/images/products/luxury-paper-bags/luxury-paper-bags-ireland-premium-die-cut.jpg',
+    accent: 'amber',
+    badge: 'Luxury',
+  },
+  {
     href: '/printed-flat-handle-bags-ireland',
     title: 'Printed Flat Handle Bags',
     desc: 'Logo takeaway bags for cafés, delis and retail — from 500 units.',
@@ -41,6 +49,7 @@ const childPages = [
 ];
 
 const hubSections = [
+  { title: 'Luxury Paper Bags for Premium Irish Brands', body: 'Die-cut luxury paper bags with built-in handles and bespoke foil, emboss and lamination finishes give luxury fashion, jewellery and hospitality brands packaging as premium as their product.', link: { href: '/luxury-paper-bags-ireland', label: 'luxury paper bags' } },
   { title: 'Paper Bags with Logo for Irish Businesses', body: 'Custom printed paper bags with your logo turn every takeaway and retail order into brand exposure. Flat handle and twisted handle styles are available from 500 units with nationwide delivery.' },
   { title: 'Printed Paper Bags for Retail, Food and Events', body: 'From café pastries to boutique purchases and event giveaways, printed paper carrier bags keep your business name in customers\' hands after they leave.' },
   { title: 'Flat Handle vs Twisted Handle Paper Bags', body: 'Flat handle bags suit economical takeaway and food service. Twisted handle bags suit premium retail, gift shops and boutiques where presentation matters more.' },
@@ -76,7 +85,7 @@ export default function PaperBagsIreland() {
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="keywords" content="paper bags Ireland, paper bags Dublin, paper bags with logo, printed paper bags Ireland, custom paper bags, wholesale paper bags, paper carrier bags, branded paper bags" />
+        <meta name="keywords" content="paper bags Ireland, paper bags Dublin, paper bags with logo, printed paper bags Ireland, luxury paper bags Ireland, custom paper bags, wholesale paper bags, paper carrier bags, branded paper bags" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href={PAGE_URL} />
         <meta property="og:type" content="website" />
@@ -128,9 +137,14 @@ export default function PaperBagsIreland() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Choose your paper bag option</h2>
           <p className="text-gray-600 mb-8 max-w-2xl">Each page covers a different buying path — printed, plain stock, or wholesale bulk.</p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {childPages.map((page) => (
-              <Link key={page.href} href={page.href} className="group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md hover:border-emerald-200 transition-all">
+              <Link key={page.href} href={page.href} className="group relative bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md hover:border-emerald-200 transition-all">
+                {page.badge && (
+                  <span className="absolute top-3 left-3 z-10 text-[10px] font-bold uppercase tracking-wider bg-amber-500 text-gray-950 px-2 py-0.5 rounded-full">
+                    {page.badge}
+                  </span>
+                )}
                 <div className="relative h-40">
                   <Image src={page.image} alt={page.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="300px" unoptimized={process.env.NODE_ENV === 'production'} />
                 </div>
@@ -149,7 +163,17 @@ export default function PaperBagsIreland() {
           {hubSections.map((section) => (
             <div key={section.title} className="mb-8 last:mb-0">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{section.title}</h2>
-              <p className="text-gray-600 leading-relaxed">{section.body}</p>
+              <p className="text-gray-600 leading-relaxed">
+                {section.body}
+                {section.link && (
+                  <>
+                    {' '}
+                    <Link href={section.link.href} className="text-emerald-600 hover:underline font-medium">
+                      View {section.link.label} →
+                    </Link>
+                  </>
+                )}
+              </p>
             </div>
           ))}
         </div>
