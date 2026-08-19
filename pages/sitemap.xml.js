@@ -83,6 +83,7 @@ const staticPages = [
   { path: '/vinyl-banners',   priority: '0.85', changefreq: 'weekly' },
   { path: '/posters',         priority: '0.85', changefreq: 'weekly' },
   { path: '/roll-up-banners', priority: '0.85', changefreq: 'weekly' },
+  { path: '/extra-wide-roll-up-banners-ireland', priority: '0.85', changefreq: 'weekly' },
   { path: '/rubber-stamps',   priority: '0.85', changefreq: 'weekly' },
   { path: '/rubber-stamps-ireland',        priority: '0.9',  changefreq: 'weekly' },
   { path: '/rubber-stamp-faq-ireland',     priority: '0.88', changefreq: 'monthly' },

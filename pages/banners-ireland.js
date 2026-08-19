@@ -59,6 +59,7 @@ const itemListLd = {
   itemListElement: [
     buildCatalogOffer('PVC Banners Ireland', `${SITE_URL}/vinyl-banners`, { price: '25.00' }).itemOffered,
     buildCatalogOffer('Roll Up Banners Ireland', `${SITE_URL}/roll-up-banners`, { price: '35.00' }).itemOffered,
+    buildCatalogOffer('Extra Wide Roll Up Banners Ireland', `${SITE_URL}/extra-wide-roll-up-banners-ireland`, { price: '398.96' }).itemOffered,
   ].map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,
@@ -127,7 +128,7 @@ export default function BannersIreland() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Two ways to order banners</h2>
           <p className="text-gray-600 mb-8 max-w-2xl">PVC for outdoor and shop-front use. Roll-ups for portable indoor displays.</p>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             <Link href="/vinyl-banners" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-blue-300 hover:shadow-lg transition-all">
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 mb-2">PVC Banners</h3>
               <p className="text-gray-600 text-sm leading-relaxed mb-4">Full-colour outdoor PVC banners with eyelets, hems, mesh options, and custom sizes. Shops, events, fences, and scaffolding.</p>
@@ -137,6 +138,11 @@ export default function BannersIreland() {
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 mb-2">Roll-Up Banners</h3>
               <p className="text-gray-600 text-sm leading-relaxed mb-4">Portable roll-up displays with stand and carry case. Trade shows, reception areas, clinics, schools, and corporate events.</p>
               <span className="text-blue-600 font-semibold text-sm">View roll-up banners →</span>
+            </Link>
+            <Link href="/extra-wide-roll-up-banners-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-orange-300 hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold text-gray-900 group-hover:text-orange-600 mb-2">Extra Wide Roll-Ups</h3>
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">200 cm wide XL roller banners up to 3 metres high. Silver XL stand, B1 certified — for large exhibition booths and corporate backdrops.</p>
+              <span className="text-orange-600 font-semibold text-sm">View extra wide roll-ups →</span>
             </Link>
           </div>
         </div>

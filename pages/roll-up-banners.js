@@ -309,6 +309,7 @@ const RollUpBannersPage = () => {
 
       <RelatedSeoLinks
         links={[
+          { href: '/extra-wide-roll-up-banners-ireland', label: 'Extra Wide Roll Up Banners', desc: '200 cm wide XL roller banners up to 3m' },
           { href: '/banners-ireland', label: 'Banners Ireland', desc: 'Complete banner printing hub' },
           { href: '/banner-faq-ireland', label: 'Banner FAQ', desc: '40+ instant answers' },
           { href: '/vinyl-banners', label: 'PVC Banners', desc: 'Outdoor advertising banners' },

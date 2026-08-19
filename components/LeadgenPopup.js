@@ -298,6 +298,7 @@ This is a lead from the website popup form.`,
                     <option value="Correx Boards">Correx Boards</option>
                     <option value="Vinyl Stickers">Vinyl Stickers</option>
                     <option value="Roll Up Banners">Roll Up Banners</option>
+                    <option value="Extra Wide Roll Up Banners">Extra Wide Roll Up Banners</option>
                     <option value="Clothing">Branded Clothing</option>
                   </select>
                 </div>
