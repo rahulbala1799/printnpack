@@ -10,12 +10,6 @@ import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 const PAGE_URL = `${SITE_URL}/luxury-paper-bags-ireland`;
 const HERO_IMAGE = '/images/products/luxury-paper-bags/luxury-paper-bags-ireland-premium-die-cut.jpg';
 
-const sizes = [
-  { size: 'Small', dimensions: '8" × 4" × 10"', use: 'Jewellery, cosmetics, small luxury gifts' },
-  { size: 'Medium', dimensions: '10" × 5" × 13"', use: 'Most popular — boutiques, fashion, hospitality' },
-  { size: 'Large', dimensions: '13" × 6" × 16"', use: 'Larger purchases, department stores, launch events' },
-];
-
 const galleryImages = [
   {
     src: '/images/products/luxury-paper-bags/luxury-paper-bags-ireland-premium-die-cut.jpg',
@@ -89,7 +83,7 @@ const seoSections = [
   },
   {
     title: 'Pure Luxury Packaging for Fashion, Jewellery & Boutique Retail',
-    body: 'From Dublin flagship stores to boutiques in Cork, Galway and Limerick, luxury brands trust die-cut paper bags to turn every purchase into a branded experience. Strong, easy to carry, and available in a range of sizes, colours and finishes to match your exact brand identity.',
+    body: 'From Dublin flagship stores to boutiques in Cork, Galway and Limerick, luxury brands trust die-cut paper bags to turn every purchase into a branded experience. Strong, easy to carry, and available in colours and finishes to match your exact brand identity.',
     link: { href: '/twisted-handle-paper-bags-ireland', label: 'premium twisted handle bags' },
   },
   {
@@ -120,7 +114,7 @@ const faqs = [
   },
   {
     q: 'What is the minimum order quantity for luxury paper bags?',
-    a: 'Luxury die-cut paper bags start from 500 units. You can mix Small, Medium and Large sizes within the same order to suit different product ranges.',
+    a: 'Luxury die-cut paper bags start from 500 units.',
   },
   {
     q: 'What luxury finishes are available?',
@@ -253,7 +247,7 @@ export default function LuxuryPaperBagsIreland() {
               <p className="text-gray-400 mb-8 leading-relaxed">
                 Turn simple packaging into a walking advert for your brand — perfect for trade shows,
                 product launches and premium campaigns. Strong, easy to carry, and fully customisable in
-                size, colour and finish to match your brand.
+                colour and finish to match your brand.
               </p>
 
               <div className="flex flex-wrap gap-3 mb-8">
@@ -362,51 +356,6 @@ export default function LuxuryPaperBagsIreland() {
                 <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Sizes */}
-      <section className="py-12 lg:py-16 bg-slate-50 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-10 items-start">
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Luxury paper bag sizes</h2>
-              <p className="text-gray-600 mb-6">
-                Medium is the most popular size for boutique retail. Mix sizes within the same order, or
-                talk to us about a fully bespoke dimension for your brand.
-              </p>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm border border-gray-200 rounded-xl overflow-hidden bg-white">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="text-left px-4 py-3 font-semibold text-gray-900">Size</th>
-                      <th className="text-left px-4 py-3 font-semibold text-gray-900">Dimensions</th>
-                      <th className="text-left px-4 py-3 font-semibold text-gray-900">Best for</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-100">
-                    {sizes.map((row) => (
-                      <tr key={row.size}>
-                        <td className="px-4 py-3 font-medium text-gray-900">{row.size}</td>
-                        <td className="px-4 py-3 text-gray-600">{row.dimensions}</td>
-                        <td className="px-4 py-3 text-gray-600">{row.use}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div className="relative aspect-square rounded-2xl overflow-hidden">
-              <Image
-                src="/images/products/luxury-paper-bags/luxury-kraft-paper-bags-ireland-custom-printed.jpg"
-                alt="Luxury paper bag sizes Ireland – custom printed kraft die-cut handle bags"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                unoptimized={process.env.NODE_ENV === 'production'}
-              />
-            </div>
           </div>
         </div>
       </section>
