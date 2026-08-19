@@ -284,6 +284,59 @@ const products = [
     weeklyDelivery: 'Our weekly delivery service keeps busy cafés and restaurants stocked with branded takeaway cups on a schedule that suits your operation — without the need for large on-site storage. A dedicated account manager monitors your usage and recommends optimal order quantities.'
   },
   {
+    id: 'luxury-magnetic-closure-boxes-ireland',
+    name: 'Luxury Magnetic Closure Boxes',
+    url: '/luxury-magnetic-closure-boxes-ireland',
+    category: 'Retail Packaging',
+    description: 'Premium magnetic closure boxes in Ireland with concealed magnetic fastening and strong rigid construction — custom printed luxury gift packaging for retail, cosmetics, jewellery and corporate gifting.',
+    features: [
+      'Premium magnetic closure for a luxury unboxing experience',
+      'Strong rigid construction for superior product protection',
+      'Fully customisable sizes, colours, finishes and inserts',
+      'Suitable for retail, gifting, cosmetics and corporate packaging',
+      'Custom printed with your logo and brand artwork',
+      'Foil stamping, embossing and spot UV finishes available',
+    ],
+    detailedDescription: 'PrintNPack supplies premium magnetic closure boxes in Ireland, designed to create an impressive and memorable unboxing experience. Featuring a concealed magnetic fastening and strong rigid construction, these luxury boxes combine excellent product protection with an elegant, high-end finish.\n\nIdeal for retail products, corporate gifts, cosmetics, jewellery, clothing and luxury gift packaging, our custom-printed magnetic boxes can be tailored to match your brand. Choose from bespoke sizes, colours, inserts and premium finishes, including foil stamping, embossing, spot UV and custom logo printing.\n\nElevate your product presentation with beautifully designed luxury magnetic boxes from PrintNPack Ireland.',
+    specifications: [
+      { name: 'Closure Type', value: 'Concealed magnetic fastening' },
+      { name: 'Construction', value: 'Strong rigid board construction' },
+      { name: 'Customisation', value: 'Bespoke sizes, colours, inserts and interior printing' },
+      { name: 'Finish Options', value: 'Foil stamping, embossing, spot UV and custom logo printing' },
+      { name: 'Applications', value: 'Retail, corporate gifts, cosmetics, jewellery, clothing and luxury gifting' },
+      { name: 'Delivery', value: 'Nationwide across Ireland — Dublin, Cork, Galway & all counties' },
+    ],
+    images: [
+      '/images/products/luxury-magnetic-closure-boxes/luxury-magnetic-closure-box-ireland-gold-foil.jpg',
+      '/images/products/luxury-magnetic-closure-boxes/luxury-magnetic-closure-box-custom-printed-ireland-navy.jpg',
+    ],
+    imageSrc: '/images/products/luxury-magnetic-closure-boxes/luxury-magnetic-closure-box-ireland-gold-foil.jpg',
+    price: 'Contact for quote',
+    applications: [
+      'Retail Products & E-commerce',
+      'Corporate Gifts',
+      'Cosmetics & Beauty Brands',
+      'Jewellery & Watches',
+      'Clothing & Fashion',
+      'Luxury Gift Packaging',
+    ],
+    faq: [
+      {
+        question: 'What are magnetic closure boxes?',
+        answer: 'Magnetic closure boxes are rigid luxury gift boxes with a concealed magnetic fastening that creates a seamless, premium opening experience with strong product protection.',
+      },
+      {
+        question: 'What customisation options are available?',
+        answer: 'Our magnetic boxes can be tailored with bespoke sizes, colours, inserts and premium finishes including foil stamping, embossing, spot UV and custom logo printing.',
+      },
+      {
+        question: 'Do you deliver magnetic gift boxes nationwide in Ireland?',
+        answer: 'Yes. PrintNPack delivers luxury magnetic closure boxes to Dublin, Cork, Galway, Limerick and every county in Ireland.',
+      },
+    ],
+    weeklyDelivery: 'Our delivery service ensures retail brands and corporate clients receive premium magnetic closure boxes on schedule — with account management to support repeat orders and ongoing packaging requirements.'
+  },
+  {
     id: 'sos-grab-bags',
     name: 'SOS Grab Bags',
     category: 'Food Packaging',

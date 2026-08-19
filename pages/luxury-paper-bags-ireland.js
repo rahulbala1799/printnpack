@@ -475,6 +475,7 @@ export default function LuxuryPaperBagsIreland() {
       <RelatedSeoLinks
         title="Related paper bag pages"
         links={[
+          { href: '/luxury-magnetic-closure-boxes-ireland', label: 'Magnetic Closure Boxes', desc: 'Luxury rigid gift boxes with custom printing' },
           { href: '/paper-bags-ireland', label: 'Paper Bags Ireland', desc: 'Printed, plain & wholesale hub' },
           { href: '/twisted-handle-paper-bags-ireland', label: 'Twisted Handle Bags', desc: 'Premium retail paper bags' },
           { href: '/printed-flat-handle-bags-ireland', label: 'Printed Flat Handle Bags', desc: 'Takeaway & café logo bags' },

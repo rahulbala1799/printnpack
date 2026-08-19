@@ -126,6 +126,31 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/magnetic-closure-boxes-ireland',
+        destination: '/luxury-magnetic-closure-boxes-ireland',
+        permanent: true,
+      },
+      {
+        source: '/magnetic-gift-boxes-ireland',
+        destination: '/luxury-magnetic-closure-boxes-ireland',
+        permanent: true,
+      },
+      {
+        source: '/luxury-gift-boxes-ireland',
+        destination: '/luxury-magnetic-closure-boxes-ireland',
+        permanent: true,
+      },
+      {
+        source: '/magnetic-boxes-dublin',
+        destination: '/luxury-magnetic-closure-boxes-ireland',
+        permanent: true,
+      },
+      {
+        source: '/custom-gift-boxes-ireland',
+        destination: '/luxury-magnetic-closure-boxes-ireland',
+        permanent: true,
+      },
+      {
         source: '/disposable-gloves-ireland',
         destination: '/gloves-ireland',
         permanent: true,
