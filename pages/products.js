@@ -6,16 +6,26 @@ import Link from 'next/link';
 import products from '../data/products';
 import { useRouter } from 'next/router';
 import { SITE_URL } from '../lib/site';
+import { buildProductListItem, parsePriceString } from '../lib/schema';
+import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
+
+const PAGE_URL = `${SITE_URL}/products`;
+const PAGE_TITLE = 'Custom Print & Packaging Products Ireland | PrintNPack';
+const PAGE_DESCRIPTION =
+  'Browse custom print and packaging products in Ireland — pizza boxes, paper bags, banners, leaflets, foamex and food packaging. Printed from 500 units with nationwide delivery from Ashbourne.';
+const PAGE_KEYWORDS =
+  'print and packaging Ireland, custom pizza boxes Ireland, printed paper bags, roll up banners Ireland, leaflets printing, foamex boards, food packaging Ireland, PrintNPack';
+const OG_IMAGE = `${SITE_URL}/images/pizza-boxes/PIZZA_BOX_1.jpg`;
 
 // ─── Category Config ──────────────────────────────────────────────────────────
 const mainGroups = [
   {
     id: 'packaging',
     name: 'Packaging',
-    description: 'Premium food, retail & hospitality packaging',
+    description: 'Food, retail & hospitality packaging',
     categories: ['Food Packaging', 'Retail Packaging', 'Eco-Friendly Packaging', 'Shipping', 'Hospitality Products'],
     icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
       </svg>
     ),
@@ -29,10 +39,10 @@ const mainGroups = [
   {
     id: 'wide-format',
     name: 'Wide Format',
-    description: 'Banners, posters, boards & vinyl graphics',
+    description: 'Banners, posters, boards & vinyl',
     categories: ['Wide Format'],
     icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
       </svg>
     ),
@@ -46,10 +56,10 @@ const mainGroups = [
   {
     id: 'leaflets',
     name: 'Leaflets & Flyers',
-    description: 'High-impact A3, A4, A5 & A6 print runs',
+    description: 'A3, A4, A5 & A6 print runs',
     categories: ['Leaflets', 'Food Service'],
     icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
       </svg>
     ),
@@ -63,11 +73,11 @@ const mainGroups = [
   {
     id: 'clothing',
     name: 'Clothing',
-    description: 'Custom branded apparel for your team',
+    description: 'Custom branded apparel',
     categories: ['Apparel'],
     redirect: '/clothing',
     icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4l2 2h4l2-2h4a2 2 0 012 2v12a4 4 0 01-4 4H7z" />
       </svg>
     ),
@@ -81,11 +91,11 @@ const mainGroups = [
   {
     id: 'rubber-stamps',
     name: 'Rubber Stamps',
-    description: 'Custom stamps for offices & businesses',
+    description: 'Custom stamps for offices',
     categories: ['Stamps'],
     redirect: '/rubber-stamps',
     icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
       </svg>
     ),
@@ -98,59 +108,132 @@ const mainGroups = [
   },
 ];
 
+const HERO_SHOWCASE_IDS = [
+  'custom-pizza-boxes-ireland',
+  'flat-handle-paper-bags',
+  'eco-bagasse-burger-boxes',
+  'roll-up-banner-stands',
+  'foamex-boards',
+  'leaflets-a5',
+];
+
+const POPULAR_LINKS = [
+  { label: 'Pizza Boxes', href: '/pizza-boxes-ireland' },
+  { label: 'Paper Bags', href: '/printed-flat-handle-bags-ireland' },
+  { label: 'Plain Packaging', href: '/plain-packaging' },
+  { label: 'Roll-Up Banners', href: '/roll-up-banners' },
+  { label: 'Leaflets', href: '/services/leaflets' },
+];
+
+const RELATED_LINKS = [
+  { href: '/pizza-boxes-ireland', label: 'Pizza Boxes Ireland', desc: 'Plain and custom printed pizza boxes for takeaways.' },
+  { href: '/printed-flat-handle-bags-ireland', label: 'Printed Paper Bags', desc: 'Flat handle bags with your logo, from 500 units.' },
+  { href: '/banners-ireland', label: 'Banners Ireland', desc: 'Vinyl banners, roll-ups and extra-wide stands.' },
+  { href: '/plain-packaging', label: 'Plain Packaging', desc: 'Stock cups, boxes, bags and gloves with volume pricing.' },
+  { href: '/foamex-ireland', label: 'Foamex Boards', desc: 'Rigid display boards for retail and events.' },
+  { href: '/services/leaflets', label: 'Leaflet Printing', desc: 'A6 to A3 flyers for restaurants and retail.' },
+  { href: '/napkins-ireland', label: 'Printed Napkins', desc: 'Custom napkins and linen-feel hospitality stock.' },
+  { href: '/burger-boxes-ireland', label: 'Burger Boxes', desc: 'Bagasse and printed burger boxes for food service.' },
+];
+
+const FAQ_ITEMS = [
+  {
+    q: 'What print and packaging products do you supply in Ireland?',
+    a: 'PrintNPack supplies custom printed pizza boxes, paper bags, SOS grab bags, bagasse burger boxes, napkins, roll-up banners, vinyl banners, foamex and correx boards, posters, vinyl stickers and leaflets. We also stock plain packaging for cafés and takeaways that need volume pricing without artwork.',
+  },
+  {
+    q: 'What is the minimum order quantity?',
+    a: 'Most custom printed packaging starts from 500 units. Printed napkins typically start from 1,000. Wide format items such as banners and boards can often be ordered as single pieces. Plain packaging MOQs vary by product.',
+  },
+  {
+    q: 'How fast is delivery across Ireland?',
+    a: 'Typical production is 5–7 business days for packaging and similar for most print jobs, with nationwide delivery from our Ashbourne, Co. Meath warehouse. Weekly scheduled delivery is available for regular packaging customers.',
+  },
+  {
+    q: 'Can you print my logo on packaging?',
+    a: 'Yes. We print full-colour branding on pizza boxes, paper bags, napkins, burger boxes and more. Our design team can work from your existing artwork or create a layout for you before production.',
+  },
+];
+
+function productHref(product) {
+  return product.url || `/products/${product.id}`;
+}
+
+function groupForProduct(product) {
+  return mainGroups.find((g) => g.categories.includes(product.category));
+}
+
+function getVisibleProducts() {
+  return products.filter((p) => !p.hidden);
+}
+
+function filterProducts(activeGroup, activeCategory, searchTerm = '') {
+  const visible = getVisibleProducts();
+  const q = searchTerm.trim().toLowerCase();
+
+  if (q) {
+    return visible.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) ||
+        (p.description || '').toLowerCase().includes(q) ||
+        (p.category || '').toLowerCase().includes(q)
+    );
+  }
+
+  const groupCats = mainGroups.find((g) => g.id === activeGroup)?.categories || [];
+  return activeCategory === 'all'
+    ? visible.filter((p) => groupCats.includes(p.category))
+    : visible.filter((p) => p.category === activeCategory);
+}
+
 // ─── Product Card ─────────────────────────────────────────────────────────────
-const ProductCard = ({ product, groupConfig }) => {
+const ProductCard = ({ product, groupConfig, priority = false }) => {
   const badge = groupConfig?.badge || 'bg-orange-100 text-orange-700';
   const accent = groupConfig?.accentBg || 'bg-orange-500';
+  const href = productHref(product);
+  const alt = `${product.name} — custom ${product.category?.toLowerCase() || 'print'} Ireland`;
 
   return (
-    <div className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
-      {/* Image */}
-      <Link href={product.url || `/products/${product.id}`} className="relative block overflow-hidden bg-gray-50" style={{ paddingBottom: '66%' }}>
-        <div className="absolute inset-0">
-          {!product.imageSrc || product.imageSrc.includes('css-placeholder-image') ? (
-            <div className="absolute inset-0 css-placeholder banner flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
-              <span className="sr-only">{product.name}</span>
-            </div>
-          ) : (
-            <Image
-              src={product.imageSrc}
-              alt={product.name}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-          )}
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </div>
+    <article className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex flex-col">
+      <Link href={href} className="relative block overflow-hidden bg-gray-50 aspect-[4/3]">
+        {!product.imageSrc || product.imageSrc.includes('css-placeholder-image') ? (
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
+            <span className="sr-only">{product.name}</span>
+          </div>
+        ) : (
+          <Image
+            src={product.imageSrc}
+            alt={alt}
+            fill
+            priority={priority}
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        )}
 
-        {/* Category badge */}
-        <div className="absolute top-3 left-3 z-10">
-          <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${badge}`}>
+        <div className="absolute top-2.5 left-2.5 z-10">
+          <span className={`text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded-full ${badge}`}>
             {product.category}
           </span>
         </div>
 
-        {/* MOQ badge */}
         {product.moq && (
-          <div className="absolute top-3 right-3 z-10">
-            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-black/70 text-white backdrop-blur-sm">
+          <div className="absolute top-2.5 right-2.5 z-10">
+            <span className="text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded-full bg-black/70 text-white">
               MOQ {product.moq.toLocaleString()}
             </span>
           </div>
         )}
       </Link>
 
-      {/* Content */}
-      <div className="p-4 flex-1 flex flex-col">
-        <h3 className="font-bold text-gray-900 text-base leading-snug mb-1.5 group-hover:text-orange-600 transition-colors line-clamp-2">
-          {product.name}
-        </h3>
-        <p className="text-gray-500 text-sm line-clamp-2 flex-1 mb-3">
+      <div className="p-3.5 sm:p-4 flex-1 flex flex-col">
+        <h2 className="font-bold text-gray-900 text-sm sm:text-base leading-snug mb-1 group-hover:text-orange-600 transition-colors line-clamp-2">
+          <Link href={href}>{product.name}</Link>
+        </h2>
+        <p className="text-gray-500 text-xs sm:text-sm line-clamp-2 flex-1 mb-3">
           {product.description}
         </p>
 
-        {/* Price + Lead time */}
         <div className="flex items-center justify-between text-xs text-gray-400 mb-3 pb-3 border-b border-gray-100">
           {product.price && (
             <span className="font-medium text-gray-700">{product.price}</span>
@@ -165,9 +248,8 @@ const ProductCard = ({ product, groupConfig }) => {
           )}
         </div>
 
-        {/* CTA */}
         <Link
-          href={product.url || `/products/${product.id}`}
+          href={href}
           className={`w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-sm font-semibold text-white transition-all duration-200 ${accent} hover:opacity-90 active:scale-95`}
         >
           View Product
@@ -176,23 +258,21 @@ const ProductCard = ({ product, groupConfig }) => {
           </svg>
         </Link>
       </div>
-    </div>
+    </article>
   );
 };
 
-// ─── Category Tab ─────────────────────────────────────────────────────────────
 const CategoryTab = ({ group, isActive, onClick }) => (
   <button
+    type="button"
     onClick={onClick}
-    className={`flex-shrink-0 flex items-center gap-2.5 px-4 py-3 rounded-xl font-semibold text-sm transition-all duration-200 border-2 ${
+    className={`flex-shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border ${
       isActive
-        ? `${group.accentBg} text-white border-transparent shadow-lg shadow-${group.color}-200`
+        ? `${group.accentBg} text-white border-transparent shadow-md`
         : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300 hover:text-gray-900'
     }`}
   >
-    <span className={isActive ? 'text-white' : group.accentText}>
-      {group.icon}
-    </span>
+    <span className={isActive ? 'text-white' : group.accentText}>{group.icon}</span>
     <span className="whitespace-nowrap">{group.name}</span>
     {group.redirect && (
       <svg className="w-3.5 h-3.5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -202,29 +282,7 @@ const CategoryTab = ({ group, isActive, onClick }) => (
   </button>
 );
 
-function filterProducts(activeGroup, activeCategory, searchTerm = '') {
-  const visible = products.filter((p) => !p.hidden);
-  const groupCats = mainGroups.find((g) => g.id === activeGroup)?.categories || [];
-
-  let filtered =
-    activeCategory === 'all'
-      ? visible.filter((p) => groupCats.includes(p.category))
-      : visible.filter((p) => p.category === activeCategory);
-
-  if (searchTerm) {
-    const q = searchTerm.toLowerCase();
-    filtered = filtered.filter(
-      (p) =>
-        p.name.toLowerCase().includes(q) ||
-        (p.description || '').toLowerCase().includes(q)
-    );
-  }
-
-  return filtered;
-}
-
-// ─── Main Page ────────────────────────────────────────────────────────────────
-const ProductsPage = ({ initialGroup, initialCategory, initialProducts }) => {
+const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogProducts }) => {
   const router = useRouter();
   const { group: groupParam, category: categoryParam } = router.query;
   const [activeGroup, setActiveGroup] = useState(initialGroup);
@@ -232,35 +290,16 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts }) => {
   const [filteredProducts, setFilteredProducts] = useState(initialProducts);
   const [visibleCount, setVisibleCount] = useState(12);
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchFocused, setSearchFocused] = useState(false);
   const tabsRef = useRef(null);
 
-  const activeGroupConfig = mainGroups.find(g => g.id === activeGroup);
+  const activeGroupConfig = mainGroups.find((g) => g.id === activeGroup);
+  const heroProducts = HERO_SHOWCASE_IDS.map((id) => products.find((p) => p.id === id)).filter(Boolean);
 
-  // URL params
   useEffect(() => {
     if (groupParam) setActiveGroup(groupParam);
     if (categoryParam) setActiveCategory(categoryParam);
   }, [groupParam, categoryParam]);
 
-  // Persist
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const sg = localStorage.getItem('activeProductGroup');
-      const sc = localStorage.getItem('activeProductCategory');
-      if (sg) setActiveGroup(sg);
-      if (sc) setActiveCategory(sc);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('activeProductGroup', activeGroup);
-      localStorage.setItem('activeProductCategory', activeCategory);
-    }
-  }, [activeGroup, activeCategory]);
-
-  // Filter (client-side search and tab changes after hydration)
   useEffect(() => {
     setFilteredProducts(filterProducts(activeGroup, activeCategory, searchTerm));
     setVisibleCount(12);
@@ -272,205 +311,253 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts }) => {
     } else {
       setActiveGroup(group.id);
       setActiveCategory('all');
+      setSearchTerm('');
     }
   };
 
-  // Sub-categories for active group
   const subCategories = activeGroupConfig?.categories || [];
+
+  const collectionLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    url: PAGE_URL,
+    inLanguage: 'en-IE',
+    isPartOf: { '@type': 'WebSite', name: 'PrintNPack Ireland', url: SITE_URL },
+    about: { '@type': 'Thing', name: 'Print and packaging products Ireland' },
+  };
+
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Products', item: PAGE_URL },
+    ],
+  };
+
+  const itemListLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'PrintNPack print and packaging products',
+    description: PAGE_DESCRIPTION,
+    numberOfItems: catalogProducts.length,
+    itemListElement: catalogProducts.map((p, i) =>
+      buildProductListItem({
+        position: i + 1,
+        name: p.name,
+        url: `${SITE_URL}${productHref(p)}`,
+        price: parsePriceString(p.price),
+        image: p.imageSrc && !p.imageSrc.includes('css-placeholder') ? `${SITE_URL}${p.imageSrc}` : undefined,
+      })
+    ),
+  };
+
+  const faqLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQ_ITEMS.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  };
 
   return (
     <Layout>
       <Head>
-        <title>B2B Print & Packaging Products | PrintNPack Ireland</title>
-        <meta
-          name="description"
-          content="Browse PrintNPack's full range of B2B print and packaging products. Food packaging, wide format, leaflets, clothing and more. Fast delivery across Ireland."
-        />
-        <link rel="canonical" href={`${SITE_URL}/products`} />
-        <meta property="og:url" content={`${SITE_URL}/products`} />
+        <title>{PAGE_TITLE}</title>
+        <meta name="description" content={PAGE_DESCRIPTION} />
+        <meta name="keywords" content={PAGE_KEYWORDS} />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+        <link rel="canonical" href={PAGE_URL} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={PAGE_TITLE} />
+        <meta property="og:description" content={PAGE_DESCRIPTION} />
+        <meta property="og:url" content={PAGE_URL} />
+        <meta property="og:image" content={OG_IMAGE} />
+        <meta property="og:locale" content="en_IE" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={PAGE_TITLE} />
+        <meta name="twitter:description" content={PAGE_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       </Head>
 
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-gray-950 text-white">
-        {/* Background decoration */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -right-40 w-96 h-96 bg-orange-500 rounded-full opacity-10 blur-3xl" />
-          <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-orange-400 rounded-full opacity-8 blur-3xl" />
-          <svg className="absolute inset-0 w-full h-full opacity-5" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse">
-                <circle cx="2" cy="2" r="1.5" fill="white" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#dots)" />
-          </svg>
-        </div>
-
-        <div className="relative z-10 container mx-auto px-4 py-14 md:py-20">
-          {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-sm text-gray-400 mb-6">
-            <Link href="/" className="hover:text-orange-400 transition-colors">Home</Link>
-            <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
-            <span className="text-gray-200 font-medium">Products</span>
+      {/* Compact visual hero — products stay above the fold */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-orange-50 border-b border-gray-100">
+        <div className="container mx-auto px-4 py-4 sm:py-5">
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 mb-4">
+            <Link href="/" className="hover:text-orange-600 transition-colors">Home</Link>
+            <span aria-hidden="true">/</span>
+            <span className="text-gray-800 font-medium">Products</span>
           </nav>
 
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-500/30 text-orange-300 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full mb-5">
-              <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
-              Ireland&apos;s B2B Print Partner
-            </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-4 tracking-tight">
-              Print & Packaging{' '}
-              <span className="text-orange-400">Solutions</span>
-            </h1>
-            <p className="text-gray-300 text-lg md:text-xl max-w-2xl mb-8 leading-relaxed">
-              Premium quality products. Consistent supply. Expert support. Everything your business needs to look its best.
-            </p>
+          <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-6 lg:gap-10 items-center">
+            <div>
+              <p className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-orange-600 mb-2.5">
+                Ashbourne · Nationwide Ireland
+              </p>
+              <h1 className="text-2xl sm:text-3xl lg:text-[2.15rem] font-extrabold leading-tight tracking-tight text-gray-900 mb-2">
+                Custom Print &amp; Packaging{' '}
+                <span className="text-orange-500">Products in Ireland</span>
+              </h1>
+              <p className="text-sm sm:text-base text-gray-600 max-w-xl mb-3 leading-relaxed">
+                Printed pizza boxes, paper bags, banners, leaflets and food packaging for cafés, takeaways and retailers.
+                Low MOQs, custom branding, delivery from Ashbourne, Co. Meath.
+              </p>
 
-            {/* Search */}
-            <div className={`relative max-w-lg transition-all duration-300 ${searchFocused ? 'scale-[1.02]' : ''}`}>
-              <div className={`flex items-center bg-white/10 backdrop-blur-sm border rounded-2xl overflow-hidden transition-all duration-200 ${searchFocused ? 'border-orange-400 ring-2 ring-orange-400/30 bg-white/15' : 'border-white/20'}`}>
-                <svg className="w-5 h-5 text-gray-300 ml-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <label className="sr-only" htmlFor="product-search">Search products</label>
+              <div className="relative max-w-lg mb-3">
+                <svg className="w-5 h-5 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
                 <input
-                  type="text"
-                  placeholder="Search packaging, banners, leaflets…"
+                  id="product-search"
+                  type="search"
+                  placeholder="Search pizza boxes, bags, banners…"
                   value={searchTerm}
-                  onChange={e => setSearchTerm(e.target.value)}
-                  onFocus={() => setSearchFocused(true)}
-                  onBlur={() => setSearchFocused(false)}
-                  className="flex-1 bg-transparent px-4 py-4 text-white placeholder-gray-400 text-sm outline-none"
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-11 pr-10 py-3 rounded-xl bg-white text-gray-900 placeholder-gray-400 shadow-sm border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent text-sm"
                 />
                 {searchTerm && (
-                  <button onClick={() => setSearchTerm('')} className="mr-3 text-gray-400 hover:text-white transition-colors">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <button
+                    type="button"
+                    onClick={() => setSearchTerm('')}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"
+                    aria-label="Clear search"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
                   </button>
                 )}
               </div>
-            </div>
-          </div>
 
-          {/* Stats bar */}
-          <div className="mt-10 pt-8 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8 max-w-2xl">
-            {[
-              { value: '22+', label: 'Products' },
-              { value: '500+', label: 'Min. Order Units' },
-              { value: '5–7', label: 'Day Delivery' },
-              { value: '100%', label: 'Irish Business' },
-            ].map(stat => (
-              <div key={stat.label}>
-                <div className="text-2xl sm:text-3xl font-extrabold text-orange-400">{stat.value}</div>
-                <div className="text-xs text-gray-400 mt-0.5 font-medium">{stat.label}</div>
+              <div className="flex flex-wrap items-center gap-1.5 mb-3">
+                <span className="text-xs text-gray-400">Popular:</span>
+                {POPULAR_LINKS.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-xs bg-white hover:bg-orange-50 text-gray-600 hover:text-orange-700 px-2.5 py-1 rounded-full border border-gray-200 hover:border-orange-200 transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
               </div>
-            ))}
+
+              <ul className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-500">
+                <li>From 500 units</li>
+                <li>5–7 day production</li>
+                <li>Irish-owned</li>
+              </ul>
+            </div>
+
+            <div className="hidden md:grid grid-cols-2 gap-2.5">
+              {heroProducts.slice(0, 4).map((product, index) => (
+                <Link
+                  key={product.id}
+                  href={productHref(product)}
+                  className="relative overflow-hidden rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow min-h-[132px]"
+                >
+                  {product.imageSrc && !product.imageSrc.includes('css-placeholder') ? (
+                    <Image
+                      src={product.imageSrc}
+                      alt={`${product.name} Ireland`}
+                      fill
+                      priority={index < 3}
+                      sizes={index === 0 ? '320px' : '140px'}
+                      className="object-cover"
+                    />
+                  ) : null}
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-2.5">
+                    <p className="text-white text-xs font-semibold leading-tight line-clamp-2">{product.name}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── Category Tabs (Sticky) ────────────────────────────────────────── */}
+      {/* Sticky category + sub-category bar */}
       <div className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
-        <div className="container mx-auto px-4 py-3">
-          <div
-            ref={tabsRef}
-            className="flex gap-2.5 overflow-x-auto no-scrollbar pb-0.5"
-          >
-            {mainGroups.map(group => (
+        <div className="container mx-auto px-4 py-2.5">
+          <div ref={tabsRef} className="flex gap-2 overflow-x-auto no-scrollbar">
+            {mainGroups.map((group) => (
               <CategoryTab
                 key={group.id}
                 group={group}
-                isActive={activeGroup === group.id && !group.redirect}
+                isActive={activeGroup === group.id && !group.redirect && !searchTerm}
                 onClick={() => handleGroupClick(group)}
               />
             ))}
           </div>
+          {subCategories.length > 1 && !searchTerm && (
+            <div className="flex gap-2 overflow-x-auto no-scrollbar mt-2 pt-2 border-t border-gray-100">
+              <button
+                type="button"
+                onClick={() => setActiveCategory('all')}
+                className={`flex-shrink-0 text-xs font-semibold px-3 py-1 rounded-full transition-all ${
+                  activeCategory === 'all'
+                    ? `${activeGroupConfig.accentBg} text-white`
+                    : 'bg-gray-50 text-gray-600 border border-gray-200 hover:border-gray-300'
+                }`}
+              >
+                All {activeGroupConfig?.name}
+              </button>
+              {subCategories.map((cat) => (
+                <button
+                  type="button"
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`flex-shrink-0 text-xs font-semibold px-3 py-1 rounded-full transition-all whitespace-nowrap ${
+                    activeCategory === cat
+                      ? `${activeGroupConfig.accentBg} text-white`
+                      : 'bg-gray-50 text-gray-600 border border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
-      {/* ── Category Banner ──────────────────────────────────────────────── */}
-      {activeGroupConfig && !activeGroupConfig.redirect && (
-        <div className={`${activeGroupConfig.lightBg} border-b border-gray-200`}>
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className={`w-9 h-9 rounded-xl ${activeGroupConfig.accentBg} text-white flex items-center justify-center flex-shrink-0 shadow-sm`}>
-                {activeGroupConfig.icon}
-              </div>
-              <div>
-                <div className="font-bold text-gray-900 text-sm">{activeGroupConfig.name}</div>
-                <div className="text-xs text-gray-500">{activeGroupConfig.description}</div>
-              </div>
-            </div>
-
-            {/* Sub-category pills */}
-            {subCategories.length > 1 && (
-              <div className="flex gap-2 overflow-x-auto no-scrollbar">
-                <button
-                  onClick={() => setActiveCategory('all')}
-                  className={`flex-shrink-0 text-xs font-semibold px-3 py-1.5 rounded-full transition-all ${
-                    activeCategory === 'all'
-                      ? `${activeGroupConfig.accentBg} text-white shadow-sm`
-                      : 'bg-white text-gray-600 border border-gray-200 hover:border-gray-300'
-                  }`}
-                >
-                  All
-                </button>
-                {subCategories.map(cat => (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(cat)}
-                    className={`flex-shrink-0 text-xs font-semibold px-3 py-1.5 rounded-full transition-all whitespace-nowrap ${
-                      activeCategory === cat
-                        ? `${activeGroupConfig.accentBg} text-white shadow-sm`
-                        : 'bg-white text-gray-600 border border-gray-200 hover:border-gray-300'
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* ── Products Grid ────────────────────────────────────────────────── */}
-      <main className="bg-gray-50 min-h-screen">
-        <div className="container mx-auto px-4 py-8 md:py-12">
-
-          {/* Plain packaging promo card — shown when Packaging tab is active */}
+      <section className="bg-gray-50">
+        <div className="container mx-auto px-4 py-5 md:py-7">
           {activeGroup === 'packaging' && !searchTerm && (
             <Link
               href="/plain-packaging"
-              className="flex items-center justify-between gap-4 bg-gray-950 text-white rounded-2xl px-5 py-4 mb-7 group hover:bg-gray-900 transition-colors border border-white/5 hover:border-orange-500/30"
+              className="flex items-center justify-between gap-3 bg-gray-950 text-white rounded-xl px-4 py-3 mb-5 group hover:bg-gray-900 transition-colors"
             >
-              <div className="flex items-center gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                  </svg>
-                </div>
-                <div>
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <span className="font-bold text-sm text-white">Plain Packaging</span>
-                    <span className="text-xs font-bold bg-orange-500 text-white px-2 py-0.5 rounded-full">New</span>
-                  </div>
-                  <div className="text-xs text-gray-400">No artwork? No problem. Order plain stock with volume pricing — build your quote in seconds.</div>
-                </div>
+              <div className="flex items-center gap-3 min-w-0">
+                <span className="font-bold text-sm">Plain Packaging</span>
+                <span className="text-[10px] font-bold bg-orange-500 text-white px-1.5 py-0.5 rounded-full">New</span>
+                <span className="hidden sm:inline text-xs text-gray-400 truncate">
+                  No artwork needed — volume pricing, quote in seconds.
+                </span>
               </div>
-              <div className="flex items-center gap-1 text-orange-400 font-bold text-xs flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
-                Browse
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </div>
+              <span className="text-orange-400 font-bold text-xs flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                Browse →
+              </span>
             </Link>
           )}
 
-          {/* Count + Sort row */}
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-4">
             <p className="text-sm text-gray-500">
+              {searchTerm ? (
+                <>
+                  Search results for <span className="font-semibold text-gray-900">&ldquo;{searchTerm}&rdquo;</span>
+                  {' — '}
+                </>
+              ) : null}
               Showing{' '}
               <span className="font-semibold text-gray-900">
                 {Math.min(visibleCount, filteredProducts.length)}
@@ -481,58 +568,51 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts }) => {
             </p>
             {searchTerm && (
               <button
+                type="button"
                 onClick={() => setSearchTerm('')}
-                className="text-xs font-medium text-orange-600 hover:text-orange-700 flex items-center gap-1.5 bg-orange-50 px-3 py-1.5 rounded-full border border-orange-200"
+                className="text-xs font-medium text-orange-600 hover:text-orange-700 bg-orange-50 px-3 py-1.5 rounded-full border border-orange-200"
               >
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-                Clear &ldquo;{searchTerm}&rdquo;
+                Clear search
               </button>
             )}
           </div>
 
-          {/* Empty state */}
           {filteredProducts.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-24 text-center">
-              <div className="w-20 h-20 rounded-full bg-orange-50 border-2 border-orange-100 flex items-center justify-center mb-5">
-                <svg className="w-10 h-10 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">No products found</h3>
-              <p className="text-gray-500 text-sm mb-6 max-w-xs">Try a different search term or browse a different category above.</p>
+            <div className="flex flex-col items-center justify-center py-16 text-center">
+              <h2 className="text-xl font-bold text-gray-800 mb-2">No products found</h2>
+              <p className="text-gray-500 text-sm mb-6 max-w-xs">Try a different search or browse a category above.</p>
               <button
-                onClick={() => { setActiveCategory('all'); setSearchTerm(''); }}
-                className="bg-orange-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-orange-600 transition-colors shadow-sm"
+                type="button"
+                onClick={() => {
+                  setActiveCategory('all');
+                  setSearchTerm('');
+                }}
+                className="bg-orange-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-orange-600 transition-colors"
               >
                 Clear Filters
               </button>
             </div>
           ) : (
             <>
-              {/* Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
-                {filteredProducts.slice(0, visibleCount).map(product => (
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5">
+                {filteredProducts.slice(0, visibleCount).map((product, index) => (
                   <ProductCard
                     key={product.id}
                     product={product}
-                    groupConfig={activeGroupConfig}
+                    groupConfig={groupForProduct(product) || activeGroupConfig}
+                    priority={index < 4}
                   />
                 ))}
               </div>
 
-              {/* Load more */}
               {visibleCount < filteredProducts.length && (
-                <div className="mt-10 text-center">
+                <div className="mt-8 text-center">
                   <button
-                    onClick={() => setVisibleCount(v => v + 8)}
-                    className="inline-flex items-center gap-2 bg-white border-2 border-orange-500 text-orange-600 font-semibold text-sm px-6 py-3 rounded-xl hover:bg-orange-500 hover:text-white transition-all duration-200 shadow-sm"
+                    type="button"
+                    onClick={() => setVisibleCount((v) => v + 8)}
+                    className="inline-flex items-center gap-2 bg-white border-2 border-orange-500 text-orange-600 font-semibold text-sm px-6 py-3 rounded-xl hover:bg-orange-500 hover:text-white transition-all duration-200"
                   >
                     Load More Products
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
                   </button>
                   <p className="text-xs text-gray-400 mt-2">
                     {filteredProducts.length - visibleCount} more products
@@ -542,88 +622,74 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts }) => {
             </>
           )}
         </div>
-      </main>
+      </section>
 
-      {/* ── Trust Strip ─────────────────────────────────────────────────── */}
       <section className="bg-white border-t border-gray-100 py-8">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
-              {
-                icon: <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>,
-                title: 'Quality Guaranteed',
-                desc: 'Every order reviewed before dispatch',
-              },
-              {
-                icon: <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>,
-                title: '5–7 Day Delivery',
-                desc: 'Fast nationwide delivery across Ireland',
-              },
-              {
-                icon: <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>,
-                title: 'Dedicated Support',
-                desc: 'Account managers for B2B clients',
-              },
-              {
-                icon: <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>,
-                title: 'Competitive Pricing',
-                desc: 'Volume discounts for regular orders',
-              },
-            ].map(item => (
-              <div key={item.title} className="flex flex-col items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-orange-50 text-orange-500 flex items-center justify-center">
-                  {item.icon}
-                </div>
-                <div>
-                  <div className="font-bold text-gray-900 text-sm">{item.title}</div>
-                  <div className="text-xs text-gray-500 mt-0.5">{item.desc}</div>
-                </div>
+              { title: 'Quality Guaranteed', desc: 'Every order reviewed before dispatch' },
+              { title: '5–7 Day Production', desc: 'Nationwide delivery across Ireland' },
+              { title: 'Dedicated Support', desc: 'Account managers for B2B clients' },
+              { title: 'Volume Pricing', desc: 'Discounts for regular orders' },
+            ].map((item) => (
+              <div key={item.title}>
+                <div className="font-bold text-gray-900 text-sm">{item.title}</div>
+                <div className="text-xs text-gray-500 mt-0.5">{item.desc}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA ─────────────────────────────────────────────────────────── */}
-      <section className="bg-gray-950 text-white py-14 md:py-20">
-        <div className="container mx-auto px-4 text-center max-w-2xl">
-          <div className="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-500/30 text-orange-300 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full mb-5">
-            Custom Orders Welcome
-          </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight">
-            Need a Custom Solution?
+      <section className="bg-slate-50 border-t border-slate-200 py-10 md:py-12">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
+            Print and packaging FAQs
           </h2>
-          <p className="text-gray-300 text-lg mb-8 max-w-lg mx-auto">
-            Our design team specialises in creating bespoke products tailored to your exact requirements. Get in touch today.
+          <dl className="space-y-4">
+            {FAQ_ITEMS.map(({ q, a }) => (
+              <div key={q} className="bg-white rounded-xl border border-gray-200 p-4 sm:p-5">
+                <dt className="font-semibold text-gray-900 text-sm sm:text-base mb-2">{q}</dt>
+                <dd className="text-sm text-gray-600 leading-relaxed">{a}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      <RelatedSeoLinks title="Related products & guides" links={RELATED_LINKS} />
+
+      <section className="bg-gray-950 text-white py-12 md:py-16">
+        <div className="container mx-auto px-4 text-center max-w-2xl">
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-3 tracking-tight">
+            Need a custom print or packaging run?
+          </h2>
+          <p className="text-gray-300 text-base mb-7">
+            Send artwork or a brief and we will quote branded pizza boxes, bags, banners or leaflets for your Irish business.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3.5 px-7 rounded-xl transition-all duration-200 shadow-lg shadow-orange-900/40 text-sm"
+              className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-xl text-sm"
             >
               Get a Custom Quote
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
             </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/20 hover:bg-white/15 text-white font-semibold py-3.5 px-7 rounded-xl transition-all duration-200 text-sm"
+            <a
+              href="tel:+353894157369"
+              className="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/20 hover:bg-white/15 text-white font-semibold py-3 px-6 rounded-xl text-sm"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.948V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              Call Our Team
-            </Link>
+              Call +353 89 415 7369
+            </a>
           </div>
         </div>
       </section>
 
-      {/* ── Mobile: sticky bottom filter bar ────────────────────────────── */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-2xl safe-area-bottom">
         <div className="flex overflow-x-auto no-scrollbar px-3 py-2 gap-2">
-          {mainGroups.map(group => (
+          {mainGroups.map((group) => (
             <button
+              type="button"
               key={group.id}
               onClick={() => handleGroupClick(group)}
               className={`flex-shrink-0 flex flex-col items-center gap-1 px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
@@ -640,8 +706,6 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts }) => {
           ))}
         </div>
       </div>
-
-      {/* Mobile bottom padding so content isn't hidden by fixed bar */}
       <div className="md:hidden h-20" />
     </Layout>
   );
@@ -657,11 +721,21 @@ export async function getServerSideProps({ query }) {
       ? categoryParam
       : 'all';
 
+  const catalogProducts = getVisibleProducts().map((p) => ({
+    id: p.id,
+    name: p.name,
+    url: p.url || null,
+    price: p.price || null,
+    imageSrc: p.imageSrc || null,
+    category: p.category || null,
+  }));
+
   return {
     props: {
       initialGroup,
       initialCategory,
       initialProducts: filterProducts(initialGroup, initialCategory),
+      catalogProducts,
     },
   };
 }
