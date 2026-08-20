@@ -39,6 +39,7 @@ export default function RigidBoardQuoteModal({
   config,
   theme = 'blue',
   thickness,
+  primaryLabel = 'Thickness',
   finishing,
   formatSummary,
   meta,
@@ -143,7 +144,7 @@ Submitted from ${meta.submittedFrom}.`;
               <p className={`text-xs font-semibold ${t.label} uppercase tracking-wider mb-3`}>Your selections</p>
               <dl className="space-y-2 text-sm">
                 <div className="flex justify-between gap-4">
-                  <dt className="text-slate-500">Thickness</dt>
+                  <dt className="text-slate-500">{primaryLabel}</dt>
                   <dd className="text-slate-900 font-medium text-right">{thickness?.name}</dd>
                 </div>
                 <div className="flex justify-between gap-4">

@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
+import PosterConfigurator from '../components/posters/PosterConfigurator';
 import { SITE_URL } from '../lib/site';
 import { buildProductLd } from '../lib/schema';
 
@@ -108,7 +109,11 @@ export default function PostersPage() {
     return () => { clearInterval(interval); if (timeoutRef.current) clearTimeout(timeoutRef.current); };
   }, [currentImage, goToImage]);
 
-  const quoteUrl = '/quote?product=Custom+Posters';
+  const openQuote = () => {
+    if (typeof document !== 'undefined') {
+      document.getElementById('quote-builder')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <Layout>
@@ -177,7 +182,7 @@ export default function PostersPage() {
                 ))}
               </ul>
               <div className="flex flex-col sm:flex-row gap-3 mb-6">
-                <Link href={quoteUrl} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-6 rounded-xl transition-colors text-center">Get Custom Quote</Link>
+                <button type="button" onClick={openQuote} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-6 rounded-xl transition-colors text-center">Get Custom Quote</button>
                 <a href="tel:+353894157369" className="flex-1 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3.5 px-6 rounded-xl border border-gray-300 transition-colors text-center">Call +353 89 415 7369</a>
               </div>
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-400 border-t border-gray-100 pt-4">
@@ -185,6 +190,19 @@ export default function PostersPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="py-14 lg:py-20 bg-stone-50 border-t border-stone-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <p className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-2">Quote builder</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Configure your poster</h2>
+            <p className="text-stone-600 max-w-2xl leading-relaxed">
+              Choose paper, enter a custom size up to 1.5 m (1500 mm), then request a quotation. No minimum order.
+            </p>
+          </div>
+          <PosterConfigurator />
         </div>
       </section>
 
@@ -220,10 +238,10 @@ export default function PostersPage() {
             ))}
           </div>
           <div className="text-center mt-8">
-            <Link href={quoteUrl} className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-xl border border-gray-300 transition-colors">
+            <button type="button" onClick={openQuote} className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-xl border border-gray-300 transition-colors">
               Get Your Custom Quote
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" /></svg>
-            </Link>
+            </button>
           </div>
         </div>
       </section>
@@ -284,7 +302,7 @@ export default function PostersPage() {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Ready to order custom posters?</h2>
           <p className="text-gray-400 mb-8 max-w-xl mx-auto">Get a free quote. We'll help with size, paper, and finish.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href={quoteUrl} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-8 rounded-xl transition-colors">Get Free Quote</Link>
+            <button type="button" onClick={openQuote} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-8 rounded-xl transition-colors">Get Free Quote</button>
             <a href="tel:+353894157369" className="bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-3.5 px-8 rounded-xl border border-gray-700 transition-colors">Call +353 89 415 7369</a>
           </div>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-8 text-sm text-gray-500">

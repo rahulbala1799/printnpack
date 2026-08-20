@@ -29,11 +29,18 @@ const themes = {
   },
 };
 
+function maxInputMm(limits) {
+  return limits.maxMm || limits.maxLongMm;
+}
+
 function isValidBoardSize(widthMm, heightMm, limits) {
   const w = Number(widthMm);
   const h = Number(heightMm);
   if (!Number.isFinite(w) || !Number.isFinite(h)) return false;
   if (w < limits.minMm || h < limits.minMm) return false;
+  if (limits.maxMm) {
+    return w <= limits.maxMm && h <= limits.maxMm;
+  }
   const fits = (w <= limits.maxLongMm && h <= limits.maxShortMm) || (w <= limits.maxShortMm && h <= limits.maxLongMm);
   return fits;
 }
@@ -41,11 +48,12 @@ function isValidBoardSize(widthMm, heightMm, limits) {
 function clampBoardSize(widthMm, heightMm, limits) {
   let w = Math.round(Number(widthMm));
   let h = Math.round(Number(heightMm));
+  const max = maxInputMm(limits);
   if (!Number.isFinite(w)) w = limits.minMm;
   if (!Number.isFinite(h)) h = limits.minMm;
-  w = Math.max(limits.minMm, Math.min(limits.maxLongMm, w));
-  h = Math.max(limits.minMm, Math.min(limits.maxLongMm, h));
-  if (!isValidBoardSize(w, h, limits)) {
+  w = Math.max(limits.minMm, Math.min(max, w));
+  h = Math.max(limits.minMm, Math.min(max, h));
+  if (!isValidBoardSize(w, h, limits) && limits.maxShortMm) {
     h = Math.min(h, limits.maxShortMm);
   }
   return { widthMm: w, heightMm: h };
@@ -134,16 +142,24 @@ export default function RigidBoardConfigurator({
   getFinishing,
   formatSummary,
   quoteMeta,
+  primaryIdKey = 'thicknessId',
+  primaryStepTitle = 'Thickness',
+  summaryPrimaryLabel = 'Thickness',
 }) {
   const t = themes[theme] || themes.blue;
   const [config, setConfig] = useState(defaultConfig);
   const [modalOpen, setModalOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const thickness = getThickness(config.thicknessId);
+  const thickness = getThickness(config[primaryIdKey]);
   const finishing = finishingOptions.length ? getFinishing?.(config.finishingId) : null;
   const sizeOk = isValidBoardSize(config.widthMm, config.heightMm, sizeLimits);
   const activeStandardId = matchingStandardId(config.widthMm, config.heightMm, standardSizes);
+  const inputMax = maxInputMm(sizeLimits);
+  const sizeHelp = sizeLimits.help
+    || `Enter width and height in millimetres. Min ${sizeLimits.minMm} mm. Max sheet ${sizeLimits.maxLongMm} × ${sizeLimits.maxShortMm} mm (8ft × 4ft).`;
+  const sizeError = sizeLimits.error
+    || `Size must fit on an 8ft × 4ft sheet (${sizeLimits.maxLongMm} × ${sizeLimits.maxShortMm} mm).`;
 
   const updateConfig = (patch) => setConfig((prev) => ({ ...prev, ...patch }));
 
@@ -162,7 +178,7 @@ export default function RigidBoardConfigurator({
   };
 
   const summaryRows = [
-    { label: 'Thickness', value: thickness?.name },
+    { label: summaryPrimaryLabel, value: thickness?.name },
     { label: 'Size', value: `${config.widthMm} × ${config.heightMm} mm` },
     ...(finishing ? [{ label: 'Laminate', value: finishing.name }] : []),
     { label: 'Quantity', value: String(Math.max(1, Number(config.quantity) || 1)) },
@@ -203,16 +219,16 @@ export default function RigidBoardConfigurator({
 
           <div className="space-y-7 min-w-0 order-2">
             <section>
-              <SectionHeading step={step++} title="Thickness" selected={thickness?.name} theme={t} />
+              <SectionHeading step={step++} title={primaryStepTitle} selected={thickness?.name} theme={t} />
               <div className="grid grid-cols-2 gap-2">
                 {thicknesses.map((item) => {
-                  const selected = config.thicknessId === item.id;
+                  const selected = config[primaryIdKey] === item.id;
                   return (
                     <OptionButton
                       key={item.id}
                       selected={selected}
                       theme={t}
-                      onClick={() => updateConfig({ thicknessId: item.id })}
+                      onClick={() => updateConfig({ [primaryIdKey]: item.id })}
                       className="overflow-hidden"
                     >
                       <div className="flex items-center gap-2 p-2">
@@ -251,16 +267,14 @@ export default function RigidBoardConfigurator({
                 selected={`${config.widthMm} × ${config.heightMm} mm`}
                 theme={t}
               />
-              <p className="text-xs text-stone-500 mb-3">
-                Enter width and height in millimetres. Min {sizeLimits.minMm} mm. Max sheet {sizeLimits.maxLongMm} × {sizeLimits.maxShortMm} mm (8ft × 4ft).
-              </p>
+              <p className="text-xs text-stone-500 mb-3">{sizeHelp}</p>
               <div className="flex items-end gap-2">
                 <label className="block min-w-0 flex-1">
                   <span className="block text-[10px] font-semibold text-stone-500 uppercase tracking-wider mb-1">Width (mm)</span>
                   <input
                     type="number"
                     min={sizeLimits.minMm}
-                    max={sizeLimits.maxLongMm}
+                    max={inputMax}
                     value={config.widthMm}
                     onChange={(e) => updateConfig({ widthMm: e.target.value })}
                     onBlur={(e) => updateConfig(clampBoardSize(e.target.value, config.heightMm, sizeLimits))}
@@ -276,7 +290,7 @@ export default function RigidBoardConfigurator({
                   <input
                     type="number"
                     min={sizeLimits.minMm}
-                    max={sizeLimits.maxLongMm}
+                    max={inputMax}
                     value={config.heightMm}
                     onChange={(e) => updateConfig({ heightMm: e.target.value })}
                     onBlur={(e) => updateConfig(clampBoardSize(config.widthMm, e.target.value, sizeLimits))}
@@ -288,9 +302,7 @@ export default function RigidBoardConfigurator({
                 </label>
               </div>
               {!sizeOk && (
-                <p className="mt-2 text-xs text-red-600">
-                  Size must fit on an 8ft × 4ft sheet ({sizeLimits.maxLongMm} × {sizeLimits.maxShortMm} mm).
-                </p>
+                <p className="mt-2 text-xs text-red-600">{sizeError}</p>
               )}
 
               <p className="text-[10px] font-semibold text-stone-500 uppercase tracking-wider mt-4 mb-2">Or choose a standard size</p>
@@ -364,6 +376,7 @@ export default function RigidBoardConfigurator({
         config={config}
         theme={theme}
         thickness={thickness}
+        primaryLabel={summaryPrimaryLabel}
         finishing={finishing}
         formatSummary={formatSummary}
         meta={quoteMeta}
