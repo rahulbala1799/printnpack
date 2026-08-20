@@ -1,15 +1,14 @@
-import React, { useMemo, useState } from 'react';
-import Link from 'next/link';
+import React, { useState } from 'react';
 import {
   FLAG_SIZES,
   FLAG_MATERIALS,
   FLAG_FINISHING,
   DEFAULT_FLAG_CONFIG,
-  calculateFlagPrice,
   getFlagSize,
   getFlagMaterial,
   getFlagFinishing,
 } from '../../data/flag-poles-options';
+import FlagQuoteModal from './FlagQuoteModal';
 
 function InfoIcon({ title }) {
   return (
@@ -136,93 +135,132 @@ function SectionLabel({ children, info }) {
   );
 }
 
-function formatEuro(value) {
-  return `€${Number(value).toFixed(2)}`;
+function ConfigSummary({ config }) {
+  const selectedSize = getFlagSize(config.sizeId);
+  const selectedMaterial = getFlagMaterial(config.materialId);
+  const selectedFinishing = getFlagFinishing(config.finishingId);
+  const quantity = Math.max(1, Number(config.quantity) || 1);
+
+  return (
+    <dl className="space-y-3 text-sm">
+      <div className="flex justify-between gap-4">
+        <dt className="text-slate-500">Size</dt>
+        <dd className="text-slate-900 font-medium text-right">
+          {selectedSize?.label} ({selectedSize?.dimensions})
+        </dd>
+      </div>
+      <div className="flex justify-between gap-4">
+        <dt className="text-slate-500">Quantity</dt>
+        <dd className="text-slate-900 font-medium">{quantity} unit{quantity !== 1 ? 's' : ''}</dd>
+      </div>
+      <div className="flex justify-between gap-4">
+        <dt className="text-slate-500">Material</dt>
+        <dd className="text-slate-900 font-medium text-right">{selectedMaterial?.name}</dd>
+      </div>
+      <div className="flex justify-between gap-4">
+        <dt className="text-slate-500">Finishing</dt>
+        <dd className="text-slate-900 font-medium text-right">{selectedFinishing?.name}</dd>
+      </div>
+      {config.customSizeNote?.trim() && (
+        <div className="pt-2 border-t border-slate-100">
+          <dt className="text-slate-500 mb-1">Custom size</dt>
+          <dd className="text-slate-900">{config.customSizeNote}</dd>
+        </div>
+      )}
+    </dl>
+  );
 }
 
-export default function FlagConfigurator({ onConfigChange }) {
+export default function FlagConfigurator() {
   const [config, setConfig] = useState(DEFAULT_FLAG_CONFIG);
   const [showCustomSize, setShowCustomSize] = useState(false);
-  const [calculated, setCalculated] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const selectedSize = getFlagSize(config.sizeId);
   const selectedMaterial = getFlagMaterial(config.materialId);
   const selectedFinishing = getFlagFinishing(config.finishingId);
 
-  const pricing = useMemo(
-    () => calculateFlagPrice(config),
-    [config.materialId, config.finishingId, config.quantity],
-  );
-
   const updateConfig = (patch) => {
-    setConfig((prev) => {
-      const next = { ...prev, ...patch };
-      onConfigChange?.(next);
-      return next;
-    });
-    setCalculated(false);
+    setConfig((prev) => ({ ...prev, ...patch }));
   };
 
-  const handleCalculate = () => {
-    setCalculated(true);
-    onConfigChange?.({ ...config, pricing: calculateFlagPrice(config) });
+  const openQuoteModal = () => {
+    setSubmitted(false);
+    setModalOpen(true);
+  };
+
+  const handleModalClose = (result) => {
+    setModalOpen(false);
+    if (result?.submitted) {
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 5000);
+    }
   };
 
   return (
-    <div className="grid lg:grid-cols-[1fr_320px] gap-8 items-start">
-      {/* Options panel */}
-      <div className="space-y-10">
-        {/* Size */}
-        <section>
-          <SectionLabel info="Flag dimensions in centimetres (width x height)">
-            Size: {selectedSize?.label}: {selectedSize?.dimensions}
-          </SectionLabel>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-            {FLAG_SIZES.map((size) => {
-              const selected = config.sizeId === size.id;
-              return (
-                <button
-                  key={size.id}
-                  type="button"
-                  onClick={() => updateConfig({ sizeId: size.id })}
-                  className={`rounded-lg border-2 px-3 py-4 text-center transition-all hover:border-blue-300 ${
-                    selected
-                      ? 'border-blue-500 bg-blue-50/40 shadow-sm'
-                      : 'border-slate-200 bg-white hover:bg-slate-50'
-                  }`}
-                >
-                  <div className="text-sm font-semibold text-slate-900">{size.label}</div>
-                  <div className="text-xs text-slate-500 mt-1">{size.dimensions}</div>
-                </button>
-              );
-            })}
-          </div>
-          <button
-            type="button"
-            onClick={() => setShowCustomSize((v) => !v)}
-            className="mt-3 text-sm text-blue-600 hover:text-blue-700 font-medium inline-flex items-center gap-1"
-          >
-            Need a custom size? Click here
-            <svg
-              className={`w-4 h-4 transition-transform ${showCustomSize ? 'rotate-180' : ''}`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-          {showCustomSize && (
-            <div className="mt-3 p-4 rounded-lg border border-slate-200 bg-slate-50 text-sm text-slate-600">
-              Custom sizes available on request — contact us with your required dimensions for a quote.
+    <>
+      <div className="grid lg:grid-cols-[1fr_300px] gap-8 items-start">
+        <div className="space-y-10">
+          {/* Size */}
+          <section>
+            <SectionLabel info="Flag dimensions in centimetres (width x height)">
+              Size: {selectedSize?.label}: {selectedSize?.dimensions}
+            </SectionLabel>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+              {FLAG_SIZES.map((size) => {
+                const selected = config.sizeId === size.id;
+                return (
+                  <button
+                    key={size.id}
+                    type="button"
+                    onClick={() => updateConfig({ sizeId: size.id })}
+                    className={`rounded-lg border-2 px-3 py-4 text-center transition-all hover:border-blue-300 ${
+                      selected
+                        ? 'border-blue-500 bg-blue-50/40 shadow-sm'
+                        : 'border-slate-200 bg-white hover:bg-slate-50'
+                    }`}
+                  >
+                    <div className="text-sm font-semibold text-slate-900">{size.label}</div>
+                    <div className="text-xs text-slate-500 mt-1">{size.dimensions}</div>
+                  </button>
+                );
+              })}
             </div>
-          )}
-        </section>
+            <button
+              type="button"
+              onClick={() => setShowCustomSize((v) => !v)}
+              className="mt-3 text-sm text-blue-600 hover:text-blue-700 font-medium inline-flex items-center gap-1"
+            >
+              Need a custom size? Click here
+              <svg
+                className={`w-4 h-4 transition-transform ${showCustomSize ? 'rotate-180' : ''}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {showCustomSize && (
+              <div className="mt-3 p-4 rounded-lg border border-slate-200 bg-slate-50 space-y-3">
+                <p className="text-sm text-slate-600">
+                  Enter your required dimensions and we will include them in your quote request.
+                </p>
+                <input
+                  type="text"
+                  value={config.customSizeNote}
+                  onChange={(e) => updateConfig({ customSizeNote: e.target.value })}
+                  placeholder="e.g. 180 x 120 cm"
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            )}
+          </section>
 
-        {/* Quantity */}
-        <section>
-          <SectionLabel>Quantity</SectionLabel>
-          <div className="flex flex-wrap items-end gap-3">
+          {/* Quantity */}
+          <section>
+            <SectionLabel>Quantity</SectionLabel>
             <div>
               <label htmlFor="flag-quantity" className="block text-xs text-slate-500 mb-1">
                 Units
@@ -236,153 +274,148 @@ export default function FlagConfigurator({ onConfigChange }) {
                 className="w-28 rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
+          </section>
+
+          {/* Material */}
+          <section>
+            <SectionLabel info="Outdoor flag fabric options">
+              Material: {selectedMaterial?.name}
+            </SectionLabel>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {FLAG_MATERIALS.map((material) => {
+                const selected = config.materialId === material.id;
+                return (
+                  <button
+                    key={material.id}
+                    type="button"
+                    onClick={() => updateConfig({ materialId: material.id })}
+                    className={`relative flex rounded-lg border-2 overflow-hidden text-left transition-all hover:border-blue-300 ${
+                      selected ? 'border-blue-500 shadow-sm' : 'border-slate-200 bg-white'
+                    }`}
+                  >
+                    <div className="w-28 sm:w-32 flex-shrink-0 h-28 relative">
+                      {material.image ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={material.image} alt="" className="w-full h-full object-cover" />
+                      ) : (
+                        <OptionImagePlaceholder
+                          label="Image coming soon"
+                          variant={material.id === 'longlife' ? 'mesh' : 'fabric'}
+                        />
+                      )}
+                    </div>
+                    <div className={`flex-1 p-4 flex flex-col justify-center ${material.recommended ? 'pb-10' : ''}`}>
+                      <div className="font-semibold text-slate-900 text-sm leading-snug pr-6">{material.name}</div>
+                      <div className="text-xs text-slate-500 mt-1">{material.gsm}</div>
+                    </div>
+                    {material.eco && <EcoBadge />}
+                    {material.recommended && <RecommendedBadge />}
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* Finishing */}
+          <section>
+            <SectionLabel info="How the flag attaches to the pole">
+              Finishing: {selectedFinishing?.name}
+            </SectionLabel>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+              {FLAG_FINISHING.map((option) => {
+                const selected = config.finishingId === option.id;
+                return (
+                  <button
+                    key={option.id}
+                    type="button"
+                    onClick={() => updateConfig({ finishingId: option.id })}
+                    className={`relative flex flex-col rounded-lg border-2 overflow-hidden text-left transition-all hover:border-blue-300 ${
+                      selected ? 'border-blue-500 shadow-sm' : 'border-slate-200 bg-white'
+                    }`}
+                  >
+                    <div className="h-24 w-full">
+                      {option.image ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={option.image} alt="" className="w-full h-full object-cover" />
+                      ) : (
+                        <FinishingThumbnail optionId={option.id} />
+                      )}
+                    </div>
+                    <div className={`p-2.5 flex-1 ${option.recommended ? 'pb-9' : ''}`}>
+                      <p className="text-xs font-medium text-slate-800 leading-snug">{option.name}</p>
+                    </div>
+                    {option.recommended && <RecommendedBadge />}
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* Mobile / bottom request CTA */}
+          <div className="lg:hidden pt-2 border-t border-slate-100">
             <button
               type="button"
-              onClick={handleCalculate}
-              className="rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:border-slate-400 transition-colors"
+              onClick={openQuoteModal}
+              className="w-full rounded-xl bg-blue-600 text-white font-semibold py-3.5 hover:bg-blue-700 transition-colors"
             >
-              Calculate
+              Request a Quote
             </button>
           </div>
-        </section>
+        </div>
 
-        {/* Material */}
-        <section>
-          <SectionLabel info="Outdoor flag fabric options">
-            Material: {selectedMaterial?.name}
-          </SectionLabel>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {FLAG_MATERIALS.map((material) => {
-              const selected = config.materialId === material.id;
-              return (
-                <button
-                  key={material.id}
-                  type="button"
-                  onClick={() => updateConfig({ materialId: material.id })}
-                  className={`relative flex rounded-lg border-2 overflow-hidden text-left transition-all hover:border-blue-300 ${
-                    selected ? 'border-blue-500 shadow-sm' : 'border-slate-200 bg-white'
-                  }`}
-                >
-                  <div className="w-28 sm:w-32 flex-shrink-0 h-28 relative">
-                    {material.image ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={material.image} alt="" className="w-full h-full object-cover" />
-                    ) : (
-                      <OptionImagePlaceholder
-                        label="Image coming soon"
-                        variant={material.id === 'longlife' ? 'mesh' : 'fabric'}
-                      />
-                    )}
-                  </div>
-                  <div className={`flex-1 p-4 flex flex-col justify-center ${material.recommended ? 'pb-10' : ''}`}>
-                    <div className="font-semibold text-slate-900 text-sm leading-snug pr-6">{material.name}</div>
-                    <div className="text-xs text-slate-500 mt-1">{material.gsm}</div>
-                    <div className="text-sm font-bold text-emerald-600 mt-2">{formatEuro(material.price)}</div>
-                  </div>
-                  {material.eco && <EcoBadge />}
-                  {material.recommended && <RecommendedBadge />}
-                </button>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Finishing */}
-        <section>
-          <SectionLabel info="How the flag attaches to the pole">
-            Finishing: {selectedFinishing?.name}
-          </SectionLabel>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-            {FLAG_FINISHING.map((option) => {
-              const selected = config.finishingId === option.id;
-              const hasAddon = option.addon > 0;
-              return (
-                <button
-                  key={option.id}
-                  type="button"
-                  onClick={() => updateConfig({ finishingId: option.id })}
-                  className={`relative flex flex-col rounded-lg border-2 overflow-hidden text-left transition-all hover:border-blue-300 ${
-                    selected ? 'border-blue-500 shadow-sm' : 'border-slate-200 bg-white'
-                  }`}
-                >
-                  <div className="h-24 w-full">
-                    {option.image ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={option.image} alt="" className="w-full h-full object-cover" />
-                    ) : (
-                      <FinishingThumbnail optionId={option.id} />
-                    )}
-                  </div>
-                  <div className={`p-2.5 flex-1 flex flex-col justify-between ${option.recommended ? 'pb-9' : ''}`}>
-                    <p className="text-xs font-medium text-slate-800 leading-snug">{option.name}</p>
-                    {hasAddon && (
-                      <p className="text-xs font-bold text-emerald-600 mt-1.5">+ {formatEuro(option.addon)}</p>
-                    )}
-                  </div>
-                  {option.recommended && <RecommendedBadge />}
-                </button>
-              );
-            })}
-          </div>
-        </section>
-      </div>
-
-      {/* Summary sidebar */}
-      <aside className="lg:sticky lg:top-6">
-        <div className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
-          <div className="bg-slate-900 px-5 py-4">
-            <h3 className="text-white font-semibold">Your configuration</h3>
-            <p className="text-slate-400 text-xs mt-0.5">Review before requesting a quote</p>
-          </div>
-          <div className="p-5 space-y-3 text-sm">
-            <div className="flex justify-between gap-4">
-              <span className="text-slate-500">Size</span>
-              <span className="text-slate-900 font-medium text-right">
-                {selectedSize?.label} ({selectedSize?.dimensions})
-              </span>
+        {/* Summary sidebar */}
+        <aside className="lg:sticky lg:top-6">
+          <div className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+            <div className="bg-slate-900 px-5 py-4">
+              <h3 className="text-white font-semibold">Your quote builder</h3>
+              <p className="text-slate-400 text-xs mt-0.5">Selections update as you choose options</p>
             </div>
-            <div className="flex justify-between gap-4">
-              <span className="text-slate-500">Quantity</span>
-              <span className="text-slate-900 font-medium">{config.quantity} unit{Number(config.quantity) !== 1 ? 's' : ''}</span>
+            <div className="p-5">
+              <ConfigSummary config={config} />
             </div>
-            <div className="flex justify-between gap-4">
-              <span className="text-slate-500">Material</span>
-              <span className="text-slate-900 font-medium text-right">{selectedMaterial?.name}</span>
-            </div>
-            <div className="flex justify-between gap-4">
-              <span className="text-slate-500">Finishing</span>
-              <span className="text-slate-900 font-medium text-right">{selectedFinishing?.name}</span>
-            </div>
-
-            <div className="border-t border-slate-100 pt-3 mt-3">
-              {calculated ? (
-                <>
-                  <div className="flex justify-between gap-4 mb-1">
-                    <span className="text-slate-500">Unit price</span>
-                    <span className="text-slate-900 font-medium">{formatEuro(pricing.unitPrice)}</span>
-                  </div>
-                  <div className="flex justify-between gap-4 items-baseline">
-                    <span className="text-slate-700 font-semibold">Estimated total</span>
-                    <span className="text-2xl font-bold text-emerald-600">{formatEuro(pricing.total)}</span>
-                  </div>
-                </>
-              ) : (
-                <p className="text-xs text-slate-500">
-                  Click <strong>Calculate</strong> to see an estimated price based on your selections.
+            <div className="px-5 pb-5 space-y-3">
+              <button
+                type="button"
+                onClick={openQuoteModal}
+                className="w-full rounded-xl bg-blue-600 text-white font-semibold py-3 hover:bg-blue-700 transition-colors"
+              >
+                Request a Quote
+              </button>
+              {submitted && (
+                <p className="text-xs text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-lg px-3 py-2 text-center">
+                  Quote request sent — we&apos;ll be in touch shortly.
                 </p>
               )}
             </div>
           </div>
-          <div className="px-5 pb-5">
-            <Link
-              href="/quote"
-              className="block w-full text-center rounded-xl bg-blue-600 text-white font-semibold py-3 hover:bg-blue-700 transition-colors"
-            >
-              Request a Quote
-            </Link>
+        </aside>
+      </div>
+
+      {/* Full-width bottom CTA on desktop */}
+      <div className="hidden lg:block mt-10 pt-8 border-t border-slate-200">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <p className="font-semibold text-slate-900">Ready to get a quote?</p>
+            <p className="text-sm text-slate-500 mt-0.5">
+              {selectedSize?.label} · {config.quantity} unit{Number(config.quantity) !== 1 ? 's' : ''} · {selectedMaterial?.name} · {selectedFinishing?.name}
+            </p>
           </div>
+          <button
+            type="button"
+            onClick={openQuoteModal}
+            className="inline-flex items-center justify-center rounded-xl bg-blue-600 text-white font-semibold px-8 py-3.5 hover:bg-blue-700 transition-colors whitespace-nowrap"
+          >
+            Request a Quote
+          </button>
         </div>
-      </aside>
-    </div>
+        {submitted && (
+          <p className="mt-4 text-sm text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-lg px-4 py-3 text-center">
+            Thank you — your quote request has been sent. We&apos;ll get back to you shortly.
+          </p>
+        )}
+      </div>
+
+      <FlagQuoteModal isOpen={modalOpen} onClose={handleModalClose} config={config} />
+    </>
   );
 }

@@ -11,7 +11,6 @@ export const FLAG_MATERIALS = [
     id: 'rpet',
     name: 'Recycled Polyester',
     gsm: '110 gsm',
-    price: 27.62,
     recommended: true,
     eco: true,
     image: null,
@@ -20,20 +19,19 @@ export const FLAG_MATERIALS = [
     id: 'longlife',
     name: 'Mesh Polyester (Longlife)',
     gsm: '115 gsm',
-    price: 25.87,
     image: null,
   },
 ];
 
 export const FLAG_FINISHING = [
-  { id: 'cord-loop', name: 'Cord and Loop', addon: 0 },
-  { id: 'white-hooks', name: 'White hooks', addon: 0, recommended: true },
-  { id: 'black-hooks', name: 'Black hooks', addon: 0 },
-  { id: 'tunnel-white', name: 'Tunnel with white band + hooks', addon: 0 },
-  { id: 'tunnel-black', name: 'Tunnel with black band + hooks', addon: 0 },
-  { id: 'no-reinforcement', name: 'Without reinforced edges or rings', addon: 1.62 },
-  { id: 'rings-30cm', name: 'Rings every 30cm, with reinforcement', addon: 4.73 },
-  { id: 'corner-rings', name: 'Hemmed with rings in each corner', addon: 1.62 },
+  { id: 'cord-loop', name: 'Cord and Loop' },
+  { id: 'white-hooks', name: 'White hooks', recommended: true },
+  { id: 'black-hooks', name: 'Black hooks' },
+  { id: 'tunnel-white', name: 'Tunnel with white band + hooks' },
+  { id: 'tunnel-black', name: 'Tunnel with black band + hooks' },
+  { id: 'no-reinforcement', name: 'Without reinforced edges or rings' },
+  { id: 'rings-30cm', name: 'Rings every 30cm, with reinforcement' },
+  { id: 'corner-rings', name: 'Hemmed with rings in each corner' },
 ];
 
 export const DEFAULT_FLAG_CONFIG = {
@@ -41,6 +39,7 @@ export const DEFAULT_FLAG_CONFIG = {
   quantity: 1,
   materialId: 'rpet',
   finishingId: 'white-hooks',
+  customSizeNote: '',
 };
 
 export function getFlagSize(id) {
@@ -55,14 +54,25 @@ export function getFlagFinishing(id) {
   return FLAG_FINISHING.find((f) => f.id === id);
 }
 
-export function calculateFlagPrice({ materialId, finishingId, quantity }) {
-  const material = getFlagMaterial(materialId);
-  const finishing = getFlagFinishing(finishingId);
-  const units = Math.max(1, Number(quantity) || 1);
-  const unitPrice = (material?.price ?? 0) + (finishing?.addon ?? 0);
-  return {
-    unitPrice,
-    total: Math.round(unitPrice * units * 100) / 100,
-    units,
-  };
+export function formatFlagQuoteSummary(config) {
+  const size = getFlagSize(config.sizeId);
+  const material = getFlagMaterial(config.materialId);
+  const finishing = getFlagFinishing(config.finishingId);
+  const quantity = Math.max(1, Number(config.quantity) || 1);
+
+  const lines = [
+    'Custom Printed Flag Quote Request',
+    '',
+    '── Flag configuration ──',
+    `Size: ${size?.label || config.sizeId} (${size?.dimensions || 'N/A'})`,
+    `Quantity: ${quantity} unit${quantity !== 1 ? 's' : ''}`,
+    `Material: ${material?.name || config.materialId}${material?.gsm ? ` — ${material.gsm}` : ''}`,
+    `Finishing: ${finishing?.name || config.finishingId}`,
+  ];
+
+  if (config.customSizeNote?.trim()) {
+    lines.push(`Custom size note: ${config.customSizeNote.trim()}`);
+  }
+
+  return lines.join('\n');
 }

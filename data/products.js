@@ -682,7 +682,7 @@ const products = [
       '/images/products/custom-printed-flags/custom-printed-flags-ireland-cricket-club.jpg',
     ],
     imageSrc: '/images/products/custom-printed-flags/custom-printed-flags-ireland-gaa-club.jpg',
-    price: 'From €25.87 per flag',
+    price: 'Contact for quote',
     moq: 1,
     leadTime: 'Contact for lead time',
     applications: [

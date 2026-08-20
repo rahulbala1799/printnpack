@@ -60,7 +60,7 @@ const itemListLd = {
     buildCatalogOffer('PVC Banners Ireland', `${SITE_URL}/vinyl-banners`, { price: '25.00' }).itemOffered,
     buildCatalogOffer('Roll Up Banners Ireland', `${SITE_URL}/roll-up-banners`, { price: '35.00' }).itemOffered,
     buildCatalogOffer('Extra Wide Roll Up Banners Ireland', `${SITE_URL}/extra-wide-roll-up-banners-ireland`, { price: '398.96' }).itemOffered,
-    buildCatalogOffer('Custom Printed Flags Ireland', `${SITE_URL}/custom-printed-flags-ireland`, { price: '25.87' }).itemOffered,
+    buildCatalogOffer('Custom Printed Flags Ireland', `${SITE_URL}/custom-printed-flags-ireland`).itemOffered,
   ].map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,

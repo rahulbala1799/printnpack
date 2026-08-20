@@ -133,7 +133,6 @@ const productLd = buildProductLd({
     'Custom printed flags Ireland — full-colour sublimation flags for GAA clubs, businesses and events. Polyester & mesh options, order from 1 flag, nationwide delivery.',
   image: `${SITE_URL}${HERO_IMAGE}`,
   url: PAGE_URL,
-  price: '25.87',
 });
 
 const webPageLd = {
@@ -373,8 +372,8 @@ export default function CustomPrintedFlagsIreland() {
             <p className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-2">Configure your order</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">Select size, material &amp; finishing</h2>
             <p className="text-slate-600 max-w-2xl leading-relaxed">
-              Choose your flag size, quantity, material and finishing options below. Click Calculate for an estimated
-              price, then request a quotation for your custom printed flag.
+              Choose your flag size, quantity, material and finishing options below, then request a quotation
+              for your custom printed flag.
             </p>
           </div>
           <FlagConfigurator />
