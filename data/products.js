@@ -1620,7 +1620,7 @@ const products = [
     id: 'stage-backdrop-banners-ireland',
     name: '3m x 3m Banners & Huge Custom Large Banners',
     url: '/stage-backdrop-banners-ireland',
-    category: 'Banners',
+    category: 'Wide Format',
     description: '3m x 3m banners, huge banners and custom large banners Ireland — any size from 10 cm to 50 m. Stage backdrop printing Dublin, Cork, Galway & nationwide.',
     features: [
       '3m × 3m banners and other standard large sizes',
