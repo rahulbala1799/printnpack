@@ -12,7 +12,6 @@ import {
 } from '../../data/premium-leaflets-options';
 import PremiumLeafletQuoteModal from './PremiumLeafletQuoteModal';
 import { Card, CardContent } from '../ui/card';
-import { Badge } from '../ui/badge';
 import { cn } from '../../lib/cn';
 
 function MaterialSwatch({ variant }) {
@@ -273,7 +272,7 @@ export default function PremiumLeafletConfigurator() {
                 title="Choose size"
                 selected={`${selectedSize?.label} — ${selectedSize?.dimensions}`}
               />
-              <div className="flex flex-wrap gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {PREMIUM_LEAFLET_SIZES.map((size) => {
                   const selected = config.sizeId === size.id;
                   return (
@@ -282,15 +281,17 @@ export default function PremiumLeafletConfigurator() {
                       selected={selected}
                       compact
                       onClick={() => updateConfig({ sizeId: size.id })}
-                      className="inline-flex flex-col items-start px-3 py-2 min-w-[calc(50%-4px)] sm:min-w-0 sm:flex-1"
+                      className="w-full overflow-hidden px-2.5 py-2"
                     >
-                      <span className="font-medium text-stone-900 text-xs">{size.label}</span>
-                      <span className="text-[10px] text-stone-500">{size.dimensions}</span>
-                      {size.recommended && (
-                        <Badge variant="secondary" className="mt-1 text-[10px] px-1.5 py-0">
-                          Recommended
-                        </Badge>
-                      )}
+                      <div className="flex items-center gap-1 min-w-0">
+                        <span className="font-medium text-stone-900 text-xs truncate">{size.label}</span>
+                        {size.recommended && (
+                          <span className="shrink-0 rounded bg-violet-100 text-violet-700 text-[9px] font-semibold leading-none px-1 py-0.5">
+                            Top
+                          </span>
+                        )}
+                      </div>
+                      <span className="block text-[10px] text-stone-500 truncate mt-0.5">{size.dimensions}</span>
                     </OptionButton>
                   );
                 })}

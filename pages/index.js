@@ -139,6 +139,7 @@ export default function Home() {
             catalogOffer('Custom Posters Ireland', '/posters'),
             catalogOffer('Leaflets Ireland', '/services/leaflets'),
             catalogOffer('Premium Leaflets Ireland', '/premium-leaflets-ireland'),
+            catalogOffer('Greaseproof Sheets Ireland', '/greaseproof-sheets-ireland'),
             catalogOffer('Custom Decals Ireland', '/vinyl-stickers'),
             catalogOffer('Vinyl Banners', '/vinyl-banners'),
             catalogOffer('Vinyl Stickers Ireland', '/vinyl-stickers'),

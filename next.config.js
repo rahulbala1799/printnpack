@@ -206,6 +206,46 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/printed-greaseproof-paper-ireland',
+        destination: '/greaseproof-sheets-ireland',
+        permanent: true,
+      },
+      {
+        source: '/custom-greaseproof-paper-ireland',
+        destination: '/greaseproof-sheets-ireland',
+        permanent: true,
+      },
+      {
+        source: '/branded-greaseproof-sheets-ireland',
+        destination: '/greaseproof-sheets-ireland',
+        permanent: true,
+      },
+      {
+        source: '/greaseproof-paper-printing-ireland',
+        destination: '/greaseproof-sheets-ireland',
+        permanent: true,
+      },
+      {
+        source: '/greaseproof-paper-ireland',
+        destination: '/greaseproof-sheets-ireland',
+        permanent: true,
+      },
+      {
+        source: '/custom-printed-greaseproof-sheets-ireland',
+        destination: '/greaseproof-sheets-ireland',
+        permanent: true,
+      },
+      {
+        source: '/burger-wrap-paper-ireland',
+        destination: '/greaseproof-sheets-ireland',
+        permanent: true,
+      },
+      {
+        source: '/sandwich-wrapping-paper-ireland',
+        destination: '/greaseproof-sheets-ireland',
+        permanent: true,
+      },
+      {
         source: '/branded-tissue-paper-ireland',
         destination: '/custom-printed-tissue-paper-ireland',
         permanent: true,
