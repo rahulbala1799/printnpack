@@ -42,6 +42,61 @@ const products = [
   },
 
   {
+    id: 'custom-cake-boxes-ireland',
+    name: 'Custom Cake Boxes',
+    url: '/custom-cake-boxes-ireland',
+    category: 'Food Packaging',
+    description: 'High-quality custom printed cake boxes in Ireland for bakeries, patisseries and cafés — branded packaging for cupcakes, celebration cakes and desserts with food-safe materials and luxury finishes.',
+    features: [
+      'Custom printed with your logo, brand colours and artwork',
+      'Wide selection of sizes, styles and board grades',
+      'Food-safe materials for bakery products',
+      'Clear display windows, inserts and handles available',
+      'Luxury finishes including foil, embossing and spot UV',
+      'Eco-friendly and recyclable options available',
+    ],
+    detailedDescription: 'PrintNPack supplies high-quality custom cake boxes in Ireland, helping bakeries, cafés, cake makers and food businesses protect their products while presenting their brand professionally. From individual cupcakes and pastries to celebration cakes and premium desserts, our custom printed cake boxes are made to suit your products, branding and practical packaging requirements.\n\nTurn every order into an opportunity to promote your business with professionally branded cake boxes. Your packaging can be customised with your logo, brand colours, artwork, contact details and marketing message, creating a consistent and memorable experience for your customers.\n\nFor artisan bakeries and premium patisseries we offer luxury cake boxes with high-end printing and finishing options including gold, silver or coloured foil, embossing, spot UV, lamination, clear window panels and premium rigid-box styles. Eco-friendly cake packaging options are also available.\n\nContact PrintNPack today for a quotation on custom printed cake boxes in Ireland.',
+    specifications: [
+      { name: 'Products', value: 'Celebration cakes, cupcakes, pastries, brownies, cookies and bakery gift sets' },
+      { name: 'Materials', value: 'Durable, food-safe boards suitable for bakery products' },
+      { name: 'Customisation', value: 'Logo, brand colours, artwork, contact details and marketing message' },
+      { name: 'Optional Features', value: 'Display windows, internal inserts, handles and custom structural designs' },
+      { name: 'Luxury Finishes', value: 'Foil, embossing, spot UV, lamination, textured boards and rigid-box styles' },
+      { name: 'Delivery', value: 'Nationwide across Ireland — Dublin, Cork, Galway & all counties' },
+    ],
+    images: [
+      '/images/products/custom-cake-boxes/custom-cake-boxes-ireland-luxury-navy-cupcake-window.jpg',
+      '/images/products/custom-cake-boxes/custom-cake-boxes-ireland-burgundy-cupcake-window.jpg',
+      '/images/products/custom-cake-boxes/custom-cake-boxes-ireland-green-cupcake-window.jpg',
+    ],
+    imageSrc: '/images/products/custom-cake-boxes/custom-cake-boxes-ireland-luxury-navy-cupcake-window.jpg',
+    price: 'Contact for quote',
+    applications: [
+      'Independent Bakeries',
+      'Patisseries & Cafés',
+      'Wedding & Celebration Cakes',
+      'Cupcakes & Muffins',
+      'Online Bakery Businesses',
+      'Catering & Events',
+    ],
+    faq: [
+      {
+        question: 'What types of cake boxes can you produce?',
+        answer: 'We offer box sizes and styles for celebration cakes, wedding cakes, cupcakes, pastries, brownies, cookies, bakery gift sets and takeaway or delivery orders, with optional windows, inserts and handles.',
+      },
+      {
+        question: 'Are your cake boxes food-safe?',
+        answer: 'Yes. Our cake packaging uses durable, food-safe materials suitable for direct or indirect contact with bakery products.',
+      },
+      {
+        question: 'Do you deliver custom cake boxes nationwide in Ireland?',
+        answer: 'Yes. PrintNPack delivers bespoke cake packaging to Dublin, Cork, Galway, Limerick and every county in Ireland.',
+      },
+    ],
+    weeklyDelivery: 'Our delivery service keeps bakeries and patisseries supplied with custom printed cake boxes on a schedule that suits your operation — with account management for repeat orders.'
+  },
+
+  {
     id: 'flat-handle-paper-bags',
     name: 'Flat Handle Paper Bags',
     url: '/printed-flat-handle-bags-ireland',

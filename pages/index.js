@@ -94,6 +94,7 @@ export default function Home() {
           itemListElement: [
             catalogOffer('Pizza Boxes Ireland', '/pizza-boxes-ireland'),
             catalogOffer('Custom Printed Pizza Boxes', '/custom-pizza-boxes-ireland'),
+            catalogOffer('Custom Cake Boxes Ireland', '/custom-cake-boxes-ireland'),
             catalogOffer('Printed Flat Handle Bags Ireland', '/printed-flat-handle-bags-ireland'),
             catalogOffer('Paper Bags with Logo', '/printed-flat-handle-bags-ireland'),
             catalogOffer('Burger Boxes Ireland', '/burger-boxes-ireland'),

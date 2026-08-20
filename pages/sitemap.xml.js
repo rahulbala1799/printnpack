@@ -48,6 +48,7 @@ const staticPages = [
   // Pizza box hub — primary SEO target
   { path: '/pizza-boxes-ireland',          priority: '0.95', changefreq: 'weekly' },
   { path: '/custom-pizza-boxes-ireland',   priority: '0.9',  changefreq: 'weekly' },
+  { path: '/custom-cake-boxes-ireland',    priority: '0.92', changefreq: 'weekly' },
   { path: '/plain-pizza-boxes-ireland',    priority: '0.88', changefreq: 'weekly' },
   { path: '/pizza-boxes-wholesale-ireland', priority: '0.88', changefreq: 'weekly' },
   { path: '/pizza-box-faq-ireland',        priority: '0.88', changefreq: 'monthly' },

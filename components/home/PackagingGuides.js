@@ -18,6 +18,13 @@ const guides = [
     cta: 'View custom print',
   },
   {
+    href: '/custom-cake-boxes-ireland',
+    title: 'Custom Cake Boxes Ireland',
+    description: 'Branded bakery packaging for cupcakes, celebration cakes & patisseries.',
+    image: '/images/products/custom-cake-boxes/custom-cake-boxes-ireland-luxury-navy-cupcake-window.jpg',
+    cta: 'View cake boxes',
+  },
+  {
     href: '/paper-bags-ireland',
     title: 'Paper Bags Ireland',
     description: 'Printed, plain & wholesale paper bags — Ireland\'s complete paper bag hub.',

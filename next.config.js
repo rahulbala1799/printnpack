@@ -156,6 +156,36 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/cake-boxes-ireland',
+        destination: '/custom-cake-boxes-ireland',
+        permanent: true,
+      },
+      {
+        source: '/custom-printed-cake-boxes-ireland',
+        destination: '/custom-cake-boxes-ireland',
+        permanent: true,
+      },
+      {
+        source: '/branded-cake-boxes-ireland',
+        destination: '/custom-cake-boxes-ireland',
+        permanent: true,
+      },
+      {
+        source: '/cupcake-boxes-ireland',
+        destination: '/custom-cake-boxes-ireland',
+        permanent: true,
+      },
+      {
+        source: '/bakery-packaging-ireland',
+        destination: '/custom-cake-boxes-ireland',
+        permanent: true,
+      },
+      {
+        source: '/luxury-cake-boxes-ireland',
+        destination: '/custom-cake-boxes-ireland',
+        permanent: true,
+      },
+      {
         source: '/branded-tissue-paper-ireland',
         destination: '/custom-printed-tissue-paper-ireland',
         permanent: true,

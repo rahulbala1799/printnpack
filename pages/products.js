@@ -74,6 +74,7 @@ const STAT_PILLS = [
 
 const POPULAR_LINKS = [
   { label: 'Pizza Boxes', href: '/pizza-boxes-ireland' },
+  { label: 'Cake Boxes', href: '/custom-cake-boxes-ireland' },
   { label: 'Paper Bags', href: '/printed-flat-handle-bags-ireland' },
   { label: 'Hot Cups', href: '/hot-cups-ireland' },
   { label: 'Custom Coffee Cups', href: '/custom-printed-coffee-cups-ireland' },
@@ -136,6 +137,7 @@ const WHY_US = [
 const RELATED_LINKS = [
   { href: '/printing-ireland', label: 'Printing Services Ireland', desc: 'Posters, flyers, stickers and business print.' },
   { href: '/pizza-boxes-ireland', label: 'Pizza Boxes Ireland', desc: 'Plain and custom printed pizza boxes for takeaways.' },
+  { href: '/custom-cake-boxes-ireland', label: 'Custom Cake Boxes', desc: 'Branded bakery packaging for cupcakes and celebration cakes.' },
   { href: '/printed-flat-handle-bags-ireland', label: 'Printed Paper Bags', desc: 'Flat handle bags with your logo, from 500 units.' },
   { href: '/hot-cups-ireland', label: 'Hot Cups & Lids Ireland', desc: 'Plain disposable coffee cups wholesale.' },
   { href: '/custom-printed-coffee-cups-ireland', label: 'Custom Printed Coffee Cups', desc: 'Branded takeaway cups Dublin & Ireland, low MOQ.' },
