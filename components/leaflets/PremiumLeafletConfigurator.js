@@ -120,7 +120,7 @@ function OptionButton({ selected, onClick, children, className }) {
   );
 }
 
-function ConfigSummary({ config }) {
+function ConfigSummary({ config, horizontal = false }) {
   const material = getPremiumLeafletMaterial(config.materialId);
   const size = getPremiumLeafletSize(config.sizeId);
   const printing = getPremiumLeafletPrinting(config.printingId);
@@ -133,6 +133,19 @@ function ConfigSummary({ config }) {
     { label: 'Quantity', value: String(quantity) },
   ];
 
+  if (horizontal) {
+    return (
+      <dl className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 flex-1 min-w-0">
+        {rows.map(({ label, value }) => (
+          <div key={label} className="min-w-0">
+            <dt className="text-[11px] font-semibold text-violet-200 uppercase tracking-wider mb-1">{label}</dt>
+            <dd className="text-sm font-medium text-white leading-snug truncate" title={value}>{value}</dd>
+          </div>
+        ))}
+      </dl>
+    );
+  }
+
   return (
     <dl className="space-y-4">
       {rows.map(({ label, value }) => (
@@ -142,6 +155,52 @@ function ConfigSummary({ config }) {
         </div>
       ))}
     </dl>
+  );
+}
+
+function QuoteSummaryBar({ config, onRequestQuote, submitted }) {
+  const material = getPremiumLeafletMaterial(config.materialId);
+
+  return (
+    <Card className="overflow-hidden border-violet-200 bg-gradient-to-r from-violet-700 to-indigo-800 text-white shadow-md">
+      <CardContent className="p-4 sm:p-5">
+        <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6">
+          {material?.image && (
+            <div className="relative hidden sm:block w-16 h-20 flex-shrink-0 rounded-lg overflow-hidden bg-white/10 border border-white/20">
+              <Image
+                key={material.id}
+                src={material.image}
+                alt=""
+                fill
+                className="object-contain p-1"
+                sizes="64px"
+                unoptimized={process.env.NODE_ENV === 'production'}
+              />
+            </div>
+          )}
+          <div className="flex-1 min-w-0">
+            <p className="text-xs font-semibold text-violet-200 uppercase tracking-wider mb-3 lg:mb-2">
+              Your quote builder
+            </p>
+            <ConfigSummary config={config} horizontal />
+          </div>
+          <div className="flex-shrink-0 w-full lg:w-auto">
+            <button
+              type="button"
+              onClick={onRequestQuote}
+              className="w-full lg:w-auto lg:min-w-[160px] rounded-lg bg-white text-violet-700 font-semibold px-6 py-3 hover:bg-violet-50 transition-colors"
+            >
+              Request Quote
+            </button>
+            {submitted && (
+              <p className="mt-2 text-xs text-emerald-200 text-center lg:text-right">
+                Quote request sent — we&apos;ll be in touch shortly.
+              </p>
+            )}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -173,26 +232,29 @@ export default function PremiumLeafletConfigurator() {
 
   return (
     <>
-      <div className="grid lg:grid-cols-[minmax(0,380px)_1fr] xl:grid-cols-[minmax(0,400px)_1fr_minmax(0,280px)] gap-8 lg:gap-10 items-start">
-        {/* Sticky material preview */}
-        <div className="lg:sticky lg:top-8">
-          <Card className="overflow-hidden">
-            <CardHeader className="pb-4">
-              <CardTitle className="text-base">Material preview</CardTitle>
-              <CardDescription>{formatPremiumLeafletMaterialLabel(selectedMaterial)}</CardDescription>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <MaterialImage
-                material={selectedMaterial}
-                priority
-                className="relative aspect-[3/4] w-full rounded-lg overflow-hidden"
-              />
-            </CardContent>
-          </Card>
-        </div>
+      <div className="space-y-8">
+        <QuoteSummaryBar config={config} onRequestQuote={openQuoteModal} submitted={submitted} />
 
-        {/* Options */}
-        <div className="space-y-12 min-w-0">
+        <div className="grid lg:grid-cols-[minmax(0,340px)_1fr] gap-8 lg:gap-10 items-start">
+          {/* Material preview */}
+          <div className="lg:sticky lg:top-8">
+            <Card className="overflow-hidden">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-base">Material preview</CardTitle>
+                <CardDescription>{formatPremiumLeafletMaterialLabel(selectedMaterial)}</CardDescription>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <MaterialImage
+                  material={selectedMaterial}
+                  priority
+                  className="relative aspect-[3/4] w-full rounded-lg overflow-hidden"
+                />
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Options — full remaining width */}
+          <div className="space-y-12 min-w-0">
           {/* Materials */}
           <section>
             <div className="mb-5">
@@ -200,7 +262,7 @@ export default function PremiumLeafletConfigurator() {
               <h3 className="text-xl font-semibold text-stone-900">Choose material</h3>
               <p className="text-sm text-stone-500 mt-1">Selected: {formatPremiumLeafletMaterialLabel(selectedMaterial)}</p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
               {PREMIUM_LEAFLET_MATERIALS.map((material) => {
                 const selected = config.materialId === material.id;
                 return (
@@ -240,7 +302,7 @@ export default function PremiumLeafletConfigurator() {
               <h3 className="text-xl font-semibold text-stone-900">Choose size</h3>
               <p className="text-sm text-stone-500 mt-1">Selected: {selectedSize?.label} — {selectedSize?.dimensions}</p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-4">
               {PREMIUM_LEAFLET_SIZES.map((size) => {
                 const selected = config.sizeId === size.id;
                 return (
@@ -271,7 +333,7 @@ export default function PremiumLeafletConfigurator() {
               <h3 className="text-xl font-semibold text-stone-900">Printing options</h3>
               <p className="text-sm text-stone-500 mt-1">Selected: {selectedPrinting?.name}</p>
             </div>
-            <div className="grid sm:grid-cols-2 gap-4 max-w-lg">
+            <div className="grid sm:grid-cols-2 gap-4 max-w-2xl">
               {PREMIUM_LEAFLET_PRINTING.map((option) => {
                 const selected = config.printingId === option.id;
                 return (
@@ -309,60 +371,9 @@ export default function PremiumLeafletConfigurator() {
               />
             </div>
           </section>
-
-          {/* Mobile / tablet quote CTA */}
-          <div className="xl:hidden">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-base">Your quote</CardTitle>
-                <CardDescription>Review your selections before requesting</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <ConfigSummary config={config} />
-                <button
-                  type="button"
-                  onClick={openQuoteModal}
-                  className="w-full rounded-lg bg-violet-600 text-white font-semibold py-3 hover:bg-violet-700 transition-colors"
-                >
-                  Request Quote
-                </button>
-                {submitted && (
-                  <p className="text-sm text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-lg px-3 py-2 text-center">
-                    Quote request sent — we&apos;ll be in touch shortly.
-                  </p>
-                )}
-              </CardContent>
-            </Card>
           </div>
         </div>
-
-        {/* Desktop quote sidebar */}
-        <aside className="hidden xl:block sticky top-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base">Your quote builder</CardTitle>
-              <CardDescription>Selections update as you choose options</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-5">
-              <ConfigSummary config={config} />
-              <button
-                type="button"
-                onClick={openQuoteModal}
-                className="w-full rounded-lg bg-violet-600 text-white font-semibold py-3 hover:bg-violet-700 transition-colors"
-              >
-                Request Quote
-              </button>
-              {submitted && (
-                <p className="text-xs text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-lg px-3 py-2 text-center">
-                  Quote request sent — we&apos;ll be in touch shortly.
-                </p>
-              )}
-            </CardContent>
-          </Card>
-        </aside>
       </div>
-
-      <div className="xl:hidden h-4" aria-hidden="true" />
 
       <PremiumLeafletQuoteModal isOpen={modalOpen} onClose={handleModalClose} config={config} />
     </>
