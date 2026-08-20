@@ -3,7 +3,7 @@ import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import CorrexQuoteForm from '../components/CorrexQuoteForm';
+import CorrexBoardConfigurator from '../components/correx/CorrexBoardConfigurator';
 import { SITE_URL } from '../lib/site';
 import { buildProductLd } from '../lib/schema';
 
@@ -115,7 +115,6 @@ const CheckIcon = () => (
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 const CorrexBoardsPage = () => {
-  const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(null);
@@ -140,7 +139,11 @@ const CorrexBoardsPage = () => {
     };
   }, [currentImage, goToImage]);
 
-  const openQuote = () => setQuoteModalOpen(true);
+  const openQuote = () => {
+    if (typeof document !== 'undefined') {
+      document.getElementById('quote-builder')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <Layout>
@@ -229,7 +232,7 @@ const CorrexBoardsPage = () => {
               </div>
 
               <ul className="space-y-2.5 mb-6">
-                {['Weather resistant & UV stable', '2mm to 8mm thicknesses', 'Election & real estate signs', 'H-stakes & mounting options', 'Custom sizes up to 8ft x 4ft', 'Nationwide Ireland delivery'].map((point) => (
+                {['Weather resistant & UV stable', '2mm to 8mm thicknesses', 'Election & real estate signs', 'Optional laminate', 'Custom sizes up to 8ft x 4ft', 'Nationwide Ireland delivery'].map((point) => (
                   <li key={point} className="flex items-start gap-2.5 text-sm text-gray-600">
                     <CheckIcon />
                     {point}
@@ -254,6 +257,19 @@ const CorrexBoardsPage = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="py-14 lg:py-20 bg-stone-50 border-t border-stone-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <p className="text-sm font-semibold text-emerald-600 uppercase tracking-wider mb-2">Quote builder</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Configure your correx / corriboard sheet</h2>
+            <p className="text-stone-600 max-w-2xl leading-relaxed">
+              Choose thickness, enter a custom size up to 8ft × 4ft (2440 × 1220 mm), then request a quotation.
+            </p>
+          </div>
+          <CorrexBoardConfigurator />
         </div>
       </section>
 
@@ -371,7 +387,7 @@ const CorrexBoardsPage = () => {
       <section className="bg-gray-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Ready for outdoor signage?</h2>
-          <p className="text-gray-400 mb-8 max-w-xl mx-auto">Get a free quote. We’ll help you choose thickness, size, and mounting.</p>
+          <p className="text-gray-400 mb-8 max-w-xl mx-auto">Get a free quote. We’ll help you choose thickness, size, and laminate.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button onClick={openQuote} className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3.5 px-8 rounded-xl transition-colors">Get Free Quote</button>
             <a href="tel:+353894157369" className="bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-3.5 px-8 rounded-xl border border-gray-700 transition-colors">Call +353 89 415 7369</a>
@@ -383,9 +399,6 @@ const CorrexBoardsPage = () => {
         </div>
       </section>
 
-      {quoteModalOpen && (
-        <CorrexQuoteForm isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} productType="4mm Correx" />
-      )}
     </Layout>
   );
 };

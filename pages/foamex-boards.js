@@ -3,7 +3,7 @@ import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import FoamexQuoteForm from '../components/FoamexQuoteForm';
+import FoamexBoardConfigurator from '../components/foamex/FoamexBoardConfigurator';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 import { SITE_URL } from '../lib/site';
 import { buildProductLd } from '../lib/schema';
@@ -135,7 +135,7 @@ const specs = [
   { label: 'Thicknesses', value: '3mm, 5mm, 5.5mm, 10mm' },
   { label: 'Max size', value: '2440mm x 1220mm (8ft x 4ft)' },
   { label: 'Printing', value: 'Direct UV, high resolution' },
-  { label: 'Finishing', value: 'Unlaminated, matt or gloss laminate' },
+  { label: 'Finishing', value: 'Unlaminated or laminated' },
   { label: 'Use', value: 'Indoor & sheltered outdoor' },
   { label: 'Delivery', value: 'Nationwide Ireland' },
 ];
@@ -151,7 +151,6 @@ const CheckIcon = () => (
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 const FoamexBoardsPage = () => {
-  const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(null);
@@ -176,7 +175,11 @@ const FoamexBoardsPage = () => {
     };
   }, [currentImage, goToImage]);
 
-  const openQuote = () => setQuoteModalOpen(true);
+  const openQuote = () => {
+    if (typeof document !== 'undefined') {
+      document.getElementById('quote-builder')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <Layout>
@@ -291,7 +294,7 @@ const FoamexBoardsPage = () => {
                   '3mm, 5mm, 5.5mm, 10mm',
                   'Direct UV printing',
                   'Custom sizes up to 8ft x 4ft',
-                  'Matt & gloss laminate options',
+                  'Optional laminate',
                   'Nationwide Ireland delivery',
                 ].map((point) => (
                   <li key={point} className="flex items-start gap-2.5 text-sm text-gray-600">
@@ -328,6 +331,19 @@ const FoamexBoardsPage = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="py-14 lg:py-20 bg-stone-50 border-t border-stone-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <p className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-2">Quote builder</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Configure your foamex board</h2>
+            <p className="text-stone-600 max-w-2xl leading-relaxed">
+              Choose thickness, enter a custom size up to 8ft × 4ft (2440 × 1220 mm), then request a quotation.
+            </p>
+          </div>
+          <FoamexBoardConfigurator />
         </div>
       </section>
 
@@ -587,15 +603,6 @@ const FoamexBoardsPage = () => {
       </section>
 
       <RelatedSeoLinks title="Related foamex pages" links={relatedLinks} />
-
-      {/* ── Quote Modal ── */}
-      {quoteModalOpen && (
-        <FoamexQuoteForm
-          isOpen={quoteModalOpen}
-          onClose={() => setQuoteModalOpen(false)}
-          productType="5mm Foamex"
-        />
-      )}
     </Layout>
   );
 };
