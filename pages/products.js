@@ -86,6 +86,7 @@ const POPULAR_LINKS = [
   { label: 'Custom Flags', href: '/custom-printed-flags-ireland' },
   { label: 'Premium Leaflets', href: '/premium-leaflets-ireland' },
   { label: 'Greaseproof Sheets', href: '/greaseproof-sheets-ireland' },
+  { label: 'Stage Backdrop Banners', href: '/stage-backdrop-banners-ireland' },
   { label: 'Leaflets', href: '/services/leaflets' },
   { label: 'Printing Services', href: '/printing-ireland' },
 ];
@@ -152,6 +153,7 @@ const RELATED_LINKS = [
   { href: '/foamex-ireland', label: 'Foamex Boards', desc: 'Rigid display boards for retail and events.' },
   { href: '/premium-leaflets-ireland', label: 'Premium Leaflets', desc: 'Special material flyers — metallic, pearl marble & synthetic paper.' },
   { href: '/greaseproof-sheets-ireland', label: 'Greaseproof Sheets', desc: 'Custom printed greaseproof paper for takeaways and bakeries.' },
+  { href: '/stage-backdrop-banners-ireland', label: '3m x 3m & Huge Banners', desc: 'Custom large banners Ireland — any size up to 50 m.' },
   { href: '/services/leaflets', label: 'Leaflets', desc: 'Flat leaflet printing for promotions and handouts.' },
   { href: '/burger-boxes-ireland', label: 'Burger Boxes', desc: 'Bagasse and printed burger boxes for food service.' },
 ];

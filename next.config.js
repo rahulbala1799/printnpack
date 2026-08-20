@@ -246,6 +246,76 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/stage-backdrops-ireland',
+        destination: '/stage-backdrop-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/large-stage-banners-ireland',
+        destination: '/stage-backdrop-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/stage-banner-printing-ireland',
+        destination: '/stage-backdrop-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/conference-backdrop-banners-ireland',
+        destination: '/stage-backdrop-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/polyester-backdrop-banners-ireland',
+        destination: '/stage-backdrop-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/3m-x-3m-banners-ireland',
+        destination: '/stage-backdrop-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/3m-x-3m-banner-ireland',
+        destination: '/stage-backdrop-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/large-banners-ireland',
+        destination: '/stage-backdrop-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/huge-banners-ireland',
+        destination: '/stage-backdrop-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/custom-large-banners-ireland',
+        destination: '/stage-backdrop-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/oversized-banners-ireland',
+        destination: '/stage-backdrop-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/extra-large-banners-ireland',
+        destination: '/stage-backdrop-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/50m-banners-ireland',
+        destination: '/stage-backdrop-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/custom-size-banners-ireland',
+        destination: '/stage-backdrop-banners-ireland',
+        permanent: true,
+      },
+      {
         source: '/branded-tissue-paper-ireland',
         destination: '/custom-printed-tissue-paper-ireland',
         permanent: true,

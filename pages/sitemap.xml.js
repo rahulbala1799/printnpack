@@ -115,6 +115,7 @@ const staticPages = [
   { path: '/services/leaflets', priority: '0.8', changefreq: 'monthly' },
   { path: '/premium-leaflets-ireland', priority: '0.91', changefreq: 'weekly' },
   { path: '/greaseproof-sheets-ireland', priority: '0.91', changefreq: 'weekly' },
+  { path: '/stage-backdrop-banners-ireland', priority: '0.91', changefreq: 'weekly' },
   { path: '/services/menus',    priority: '0.8', changefreq: 'monthly' },
   { path: '/services/posters',  priority: '0.8', changefreq: 'monthly' },
   { path: '/services/vinyls',   priority: '0.8', changefreq: 'monthly' },

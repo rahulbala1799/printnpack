@@ -5,48 +5,24 @@ import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 const QUICK_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },
-  { label: 'Services', href: '/services' },
   { label: 'Products', href: '/products' },
+  { label: 'Plain Packaging', href: '/plain-packaging' },
+  { label: 'Services', href: '/services' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
 ];
 
 const PRODUCT_LINKS = [
-  { label: 'Printing Ireland', href: '/printing-ireland' },
-  { label: 'Printing Ashbourne', href: '/printing-ashbourne' },
+  { label: 'Printing Services', href: '/printing-ireland' },
   { label: 'Pizza Boxes', href: '/pizza-boxes-ireland' },
-  { label: 'Plain Pizza Boxes', href: '/plain-pizza-boxes-ireland' },
-  { label: 'Custom Pizza Boxes', href: '/custom-pizza-boxes-ireland' },
-  { label: 'Banners Ireland', href: '/banners-ireland' },
-  { label: 'Banner Printing Dublin', href: '/banner-printing-dublin' },
-  { label: 'Banner FAQ', href: '/banner-faq-ireland' },
-  { label: 'Paper Bags Ireland', href: '/paper-bags-ireland' },
-  { label: 'Plain Paper Bags', href: '/plain-paper-bags-ireland' },
-  { label: 'Wholesale Paper Bags', href: '/wholesale-paper-bags-ireland' },
-  { label: 'Printed Flat Handle Bags', href: '/printed-flat-handle-bags-ireland' },
-  { label: 'Twisted Handle Bags', href: '/twisted-handle-paper-bags-ireland' },
-  { label: 'Vinyl Banners', href: '/vinyl-banners' },
-  { label: 'Pull Up Banners Meath', href: '/pull-up-banners-meath' },
-  { label: 'Roll Up Banners', href: '/roll-up-banners' },
-  { label: 'Extra Wide Roll Ups', href: '/extra-wide-roll-up-banners-ireland' },
-  { label: 'Rubber Stamps', href: '/rubber-stamps-ireland' },
-  { label: 'Stamp FAQ', href: '/rubber-stamp-faq-ireland' },
-  { label: 'Napkins Ireland', href: '/napkins-ireland' },
-  { label: 'Napkin FAQ', href: '/napkin-faq-ireland' },
-  { label: 'Foamex Ireland', href: '/foamex-ireland' },
-  { label: 'Foamex FAQ', href: '/foamex-faq-ireland' },
-  { label: 'Burger Boxes Ireland', href: '/burger-boxes-ireland' },
-  { label: 'Burger Box FAQ', href: '/burger-box-faq-ireland' },
-  { label: 'Custom Posters', href: '/posters' },
-  { label: 'Vinyl Stickers', href: '/vinyl-stickers' },
-  { label: 'Leaflets Ireland', href: '/services/leaflets' },
-  { label: 'Plain Packaging', href: '/plain-packaging' },
+  { label: 'Paper Bags', href: '/paper-bags-ireland' },
   { label: 'Hot Cups & Lids', href: '/hot-cups-ireland' },
+  { label: 'Banners & Roll-Ups', href: '/banners-ireland' },
+  { label: 'Burger Boxes', href: '/burger-boxes-ireland' },
   { label: 'Disposable Gloves', href: '/gloves-ireland' },
-  { label: 'Nitrile Gloves', href: '/nitrile-gloves-ireland' },
-  { label: 'Refuse Sacks', href: '/refuse-sacks-ireland' },
-  { label: 'Plain Napkins & Tableware', href: '/plain-napkins-tableware-ireland' },
-  { label: 'Biobox Containers', href: '/biobox-containers-ireland' },
-  { label: 'Correx Boards', href: '/correx-boards' },
+  { label: 'Napkins & Tableware', href: '/plain-napkins-tableware-ireland' },
+  { label: 'Rubber Stamps', href: '/rubber-stamps-ireland' },
+  { label: 'Leaflets & Flyers', href: '/services/leaflets' },
 ];
 
 // Accordion section for mobile
@@ -140,9 +116,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Products */}
+          {/* Popular products */}
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wide text-slate-300 mb-4">Products</h4>
+            <h4 className="text-sm font-semibold uppercase tracking-wide text-slate-300 mb-4">Popular Products</h4>
             <ul className="space-y-2.5">
               {PRODUCT_LINKS.map((link) => (
                 <li key={link.label}>
@@ -151,6 +127,11 @@ const Footer = () => {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/products" className="text-sm text-blue-400 hover:text-blue-300 transition-colors font-medium">
+                  View all products →
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -197,14 +178,17 @@ const Footer = () => {
             </div>
           </FooterAccordion>
 
-          {/* Products accordion */}
-          <FooterAccordion title="Products">
+          {/* Popular products accordion */}
+          <FooterAccordion title="Popular Products">
             <div className="grid grid-cols-2 gap-x-4 gap-y-2.5">
               {PRODUCT_LINKS.map((link) => (
                 <Link key={link.label} href={link.href} className="text-sm text-slate-400 hover:text-white transition-colors">
                   {link.label}
                 </Link>
               ))}
+              <Link href="/products" className="col-span-2 text-sm text-blue-400 hover:text-blue-300 transition-colors font-medium pt-1">
+                View all products →
+              </Link>
             </div>
           </FooterAccordion>
         </div>
