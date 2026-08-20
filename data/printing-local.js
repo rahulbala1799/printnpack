@@ -78,9 +78,9 @@ export const PRINTING_SERVICES = [
   },
   {
     title: 'Stickers & Labels',
-    desc: 'Packaging labels, product stickers, window decals and vinyl branding.',
-    href: '/vinyl-stickers',
-    cta: 'View stickers',
+    desc: 'Labels on a roll, jar labels, dispenser boxes, product stickers and vinyl decals.',
+    href: '/labels-on-a-roll',
+    cta: 'View labels & stickers',
   },
   {
     title: 'Banners & Signs',

@@ -344,6 +344,7 @@ const VinylStickersPage = () => {
 
       <RelatedSeoLinks
         links={[
+          { href: '/labels-on-a-roll', label: 'Labels on a Roll', desc: 'Custom roll labels — shape, size & material' },
           { href: '/printing-ashbourne', label: 'Sticker printing in Ashbourne', desc: 'Local print shop — labels & decals' },
           { href: '/printing-ireland', label: 'Printing Ireland', desc: 'Nationwide print & packaging' },
           { href: '/blog/custom-vinyl-stickers-ireland', label: 'Custom Vinyl Stickers Guide', desc: 'Sticker types & materials' },

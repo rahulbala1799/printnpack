@@ -30,6 +30,12 @@ const categoryConfig = [
     badge: 'bg-purple-100 text-purple-700',
   },
   {
+    name: 'Stickers & Labels',
+    description: 'Vinyl stickers, decals and labels on a roll',
+    accent: 'border-pink-500',
+    badge: 'bg-pink-100 text-pink-700',
+  },
+  {
     name: 'Leaflets',
     description: 'High quality leaflets & flyers in all sizes',
     accent: 'border-sky-500',

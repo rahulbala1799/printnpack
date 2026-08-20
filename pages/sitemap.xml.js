@@ -79,6 +79,7 @@ const staticPages = [
   { path: '/burger-box-printing-ashbourne',  priority: '0.88', changefreq: 'monthly' },
   { path: '/burger-box-printing-dublin',      priority: '0.88', changefreq: 'monthly' },
   { path: '/vinyl-stickers',  priority: '0.8', changefreq: 'monthly' },
+  { path: '/labels-on-a-roll', priority: '0.85', changefreq: 'weekly' },
   // Banner cluster
   { path: '/banners-ireland',              priority: '0.9',  changefreq: 'weekly' },
   { path: '/banner-faq-ireland',           priority: '0.88', changefreq: 'monthly' },

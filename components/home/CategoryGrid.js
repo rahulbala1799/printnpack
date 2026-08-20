@@ -40,12 +40,21 @@ const categories = [
   },
   {
     name: 'Wide Format',
-    description: 'Banners, boards, stickers, posters',
+    description: 'Banners, boards and posters',
     icon: FaPrint,
     color: 'bg-purple-50 text-purple-600 border-purple-200',
     iconBg: 'bg-purple-100',
     href: '/products?group=wide-format',
     productCount: 6,
+  },
+  {
+    name: 'Stickers and Labels',
+    description: 'Vinyl stickers and labels on a roll',
+    icon: FaTags,
+    color: 'bg-pink-50 text-pink-600 border-pink-200',
+    iconBg: 'bg-pink-100',
+    href: '/products?group=stickers-labels',
+    productCount: 2,
   },
   {
     name: 'Leaflets & Flyers',

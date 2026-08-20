@@ -1455,8 +1455,7 @@ const products = [
   {
     id: 'vinyl-stickers',
     name: 'Vinyl Stickers',
-    category: 'Wide Format',
-    url: '/vinyl-stickers',
+    category: 'Stickers & Labels',
     description: 'Premium vinyl stickers and decals for business branding, promotions, and creative applications in any size or shape.',
     features: [
       'High-quality vinyl materials with professional adhesives',
@@ -1572,6 +1571,46 @@ const products = [
         answer: 'Absolutely! We can create vinyl stickers in virtually any shape or size through precision contour cutting. Simply provide your design, and we\'ll cut exactly to the outline you want. There\'s no extra charge for custom shapes within the same area pricing. For complex designs with very intricate details, our design team can advise on slight modifications if needed to ensure clean cutting and durability.'
       }
     ]
+  },
+  {
+    id: 'labels-on-a-roll',
+    name: 'Labels on a Roll',
+    category: 'Stickers & Labels',
+    description: 'Custom labels on a roll in Ireland — round jar labels, dispenser boxes, PVC and transparent film. Glossy PP, matt polypropylene and NatureFlex White. Nationwide delivery from Ashbourne.',
+    features: [
+      'Shapes: round, square, rectangle and oval',
+      'Sizes from 10 mm to 100 mm',
+      'Material appearance: white film, transparent, paper, special',
+      'Materials: glossy PP, matt polypropylene, NatureFlex White',
+      'Full colour printing',
+      'Optional dispenser per roll',
+      'Roll winding 0°, 90°, 180° and 270°',
+      '40 mm or 76 mm core',
+    ],
+    detailedDescription: 'Custom labels on a roll for product packaging and branding. Configure shape, size, material appearance, material, full colour print, dispenser, roll winding and core diameter, then request a quotation.',
+    specifications: [
+      { name: 'Shapes', value: 'Round, square, rectangle, oval' },
+      { name: 'Sizes', value: '10, 20, 30, 40, 50, 60, 70, 75, 80, 100 mm' },
+      { name: 'Material appearance', value: 'White film, transparent, paper, special' },
+      { name: 'Material', value: 'Glossy PP, matt polypropylene, NatureFlex White' },
+      { name: 'Printing', value: 'Full colour' },
+      { name: 'Dispenser', value: 'No dispenser, or dispenser per roll' },
+      { name: 'Roll winding', value: '0°, 90°, 180°, 270°' },
+      { name: 'Core diameter', value: '40 mm or 76 mm' },
+    ],
+    imageSrc: '/images/products/labels-on-a-roll/labels-on-a-roll-ireland-round-jar-product-label.png',
+    images: [
+      '/images/products/labels-on-a-roll/labels-on-a-roll-ireland-round-jar-product-label.png',
+      '/images/products/labels-on-a-roll/labels-on-a-roll-ireland-dispenser-box-square-round.png',
+      '/images/products/labels-on-a-roll/labels-on-a-roll-ireland-pvc-transparent-cafe-dispenser.webp',
+    ],
+    price: 'Contact for quote',
+    moq: 1,
+    applications: [
+      'Product packaging labels',
+      'Food and beverage labels',
+      'Retail and bottle labels',
+    ],
   },
   {
     id: 'premium-linen-feel-napkins',

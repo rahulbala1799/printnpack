@@ -18,6 +18,7 @@ const categoryColors = {
   'Eco-Friendly Packaging':'bg-green-100 text-green-700',
   'Hospitality Products':  'bg-purple-100 text-purple-700',
   'Wide Format':           'bg-cyan-100 text-cyan-700',
+  'Stickers & Labels':     'bg-pink-100 text-pink-700',
   'Leaflets':              'bg-indigo-100 text-indigo-700',
   'Branded Items':         'bg-pink-100 text-pink-700',
   'Ultra Light':           'bg-slate-100 text-slate-600',

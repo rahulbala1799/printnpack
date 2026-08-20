@@ -81,6 +81,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/products/labels-on-a-roll',
+        destination: '/labels-on-a-roll',
+        permanent: true,
+      },
+      {
         source: '/disposable-coffee-cups-ireland',
         destination: '/hot-cups-ireland',
         permanent: true,
