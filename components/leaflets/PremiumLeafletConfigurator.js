@@ -11,19 +11,10 @@ import {
   formatPremiumLeafletMaterialLabel,
 } from '../../data/premium-leaflets-options';
 import PremiumLeafletQuoteModal from './PremiumLeafletQuoteModal';
-
-function InfoIcon({ title }) {
-  return (
-    <button
-      type="button"
-      title={title || 'More information'}
-      className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-violet-500 text-white text-[10px] font-bold leading-none hover:bg-violet-600 transition-colors"
-      aria-label="More information"
-    >
-      i
-    </button>
-  );
-}
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
+import { Badge } from '../ui/badge';
+import { Label } from '../ui/label';
+import { cn } from '../../lib/cn';
 
 function MaterialSwatch({ variant }) {
   const styles = {
@@ -36,42 +27,52 @@ function MaterialSwatch({ variant }) {
   };
 
   return (
-    <div className={`relative w-full h-full overflow-hidden ${styles[variant] || styles['sulfate-cardboard']}`}>
-      <div
-        className="absolute inset-0 opacity-40"
-        style={{
-          backgroundImage:
-            variant === 'pearl-marble'
-              ? 'radial-gradient(circle at 20% 30%, rgba(255,255,255,0.9) 0%, transparent 40%), radial-gradient(circle at 70% 60%, rgba(200,200,200,0.5) 0%, transparent 35%)'
-              : variant === 'pvc'
-                ? 'radial-gradient(circle at 30% 40%, rgba(147,197,253,0.35) 0%, transparent 45%), radial-gradient(circle at 65% 70%, rgba(147,197,253,0.25) 0%, transparent 40%)'
-                : 'none',
-        }}
-      />
-      <div className="absolute bottom-0 right-0 w-[55%] h-[55%] bg-white/20 border-t border-l border-white/40 rounded-tl-2xl shadow-inner" />
-      {variant === 'sulfate-cardboard' && (
-        <div className="absolute top-3 right-3 w-5 h-5 rounded-full bg-white/80 border border-stone-200 flex items-center justify-center text-[8px] text-stone-500">
-          ✎
+    <div className={cn('w-full h-full', styles[variant] || styles['sulfate-cardboard'])} />
+  );
+}
+
+function MaterialImage({ material, priority = false, className = '' }) {
+  if (!material?.image) {
+    return (
+      <div className={cn('relative flex items-center justify-center bg-stone-100 overflow-hidden', className)}>
+        <div className="absolute inset-0">
+          <MaterialSwatch variant={material?.variant} />
         </div>
-      )}
+        <span className="relative z-10 text-sm text-stone-500 px-4 text-center">Preview coming soon</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className={cn('relative bg-stone-100', className)}>
+      <Image
+        key={material.id}
+        src={material.image}
+        alt={material.previewAlt || material.name}
+        fill
+        priority={priority}
+        className="object-contain p-3"
+        sizes="(max-width: 768px) 100vw, 400px"
+        unoptimized={process.env.NODE_ENV === 'production'}
+      />
     </div>
   );
 }
 
 function SizeDiagram({ width, height }) {
-  const maxW = 72;
-  const maxH = 96;
-  const scale = Math.min(maxW / width, maxH / height);
-  const w = Math.round(width * scale);
-  const h = Math.round(height * scale);
+  const sheetW = 56;
+  const sheetH = 72;
+  const scale = Math.min((sheetW - 8) / width, (sheetH - 8) / height);
+  const w = Math.max(8, Math.round(width * scale));
+  const h = Math.max(8, Math.round(height * scale));
 
   return (
-    <div className="flex items-center justify-center h-24 px-2">
-      <div className="relative w-[88px] h-[104px]">
-        <div className="absolute inset-0 border border-dashed border-stone-300 rounded-sm bg-stone-50" />
+    <div className="flex items-center justify-center py-5 px-3 min-h-[120px]">
+      <div className="relative" style={{ width: sheetW, height: sheetH }}>
+        <div className="absolute inset-0 rounded border border-dashed border-stone-300 bg-stone-50" />
         <div
-          className="absolute bottom-2 left-2 border-2 border-stone-700 bg-white shadow-sm"
-          style={{ width: `${w}px`, height: `${h}px` }}
+          className="absolute bottom-1.5 left-1.5 rounded-sm border-2 border-stone-800 bg-white shadow-sm"
+          style={{ width: w, height: h }}
         />
       </div>
     </div>
@@ -81,120 +82,66 @@ function SizeDiagram({ width, height }) {
 function PrintingIcon({ sides }) {
   if (sides === 'single') {
     return (
-      <div className="flex items-center justify-center h-24">
-        <div className="relative w-16 h-20 border-2 border-stone-700 rounded-sm bg-white flex items-center justify-center">
-          <span className="text-2xl font-light text-stone-400">1</span>
+      <div className="flex items-center justify-center py-6 min-h-[100px]">
+        <div className="w-14 h-[4.5rem] border-2 border-stone-800 rounded-md bg-white flex items-center justify-center">
+          <span className="text-xl font-light text-stone-400">1</span>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex items-center justify-center h-24 gap-1">
-      <div className="relative w-14 h-[4.5rem] border-2 border-stone-700 rounded-sm bg-white flex items-center justify-center z-10">
-        <span className="text-xl font-light text-stone-400">1</span>
+    <div className="flex items-center justify-center py-6 min-h-[100px] gap-1">
+      <div className="w-12 h-16 border-2 border-stone-800 rounded-md bg-white flex items-center justify-center z-10">
+        <span className="text-lg font-light text-stone-400">1</span>
       </div>
-      <div className="relative w-14 h-[4.5rem] border-2 border-stone-300 rounded-sm bg-stone-50 flex items-center justify-center -ml-3 mt-2">
-        <span className="text-xl font-light text-stone-300">2</span>
+      <div className="w-12 h-16 border-2 border-stone-300 rounded-md bg-stone-50 flex items-center justify-center -ml-2 mt-2">
+        <span className="text-lg font-light text-stone-300">2</span>
       </div>
     </div>
   );
 }
 
-function SectionHeader({ step, title, value, info }) {
+function OptionButton({ selected, onClick, children, className }) {
   return (
-    <div className="flex items-start gap-3 mb-5">
-      <span className="flex-shrink-0 w-7 h-7 rounded-full bg-violet-600 text-white text-sm font-bold flex items-center justify-center mt-0.5">
-        {step}
-      </span>
-      <div className="flex-1 min-w-0">
-        <div className="flex flex-wrap items-center gap-2">
-          <h3 className="text-lg font-semibold text-stone-900">
-            {title}
-            {value && (
-              <span className="font-normal text-stone-500">: {value}</span>
-            )}
-          </h3>
-          {info && <InfoIcon title={info} />}
-        </div>
-      </div>
-    </div>
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        'w-full rounded-xl border-2 text-left transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2',
+        selected
+          ? 'border-violet-600 bg-violet-50/40 shadow-sm'
+          : 'border-stone-200 bg-white hover:border-violet-200 hover:bg-stone-50/50',
+        className,
+      )}
+    >
+      {children}
+    </button>
   );
 }
 
-function MaterialPreview({ material }) {
-  if (!material) return null;
-
-  return (
-    <div className="rounded-2xl border border-stone-200 bg-white overflow-hidden shadow-sm">
-      <div className="px-4 py-3 border-b border-stone-100 bg-stone-50">
-        <p className="text-xs font-semibold text-violet-600 uppercase tracking-wider">Material preview</p>
-        <p className="text-sm font-semibold text-stone-900 mt-0.5">{formatPremiumLeafletMaterialLabel(material)}</p>
-      </div>
-      <div className="relative aspect-[4/3] bg-stone-100">
-        {material.image ? (
-          <Image
-            key={material.id}
-            src={material.image}
-            alt={material.previewAlt || material.name}
-            fill
-            className="object-cover transition-opacity duration-300"
-            sizes="(max-width: 1024px) 100vw, 400px"
-            unoptimized={process.env.NODE_ENV === 'production'}
-          />
-        ) : (
-          <div className="absolute inset-0">
-            <MaterialSwatch variant={material.variant} />
-            <div className="absolute inset-0 flex items-center justify-center bg-stone-900/5 px-6 text-center">
-              <p className="text-sm text-stone-500">Preview image coming soon</p>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function ConfigSummary({ config, showMaterialImage = false }) {
+function ConfigSummary({ config }) {
   const material = getPremiumLeafletMaterial(config.materialId);
   const size = getPremiumLeafletSize(config.sizeId);
   const printing = getPremiumLeafletPrinting(config.printingId);
   const quantity = Math.max(1, Number(config.quantity) || 1);
 
+  const rows = [
+    { label: 'Material', value: formatPremiumLeafletMaterialLabel(material) },
+    { label: 'Size', value: `${size?.label} (${size?.dimensions})` },
+    { label: 'Printing', value: printing?.name },
+    { label: 'Quantity', value: String(quantity) },
+  ];
+
   return (
-    <div className="space-y-4">
-      {showMaterialImage && material?.image && (
-        <div className="relative aspect-[16/10] rounded-xl overflow-hidden border border-white/10">
-          <Image
-            key={material.id}
-            src={material.image}
-            alt={material.previewAlt || material.name}
-            fill
-            className="object-cover"
-            sizes="280px"
-            unoptimized={process.env.NODE_ENV === 'production'}
-          />
+    <dl className="space-y-4">
+      {rows.map(({ label, value }) => (
+        <div key={label}>
+          <dt className="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">{label}</dt>
+          <dd className="text-sm font-medium text-stone-900 leading-snug">{value}</dd>
         </div>
-      )}
-      <dl className="space-y-3 text-sm">
-      <div>
-        <dt className="text-violet-200/80 text-xs uppercase tracking-wider mb-1">Material</dt>
-        <dd className="text-white font-medium">{formatPremiumLeafletMaterialLabel(material)}</dd>
-      </div>
-      <div>
-        <dt className="text-violet-200/80 text-xs uppercase tracking-wider mb-1">Size</dt>
-        <dd className="text-white font-medium">{size?.label} — {size?.dimensions}</dd>
-      </div>
-      <div>
-        <dt className="text-violet-200/80 text-xs uppercase tracking-wider mb-1">Printing</dt>
-        <dd className="text-white font-medium">{printing?.name}</dd>
-      </div>
-      <div>
-        <dt className="text-violet-200/80 text-xs uppercase tracking-wider mb-1">Quantity</dt>
-        <dd className="text-white font-medium">{quantity}</dd>
-      </div>
+      ))}
     </dl>
-    </div>
   );
 }
 
@@ -224,204 +171,198 @@ export default function PremiumLeafletConfigurator() {
     }
   };
 
-  const selectedCardClass = 'ring-2 ring-violet-600 border-violet-600 shadow-md';
-  const cardClass = 'border-stone-200 bg-white hover:border-violet-300 hover:shadow-sm';
-
   return (
     <>
-      <div className="rounded-2xl border border-stone-200 bg-stone-100/80 p-4 sm:p-6 lg:p-8">
-        <div className="grid xl:grid-cols-[1fr_280px] gap-8 items-start">
-          <div className="space-y-10">
-            {/* Material */}
-            <section>
-              <SectionHeader
-                step={1}
-                title="Material"
-                value={formatPremiumLeafletMaterialLabel(selectedMaterial)}
-                info="Special material flyer stocks"
+      <div className="grid lg:grid-cols-[minmax(0,380px)_1fr] xl:grid-cols-[minmax(0,400px)_1fr_minmax(0,280px)] gap-8 lg:gap-10 items-start">
+        {/* Sticky material preview */}
+        <div className="lg:sticky lg:top-8">
+          <Card className="overflow-hidden">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-base">Material preview</CardTitle>
+              <CardDescription>{formatPremiumLeafletMaterialLabel(selectedMaterial)}</CardDescription>
+            </CardHeader>
+            <CardContent className="pt-0">
+              <MaterialImage
+                material={selectedMaterial}
+                priority
+                className="relative aspect-[3/4] w-full rounded-lg overflow-hidden"
               />
+            </CardContent>
+          </Card>
+        </div>
 
-              {/* Live preview — updates when material is selected */}
-              <div className="mb-6 lg:hidden">
-                <MaterialPreview material={selectedMaterial} />
-              </div>
-
-              <div className="grid lg:grid-cols-[1fr_300px] gap-6 items-start">
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                  {PREMIUM_LEAFLET_MATERIALS.map((material) => {
-                    const selected = config.materialId === material.id;
-                    return (
-                      <button
-                        key={material.id}
-                        type="button"
-                        onClick={() => updateConfig({ materialId: material.id })}
-                        className={`relative flex flex-col rounded-xl border overflow-hidden text-left transition-all ${selected ? selectedCardClass : cardClass}`}
-                      >
-                        <div className="h-28 w-full relative">
-                          {material.image ? (
-                            <Image
-                              src={material.image}
-                              alt=""
-                              fill
-                              className="object-cover"
-                              sizes="160px"
-                              unoptimized={process.env.NODE_ENV === 'production'}
-                            />
-                          ) : (
-                            <MaterialSwatch variant={material.variant} />
-                          )}
-                        </div>
-                        <div className="p-3 border-t border-stone-100">
-                          <p className="text-sm font-semibold text-stone-900 leading-snug">{material.name}</p>
-                          <p className="text-xs text-stone-500 mt-0.5">{material.gsm}</p>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                <div className="hidden lg:block sticky top-6">
-                  <MaterialPreview material={selectedMaterial} />
-                </div>
-              </div>
-            </section>
-
-            {/* Size */}
-            <section>
-              <SectionHeader
-                step={2}
-                title="Size"
-                value={`${selectedSize?.label}: ${selectedSize?.dimensions}`}
-                info="Leaflet dimensions in millimetres"
-              />
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-                {PREMIUM_LEAFLET_SIZES.map((size) => {
-                  const selected = config.sizeId === size.id;
-                  return (
-                    <button
-                      key={size.id}
-                      type="button"
-                      onClick={() => updateConfig({ sizeId: size.id })}
-                      className={`relative flex flex-col rounded-xl border overflow-hidden text-center transition-all ${selected ? selectedCardClass : cardClass}`}
-                    >
-                      <SizeDiagram width={size.width} height={size.height} />
-                      <div className={`p-3 border-t border-stone-100 ${size.recommended ? 'pb-9' : ''}`}>
-                        <p className="text-sm font-semibold text-stone-900">{size.label}</p>
-                        <p className="text-[11px] text-stone-500 mt-0.5 leading-tight">{size.dimensions}</p>
-                      </div>
-                      {size.recommended && (
-                        <div className="absolute bottom-0 left-0 right-0 bg-violet-600 text-white text-[11px] font-semibold text-center py-1.5">
-                          Recommended
-                        </div>
+        {/* Options */}
+        <div className="space-y-12 min-w-0">
+          {/* Materials */}
+          <section>
+            <div className="mb-5">
+              <p className="text-xs font-semibold text-violet-600 uppercase tracking-wider mb-1">Step 1</p>
+              <h3 className="text-xl font-semibold text-stone-900">Choose material</h3>
+              <p className="text-sm text-stone-500 mt-1">Selected: {formatPremiumLeafletMaterialLabel(selectedMaterial)}</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {PREMIUM_LEAFLET_MATERIALS.map((material) => {
+                const selected = config.materialId === material.id;
+                return (
+                  <OptionButton
+                    key={material.id}
+                    selected={selected}
+                    onClick={() => updateConfig({ materialId: material.id })}
+                  >
+                    <div className="relative aspect-[4/3] bg-stone-100 rounded-t-[10px] overflow-hidden">
+                      {material.image ? (
+                        <Image
+                          src={material.image}
+                          alt=""
+                          fill
+                          className="object-contain p-2"
+                          sizes="200px"
+                          unoptimized={process.env.NODE_ENV === 'production'}
+                        />
+                      ) : (
+                        <MaterialSwatch variant={material.variant} />
                       )}
-                    </button>
-                  );
-                })}
-              </div>
-            </section>
+                    </div>
+                    <div className="px-4 py-3 border-t border-stone-100">
+                      <p className="font-semibold text-stone-900 text-sm">{material.name}</p>
+                      <p className="text-xs text-stone-500 mt-0.5">{material.gsm}</p>
+                    </div>
+                  </OptionButton>
+                );
+              })}
+            </div>
+          </section>
 
-            {/* Printing */}
-            <section>
-              <SectionHeader
-                step={3}
-                title="Printing options"
-                value={selectedPrinting?.name}
-              />
-              <div className="grid sm:grid-cols-2 gap-3 max-w-xl">
-                {PREMIUM_LEAFLET_PRINTING.map((option) => {
-                  const selected = config.printingId === option.id;
-                  return (
-                    <button
-                      key={option.id}
-                      type="button"
-                      onClick={() => updateConfig({ printingId: option.id })}
-                      className={`relative flex flex-col rounded-xl border overflow-hidden text-center transition-all ${selected ? selectedCardClass : cardClass}`}
-                    >
-                      <PrintingIcon sides={option.id === 'single-sided' ? 'single' : 'double'} />
-                      <div className="p-3 border-t border-stone-100">
-                        <p className="text-sm font-semibold text-stone-900">{option.name}</p>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </section>
+          {/* Sizes */}
+          <section>
+            <div className="mb-5">
+              <p className="text-xs font-semibold text-violet-600 uppercase tracking-wider mb-1">Step 2</p>
+              <h3 className="text-xl font-semibold text-stone-900">Choose size</h3>
+              <p className="text-sm text-stone-500 mt-1">Selected: {selectedSize?.label} — {selectedSize?.dimensions}</p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {PREMIUM_LEAFLET_SIZES.map((size) => {
+                const selected = config.sizeId === size.id;
+                return (
+                  <OptionButton
+                    key={size.id}
+                    selected={selected}
+                    onClick={() => updateConfig({ sizeId: size.id })}
+                    className="text-center"
+                  >
+                    <SizeDiagram width={size.width} height={size.height} />
+                    <div className="px-3 pb-4 pt-1 border-t border-stone-100 space-y-1">
+                      <p className="font-semibold text-stone-900 text-sm">{size.label}</p>
+                      <p className="text-xs text-stone-500">{size.dimensions}</p>
+                      {size.recommended && (
+                        <Badge className="mt-1">Recommended</Badge>
+                      )}
+                    </div>
+                  </OptionButton>
+                );
+              })}
+            </div>
+          </section>
 
-            {/* Quantity */}
-            <section>
-              <SectionHeader step={4} title="Quantity" value={String(config.quantity)} />
+          {/* Printing */}
+          <section>
+            <div className="mb-5">
+              <p className="text-xs font-semibold text-violet-600 uppercase tracking-wider mb-1">Step 3</p>
+              <h3 className="text-xl font-semibold text-stone-900">Printing options</h3>
+              <p className="text-sm text-stone-500 mt-1">Selected: {selectedPrinting?.name}</p>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4 max-w-lg">
+              {PREMIUM_LEAFLET_PRINTING.map((option) => {
+                const selected = config.printingId === option.id;
+                return (
+                  <OptionButton
+                    key={option.id}
+                    selected={selected}
+                    onClick={() => updateConfig({ printingId: option.id })}
+                    className="text-center"
+                  >
+                    <PrintingIcon sides={option.id === 'single-sided' ? 'single' : 'double'} />
+                    <div className="px-4 pb-4 border-t border-stone-100">
+                      <p className="font-semibold text-stone-900 text-sm">{option.name}</p>
+                    </div>
+                  </OptionButton>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* Quantity */}
+          <section>
+            <div className="mb-5">
+              <p className="text-xs font-semibold text-violet-600 uppercase tracking-wider mb-1">Step 4</p>
+              <h3 className="text-xl font-semibold text-stone-900">Quantity</h3>
+            </div>
+            <div className="max-w-xs">
+              <Label htmlFor="premium-leaflet-quantity" className="mb-2 block">How many leaflets?</Label>
               <input
                 id="premium-leaflet-quantity"
                 type="number"
                 min="1"
                 value={config.quantity}
                 onChange={(e) => updateConfig({ quantity: e.target.value })}
-                className="w-36 rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                className="w-full rounded-lg border border-stone-300 bg-white px-4 py-3 text-stone-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
               />
-            </section>
-          </div>
+            </div>
+          </section>
 
-          {/* Desktop summary */}
-          <aside className="hidden xl:block sticky top-6">
-            <div className="rounded-2xl overflow-hidden shadow-lg bg-gradient-to-b from-violet-700 to-indigo-800">
-              <div className="px-5 py-4 border-b border-white/10">
-                <h3 className="text-white font-semibold">Your quote builder</h3>
-                <p className="text-violet-200 text-xs mt-0.5">Selections update as you choose options</p>
-              </div>
-              <div className="p-5">
-                <ConfigSummary config={config} showMaterialImage />
-              </div>
-              <div className="px-5 pb-5 space-y-3">
+          {/* Mobile / tablet quote CTA */}
+          <div className="xl:hidden">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base">Your quote</CardTitle>
+                <CardDescription>Review your selections before requesting</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <ConfigSummary config={config} />
                 <button
                   type="button"
                   onClick={openQuoteModal}
-                  className="w-full rounded-xl bg-white text-violet-700 font-semibold py-3 hover:bg-violet-50 transition-colors"
+                  className="w-full rounded-lg bg-violet-600 text-white font-semibold py-3 hover:bg-violet-700 transition-colors"
                 >
                   Request Quote
                 </button>
                 {submitted && (
-                  <p className="text-xs text-emerald-200 bg-emerald-900/30 border border-emerald-400/30 rounded-lg px-3 py-2 text-center">
+                  <p className="text-sm text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-lg px-3 py-2 text-center">
                     Quote request sent — we&apos;ll be in touch shortly.
                   </p>
                 )}
-              </div>
-            </div>
-          </aside>
+              </CardContent>
+            </Card>
+          </div>
         </div>
+
+        {/* Desktop quote sidebar */}
+        <aside className="hidden xl:block sticky top-8">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base">Your quote builder</CardTitle>
+              <CardDescription>Selections update as you choose options</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-5">
+              <ConfigSummary config={config} />
+              <button
+                type="button"
+                onClick={openQuoteModal}
+                className="w-full rounded-lg bg-violet-600 text-white font-semibold py-3 hover:bg-violet-700 transition-colors"
+              >
+                Request Quote
+              </button>
+              {submitted && (
+                <p className="text-xs text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-lg px-3 py-2 text-center">
+                  Quote request sent — we&apos;ll be in touch shortly.
+                </p>
+              )}
+            </CardContent>
+          </Card>
+        </aside>
       </div>
 
-      {/* Mobile sticky bar */}
-      <div className="xl:hidden fixed bottom-0 left-0 right-0 z-40 border-t border-stone-200 bg-white/95 backdrop-blur-md px-4 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
-        <button
-          type="button"
-          onClick={openQuoteModal}
-          className="w-full rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold py-3.5 hover:from-violet-700 hover:to-indigo-700 transition-colors"
-        >
-          Request Quote
-        </button>
-        {submitted && (
-          <p className="mt-2 text-xs text-emerald-700 text-center">Quote request sent.</p>
-        )}
-      </div>
-
-      {/* Desktop bottom bar */}
-      <div className="hidden xl:flex mt-6 items-center justify-between gap-4 rounded-2xl border border-violet-100 bg-violet-50/50 px-6 py-4">
-        <div className="min-w-0">
-          <p className="font-semibold text-stone-900">Ready to request a quote?</p>
-          <p className="text-sm text-stone-500 truncate mt-0.5">
-            {formatPremiumLeafletMaterialLabel(selectedMaterial)} · {selectedSize?.label} · {selectedPrinting?.name} · {config.quantity} qty
-          </p>
-        </div>
-        <button
-          type="button"
-          onClick={openQuoteModal}
-          className="flex-shrink-0 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold px-8 py-3 hover:from-violet-700 hover:to-indigo-700 transition-colors"
-        >
-          Request Quote
-        </button>
-      </div>
-
-      <div className="xl:hidden h-20" aria-hidden="true" />
+      <div className="xl:hidden h-4" aria-hidden="true" />
 
       <PremiumLeafletQuoteModal isOpen={modalOpen} onClose={handleModalClose} config={config} />
     </>

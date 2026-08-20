@@ -8,6 +8,7 @@ import PremiumLeafletConfigurator from '../components/leaflets/PremiumLeafletCon
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 
 const PAGE_URL = `${SITE_URL}/premium-leaflets-ireland`;
+const HERO_IMAGE = '/images/products/premium-leaflets/premium-leaflets-ireland-metallic-gold.jpg';
 
 const highlights = [
   'Unique materials guaranteed to make you stand out',
@@ -15,23 +16,48 @@ const highlights = [
   'White colours cannot be printed on metallic or pearl paper',
 ];
 
+const seoSections = [
+  {
+    title: 'Premium Leaflet Printing on Special Materials',
+    paragraphs: [
+      'Make your marketing impossible to ignore with our **premium leaflet printing on special materials**, available for businesses, events and luxury brands throughout Ireland. Designed for customers who want something more distinctive than a standard paper leaflet, these high-quality printed leaflets combine striking materials, rich colours and specialist finishes to create a memorable first impression.',
+      'Choose from an exclusive range of premium stocks, including **metallic gold paper, metallic silver paper, pearl-white card, marble-effect paper and natural sulphate board**. Each material has its own distinctive texture, colour and reflective finish, allowing you to create luxury leaflets that complement your brand and immediately communicate quality.',
+    ],
+  },
+  {
+    title: 'Metallic Leaflet Printing for Luxury Brands',
+    paragraphs: [
+      'Our **metallic leaflet printing** is ideal for wedding invitations, hotel and spa promotions, luxury property launches, premium product brochures, jewellery brands, restaurants, beauty businesses and exclusive events. Metallic gold and silver materials reflect light beautifully, while pearl and marble-white stocks create a softer, elegant sheen. Natural sulphate board offers a tactile, organic appearance that works particularly well for premium food, drinks, fashion and sustainable brands.',
+      'Your design can be printed using carefully selected contrasting colours to ensure important information remains clear and easy to read. Dark black, deep emerald, navy, burgundy and rich teal inks work particularly well on metallic and pearlescent materials. Depending on your chosen specification, additional finishes such as **metallic ink, foil detailing, embossing, debossing or spot gloss** can be used to add further depth and visual impact.',
+    ],
+  },
+  {
+    title: 'Bespoke Leaflets — Sizes, Formats & Ireland Delivery',
+    paragraphs: [
+      'Available in a range of sizes and formats, our bespoke leaflets can be produced for small exclusive campaigns or larger promotional requirements. We will help you select the most suitable material, print finish and colour combination for your artwork, ensuring the finished product looks professional and performs exactly as intended.',
+      'Whether you are launching a luxury development, promoting a five-star hotel, creating exclusive wedding stationery or presenting a premium product, our **special material leaflet printing in Ireland** gives your brand a finish that standard paper simply cannot achieve.',
+    ],
+  },
+];
+
 const productLd = buildProductLd({
   name: 'Premium Leaflets Ireland',
   description:
-    'Print to impress with special material flyers — metallic, pearl marble, sulfate cardboard and synthetic PVC paper. High-quality digital print, Ireland.',
+    'Premium leaflet printing on special materials in Ireland — metallic gold and silver, pearl-white, marble-effect and natural sulphate board. Luxury leaflet printing Dublin and nationwide.',
+  image: `${SITE_URL}${HERO_IMAGE}`,
   url: PAGE_URL,
 });
 
 const webPageLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Premium Leaflets Ireland | Special Material Flyers',
+  name: 'Premium Leaflet Printing Ireland | Special Material Flyers Dublin',
   description:
-    'Print to impress with special material flyers. Metallic finishes in white, gold and silver, pearl marble, sulfate cardboard and waterproof synthetic paper.',
+    'Premium leaflet printing on special materials in Ireland. Metallic gold and silver, pearl-white, marble-effect and sulphate board. Luxury leaflet printing Dublin and nationwide.',
   url: PAGE_URL,
   inLanguage: 'en-IE',
   isPartOf: { '@type': 'WebSite', name: 'PrintNPack Ireland', url: SITE_URL },
-  about: { '@type': 'Thing', name: 'Premium leaflets Ireland' },
+  about: { '@type': 'Thing', name: 'Premium leaflet printing Ireland' },
   dateModified: '2026-08-20',
 };
 
@@ -46,9 +72,9 @@ const breadcrumbLd = {
 };
 
 export default function PremiumLeafletsIreland() {
-  const title = 'Premium Leaflets Ireland | Special Material Flyers';
+  const title = 'Premium Leaflet Printing Ireland | Special Material Flyers Dublin';
   const description =
-    'Print to impress with special material flyers. Metallic finishes in white, gold and silver, pearl marble, sulfate cardboard and waterproof synthetic paper. High-quality digital print.';
+    'Premium leaflet printing on special materials in Ireland. Metallic gold and silver, pearl-white, marble-effect and sulphate board. Luxury leaflet printing Dublin and nationwide.';
 
   return (
     <Layout>
@@ -57,7 +83,7 @@ export default function PremiumLeafletsIreland() {
         <meta name="description" content={description} />
         <meta
           name="keywords"
-          content="premium leaflets ireland, special material flyers ireland, metallic flyers ireland, pearl marble leaflets, sulfate cardboard flyers, synthetic paper flyers ireland, waterproof flyers ireland, premium flyer printing ireland"
+          content="premium leaflet printing ireland, luxury leaflet printing dublin, special material flyers ireland, metallic leaflet printing ireland, metallic gold paper leaflets, pearl marble leaflets ireland, sulphate board flyers, bespoke leaflets ireland"
         />
         <meta name="author" content="PrintNPack Ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
@@ -69,10 +95,12 @@ export default function PremiumLeafletsIreland() {
         <meta property="og:url" content={PAGE_URL} />
         <meta property="og:site_name" content="PrintNPack Ireland" />
         <meta property="og:locale" content="en_IE" />
+        <meta property="og:image" content={`${SITE_URL}${HERO_IMAGE}`} />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={`${SITE_URL}${HERO_IMAGE}`} />
 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
@@ -93,13 +121,12 @@ export default function PremiumLeafletsIreland() {
 
       <section className="relative bg-gradient-to-br from-violet-950 via-indigo-950 to-stone-950 border-b border-violet-900/50 overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(167,139,250,0.18),_transparent_50%)]" />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_rgba(251,191,36,0.1),_transparent_45%)]" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <p className="text-sm font-semibold text-violet-300 uppercase tracking-[0.2em] mb-4">
             Special Material Flyers
           </p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6 max-w-4xl">
-            Premium Leaflets Ireland
+            Premium Leaflet Printing Ireland
           </h1>
           <p className="text-lg text-stone-300 leading-relaxed max-w-3xl mb-8">
             Print to impress with Special Material Flyers! Command attention with our metallic flyer finishes in
@@ -123,16 +150,39 @@ export default function PremiumLeafletsIreland() {
         </div>
       </section>
 
-      <section className="py-12 lg:py-16 bg-white">
+      <section className="py-14 lg:py-20 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-8">
-            <p className="text-sm font-semibold text-violet-600 uppercase tracking-wider mb-2">Configure your order</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Select material, size &amp; printing</h2>
+          <div className="mb-10">
+            <p className="text-sm font-semibold text-violet-600 uppercase tracking-wider mb-2">Quote builder</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Configure your premium leaflet</h2>
             <p className="text-stone-600 max-w-2xl leading-relaxed">
-              Choose your special material, leaflet size and printing options below, then request a quotation.
+              Select your material, size and printing options, then request a quotation.
             </p>
           </div>
           <PremiumLeafletConfigurator />
+        </div>
+      </section>
+
+      <section className="py-14 lg:py-20 bg-white border-t border-stone-100">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          {seoSections.map((section) => (
+            <article key={section.title} className="mb-12 last:mb-0">
+              <h2 className="text-xl sm:text-2xl font-bold text-stone-900 mb-4">{section.title}</h2>
+              <div className="space-y-4">
+                {section.paragraphs.map((paragraph) => (
+                  <p key={paragraph.slice(0, 48)} className="text-stone-600 leading-relaxed">
+                    {paragraph.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+                      part.startsWith('**') && part.endsWith('**') ? (
+                        <strong key={i} className="font-semibold text-stone-800">{part.slice(2, -2)}</strong>
+                      ) : (
+                        part
+                      ),
+                    )}
+                  </p>
+                ))}
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -146,10 +196,12 @@ export default function PremiumLeafletsIreland() {
         ]}
       />
 
-      <section className="py-12 bg-violet-950">
+      <section className="py-14 bg-violet-950">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+          <h2 className="text-2xl font-bold text-white mb-4">Request a quotation</h2>
           <p className="text-stone-300 mb-6 leading-relaxed">
-            Contact PrintNPack for a quotation on premium leaflets with special material finishes.
+            Contact Print n Pack today for a quotation on luxury leaflet printing in Dublin and throughout Ireland.
+            Send us your artwork or design brief, and our team will help you create a truly distinctive printed leaflet.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link

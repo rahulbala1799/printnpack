@@ -117,12 +117,12 @@ Submitted from the Premium Leaflets quote builder.`;
         <div className="px-6 py-5">
           <div className="mb-6 rounded-xl border border-violet-100 bg-violet-50/70 overflow-hidden">
             {selectedMaterial?.image && (
-              <div className="relative aspect-[16/9] border-b border-violet-100">
+              <div className="relative aspect-[3/4] bg-stone-100 border-b border-violet-100">
                 <Image
                   src={selectedMaterial.image}
                   alt={selectedMaterial.previewAlt || selectedMaterial.name}
                   fill
-                  className="object-cover"
+                  className="object-contain p-4"
                   sizes="480px"
                   unoptimized={process.env.NODE_ENV === 'production'}
                 />
