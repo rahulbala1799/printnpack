@@ -68,18 +68,19 @@ const LeafletsPage = () => {
             </p>
 
             <div className="flex flex-wrap gap-3 mb-8">
-              <div className="bg-white border border-blue-100 rounded-xl px-4 py-2 text-center shadow-sm">
-                <div className="text-sm font-bold text-gray-900">From €0.05</div>
-                <div className="text-xs text-gray-500">per leaflet</div>
-              </div>
+              <Link
+                href="/premium-leaflets-ireland"
+                className="inline-flex items-center bg-violet-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-violet-700 transition-colors"
+              >
+                Premium Special Material Flyers <FaArrowRight className="ml-2" />
+              </Link>
+              <Link
+                href="/quote"
+                className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+              >
+                Get a Quote <FaArrowRight className="ml-2" />
+              </Link>
             </div>
-            
-            <Link 
-              href="/quote"
-              className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-            >
-              Get a Quote <FaArrowRight className="ml-2" />
-            </Link>
           </div>
         </div>
       </div>

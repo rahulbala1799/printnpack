@@ -84,6 +84,7 @@ const POPULAR_LINKS = [
   { label: 'Plain Packaging', href: '/plain-packaging' },
   { label: 'Roll-Up Banners', href: '/roll-up-banners' },
   { label: 'Custom Flags', href: '/custom-printed-flags-ireland' },
+  { label: 'Premium Leaflets', href: '/premium-leaflets-ireland' },
   { label: 'Leaflets', href: '/services/leaflets' },
   { label: 'Printing Services', href: '/printing-ireland' },
 ];
@@ -148,7 +149,8 @@ const RELATED_LINKS = [
   { href: '/custom-printed-flags-ireland', label: 'Custom Printed Flags', desc: 'Full-colour flags for clubs & events, from 1 flag.' },
   { href: '/plain-packaging', label: 'Plain Packaging', desc: 'Stock cups, boxes, bags and gloves with volume pricing.' },
   { href: '/foamex-ireland', label: 'Foamex Boards', desc: 'Rigid display boards for retail and events.' },
-  { href: '/services/leaflets', label: 'Leaflet Printing', desc: 'A6 to A3 flyers for restaurants and retail.' },
+  { href: '/premium-leaflets-ireland', label: 'Premium Leaflets', desc: 'Special material flyers — metallic, pearl marble & synthetic paper.' },
+  { href: '/services/leaflets', label: 'Leaflets', desc: 'Flat leaflet printing for promotions and handouts.' },
   { href: '/burger-boxes-ireland', label: 'Burger Boxes', desc: 'Bagasse and printed burger boxes for food service.' },
 ];
 

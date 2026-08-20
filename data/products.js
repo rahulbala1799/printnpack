@@ -1617,6 +1617,50 @@ const products = [
     weeklyDelivery: 'Our weekly delivery service is ideal for hospitality businesses that need a consistent supply of premium napkins. We establish a regular delivery schedule tailored to your needs, ensuring you always have sufficient stock without requiring large storage areas. Our account team monitors your usage patterns to optimize order quantities, helping you maintain efficiency and reduce costs. This reliable branded napkin service enhances your professional image while simplifying operations.'
   },
   {
+    id: 'premium-leaflets-ireland',
+    name: 'Premium Leaflets',
+    url: '/premium-leaflets-ireland',
+    category: 'Leaflets',
+    description: 'Special material flyers — metallic finishes in white, gold and silver, pearl marble, sulfate cardboard and waterproof synthetic PVC paper. High-quality digital print.',
+    features: [
+      'Metallic flyer finishes in white, gold and silver',
+      'Pearl marble finish',
+      'Smoothed sulfate cardboard flyers',
+      'Synthetic paper flyers — 100% tree free, tear-resistant and waterproof',
+      'High-quality digital print',
+      'Unique materials guaranteed to make you stand out',
+    ],
+    detailedDescription: 'Print to impress with Special Material Flyers! Command attention with our metallic flyer finishes in white, gold and silver. Exude an aura of sophistication with our pearl marble finish. Looking for something more subtle? Need something that can withstand the test of time? Our smoothed cardboard flyers are as sturdy as they get. Not a fan of paper? Our synthetic paper flyers are a great alternative to paper - they\'re 100% tree free, tear-resistant and even waterproof!\n\nUnique materials guaranteed to make you stand out. High-quality digital print. White colours cannot be printed on metallic or pearl paper.',
+    specifications: [
+      { name: 'Materials', value: 'Metallic gold, silver & white (300 gsm), Pearl Marble (290 gsm), Sulfate Cardboard (290 gsm), PVC paper (158/234/276 gsm)' },
+      { name: 'Sizes', value: 'A6, A5, A4, DL | US, Medium Square, A7' },
+      { name: 'Printing', value: 'Single-sided or double-sided' },
+      { name: 'Print', value: 'High-quality digital print' },
+      { name: 'Note', value: 'White colours cannot be printed on metallic or pearl paper' },
+    ],
+    images: [
+      '/images/products/premium-leaflets/premium-leaflets-ireland-metallic-gold.jpg',
+      '/images/products/premium-leaflets/premium-leaflets-ireland-metallic-silver.jpg',
+      '/images/products/premium-leaflets/premium-leaflets-ireland-metallic-white.jpg',
+      '/images/products/premium-leaflets/premium-leaflets-ireland-sulfate-cardboard.jpg',
+    ],
+    imageSrc: '/images/products/premium-leaflets/premium-leaflets-ireland-metallic-gold.jpg',
+    price: 'Contact for quote',
+    applications: [
+      'Promotional Flyers',
+      'Event Marketing',
+      'Luxury Brand Handouts',
+      'Waterproof Outdoor Flyers',
+    ],
+    faq: [
+      {
+        question: 'Can white be printed on metallic or pearl paper?',
+        answer: 'White colours cannot be printed on metallic or pearl paper.',
+      },
+    ],
+    weeklyDelivery: 'Contact us to discuss quantities and delivery for premium special material leaflets.',
+  },
+  {
     id: 'leaflets-a6',
     name: 'A6 Leaflets',
     category: 'Leaflets',

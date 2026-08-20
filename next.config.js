@@ -186,6 +186,26 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/premium-flyers-ireland',
+        destination: '/premium-leaflets-ireland',
+        permanent: true,
+      },
+      {
+        source: '/special-material-flyers-ireland',
+        destination: '/premium-leaflets-ireland',
+        permanent: true,
+      },
+      {
+        source: '/metallic-flyers-ireland',
+        destination: '/premium-leaflets-ireland',
+        permanent: true,
+      },
+      {
+        source: '/premium-leaflet-printing-ireland',
+        destination: '/premium-leaflets-ireland',
+        permanent: true,
+      },
+      {
         source: '/branded-tissue-paper-ireland',
         destination: '/custom-printed-tissue-paper-ireland',
         permanent: true,
