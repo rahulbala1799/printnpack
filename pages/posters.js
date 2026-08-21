@@ -143,7 +143,20 @@ export default function PostersPage() {
         </div>
       </nav>
 
-      <section className="bg-white">
+      <section className="py-14 lg:py-20 bg-stone-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <p className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-2">Quote builder</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Configure your poster</h2>
+            <p className="text-stone-600 max-w-2xl leading-relaxed">
+              Choose paper, enter a custom size up to 1.5 m (1500 mm), then request a quotation. No minimum order.
+            </p>
+          </div>
+          <PosterConfigurator />
+        </div>
+      </section>
+
+      <section className="bg-white border-t border-stone-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             <div>
@@ -190,19 +203,6 @@ export default function PostersPage() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="py-14 lg:py-20 bg-stone-50 border-t border-stone-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-10">
-            <p className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-2">Quote builder</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Configure your poster</h2>
-            <p className="text-stone-600 max-w-2xl leading-relaxed">
-              Choose paper, enter a custom size up to 1.5 m (1500 mm), then request a quotation. No minimum order.
-            </p>
-          </div>
-          <PosterConfigurator />
         </div>
       </section>
 

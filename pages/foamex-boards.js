@@ -214,8 +214,21 @@ const FoamexBoardsPage = () => {
         </div>
       </nav>
 
+      <section className="py-14 lg:py-20 bg-stone-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <p className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-2">Quote builder</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Configure your foamex board</h2>
+            <p className="text-stone-600 max-w-2xl leading-relaxed">
+              Choose thickness, enter a custom size up to 8ft × 4ft (2440 × 1220 mm), then request a quotation.
+            </p>
+          </div>
+          <FoamexBoardConfigurator />
+        </div>
+      </section>
+
       {/* ── Hero / Product Overview ── */}
-      <section className="bg-white">
+      <section className="bg-white border-t border-stone-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             <div>
@@ -331,19 +344,6 @@ const FoamexBoardsPage = () => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="py-14 lg:py-20 bg-stone-50 border-t border-stone-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-10">
-            <p className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-2">Quote builder</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Configure your foamex board</h2>
-            <p className="text-stone-600 max-w-2xl leading-relaxed">
-              Choose thickness, enter a custom size up to 8ft × 4ft (2440 × 1220 mm), then request a quotation.
-            </p>
-          </div>
-          <FoamexBoardConfigurator />
         </div>
       </section>
 

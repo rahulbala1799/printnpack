@@ -198,6 +198,21 @@ export default function CustomPrintedFlagsIreland() {
         </div>
       </nav>
 
+      {/* Quote builder */}
+      <section id="configure" className="py-12 lg:py-16 bg-stone-50 scroll-mt-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <p className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-2">Quote builder</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">Select size, material &amp; finishing</h2>
+            <p className="text-slate-600 max-w-2xl leading-relaxed">
+              Choose your flag size, quantity, material and finishing options below, then request a quotation
+              for your custom printed flag.
+            </p>
+          </div>
+          <FlagConfigurator />
+        </div>
+      </section>
+
       {/* Hero */}
       <section className="relative bg-slate-900 border-b border-slate-800 overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(59,130,246,0.15),_transparent_55%)]" />
@@ -270,6 +285,28 @@ export default function CustomPrintedFlagsIreland() {
         </div>
       </section>
 
+      {/* SEO content */}
+      <section className="py-12 lg:py-16 bg-white border-t border-slate-100">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          {seoSections.map((section) => (
+            <div key={section.title} className="mb-10 last:mb-0">
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3">{section.title}</h2>
+              <p className="text-slate-600 leading-relaxed">
+                {section.body}
+                {section.link && (
+                  <>
+                    {' '}
+                    <Link href={section.link.href} className="text-blue-700 hover:underline font-medium">
+                      View {section.link.label} →
+                    </Link>
+                  </>
+                )}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Gallery */}
       <section className="py-12 lg:py-16 bg-white border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -316,28 +353,6 @@ export default function CustomPrintedFlagsIreland() {
         </div>
       </section>
 
-      {/* SEO content */}
-      <section className="py-12 lg:py-16 bg-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          {seoSections.map((section) => (
-            <div key={section.title} className="mb-10 last:mb-0">
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3">{section.title}</h2>
-              <p className="text-slate-600 leading-relaxed">
-                {section.body}
-                {section.link && (
-                  <>
-                    {' '}
-                    <Link href={section.link.href} className="text-blue-700 hover:underline font-medium">
-                      View {section.link.label} →
-                    </Link>
-                  </>
-                )}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Specifications */}
       <section className="py-12 lg:py-16 bg-slate-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -362,21 +377,6 @@ export default function CustomPrintedFlagsIreland() {
           <div className="mt-6 rounded-xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-900">
             <strong>Please note:</strong> The flagpole is not included.
           </div>
-        </div>
-      </section>
-
-      {/* Configurator */}
-      <section id="configure" className="py-12 lg:py-16 bg-white border-t border-slate-100 scroll-mt-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-10">
-            <p className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-2">Configure your order</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">Select size, material &amp; finishing</h2>
-            <p className="text-slate-600 max-w-2xl leading-relaxed">
-              Choose your flag size, quantity, material and finishing options below, then request a quotation
-              for your custom printed flag.
-            </p>
-          </div>
-          <FlagConfigurator />
         </div>
       </section>
 

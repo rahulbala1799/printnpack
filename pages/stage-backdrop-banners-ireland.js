@@ -206,6 +206,19 @@ export default function StageBackdropBannersIreland() {
         </div>
       </nav>
 
+      <section className="py-14 lg:py-20 bg-stone-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <p className="text-sm font-semibold text-sky-600 uppercase tracking-wider mb-2">Quote builder</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Configure your large banner</h2>
+            <p className="text-stone-600 max-w-2xl leading-relaxed">
+              Select a 3m × 3m banner, another standard size, or type a custom width and height up to 50 m, then request a quotation.
+            </p>
+          </div>
+          <StageBackdropConfigurator />
+        </div>
+      </section>
+
       <section className="relative bg-gradient-to-br from-slate-950 via-sky-950 to-blue-950 border-b border-sky-900/50 overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(56,189,248,0.16),_transparent_50%)]" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
@@ -246,44 +259,6 @@ export default function StageBackdropBannersIreland() {
                 unoptimized={process.env.NODE_ENV === 'production'}
               />
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-14 lg:py-20 bg-stone-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-10">
-            <p className="text-sm font-semibold text-sky-600 uppercase tracking-wider mb-2">Quote builder</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Configure your large banner</h2>
-            <p className="text-stone-600 max-w-2xl leading-relaxed">
-              Select a 3m × 3m banner, another standard size, or type a custom width and height up to 50 m, then request a quotation.
-            </p>
-          </div>
-          <StageBackdropConfigurator />
-        </div>
-      </section>
-
-      <section className="py-14 lg:py-20 bg-white border-t border-stone-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Huge banner &amp; stage backdrop examples</h2>
-            <p className="text-stone-600 max-w-2xl mx-auto leading-relaxed">
-              Custom large banners for outdoor festivals, indoor conferences and night concerts across Ireland.
-            </p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {STAGE_BACKDROP_GALLERY.map((img) => (
-              <div key={img.src} className="relative aspect-[4/3] rounded-xl overflow-hidden border border-stone-200 bg-stone-50">
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 33vw"
-                  unoptimized={process.env.NODE_ENV === 'production'}
-                />
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -371,6 +346,31 @@ export default function StageBackdropBannersIreland() {
               ))}
             </div>
           </article>
+        </div>
+      </section>
+
+      <section className="py-14 lg:py-20 bg-white border-t border-stone-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Huge banner &amp; stage backdrop examples</h2>
+            <p className="text-stone-600 max-w-2xl mx-auto leading-relaxed">
+              Custom large banners for outdoor festivals, indoor conferences and night concerts across Ireland.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {STAGE_BACKDROP_GALLERY.map((img) => (
+              <div key={img.src} className="relative aspect-[4/3] rounded-xl overflow-hidden border border-stone-200 bg-stone-50">
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  unoptimized={process.env.NODE_ENV === 'production'}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

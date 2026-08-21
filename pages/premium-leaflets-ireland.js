@@ -119,6 +119,19 @@ export default function PremiumLeafletsIreland() {
         </div>
       </nav>
 
+      <section className="py-14 lg:py-20 bg-stone-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <p className="text-sm font-semibold text-violet-600 uppercase tracking-wider mb-2">Quote builder</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Configure your premium leaflet</h2>
+            <p className="text-stone-600 max-w-2xl leading-relaxed">
+              Select your material, size and printing options, then request a quotation.
+            </p>
+          </div>
+          <PremiumLeafletConfigurator />
+        </div>
+      </section>
+
       <section className="relative bg-gradient-to-br from-violet-950 via-indigo-950 to-stone-950 border-b border-violet-900/50 overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(167,139,250,0.18),_transparent_50%)]" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
@@ -147,19 +160,6 @@ export default function PremiumLeafletsIreland() {
               </li>
             ))}
           </ul>
-        </div>
-      </section>
-
-      <section className="py-14 lg:py-20 bg-stone-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-10">
-            <p className="text-sm font-semibold text-violet-600 uppercase tracking-wider mb-2">Quote builder</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Configure your premium leaflet</h2>
-            <p className="text-stone-600 max-w-2xl leading-relaxed">
-              Select your material, size and printing options, then request a quotation.
-            </p>
-          </div>
-          <PremiumLeafletConfigurator />
         </div>
       </section>
 

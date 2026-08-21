@@ -224,6 +224,19 @@ export default function LabelsOnARollPage() {
         </div>
       </nav>
 
+      <section className="py-14 lg:py-20 bg-stone-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <p className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-2">Quote builder</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Configure your labels on a roll</h2>
+            <p className="text-stone-600 max-w-2xl leading-relaxed">
+              Choose shape, size, material, dispenser, winding and core, then request a quotation for printed roll labels in Ireland.
+            </p>
+          </div>
+          <LabelsOnRollConfigurator />
+        </div>
+      </section>
+
       <section className="relative bg-gradient-to-br from-slate-950 via-blue-950 to-stone-950 border-b border-blue-900/40 overflow-hidden">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
@@ -262,81 +275,6 @@ export default function LabelsOnARollPage() {
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 unoptimized={process.env.NODE_ENV === 'production'}
               />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-14 lg:py-20 bg-stone-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-10">
-            <p className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-2">Quote builder</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Configure your labels on a roll</h2>
-            <p className="text-stone-600 max-w-2xl leading-relaxed">
-              Choose shape, size, material, dispenser, winding and core, then request a quotation for printed roll labels in Ireland.
-            </p>
-          </div>
-          <LabelsOnRollConfigurator />
-        </div>
-      </section>
-
-      <section className="py-14 lg:py-20 bg-white border-t border-stone-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Label types we print</h2>
-            <p className="text-stone-600 max-w-2xl mx-auto leading-relaxed">
-              Round jar labels, dispenser-box roll labels, and PVC transparent café stickers — the formats Irish shops and producers search for.
-            </p>
-          </div>
-          <div className="grid sm:grid-cols-3 gap-6">
-            {galleryImages.map((img) => (
-              <div key={img.src} className="relative aspect-square rounded-xl overflow-hidden border border-stone-200 bg-stone-50">
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, 33vw"
-                  unoptimized={process.env.NODE_ENV === 'production'}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-14 lg:py-16 bg-stone-50 border-t border-stone-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8 mb-14">
-            {keyBenefits.map((benefit) => (
-              <div key={benefit.title} className="rounded-xl border border-stone-200 bg-white p-6">
-                <h3 className="text-lg font-semibold text-stone-900 mb-2">{benefit.title}</h3>
-                <p className="text-stone-600 text-sm leading-relaxed">{benefit.desc}</p>
-              </div>
-            ))}
-          </div>
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-stone-900 mb-4">Applications</h2>
-              <ul className="grid sm:grid-cols-2 gap-2">
-                {applications.map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-stone-600 text-sm">
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-stone-900 mb-4">Who we supply</h2>
-              <ul className="grid sm:grid-cols-2 gap-2">
-                {businesses.map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-stone-600 text-sm">
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </div>
@@ -401,6 +339,68 @@ export default function LabelsOnARollPage() {
               ))}
             </div>
           </article>
+        </div>
+      </section>
+
+      <section className="py-14 lg:py-20 bg-white border-t border-stone-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Label types we print</h2>
+            <p className="text-stone-600 max-w-2xl mx-auto leading-relaxed">
+              Round jar labels, dispenser-box roll labels, and PVC transparent café stickers — the formats Irish shops and producers search for.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-6">
+            {galleryImages.map((img) => (
+              <div key={img.src} className="relative aspect-square rounded-xl overflow-hidden border border-stone-200 bg-stone-50">
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 33vw"
+                  unoptimized={process.env.NODE_ENV === 'production'}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-14 lg:py-16 bg-stone-50 border-t border-stone-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-3 gap-8 mb-14">
+            {keyBenefits.map((benefit) => (
+              <div key={benefit.title} className="rounded-xl border border-stone-200 bg-white p-6">
+                <h3 className="text-lg font-semibold text-stone-900 mb-2">{benefit.title}</h3>
+                <p className="text-stone-600 text-sm leading-relaxed">{benefit.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="grid lg:grid-cols-2 gap-12">
+            <div>
+              <h2 className="text-xl sm:text-2xl font-bold text-stone-900 mb-4">Applications</h2>
+              <ul className="grid sm:grid-cols-2 gap-2">
+                {applications.map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-stone-600 text-sm">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h2 className="text-xl sm:text-2xl font-bold text-stone-900 mb-4">Who we supply</h2>
+              <ul className="grid sm:grid-cols-2 gap-2">
+                {businesses.map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-stone-600 text-sm">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 

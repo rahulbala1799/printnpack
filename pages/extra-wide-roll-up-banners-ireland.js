@@ -285,7 +285,122 @@ const ExtraWideRollUpBannersPage = () => {
         </div>
       </nav>
 
-      <section className="bg-white">
+      {/* Quote builder */}
+      <section id="quote-builder" className="py-14 lg:py-20 bg-stone-50 scroll-mt-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <p className="text-sm font-semibold text-orange-600 uppercase tracking-wider mb-2">Quote builder</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mb-3">Configure your extra wide roll up banner</h2>
+            <p className="text-stone-600 max-w-2xl leading-relaxed">
+              Choose your size and Silver XL stand, then request a quotation for delivery across Ireland, Northern Ireland, the UK and EU.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-3 gap-3 mb-6 max-w-lg">
+            <div className="bg-white rounded-xl p-3 text-center border border-stone-200">
+              <div className="text-lg sm:text-xl font-bold text-emerald-600">{formatEuro(activeSize.price)}</div>
+              <div className="text-xs text-gray-500">selected size</div>
+            </div>
+            <div className="bg-white rounded-xl p-3 text-center border border-stone-200">
+              <div className="text-lg sm:text-xl font-bold text-gray-900">200 cm</div>
+              <div className="text-xs text-gray-500">extra wide</div>
+            </div>
+            <div className="bg-white rounded-xl p-3 text-center border border-stone-200">
+              <div className="text-lg sm:text-xl font-bold text-gray-900">From 1</div>
+              <div className="text-xs text-gray-500">piece MOQ</div>
+            </div>
+          </div>
+
+          <div className="mb-6">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-semibold text-gray-900">
+                Size: <span className="text-orange-600">{activeSize.label}</span>
+              </h3>
+              <span className="text-xs text-gray-400">{activeSize.dimensions}</span>
+            </div>
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 max-w-2xl">
+              {sizeOptions.map((size) => (
+                <button
+                  key={size.id}
+                  type="button"
+                  onClick={() => setSelectedSize(size.id)}
+                  className={`relative rounded-xl border-2 overflow-hidden text-left transition-all ${
+                    selectedSize === size.id
+                      ? 'border-blue-500 ring-2 ring-blue-100 shadow-md'
+                      : 'border-gray-200 hover:border-gray-300 bg-white'
+                  }`}
+                >
+                  <div className="relative aspect-[3/4] bg-gray-50">
+                    <Image src={size.image} alt={`${size.label} extra wide roll up banner size`} fill className="object-contain p-2" sizes="120px" />
+                  </div>
+                  <div className={`p-2 sm:p-3 border-t border-gray-100 ${size.popular ? 'pb-7' : ''}`}>
+                    <div className="font-bold text-gray-900 text-sm">{size.label}</div>
+                    <div className="text-[10px] sm:text-xs text-gray-500 mb-1">{size.dimensions}</div>
+                    <div className="text-[10px] sm:text-xs text-red-400 line-through">{formatEuro(size.wasPrice)}</div>
+                    <div className="text-sm font-bold text-emerald-600">{formatEuro(size.price)}</div>
+                  </div>
+                  {size.popular && (
+                    <div className="absolute bottom-0 left-0 right-0 bg-blue-600 text-white text-[10px] sm:text-xs font-semibold text-center py-1">
+                      Recommended
+                    </div>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="mb-6 max-w-md">
+            <h3 className="text-sm font-semibold text-gray-900 mb-3">
+              Base: <span className="text-orange-600">{activeBase.label}</span>
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {baseOptions.map((base) => (
+                <button
+                  key={base.id}
+                  type="button"
+                  onClick={() => setSelectedBase(base.id)}
+                  className={`relative rounded-xl border-2 overflow-hidden text-left transition-all ${
+                    selectedBase === base.id
+                      ? 'border-blue-500 ring-2 ring-blue-100 shadow-md'
+                      : 'border-gray-200 hover:border-gray-300 bg-white'
+                  }`}
+                >
+                  <div className="relative aspect-[16/9] bg-gray-50">
+                    <Image src={base.image} alt={base.label} fill className="object-cover" sizes="200px" />
+                  </div>
+                  <div className="p-3 border-t border-gray-100">
+                    <div className="font-semibold text-gray-900 text-sm">{base.label}</div>
+                  </div>
+                  {base.popular && (
+                    <div className="absolute bottom-0 left-0 right-0 bg-blue-600 text-white text-xs font-semibold text-center py-1">
+                      Recommended
+                    </div>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 max-w-xl">
+            <button
+              type="button"
+              onClick={openQuote}
+              className="flex-1 bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3.5 px-6 rounded-xl transition-colors text-center"
+            >
+              Get Quote — {activeSize.label} {formatEuro(activeSize.price)}
+            </button>
+            <a
+              href="tel:+353894157369"
+              className="flex-1 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3.5 px-6 rounded-xl border border-gray-300 transition-colors text-center"
+            >
+              Call +353 89 415 7369
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Hero */}
+      <section className="bg-white border-t border-stone-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             <div>
@@ -325,7 +440,7 @@ const ExtraWideRollUpBannersPage = () => {
               </div>
             </div>
 
-            <div className="lg:sticky lg:top-24">
+            <div>
               <div className="inline-flex items-center gap-2 bg-orange-50 text-orange-700 rounded-full px-3 py-1 text-sm font-medium mb-4 border border-orange-200">
                 <span className="w-2 h-2 bg-orange-500 rounded-full" />
                 XL 2m wide — Indoor exhibitions
@@ -345,93 +460,6 @@ const ExtraWideRollUpBannersPage = () => {
               <p className="text-gray-500 text-sm mb-6 leading-relaxed">
                 Create a big impact with our XXL roller banners and order today! Wrinkle-free · Scratch-resistant · Indoor use only · B1 certified.
               </p>
-
-              <div className="grid grid-cols-3 gap-3 mb-6">
-                <div className="bg-gray-50 rounded-xl p-3 text-center">
-                  <div className="text-lg sm:text-xl font-bold text-emerald-600">{formatEuro(activeSize.price)}</div>
-                  <div className="text-xs text-gray-500">selected size</div>
-                </div>
-                <div className="bg-gray-50 rounded-xl p-3 text-center">
-                  <div className="text-lg sm:text-xl font-bold text-gray-900">200 cm</div>
-                  <div className="text-xs text-gray-500">extra wide</div>
-                </div>
-                <div className="bg-gray-50 rounded-xl p-3 text-center">
-                  <div className="text-lg sm:text-xl font-bold text-gray-900">From 1</div>
-                  <div className="text-xs text-gray-500">piece MOQ</div>
-                </div>
-              </div>
-
-              {/* Size selector */}
-              <div className="mb-6">
-                <div className="flex items-center justify-between mb-3">
-                  <h2 className="text-sm font-semibold text-gray-900">
-                    Size: <span className="text-orange-600">{activeSize.label}</span>
-                  </h2>
-                  <span className="text-xs text-gray-400">{activeSize.dimensions}</span>
-                </div>
-                <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                  {sizeOptions.map((size) => (
-                    <button
-                      key={size.id}
-                      type="button"
-                      onClick={() => setSelectedSize(size.id)}
-                      className={`relative rounded-xl border-2 overflow-hidden text-left transition-all ${
-                        selectedSize === size.id
-                          ? 'border-blue-500 ring-2 ring-blue-100 shadow-md'
-                          : 'border-gray-200 hover:border-gray-300 bg-white'
-                      }`}
-                    >
-                      <div className="relative aspect-[3/4] bg-gray-50">
-                        <Image src={size.image} alt={`${size.label} extra wide roll up banner size`} fill className="object-contain p-2" sizes="120px" />
-                      </div>
-                      <div className={`p-2 sm:p-3 border-t border-gray-100 ${size.popular ? 'pb-7' : ''}`}>
-                        <div className="font-bold text-gray-900 text-sm">{size.label}</div>
-                        <div className="text-[10px] sm:text-xs text-gray-500 mb-1">{size.dimensions}</div>
-                        <div className="text-[10px] sm:text-xs text-red-400 line-through">{formatEuro(size.wasPrice)}</div>
-                        <div className="text-sm font-bold text-emerald-600">{formatEuro(size.price)}</div>
-                      </div>
-                      {size.popular && (
-                        <div className="absolute bottom-0 left-0 right-0 bg-blue-600 text-white text-[10px] sm:text-xs font-semibold text-center py-1">
-                          Recommended
-                        </div>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Base selector */}
-              <div className="mb-6">
-                <h2 className="text-sm font-semibold text-gray-900 mb-3">
-                  Base: <span className="text-orange-600">{activeBase.label}</span>
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {baseOptions.map((base) => (
-                    <button
-                      key={base.id}
-                      type="button"
-                      onClick={() => setSelectedBase(base.id)}
-                      className={`relative rounded-xl border-2 overflow-hidden text-left transition-all ${
-                        selectedBase === base.id
-                          ? 'border-blue-500 ring-2 ring-blue-100 shadow-md'
-                          : 'border-gray-200 hover:border-gray-300 bg-white'
-                      }`}
-                    >
-                      <div className="relative aspect-[16/9] bg-gray-50">
-                        <Image src={base.image} alt={base.label} fill className="object-cover" sizes="200px" />
-                      </div>
-                      <div className="p-3 border-t border-gray-100">
-                        <div className="font-semibold text-gray-900 text-sm">{base.label}</div>
-                      </div>
-                      {base.popular && (
-                        <div className="absolute bottom-0 left-0 right-0 bg-blue-600 text-white text-xs font-semibold text-center py-1">
-                          Recommended
-                        </div>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
 
               <ul className="space-y-2.5 mb-6">
                 {[
@@ -455,7 +483,7 @@ const ExtraWideRollUpBannersPage = () => {
                   onClick={openQuote}
                   className="flex-1 bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3.5 px-6 rounded-xl transition-colors text-center"
                 >
-                  Get Quote — {activeSize.label} {formatEuro(activeSize.price)}
+                  Configure &amp; Get Quote
                 </button>
                 <a
                   href="tel:+353894157369"
@@ -476,28 +504,8 @@ const ExtraWideRollUpBannersPage = () => {
         </div>
       </section>
 
-      <section className="bg-gray-50 border-y border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Why Choose Extra Wide Roll Up Banners?</h2>
-            <p className="text-gray-500 max-w-2xl mx-auto">
-              Double the width of standard pull up banners — built for exhibitions, conferences and large indoor venues across Ireland.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {features.map((f) => (
-              <div key={f.title} className="bg-white rounded-xl p-5 sm:p-6 border border-gray-200 hover:border-orange-200 hover:shadow-md transition-all">
-                <div className="w-10 h-10 bg-orange-50 text-orange-600 rounded-lg flex items-center justify-center mb-3">{f.icon}</div>
-                <h3 className="font-semibold text-gray-900 mb-1.5">{f.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{f.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* SEO content sections */}
-      <section className="bg-white">
+      <section className="bg-white border-t border-stone-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <div className="max-w-3xl mx-auto space-y-8">
             {seoSections.map((section) => (
@@ -515,6 +523,26 @@ const ExtraWideRollUpBannersPage = () => {
                     </>
                   )}
                 </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-gray-50 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Why Choose Extra Wide Roll Up Banners?</h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">
+              Double the width of standard pull up banners — built for exhibitions, conferences and large indoor venues across Ireland.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {features.map((f) => (
+              <div key={f.title} className="bg-white rounded-xl p-5 sm:p-6 border border-gray-200 hover:border-orange-200 hover:shadow-md transition-all">
+                <div className="w-10 h-10 bg-orange-50 text-orange-600 rounded-lg flex items-center justify-center mb-3">{f.icon}</div>
+                <h3 className="font-semibold text-gray-900 mb-1.5">{f.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{f.description}</p>
               </div>
             ))}
           </div>
