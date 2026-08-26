@@ -2696,6 +2696,26 @@ const products = [
     price: 'Starting at €0.05 per unit',
     moq: 1000,
     leadTime: '5-7 business days'
+  },
+  {
+    id: 'custom-clothing-ireland',
+    name: 'Custom Clothing & Workwear',
+    category: 'Apparel',
+    url: '/clothing',
+    description: 'Custom printed and embroidered t-shirts, polos, hoodies and workwear for corporate events, teams and promotions. Bulk discounts, 3–5 day turnaround.',
+    imageSrc: '/images/apparel/TSHIRT MOCK UP 1.jpg',
+    price: 'From €8.50',
+    leadTime: '3-5 business days'
+  },
+  {
+    id: 'rubber-stamps-ireland',
+    name: 'Rubber Stamps',
+    category: 'Stamps',
+    url: '/rubber-stamps',
+    description: 'Custom self-inking and traditional rubber stamps for business and personal use. Business stamps, signature stamps and company logo stamps, same-day service available.',
+    imageSrc: '/images/rubber-stamps/RubberStamp_10.jpg',
+    price: 'From €15.00',
+    leadTime: '1-3 business days'
   }
 ];
 

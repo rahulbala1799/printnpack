@@ -66,7 +66,6 @@ const mainGroups = [
     shortName: 'Clothing',
     description: 'Custom branded apparel for your team',
     categories: ['Apparel'],
-    redirect: '/clothing',
     icon: FaTshirt,
     activeClasses: 'bg-emerald-600 text-white border-emerald-600',
     iconBg: 'bg-emerald-100 text-emerald-600',
@@ -77,7 +76,6 @@ const mainGroups = [
     shortName: 'Stamps',
     description: 'Custom stamps for offices and businesses',
     categories: ['Stamps'],
-    redirect: '/rubber-stamps',
     icon: FaStamp,
     activeClasses: 'bg-stone-600 text-white border-stone-600',
     iconBg: 'bg-stone-100 text-stone-600',
@@ -520,13 +518,13 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
         </div>
       </section>
 
-      {/* Category filters */}
-      <div className="sticky top-0 z-30 bg-slate-50/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+      {/* Category filters — black band, hidden on desktop (sidebar takes over there) */}
+      <div className="sticky top-0 z-30 lg:hidden bg-black backdrop-blur-md border-b border-black shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3">
           <div className="relative">
             <div className="flex gap-2 sm:gap-2.5 overflow-x-auto no-scrollbar snap-x">
               {mainGroups.map((group) => {
-                const isActive = activeGroup === group.id && !group.redirect && !searchTerm;
+                const isActive = activeGroup === group.id && !searchTerm;
                 const IconComponent = group.icon;
                 return (
                   <button
@@ -536,7 +534,7 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
                     className={`snap-start flex-shrink-0 flex items-center gap-2 pl-2 pr-4 py-2 rounded-full font-semibold text-sm transition-all border min-h-[44px] ${
                       isActive
                         ? `${group.activeClasses} shadow-md scale-[1.02]`
-                        : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300 hover:shadow-sm'
+                        : 'bg-gray-900 text-white border-gray-700 hover:border-gray-500 hover:bg-gray-800'
                     }`}
                   >
                     <span
@@ -547,23 +545,22 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
                       <IconComponent className="w-3 h-3" />
                     </span>
                     {group.shortName}
-                    {group.redirect && <span className="opacity-60">↗</span>}
                   </button>
                 );
               })}
             </div>
             {/* Fade hint so mobile users know the band scrolls */}
-            <div className="pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-slate-50 to-transparent sm:hidden" />
+            <div className="pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-black to-transparent sm:hidden" />
           </div>
           {subCategories.length > 1 && !searchTerm && (
-            <div className="flex gap-2 overflow-x-auto no-scrollbar mt-2.5 pt-2.5 border-t border-gray-100">
+            <div className="flex gap-2 overflow-x-auto no-scrollbar mt-2.5 pt-2.5 border-t border-gray-800">
               <button
                 type="button"
                 onClick={() => setActiveCategory('all')}
                 className={`flex-shrink-0 text-xs font-semibold px-3 py-1 rounded-full transition-colors ${
                   activeCategory === 'all'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-slate-50 text-gray-600 border border-gray-200 hover:border-gray-300'
+                    ? 'bg-white text-black'
+                    : 'bg-gray-900 text-gray-300 border border-gray-700 hover:border-gray-500'
                 }`}
               >
                 All {activeGroupConfig?.shortName}
@@ -575,8 +572,8 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
                   onClick={() => setActiveCategory(cat)}
                   className={`flex-shrink-0 text-xs font-semibold px-3 py-1 rounded-full transition-colors whitespace-nowrap ${
                     activeCategory === cat
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-slate-50 text-gray-600 border border-gray-200 hover:border-gray-300'
+                      ? 'bg-white text-black'
+                      : 'bg-gray-900 text-gray-300 border border-gray-700 hover:border-gray-500'
                   }`}
                 >
                   {cat}
@@ -587,9 +584,71 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
         </div>
       </div>
 
-      {/* Product grid */}
+      {/* Product grid + desktop sidebar */}
       <section className="bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
+          <div className="lg:grid lg:grid-cols-[240px_1fr] lg:gap-8">
+            {/* Desktop-only category sidebar */}
+            <aside className="hidden lg:block">
+              <div className="sticky top-24 bg-black rounded-2xl p-3 shadow-sm">
+                <p className="text-white/50 text-[11px] font-semibold uppercase tracking-wider px-2 pt-1 pb-2">
+                  Categories
+                </p>
+                <nav className="space-y-1">
+                  {mainGroups.map((group) => {
+                    const isActive = activeGroup === group.id && !searchTerm;
+                    const IconComponent = group.icon;
+                    return (
+                      <button
+                        type="button"
+                        key={group.id}
+                        onClick={() => handleGroupClick(group)}
+                        className={`w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-xl font-semibold text-sm transition-all text-left ${
+                          isActive ? `${group.activeClasses} shadow-md` : 'text-white hover:bg-gray-800'
+                        }`}
+                      >
+                        <span
+                          className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center ${
+                            isActive ? 'bg-white/20 text-white' : group.iconBg
+                          }`}
+                        >
+                          <IconComponent className="w-3.5 h-3.5" />
+                        </span>
+                        {group.shortName}
+                      </button>
+                    );
+                  })}
+                </nav>
+
+                {subCategories.length > 1 && !searchTerm && (
+                  <div className="mt-3 pt-3 border-t border-gray-800 space-y-1">
+                    <button
+                      type="button"
+                      onClick={() => setActiveCategory('all')}
+                      className={`w-full text-left text-xs font-semibold px-2.5 py-1.5 rounded-lg transition-colors ${
+                        activeCategory === 'all' ? 'bg-white text-black' : 'text-gray-300 hover:bg-gray-800'
+                      }`}
+                    >
+                      All {activeGroupConfig?.shortName}
+                    </button>
+                    {subCategories.map((cat) => (
+                      <button
+                        type="button"
+                        key={cat}
+                        onClick={() => setActiveCategory(cat)}
+                        className={`w-full text-left text-xs font-semibold px-2.5 py-1.5 rounded-lg transition-colors ${
+                          activeCategory === cat ? 'bg-white text-black' : 'text-gray-300 hover:bg-gray-800'
+                        }`}
+                      >
+                        {cat}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </aside>
+
+            <div>
           {activeGroup === 'packaging' && !searchTerm && (
             <Link
               href="/plain-packaging"
@@ -645,7 +704,7 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
                 {filteredProducts.slice(0, visibleCount).map((product, index) => (
                   <ProductCard key={product.id} product={product} priority={index < 4} />
                 ))}
@@ -667,6 +726,8 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
               )}
             </>
           )}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -783,10 +844,10 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
       </section>
 
       {/* Mobile category bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-2xl safe-area-bottom">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-black backdrop-blur-md border-t border-gray-800 shadow-2xl safe-area-bottom">
         <div className="flex overflow-x-auto no-scrollbar px-2 py-1.5 gap-1.5 snap-x">
           {mainGroups.map((group) => {
-            const isActive = activeGroup === group.id && !group.redirect;
+            const isActive = activeGroup === group.id;
             const IconComponent = group.icon;
             return (
               <button
@@ -794,7 +855,7 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
                 key={group.id}
                 onClick={() => handleGroupClick(group)}
                 className={`snap-start flex-shrink-0 flex flex-col items-center justify-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[64px] min-h-[52px] transition-colors ${
-                  isActive ? `${group.activeClasses} shadow-md` : 'text-gray-500 bg-gray-50'
+                  isActive ? `${group.activeClasses} shadow-md` : 'text-white/70 bg-gray-900'
                 }`}
               >
                 <span
