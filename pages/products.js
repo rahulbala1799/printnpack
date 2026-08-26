@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { SITE_URL } from '../lib/site';
 import { buildProductListItem, parsePriceString } from '../lib/schema';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
+import { FaBoxOpen, FaPrint, FaTags, FaFileAlt, FaTshirt, FaStamp } from 'react-icons/fa';
 
 const PAGE_URL = `${SITE_URL}/products`;
 const PAGE_TITLE = 'Print & Packaging Products Ireland | PrintNPack Ashbourne';
@@ -25,6 +26,9 @@ const mainGroups = [
     shortName: 'Packaging',
     description: 'Pizza boxes, bags, burger boxes and hospitality stock',
     categories: ['Food Packaging', 'Retail Packaging', 'Eco-Friendly Packaging', 'Shipping', 'Hospitality Products'],
+    icon: FaBoxOpen,
+    activeClasses: 'bg-orange-600 text-white border-orange-600',
+    iconBg: 'bg-orange-100 text-orange-600',
   },
   {
     id: 'wide-format',
@@ -32,6 +36,9 @@ const mainGroups = [
     shortName: 'Wide Format',
     description: 'Banners, posters, boards and flags',
     categories: ['Wide Format'],
+    icon: FaPrint,
+    activeClasses: 'bg-purple-600 text-white border-purple-600',
+    iconBg: 'bg-purple-100 text-purple-600',
   },
   {
     id: 'stickers-labels',
@@ -39,6 +46,9 @@ const mainGroups = [
     shortName: 'Stickers & Labels',
     description: 'Vinyl stickers, decals and labels on a roll',
     categories: ['Stickers & Labels'],
+    icon: FaTags,
+    activeClasses: 'bg-pink-600 text-white border-pink-600',
+    iconBg: 'bg-pink-100 text-pink-600',
   },
   {
     id: 'leaflets',
@@ -46,6 +56,9 @@ const mainGroups = [
     shortName: 'Leaflets',
     description: 'A3, A4, A5 and A6 print runs',
     categories: ['Leaflets', 'Food Service'],
+    icon: FaFileAlt,
+    activeClasses: 'bg-sky-600 text-white border-sky-600',
+    iconBg: 'bg-sky-100 text-sky-600',
   },
   {
     id: 'clothing',
@@ -54,6 +67,9 @@ const mainGroups = [
     description: 'Custom branded apparel for your team',
     categories: ['Apparel'],
     redirect: '/clothing',
+    icon: FaTshirt,
+    activeClasses: 'bg-emerald-600 text-white border-emerald-600',
+    iconBg: 'bg-emerald-100 text-emerald-600',
   },
   {
     id: 'rubber-stamps',
@@ -62,6 +78,9 @@ const mainGroups = [
     description: 'Custom stamps for offices and businesses',
     categories: ['Stamps'],
     redirect: '/rubber-stamps',
+    icon: FaStamp,
+    activeClasses: 'bg-stone-600 text-white border-stone-600',
+    iconBg: 'bg-stone-100 text-stone-600',
   },
 ];
 
@@ -502,27 +521,39 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
       </section>
 
       {/* Category filters */}
-      <div className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <div className="flex gap-2 overflow-x-auto no-scrollbar">
-            {mainGroups.map((group) => {
-              const isActive = activeGroup === group.id && !group.redirect && !searchTerm;
-              return (
-                <button
-                  type="button"
-                  key={group.id}
-                  onClick={() => handleGroupClick(group)}
-                  className={`flex-shrink-0 px-4 py-2 rounded-xl font-semibold text-sm transition-colors border ${
-                    isActive
-                      ? 'bg-blue-600 text-white border-blue-600'
-                      : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300 hover:text-gray-900'
-                  }`}
-                >
-                  {group.shortName}
-                  {group.redirect && <span className="ml-1 opacity-60">↗</span>}
-                </button>
-              );
-            })}
+      <div className="sticky top-0 z-30 bg-slate-50/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3">
+          <div className="relative">
+            <div className="flex gap-2 sm:gap-2.5 overflow-x-auto no-scrollbar snap-x">
+              {mainGroups.map((group) => {
+                const isActive = activeGroup === group.id && !group.redirect && !searchTerm;
+                const IconComponent = group.icon;
+                return (
+                  <button
+                    type="button"
+                    key={group.id}
+                    onClick={() => handleGroupClick(group)}
+                    className={`snap-start flex-shrink-0 flex items-center gap-2 pl-2 pr-4 py-2 rounded-full font-semibold text-sm transition-all border min-h-[44px] ${
+                      isActive
+                        ? `${group.activeClasses} shadow-md scale-[1.02]`
+                        : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300 hover:shadow-sm'
+                    }`}
+                  >
+                    <span
+                      className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${
+                        isActive ? 'bg-white/20 text-white' : group.iconBg
+                      }`}
+                    >
+                      <IconComponent className="w-3 h-3" />
+                    </span>
+                    {group.shortName}
+                    {group.redirect && <span className="opacity-60">↗</span>}
+                  </button>
+                );
+              })}
+            </div>
+            {/* Fade hint so mobile users know the band scrolls */}
+            <div className="pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-slate-50 to-transparent sm:hidden" />
           </div>
           {subCategories.length > 1 && !searchTerm && (
             <div className="flex gap-2 overflow-x-auto no-scrollbar mt-2.5 pt-2.5 border-t border-gray-100">
@@ -753,24 +784,33 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
 
       {/* Mobile category bar */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-2xl safe-area-bottom">
-        <div className="flex overflow-x-auto no-scrollbar px-3 py-2 gap-2">
-          {mainGroups.map((group) => (
-            <button
-              type="button"
-              key={group.id}
-              onClick={() => handleGroupClick(group)}
-              className={`flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-semibold transition-colors ${
-                activeGroup === group.id && !group.redirect
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-500 bg-gray-50'
-              }`}
-            >
-              {group.shortName}
-            </button>
-          ))}
+        <div className="flex overflow-x-auto no-scrollbar px-2 py-1.5 gap-1.5 snap-x">
+          {mainGroups.map((group) => {
+            const isActive = activeGroup === group.id && !group.redirect;
+            const IconComponent = group.icon;
+            return (
+              <button
+                type="button"
+                key={group.id}
+                onClick={() => handleGroupClick(group)}
+                className={`snap-start flex-shrink-0 flex flex-col items-center justify-center gap-0.5 px-3 py-1.5 rounded-xl min-w-[64px] min-h-[52px] transition-colors ${
+                  isActive ? `${group.activeClasses} shadow-md` : 'text-gray-500 bg-gray-50'
+                }`}
+              >
+                <span
+                  className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center ${
+                    isActive ? 'bg-white/20 text-white' : group.iconBg
+                  }`}
+                >
+                  <IconComponent className="w-2.5 h-2.5" />
+                </span>
+                <span className="text-[10px] font-semibold leading-none whitespace-nowrap">{group.shortName}</span>
+              </button>
+            );
+          })}
         </div>
       </div>
-      <div className="md:hidden h-16" />
+      <div className="md:hidden h-[68px]" />
     </Layout>
   );
 };
