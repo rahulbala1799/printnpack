@@ -47,7 +47,7 @@ export const BANNER_LOCAL_PAGES = {
       },
       {
         q: 'How much does banner printing cost in Dublin?',
-        a: 'PVC banners start from around €25–€45 for small sizes, with larger outdoor banners from €60–€150+. Roll-up banners with stands start from around €35. We provide free quotes with no minimum order.',
+        a: 'PVC banners start from around €25–€45 for small sizes, with larger outdoor banners from €60–€150+. Complete roll-up banners with a heavy cassette start from €80. Artwork reprints start from €35. We provide free quotes with no minimum order.',
       },
       {
         q: 'Can you print trade show banners for Dublin exhibitions?',
@@ -79,7 +79,7 @@ export const BANNER_LOCAL_PAGES = {
     title: 'Pull Up Banners Meath',
     metaTitle: 'Pull Up Banners Meath | Roll Up & Trade Show Banners | PrintNPack',
     metaDescription:
-      'Pull up banners Meath — roll up banners and trade show displays for Ashbourne, Navan, Ratoath and across County Meath. Portable exhibition banners from €35. Based in Ashbourne with nationwide delivery.',
+      'Pull up banners Meath — roll up banners and trade show displays for Ashbourne, Navan, Ratoath and across County Meath. Portable exhibition banners from €80 with a heavy cassette. Based in Ashbourne with nationwide delivery.',
     h1: 'Pull Up Banners Meath — Roll Up & Trade Show Displays',
     intro:
       'Need pull up banners in Meath for a trade show, conference, school event or shop display? PrintNPack is based in Ashbourne, Co. Meath and supplies professional roll up banners and pull up banner stands across Navan, Trim, Ratoath, Dunboyne, Dunshaughlin and all of County Meath. Premium vinyl graphics, aluminium stands, and fast turnaround.',
@@ -92,7 +92,7 @@ export const BANNER_LOCAL_PAGES = {
     ],
     deliveryNote: 'Collect from our Ashbourne unit or arrange delivery across Meath and Dublin. Order online or call +353 89 415 7369 for exhibition banners.',
     keywords: 'pull up banners meath, roll up banners meath, trade show banners meath, pull up banner printing meath, exhibition banners meath, roll up banners ashbourne',
-    quoteHref: '/roll-up-banners',
+    quoteHref: '/roll-up-banners-ireland',
     quoteLabel: 'Order Pull Up Banners',
     faqs: [
       {
@@ -101,7 +101,7 @@ export const BANNER_LOCAL_PAGES = {
       },
       {
         q: 'How much do pull up banners cost in Meath?',
-        a: 'Roll up banners start from around €35 depending on size and frame type. We provide free quotes with no minimum order for Meath customers.',
+        a: 'Complete roll up banners start from €80 with a heavy cassette included. Artwork reprints start from €35. Extra wide XXL banners go up to €450 for 3 m × 2 m. We provide free quotes with no minimum order for Meath customers.',
       },
       {
         q: 'Can I collect pull up banners in Ashbourne?',

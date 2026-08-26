@@ -18,6 +18,8 @@ const localPages = [
 const guides = [
   { href: '/banner-faq-ireland', title: 'Banner FAQ', desc: '40+ instant answers on cost, materials, artwork & delivery.' },
   { href: '/blog/banner-sizes-ireland', title: 'Banner Sizes Guide', desc: '2×4, 3×6, 4×8 PVC & roll-up dimensions for Irish businesses.' },
+  { href: '/blog/roll-up-banner-printing-ireland', title: 'Roll Up Banner Printing', desc: 'From €80 with cassette, artwork from €35, Dublin delivery.' },
+  { href: '/blog/roll-up-banners-ireland-guide', title: 'Roll Up Banners Guide', desc: 'Sizes, pull up vs roller banners, and complete units from €80.' },
   { href: '/blog/banner-printing-ireland-guide', title: 'Banner Printing Guide', desc: 'Cost, materials, turnaround & design tips for Irish businesses.' },
   { href: '/blog/trade-show-banners-decals-ireland', title: 'Trade Show Banners & Decals', desc: 'Exhibition marketing and custom decals guide.' },
 ];
@@ -25,7 +27,7 @@ const guides = [
 const faqs = [
   { q: 'Where can I get banner printing near me?', a: 'PrintNPack is based in Ashbourne, Co. Meath — your local banner printer for Meath and north Dublin with collection available. We also deliver banner printing across Dublin, Cork, Galway and all Irish counties.' },
   { q: 'Where can I get banner printing in Dublin?', a: 'We provide banner printing Dublin with delivery across the city and county — PVC banners, roll-up banners, and event graphics for shops, restaurants, schools and exhibitions. See our Dublin banner printing page for local delivery details.' },
-  { q: 'How much does banner printing cost?', a: 'PVC banners start from around €25–€45 for small sizes, with larger outdoor banners from €60–€150+. Roll-up banners with stands start from around €35. No minimum order — get a free quote for your exact size.' },
+  { q: 'How much does banner printing cost?', a: 'PVC banners start from around €25–€45 for small sizes, with larger outdoor banners from €60–€150+. Complete roll-up banners with a heavy cassette start from €80. Artwork reprints start from €35. Extra wide XXL banners go up to €450 for 3 m × 2 m. No minimum order — get a free quote for your exact size.' },
   { q: 'Can I order one banner?', a: 'Yes. Single banners for shop sales, school events, sports matches, and parties are welcome. We help with artwork and finishing.' },
   { q: 'How quickly can you print a banner?', a: 'Standard turnaround is 3–5 business days after artwork approval. Rush options (24–48 hours) may be available — tell us your deadline.' },
   { q: 'Do you offer banner printing in Ashbourne?', a: 'Yes. PrintNPack is based in Ashbourne, Co. Meath. Local collection is available, and we serve Ratoath, Dunboyne, Dunshaughlin, Dublin, and all of Ireland.' },
@@ -58,7 +60,7 @@ const itemListLd = {
   name: 'Banner Printing Ireland',
   itemListElement: [
     buildCatalogOffer('PVC Banners Ireland', `${SITE_URL}/vinyl-banners`, { price: '25.00' }).itemOffered,
-    buildCatalogOffer('Roll Up Banners Ireland', `${SITE_URL}/roll-up-banners`, { price: '35.00' }).itemOffered,
+    buildCatalogOffer('Roll Up Banners Ireland', `${SITE_URL}/roll-up-banners-ireland`, { price: '80.00' }).itemOffered,
     buildCatalogOffer('Extra Wide Roll Up Banners Ireland', `${SITE_URL}/extra-wide-roll-up-banners-ireland`, { price: '398.96' }).itemOffered,
     buildCatalogOffer('Large Stage Backdrop Banners Ireland', `${SITE_URL}/stage-backdrop-banners-ireland`).itemOffered,
     buildCatalogOffer('Custom Printed Flags Ireland', `${SITE_URL}/custom-printed-flags-ireland`).itemOffered,
@@ -136,10 +138,10 @@ export default function BannersIreland() {
               <p className="text-gray-600 text-sm leading-relaxed mb-4">Full-colour outdoor PVC banners with eyelets, hems, mesh options, and custom sizes. Shops, events, fences, and scaffolding.</p>
               <span className="text-blue-600 font-semibold text-sm">View PVC banners →</span>
             </Link>
-            <Link href="/roll-up-banners" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-blue-300 hover:shadow-lg transition-all">
-              <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 mb-2">Roll-Up Banners</h3>
-              <p className="text-gray-600 text-sm leading-relaxed mb-4">Portable roll-up displays with stand and carry case. Trade shows, reception areas, clinics, schools, and corporate events.</p>
-              <span className="text-blue-600 font-semibold text-sm">View roll-up banners →</span>
+            <Link href="/roll-up-banners-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-blue-300 hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 mb-2">Roll Up Banners Ireland</h3>
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">Pull up and roller banners from €80 with a heavy cassette. Artwork reprints from €35. Extra wide XXL up to €450 for 3 m × 2 m.</p>
+              <span className="text-blue-600 font-semibold text-sm">View roll up banners →</span>
             </Link>
             <Link href="/extra-wide-roll-up-banners-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-orange-300 hover:shadow-lg transition-all">
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-orange-600 mb-2">Extra Wide Roll-Ups</h3>

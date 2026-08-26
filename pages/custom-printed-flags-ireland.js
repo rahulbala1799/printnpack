@@ -441,7 +441,7 @@ export default function CustomPrintedFlagsIreland() {
         links={[
           { href: '/banners-ireland', label: 'Banners Ireland', desc: 'PVC banners, roll-ups and wide format hub' },
           { href: '/vinyl-banners', label: 'Vinyl Banners', desc: 'Outdoor PVC banner printing' },
-          { href: '/roll-up-banners', label: 'Roll Up Banners', desc: 'Portable trade show displays' },
+          { href: '/roll-up-banners-ireland', label: 'Roll Up Banners', desc: 'Portable trade show displays' },
           { href: '/foamex-ireland', label: 'Foamex Boards', desc: 'Rigid display boards for retail' },
           { href: '/posters', label: 'Custom Posters', desc: 'Poster printing Ireland' },
           { href: '/products', label: 'All Products', desc: 'Full print and packaging catalogue' },

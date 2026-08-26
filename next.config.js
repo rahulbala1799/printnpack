@@ -47,7 +47,47 @@ const nextConfig = {
       },
       {
         source: '/products/roll-up-banner-stands',
-        destination: '/roll-up-banners',
+        destination: '/roll-up-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/roll-up-banners',
+        destination: '/roll-up-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/roll-up-banner',
+        destination: '/roll-up-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/rollup-banners',
+        destination: '/roll-up-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/pull-up-banners',
+        destination: '/roll-up-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/pull-up-banners-ireland',
+        destination: '/roll-up-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/roller-banners-ireland',
+        destination: '/roll-up-banners-ireland',
+        permanent: true,
+      },
+      {
+        source: '/blog/roll-up-banner-cost-ireland',
+        destination: '/blog/roll-up-banner-printing-ireland',
+        permanent: true,
+      },
+      {
+        source: '/roll-up-banner-printing-ireland',
+        destination: '/blog/roll-up-banner-printing-ireland',
         permanent: true,
       },
       {

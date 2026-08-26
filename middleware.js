@@ -4,12 +4,17 @@ const CANONICAL_HOST = 'www.printnpack.ie';
 
 /** Force all traffic to https://www.printnpack.ie (single canonical origin for SEO). */
 export function middleware(request) {
-  const host = request.headers.get('host')?.split(':')[0]?.toLowerCase();
+  const hostname = (request.nextUrl.hostname || '').toLowerCase();
 
-  if (host && host !== CANONICAL_HOST) {
+  if (!hostname || hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '::1') {
+    return NextResponse.next();
+  }
+
+  if (hostname !== CANONICAL_HOST) {
     const url = request.nextUrl.clone();
     url.protocol = 'https:';
-    url.host = CANONICAL_HOST;
+    url.hostname = CANONICAL_HOST;
+    url.port = '';
     return NextResponse.redirect(url, 308);
   }
 

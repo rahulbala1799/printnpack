@@ -767,7 +767,7 @@ const products = [
     id: 'roll-up-banner-stands',
     name: 'Roll-Up Banner Stands',
     category: 'Wide Format',
-    url: '/roll-up-banners',
+    url: '/roll-up-banners-ireland',
     description: 'Professional roll-up banner stands that create instant impact for exhibitions, retail displays, and presentations.',
     features: [
       'Premium quality portable display system',
@@ -858,7 +858,7 @@ const products = [
       '/images/ifa/heroh/rollup/6.png'
     ],
     imageSrc: '/images/ifa/heroh/rollup/1.png',
-    price: 'Request for Quote',
+    price: 'From €80',
     quoteRequired: true,
     leadTime: '2-3 business days standard',
     faq: [

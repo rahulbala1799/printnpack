@@ -204,7 +204,7 @@ export default function TradeShowBannersDecalsIreland() {
         <p className="text-lg text-slate-600 mb-8 leading-relaxed">
           Searching for <strong>decals in Ireland</strong>? PrintNPack prints custom window decals, vehicle graphics,
           and retail vinyl stickers — plus portable{' '}
-          <Link href="/roll-up-banners" className="text-purple-600 hover:text-purple-700 font-medium">trade show banners</Link>{' '}
+          <Link href="/roll-up-banners-ireland" className="text-purple-600 hover:text-purple-700 font-medium">trade show banners</Link>{' '}
           and pull up banners for exhibitions nationwide. Browse our{' '}
           <Link href="/banners-ireland" className="text-purple-600 hover:text-purple-700 font-medium">banners Ireland</Link>{' '}
           hub or read the{' '}
@@ -284,7 +284,7 @@ export default function TradeShowBannersDecalsIreland() {
           </div>
 
           <p className="text-slate-700 leading-relaxed mb-8">
-            For many PrintNPack customers, a single well-designed <Link href="/roll-up-banners" className="text-purple-600 hover:text-purple-700 font-medium">roll-up banner</Link> —
+            For many PrintNPack customers, a single well-designed <Link href="/roll-up-banners-ireland" className="text-purple-600 hover:text-purple-700 font-medium">roll-up banner</Link> —
             whether <strong>premium roll up banner printing Dublin</strong> or <strong>next day pull up banners Ireland</strong> — pays for itself after just one successful event.
             We supply <strong>lightweight exhibition banner stands Ireland</strong>, <strong>retractable banner printing Ireland cheap</strong>, and
             <strong> high quality roll up banners Ireland</strong> for indoor promotional use.
@@ -536,7 +536,8 @@ export default function TradeShowBannersDecalsIreland() {
             <li><Link href="/banner-faq-ireland" className="text-purple-600 hover:text-purple-700 font-medium">Banner FAQ</Link> — pricing, materials &amp; artwork answers</li>
             <li><Link href="/blog/banner-sizes-ireland" className="text-purple-600 hover:text-purple-700 font-medium">Banner sizes guide</Link> — PVC &amp; roll-up dimensions</li>
             <li><Link href="/correx-boards" className="text-purple-600 hover:text-purple-700 font-medium">Corriboard / Correx boards</Link> — outdoor signage</li>
-            <li><Link href="/roll-up-banners" className="text-purple-600 hover:text-purple-700 font-medium">Roll-up banners</Link> — trade show banner printing Ireland</li>
+            <li><Link href="/roll-up-banners-ireland" className="text-purple-600 hover:text-purple-700 font-medium">Roll-up banners</Link> — trade show banner printing Ireland</li>
+            <li><Link href="/blog/roll-up-banner-printing-ireland" className="text-purple-600 hover:text-purple-700 font-medium">Roll up banner printing Ireland</Link> — cost, Dublin delivery and turnaround</li>
             <li><Link href="/extra-wide-roll-up-banners-ireland" className="text-purple-600 hover:text-purple-700 font-medium">Extra wide roll up banners</Link> — 2m XL roller banners up to 3m</li>
             <li><Link href="/vinyl-stickers" className="text-purple-600 hover:text-purple-700 font-medium">Vehicle decals &amp; window graphics</Link> — custom vinyl stickers Ireland</li>
             <li><Link href="/foamex-boards" className="text-purple-600 hover:text-purple-700 font-medium">Foamex boards</Link> — exhibition display printing</li>
@@ -566,7 +567,8 @@ export default function TradeShowBannersDecalsIreland() {
         <RelatedSeoLinks
           links={[
             { href: '/vinyl-stickers', label: 'Custom Vinyl Stickers', desc: 'Window, vehicle & retail decals' },
-            { href: '/roll-up-banners', label: 'Pull Up Banners Meath', desc: 'Portable trade show displays' },
+            { href: '/roll-up-banners-ireland', label: 'Roll Up Banners Ireland', desc: 'Portable pull up displays from €80' },
+            { href: '/blog/roll-up-banner-printing-ireland', label: 'Roll Up Banner Printing', desc: 'Cost, Dublin delivery & turnaround' },
             { href: '/vinyl-banners', label: 'Printed Banners Ireland', desc: 'Large format outdoor vinyl' },
             { href: '/blog/custom-vinyl-stickers-ireland', label: 'Vinyl Stickers Guide', desc: 'Materials & applications' },
           ]}
@@ -584,7 +586,7 @@ export default function TradeShowBannersDecalsIreland() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
-                href="/roll-up-banners"
+                href="/roll-up-banners-ireland"
                 className="bg-white text-purple-700 hover:bg-purple-50 px-6 py-3 rounded-lg font-semibold transition-colors"
               >
                 Roll-Up Banners →

@@ -16,7 +16,7 @@ export default function BannerLocalPage({ config }) {
   const defaultFaqs = [
     {
       q: `How much does banner printing cost in ${config.title.replace('Banner Printing ', '')}?`,
-      a: 'PVC banners start from around €25–€45 for small sizes, with larger outdoor banners from €60–€150+. Roll-up banners with stands start from around €35. We provide free quotes with no minimum order.',
+      a: 'PVC banners start from around €25–€45 for small sizes, with larger outdoor banners from €60–€150+. Complete roll-up banners with a heavy cassette start from €80. Artwork reprints start from €35. We provide free quotes with no minimum order.',
     },
     {
       q: 'How quickly can you print a banner?',
@@ -152,7 +152,7 @@ export default function BannerLocalPage({ config }) {
               <p className="text-gray-600 text-sm leading-relaxed mb-3">Outdoor and indoor PVC banners with eyelets, hems, mesh options, and custom sizes up to 5m wide.</p>
               <span className="text-blue-600 font-semibold text-sm">View PVC banners →</span>
             </Link>
-            <Link href="/roll-up-banners" className="group bg-white rounded-2xl border border-gray-200 p-6 hover:border-blue-300 hover:shadow-lg transition-all">
+            <Link href="/roll-up-banners-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 hover:border-blue-300 hover:shadow-lg transition-all">
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 mb-2">Roll-Up Banners</h3>
               <p className="text-gray-600 text-sm leading-relaxed mb-3">Portable roll-up displays for trade shows, reception areas, clinics, schools, and corporate events.</p>
               <span className="text-blue-600 font-semibold text-sm">View roll-up banners →</span>
@@ -222,7 +222,8 @@ export default function BannerLocalPage({ config }) {
           { href: '/banners-ireland', label: 'Banners Ireland', desc: 'Complete banner printing hub' },
           { href: '/blog/banner-sizes-ireland', label: 'Banner Sizes Guide', desc: '2×4, 3×6, 4×8 & roll-up dimensions' },
           { href: '/vinyl-banners', label: 'PVC Banners', desc: 'Outdoor & shop-front banners' },
-          { href: '/roll-up-banners', label: 'Roll-Up Banners', desc: 'Portable trade show displays' },
+          { href: '/roll-up-banners-ireland', label: 'Roll Up Banners Ireland', desc: 'Pull up & roller banners from €80' },
+          { href: '/blog/roll-up-banner-printing-ireland', label: 'Roll Up Banner Printing', desc: 'Cost, Dublin delivery & turnaround' },
           { href: '/extra-wide-roll-up-banners-ireland', label: 'Extra Wide Roll Ups', desc: '2m XL roller banners up to 3m' },
           { href: '/banner-faq-ireland', label: 'Banner FAQ', desc: '40+ instant answers' },
           ...siblingLinks,

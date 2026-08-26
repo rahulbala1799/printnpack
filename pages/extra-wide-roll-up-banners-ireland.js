@@ -45,7 +45,7 @@ const sizeOptions = [
     label: 'XXXL',
     dimensions: '200 × 300 cm',
     wasPrice: 469.49,
-    price: 436.62,
+    price: 450,
     image: '/ifa/product/extra-wide-rollup/size-xxxl.jpg',
     popular: false,
   },
@@ -174,7 +174,7 @@ const productLd = {
     url: PAGE_URL,
     priceCurrency: 'EUR',
     lowPrice: '398.96',
-    highPrice: '436.62',
+    highPrice: '450.00',
     offerCount: String(sizeOptions.length),
     availability: 'https://schema.org/InStock',
     areaServed,
@@ -197,7 +197,7 @@ const breadcrumbLd = {
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
     { '@type': 'ListItem', position: 2, name: 'Banners Ireland', item: `${SITE_URL}/banners-ireland` },
-    { '@type': 'ListItem', position: 3, name: 'Roll Up Banners', item: `${SITE_URL}/roll-up-banners` },
+    { '@type': 'ListItem', position: 3, name: 'Roll Up Banners', item: `${SITE_URL}/roll-up-banners-ireland` },
     { '@type': 'ListItem', position: 4, name: 'Extra Wide Roll Up Banners', item: PAGE_URL },
   ],
 };
@@ -278,7 +278,7 @@ const ExtraWideRollUpBannersPage = () => {
             <li>/</li>
             <li><Link href="/banners-ireland" className="hover:text-gray-700">Banners Ireland</Link></li>
             <li>/</li>
-            <li><Link href="/roll-up-banners" className="hover:text-gray-700">Roll Up Banners</Link></li>
+            <li><Link href="/roll-up-banners-ireland" className="hover:text-gray-700">Roll Up Banners</Link></li>
             <li>/</li>
             <li className="text-gray-800 font-medium">Extra Wide</li>
           </ol>
@@ -495,7 +495,7 @@ const ExtraWideRollUpBannersPage = () => {
 
               <p className="text-xs text-gray-400 text-center">
                 Need standard width?{' '}
-                <Link href="/roll-up-banners" className="text-orange-600 hover:underline">
+                <Link href="/roll-up-banners-ireland" className="text-orange-600 hover:underline">
                   View standard roll up banners
                 </Link>
               </p>
@@ -571,8 +571,8 @@ const ExtraWideRollUpBannersPage = () => {
               </div>
               <p className="text-sm text-gray-500 mt-4">
                 Need a compact stand?{' '}
-                <Link href="/roll-up-banners" className="text-orange-600 hover:underline font-medium">Order standard roll up banners</Link>
-                {' '}from €35. Size guide:{' '}
+                <Link href="/roll-up-banners-ireland" className="text-orange-600 hover:underline font-medium">Order standard roll up banners</Link>
+                {' '}from €80 with a heavy cassette. Size guide:{' '}
                 <Link href="/blog/banner-sizes-ireland" className="text-orange-600 hover:underline font-medium">banner sizes Ireland</Link>.
               </p>
             </div>
@@ -699,7 +699,8 @@ const ExtraWideRollUpBannersPage = () => {
       <RelatedSeoLinks
         links={[
           { href: '/blog/extra-wide-roll-up-banners-ireland-guide', label: 'XL Roller Banner Guide', desc: 'Sizes, venues, NI & UK shipping' },
-          { href: '/roll-up-banners', label: 'Standard Roll Up Banners', desc: 'Portable trade show displays from €35' },
+          { href: '/roll-up-banners-ireland', label: 'Standard Roll Up Banners', desc: 'Complete units from €80 with heavy cassette' },
+          { href: '/blog/roll-up-banner-printing-ireland', label: 'Roll Up Banner Printing', desc: 'Cost, Dublin delivery & turnaround' },
           { href: '/banners-ireland', label: 'Banners Ireland', desc: 'Complete banner printing hub' },
           { href: '/banner-faq-ireland', label: 'Banner FAQ', desc: '40+ instant answers' },
           { href: '/vinyl-banners', label: 'PVC Banners', desc: 'Outdoor advertising banners' },

@@ -350,7 +350,7 @@ const VinylStickersPage = () => {
           { href: '/blog/custom-vinyl-stickers-ireland', label: 'Custom Vinyl Stickers Guide', desc: 'Sticker types & materials' },
           { href: '/blog/trade-show-banners-decals-ireland', label: 'Custom Decals Ireland', desc: 'Window & vehicle decals' },
           { href: '/vinyl-banners', label: 'Printed Banners', desc: 'Outdoor advertising' },
-          { href: '/roll-up-banners', label: 'Roll Up Banners', desc: 'Trade show displays' },
+          { href: '/roll-up-banners-ireland', label: 'Roll Up Banners', desc: 'Trade show displays' },
         ]}
       />
 

@@ -15,11 +15,11 @@ const pvcSizes = [
 ];
 
 const rollUpSizes = [
-  { size: '850mm × 2000mm', use: 'Compact roll-up — reception desks, small exhibitions', from: '€35' },
-  { size: '1000mm × 2000mm', use: 'Standard trade show width — most popular', from: '€45' },
-  { size: '1200mm × 2000mm', use: 'Wide roll-up — corporate events, retail displays', from: '€55' },
+  { size: '850mm × 2000mm', use: 'Compact roll-up — reception desks, small exhibitions', from: '€80' },
+  { size: '1000mm × 2000mm', use: 'Standard trade show width — most popular', from: '€80' },
+  { size: '1200mm × 2000mm', use: 'Wide roll-up — corporate events, retail displays', from: '€80' },
   { size: '2000 × 2000 mm (XL extra wide)', use: '2m extra-wide exhibition backdrop', from: '€398.96' },
-  { size: '2000 × 3000 mm (XXXL extra wide)', use: '3m-high extra-wide hall backdrop', from: '€436.62' },
+  { size: '2000 × 3000 mm (XXXL extra wide)', use: '3 m × 2 m extra-wide hall backdrop', from: '€450' },
 ];
 
 const jsonLd = {
@@ -149,7 +149,7 @@ export default function BannerSizesIreland() {
             hub, order{' '}
             <Link href="/vinyl-banners" className="text-blue-600 hover:underline font-medium">PVC banners</Link>{' '}
             or{' '}
-            <Link href="/roll-up-banners" className="text-blue-600 hover:underline font-medium">roll-up banners</Link>, or
+            <Link href="/roll-up-banners-ireland" className="text-blue-600 hover:underline font-medium">roll-up banners</Link>, or
             read the full{' '}
             <Link href="/banner-faq-ireland" className="text-blue-600 hover:underline font-medium">banner FAQ</Link>{' '}
             for pricing, materials, and artwork tips.
@@ -254,6 +254,8 @@ export default function BannerSizesIreland() {
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">Related guides</h2>
           <ul className="list-disc pl-6 text-slate-700 mb-8 space-y-2">
             <li><Link href="/blog/banner-printing-ireland-guide" className="text-blue-600 hover:underline font-medium">Banner printing cost, materials &amp; turnaround guide</Link></li>
+            <li><Link href="/blog/roll-up-banner-printing-ireland" className="text-blue-600 hover:underline font-medium">Roll up banner printing Ireland</Link> — from €80 with cassette, artwork from €35</li>
+            <li><Link href="/roll-up-banners-ireland" className="text-blue-600 hover:underline font-medium">Roll up banners Ireland</Link> — pull up &amp; roller banners with stand</li>
             <li><Link href="/extra-wide-roll-up-banners-ireland" className="text-blue-600 hover:underline font-medium">Extra wide 2m roll up banners</Link> — XL to 3m high for exhibitions</li>
             <li><Link href="/blog/extra-wide-roll-up-banners-ireland-guide" className="text-blue-600 hover:underline font-medium">Extra wide roll up banner size &amp; delivery guide</Link></li>
             <li><Link href="/blog/trade-show-banners-decals-ireland" className="text-blue-600 hover:underline font-medium">Trade show banners &amp; custom decals guide</Link></li>

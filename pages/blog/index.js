@@ -6,6 +6,28 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'roll-up-banner-printing-ireland',
+    title: 'Roll Up Banner Printing Ireland: Cost, Dublin Delivery & Turnaround',
+    excerpt:
+      'Roll up banner printing from €80 with a heavy cassette. Artwork reprints from €35. Dublin delivery, Ashbourne collection, 2–3 day turnaround, pull up vs roller banners, and no minimum order.',
+    date: '2026-08-26',
+    readTime: '9 min read',
+    image: '/ifa/product/rollup/2.png',
+    imageAlt: 'Roll up banner printing Ireland — pull up banner with aluminium stand',
+    category: 'Print Guide',
+  },
+  {
+    slug: 'roll-up-banners-ireland-guide',
+    title: 'Roll Up Banners Ireland: Sizes, Pull Up vs Roller Banners & Cost Guide',
+    excerpt:
+      'How to choose roll up banners in Ireland — 850, 1000 and 1200 mm sizes, pull up vs roller banner names, complete units from €80, artwork reprints from €35, and extra wide XXL up to €450.',
+    date: '2026-08-26',
+    readTime: '7 min read',
+    image: '/ifa/product/rollup/1.png',
+    imageAlt: 'Roll up banners Ireland — pull up banner with aluminium stand',
+    category: 'Print Guide',
+  },
+  {
     slug: 'extra-wide-roll-up-banners-ireland-guide',
     title: 'Extra Wide Roll Up Banners Ireland: 2m XL Sizes, NI Delivery & Trade Show Guide',
     excerpt:

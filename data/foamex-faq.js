@@ -147,7 +147,7 @@ export const FOAMEX_FAQS = [
     q: 'Are foamex boards good for exhibitions?',
     subtitle: 'Trade show and exhibition graphics',
     a: 'Yes. Foamex is one of the most popular materials for exhibition panels and trade show graphics in Ireland. Lightweight for transport, rigid enough to stand upright, and prints with sharp detail. Pair with our roll-up banners for a complete exhibition package.',
-    link: { href: '/roll-up-banners', label: 'Roll-up banners' },
+    link: { href: '/roll-up-banners-ireland', label: 'Roll-up banners' },
   },
   {
     id: 'outdoor-use',

@@ -2,7 +2,7 @@ export const EXTRA_WIDE_TITLE =
   'Extra Wide Roll Up Banners Ireland | 2m XL Roller Banners NI & UK | PrintNPack';
 
 export const EXTRA_WIDE_DESCRIPTION =
-  'Buy extra wide roll up banners in Ireland, Northern Ireland and the UK. 2m-wide XL, XXL and XXXL roller banners up to 3m high. UV print on Airtex 330, Silver XL stand, B1 certified. From €398.96 — order from 1. Delivery across Ireland, Belfast, UK and EU.';
+  'Buy extra wide roll up banners in Ireland, Northern Ireland and the UK. 2m-wide XL, XXL and XXXL roller banners up to 3m high. UV print on Airtex 330, Silver XL stand, B1 certified. From €398.96, XXL up to €450 for 3 m × 2 m — order from 1. Delivery across Ireland, Belfast, UK and EU.';
 
 export const EXTRA_WIDE_KEYWORDS =
   'extra wide roll up banner, extra wide roll up banners ireland, extra wide roller banner, xl roll up banner, xl roller banner ireland, 2m roll up banner, 2 metre roller banner, 200cm roll up banner, 3 metre roll up banner, xxxl roll up banner, large format pull up banner, extra wide pull up banner, exhibition roll up banner ireland, trade show roller banner, wide format roll up banner dublin, roll up banners belfast, extra wide banner northern ireland, roller banner uk, extra wide roll up banner europe, 2000mm roll up banner, giant pull up banner, indoor exhibition banner, b1 certified roll up banner, airtex 330 roller banner';
@@ -26,8 +26,8 @@ export const seoSections = [
   },
   {
     title: 'Extra Wide vs Standard Roll Up Banners',
-    body: 'Standard Irish roll ups are typically 80–120 cm wide and 200 cm tall, from around €35. Extra wide roll up banners are 200 cm wide with heights of 200, 250 or 300 cm, from €398.96 including the heavy-duty stand. Choose standard width for small reception desks and compact booths. Choose extra wide when you need a 2 metre backdrop visible across a busy hall.',
-    link: { href: '/roll-up-banners', label: 'Standard roll up banners from €35' },
+    body: 'Standard Irish roll ups are typically 80–120 cm wide and 200 cm tall, from €80 with a heavy cassette (artwork reprints from €35). Extra wide roll up banners are 200 cm wide with heights of 200, 250 or 300 cm, from €398.96 up to €450 for 3 m × 2 m XXL including the heavy-duty stand. Choose standard width for small reception desks and compact booths. Choose extra wide when you need a 2 metre backdrop visible across a busy hall.',
+    link: { href: '/roll-up-banners-ireland', label: 'Standard roll up banners from €80' },
   },
   {
     title: 'Delivery to Northern Ireland, the UK and Europe',
@@ -46,7 +46,7 @@ export const pageFaqs = [
   },
   {
     q: 'How much do extra wide roller banners cost?',
-    a: 'Extra wide roll up banners start from €398.96 for XL (200×200 cm) including Silver XL stand and UV print. XXL (200×250 cm) is €418.49 and XXXL (200×300 cm) is €436.62. There is no minimum order — from 1 piece.',
+    a: 'Extra wide roll up banners start from €398.96 for XL (200×200 cm) including Silver XL stand and UV print. XXL (200×250 cm) is €418.49. XXXL (200×300 cm / 3 m × 2 m) is up to €450. There is no minimum order — from 1 piece.',
   },
   {
     q: 'Do you deliver extra wide roll up banners to Northern Ireland?',
@@ -59,7 +59,7 @@ export const pageFaqs = [
   {
     q: 'What is the difference between extra wide and standard roll up banners?',
     a: 'Standard roll ups are usually 80–120 cm wide and 200 cm high. Extra wide roller banners are 200 cm (2 m) wide with optional 2.5 m or 3 m height. Extra wide is for large indoor exhibitions; standard width is better for compact stands and reception desks.',
-    link: { href: '/roll-up-banners', label: 'See standard roll up banners' },
+    link: { href: '/roll-up-banners-ireland', label: 'See standard roll up banners' },
   },
   {
     q: 'Are extra wide pull up banners suitable for outdoor use?',
@@ -92,6 +92,6 @@ export const comparisonRows = [
   { feature: 'Height options', extra: '200 / 250 / 300 cm', standard: 'Typically 200 cm' },
   { feature: 'Best for', extra: 'Exhibition halls, 3 m backdrops, retail atriums', standard: 'Reception, compact booths, clinics' },
   { feature: 'Stand', extra: 'Silver XL heavy-duty cassette', standard: 'Standard aluminium cassette' },
-  { feature: 'From price', extra: '€398.96 inc. stand', standard: '€35 inc. stand' },
+  { feature: 'From price', extra: 'From €398.96, XXL up to €450', standard: '€80 with cassette (€35 artwork)' },
   { feature: 'Use', extra: 'Indoor only (B1 certified)', standard: 'Indoor (outdoor PVC separate)' },
 ];

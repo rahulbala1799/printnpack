@@ -89,7 +89,7 @@ const POPULAR_LINKS = [
   { label: 'Magnetic Gift Boxes', href: '/luxury-magnetic-closure-boxes-ireland' },
   { label: 'Tissue Paper', href: '/custom-printed-tissue-paper-ireland' },
   { label: 'Plain Packaging', href: '/plain-packaging' },
-  { label: 'Roll-Up Banners', href: '/roll-up-banners' },
+  { label: 'Roll-Up Banners', href: '/roll-up-banners-ireland' },
   { label: 'Custom Flags', href: '/custom-printed-flags-ireland' },
   { label: 'Vinyl Stickers', href: '/vinyl-stickers' },
   { label: 'Labels on a Roll', href: '/labels-on-a-roll' },

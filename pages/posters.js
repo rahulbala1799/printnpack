@@ -293,7 +293,7 @@ export default function PostersPage() {
           { href: '/services/posters', label: 'Poster Printing Service', desc: 'Design & print service' },
           { href: '/services/leaflets', label: 'Leaflets Ireland', desc: 'Flat leaflet printing' },
           { href: '/vinyl-banners', label: 'Printed Banners', desc: 'Large format outdoor' },
-          { href: '/roll-up-banners', label: 'Roll Up Banners', desc: 'Trade show displays' },
+          { href: '/roll-up-banners-ireland', label: 'Roll Up Banners', desc: 'Trade show displays' },
         ]}
       />
 

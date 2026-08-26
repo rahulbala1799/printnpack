@@ -175,7 +175,7 @@ export default function BannerFaqIreland() {
           <div className="flex flex-wrap gap-3">
             <Link href="/quote?product=Vinyl+Banners" className="inline-flex items-center bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors">Get a Free Quote</Link>
             <Link href="/vinyl-banners" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">PVC Banners</Link>
-            <Link href="/roll-up-banners" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">Roll-Up Banners</Link>
+            <Link href="/roll-up-banners-ireland" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">Roll-Up Banners</Link>
           </div>
         </div>
       </section>
@@ -187,6 +187,8 @@ export default function BannerFaqIreland() {
           { href: '/banner-printing-ashbourne', label: 'Banner Printing Ashbourne', desc: 'Local collection & support' },
           { href: '/banner-printing-dublin', label: 'Banner Printing Dublin', desc: 'Delivery across Dublin' },
           { href: '/blog/banner-printing-ireland-guide', label: 'Banner Printing Guide', desc: 'Cost, materials & turnaround' },
+          { href: '/blog/roll-up-banner-printing-ireland', label: 'Roll Up Banner Printing', desc: 'From €80 with cassette, Dublin delivery' },
+          { href: '/roll-up-banners-ireland', label: 'Roll Up Banners Ireland', desc: 'Pull up & roller banners' },
         ]}
       />
     </Layout>

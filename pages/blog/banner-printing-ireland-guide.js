@@ -27,7 +27,7 @@ const faqLd = {
     {
       '@type': 'Question',
       name: 'How much does banner printing cost in Ireland?',
-      acceptedAnswer: { '@type': 'Answer', text: 'PVC banners typically start from €25–€45 for small sizes, with larger outdoor banners from €60–€150+. Roll-up banners with stands start from around €35. Price depends on size, material, finishing, and urgency.' },
+      acceptedAnswer: { '@type': 'Answer', text: 'PVC banners typically start from €25–€45 for small sizes, with larger outdoor banners from €60–€150+. Complete roll-up banners with a heavy cassette start from €80. Artwork reprints start from €35. Extra wide XXL banners go up to €450 for 3 m × 2 m. Price depends on size, material, finishing, and urgency.' },
     },
     {
       '@type': 'Question',
@@ -99,7 +99,10 @@ export default function BannerPrintingIrelandGuide() {
             hub, see{' '}
             <Link href="/vinyl-banners" className="text-blue-600 hover:underline font-medium">PVC banners</Link>{' '}
             and{' '}
-            <Link href="/roll-up-banners" className="text-blue-600 hover:underline font-medium">roll-up banners</Link>, or
+            <Link href="/roll-up-banners-ireland" className="text-blue-600 hover:underline font-medium">roll-up banners</Link>,
+            our{' '}
+            <Link href="/blog/roll-up-banner-printing-ireland" className="text-blue-600 hover:underline font-medium">roll up banner printing Ireland</Link>{' '}
+            cost and turnaround guide, or
             read the full{' '}
             <Link href="/banner-faq-ireland" className="text-blue-600 hover:underline font-medium">banner FAQ</Link>.
             See also our{' '}
@@ -114,7 +117,7 @@ export default function BannerPrintingIrelandGuide() {
             <li><strong>Small PVC banner</strong> (e.g. 2ft × 4ft): from around €25–€45</li>
             <li><strong>Medium outdoor PVC</strong> (e.g. 4ft × 8ft): from around €60–€90</li>
             <li><strong>Large outdoor / mesh</strong>: priced per square metre — €100–€200+ for big installs</li>
-            <li><strong>Roll-up banner with stand</strong>: from around €35 (economy) to €150+ (premium aluminium)</li>
+            <li><strong>Roll-up banner with heavy cassette</strong>: from €80 (artwork reprint from €35; extra wide XXL up to €450)</li>
           </ul>
           <p className="text-slate-700 leading-relaxed mb-8">
             Cheaper banners often use thinner PVC or skip reinforced hems. That is fine for a one-day event but poor value

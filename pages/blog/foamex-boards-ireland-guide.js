@@ -161,7 +161,7 @@ export default function FoamexBoardsIrelandGuide() {
             <li>Event branding and conference signage</li>
           </ul>
           <p className="text-gray-600 leading-relaxed mt-4">
-            Pair foamex panels with <Link href="/roll-up-banners" className="text-violet-600 hover:underline">roll-up banners</Link> for
+            Pair foamex panels with <Link href="/roll-up-banners-ireland" className="text-violet-600 hover:underline">roll-up banners</Link> for
             a complete exhibition package.
           </p>
 

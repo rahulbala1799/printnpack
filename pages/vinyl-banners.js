@@ -56,7 +56,7 @@ const relatedLinks = [
   { href: '/banners-ireland', label: 'Banners Ireland', desc: 'Complete banner printing hub' },
   { href: '/banner-faq-ireland', label: 'Banner FAQ', desc: '40+ instant answers' },
   { href: '/blog/banner-sizes-ireland', label: 'Banner Sizes Guide', desc: '2×4, 3×6, 4×8 & roll-up dimensions' },
-  { href: '/roll-up-banners', label: 'Pull Up & Roll Up Banners', desc: 'Portable trade show displays' },
+  { href: '/roll-up-banners-ireland', label: 'Pull Up & Roll Up Banners', desc: 'Portable trade show displays' },
   { href: '/banner-printing-dublin', label: 'Banner Printing Dublin', desc: 'Delivery across Dublin' },
 ];
 
@@ -182,7 +182,7 @@ export default function VinylBannersPage() {
                 Standard sizes from 2×4 to 5×10 — see our{' '}
                 <Link href="/blog/banner-sizes-ireland" className="text-blue-600 hover:underline font-medium">banner sizes guide</Link>.
                 For portable displays, see{' '}
-                <Link href="/roll-up-banners" className="text-blue-600 hover:underline font-medium">pull up banners</Link>.
+                <Link href="/roll-up-banners-ireland" className="text-blue-600 hover:underline font-medium">pull up banners</Link>.
               </p>
               <div className="grid grid-cols-3 gap-3 mb-6">
                 <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">From €25</div><div className="text-xs text-gray-500">small PVC</div></div>

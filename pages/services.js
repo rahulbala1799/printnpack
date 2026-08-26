@@ -52,7 +52,7 @@ export default function Services() {
       icon: <FaImage className="w-12 h-12 text-primary" />,
       title: "Roll Up Banners",
       description: "Professional exhibition and trade show displays with easy setup",
-      link: "/roll-up-banners"
+      link: "/roll-up-banners-ireland"
     }
   ];
 

@@ -137,11 +137,18 @@ const guides = [
     cta: 'View banners',
   },
   {
-    href: '/roll-up-banners',
-    title: 'Pull Up Banners Meath',
-    description: 'Portable roll up banners for trade shows — based in Ashbourne, Co. Meath.',
+    href: '/roll-up-banners-ireland',
+    title: 'Roll Up Banners Ireland',
+    description: 'Pull up and roller banners from €80 with a heavy cassette — printed in Ashbourne, delivered nationwide.',
     image: '/ifa/product/rollup/1.png',
     cta: 'View roll ups',
+  },
+  {
+    href: '/blog/roll-up-banner-printing-ireland',
+    title: 'Roll Up Banner Printing Ireland',
+    description: 'Complete units from €80, artwork reprints from €35, extra wide XXL up to €450.',
+    image: '/ifa/product/rollup/2.png',
+    cta: 'Read the printing guide',
   },
   {
     href: '/custom-printed-flags-ireland',

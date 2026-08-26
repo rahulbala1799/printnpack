@@ -249,7 +249,7 @@ export default function PrintingAshbourneGuide() {
           <p className="text-slate-700 leading-relaxed mb-4">
             Banners are ideal for events, festivals, sports clubs, charity fundraisers, openings, outdoor promotions and
             shopfront visibility.{' '}
-            <Link href="/roll-up-banners" className="text-blue-600 hover:underline font-medium">Roll-up banners</Link> are
+            <Link href="/roll-up-banners-ireland" className="text-blue-600 hover:underline font-medium">Roll-up banners</Link> are
             useful for exhibitions, reception areas, pop-ups, trade shows and indoor events because they are portable and
             reusable.
           </p>

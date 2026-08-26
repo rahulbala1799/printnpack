@@ -32,7 +32,7 @@ const quickLinks = [
   { label: 'Cake Boxes', href: '/custom-cake-boxes-ireland' },
   { label: 'Paper Bags', href: '/printed-flat-handle-bags-ireland' },
   { label: 'Plain Packaging', href: '/plain-packaging' },
-  { label: 'Roll-Up Banners', href: '/roll-up-banners' },
+  { label: 'Roll-Up Banners', href: '/roll-up-banners-ireland' },
   { label: 'Custom Flags', href: '/custom-printed-flags-ireland' },
   { label: 'Foamex Boards', href: '/foamex-boards' },
 ];

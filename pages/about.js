@@ -177,7 +177,7 @@ const AboutPage = () => {
                 { href: '/custom-pizza-boxes-ireland', label: 'Custom Pizza Boxes Ireland' },
                 { href: '/printed-flat-handle-bags-ireland', label: 'Printed Flat Handle Bags' },
                 { href: '/vinyl-banners', label: 'Printed Banners Ireland' },
-                { href: '/roll-up-banners', label: 'Pull Up Banners Meath' },
+                { href: '/roll-up-banners-ireland', label: 'Roll Up Banners Ireland' },
                 { href: '/vinyl-stickers', label: 'Custom Vinyl Stickers' },
                 { href: '/posters', label: 'Custom Posters Ireland' },
                 { href: '/services/leaflets', label: 'Leaflets Ireland' },

@@ -127,7 +127,7 @@ export default function ExtraWideRollUpGuide() {
           <ul className="list-disc pl-6 text-slate-700 mb-6 space-y-2">
             <li><strong>XL — 200 × 200 cm</strong> from €398.96. Square footprint for compact exhibition booths and retail atriums.</li>
             <li><strong>XXL — 200 × 250 cm</strong> from €418.49. Taller conference and hotel foyer backdrops.</li>
-            <li><strong>XXXL — 200 × 300 cm</strong> from €436.62. Full 3 metre extra wide roll up banner for large indoor halls.</li>
+            <li><strong>XXXL — 200 × 300 cm</strong> up to €450. Full 3 m × 2 m extra wide roll up banner for large indoor halls.</li>
           </ul>
           <p className="text-slate-700 leading-relaxed mb-6">
             Every size includes the Silver XL aluminium stand, carry bag, and single-sided UV print on wrinkle-free
@@ -150,7 +150,7 @@ export default function ExtraWideRollUpGuide() {
             display — not an outdoor PVC banner. For fences and shop fronts use{' '}
             <Link href="/vinyl-banners" className="text-orange-600 hover:underline font-medium">PVC vinyl banners</Link>.
             For 85–120 cm portable stands use{' '}
-            <Link href="/roll-up-banners" className="text-orange-600 hover:underline font-medium">standard roll up banners</Link>.
+            <Link href="/roll-up-banners-ireland" className="text-orange-600 hover:underline font-medium">standard roll up banners</Link>.
           </p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">Where extra wide pull up banners work</h2>
@@ -194,8 +194,9 @@ export default function ExtraWideRollUpGuide() {
 
       <RelatedSeoLinks
         links={[
-          { href: '/extra-wide-roll-up-banners-ireland', label: 'Extra Wide Roll Up Banners', desc: '2m XL–XXXL from €398.96' },
-          { href: '/roll-up-banners', label: 'Standard Roll Up Banners', desc: 'From €35 with stand' },
+          { href: '/extra-wide-roll-up-banners-ireland', label: 'Extra Wide Roll Up Banners', desc: '2m XL–XXXL, XXL up to €450' },
+          { href: '/roll-up-banners-ireland', label: 'Standard Roll Up Banners', desc: 'From €80 with heavy cassette' },
+          { href: '/blog/roll-up-banner-printing-ireland', label: 'Roll Up Banner Printing', desc: 'Cost, Dublin & turnaround' },
           { href: '/banners-ireland', label: 'Banners Ireland', desc: 'PVC and roll-up hub' },
           { href: '/blog/trade-show-banners-decals-ireland', label: 'Trade Show Banners Guide', desc: 'Exhibition marketing' },
           { href: '/banner-printing-dublin', label: 'Banner Printing Dublin', desc: 'City & county delivery' },

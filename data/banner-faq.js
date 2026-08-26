@@ -15,7 +15,7 @@ export const BANNER_FAQS = [
     category: 'pricing',
     q: 'How much does banner printing cost in Ireland?',
     subtitle: 'Understanding banner pricing for your budget',
-    a: 'Banner printing in Ireland typically starts from around €25–€45 for a small PVC banner (e.g. 2ft × 4ft), with larger outdoor banners from €60–€150+ depending on size, material, and finishing. Roll-up banners with stands start from around €35–€120. Price varies with size, PVC weight (440gsm vs 510gsm), eyelets, hems, urgency, and whether you need design support. PrintNPack provides free quotes with no minimum order.',
+    a: 'Banner printing in Ireland typically starts from around €25–€45 for a small PVC banner (e.g. 2ft × 4ft), with larger outdoor banners from €60–€150+ depending on size, material, and finishing. Complete roll-up banners with a heavy cassette start from €80. Artwork reprints start from €35. Extra wide XXL banners go up to €450 for 3 m × 2 m. Price varies with size, PVC weight (440gsm vs 510gsm), eyelets, hems, urgency, and whether you need design support. PrintNPack provides free quotes with no minimum order.',
     link: { href: '/quote?product=Vinyl+Banners', label: 'Get a banner quote' },
   },
   {
@@ -31,8 +31,16 @@ export const BANNER_FAQS = [
     category: 'pricing',
     q: 'How much does a roll-up banner cost?',
     subtitle: 'Comparing roll-up banner prices in Ireland',
-    a: 'Roll-up banners in Ireland typically start from €35 for a basic economy stand with printed graphic, rising to €80–€150+ for premium aluminium cassettes with carry cases. Extra wide 2m roller banners start from €398.96. Standard widths are 850mm and 1200mm. Contact us with your size and deadline for an exact quote.',
-    link: { href: '/roll-up-banners', label: 'View roll-up banners' },
+    a: 'Complete roll-up banners in Ireland start from €80 with a heavy cassette included. Artwork reprints (graphic only, no stand) start from €35. Extra wide XXL banners go up to €450 for 3 m × 2 m. Standard widths are 850mm, 1000mm and 1200mm. Dublin delivery and Ashbourne collection are available. Contact us with your size and deadline for an exact quote.',
+    link: { href: '/blog/roll-up-banner-printing-ireland', label: 'Roll up banner printing cost guide' },
+  },
+  {
+    id: 'rollup-printing-time',
+    category: 'turnaround',
+    q: 'How long does roll up banner printing take?',
+    subtitle: 'Dublin delivery and Ashbourne collection',
+    a: 'Standard roll up banner printing takes 2–3 business days after you approve the artwork proof. 24–48 hour rush is often available when the PDF is print-ready. Dublin delivery and collection from our Ashbourne unit are both options. Complete units start from €80 with a heavy cassette; artwork reprints start from €35.',
+    link: { href: '/blog/roll-up-banner-printing-ireland', label: 'Roll up banner printing Ireland' },
   },
   {
     id: 'why-prices-vary',
@@ -115,7 +123,7 @@ export const BANNER_FAQS = [
     q: 'How long does a roll-up banner take to print?',
     subtitle: 'Business event and exhibition deadlines',
     a: 'Roll-up banners typically take 3–5 business days from artwork sign-off. Rush options may be available for trade shows and corporate events. Send your logo and key message early — we can prepare artwork while you confirm stand size.',
-    link: { href: '/roll-up-banners', label: 'Roll-up banner printing' },
+    link: { href: '/roll-up-banners-ireland', label: 'Roll-up banner printing' },
   },
   {
     id: 'last-minute',
@@ -263,8 +271,8 @@ export const BANNER_FAQS = [
     category: 'finishing',
     q: 'Can I get a roll-up banner with a stand?',
     subtitle: 'Portable display with carry case',
-    a: 'Yes. Roll-up banners include a retractable aluminium base, printed graphic, support pole, and carry bag. Setup takes under a minute. Standard widths are 850mm and 1200mm. Extra wide 2m stands are available separately.',
-    link: { href: '/extra-wide-roll-up-banners-ireland', label: 'Extra wide roll up banners' },
+    a: 'Yes. Roll-up banners include a retractable aluminium base, printed graphic, support pole, and carry bag. Setup takes under a minute. Standard widths are 850mm, 1000mm and 1200mm from €80 with a heavy cassette. Artwork reprints start from €35. Extra wide 2m stands go up to €450 for 3 m × 2 m.',
+    link: { href: '/roll-up-banners-ireland', label: 'Order roll up banners Ireland' },
   },
   {
     id: 'double-sided',
