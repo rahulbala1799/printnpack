@@ -6,6 +6,17 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'coffee-cups-ireland-guide',
+    title: 'Coffee Cups Ireland: Plain vs Custom Printed Buying Guide',
+    excerpt:
+      'Plain wholesale double wall coffee cups vs custom printed branded cups, sizes from 4oz to 16oz, compostable options, pricing, and how to order coffee cups in Ireland.',
+    date: '2026-08-26',
+    readTime: '7 min read',
+    image: '/images/plain-packaging/100070.webp',
+    imageAlt: 'Coffee cups Ireland — plain and custom printed takeaway cups',
+    category: 'Hospitality Guide',
+  },
+  {
     slug: 'roll-up-banner-printing-ireland',
     title: 'Roll Up Banner Printing Ireland: Cost, Dublin Delivery & Turnaround',
     excerpt:

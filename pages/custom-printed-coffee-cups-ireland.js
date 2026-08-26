@@ -76,7 +76,8 @@ const deliveryAreas = [
 const guides = [
   { href: '/hot-cups-ireland', title: 'Disposable Coffee Cups Ireland', desc: 'Plain wholesale hot cups and lids by the case.' },
   { href: '/plain-hot-cups-ireland', title: 'Plain Hot Cups Ireland', desc: 'White double wall takeaway cups in stock.' },
-  { href: '/plain-packaging', title: 'Plain Packaging', desc: 'Cups, boxes, bags and catering supplies.' },
+  { href: '/coffee-cup-faq-ireland', title: 'Coffee Cup FAQ', desc: 'Instant answers on pricing, sizes & printing.' },
+  { href: '/blog/coffee-cups-ireland-guide', title: 'Coffee Cups Buying Guide', desc: 'Plain vs printed, sizes & pricing.' },
 ];
 
 const faqs = [
@@ -436,7 +437,7 @@ export default function CustomPrintedCoffeeCupsIreland() {
       <section className="py-12 lg:py-16 bg-stone-50 border-t border-stone-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold text-stone-900 mb-6">Related guides</h2>
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {guides.map((guide) => (
               <Link
                 key={guide.href}
@@ -471,8 +472,10 @@ export default function CustomPrintedCoffeeCupsIreland() {
       <RelatedSeoLinks
         title="More packaging for Irish food service"
         links={[
-          { href: '/hot-cups-ireland', label: 'Hot Cups & Lids Ireland', desc: 'Plain disposable coffee cups wholesale' },
+          { href: '/hot-cups-ireland', label: 'Coffee Cups Ireland', desc: 'Plain disposable coffee cups wholesale' },
           { href: '/plain-hot-cups-ireland', label: 'Plain Hot Cups', desc: 'White takeaway coffee cups by the case' },
+          { href: '/coffee-cup-faq-ireland', label: 'Coffee Cup FAQ', desc: 'Pricing, sizes & printing answered' },
+          { href: '/blog/coffee-cups-ireland-guide', label: 'Coffee Cups Buying Guide', desc: 'Plain vs printed, sizes & pricing' },
           { href: '/printed-flat-handle-bags-ireland', label: 'Printed Paper Bags', desc: 'Branded bags for cafés and takeaway' },
           { href: '/custom-pizza-boxes-ireland', label: 'Custom Pizza Boxes', desc: 'Printed food packaging Ireland' },
           { href: '/plain-packaging', label: 'Plain Packaging', desc: 'Wholesale catering supplies' },

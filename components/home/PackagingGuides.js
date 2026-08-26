@@ -285,10 +285,31 @@ const guides = [
   },
   {
     href: '/hot-cups-ireland',
-    title: 'Hot Cups & Lids Ireland',
+    title: 'Coffee Cups Ireland',
     description: 'Wholesale disposable coffee cups — 8oz to 16oz, compostable & plain.',
     image: '/images/plain-packaging/100070.webp',
-    cta: 'Browse hot cups',
+    cta: 'Browse coffee cups',
+  },
+  {
+    href: '/custom-printed-coffee-cups-ireland',
+    title: 'Custom Printed Coffee Cups',
+    description: 'Branded takeaway cups with your logo — low MOQ, Dublin & nationwide.',
+    image: '/images/products/custom-printed-coffee-cups/branded-coffee-cups-dublin-ireland-matte-black-gold.jpg',
+    cta: 'View printed cups',
+  },
+  {
+    href: '/coffee-cup-faq-ireland',
+    title: 'Coffee Cup FAQ',
+    description: 'Instant answers on pricing, sizes, printing & delivery.',
+    image: '/images/plain-packaging/100071.webp',
+    cta: 'Browse FAQ',
+  },
+  {
+    href: '/blog/coffee-cups-ireland-guide',
+    title: 'Coffee Cups Buying Guide',
+    description: 'Plain vs printed, sizes 4oz–16oz, and compostable options.',
+    image: '/images/plain-packaging/100072.webp',
+    cta: 'Read the guide',
   },
   {
     href: '/gloves-ireland',

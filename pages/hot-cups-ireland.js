@@ -544,6 +544,12 @@ export default function HotCupsIreland() {
               </div>
             ))}
           </div>
+          <p className="text-center text-sm text-gray-500 mt-8">
+            More questions? See the full{' '}
+            <Link href="/coffee-cup-faq-ireland" className="text-amber-700 hover:underline font-medium">coffee cup FAQ</Link>{' '}
+            or read our{' '}
+            <Link href="/blog/coffee-cups-ireland-guide" className="text-amber-700 hover:underline font-medium">coffee cups buying guide</Link>.
+          </p>
         </div>
       </section>
 
