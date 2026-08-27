@@ -21,6 +21,41 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/custom-pizza-boxes',
+        destination: '/custom-pizza-boxes-ireland',
+        permanent: true,
+      },
+      {
+        source: '/custom-pizza-box',
+        destination: '/custom-pizza-boxes-ireland',
+        permanent: true,
+      },
+      {
+        source: '/branded-pizza-boxes-ireland',
+        destination: '/custom-pizza-boxes-ireland',
+        permanent: true,
+      },
+      {
+        source: '/printed-pizza-boxes-ireland',
+        destination: '/custom-pizza-boxes-ireland',
+        permanent: true,
+      },
+      {
+        source: '/wholesale-pizza-boxes',
+        destination: '/pizza-boxes-wholesale-ireland',
+        permanent: true,
+      },
+      {
+        source: '/wholesale-pizza-boxes-ireland',
+        destination: '/pizza-boxes-wholesale-ireland',
+        permanent: true,
+      },
+      {
+        source: '/plain-pizza-boxes',
+        destination: '/plain-pizza-boxes-ireland',
+        permanent: true,
+      },
+      {
         source: '/flat-handle-bags',
         destination: '/printed-flat-handle-bags-ireland',
         permanent: true,

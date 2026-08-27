@@ -15,6 +15,9 @@ const QUICK_LINKS = [
 const PRODUCT_LINKS = [
   { label: 'Printing Services', href: '/printing-ireland' },
   { label: 'Pizza Boxes', href: '/pizza-boxes-ireland' },
+  { label: 'Custom Pizza Boxes', href: '/custom-pizza-boxes-ireland' },
+  { label: 'Plain Pizza Boxes', href: '/plain-pizza-boxes-ireland' },
+  { label: 'Pizza Box FAQ', href: '/pizza-box-faq-ireland' },
   { label: 'Paper Bags', href: '/paper-bags-ireland' },
   { label: 'Hot Cups & Lids', href: '/hot-cups-ireland' },
   { label: 'Banners & Roll-Ups', href: '/banners-ireland' },

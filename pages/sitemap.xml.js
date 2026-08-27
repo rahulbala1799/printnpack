@@ -52,6 +52,8 @@ const staticPages = [
   { path: '/plain-pizza-boxes-ireland',    priority: '0.88', changefreq: 'weekly' },
   { path: '/pizza-boxes-wholesale-ireland', priority: '0.88', changefreq: 'weekly' },
   { path: '/pizza-box-faq-ireland',        priority: '0.88', changefreq: 'monthly' },
+  { path: '/pizza-box-printing-ashbourne',  priority: '0.88', changefreq: 'monthly' },
+  { path: '/pizza-box-printing-dublin',      priority: '0.88', changefreq: 'monthly' },
   { path: '/refuse-sacks-ireland',         priority: '0.95', changefreq: 'weekly' },
   { path: '/plain-napkins-tableware-ireland', priority: '0.95', changefreq: 'weekly' },
   { path: '/hot-cups-ireland',              priority: '0.95', changefreq: 'weekly' },
@@ -124,6 +126,7 @@ const staticPages = [
   { path: '/blog',              priority: '0.8', changefreq: 'weekly'  },
   // Pizza box content cluster
   { path: '/blog/pizza-box-sizes-ireland', priority: '0.85', changefreq: 'monthly' },
+  { path: '/blog/pizza-boxes-ireland-guide', priority: '0.9', changefreq: 'monthly' },
   { path: '/blog/custom-pizza-box-cost-ireland', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/banner-sizes-ireland', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/extra-wide-roll-up-banners-ireland-guide', priority: '0.85', changefreq: 'monthly' },

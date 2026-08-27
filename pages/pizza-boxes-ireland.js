@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
 import { PLAIN_PRODUCTS, getPlainProductPath, getPlainProductPathById } from '../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
-import { buildProductListItem } from '../lib/schema';
+import { buildOffer, buildProductListItem } from '../lib/schema';
 
 const PAGE_URL = `${SITE_URL}/pizza-boxes-ireland`;
 
@@ -23,7 +23,17 @@ const sizeGuide = [
   { size: '16"', use: 'Extra-large and family boxes' },
 ];
 
+const localPages = [
+  { href: '/pizza-box-printing-ashbourne', title: 'Pizza Boxes Ashbourne', desc: 'Plain wholesale & printed boxes — Ashbourne, Ratoath & Meath.' },
+  { href: '/pizza-box-printing-dublin', title: 'Pizza Boxes Dublin', desc: 'Takeaway and pizzeria pizza box supply across Dublin.' },
+];
+
 const guides = [
+  {
+    href: '/blog/pizza-boxes-ireland-guide',
+    title: 'Pizza Boxes Ireland Guide',
+    desc: 'Plain vs custom printed, sizes, wholesale & how to order.',
+  },
   {
     href: '/custom-pizza-boxes-ireland',
     title: 'Custom Printed Pizza Boxes',
@@ -131,7 +141,7 @@ const itemListLd = {
 const webPageLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Pizza Boxes Ireland | Custom Printed & Wholesale Supply',
+  name: 'Pizza Box Ireland | Custom Pizza Boxes & Wholesale Supply',
   description:
     'Buy pizza boxes in Ireland — custom printed branded boxes and plain kraft wholesale. All sizes, fast nationwide delivery for restaurants and takeaways.',
   url: PAGE_URL,
@@ -141,13 +151,38 @@ const webPageLd = {
     '@type': 'Thing',
     name: 'Pizza box packaging Ireland',
   },
-  dateModified: '2026-06-18',
+  dateModified: '2026-08-27',
+};
+
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Pizza Boxes Ireland',
+  description:
+    'Custom printed and plain wholesale pizza boxes for Irish takeaways, pizzerias and restaurants. All sizes, nationwide delivery.',
+  url: PAGE_URL,
+  provider: {
+    '@type': 'LocalBusiness',
+    name: 'PrintNPack Ireland',
+    url: SITE_URL,
+    telephone: '+353894157369',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Unit 14 Ashbourne Business Centre',
+      addressLocality: 'Ashbourne',
+      addressRegion: 'Co. Meath',
+      postalCode: 'A84 KV57',
+      addressCountry: 'IE',
+    },
+  },
+  areaServed: { '@type': 'Country', name: 'Ireland' },
+  offers: buildOffer({ url: PAGE_URL, price: '0.17' }),
 };
 
 export default function PizzaBoxesIreland() {
-  const title = 'Pizza Boxes Ireland | Plain, Printed & Custom Pizza Boxes';
+  const title = 'Pizza Box Ireland | Custom Pizza Boxes & Wholesale Supply';
   const description =
-    'Buy pizza boxes in Ireland — custom printed boxes with logo from 500 units, plain kraft wholesale in 100-pack cases, and bulk supply for takeaways. Fast delivery nationwide.';
+    'Buy pizza boxes in Ireland — custom pizza boxes with logo from 500 units, plain kraft wholesale in 100-pack cases, and bulk supply for takeaways. Fast delivery nationwide.';
 
   return (
     <Layout>
@@ -180,6 +215,7 @@ export default function PizzaBoxesIreland() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }} />
       </Head>
 
       <nav className="bg-gray-50 border-b border-gray-200">
@@ -201,13 +237,13 @@ export default function PizzaBoxesIreland() {
                 Ireland&apos;s Pizza Box Supplier
               </p>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">
-                Pizza Boxes Ireland
+                Pizza Box Ireland — Custom Pizza Boxes &amp; Wholesale Supply
               </h1>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                Whether you need <strong>custom printed pizza boxes</strong> with your logo or{' '}
-                <strong>plain kraft pizza boxes</strong> for wholesale, PrintNPack is Ireland&apos;s
-                go-to supplier for restaurants, pizzerias, and takeaways. All standard sizes, fast
-                nationwide delivery, and competitive pricing.
+                Whether you need a single <strong>pizza box</strong> case for your takeaway or{' '}
+                <strong>custom pizza boxes</strong> with your logo, PrintNPack is Ireland&apos;s
+                go-to supplier for restaurants, pizzerias, and delivery kitchens. Plain kraft wholesale,
+                branded full-colour print, all standard sizes, and fast nationwide delivery.
               </p>
               <div className="flex flex-wrap gap-3 mb-6">
                 <div className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-center">
@@ -449,8 +485,27 @@ export default function PizzaBoxesIreland() {
         </section>
       )}
 
-      {/* Delivery across Ireland */}
+      {/* Local supply */}
       <section className="py-12 lg:py-16 bg-white border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">Local pizza box supply</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            {localPages.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group bg-slate-50 rounded-2xl border border-gray-200 p-6 hover:border-blue-300 hover:shadow-lg transition-all"
+              >
+                <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 mb-2">{item.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Delivery across Ireland */}
+      <section className="py-12 lg:py-16 bg-slate-50 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
             Pizza box delivery across Ireland
