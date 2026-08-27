@@ -75,6 +75,14 @@ export const NAPKIN_FAQS = [
     a: 'Yes. We deliver custom printed napkins nationwide across all Irish counties. Customers in Ashbourne, Ratoath, Dunboyne, and north Dublin can also collect from our unit at Ashbourne Business Centre.',
     link: { href: '/napkin-printing-dublin', label: 'Napkin printing Dublin' },
   },
+  {
+    id: 'uk-europe-delivery',
+    category: 'turnaround',
+    q: 'Do you ship custom napkins to the UK and Europe?',
+    subtitle: 'Northern Ireland, UK mainland and EU courier',
+    a: 'Yes. PrintNPack delivers custom napkins across Ireland, into Northern Ireland, and by courier to the UK mainland and EU addresses. Ireland-to-EU shipments stay inside the single market. UK carriage is confirmed on the quote. Restaurants, hotels and wedding planners from London to Berlin can order from 1,000 units.',
+    link: { href: '/blog/custom-napkins-uk-ireland-europe', label: 'Custom napkins UK, Ireland & Europe' },
+  },
 
   // Types
   {
@@ -218,4 +226,5 @@ export const MOST_ASKED_NAPKIN_FAQS = [
   'linen-feel-vs-paper',
   'turnaround',
   'personalised-napkins',
+  'uk-europe-delivery',
 ].map((id) => NAPKIN_FAQS.find((faq) => faq.id === id)).filter(Boolean);

@@ -23,6 +23,7 @@ const localPages = [
 
 const guides = [
   { href: '/napkin-faq-ireland', title: 'Napkin FAQ', desc: '25+ instant answers on pricing, sizes, materials & delivery.' },
+  { href: '/blog/custom-napkins-uk-ireland-europe', title: 'Custom Napkins UK, Ireland & Europe', desc: 'Printed napkins for restaurants, weddings and hotels — Ireland, UK and EU delivery.' },
   { href: '/blog/personalised-napkins-ireland-guide', title: 'Personalised Napkins Guide', desc: 'Sizes, materials, wedding napkins & branding tips for Irish businesses.' },
 ];
 
@@ -66,7 +67,7 @@ export default function NapkinsIreland() {
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="keywords" content="napkins ireland, printed napkins ireland, personalised napkins ireland, branded napkins, napkin printing ireland, linen feel napkins, cocktail napkins, wedding napkins ireland, paper napkins ireland, napkin printing ashbourne" />
+        <meta name="keywords" content="napkins ireland, printed napkins ireland, personalised napkins ireland, branded napkins, napkin printing ireland, linen feel napkins, cocktail napkins, wedding napkins ireland, paper napkins ireland, napkin printing ashbourne, custom napkins, custom napkins uk, custom napkins ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href={PAGE_URL} />
         <meta property="og:type" content="website" />
@@ -148,7 +149,7 @@ export default function NapkinsIreland() {
       <section className="py-12 lg:py-16 bg-slate-50 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">Guides &amp; resources</h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             {guides.map((item) => (
               <Link key={item.href} href={item.href} className="group bg-white rounded-2xl border border-gray-200 p-6 hover:border-amber-300 hover:shadow-lg transition-all">
                 <h3 className="text-xl font-bold text-gray-900 group-hover:text-amber-600 mb-2">{item.title}</h3>

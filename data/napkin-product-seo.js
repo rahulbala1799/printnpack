@@ -5,6 +5,7 @@ const byId = (id) => NAPKIN_FAQS.find((faq) => faq.id === id);
 const SHARED_LINKS = [
   { href: '/napkins-ireland', label: 'Napkins Ireland', desc: 'Complete napkin printing hub' },
   { href: '/napkin-faq-ireland', label: 'Napkin FAQ', desc: '25+ instant answers' },
+  { href: '/blog/custom-napkins-uk-ireland-europe', label: 'Custom Napkins UK, Ireland & Europe', desc: 'Printed napkins for Ireland, the UK and EU' },
   { href: '/blog/personalised-napkins-ireland-guide', label: 'Personalised Napkins Guide', desc: 'Sizes, materials & wedding tips' },
   { href: '/napkin-printing-ashbourne', label: 'Napkin Printing Ashbourne', desc: 'Local collection & delivery' },
   { href: '/napkin-printing-dublin', label: 'Napkin Printing Dublin', desc: 'Delivery across Dublin' },
@@ -16,7 +17,7 @@ export const NAPKIN_PRODUCT_SEO = {
     title: 'Printed Napkins Ireland | Custom Branded & Cocktail Napkins | Print n Pack',
     description:
       'Custom printed napkins for Irish restaurants, cafes & caterers — cocktail, lunch & dinner sizes. Logo printing from €0.05/unit, 1,000 MOQ. Delivery nationwide from Ashbourne.',
-    keywords: 'printed napkins ireland, personalised napkins ireland, branded napkins, cocktail napkins, paper napkins, napkin printing ireland, restaurant napkins, custom napkins',
+    keywords: 'printed napkins ireland, personalised napkins ireland, branded napkins, cocktail napkins, paper napkins, napkin printing ireland, restaurant napkins, custom napkins, custom napkins uk, custom napkins ireland',
     h1: 'Printed Napkins Ireland',
     intro: 'Custom printed napkins with your logo for restaurants, cafes, takeaways, and catering businesses across Ireland. Cocktail, lunch, and dinner sizes — from €0.05 per unit.',
     price: '0.05',

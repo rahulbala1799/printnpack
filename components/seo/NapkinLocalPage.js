@@ -220,6 +220,7 @@ export default function NapkinLocalPage({ config }) {
           { href: '/printing-ashbourne', label: 'Printing Ashbourne', desc: 'Local print shop — posters, flyers, stickers & more' },
           { href: '/napkins-ireland', label: 'Napkins Ireland', desc: 'Complete napkin printing hub' },
           { href: '/products/printed-napkins', label: 'Printed Napkins', desc: 'Custom logo napkins from €0.05' },
+          { href: '/blog/custom-napkins-uk-ireland-europe', label: 'Custom Napkins UK, Ireland & Europe', desc: 'Ireland, UK and EU delivery guide' },
           { href: '/blog/personalised-napkins-ireland-guide', label: 'Personalised Napkins Guide', desc: 'Sizes, materials & wedding tips' },
           { href: '/napkin-faq-ireland', label: 'Napkin FAQ', desc: '25+ instant answers' },
           { href: '/hot-cups-ireland', label: 'Hot Cups & Lids', desc: 'Disposable coffee cups wholesale' },

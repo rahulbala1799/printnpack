@@ -221,6 +221,13 @@ const guides = [
     cta: 'Browse FAQ',
   },
   {
+    href: '/blog/custom-napkins-uk-ireland-europe',
+    title: 'Custom Napkins UK, Ireland & Europe',
+    description: 'Printed napkins for restaurants, pubs and weddings — Ireland, UK and EU delivery.',
+    image: '/images/blog/custom-napkins/custom-napkins-uk-ireland-restaurant-table.jpg',
+    cta: 'Read the guide',
+  },
+  {
     href: '/blog/personalised-napkins-ireland-guide',
     title: 'Personalised Napkins Guide',
     description: 'Cocktail vs dinner sizes, linen-feel vs paper, wedding napkins.',

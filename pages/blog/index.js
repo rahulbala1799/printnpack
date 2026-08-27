@@ -6,6 +6,17 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'custom-napkins-uk-ireland-europe',
+    title: 'Custom Napkins UK, Ireland & Europe: Printed, Personalised & Branded Guide',
+    excerpt:
+      'Custom printed napkins for restaurants, pubs, hotels and weddings across Ireland, the UK and Europe — sizes, linen-feel vs paper, pricing from €0.05, and delivery from Ashbourne.',
+    date: '2026-08-27',
+    readTime: '12 min read',
+    image: '/images/blog/custom-napkins/custom-napkins-uk-ireland-restaurant-table.jpg',
+    imageAlt: 'Custom napkins UK and Ireland — branded restaurant napkins on a dining table',
+    category: 'Hospitality Guide',
+  },
+  {
     slug: 'coffee-cups-ireland-guide',
     title: 'Coffee Cups Ireland: Plain vs Custom Printed Buying Guide',
     excerpt:

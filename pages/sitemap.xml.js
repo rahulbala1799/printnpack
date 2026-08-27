@@ -134,6 +134,7 @@ const staticPages = [
   { path: '/blog/roll-up-banner-printing-ireland', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/business-stamps-ireland-guide', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/personalised-napkins-ireland-guide', priority: '0.85', changefreq: 'monthly' },
+  { path: '/blog/custom-napkins-uk-ireland-europe', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/foamex-boards-ireland-guide', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/burger-boxes-ireland-guide', priority: '0.85', changefreq: 'monthly' },
   { path: '/blog/coffee-cups-ireland-guide', priority: '0.88', changefreq: 'monthly' },

@@ -175,6 +175,7 @@ export default function NapkinFaqIreland() {
           <div className="flex flex-wrap gap-3">
             <Link href="/products/printed-napkins" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors">Order Printed Napkins</Link>
             <Link href="/napkin-printing-ashbourne" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">Napkin Printing Ashbourne</Link>
+            <Link href="/blog/custom-napkins-uk-ireland-europe" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">Custom Napkins UK &amp; Europe</Link>
             <Link href="/blog/personalised-napkins-ireland-guide" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">Personalised Napkins Guide</Link>
           </div>
         </div>
@@ -186,6 +187,7 @@ export default function NapkinFaqIreland() {
           { href: '/napkins-ireland', label: 'Napkins Ireland', desc: 'Complete napkin printing hub' },
           { href: '/products/printed-napkins', label: 'Printed Napkins', desc: 'Custom logo napkins from €0.05' },
           { href: '/napkin-printing-dublin', label: 'Napkin Printing Dublin', desc: 'Delivery across Dublin' },
+          { href: '/blog/custom-napkins-uk-ireland-europe', label: 'Custom Napkins UK, Ireland & Europe', desc: 'Ireland, UK and EU delivery guide' },
           { href: '/blog/personalised-napkins-ireland-guide', label: 'Personalised Napkins Guide', desc: 'Sizes, materials & wedding tips' },
         ]}
       />

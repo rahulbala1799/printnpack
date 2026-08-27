@@ -181,6 +181,8 @@ export default function PersonalisedNapkinsIrelandGuide() {
           </ol>
           <p className="text-gray-600 leading-relaxed mt-4">
             PrintNPack prints custom napkins from our Ashbourne unit with delivery across Dublin, Meath, and all Irish counties.
+            Ordering from the UK or EU? See our{' '}
+            <Link href="/blog/custom-napkins-uk-ireland-europe" className="text-amber-600 hover:underline">custom napkins UK, Ireland and Europe guide</Link>.
             Based locally? See <Link href="/napkin-printing-ashbourne" className="text-amber-600 hover:underline">napkin printing Ashbourne</Link> or{' '}
             <Link href="/napkin-printing-dublin" className="text-amber-600 hover:underline">napkin printing Dublin</Link>.
           </p>
