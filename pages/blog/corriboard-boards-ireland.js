@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import Layout from '../../components/layout/Layout';
+import RelatedSeoLinks from '../../components/seo/RelatedSeoLinks';
 
 import { SITE_URL as siteUrl } from '../../lib/site';
 const slug = 'corriboard-boards-ireland';
@@ -10,9 +11,9 @@ const heroImage = '/ifa/product/corriboard/corrugated-plastic-signs.jpg';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Corriboard (Correx) Boards in Ireland: The Quiet Workhorse of Outdoor Marketing',
+  headline: 'Correx Boards Ireland | Corriboard Signs, Election & Site Boards',
   description:
-    'Everything Irish businesses need to know about corriboard — what it is, why it works in Irish weather, and where it is used for election signs, estate agent boards, construction signage, events, and retail.',
+    'Printed Correx / corriboard boards in Ireland for election signs, estate agent boards and site signage. Waterproof, 1–3 day turnaround, nationwide delivery from Ashbourne.',
   image: `${siteUrl}${heroImage}`,
   author: { '@type': 'Organization', name: 'PrintNPack Ireland', url: siteUrl },
   publisher: {
@@ -21,7 +22,7 @@ const jsonLd = {
     logo: { '@type': 'ImageObject', url: `${siteUrl}/favicon.ico` },
   },
   datePublished: '2026-02-18',
-  dateModified: '2026-02-18',
+  dateModified: '2026-09-10',
   mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${slug}` },
 };
 
@@ -149,9 +150,9 @@ const vsAlternatives = [
 ];
 
 export default function CorriboardBoardsIreland() {
-  const title = 'Corriboard (Correx) Boards in Ireland: The Quiet Workhorse of Outdoor Marketing';
+  const title = 'Correx Boards Ireland | Corriboard Signs, Election & Site Boards';
   const description =
-    'Everything Irish businesses need to know about corriboard (Correx) boards — election signs, property boards, site signage, events, and retail displays. Lightweight, waterproof, and built for Irish weather.';
+    'Printed Correx (corriboard) boards in Ireland — election signs, property boards and site signage. Waterproof, recyclable, 1–3 day print, delivered nationwide from Ashbourne.';
 
   return (
     <Layout>
@@ -204,7 +205,7 @@ export default function CorriboardBoardsIreland() {
         </div>
 
         <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight mb-6">
-          Corriboard (Correx) Boards in Ireland: The Quiet Workhorse of Outdoor Marketing
+          Correx Boards Ireland — Printed Corriboard Signs, Election & Site Boards
         </h1>
 
         {/* Hero image */}
@@ -499,7 +500,7 @@ export default function CorriboardBoardsIreland() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
-                href="/corriboard"
+                href="/correx-boards"
                 className="bg-white text-slate-900 hover:bg-slate-100 px-6 py-3 rounded-lg font-semibold transition-colors"
               >
                 View Corriboard →
@@ -529,6 +530,15 @@ export default function CorriboardBoardsIreland() {
         </div>
 
       </main>
+      <RelatedSeoLinks
+        title="Related signage in Ireland"
+        links={[
+          { href: '/correx-boards', label: 'Correx Boards', desc: 'Order printed Correx / corriboard signs' },
+          { href: '/foamex-ireland', label: 'Foamex Boards Ireland', desc: 'Indoor PVC foam signage' },
+          { href: '/blog/foamex-boards-ireland-guide', label: 'Foamex Boards Guide', desc: '3mm vs 5mm vs 10mm thickness' },
+          { href: '/banners-ireland', label: 'Banner Printing Ireland', desc: 'PVC, mesh and roll-up banners' },
+        ]}
+      />
     </Layout>
   );
 }

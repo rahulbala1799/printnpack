@@ -138,7 +138,7 @@ const productLd = buildProductLd({
 const webPageLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Custom Printed Coffee Cups Ireland | Branded Takeaway Cups Dublin & NI',
+  name: 'Custom Coffee Cups Ireland | Printed Takeaway Cups Dublin & NI',
   description:
     'Branded coffee cups Dublin & Ireland — custom printed takeaway cups with low MOQ for cafés, restaurants and events. Logo printing, food-safe cups, delivery across Ireland and Northern Ireland.',
   url: PAGE_URL,
@@ -149,9 +149,9 @@ const webPageLd = {
 };
 
 export default function CustomPrintedCoffeeCupsIreland() {
-  const title = 'Custom Printed Coffee Cups Ireland | Branded Takeaway Cups Dublin & NI';
+  const title = 'Custom Coffee Cups Ireland | Printed Takeaway Cups Dublin & NI';
   const description =
-    'Branded coffee cups Dublin & Ireland — custom printed takeaway cups with low MOQ for cafés, restaurants and events. Logo printing, food-safe cups, delivery across Ireland and Northern Ireland.';
+    'Custom coffee cups Ireland — printed takeaway cups with your logo, low MOQ, food-safe cups. Delivery across Dublin, Ireland and Northern Ireland from Ashbourne.';
 
   return (
     <Layout>
@@ -209,7 +209,7 @@ export default function CustomPrintedCoffeeCupsIreland() {
                 Low MOQ · Ireland &amp; Northern Ireland
               </p>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-5">
-                Custom Printed Coffee Cups Ireland — Branded Takeaway Cups for Dublin, NI &amp; Nationwide
+                Custom Coffee Cups Ireland — Printed Takeaway Cups for Dublin, NI &amp; Nationwide
               </h1>
               <p className="text-lg text-stone-300 mb-4 leading-relaxed">
                 PrintNPack supplies high-quality <strong className="text-white">custom printed coffee cups</strong> to
@@ -477,6 +477,7 @@ export default function CustomPrintedCoffeeCupsIreland() {
           { href: '/coffee-cup-faq-ireland', label: 'Coffee Cup FAQ', desc: 'Pricing, sizes & printing answered' },
           { href: '/blog/coffee-cups-ireland-guide', label: 'Coffee Cups Buying Guide', desc: 'Plain vs printed, sizes & pricing' },
           { href: '/printed-flat-handle-bags-ireland', label: 'Printed Paper Bags', desc: 'Branded bags for cafés and takeaway' },
+          { href: '/paper-bags-ireland', label: 'Paper Bags Ireland', desc: 'Plain, printed and wholesale bags' },
           { href: '/custom-pizza-boxes-ireland', label: 'Custom Pizza Boxes', desc: 'Printed food packaging Ireland' },
           { href: '/plain-packaging', label: 'Plain Packaging', desc: 'Wholesale catering supplies' },
           { href: '/products', label: 'All Products', desc: 'Full print and packaging catalogue' },

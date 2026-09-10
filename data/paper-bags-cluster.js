@@ -16,7 +16,7 @@ export const PLAIN_PAPER_BAGS_CONFIG = {
   intro:
     'Buy plain paper bags in Ireland for everyday takeaway, retail and food service. PrintNPack stocks kraft SOS grab bags, MG kraft food bags, handled carrier bags and flat kraft bags with tiered case pricing and fast delivery across Dublin and nationwide.',
   keywords:
-    'plain paper bags Ireland, plain kraft paper bags, brown paper bags, white paper bags, kraft paper bags, paper bags bulk',
+    'plain paper bags Ireland, paper bags, brown paper bags Ireland, plain kraft paper bags, brown paper bags, white paper bags, kraft paper bags, paper bags bulk',
   primaryCta: { href: '/plain-packaging?category=SOS+Bags', label: 'Browse Plain Paper Bags' },
   secondaryCta: { href: '/printed-flat-handle-bags-ireland', label: 'Need bags with your logo?' },
   sections: [

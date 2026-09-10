@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import Layout from '../../components/layout/Layout';
+import RelatedSeoLinks from '../../components/seo/RelatedSeoLinks';
 import { SITE_URL as siteUrl } from '../../lib/site';
 
 const PAGE_URL = `${siteUrl}/blog/personalised-napkins-ireland-guide`;
@@ -10,14 +11,14 @@ const HERO_IMAGE = '/images/hero/napkin.svg';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Personalised Napkins Ireland: Sizes, Materials & Wedding Napkin Guide',
+  headline: 'Personalised Napkins Ireland | Printed Napkins from €0.05',
   description:
-    'A practical guide to personalised napkins in Ireland — cocktail vs dinner sizes, paper vs linen-feel, wedding napkins, restaurant branding, and how to order custom printed napkins.',
+    'Personalised and branded napkins in Ireland from €0.05. Cocktail, lunch and dinner sizes, linen-feel wedding napkins, and custom printed restaurant napkins with nationwide delivery.',
   image: `${siteUrl}${HERO_IMAGE}`,
   author: { '@type': 'Organization', name: 'PrintNPack Ireland', url: siteUrl },
   publisher: { '@type': 'Organization', name: 'PrintNPack Ireland', logo: { '@type': 'ImageObject', url: `${siteUrl}/favicon.ico` } },
   datePublished: '2026-06-21',
-  dateModified: '2026-06-21',
+  dateModified: '2026-09-10',
   mainEntityOfPage: { '@type': 'WebPage', '@id': PAGE_URL },
 };
 
@@ -63,9 +64,9 @@ const breadcrumbLd = {
 };
 
 export default function PersonalisedNapkinsIrelandGuide() {
-  const title = 'Personalised Napkins Ireland: Sizes, Materials & Wedding Napkin Guide';
+  const title = 'Personalised Napkins Ireland | Printed Napkins from €0.05';
   const description =
-    'Everything Irish restaurants and event planners need to know about personalised napkins — cocktail vs dinner sizes, paper vs linen-feel, wedding napkins, branding tips, and how to order.';
+    'Personalised napkins Ireland for restaurants, pubs and weddings. Branded printed napkins from €0.05, linen-feel options, cocktail vs dinner sizes, and delivery from Ashbourne.';
 
   return (
     <Layout>
@@ -197,6 +198,15 @@ export default function PersonalisedNapkinsIrelandGuide() {
           </div>
         </section>
       </main>
+      <RelatedSeoLinks
+        title="Related napkins & packaging"
+        links={[
+          { href: '/napkins-ireland', label: 'Napkins Ireland', desc: 'Printed, linen-feel and plain wholesale' },
+          { href: '/products/printed-napkins', label: 'Printed Napkins', desc: 'Custom logo napkins from €0.05' },
+          { href: '/blog/custom-napkins-uk-ireland-europe', label: 'Custom Napkins UK & Europe', desc: 'Ireland, UK and EU delivery' },
+          { href: '/paper-bags-ireland', label: 'Paper Bags Ireland', desc: 'Printed and plain takeaway bags' },
+        ]}
+      />
     </Layout>
   );
 }

@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import Layout from '../../components/layout/Layout';
+import RelatedSeoLinks from '../../components/seo/RelatedSeoLinks';
 import { SITE_URL as siteUrl } from '../../lib/site';
 
 const PAGE_URL = `${siteUrl}/blog/business-stamps-ireland-guide`;
@@ -9,14 +10,14 @@ const PAGE_URL = `${siteUrl}/blog/business-stamps-ireland-guide`;
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Business Stamps Ireland: Company Stamps, Invoice Stamps & Logo Stamps Guide',
+  headline: 'Business Stamps Ireland | Custom Rubber & Company Stamps from €15',
   description:
-    'A practical guide to business stamps in Ireland — company stamps, invoice stamps, address stamps, self-inking vs traditional, and how to order custom rubber stamps for your Irish business.',
+    'Custom business stamps in Ireland from €15. Company stamps, invoice stamps, logo stamps and self-inking rubber stamps with fast turnaround from Ashbourne.',
   image: `${siteUrl}/images/rubber-stamps/RubberStamp_10.jpg`,
   author: { '@type': 'Organization', name: 'PrintNPack Ireland', url: siteUrl },
   publisher: { '@type': 'Organization', name: 'PrintNPack Ireland', logo: { '@type': 'ImageObject', url: `${siteUrl}/favicon.ico` } },
   datePublished: '2026-06-21',
-  dateModified: '2026-06-21',
+  dateModified: '2026-09-10',
   mainEntityOfPage: { '@type': 'WebPage', '@id': PAGE_URL },
 };
 
@@ -62,9 +63,9 @@ const breadcrumbLd = {
 };
 
 export default function BusinessStampsIrelandGuide() {
-  const title = 'Business Stamps Ireland: Company Stamps, Invoice Stamps & Logo Stamps Guide';
+  const title = 'Business Stamps Ireland | Custom Rubber & Company Stamps from €15';
   const description =
-    'Everything Irish businesses need to know about company stamps — what to include, self-inking vs traditional, invoice stamps, logo stamps, and how to order custom rubber stamps with fast turnaround.';
+    'Business stamps Ireland — custom rubber stamps, company stamps and invoice stamps from €15. Self-inking or traditional, logo print, fast turnaround from Ashbourne.';
 
   return (
     <Layout>
@@ -206,6 +207,15 @@ export default function BusinessStampsIrelandGuide() {
           <Link href="/blog" className="text-slate-500 hover:text-slate-700 text-sm font-medium">← Back to all articles</Link>
         </div>
       </main>
+      <RelatedSeoLinks
+        title="Related print services"
+        links={[
+          { href: '/rubber-stamps', label: 'Order Rubber Stamps', desc: 'Custom company and logo stamps' },
+          { href: '/rubber-stamps-ireland', label: 'Rubber Stamps Ireland', desc: 'Stamp types, sizes and delivery' },
+          { href: '/rubber-stamp-faq-ireland', label: 'Rubber Stamp FAQ', desc: 'Pricing, ink and artwork answers' },
+          { href: '/printing-ireland', label: 'Printing Ireland', desc: 'Local print for Irish businesses' },
+        ]}
+      />
     </Layout>
   );
 }

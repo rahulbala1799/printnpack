@@ -8,9 +8,9 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Pizza Box Sizes Ireland: The Complete Guide for Takeaways & Restaurants',
+  headline: 'Pizza Box Sizes Ireland | 7–16 Inch Wholesale Takeaway Guide',
   description:
-    'A complete guide to pizza box sizes available in Ireland — from 7-inch personal boxes to 18-inch family sizes — with tips on choosing the right box for your takeaway.',
+    'Pizza box sizes Ireland for takeaways — 7, 9, 10, 12, 14 and 16 inch wholesale boxes. Which sizes to stock, custom print options, and how to order from PrintNPack.',
   image: `${siteUrl}/images/pizza-boxes/PIZZA_BOX_1.jpg`,
   author: {
     '@type': 'Organization',
@@ -23,7 +23,7 @@ const jsonLd = {
     logo: { '@type': 'ImageObject', url: `${siteUrl}/favicon.ico` },
   },
   datePublished: '2026-02-12',
-  dateModified: '2026-06-17',
+  dateModified: '2026-09-10',
   mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/pizza-box-sizes-ireland` },
 };
 
@@ -69,9 +69,9 @@ const breadcrumbLd = {
 };
 
 export default function PizzaBoxSizesIreland() {
-  const title = 'Pizza Box Sizes Ireland: The Complete Guide for Takeaways & Restaurants';
+  const title = 'Pizza Box Sizes Ireland | 7–16 Inch Wholesale Takeaway Guide';
   const description =
-    'Not sure which pizza box size to order? We break down every standard pizza box size in Ireland — from 7" personal boxes to 18" family sizes — with tips on customisation, material, and ordering.';
+    'Pizza box sizes Ireland — 7" to 16" wholesale takeaway boxes. Which sizes Irish pizzerias stock first, custom printed options, and how to order nationwide.';
 
   return (
     <Layout>
@@ -122,7 +122,7 @@ export default function PizzaBoxSizesIreland() {
 
         {/* Title */}
         <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight mb-6">
-          Pizza Box Sizes Ireland: The Complete Guide for Takeaways &amp; Restaurants
+          Pizza Box Sizes Ireland: 7–16 Inch Wholesale Takeaway Guide
         </h1>
 
         {/* Hero image */}

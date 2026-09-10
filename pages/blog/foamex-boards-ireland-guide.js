@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import Layout from '../../components/layout/Layout';
+import RelatedSeoLinks from '../../components/seo/RelatedSeoLinks';
 import { SITE_URL as siteUrl } from '../../lib/site';
 
 const PAGE_URL = `${siteUrl}/blog/foamex-boards-ireland-guide`;
@@ -10,14 +11,14 @@ const HERO_IMAGE = '/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.av
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Foamex Boards Ireland: Thickness, Sizes & Signage Guide',
+  headline: 'Foamex Board Ireland | 3mm, 5mm & 10mm Printed Foam Signs',
   description:
-    'A practical guide to foamex boards in Ireland — 3mm vs 5mm vs 10mm, standard sheet sizes, indoor vs outdoor use, foamex vs correx, and how to order custom PVC foam signage.',
+    'Foamex board printing in Ireland — 3mm, 5mm and 10mm PVC foam signs. Sheet sizes, indoor vs outdoor, foamex vs Correx, and how to order from Ashbourne.',
   image: `${siteUrl}${HERO_IMAGE}`,
   author: { '@type': 'Organization', name: 'PrintNPack Ireland', url: siteUrl },
   publisher: { '@type': 'Organization', name: 'PrintNPack Ireland', logo: { '@type': 'ImageObject', url: `${siteUrl}/favicon.ico` } },
   datePublished: '2026-06-21',
-  dateModified: '2026-06-21',
+  dateModified: '2026-09-10',
   mainEntityOfPage: { '@type': 'WebPage', '@id': PAGE_URL },
 };
 
@@ -63,9 +64,9 @@ const breadcrumbLd = {
 };
 
 export default function FoamexBoardsIrelandGuide() {
-  const title = 'Foamex Boards Ireland: Thickness, Sizes & Signage Guide';
+  const title = 'Foamex Board Ireland | 3mm, 5mm & 10mm Printed Foam Signs';
   const description =
-    'Everything Irish businesses need to know about foamex boards — 3mm vs 5mm vs 10mm, sheet sizes, indoor vs outdoor, foamex vs correx, and how to order custom PVC foam signage.';
+    'Foamex board Ireland for retail, exhibitions and indoor signs. Compare 3mm vs 5mm vs 10mm, standard sheet sizes, foamex vs Correx, and order printed boards from Ashbourne.';
 
   return (
     <Layout>
@@ -195,6 +196,15 @@ export default function FoamexBoardsIrelandGuide() {
           </div>
         </section>
       </main>
+      <RelatedSeoLinks
+        title="Related signage"
+        links={[
+          { href: '/foamex-ireland', label: 'Foamex Ireland', desc: 'Printed foamex boards and sizes' },
+          { href: '/foamex-boards', label: 'Order Foamex Boards', desc: '3mm, 5mm and 10mm UV print' },
+          { href: '/blog/corriboard-boards-ireland', label: 'Correx / Corriboard Guide', desc: 'Outdoor waterproof sign boards' },
+          { href: '/foamex-faq-ireland', label: 'Foamex FAQ', desc: 'Thickness, outdoor use and pricing' },
+        ]}
+      />
     </Layout>
   );
 }

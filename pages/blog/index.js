@@ -84,9 +84,9 @@ const posts = [
   },
   {
     slug: 'business-stamps-ireland-guide',
-    title: 'Business Stamps Ireland: Company Stamps, Invoice Stamps & Logo Stamps Guide',
+    title: 'Business Stamps Ireland | Custom Rubber & Company Stamps from €15',
     excerpt:
-      'Everything Irish businesses need to know about company stamps — what to include, self-inking vs traditional, and how to order custom rubber stamps.',
+      'Custom rubber stamps, company stamps and invoice stamps from €15. Self-inking vs traditional and how to order from Ashbourne.',
     date: '2026-06-21',
     readTime: '7 min read',
     image: '/images/rubber-stamps/RubberStamp_10.jpg',
@@ -95,9 +95,9 @@ const posts = [
   },
   {
     slug: 'personalised-napkins-ireland-guide',
-    title: 'Personalised Napkins Ireland: Sizes, Materials & Wedding Napkin Guide',
+    title: 'Personalised Napkins Ireland | Printed Napkins from €0.05',
     excerpt:
-      'Cocktail vs dinner napkin sizes, paper vs linen-feel, wedding napkins, restaurant branding, and how to order custom printed napkins in Ireland.',
+      'Personalised and branded napkins from €0.05 — cocktail vs dinner sizes, linen-feel wedding napkins, and how to order in Ireland.',
     date: '2026-06-21',
     readTime: '8 min read',
     image: '/images/hero/napkin.svg',
@@ -106,9 +106,9 @@ const posts = [
   },
   {
     slug: 'foamex-boards-ireland-guide',
-    title: 'Foamex Boards Ireland: Thickness, Sizes & Signage Guide',
+    title: 'Foamex Board Ireland | 3mm, 5mm & 10mm Printed Foam Signs',
     excerpt:
-      '3mm vs 5mm vs 10mm foamex, standard sheet sizes, indoor vs outdoor use, foamex vs correx, and how to order custom PVC foam signage.',
+      'Foamex board printing in Ireland — 3mm vs 5mm vs 10mm, sheet sizes, indoor vs outdoor, and foamex vs Correx.',
     date: '2026-06-21',
     readTime: '7 min read',
     image: '/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif',
@@ -161,9 +161,9 @@ const posts = [
   },
   {
     slug: 'corriboard-boards-ireland',
-    title: 'Corriboard (Correx) Boards in Ireland: The Quiet Workhorse of Outdoor Marketing',
+    title: 'Correx Boards Ireland | Corriboard Signs, Election & Site Boards',
     excerpt:
-      "If you've walked down any Irish street during an election, passed a property for sale, or attended a summer festival, you've already seen corriboard in action. This guide explains what it is, why it performs so well in Irish weather, and where businesses use it most.",
+      'Printed Correx / corriboard boards in Ireland for election signs, property boards and site signage. Waterproof, 1–3 day print, nationwide delivery.',
     date: '2026-02-18',
     readTime: '7 min read',
     image: '/ifa/product/corriboard/corrugated-plastic-signs.jpg',
@@ -216,9 +216,9 @@ const posts = [
   },
   {
     slug: 'pizza-box-sizes-ireland',
-    title: 'Pizza Box Sizes Ireland: The Complete Guide for Takeaways & Restaurants',
+    title: 'Pizza Box Sizes Ireland | 7–16 Inch Wholesale Takeaway Guide',
     excerpt:
-      'Not sure which pizza box size to order? From 7-inch personal boxes to 18-inch family sizes, we break down every standard size, explain what to look for in a custom pizza box, and show you how to get the best value per unit for your Irish takeaway.',
+      '7" to 16" pizza box sizes for Irish takeaways — which wholesale sizes to stock, custom print options, and how to order.',
     date: '2026-02-12',
     readTime: '6 min read',
     image: '/images/pizza-boxes/PIZZA_BOX_1.jpg',

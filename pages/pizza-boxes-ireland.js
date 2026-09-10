@@ -64,6 +64,16 @@ const guides = [
     title: 'Custom Pizza Box Cost Guide',
     desc: 'How pricing works before you request a quote.',
   },
+  {
+    href: '/paper-bags-ireland',
+    title: 'Paper Bags Ireland',
+    desc: 'Printed and plain takeaway bags to go with pizza boxes.',
+  },
+  {
+    href: '/burger-boxes-ireland',
+    title: 'Burger Boxes Ireland',
+    desc: 'Plain, printed and bagasse burger packaging.',
+  },
 ];
 
 const faqs = [

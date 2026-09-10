@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
 import { HUB_FAQS } from '../data/paper-bags-cluster';
+import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 
 const PAGE_URL = `${SITE_URL}/paper-bags-ireland`;
 const HERO_IMAGE = '/images/products/flat-handle-bags/1.png';
@@ -76,16 +77,16 @@ const faqLd = {
 };
 
 export default function PaperBagsIreland() {
-  const title = 'Paper Bags Ireland | Printed, Plain & Wholesale Paper Bags with Logo';
+  const title = 'Paper Bags Ireland | Buy Printed, Plain & Wholesale Paper Bags';
   const description =
-    'Paper bags Ireland for retail, takeaway, cafés and events. Printed paper bags with logo, plain kraft bags, flat handle, twisted handle and wholesale options with delivery nationwide.';
+    'Buy paper bags in Ireland — brown kraft, SOS takeaway, printed bags with logo and wholesale cases. Flat handle, twisted handle and nationwide delivery from Ashbourne.';
 
   return (
     <Layout>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="keywords" content="paper bags Ireland, paper bags Dublin, paper bags with logo, printed paper bags Ireland, luxury paper bags Ireland, custom paper bags, wholesale paper bags, paper carrier bags, branded paper bags" />
+        <meta name="keywords" content="paper bags, paper bags Ireland, brown paper bags Ireland, paper bags Dublin, paper bags with logo, printed paper bags Ireland, branded paper bags, wholesale paper bags, paper carrier bags, kraft paper bags" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href={PAGE_URL} />
         <meta property="og:type" content="website" />
@@ -220,6 +221,18 @@ export default function PaperBagsIreland() {
           </div>
         </div>
       </section>
+
+      <RelatedSeoLinks
+        title="Related packaging for Irish food & retail"
+        links={[
+          { href: '/printed-flat-handle-bags-ireland', label: 'Printed Flat Handle Bags', desc: 'Logo takeaway bags from 500 units' },
+          { href: '/plain-paper-bags-ireland', label: 'Plain Paper Bags', desc: 'Brown kraft and SOS bags in bulk' },
+          { href: '/wholesale-paper-bags-ireland', label: 'Wholesale Paper Bags', desc: 'Case pricing for retailers and cafés' },
+          { href: '/pizza-boxes-ireland', label: 'Pizza Boxes Ireland', desc: 'Plain and printed pizza boxes' },
+          { href: '/napkins-ireland', label: 'Napkins Ireland', desc: 'Printed and personalised napkins' },
+          { href: '/custom-printed-coffee-cups-ireland', label: 'Custom Coffee Cups', desc: 'Branded takeaway cups' },
+        ]}
+      />
     </Layout>
   );
 }
