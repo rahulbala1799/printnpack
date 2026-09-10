@@ -6,6 +6,17 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'refuse-sacks-ireland-buying-guide',
+    title: 'Refuse Sacks Ireland: Sizes, Hi-Grade vs Standard & Wholesale Buying Guide',
+    excerpt:
+      'How to buy refuse sacks and bin bags in Ireland — 26×44 sizes, hi-grade vs standard, clear and Greensack options, case packs from around €18, and nationwide delivery from Ashbourne.',
+    date: '2026-09-10',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/150003.webp',
+    imageAlt: 'Refuse sacks Ireland — hi-grade black bin bags wholesale',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'custom-napkins-uk-ireland-europe',
     title: 'Custom Napkins UK, Ireland & Europe: Printed, Personalised & Branded Guide',
     excerpt:
