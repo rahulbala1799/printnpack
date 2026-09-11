@@ -6,6 +6,17 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'custom-cake-boxes-ireland-buying-guide',
+    title: 'Custom Cake Boxes Ireland: Window Styles, Luxury Finishes & Bakery Buying Guide',
+    excerpt:
+      'How to buy custom printed cake boxes in Ireland — window panels, inserts, handles, foil and embossing, food-safe boards for bakeries, and nationwide delivery from Ashbourne.',
+    date: '2026-09-11',
+    readTime: '8 min read',
+    image: '/images/products/custom-cake-boxes/custom-cake-boxes-ireland-luxury-navy-cupcake-window.jpg',
+    imageAlt: 'Custom cake boxes Ireland — navy cupcake box with display window',
+    category: 'Bakery Guide',
+  },
+  {
     slug: 'refuse-sacks-ireland-buying-guide',
     title: 'Refuse Sacks Ireland: Sizes, Hi-Grade vs Standard & Wholesale Buying Guide',
     excerpt:
