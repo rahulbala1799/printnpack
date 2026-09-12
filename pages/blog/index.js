@@ -6,6 +6,17 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'biobox-containers-ireland-sizes-buying-guide',
+    title: 'Biobox Containers Ireland: Sizes No.1–No.12, Kraft vs White & Wholesale Buying Guide',
+    excerpt:
+      'How to buy biobox containers in Ireland — No.1 to No.12 kraft and white takeaway food boxes, case packs, tiered wholesale pricing, and nationwide delivery from Ashbourne.',
+    date: '2026-09-12',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/120090.webp',
+    imageAlt: 'Biobox containers Ireland — kraft No.8 takeaway food boxes wholesale',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'custom-cake-boxes-ireland-buying-guide',
     title: 'Custom Cake Boxes Ireland: Window Styles, Luxury Finishes & Bakery Buying Guide',
     excerpt:
