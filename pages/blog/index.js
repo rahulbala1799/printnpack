@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'custom-printed-tissue-paper-ireland-buying-guide',
+    title:
+      'Custom Printed Tissue Paper Ireland: Ecommerce Unboxing, Logo vs Pattern & Buying Guide',
+    excerpt:
+      'How to buy custom printed tissue paper in Ireland — logo versus pattern print, colours and eco options for ecommerce and boutiques, and nationwide delivery from Ashbourne.',
+    date: '2026-09-13',
+    readTime: '8 min read',
+    image:
+      '/images/products/custom-printed-tissue-paper/luxury-custom-printed-tissue-paper-black-gold-ireland.jpg',
+    imageAlt: 'Custom printed tissue paper Ireland — black tissue with gold logo pattern',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'biobox-containers-ireland-sizes-buying-guide',
     title: 'Biobox Containers Ireland: Sizes No.1–No.12, Kraft vs White & Wholesale Buying Guide',
     excerpt:
