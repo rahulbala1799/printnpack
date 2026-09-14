@@ -125,6 +125,7 @@ const staticPages = [
   { path: '/services/vinyls',   priority: '0.8', changefreq: 'monthly' },
   { path: '/blog',              priority: '0.8', changefreq: 'weekly'  },
   // Pizza box content cluster
+  { path: '/blog/disposable-gloves-ireland-nitrile-vs-vinyl-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/custom-printed-tissue-paper-ireland-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/biobox-containers-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/custom-cake-boxes-ireland-buying-guide', priority: '0.88', changefreq: 'monthly' },

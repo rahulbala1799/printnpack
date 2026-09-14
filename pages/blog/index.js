@@ -6,6 +6,17 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'disposable-gloves-ireland-nitrile-vs-vinyl-buying-guide',
+    title: 'Disposable Gloves Ireland: Nitrile vs Vinyl, Sizes & Wholesale Buying Guide',
+    excerpt:
+      'How to buy disposable gloves in Ireland — nitrile vs vinyl, powder-free options, S–XL sizes, case packs, and nationwide wholesale delivery from Ashbourne.',
+    date: '2026-09-14',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/170054.webp',
+    imageAlt: 'Disposable gloves Ireland — blue powder-free nitrile catering gloves wholesale',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'custom-printed-tissue-paper-ireland-buying-guide',
     title:
       'Custom Printed Tissue Paper Ireland: Ecommerce Unboxing, Logo vs Pattern & Buying Guide',
