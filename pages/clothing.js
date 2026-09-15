@@ -4,19 +4,42 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import ClothingQuoteForm from '../components/ClothingQuoteForm';
+import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 import { SITE_URL } from '../lib/site';
 import { buildProductLd } from '../lib/schema';
+import { CLOTHING_FAQS } from '../data/clothing-faq';
 
 const PAGE_URL = `${SITE_URL}/clothing`;
 
 const productLd = buildProductLd({
-  name: 'Custom Clothing Ireland',
+  name: 'Branded Clothing Ireland — Promotional Wear & Workwear',
   description:
-    'Custom printed and embroidered clothing in Ireland. T-shirts, polos, hoodies, workwear. Corporate events, teams, promotions. Fast turnaround, bulk discounts.',
+    'Branded clothing Ireland — custom printed and embroidered t-shirts, polos, hoodies and workwear. Promotional clothing and company logos from €8.50. Nationwide from Ashbourne.',
   image: `${SITE_URL}/images/apparel/TSHIRT MOCK UP 1.jpg`,
   url: PAGE_URL,
   price: '8.50',
 });
+
+const clothingHubFaqs = CLOTHING_FAQS.slice(0, 6);
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: clothingHubFaqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Branded Clothing Ireland', item: PAGE_URL },
+  ],
+};
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -90,16 +113,19 @@ const CustomClothingIreland = () => {
   return (
     <Layout>
       <Head>
-        <title>Custom Clothing Ireland | Branded Workwear & Promotional Wear | Print n Pack</title>
-        <meta name="description" content="Custom printed and embroidered clothing in Ireland. T-shirts, polos, hoodies, workwear. Corporate events, teams, promotions. Fast turnaround, bulk discounts." />
-        <meta name="keywords" content="custom clothing Ireland, branded workwear, promotional wear, t-shirt printing, polo shirts, hoodies, corporate wear, Dublin, Cork, Galway" />
-        <meta property="og:title" content="Custom Clothing Ireland | Branded Workwear & Promotional Wear" />
-        <meta property="og:description" content="Custom printed and embroidered clothing. T-shirts, polos, hoodies. Fast turnaround, Ireland-wide." />
+        <title>Branded Clothing Ireland | Promotional Wear & Company Logos | PrintNPack</title>
+        <meta name="description" content="Branded clothing Ireland — promotional t-shirts, company clothing with logo, embroidered polos and custom workwear from €8.50. 3–5 day print, nationwide from Ashbourne." />
+        <meta name="keywords" content="branded clothing ireland, promotional clothing, company clothing with logo, branded clothing for business, custom clothing ireland, custom workwear, corporate branded clothing, t-shirt printing ireland" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+        <meta property="og:title" content="Branded Clothing Ireland | Promotional Wear & Company Logos" />
+        <meta property="og:description" content="Promotional clothing and company clothing with logo. T-shirts from €8.50, embroidery and print, Ireland-wide delivery." />
         <meta property="og:image" content="https://www.printnpack.ie/images/apparel/TSHIRT MOCK UP 1.jpg" />
         <meta property="og:url" content="https://www.printnpack.ie/clothing" />
         <meta property="og:type" content="website" />
         <link rel="canonical" href={PAGE_URL} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       </Head>
 
       <nav className="bg-gray-50 border-b border-gray-200">
@@ -138,9 +164,9 @@ const CustomClothingIreland = () => {
                 <span className="w-2 h-2 bg-blue-500 rounded-full" />
                 Workwear & promotional
               </div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">Custom Clothing</h1>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">Branded Clothing Ireland — Promotional Wear &amp; Company Logos</h1>
               <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
-                Custom printed and embroidered clothing for corporate events, teams, and promotions. T-shirts, polos, hoodies, and workwear across Ireland.
+                Custom printed and embroidered <strong>branded clothing</strong> for Irish businesses — promotional t-shirts, company clothing with your logo, corporate polos, hoodies and hi-viz workwear. From €8.50, 3–5 day turnaround, delivery nationwide from Ashbourne.
               </p>
               <div className="grid grid-cols-3 gap-3 mb-6">
                 <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">From €8.50</div><div className="text-xs text-gray-500">starting</div></div>
@@ -257,6 +283,40 @@ const CustomClothingIreland = () => {
           </div>
         </div>
       </section>
+
+      <section className="bg-white border-t border-gray-100">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">Branded clothing FAQs</h2>
+          <div className="space-y-4">
+            {clothingHubFaqs.map((faq) => (
+              <details key={faq.id} className="group bg-slate-50 rounded-xl border border-gray-200 p-5 open:shadow-sm">
+                <summary className="font-semibold text-gray-900 cursor-pointer list-none flex justify-between items-center gap-4">
+                  {faq.q}
+                  <span className="text-gray-400 group-open:rotate-180 transition-transform">▼</span>
+                </summary>
+                <p className="text-gray-600 mt-3 text-sm leading-relaxed">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+          <p className="text-center text-sm text-gray-500 mt-6">
+            More answers in the{' '}
+            <Link href="/clothing-faq-ireland" className="text-blue-600 hover:underline font-medium">clothing FAQ</Link>
+            {' '}and{' '}
+            <Link href="/blog/branded-clothing-ireland-guide" className="text-blue-600 hover:underline font-medium">branded clothing guide</Link>.
+          </p>
+        </div>
+      </section>
+
+      <RelatedSeoLinks
+        title="Related clothing & print"
+        links={[
+          { href: '/clothing-faq-ireland', label: 'Clothing FAQ', desc: 'Promotional wear, logos & pricing' },
+          { href: '/blog/branded-clothing-ireland-guide', label: 'Branded Clothing Guide', desc: 'Workwear vs promotional clothing' },
+          { href: '/products?group=clothing', label: 'Products — Clothing', desc: 'Browse the clothing category' },
+          { href: '/custom-printed-flags-ireland', label: 'Custom Flags', desc: 'Club and event flags from 1' },
+          { href: '/printing-ireland', label: 'Printing Ireland', desc: 'Posters, flyers and more' },
+        ]}
+      />
 
       <section className="bg-gray-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 text-center">

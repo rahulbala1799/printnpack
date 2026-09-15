@@ -66,6 +66,28 @@ const posts = [
     category: 'Bakery Guide',
   },
   {
+    slug: 'branded-clothing-ireland-guide',
+    title: 'Branded Clothing Ireland: Promotional Wear, Workwear & Company Logos',
+    excerpt:
+      'How Irish businesses buy branded clothing — promotional t-shirts, company clothing with logo, embroidery vs print, from €8.50, nationwide from Ashbourne.',
+    date: '2026-09-15',
+    readTime: '7 min read',
+    image: '/images/apparel/POLO SHIRT MOCK UP 1.jpg',
+    imageAlt: 'Branded clothing Ireland — custom polo with company logo',
+    category: 'Apparel Guide',
+  },
+  {
+    slug: 'poster-printing-ireland-guide',
+    title: 'Poster Printing Ireland: Sizes A4–A0, Paper, Cost & Turnaround',
+    excerpt:
+      'Poster prints from A4 to A0 on 170gsm and 200gsm paper. From €8, no minimum order, 1–3 day print from Ashbourne.',
+    date: '2026-09-15',
+    readTime: '6 min read',
+    image: '/ifa/product/Poster/single_poster.jpg',
+    imageAlt: 'Poster printing Ireland — custom A1 poster print',
+    category: 'Print Guide',
+  },
+  {
     slug: 'refuse-sacks-ireland-buying-guide',
     title: 'Refuse Sacks Ireland: Sizes, Hi-Grade vs Standard & Wholesale Buying Guide',
     excerpt:
@@ -111,9 +133,9 @@ const posts = [
   },
   {
     slug: 'roll-up-banners-ireland-guide',
-    title: 'Roll Up Banners Ireland: Sizes, Pull Up vs Roller Banners & Cost Guide',
+    title: 'Roll Up Banner Sizes Ireland: Pull Up, Roller Specs & Meath Printing',
     excerpt:
-      'How to choose roll up banners in Ireland — 850, 1000 and 1200 mm sizes, pull up vs roller banner names, complete units from €80, artwork reprints from €35, and extra wide XXL up to €450.',
+      'Standard roller banner size is 1000 × 2000 mm. Pull up banners printed in Meath from €80. Specs, 850/1000/1200 mm sizes, and extra wide XXL up to €450.',
     date: '2026-08-26',
     readTime: '7 min read',
     image: '/ifa/product/rollup/1.png',

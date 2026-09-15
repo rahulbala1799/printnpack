@@ -8,15 +8,15 @@ export const PLAIN_BAG_CATEGORIES = [
 
 export const PLAIN_PAPER_BAGS_CONFIG = {
   slug: 'plain-paper-bags-ireland',
-  metaTitle: 'Plain Paper Bags Ireland | Brown, White & Kraft Bags in Bulk',
+  metaTitle: 'Brown Paper Bags Ireland | Plain Kraft, SOS & Retail Bags in Bulk',
   metaDescription:
-    'Plain paper bags Ireland in brown kraft, white and coloured options. Stock paper carrier bags, SOS takeaway bags and bulk case options for cafés, retail and food businesses.',
-  h1: 'Plain Paper Bags Ireland — Brown, White and Kraft Bags in Bulk',
+    'Brown paper bags Ireland — plain kraft SOS takeaway bags, retail carrier bags and white stock bags by the case. Wholesale case pricing, Dublin and nationwide delivery.',
+  h1: 'Brown Paper Bags Ireland — Plain Kraft, SOS and Retail Bags in Bulk',
   heroLabel: 'Stock bags · case pricing',
   intro:
     'Buy plain paper bags in Ireland for everyday takeaway, retail and food service. PrintNPack stocks kraft SOS grab bags, MG kraft food bags, handled carrier bags and flat kraft bags with tiered case pricing and fast delivery across Dublin and nationwide.',
   keywords:
-    'plain paper bags Ireland, paper bags, brown paper bags Ireland, plain kraft paper bags, brown paper bags, white paper bags, kraft paper bags, paper bags bulk',
+    'plain paper bags Ireland, brown paper bags Ireland, paper bags, brown kraft paper bags, retail paper bags, SOS takeaway bags, kraft paper bags, paper bags bulk',
   primaryCta: { href: '/plain-packaging?category=SOS+Bags', label: 'Browse Plain Paper Bags' },
   secondaryCta: { href: '/printed-flat-handle-bags-ireland', label: 'Need bags with your logo?' },
   sections: [
@@ -140,6 +140,18 @@ export const HUB_FAQS = [
   {
     q: 'What is the difference between flat handle and twisted handle paper bags?',
     a: 'Flat handle bags use a die-cut paper loop — economical for cafés, delis and takeaway. Twisted handle bags use rope-style handles — popular for boutiques, gift retail and premium presentation.',
+  },
+  {
+    q: 'Do you sell branded paper bags?',
+    a: 'Yes. Branded paper bags with your logo are available as printed flat handle and twisted handle carrier bags from 500 units, plus luxury die-cut bags for premium brands. Plain kraft bags are available by the case if you do not need print yet.',
+  },
+  {
+    q: 'Do you supply retail paper bags and small paper bags?',
+    a: 'Yes. Retail paper bags include handled carrier bags for boutiques and gift shops, plus smaller kraft and SOS bags for bakeries, delis and takeaway. Browse printed, plain or wholesale options depending on volume.',
+  },
+  {
+    q: 'Where can I buy brown paper bags in Ireland?',
+    a: 'PrintNPack stocks brown kraft paper bags Ireland-wide — SOS takeaway bags, MG kraft food bags and handled carriers in case packs, with delivery from Ashbourne, Co. Meath to Dublin and nationwide.',
   },
   {
     q: 'Do you deliver paper bags to Dublin?',

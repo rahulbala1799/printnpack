@@ -77,16 +77,16 @@ const faqLd = {
 };
 
 export default function PaperBagsIreland() {
-  const title = 'Paper Bags Ireland | Buy Printed, Plain & Wholesale Paper Bags';
+  const title = 'Paper Bags Ireland | Branded, Brown Kraft, Retail & Wholesale';
   const description =
-    'Buy paper bags in Ireland — brown kraft, SOS takeaway, printed bags with logo and wholesale cases. Flat handle, twisted handle and nationwide delivery from Ashbourne.';
+    'Paper bags Ireland — branded bags with logo, brown kraft and SOS takeaway bags, retail carrier bags and wholesale cases. Flat handle, twisted handle, delivery from Ashbourne.';
 
   return (
     <Layout>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="keywords" content="paper bags, paper bags Ireland, brown paper bags Ireland, paper bags Dublin, paper bags with logo, printed paper bags Ireland, branded paper bags, wholesale paper bags, paper carrier bags, kraft paper bags" />
+        <meta name="keywords" content="paper bags, paper bags Ireland, brown paper bags Ireland, branded paper bags, retail paper bags, paper bags Dublin, paper bags with logo, printed paper bags Ireland, wholesale paper bags, kraft paper bags, small paper bags" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href={PAGE_URL} />
         <meta property="og:type" content="website" />
@@ -229,7 +229,7 @@ export default function PaperBagsIreland() {
           { href: '/plain-paper-bags-ireland', label: 'Plain Paper Bags', desc: 'Brown kraft and SOS bags in bulk' },
           { href: '/wholesale-paper-bags-ireland', label: 'Wholesale Paper Bags', desc: 'Case pricing for retailers and cafés' },
           { href: '/pizza-boxes-ireland', label: 'Pizza Boxes Ireland', desc: 'Plain and printed pizza boxes' },
-          { href: '/napkins-ireland', label: 'Napkins Ireland', desc: 'Printed and personalised napkins' },
+          { href: '/blog/printed-paper-bag-cost-ireland', label: 'Paper Bag Cost Guide', desc: 'How printed bag pricing works' },
           { href: '/custom-printed-coffee-cups-ireland', label: 'Custom Coffee Cups', desc: 'Branded takeaway cups' },
         ]}
       />

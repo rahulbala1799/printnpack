@@ -12,16 +12,24 @@ const PAGE_URL = `${SITE_URL}/posters`;
 
 const pageFaqs = [
   {
-    q: 'Where can I get custom posters printed in Ireland?',
-    a: 'PrintNPack prints custom posters and customisable posters across Ireland on premium 170gsm and 200gsm paper. Sizes from A4 to A0 with eco-solvent inks, no minimum order, and fast nationwide delivery.',
+    q: 'Where can I get poster printing in Ireland?',
+    a: 'PrintNPack prints custom poster prints in Ashbourne, Co. Meath — A4 to A0 on 170gsm and 200gsm paper, no minimum order, 1–3 day turnaround and nationwide delivery. Configure a quote on this page or call +353 89 415 7369.',
+  },
+  {
+    q: 'How much do poster prints cost in Ireland?',
+    a: 'Poster printing starts from around €8 depending on size and paper. Single posters are available; bulk discounts apply for larger runs.',
   },
   {
     q: 'What poster sizes are available?',
-    a: 'We print standard sizes A4, A3, A2, A1, and A0, plus custom dimensions up to 1.5m width. Matt or gloss lamination is available.',
+    a: 'Standard sizes A4, A3, A2, A1 and A0, plus 40×60 cm to 70×100 cm. Custom dimensions up to 1.5 m width. Matt or gloss lamination is optional.',
   },
   {
     q: 'Is there a minimum order for custom posters?',
-    a: 'No — single custom posters are available. Bulk discounts apply for larger orders.',
+    a: 'No — single custom posters are available. Rush service is often possible when artwork is print-ready.',
+  },
+  {
+    q: 'Do you print posters for events and retail?',
+    a: 'Yes. Event posters, shop-window posters, exhibition graphics and customisable retail posters are all printed on the same wide-format line in Ashbourne.',
   },
 ];
 
@@ -118,11 +126,12 @@ export default function PostersPage() {
   return (
     <Layout>
       <Head>
-        <title>Custom Posters Ireland | Customisable Poster Printing | PrintNPack</title>
-        <meta name="description" content="Custom posters &amp; customisable posters Ireland — premium paper, eco-solvent printing, A4 to A0 sizes. No minimum order, fast turnaround, nationwide delivery." />
-        <meta name="keywords" content="custom posters, custom posters ireland, customisable posters, poster printing ireland, print posters ireland, A4 A3 A2 A1 A0 posters, event posters ireland" />
-        <meta property="og:title" content="Custom Posters Ireland | Customisable Poster Printing" />
-        <meta property="og:description" content="Custom & customisable posters on premium paper. Eco-solvent inks, no minimum order, Ireland delivery." />
+        <title>Poster Printing Ireland | Custom Poster Prints A4–A0 | PrintNPack</title>
+        <meta name="description" content="Poster printing Ireland — custom poster prints from A4 to A0 on 170gsm & 200gsm paper. From €8, no minimum order, 1–3 day turnaround, nationwide from Ashbourne." />
+        <meta name="keywords" content="poster printing ireland, poster prints ireland, print posters ireland, custom posters, customisable posters, A1 poster printing, poster printing services ireland" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+        <meta property="og:title" content="Poster Printing Ireland | Custom Poster Prints A4–A0" />
+        <meta property="og:description" content="Custom poster prints from A4 to A0. Eco-solvent inks, no minimum order, Ireland delivery." />
         <meta property="og:image" content="https://www.printnpack.ie/ifa/product/Poster/single_poster.jpg" />
         <meta property="og:url" content={PAGE_URL} />
         <meta property="og:type" content="website" />
@@ -180,9 +189,9 @@ export default function PostersPage() {
                 <span className="w-2 h-2 bg-blue-500 rounded-full" />
                 Wide format
               </div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">Custom Posters Ireland</h1>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">Poster Printing Ireland — Custom Prints from A4 to A0</h1>
               <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
-                <strong>Custom posters</strong> and <strong>customisable posters</strong> printed on premium paper with vibrant eco-solvent inks. Perfect for advertising, events, retail displays, and exhibitions across Ireland.
+                <strong>Poster printing</strong> and <strong>custom poster prints</strong> on premium 170gsm and 200gsm paper with eco-solvent inks. A4 to A0, no minimum order, 1–3 day turnaround from Ashbourne — events, retail and exhibitions across Ireland.
               </p>
               <div className="grid grid-cols-3 gap-3 mb-6">
                 <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">From €8</div><div className="text-xs text-gray-500">per poster</div></div>
@@ -286,10 +295,56 @@ export default function PostersPage() {
         </div>
       </section>
 
+      <section className="bg-white border-t border-gray-100">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Poster sizes we print</h2>
+          <div className="overflow-x-auto mb-10">
+            <table className="w-full text-sm border border-gray-200 rounded-xl overflow-hidden">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="text-left px-4 py-3 font-semibold text-gray-700">Size</th>
+                  <th className="text-left px-4 py-3 font-semibold text-gray-700">Typical use</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ['A4', 'Notices, menus, small windows'],
+                  ['A3', 'Retail and event posters'],
+                  ['A2', 'Shop windows and foyers'],
+                  ['A1', 'Most popular event / retail size'],
+                  ['A0', 'Large indoor advertising'],
+                ].map(([size, use], i) => (
+                  <tr key={size} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                    <td className="px-4 py-3 font-medium text-gray-900">{size}</td>
+                    <td className="px-4 py-3 text-gray-600">{use}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">Poster printing FAQs</h2>
+          <div className="space-y-4">
+            {pageFaqs.map((faq) => (
+              <details key={faq.q} className="group bg-slate-50 rounded-xl border border-gray-200 p-5 open:shadow-sm">
+                <summary className="font-semibold text-gray-900 cursor-pointer list-none flex justify-between items-center gap-4">
+                  {faq.q}
+                  <span className="text-gray-400 group-open:rotate-180 transition-transform">▼</span>
+                </summary>
+                <p className="text-gray-600 mt-3 text-sm leading-relaxed">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+          <p className="text-sm text-gray-500 mt-6">
+            Full buying notes in our{' '}
+            <Link href="/blog/poster-printing-ireland-guide" className="text-blue-600 hover:underline font-medium">poster printing Ireland guide</Link>.
+          </p>
+        </div>
+      </section>
+
       <RelatedSeoLinks
         links={[
           { href: '/printing-ashbourne', label: 'Poster printing in Ashbourne', desc: 'Local print shop — collection from Ashbourne' },
-          { href: '/printing-ireland', label: 'Printing Ireland', desc: 'Nationwide posters, flyers & business print' },
+          { href: '/blog/poster-printing-ireland-guide', label: 'Poster Printing Guide', desc: 'A4–A0 sizes, paper and cost' },
           { href: '/services/posters', label: 'Poster Printing Service', desc: 'Design & print service' },
           { href: '/services/leaflets', label: 'Leaflets Ireland', desc: 'Flat leaflet printing' },
           { href: '/vinyl-banners', label: 'Printed Banners', desc: 'Large format outdoor' },

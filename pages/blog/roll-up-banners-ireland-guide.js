@@ -12,14 +12,14 @@ const heroImage = '/ifa/product/rollup/1.png';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Roll Up Banners Ireland: Sizes, Pull Up vs Roller Banners & Cost Guide',
+  headline: 'Roll Up Banner Sizes Ireland: Pull Up, Roller Specs & Meath Printing',
   description:
-    'How to choose roll up banners in Ireland — 850, 1000 and 1200 mm sizes, pull up vs roller banner names, complete units from €80 with a heavy cassette, artwork reprints from €35, and extra wide XXL up to €450.',
+    'Standard roll up / pull up / roller banner sizes in Ireland — 850, 1000 and 1200 × 2000 mm specs, Meath printing, complete units from €80 with a heavy cassette, artwork from €35.',
   image: `${siteUrl}${heroImage}`,
   author: { '@type': 'Organization', name: 'PrintNPack Ireland', url: siteUrl },
   publisher: { '@type': 'Organization', name: 'PrintNPack Ireland', logo: { '@type': 'ImageObject', url: `${siteUrl}/favicon.ico` } },
   datePublished: '2026-08-26',
-  dateModified: '2026-08-26',
+  dateModified: '2026-09-15',
   mainEntityOfPage: { '@type': 'WebPage', '@id': PAGE_URL },
 };
 
@@ -45,10 +45,26 @@ const faqLd = {
     },
     {
       '@type': 'Question',
-      name: 'How much do roll up banners cost in Ireland?',
+      name: 'What is the standard roller banner size?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Complete roll up banners start from €80 with a heavy cassette included. Artwork reprints (graphic only) start from €35. Extra wide XXL banners go up to €450 for 3 m × 2 m.',
+        text: 'The standard Irish roller / pull up / roll up banner size is 1000 × 2000 mm. Compact 850 × 2000 mm suits reception desks. 1200 × 2000 mm is used for wider foyers. Extra wide stands are 2000 mm wide and up to 3000 mm high.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do you print pull up banners in Meath?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. PrintNPack prints pull up and roll up banners in Ashbourne, Co. Meath. Collection from Unit 14 Ashbourne Business Centre, or delivery across Meath, Dublin and nationwide. Complete units from €80 with a heavy cassette.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What are pull up banner specs?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A standard pull up banner includes a heavy aluminium cassette, telescopic pole, anti-curl graphic about 2000 mm tall, and a padded carry bag. Setup takes under 60 seconds with no tools. Graphic reprints (no cassette) start from €35.',
       },
     },
   ],
@@ -65,15 +81,16 @@ const breadcrumbLd = {
 };
 
 export default function RollUpBannersIrelandGuide() {
-  const title = 'Roll Up Banners Ireland: Sizes, Pull Up vs Roller Banners & Cost';
+  const title = 'Roll Up Banner Sizes Ireland: Pull Up, Roller Specs & Meath Printing';
   const description =
-    'Choose roll up banners in Ireland — 850, 1000 and 1200 mm, pull up vs roller banner names, complete units from €80 with a heavy cassette, artwork reprints from €35, and extra wide XXL up to €450 for 3 m × 2 m.';
+    'Standard roller banner size is 1000 × 2000 mm. Pull up banners printed in Meath from €80 with a heavy cassette. Specs, 850/1000/1200 mm sizes, and extra wide XXL up to €450.';
 
   return (
     <Layout>
       <Head>
         <title>{title} | PrintNPack</title>
         <meta name="description" content={description} />
+        <meta name="keywords" content="roll up banner sizes ireland, roller banner size, pull up banner size, pull up banners meath, roll up banner printing meath, pull up banner specs, roll up banners ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href={PAGE_URL} />
         <meta property="og:type" content="article" />
@@ -96,7 +113,7 @@ export default function RollUpBannersIrelandGuide() {
             </p>
             <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight mb-4">{title}</h1>
             <p className="text-lg text-slate-600 leading-relaxed mb-6">{description}</p>
-            <p className="text-sm text-slate-400">Updated 26 August 2026 · 7 min read</p>
+            <p className="text-sm text-slate-400">Updated 15 September 2026 · 8 min read</p>
           </div>
         </header>
 
@@ -131,18 +148,70 @@ export default function RollUpBannersIrelandGuide() {
             .
           </p>
 
-          <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">Standard roll up banner sizes in Ireland</h2>
-          <ul className="list-disc pl-6 text-slate-700 mb-6 space-y-2">
-            <li><strong>850 × 2000 mm</strong> — compact reception desks, clinics, small booths.</li>
-            <li><strong>1000 × 2000 mm</strong> — the default Irish trade show size.</li>
-            <li><strong>1200 × 2000 mm</strong> — wider corporate foyer and retail displays.</li>
-            <li><strong>2000 mm extra wide</strong> — XL / XXL / XXXL up to 3 m high for exhibition halls.</li>
-          </ul>
+          <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">Standard roll up / roller banner sizes in Ireland</h2>
+          <div className="overflow-x-auto mb-6">
+            <table className="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+              <thead className="bg-slate-50">
+                <tr>
+                  <th className="text-left px-4 py-3 font-semibold text-slate-700">Size (W × H)</th>
+                  <th className="text-left px-4 py-3 font-semibold text-slate-700">Also called</th>
+                  <th className="text-left px-4 py-3 font-semibold text-slate-700">Best for</th>
+                  <th className="text-left px-4 py-3 font-semibold text-slate-700">From</th>
+                </tr>
+              </thead>
+              <tbody className="text-slate-700">
+                <tr className="border-t border-slate-100">
+                  <td className="px-4 py-3 font-medium">850 × 2000 mm</td>
+                  <td className="px-4 py-3">Compact pull up</td>
+                  <td className="px-4 py-3">Reception desks, clinics, small booths</td>
+                  <td className="px-4 py-3">€80</td>
+                </tr>
+                <tr className="border-t border-slate-100 bg-slate-50">
+                  <td className="px-4 py-3 font-medium">1000 × 2000 mm</td>
+                  <td className="px-4 py-3">Standard roller banner size</td>
+                  <td className="px-4 py-3">Irish trade shows — most popular</td>
+                  <td className="px-4 py-3">€80</td>
+                </tr>
+                <tr className="border-t border-slate-100">
+                  <td className="px-4 py-3 font-medium">1200 × 2000 mm</td>
+                  <td className="px-4 py-3">Wide pull up</td>
+                  <td className="px-4 py-3">Corporate foyers and retail</td>
+                  <td className="px-4 py-3">€80</td>
+                </tr>
+                <tr className="border-t border-slate-100 bg-slate-50">
+                  <td className="px-4 py-3 font-medium">2000 × 2000–3000 mm</td>
+                  <td className="px-4 py-3">Extra wide / XXL</td>
+                  <td className="px-4 py-3">Exhibition halls, 3 m × 2 m backdrops</td>
+                  <td className="px-4 py-3">Up to €450</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <p className="text-slate-700 leading-relaxed mb-6">
-            If you only remember one size, remember 1000 mm wide. It fits most shell-scheme stands at RDS and
-            regional exhibitions without dominating a 3 m booth.{' '}
+            If you searched <strong>roller banner size</strong> or <strong>pull up banner size</strong>, 1000 × 2000 mm
+            is the size to order unless your booth is unusually narrow or you need a 2 m-wide backdrop.{' '}
             <Link href="/blog/banner-sizes-ireland" className="text-orange-600 hover:underline font-medium">
               Full banner sizes guide
+            </Link>
+            .
+          </p>
+
+          <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">Pull up banner specs</h2>
+          <ul className="list-disc pl-6 text-slate-700 mb-6 space-y-2">
+            <li>Heavy aluminium cassette (graphic retracts inside for travel)</li>
+            <li>Telescopic support pole — no tools, under 60 seconds to stand</li>
+            <li>Anti-curl graphic, typically 2000 mm visible height</li>
+            <li>Padded carry bag included on complete units</li>
+            <li>Indoor use; extra wide stands are B1 fire certified</li>
+          </ul>
+
+          <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">Pull up banners Meath — print locally</h2>
+          <p className="text-slate-700 leading-relaxed mb-6">
+            Searches for <strong>pull up banners Meath</strong> and <strong>roll up banner printing Meath</strong> go
+            to our Ashbourne unit. Collect from Unit 14 Ashbourne Business Centre, or we deliver across Meath, Dublin
+            and nationwide. Complete units from €80 with a heavy cassette; artwork reprints from €35.{' '}
+            <Link href="/pull-up-banners-meath" className="text-orange-600 hover:underline font-medium">
+              Pull up banners Meath
             </Link>
             .
           </p>
@@ -207,10 +276,26 @@ export default function RollUpBannersIrelandGuide() {
             </details>
             <details className="group border border-slate-200 rounded-xl overflow-hidden bg-white">
               <summary className="cursor-pointer px-4 py-3 bg-slate-50 hover:bg-slate-100 font-semibold text-slate-900 text-sm">
-                How much do roll up banners cost in Ireland?
+                What is the standard roller banner size?
               </summary>
               <p className="px-4 py-3 text-sm text-slate-600 leading-relaxed">
-                Complete roll up banners start from €80 with a heavy cassette included. Artwork reprints (graphic only) start from €35. Extra wide XXL banners go up to €450 for 3 m × 2 m.
+                The standard Irish roller / pull up / roll up banner size is 1000 × 2000 mm. Compact 850 × 2000 mm suits reception desks. 1200 × 2000 mm is used for wider foyers.
+              </p>
+            </details>
+            <details className="group border border-slate-200 rounded-xl overflow-hidden bg-white">
+              <summary className="cursor-pointer px-4 py-3 bg-slate-50 hover:bg-slate-100 font-semibold text-slate-900 text-sm">
+                Do you print pull up banners in Meath?
+              </summary>
+              <p className="px-4 py-3 text-sm text-slate-600 leading-relaxed">
+                Yes. PrintNPack prints pull up and roll up banners in Ashbourne, Co. Meath. Collection from Unit 14 Ashbourne Business Centre, or delivery across Meath, Dublin and nationwide. Complete units from €80.
+              </p>
+            </details>
+            <details className="group border border-slate-200 rounded-xl overflow-hidden bg-white">
+              <summary className="cursor-pointer px-4 py-3 bg-slate-50 hover:bg-slate-100 font-semibold text-slate-900 text-sm">
+                What are pull up banner specs?
+              </summary>
+              <p className="px-4 py-3 text-sm text-slate-600 leading-relaxed">
+                A standard pull up includes a heavy aluminium cassette, telescopic pole, anti-curl graphic about 2000 mm tall, and a padded carry bag. Setup takes under 60 seconds. Graphic reprints start from €35.
               </p>
             </details>
           </div>
@@ -235,7 +320,7 @@ export default function RollUpBannersIrelandGuide() {
           { href: '/blog/roll-up-banner-printing-ireland', label: 'Roll Up Banner Printing', desc: 'Cost, Dublin & turnaround' },
           { href: '/roll-up-banners-ireland', label: 'Roll Up Banners Ireland', desc: 'From €80 with heavy cassette' },
           { href: '/extra-wide-roll-up-banners-ireland', label: 'Extra Wide Roll Ups', desc: '2m XL to 3m high' },
-          { href: '/banners-ireland', label: 'Banners Ireland', desc: 'PVC and exhibition printing' },
+          { href: '/pull-up-banners-meath', label: 'Pull Up Banners Meath', desc: 'Local Ashbourne print & collection' },
           { href: '/blog/banner-sizes-ireland', label: 'Banner Sizes Guide', desc: 'PVC and roll-up dimensions' },
         ]}
       />
