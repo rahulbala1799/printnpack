@@ -6,6 +6,20 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'luxury-magnetic-closure-boxes-ireland-buying-guide',
+    title:
+      'Luxury Magnetic Closure Boxes Ireland: Foil, Embossing & Corporate Gift Buying Guide',
+    excerpt:
+      'How to buy luxury magnetic closure boxes in Ireland — foil stamping, embossing, spot UV, inserts for cosmetics, jewellery and corporate gifts, and nationwide delivery from Ashbourne.',
+    date: '2026-09-15',
+    readTime: '8 min read',
+    image:
+      '/images/products/luxury-magnetic-closure-boxes/luxury-magnetic-closure-box-ireland-gold-foil.jpg',
+    imageAlt:
+      'Luxury magnetic closure boxes Ireland — forest green rigid gift box with gold foil logo',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'disposable-gloves-ireland-nitrile-vs-vinyl-buying-guide',
     title: 'Disposable Gloves Ireland: Nitrile vs Vinyl, Sizes & Wholesale Buying Guide',
     excerpt:
