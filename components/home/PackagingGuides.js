@@ -67,6 +67,13 @@ const guides = [
     cta: 'Read the guide',
   },
   {
+    href: '/blog/kerala-cafe-printed-paper-bags-dublin',
+    title: 'Kerala Cafe Paper Bags',
+    description: '1,000 branded bags for a Coolmine Dublin café — short-run print from PrintNPack.',
+    image: '/images/blog/kerala-cafe/kerala-cafe-printed-paper-bag-dublin.jpg',
+    cta: 'Read the case study',
+  },
+  {
     href: '/plain-pizza-boxes-ireland',
     title: 'Plain Pizza Boxes',
     description: 'Kraft brown boxes in 100-pack cases — order online.',

@@ -116,7 +116,9 @@ export default function PrintedPaperBagCostIreland() {
             <strong>Flat handle paper bags</strong> — economical for cafés, delis and takeaway — often start from around <strong>€0.18 per unit at 500 units</strong>. <strong>Twisted handle carrier bags</strong> — premium retail and gift packaging — typically start from around <strong>€0.35 per unit at 500 units</strong>.
           </p>
           <p className="text-slate-700 leading-relaxed mb-8">
-            Larger runs (1,000, 3,000, 10,000+) usually reduce the per-bag cost. For style comparisons, see our{' '}
+            Larger runs (1,000, 3,000, 10,000+) usually reduce the per-bag cost. A 1,000-bag run is a typical café branding quantity — see how we printed{' '}
+            <Link href="/blog/kerala-cafe-printed-paper-bags-dublin" className="text-blue-600 hover:underline font-medium">1,000 branded bags for Kerala Cafe in Coolmine</Link>
+            . For style comparisons, see our{' '}
             <Link href="/blog/paper-bags-with-logo-ireland" className="text-blue-600 hover:underline font-medium">paper bags with logo guide</Link>{' '}
             or the{' '}
             <Link href="/paper-bags-ireland" className="text-blue-600 hover:underline font-medium">paper bags Ireland hub</Link>.

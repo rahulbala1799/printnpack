@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'kerala-cafe-printed-paper-bags-dublin',
+    title: 'Kerala Cafe Dublin: How 1,000 Printed Paper Bags Were Enough for Branding',
+    excerpt:
+      'PrintNPack printed 1,000 branded white paper bags for Kerala Cafe in Coolmine, Dublin — logo, Instagram QR and contact details on a short café branding run from 500 units.',
+    date: '2026-09-15',
+    readTime: '6 min read',
+    image: '/images/blog/kerala-cafe/kerala-cafe-printed-paper-bag-dublin.jpg',
+    imageAlt:
+      'Kerala Cafe Coolmine Dublin — custom printed white paper bag with palm tree logo and Instagram QR',
+    category: 'Case Study',
+  },
+  {
     slug: 'luxury-magnetic-closure-boxes-ireland-buying-guide',
     title:
       'Luxury Magnetic Closure Boxes Ireland: Foil, Embossing & Corporate Gift Buying Guide',

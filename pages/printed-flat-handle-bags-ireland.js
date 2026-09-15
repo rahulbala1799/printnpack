@@ -71,9 +71,9 @@ const seoSections = [
 
 const guides = [
   {
-    href: '/paper-bags-ireland',
-    title: 'Paper Bags Ireland',
-    desc: 'Hub for printed, plain and wholesale paper bag options.',
+    href: '/blog/kerala-cafe-printed-paper-bags-dublin',
+    title: 'Kerala Cafe Case Study',
+    desc: '1,000 branded paper bags printed for a Dublin café.',
   },
   {
     href: '/blog/paper-bags-with-logo-ireland',
@@ -493,6 +493,7 @@ export default function PrintedFlatHandleBagsIreland() {
           { href: '/plain-paper-bags-ireland', label: 'Plain Paper Bags', desc: 'Kraft SOS stock cases' },
           { href: '/wholesale-paper-bags-ireland', label: 'Wholesale Paper Bags', desc: 'Bulk case pricing' },
           { href: '/blog/printed-paper-bag-cost-ireland', label: 'Paper Bag Cost Guide', desc: 'Pricing before you quote' },
+          { href: '/blog/kerala-cafe-printed-paper-bags-dublin', label: 'Kerala Cafe Case Study', desc: '1,000 branded bags for a Dublin café' },
         ]}
       />
 

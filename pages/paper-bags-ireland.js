@@ -61,9 +61,9 @@ const hubSections = [
 ];
 
 const guides = [
+  { href: '/blog/kerala-cafe-printed-paper-bags-dublin', title: 'Kerala Cafe Case Study', desc: '1,000 branded paper bags for a Coolmine Dublin café.' },
   { href: '/blog/paper-bags-with-logo-ireland', title: 'Paper Bags with Logo Guide', desc: 'Flat vs twisted vs SOS — which style fits your business.' },
   { href: '/blog/printed-paper-bag-cost-ireland', title: 'Paper Bag Cost Guide', desc: 'How printed paper bag pricing works in Ireland.' },
-  { href: '/blog/eco-friendly-pizza-box-paper-bags-burger-boxes-ireland', title: 'Eco-Friendly Paper Bags', desc: 'Recyclable kraft options for sustainable takeaway.' },
 ];
 
 const faqLd = {
@@ -230,6 +230,7 @@ export default function PaperBagsIreland() {
           { href: '/wholesale-paper-bags-ireland', label: 'Wholesale Paper Bags', desc: 'Case pricing for retailers and cafés' },
           { href: '/pizza-boxes-ireland', label: 'Pizza Boxes Ireland', desc: 'Plain and printed pizza boxes' },
           { href: '/blog/printed-paper-bag-cost-ireland', label: 'Paper Bag Cost Guide', desc: 'How printed bag pricing works' },
+          { href: '/blog/kerala-cafe-printed-paper-bags-dublin', label: 'Kerala Cafe Case Study', desc: '1,000 branded bags for a Dublin café' },
           { href: '/custom-printed-coffee-cups-ireland', label: 'Custom Coffee Cups', desc: 'Branded takeaway cups' },
         ]}
       />

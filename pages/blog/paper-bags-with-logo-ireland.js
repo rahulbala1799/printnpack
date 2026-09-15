@@ -361,6 +361,11 @@ export default function PaperBagsWithLogoIreland() {
             <p className="font-semibold text-slate-900 mb-3">Related packaging guides</p>
             <ul className="space-y-2 text-sm">
               <li>
+                <Link href="/blog/kerala-cafe-printed-paper-bags-dublin" className="text-blue-600 hover:underline">
+                  → Kerala Cafe Dublin: How 1,000 Printed Paper Bags Were Enough for Branding
+                </Link>
+              </li>
+              <li>
                 <Link href="/blog/eco-packaging-for-takeaways-ireland" className="text-blue-600 hover:underline">
                   → Eco Packaging for Takeaways Ireland: How to Switch to Sustainable Food Packaging
                 </Link>
