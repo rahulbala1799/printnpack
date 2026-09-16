@@ -58,6 +58,7 @@ const relatedLinks = [
   { href: '/rubber-stamps-ireland', label: 'Rubber Stamps Ireland', desc: 'Complete stamp printing hub' },
   { href: '/rubber-stamp-faq-ireland', label: 'Stamp FAQ', desc: '25+ instant answers' },
   { href: '/blog/business-stamps-ireland-guide', label: 'Business Stamps Guide', desc: 'Company & invoice stamps' },
+  { href: '/blog/custom-event-stamp-next-day-dublin', label: 'Next-Day Event Stamp', desc: 'Rush wooden stamp delivered in one day' },
   { href: '/rubber-stamp-printing-ashbourne', label: 'Stamp Printing Ashbourne', desc: 'Local collection & same-day' },
   { href: '/rubber-stamp-printing-dublin', label: 'Stamp Printing Dublin', desc: 'Delivery across Dublin' },
 ];

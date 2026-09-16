@@ -21,6 +21,7 @@ const localPages = [
 ];
 
 const guides = [
+  { href: '/blog/custom-event-stamp-next-day-dublin', title: 'Next-Day Event Stamp', desc: 'A personalised wooden stamp made and delivered in one day for a Dublin event.' },
   { href: '/rubber-stamp-faq-ireland', title: 'Rubber Stamp FAQ', desc: '25+ instant answers on pricing, types, turnaround & delivery.' },
   { href: '/blog/business-stamps-ireland-guide', title: 'Business Stamps Guide', desc: 'Company stamps, invoice stamps & logo stamps for Irish businesses.' },
 ];
@@ -156,7 +157,7 @@ export default function RubberStampsIreland() {
       <section className="py-12 lg:py-16 bg-slate-50 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">Guides &amp; resources</h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             {guides.map((item) => (
               <Link key={item.href} href={item.href} className="group bg-white rounded-2xl border border-gray-200 p-6 hover:border-indigo-300 hover:shadow-lg transition-all">
                 <h3 className="text-xl font-bold text-gray-900 group-hover:text-indigo-600 mb-2">{item.title}</h3>

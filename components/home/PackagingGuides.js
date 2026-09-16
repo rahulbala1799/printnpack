@@ -214,6 +214,13 @@ const guides = [
     cta: 'Read the guide',
   },
   {
+    href: '/blog/custom-event-stamp-next-day-dublin',
+    title: 'Next-Day Event Stamp',
+    description: 'A personalised wooden stamp made and delivered in one day for a Dublin event.',
+    image: '/images/blog/custom-event-stamp/custom-event-stamp-dublin-e-and-j.jpg',
+    cta: 'Read the case study',
+  },
+  {
     href: '/napkins-ireland',
     title: 'Napkins Ireland',
     description: 'Custom printed & linen-feel napkins — restaurants, weddings & catering.',

@@ -62,6 +62,7 @@ export const RUBBER_STAMP_FAQS = [
     q: 'Do you offer same-day rubber stamp printing?',
     subtitle: 'Express stamp service in Ireland',
     a: 'Yes. Same-day and next-day rubber stamp service is available for urgent business stamp orders when artwork is ready. Call +353 89 415 7369 with your deadline — we will confirm availability based on current workload.',
+    link: { href: '/blog/custom-event-stamp-next-day-dublin', label: 'Next-day event stamp case study' },
   },
   {
     id: 'delivery',

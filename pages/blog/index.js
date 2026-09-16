@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'custom-event-stamp-next-day-dublin',
+    title: 'Custom Event Stamp Made & Delivered the Next Day – A Print n Pack Rush Job',
+    excerpt:
+      'Need a custom stamp urgently in Dublin? How Print n Pack created and delivered a personalised wooden event stamp within one day for a last-minute event.',
+    date: '2026-09-16',
+    readTime: '5 min read',
+    image: '/images/blog/custom-event-stamp/custom-event-stamp-dublin-e-and-j.jpg',
+    imageAlt:
+      'Custom event stamp Dublin — wooden handle stamp pressing an E&J wreath monogram onto stationery',
+    category: 'Case Study',
+  },
+  {
     slug: 'sos-grab-bags-ireland-sizes-buying-guide',
     title: 'SOS Grab Bags Ireland: Sizes, Plain vs Printed & Wholesale Buying Guide',
     excerpt:

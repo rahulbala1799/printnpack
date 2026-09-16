@@ -197,6 +197,7 @@ export default function BusinessStampsIrelandGuide() {
 
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">Related guides</h2>
           <ul className="list-disc pl-6 text-slate-700 mb-8 space-y-2">
+            <li><Link href="/blog/custom-event-stamp-next-day-dublin" className="text-indigo-600 hover:underline font-medium">Custom event stamp made and delivered the next day</Link></li>
             <li><Link href="/rubber-stamp-faq-ireland" className="text-indigo-600 hover:underline font-medium">Rubber stamp FAQ — 25+ instant answers</Link></li>
             <li><Link href="/rubber-stamp-printing-dublin" className="text-indigo-600 hover:underline font-medium">Stamp printing Dublin</Link></li>
             <li><Link href="/rubber-stamps-ireland" className="text-indigo-600 hover:underline font-medium">Rubber stamps Ireland hub</Link></li>

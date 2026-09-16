@@ -187,6 +187,7 @@ export default function RubberStampFaqIreland() {
           { href: '/rubber-stamps', label: 'Order Custom Stamps', desc: 'Business, signature & hand stamps' },
           { href: '/rubber-stamp-printing-dublin', label: 'Stamp Printing Dublin', desc: 'Delivery across Dublin' },
           { href: '/blog/business-stamps-ireland-guide', label: 'Business Stamps Guide', desc: 'Company stamps for Irish businesses' },
+          { href: '/blog/custom-event-stamp-next-day-dublin', label: 'Next-Day Event Stamp', desc: 'Rush wooden stamp delivered in one day' },
         ]}
       />
     </Layout>
