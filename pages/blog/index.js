@@ -6,6 +6,17 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'sos-grab-bags-ireland-sizes-buying-guide',
+    title: 'SOS Grab Bags Ireland: Sizes, Plain vs Printed & Wholesale Buying Guide',
+    excerpt:
+      'How to buy SOS grab bags in Ireland — kraft takeaway sizes, plain case packs vs custom print from 500 units, tiered wholesale pricing, and nationwide delivery from Ashbourne.',
+    date: '2026-09-16',
+    readTime: '8 min read',
+    image: '/images/products/sos-bags/1.png',
+    imageAlt: 'SOS grab bags Ireland — kraft takeaway paper bags wholesale',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'kerala-cafe-printed-paper-bags-dublin',
     title: 'Kerala Cafe Dublin: How 1,000 Printed Paper Bags Were Enough for Branding',
     excerpt:
