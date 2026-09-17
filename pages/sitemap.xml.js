@@ -125,6 +125,7 @@ const staticPages = [
   { path: '/services/posters',  priority: '0.8', changefreq: 'monthly' },
   { path: '/services/vinyls',   priority: '0.8', changefreq: 'monthly' },
   { path: '/blog',              priority: '0.8', changefreq: 'weekly'  },
+  { path: '/blog/labels-on-a-roll-ireland-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/custom-event-stamp-next-day-dublin', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/sos-grab-bags-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/kerala-cafe-printed-paper-bags-dublin', priority: '0.88', changefreq: 'monthly' },

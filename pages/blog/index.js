@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'labels-on-a-roll-ireland-buying-guide',
+    title: 'Labels on a Roll Ireland: Shapes, Materials, Dispensers & Buying Guide',
+    excerpt:
+      'How to buy custom labels on a roll in Ireland — round jar labels, glossy PP vs matt vs NatureFlex, dispenser boxes, roll winding and cores, and nationwide delivery from Ashbourne.',
+    date: '2026-09-17',
+    readTime: '8 min read',
+    image:
+      '/images/products/labels-on-a-roll/labels-on-a-roll-ireland-round-jar-product-label.png',
+    imageAlt: 'Labels on a roll Ireland — custom round jar product label wholesale print',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'custom-event-stamp-next-day-dublin',
     title: 'Custom Event Stamp Made & Delivered the Next Day – A Print n Pack Rush Job',
     excerpt:
