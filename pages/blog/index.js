@@ -6,6 +6,17 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'foil-containers-ireland-sizes-buying-guide',
+    title: 'Foil Containers Ireland: Sizes, Lids & Wholesale Buying Guide',
+    excerpt:
+      'How to buy foil containers in Ireland — 4×5, 4×8, 6×9 and 9×9 sizes, lid combos vs separate lids, half-gastro trays, and nationwide wholesale delivery from Ashbourne.',
+    date: '2026-09-18',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/10928.webp',
+    imageAlt: 'Foil containers Ireland — 4×8 aluminium foil trays with lids wholesale',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'labels-on-a-roll-ireland-buying-guide',
     title: 'Labels on a Roll Ireland: Shapes, Materials, Dispensers & Buying Guide',
     excerpt:
