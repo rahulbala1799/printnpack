@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'custom-greaseproof-sheets-ireland-sizes-buying-guide',
+    title: 'Custom Greaseproof Sheets Ireland: Sizes, MOQ & Buying Guide',
+    excerpt:
+      'How to buy custom printed greaseproof sheets in Ireland — sizes from 14×14 cm to 43×31.5 cm, 500-piece MOQ, 1/2/full colour food-safe print on 45 gsm white paper, and nationwide delivery from Ashbourne.',
+    date: '2026-09-19',
+    readTime: '8 min read',
+    image:
+      '/images/products/greaseproof-sheets/greaseproof-sheets-ireland-branded-burger-wrap.jpg',
+    imageAlt:
+      'Custom greaseproof sheets Ireland — branded white greaseproof burger wrap wholesale print',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'foil-containers-ireland-sizes-buying-guide',
     title: 'Foil Containers Ireland: Sizes, Lids & Wholesale Buying Guide',
     excerpt:
