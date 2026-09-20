@@ -3,7 +3,7 @@ import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import ClothingQuoteForm from '../components/ClothingQuoteForm';
+import { useQuoteCart } from '../lib/quote-cart-context';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 import { SITE_URL } from '../lib/site';
 import { buildProductLd, buildProductListItem } from '../lib/schema';
@@ -100,8 +100,7 @@ const CheckIcon = () => (
 );
 
 const CustomClothingIreland = () => {
-  const [quoteModalOpen, setQuoteModalOpen] = useState(false);
-  const [quoteType, setQuoteType] = useState('T-Shirts');
+  const { openBuilder } = useQuoteCart();
   const [currentImage, setCurrentImage] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(null);
@@ -118,9 +117,12 @@ const CustomClothingIreland = () => {
     return () => { clearInterval(interval); if (timeoutRef.current) clearTimeout(timeoutRef.current); };
   }, [currentImage, goToImage]);
 
-  const openQuote = (type) => {
-    setQuoteType(type || 'T-Shirts');
-    setQuoteModalOpen(true);
+  const openQuote = (product) => {
+    if (product?.id) {
+      openBuilder(product.id);
+      return;
+    }
+    openBuilder();
   };
 
   return (
@@ -245,7 +247,7 @@ const CustomClothingIreland = () => {
                   </div>
                   <div className="flex gap-2">
                     <Link href={item.url} className="flex-1 text-center text-sm font-semibold py-2.5 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-50">View</Link>
-                    <button type="button" onClick={() => openQuote(item.quoteType)} className="flex-1 text-sm font-semibold py-2.5 rounded-xl bg-blue-600 text-white hover:bg-blue-700">Quote</button>
+                    <button type="button" onClick={() => openQuote(item)} className="flex-1 text-sm font-semibold py-2.5 rounded-xl bg-blue-600 text-white hover:bg-blue-700">Quote</button>
                   </div>
                 </div>
               </article>
@@ -365,7 +367,6 @@ const CustomClothingIreland = () => {
         </div>
       </section>
 
-      {quoteModalOpen && <ClothingQuoteForm isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} productType={quoteType} />}
     </Layout>
   );
 };

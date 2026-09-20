@@ -171,7 +171,7 @@ const HomepageHero = () => {
 
             {/* USP pills */}
             <div className="flex flex-wrap gap-2 sm:gap-4 mt-4 sm:mt-6 justify-center lg:justify-start">
-              {['Low MOQs from 100', 'Fast Delivery', 'Same-Day Dispatch'].map((text) => (
+              {['Quote reply in 2 hours', 'Fast Delivery', 'Same-Day Dispatch'].map((text) => (
                 <div key={text} className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm text-gray-500">
                   <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />

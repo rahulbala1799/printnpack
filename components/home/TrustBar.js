@@ -7,8 +7,8 @@ const trustItems = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     ),
-    title: 'Fast Delivery',
-    description: 'Same-day dispatch',
+    title: 'Quote in 2 hours',
+    description: 'We get back to you fast',
   },
   {
     icon: (

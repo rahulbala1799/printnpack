@@ -16,7 +16,7 @@ const HomepageCTA = () => {
         </h2>
         <p className="text-sm sm:text-lg text-blue-100 mb-6 sm:mb-8 max-w-2xl mx-auto">
           Get custom packaging and print solutions tailored to your business.
-          Request a free quote today.
+          Request a free quote — we reply within 2 hours.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
@@ -42,7 +42,7 @@ const HomepageCTA = () => {
 
         {/* Trust indicators */}
         <div className="mt-6 sm:mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-blue-200">
-          {['No minimum design fees', 'Free delivery across Ireland', '100% Irish owned'].map((text) => (
+          {['Reply within 2 hours', 'Free delivery across Ireland', '100% Irish owned'].map((text) => (
             <div key={text} className="flex items-center gap-1.5 sm:gap-2">
               <svg className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />

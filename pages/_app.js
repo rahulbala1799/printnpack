@@ -2,6 +2,7 @@ import '../styles/globals.css';
 import Head from 'next/head';
 import { useEffect } from 'react';
 import Script from 'next/script';
+import { QuoteCartProvider } from '../lib/quote-cart-context';
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -36,7 +37,9 @@ function MyApp({ Component, pageProps }) {
             Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
         }
       `}</style>
-      <Component {...pageProps} />
+      <QuoteCartProvider>
+        <Component {...pageProps} />
+      </QuoteCartProvider>
     </>
   );
 }

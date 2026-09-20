@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from 'react';
-import ClothingQuoteForm from '../ClothingQuoteForm';
 import {
   CLOTHING_SIZES,
   GARMENT_PRICING,
@@ -11,6 +10,9 @@ import {
   isLightColour,
   pricePerPiece,
 } from '../../data/clothing-pricing';
+import { buildClothingQuoteLine } from '../../data/quote-modules';
+import { useQuoteCart } from '../../lib/quote-cart-context';
+import QuantityField from '../quote/QuantityField';
 
 function ColourSwatch({ colour, selected, onSelect }) {
   const light = isLightColour(colour.id);
@@ -57,7 +59,7 @@ export default function ApparelConfigurator({ product }) {
   const [size, setSize] = useState('M');
   const [qty, setQty] = useState(5);
   const [comboId, setComboId] = useState('chest');
-  const [quoteOpen, setQuoteOpen] = useState(false);
+  const { addItem, openBuilder } = useQuoteCart();
 
   const combo = PRINT_COMBOS.find((c) => c.id === comboId) || PRINT_COMBOS[0];
   const band = getQtyBand(qty);
@@ -122,12 +124,10 @@ export default function ApparelConfigurator({ product }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <label className="block">
           <span className="text-sm font-semibold text-gray-900">Quantity</span>
-          <input
-            type="number"
-            min={MIN_QTY}
-            step={1}
+          <QuantityField
             value={qty}
-            onChange={(e) => setQty(Number(e.target.value))}
+            min={MIN_QTY}
+            onCommit={setQty}
             className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
           <span className="mt-1 block text-xs text-gray-400">
@@ -167,26 +167,23 @@ export default function ApparelConfigurator({ product }) {
 
       <button
         type="button"
-        onClick={() => setQuoteOpen(true)}
+        onClick={() =>
+          addItem(
+            buildClothingQuoteLine(product, { colour, size, qty, combo })
+          )
+        }
         disabled={unit == null}
         className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white font-semibold py-3.5 px-6 rounded-xl"
       >
-        Request this quote
+        Add to quote
       </button>
-
-      {quoteOpen && (
-        <ClothingQuoteForm
-          isOpen={quoteOpen}
-          onClose={() => setQuoteOpen(false)}
-          productType={pricing.quoteType}
-          preset={{
-            quantity: qty,
-            sizes: [size],
-            colors: colour?.name ? [colour.name] : [],
-            placements: [combo.label],
-          }}
-        />
-      )}
+      <button
+        type="button"
+        onClick={() => openBuilder()}
+        className="w-full text-sm font-semibold text-blue-600 hover:text-blue-800 py-1"
+      >
+        Add another product
+      </button>
     </div>
   );
 }

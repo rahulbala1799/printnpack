@@ -18,8 +18,11 @@ import {
 } from 'react-icons/fa';
 import SearchBar from '../search/SearchBar';
 import MobileSearch from '../search/MobileSearch';
+import QuoteCartButton from '../quote/QuoteCartButton';
+import { useQuoteCart } from '../../lib/quote-cart-context';
 
 const Header = () => {
+  const { openBuilder } = useQuoteCart();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -84,8 +87,8 @@ const Header = () => {
               <span>info@printnpack.ie</span>
             </a>
           </div>
-          <div className="text-slate-400 text-xs">
-            Ireland&apos;s Printing &amp; Packaging Specialists
+          <div className="text-xs font-semibold text-sky-300">
+            Quote replies within 2 hours
           </div>
         </div>
       </div>
@@ -121,17 +124,20 @@ const Header = () => {
 
             <div className="flex items-center gap-2 ml-4 pl-4 border-l border-slate-200">
               <SearchBar />
-              <Link
-                href="/quote"
+              <QuoteCartButton />
+              <button
+                type="button"
+                onClick={() => openBuilder()}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md text-sm font-medium transition-colors"
               >
                 Get Quote
-              </Link>
+              </button>
             </div>
           </div>
 
           {/* Mobile actions */}
           <div className="md:hidden flex items-center gap-2">
+            <QuoteCartButton className="px-2" />
             <a href="tel:+353894157369" className="p-2 text-slate-600" aria-label="Call Us">
               <FaPhone className="text-base" />
             </a>
@@ -222,13 +228,16 @@ const Header = () => {
               <FaEnvelope className="text-slate-400 mr-3 text-xs" />
               info@printnpack.ie
             </a>
-            <Link
-              href="/quote"
+            <button
+              type="button"
               className="w-full flex items-center justify-center bg-blue-600 text-white py-3 rounded-lg mt-3 hover:bg-blue-700 transition-colors text-sm font-medium"
-              onClick={handleMenuItemClick}
+              onClick={() => {
+                handleMenuItemClick();
+                openBuilder();
+              }}
             >
               Get a Free Quote
-            </Link>
+            </button>
           </div>
         </div>
       </div>
@@ -239,7 +248,11 @@ const Header = () => {
           isOpen ? 'opacity-100 z-40' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => setIsOpen(false)}
-      ></div>
+      >      </div>
+
+      <div className="bg-blue-600 text-center text-[13px] font-semibold leading-none text-white sm:text-sm">
+        <p className="px-4 py-2">We reply to quote requests within 2 hours</p>
+      </div>
     </header>
   );
 };

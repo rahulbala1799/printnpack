@@ -18,7 +18,6 @@ const ClothingQuoteForm = ({ isOpen, onClose, productType, preset = {} }) => {
         placements: ['Front Only', 'Back Only', 'Front & Back', 'Left Chest', 'Right Chest', 'Sleeve', 'Full Wrap'],
         colors: TSHIRT_COLOURS.map((c) => c.name),
         sizes: CLOTHING_SIZES,
-        materials: ['100% Cotton', 'Cotton Blend', 'Polyester', 'Organic Cotton', 'Performance Fabric']
       }
     },
     'Polo T-Shirts': {
@@ -28,7 +27,6 @@ const ClothingQuoteForm = ({ isOpen, onClose, productType, preset = {} }) => {
         placements: ['Left Chest', 'Right Chest', 'Front Center', 'Back', 'Sleeve', 'Collar'],
         colors: coloursForGarment('polos').colours.map((c) => c.name),
         sizes: CLOTHING_SIZES,
-        materials: ['Cotton Pique', 'Cotton Blend', 'Performance Polyester', 'Organic Cotton'],
         collarTypes: ['Standard Collar', 'Button-Down Collar', 'Ribbed Collar', 'Flat Knit Collar']
       }
     },
@@ -39,7 +37,6 @@ const ClothingQuoteForm = ({ isOpen, onClose, productType, preset = {} }) => {
         placements: ['Front Center', 'Back', 'Left Chest', 'Hood', 'Sleeve', 'Kangaroo Pocket'],
         colors: coloursForGarment('hoodies').colours.map((c) => c.name),
         sizes: CLOTHING_SIZES,
-        materials: ['Cotton Blend', '100% Cotton', 'Fleece', 'French Terry', 'Performance Fabric'],
         hoodieTypes: ['Pullover', 'Zip-Up', 'Quarter Zip', 'Cropped']
       }
     },
@@ -50,7 +47,6 @@ const ClothingQuoteForm = ({ isOpen, onClose, productType, preset = {} }) => {
         placements: ['Front Left', 'Front Right', 'Back', 'Sleeve', 'Chest Pocket'],
         colors: coloursForGarment('hiviz').colours.map((c) => c.name),
         sizes: CLOTHING_SIZES,
-        materials: ['Polyester with Reflective Strips', 'Mesh Fabric', 'Waterproof', 'Breathable Fabric'],
         safetyStandards: ['EN ISO 20471 Class 2', 'EN ISO 20471 Class 3', 'ANSI/ISEA 107-2015 Class 2', 'ANSI/ISEA 107-2015 Class 3']
       }
     },
@@ -61,7 +57,6 @@ const ClothingQuoteForm = ({ isOpen, onClose, productType, preset = {} }) => {
         placements: ['Front Center', 'Back', 'Left Chest', 'Sleeve', 'All Over Print'],
         colors: coloursForGarment('sweatshirts').colours.map((c) => c.name),
         sizes: CLOTHING_SIZES,
-        materials: ['Cotton Blend', '100% Cotton', 'Fleece', 'French Terry'],
         neckTypes: ['Crew Neck', 'V-Neck', 'Mock Neck']
       }
     },
@@ -72,7 +67,6 @@ const ClothingQuoteForm = ({ isOpen, onClose, productType, preset = {} }) => {
         placements: ['Chest only', 'Large front only', 'Large back only', 'Chest + large back', 'Large front + large back', 'Sleeves only (L+R)', 'Large front + back + sleeves'],
         colors: coloursForGarment('sportswear').colours.map((c) => c.name),
         sizes: CLOTHING_SIZES,
-        materials: ['Performance polyester', 'Moisture-wicking blend', 'Recycled sports fabric']
       }
     }
   };
@@ -90,7 +84,6 @@ const ClothingQuoteForm = ({ isOpen, onClose, productType, preset = {} }) => {
     colors: Yup.array().min(1, 'Please select at least one color'),
     sizes: Yup.array().min(1, 'Please select at least one size'),
     placements: Yup.array().min(1, 'Please select at least one placement'),
-    material: Yup.string().required('Please select a material'),
     designDetails: Yup.string(),
     additionalRequirements: Yup.string()
   });
@@ -106,7 +99,6 @@ const ClothingQuoteForm = ({ isOpen, onClose, productType, preset = {} }) => {
       colors: preset.colors || [],
       sizes: preset.sizes || [],
       placements: preset.placements || [],
-      material: '',
       designDetails: '',
       additionalRequirements: '',
       ...(config.fields.collarTypes && { collarType: '' }),
@@ -134,7 +126,6 @@ Quantity: ${values.quantity}
 Colors: ${values.colors.join(', ')}
 Sizes: ${values.sizes.join(', ')}
 Print Placements: ${values.placements.join(', ')}
-Material: ${values.material}
 ${values.collarType ? `Collar Type: ${values.collarType}` : ''}
 ${values.hoodieType ? `Hoodie Type: ${values.hoodieType}` : ''}
 ${values.safetyStandard ? `Safety Standard: ${values.safetyStandard}` : ''}
@@ -354,28 +345,6 @@ This is a quote request from the clothing page.`;
                       )}
                     </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Material *
-                      </label>
-                      <select
-                        name="material"
-                        value={formik.values.material}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
-                          formik.touched.material && formik.errors.material ? 'border-red-500' : 'border-gray-300'
-                        }`}
-                      >
-                        <option value="">Select material</option>
-                        {config.fields.materials.map(material => (
-                          <option key={material} value={material}>{material}</option>
-                        ))}
-                      </select>
-                      {formik.touched.material && formik.errors.material && (
-                        <p className="text-red-500 text-xs mt-1">{formik.errors.material}</p>
-                      )}
-                    </div>
                   </div>
 
                   {/* Additional product-specific fields */}

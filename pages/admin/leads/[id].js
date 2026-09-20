@@ -248,6 +248,39 @@ function QuoteTable({ lead }) {
   const p = lead.payload || {};
 
   if (p.quoteItems && p.quoteItems.length > 0) {
+    const isCart = p.quoteItems.some((item) => item.moduleId || item.summary);
+    if (isCart) {
+      return (
+        <SectionCard title="Quote Request" icon={FiShoppingCart} badge={`${p.quoteItems.length} line${p.quoteItems.length !== 1 ? 's' : ''}`}>
+          <div className="space-y-2">
+            {p.quoteItems.map((item, i) => (
+              <div key={i} className="bg-slate-50 border border-slate-200 rounded-xl p-3">
+                <p className="text-sm font-semibold text-slate-900">{item.name}</p>
+                {item.summary && <p className="text-xs text-slate-500 mt-0.5">{item.summary}</p>}
+                <div className="flex flex-wrap gap-2 mt-1.5">
+                  <span className="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full border border-blue-100">Qty {item.qty}</span>
+                  {item.unitPrice != null && <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">€{Number(item.unitPrice).toFixed(2)} / pc</span>}
+                  {item.lineTotal != null && <span className="text-xs bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold">€{Number(item.lineTotal).toFixed(2)}</span>}
+                </div>
+              </div>
+            ))}
+          </div>
+          {p.quoteSubtotal != null && (
+            <div className="mt-4 pt-3 border-t border-slate-100 flex justify-between text-sm">
+              <span className="text-slate-500">Indicative subtotal</span>
+              <span className="font-semibold">€{Number(p.quoteSubtotal).toFixed(2)}</span>
+            </div>
+          )}
+          {p.quoteNotes && (
+            <div className="mt-4 p-3 bg-amber-50 border border-amber-100 rounded-xl">
+              <p className="text-xs font-bold text-amber-700 uppercase tracking-wider mb-1">Customer Notes</p>
+              <p className="text-sm text-amber-900 leading-relaxed">{p.quoteNotes}</p>
+            </div>
+          )}
+        </SectionCard>
+      );
+    }
+
     return (
       <SectionCard title="Quote Request" icon={FiShoppingCart} badge={`${p.quoteItems.length} line${p.quoteItems.length !== 1 ? 's' : ''}`}>
         <div className="overflow-x-auto -mx-1">
