@@ -49,7 +49,7 @@ export default function ProductPageTemplate({ product, seoOverride, skipBreadcru
 
   const quoteUrl = `/quote?product=${encodeURIComponent(product.name)}`;
   const baseUrl = 'https://www.printnpack.ie';
-  const productUrl = `${baseUrl}/products/${product.id}`;
+  const productUrl = `${baseUrl}${product.url || `/products/${product.id}`}`;
   const ogImage = images[0] ? (images[0].startsWith('http') ? images[0] : `${baseUrl}${images[0]}`) : '';
 
   const displayName = seoOverride?.h1 || product.name;

@@ -175,7 +175,7 @@ export default function ClothingFaqIreland() {
         links={[
           { href: '/clothing', label: 'Branded Clothing Ireland', desc: 'T-shirts, polos, sports wear, hoodies from €12' },
           { href: '/blog/branded-clothing-ireland-guide', label: 'Branded Clothing Guide', desc: 'Promotional vs corporate wear' },
-          { href: '/products?group=clothing', label: 'Clothing on Products', desc: 'T-shirts, polos, hoodies, sweatshirts, hi-viz' },
+          { href: '/clothing/custom-printed-tshirts-ireland', label: 'Custom T-Shirts', desc: 'From €15, 13 stock colours' },
           { href: '/printing-ireland', label: 'Printing Ireland', desc: 'Posters, flyers and more' },
         ]}
       />

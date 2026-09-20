@@ -69,6 +69,7 @@ const mainGroups = [
     icon: FaTshirt,
     activeClasses: 'bg-emerald-600 text-white border-emerald-600',
     iconBg: 'bg-emerald-100 text-emerald-600',
+    redirect: '/clothing',
   },
   {
     id: 'rubber-stamps',
@@ -322,11 +323,16 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
   const handleGroupClick = (group) => {
     if (group.redirect) {
       router.push(group.redirect);
-    } else {
-      setActiveGroup(group.id);
-      setActiveCategory('all');
-      setSearchTerm('');
+      return;
     }
+    setSearchTerm('');
+    router.push({ pathname: '/products', query: { group: group.id } }, undefined, { shallow: true });
+  };
+
+  const handleCategoryClick = (category) => {
+    const query = { group: activeGroup };
+    if (category !== 'all') query.category = category;
+    router.push({ pathname: '/products', query }, undefined, { shallow: true });
   };
 
   const subCategories = activeGroupConfig?.categories || [];
@@ -556,7 +562,7 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
             <div className="flex gap-2 overflow-x-auto no-scrollbar mt-2.5 pt-2.5 border-t border-gray-800">
               <button
                 type="button"
-                onClick={() => setActiveCategory('all')}
+                onClick={() => handleCategoryClick('all')}
                 className={`flex-shrink-0 text-xs font-semibold px-3 py-1 rounded-full transition-colors ${
                   activeCategory === 'all'
                     ? 'bg-white text-black'
@@ -569,7 +575,7 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
                 <button
                   type="button"
                   key={cat}
-                  onClick={() => setActiveCategory(cat)}
+                  onClick={() => handleCategoryClick(cat)}
                   className={`flex-shrink-0 text-xs font-semibold px-3 py-1 rounded-full transition-colors whitespace-nowrap ${
                     activeCategory === cat
                       ? 'bg-white text-black'
@@ -624,7 +630,7 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
                   <div className="mt-3 pt-3 border-t border-gray-800 space-y-1">
                     <button
                       type="button"
-                      onClick={() => setActiveCategory('all')}
+                      onClick={() => handleCategoryClick('all')}
                       className={`w-full text-left text-xs font-semibold px-2.5 py-1.5 rounded-lg transition-colors ${
                         activeCategory === 'all' ? 'bg-white text-black' : 'text-gray-300 hover:bg-gray-800'
                       }`}
@@ -635,7 +641,7 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
                       <button
                         type="button"
                         key={cat}
-                        onClick={() => setActiveCategory(cat)}
+                        onClick={() => handleCategoryClick(cat)}
                         className={`w-full text-left text-xs font-semibold px-2.5 py-1.5 rounded-lg transition-colors ${
                           activeCategory === cat ? 'bg-white text-black' : 'text-gray-300 hover:bg-gray-800'
                         }`}
@@ -694,8 +700,8 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
               <button
                 type="button"
                 onClick={() => {
-                  setActiveCategory('all');
                   setSearchTerm('');
+                  router.push({ pathname: '/products', query: { group: activeGroup } }, undefined, { shallow: true });
                 }}
                 className="bg-blue-600 text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-700 transition-colors"
               >

@@ -25,6 +25,8 @@ const HOODIE_IMAGES = [
   '/images/apparel/HOODIE MOCK UP 5.jpg',
 ];
 
+export const clothingHref = (product) => product.url || `/clothing/${product.id}`;
+
 export const clothingProducts = [
   {
     id: 'custom-printed-tshirts-ireland',
@@ -226,4 +228,7 @@ export const clothingProducts = [
     moq: 5,
     leadTime: '3-5 business days',
   },
-];
+].map((product) => ({
+  ...product,
+  url: `/clothing/${product.id}`,
+}));

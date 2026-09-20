@@ -455,6 +455,36 @@ const nextConfig = {
         destination: '/gloves-ireland',
         permanent: true,
       },
+      {
+        source: '/products/custom-printed-tshirts-ireland',
+        destination: '/clothing/custom-printed-tshirts-ireland',
+        permanent: true,
+      },
+      {
+        source: '/products/custom-polo-shirts-ireland',
+        destination: '/clothing/custom-polo-shirts-ireland',
+        permanent: true,
+      },
+      {
+        source: '/products/custom-hoodies-ireland',
+        destination: '/clothing/custom-hoodies-ireland',
+        permanent: true,
+      },
+      {
+        source: '/products/custom-sweatshirts-ireland',
+        destination: '/clothing/custom-sweatshirts-ireland',
+        permanent: true,
+      },
+      {
+        source: '/products/custom-sportswear-ireland',
+        destination: '/clothing/custom-sportswear-ireland',
+        permanent: true,
+      },
+      {
+        source: '/products/custom-hiviz-workwear-ireland',
+        destination: '/clothing/custom-hiviz-workwear-ireland',
+        permanent: true,
+      },
     ];
   },
   

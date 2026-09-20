@@ -50,7 +50,7 @@ const itemListLd = {
     buildProductListItem({
       position: i + 1,
       name: item.name,
-      url: `${SITE_URL}/products/${item.id}`,
+      url: `${SITE_URL}${item.url}`,
       price: item.price,
       image: `${SITE_URL}${item.imageSrc}`,
     })
@@ -228,7 +228,7 @@ const CustomClothingIreland = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {clothingProducts.map((item) => (
               <article key={item.id} className={`rounded-2xl overflow-hidden border bg-white flex flex-col ${item.popular ? 'border-blue-200 shadow-sm' : 'border-gray-200'}`}>
-                <Link href={`/products/${item.id}`} className="relative block aspect-[4/3] bg-gray-50">
+                <Link href={item.url} className="relative block aspect-[4/3] bg-gray-50">
                   <Image src={item.imageSrc} alt={`${item.name} Ireland`} fill className="object-cover" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
                   {item.popular && (
                     <span className="absolute top-3 left-3 text-[10px] font-semibold uppercase tracking-wide bg-blue-600 text-white px-2 py-0.5 rounded-full">Popular</span>
@@ -236,7 +236,7 @@ const CustomClothingIreland = () => {
                 </Link>
                 <div className="p-5 flex flex-col flex-1">
                   <h3 className="font-bold text-gray-900 mb-1">
-                    <Link href={`/products/${item.id}`} className="hover:text-blue-600">{item.name}</Link>
+                    <Link href={item.url} className="hover:text-blue-600">{item.name}</Link>
                   </h3>
                   <p className="text-sm text-gray-500 mb-4 flex-1 leading-relaxed">{item.description}</p>
                   <div className="flex items-center justify-between gap-3 mb-4">
@@ -244,7 +244,7 @@ const CustomClothingIreland = () => {
                     <span className="text-xs text-gray-400">{item.leadTime}</span>
                   </div>
                   <div className="flex gap-2">
-                    <Link href={`/products/${item.id}`} className="flex-1 text-center text-sm font-semibold py-2.5 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-50">View</Link>
+                    <Link href={item.url} className="flex-1 text-center text-sm font-semibold py-2.5 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-50">View</Link>
                     <button type="button" onClick={() => openQuote(item.quoteType)} className="flex-1 text-sm font-semibold py-2.5 rounded-xl bg-blue-600 text-white hover:bg-blue-700">Quote</button>
                   </div>
                 </div>
@@ -344,7 +344,7 @@ const CustomClothingIreland = () => {
         links={[
           { href: '/clothing-faq-ireland', label: 'Clothing FAQ', desc: 'Promotional wear, logos & pricing' },
           { href: '/blog/branded-clothing-ireland-guide', label: 'Branded Clothing Guide', desc: 'Workwear vs promotional clothing' },
-          { href: '/products?group=clothing', label: 'Products — Clothing', desc: 'T-shirts, polos, hoodies, sweatshirts, hi-viz' },
+          { href: '/clothing/custom-printed-tshirts-ireland', label: 'Custom T-Shirts', desc: 'Fruit of the Loom Super Premium from €15' },
           { href: '/custom-printed-flags-ireland', label: 'Custom Flags', desc: 'Club and event flags from 1' },
           { href: '/printing-ireland', label: 'Printing Ireland', desc: 'Posters, flyers and more' },
         ]}
