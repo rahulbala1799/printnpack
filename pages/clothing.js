@@ -6,18 +6,19 @@ import Link from 'next/link';
 import ClothingQuoteForm from '../components/ClothingQuoteForm';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 import { SITE_URL } from '../lib/site';
-import { buildProductLd } from '../lib/schema';
+import { buildProductLd, buildProductListItem } from '../lib/schema';
 import { CLOTHING_FAQS } from '../data/clothing-faq';
+import { clothingProducts } from '../data/clothing-products';
 
 const PAGE_URL = `${SITE_URL}/clothing`;
 
 const productLd = buildProductLd({
   name: 'Branded Clothing Ireland — Promotional Wear & Workwear',
   description:
-    'Branded clothing Ireland — custom printed and embroidered t-shirts, polos, hoodies and workwear. Promotional clothing and company logos from €8.50. Nationwide from Ashbourne.',
+    'Branded clothing Ireland — custom printed and embroidered t-shirts, polos, sports wear, hoodies and hi-viz. From €12, same price S–3XL, nationwide from Ashbourne.',
   image: `${SITE_URL}/images/apparel/TSHIRT MOCK UP 1.jpg`,
   url: PAGE_URL,
-  price: '8.50',
+  price: '12.00',
 });
 
 const clothingHubFaqs = CLOTHING_FAQS.slice(0, 6);
@@ -41,6 +42,21 @@ const breadcrumbLd = {
   ],
 };
 
+const itemListLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Branded clothing products Ireland',
+  itemListElement: clothingProducts.map((item, i) =>
+    buildProductListItem({
+      position: i + 1,
+      name: item.name,
+      url: `${SITE_URL}/products/${item.id}`,
+      price: item.price,
+      image: `${SITE_URL}${item.imageSrc}`,
+    })
+  ),
+};
+
 // ─── Data ────────────────────────────────────────────────────────────────────
 
 const heroImages = [
@@ -61,13 +77,6 @@ const galleryImages = [
   '/images/apparel/HOODIE MOCK UP 2.jpg',
 ];
 
-const productOptions = [
-  { size: 'T-Shirts', label: 'T-Shirts', popular: true },
-  { size: 'Polo T-Shirts', label: 'Polo Shirts', popular: true },
-  { size: 'Hoodies', label: 'Hoodies', popular: true },
-  { size: 'Sweatshirts', label: 'Sweatshirts', popular: false },
-  { size: 'Hi-Viz Jackets', label: 'Hi-Viz', popular: false },
-];
 
 const features = [
   { title: 'Premium printing & embroidery', description: 'Screen and digital printing, custom embroidery. Corporate quality across Ireland.', icon: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" /></svg> },
@@ -92,6 +101,7 @@ const CheckIcon = () => (
 
 const CustomClothingIreland = () => {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
+  const [quoteType, setQuoteType] = useState('T-Shirts');
   const [currentImage, setCurrentImage] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(null);
@@ -108,22 +118,26 @@ const CustomClothingIreland = () => {
     return () => { clearInterval(interval); if (timeoutRef.current) clearTimeout(timeoutRef.current); };
   }, [currentImage, goToImage]);
 
-  const openQuote = () => setQuoteModalOpen(true);
+  const openQuote = (type) => {
+    setQuoteType(type || 'T-Shirts');
+    setQuoteModalOpen(true);
+  };
 
   return (
     <Layout>
       <Head>
         <title>Branded Clothing Ireland | Promotional Wear & Company Logos | PrintNPack</title>
-        <meta name="description" content="Branded clothing Ireland — promotional t-shirts, company clothing with logo, embroidered polos and custom workwear from €8.50. 3–5 day print, nationwide from Ashbourne." />
+        <meta name="description" content="Branded clothing Ireland — t-shirts from €15, polos from €19, sports wear from €16.50, hi-viz from €12. Same price S–3XL, from 5 pieces. Nationwide from Ashbourne." />
         <meta name="keywords" content="branded clothing ireland, promotional clothing, company clothing with logo, branded clothing for business, custom clothing ireland, custom workwear, corporate branded clothing, t-shirt printing ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <meta property="og:title" content="Branded Clothing Ireland | Promotional Wear & Company Logos" />
-        <meta property="og:description" content="Promotional clothing and company clothing with logo. T-shirts from €8.50, embroidery and print, Ireland-wide delivery." />
+        <meta property="og:description" content="T-shirts from €15, polos from €19, sports wear from €16.50, hi-viz from €12. Same price every size." />
         <meta property="og:image" content="https://www.printnpack.ie/images/apparel/TSHIRT MOCK UP 1.jpg" />
         <meta property="og:url" content="https://www.printnpack.ie/clothing" />
         <meta property="og:type" content="website" />
         <link rel="canonical" href={PAGE_URL} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       </Head>
@@ -166,10 +180,10 @@ const CustomClothingIreland = () => {
               </div>
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">Branded Clothing Ireland — Promotional Wear &amp; Company Logos</h1>
               <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
-                Custom printed and embroidered <strong>branded clothing</strong> for Irish businesses — promotional t-shirts, company clothing with your logo, corporate polos, hoodies and hi-viz workwear. From €8.50, 3–5 day turnaround, delivery nationwide from Ashbourne.
+                Custom printed and embroidered <strong>branded clothing</strong> for Irish businesses — t-shirts, polos, sports wear, hoodies, sweatshirts and hi-viz. From €12, same price S–3XL, minimum 5, delivery nationwide from Ashbourne.
               </p>
               <div className="grid grid-cols-3 gap-3 mb-6">
-                <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">From €8.50</div><div className="text-xs text-gray-500">starting</div></div>
+                <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">From €12</div><div className="text-xs text-gray-500">starting</div></div>
                 <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">3–5 days</div><div className="text-xs text-gray-500">turnaround</div></div>
                 <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">Bulk</div><div className="text-xs text-gray-500">discounts</div></div>
               </div>
@@ -205,20 +219,38 @@ const CustomClothingIreland = () => {
         </div>
       </section>
 
-      <section className="bg-white">
+      <section id="range" className="bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <div className="text-center mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Product Range</h2>
-            <p className="text-gray-500 max-w-2xl mx-auto">T-shirts, polos, hoodies, sweatshirts, and hi-viz.</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Clothing products</h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">Each garment is its own product — pick one for a quote, or browse the full spec.</p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 max-w-3xl mx-auto">
-            {productOptions.map((s) => (
-              <div key={s.size} className={`rounded-xl p-4 text-center border-2 transition-all ${s.popular ? 'border-blue-300 bg-blue-50' : 'border-gray-200 bg-gray-50 hover:border-gray-300'}`}>
-                <div className={`text-sm font-bold ${s.popular ? 'text-blue-600' : 'text-gray-800'}`}>{s.label}</div>
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {clothingProducts.map((item) => (
+              <article key={item.id} className={`rounded-2xl overflow-hidden border bg-white flex flex-col ${item.popular ? 'border-blue-200 shadow-sm' : 'border-gray-200'}`}>
+                <Link href={`/products/${item.id}`} className="relative block aspect-[4/3] bg-gray-50">
+                  <Image src={item.imageSrc} alt={`${item.name} Ireland`} fill className="object-cover" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+                  {item.popular && (
+                    <span className="absolute top-3 left-3 text-[10px] font-semibold uppercase tracking-wide bg-blue-600 text-white px-2 py-0.5 rounded-full">Popular</span>
+                  )}
+                </Link>
+                <div className="p-5 flex flex-col flex-1">
+                  <h3 className="font-bold text-gray-900 mb-1">
+                    <Link href={`/products/${item.id}`} className="hover:text-blue-600">{item.name}</Link>
+                  </h3>
+                  <p className="text-sm text-gray-500 mb-4 flex-1 leading-relaxed">{item.description}</p>
+                  <div className="flex items-center justify-between gap-3 mb-4">
+                    <span className="text-sm font-semibold text-gray-900">{item.price}</span>
+                    <span className="text-xs text-gray-400">{item.leadTime}</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <Link href={`/products/${item.id}`} className="flex-1 text-center text-sm font-semibold py-2.5 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-50">View</Link>
+                    <button type="button" onClick={() => openQuote(item.quoteType)} className="flex-1 text-sm font-semibold py-2.5 rounded-xl bg-blue-600 text-white hover:bg-blue-700">Quote</button>
+                  </div>
+                </div>
+              </article>
             ))}
           </div>
-          <p className="text-center text-sm text-gray-400 mt-6"><button onClick={openQuote} className="text-blue-600 hover:underline font-medium">Get a quote</button></p>
         </div>
       </section>
 
@@ -312,7 +344,7 @@ const CustomClothingIreland = () => {
         links={[
           { href: '/clothing-faq-ireland', label: 'Clothing FAQ', desc: 'Promotional wear, logos & pricing' },
           { href: '/blog/branded-clothing-ireland-guide', label: 'Branded Clothing Guide', desc: 'Workwear vs promotional clothing' },
-          { href: '/products?group=clothing', label: 'Products — Clothing', desc: 'Browse the clothing category' },
+          { href: '/products?group=clothing', label: 'Products — Clothing', desc: 'T-shirts, polos, hoodies, sweatshirts, hi-viz' },
           { href: '/custom-printed-flags-ireland', label: 'Custom Flags', desc: 'Club and event flags from 1' },
           { href: '/printing-ireland', label: 'Printing Ireland', desc: 'Posters, flyers and more' },
         ]}
@@ -333,7 +365,7 @@ const CustomClothingIreland = () => {
         </div>
       </section>
 
-      {quoteModalOpen && <ClothingQuoteForm isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} productType="T-Shirts" />}
+      {quoteModalOpen && <ClothingQuoteForm isOpen={quoteModalOpen} onClose={() => setQuoteModalOpen(false)} productType={quoteType} />}
     </Layout>
   );
 };

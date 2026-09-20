@@ -35,8 +35,8 @@ export const CLOTHING_FAQS = [
     id: 'cost',
     category: 'pricing',
     q: 'How much does custom clothing cost in Ireland?',
-    subtitle: 'From €8.50 per garment',
-    a: 'Custom printed t-shirts start from around €8.50 per unit depending on garment quality, print colours and quantity. Polos and hoodies cost more. Bulk discounts apply for teams and repeat corporate orders. Free quotes, no obligation.',
+    subtitle: 'From €12 hi-viz · €15 t-shirts',
+    a: 'Single-placement prices: hi-viz from €12, t-shirts from €15, sports wear from €16.50, polos from €19, hoodies and sweatshirts from €36. Same price S–3XL, minimum 5. Extra print areas +€1.50, 8% off each quantity step. Free quotes.',
     link: { href: '/clothing', label: 'Get a clothing quote' },
   },
   {

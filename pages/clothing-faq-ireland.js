@@ -173,9 +173,9 @@ export default function ClothingFaqIreland() {
       <RelatedSeoLinks
         title="Related clothing pages"
         links={[
-          { href: '/clothing', label: 'Branded Clothing Ireland', desc: 'T-shirts, polos, hoodies from €8.50' },
+          { href: '/clothing', label: 'Branded Clothing Ireland', desc: 'T-shirts, polos, sports wear, hoodies from €12' },
           { href: '/blog/branded-clothing-ireland-guide', label: 'Branded Clothing Guide', desc: 'Promotional vs corporate wear' },
-          { href: '/products?group=clothing', label: 'Clothing on Products', desc: 'Browse the clothing category' },
+          { href: '/products?group=clothing', label: 'Clothing on Products', desc: 'T-shirts, polos, hoodies, sweatshirts, hi-viz' },
           { href: '/printing-ireland', label: 'Printing Ireland', desc: 'Posters, flyers and more' },
         ]}
       />

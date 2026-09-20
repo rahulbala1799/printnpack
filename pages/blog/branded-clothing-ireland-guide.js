@@ -12,7 +12,7 @@ const jsonLd = {
   '@type': 'Article',
   headline: 'Branded Clothing Ireland: Promotional Wear, Workwear & Company Logos',
   description:
-    'How Irish businesses buy branded clothing — promotional t-shirts, corporate polos, company clothing with logo, embroidery vs print, pricing from €8.50, and nationwide delivery.',
+    'How Irish businesses buy branded clothing — promotional t-shirts, corporate polos, sports wear, company clothing with logo, embroidery vs print, pricing from €12, and nationwide delivery.',
   image: `${siteUrl}${HERO_IMAGE}`,
   author: { '@type': 'Organization', name: 'PrintNPack Ireland', url: siteUrl },
   publisher: { '@type': 'Organization', name: 'PrintNPack Ireland', logo: { '@type': 'ImageObject', url: `${siteUrl}/favicon.ico` } },
@@ -38,7 +38,7 @@ const faqLd = {
       name: 'Can I get company clothing with a logo in Ireland?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. Screen print, digital print and embroidery are available on t-shirts, polos, hoodies and hi-viz. Custom clothing starts from around €8.50 per t-shirt depending on quantity and print colours.',
+        text: 'Yes. Screen print, digital print and embroidery are available on t-shirts, polos, sports wear, hoodies and hi-viz. T-shirts start from €15 for a chest print, minimum 5, same price S–3XL.',
       },
     },
   ],
@@ -47,7 +47,7 @@ const faqLd = {
 export default function BrandedClothingIrelandGuide() {
   const title = 'Branded Clothing Ireland: Promotional Wear, Workwear & Company Logos';
   const description =
-    'Buy branded clothing in Ireland — promotional clothing, company clothing with logo, custom workwear and embroidered polos. From €8.50, 3–5 day turnaround, nationwide from Ashbourne.';
+    'Buy branded clothing in Ireland — t-shirts from €15, polos from €19, sports wear from €16.50, hi-viz from €12. Same price S–3XL, 3–5 day turnaround from Ashbourne.';
 
   return (
     <Layout>
@@ -115,16 +115,17 @@ export default function BrandedClothingIrelandGuide() {
 
           <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">What garments to stock first</h2>
           <ul className="list-disc pl-6 text-gray-600 space-y-2">
-            <li><strong>T-shirts</strong> — the cheapest branded clothing, from around €8.50.</li>
-            <li><strong>Polo shirts</strong> — the default company clothing for retail, hospitality and offices.</li>
-            <li><strong>Hoodies / sweatshirts</strong> — merch and winter staff wear.</li>
-            <li><strong>Hi-viz</strong> — site teams and outdoor events.</li>
+            <li><strong>T-shirts</strong> — Fruit of the Loom Super Premium, from €15. <Link href="/products/custom-printed-tshirts-ireland" className="text-blue-600 hover:underline">Custom printed t-shirts</Link>.</li>
+            <li><strong>Polo shirts</strong> — the default company clothing for retail, hospitality and offices. <Link href="/products/custom-polo-shirts-ireland" className="text-blue-600 hover:underline">Custom polo shirts</Link>.</li>
+            <li><strong>Sports wear</strong> — club and team kits from €16.50. <Link href="/products/custom-sportswear-ireland" className="text-blue-600 hover:underline">Custom sports wear</Link>.</li>
+            <li><strong>Hoodies / sweatshirts</strong> — merch and winter staff wear. <Link href="/products/custom-hoodies-ireland" className="text-blue-600 hover:underline">Hoodies</Link> and <Link href="/products/custom-sweatshirts-ireland" className="text-blue-600 hover:underline">sweatshirts</Link>.</li>
+            <li><strong>Hi-viz</strong> — site teams and outdoor events. <Link href="/products/custom-hiviz-workwear-ireland" className="text-blue-600 hover:underline">Hi-viz workwear</Link>.</li>
           </ul>
 
           <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">Pricing and turnaround in Ireland</h2>
           <p className="text-gray-600 leading-relaxed">
-            T-shirts start from around <strong>€8.50</strong>. Price depends on garment brand, print colours and
-            quantity — bulk discounts apply. Production is typically <strong>3–5 business days</strong> after proof
+            T-shirts start from <strong>€15</strong> for a chest print. Extra print areas +€1.50, 8% off each quantity step.
+            Production is typically <strong>3–5 business days</strong> after proof
             approval, with delivery across Ireland from Ashbourne, Co. Meath. Full answers:{' '}
             <Link href="/clothing-faq-ireland" className="text-blue-600 hover:underline">clothing FAQ</Link>.
           </p>

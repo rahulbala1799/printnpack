@@ -1,3 +1,5 @@
+import { clothingProducts } from './clothing-products';
+
 const products = [
   {
     id: 'custom-pizza-boxes-ireland',
@@ -2697,16 +2699,7 @@ const products = [
     moq: 1000,
     leadTime: '5-7 business days'
   },
-  {
-    id: 'custom-clothing-ireland',
-    name: 'Custom Clothing & Workwear',
-    category: 'Apparel',
-    url: '/clothing',
-    description: 'Custom printed and embroidered t-shirts, polos, hoodies and workwear for corporate events, teams and promotions. Bulk discounts, 3–5 day turnaround.',
-    imageSrc: '/images/apparel/TSHIRT MOCK UP 1.jpg',
-    price: 'From €8.50',
-    leadTime: '3-5 business days'
-  },
+  ...clothingProducts,
   {
     id: 'rubber-stamps-ireland',
     name: 'Rubber Stamps',

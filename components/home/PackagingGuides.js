@@ -293,7 +293,7 @@ const guides = [
   {
     href: '/clothing',
     title: 'Branded Clothing Ireland',
-    description: 'Promotional t-shirts, company logos and workwear from €8.50.',
+    description: 'Promotional t-shirts, company logos and workwear from €12.',
     image: '/images/apparel/TSHIRT MOCK UP 1.jpg',
     cta: 'View branded clothing',
   },

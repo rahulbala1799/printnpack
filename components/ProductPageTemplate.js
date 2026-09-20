@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import ApparelConfigurator from './clothing/ApparelConfigurator';
 
 /**
  * Reusable product page template. Renders breadcrumb, hero (2-col gallery + copy),
@@ -64,6 +65,12 @@ export default function ProductPageTemplate({ product, seoOverride, skipBreadcru
             <li><Link href="/" className="hover:text-gray-700">Home</Link></li>
             <li>/</li>
             <li><Link href="/products" className="hover:text-gray-700">Products</Link></li>
+            {product.category === 'Apparel' && (
+              <>
+                <li>/</li>
+                <li><Link href="/clothing" className="hover:text-gray-700">Clothing</Link></li>
+              </>
+            )}
             <li>/</li>
             <li className="text-gray-800 font-medium">{product.name}</li>
           </ol>
@@ -171,6 +178,11 @@ export default function ProductPageTemplate({ product, seoOverride, skipBreadcru
                 </ul>
               )}
 
+              {product.pricingKey ? (
+                <div className="mb-6">
+                  <ApparelConfigurator product={product} />
+                </div>
+              ) : (
               <div className="flex flex-col sm:flex-row gap-3 mb-6">
                 <Link
                   href={quoteUrl}
@@ -185,6 +197,7 @@ export default function ProductPageTemplate({ product, seoOverride, skipBreadcru
                   Call +353 89 415 7369
                 </a>
               </div>
+              )}
 
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-400 border-t border-gray-100 pt-4">
                 <span className="flex items-center gap-1">

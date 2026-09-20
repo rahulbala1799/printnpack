@@ -3,7 +3,9 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { FaTimes, FaUser, FaEnvelope, FaPhone, FaBuilding, FaTshirt } from 'react-icons/fa';
 
-const ClothingQuoteForm = ({ isOpen, onClose, productType }) => {
+import { CLOTHING_SIZES, TSHIRT_COLOURS, coloursForGarment, garmentFromQuoteType, isLightColour } from '../data/clothing-pricing';
+
+const ClothingQuoteForm = ({ isOpen, onClose, productType, preset = {} }) => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -14,8 +16,8 @@ const ClothingQuoteForm = ({ isOpen, onClose, productType }) => {
       title: 'T-Shirt Quote Request',
       fields: {
         placements: ['Front Only', 'Back Only', 'Front & Back', 'Left Chest', 'Right Chest', 'Sleeve', 'Full Wrap'],
-        colors: ['White', 'Black', 'Navy', 'Grey', 'Red', 'Blue', 'Green', 'Yellow', 'Custom Color'],
-        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+        colors: TSHIRT_COLOURS.map((c) => c.name),
+        sizes: CLOTHING_SIZES,
         materials: ['100% Cotton', 'Cotton Blend', 'Polyester', 'Organic Cotton', 'Performance Fabric']
       }
     },
@@ -24,8 +26,8 @@ const ClothingQuoteForm = ({ isOpen, onClose, productType }) => {
       title: 'Polo Shirt Quote Request',
       fields: {
         placements: ['Left Chest', 'Right Chest', 'Front Center', 'Back', 'Sleeve', 'Collar'],
-        colors: ['White', 'Black', 'Navy', 'Grey', 'Red', 'Blue', 'Green', 'Burgundy', 'Custom Color'],
-        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+        colors: coloursForGarment('polos').colours.map((c) => c.name),
+        sizes: CLOTHING_SIZES,
         materials: ['Cotton Pique', 'Cotton Blend', 'Performance Polyester', 'Organic Cotton'],
         collarTypes: ['Standard Collar', 'Button-Down Collar', 'Ribbed Collar', 'Flat Knit Collar']
       }
@@ -35,8 +37,8 @@ const ClothingQuoteForm = ({ isOpen, onClose, productType }) => {
       title: 'Hoodie Quote Request',
       fields: {
         placements: ['Front Center', 'Back', 'Left Chest', 'Hood', 'Sleeve', 'Kangaroo Pocket'],
-        colors: ['Black', 'Grey', 'Navy', 'White', 'Red', 'Blue', 'Green', 'Burgundy', 'Custom Color'],
-        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+        colors: coloursForGarment('hoodies').colours.map((c) => c.name),
+        sizes: CLOTHING_SIZES,
         materials: ['Cotton Blend', '100% Cotton', 'Fleece', 'French Terry', 'Performance Fabric'],
         hoodieTypes: ['Pullover', 'Zip-Up', 'Quarter Zip', 'Cropped']
       }
@@ -46,8 +48,8 @@ const ClothingQuoteForm = ({ isOpen, onClose, productType }) => {
       title: 'Hi-Viz Jacket Quote Request',
       fields: {
         placements: ['Front Left', 'Front Right', 'Back', 'Sleeve', 'Chest Pocket'],
-        colors: ['Hi-Viz Yellow', 'Hi-Viz Orange', 'Hi-Viz Green', 'Hi-Viz Pink'],
-        sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
+        colors: coloursForGarment('hiviz').colours.map((c) => c.name),
+        sizes: CLOTHING_SIZES,
         materials: ['Polyester with Reflective Strips', 'Mesh Fabric', 'Waterproof', 'Breathable Fabric'],
         safetyStandards: ['EN ISO 20471 Class 2', 'EN ISO 20471 Class 3', 'ANSI/ISEA 107-2015 Class 2', 'ANSI/ISEA 107-2015 Class 3']
       }
@@ -57,10 +59,20 @@ const ClothingQuoteForm = ({ isOpen, onClose, productType }) => {
       title: 'Sweatshirt Quote Request',
       fields: {
         placements: ['Front Center', 'Back', 'Left Chest', 'Sleeve', 'All Over Print'],
-        colors: ['Black', 'Grey', 'Navy', 'White', 'Red', 'Blue', 'Green', 'Burgundy', 'Custom Color'],
-        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+        colors: coloursForGarment('sweatshirts').colours.map((c) => c.name),
+        sizes: CLOTHING_SIZES,
         materials: ['Cotton Blend', '100% Cotton', 'Fleece', 'French Terry'],
         neckTypes: ['Crew Neck', 'V-Neck', 'Mock Neck']
+      }
+    },
+    'Sports Wear': {
+      icon: FaTshirt,
+      title: 'Sports Wear Quote Request',
+      fields: {
+        placements: ['Chest only', 'Large front only', 'Large back only', 'Chest + large back', 'Large front + large back', 'Sleeves only (L+R)', 'Large front + back + sleeves'],
+        colors: coloursForGarment('sportswear').colours.map((c) => c.name),
+        sizes: CLOTHING_SIZES,
+        materials: ['Performance polyester', 'Moisture-wicking blend', 'Recycled sports fabric']
       }
     }
   };
@@ -90,10 +102,10 @@ const ClothingQuoteForm = ({ isOpen, onClose, productType }) => {
       email: '',
       phone: '',
       company: '',
-      quantity: '',
-      colors: [],
-      sizes: [],
-      placements: [],
+      quantity: preset.quantity || '',
+      colors: preset.colors || [],
+      sizes: preset.sizes || [],
+      placements: preset.placements || [],
       material: '',
       designDetails: '',
       additionalRequirements: '',
@@ -446,8 +458,33 @@ This is a quote request from the clothing page.`;
                   {/* Colors */}
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Colors * (Select all that apply)
+                      Colours * (select all that apply)
                     </label>
+                    {coloursForGarment(garmentFromQuoteType(productType)) ? (
+                      <div className="flex flex-wrap gap-2">
+                        {coloursForGarment(garmentFromQuoteType(productType)).colours.map((c) => {
+                          const on = formik.values.colors.includes(c.name);
+                          const light = isLightColour(c.id);
+                          return (
+                            <button
+                              key={c.id}
+                              type="button"
+                              onClick={() => handleCheckboxChange('colors', c.name)}
+                              className="flex flex-col items-center gap-1 w-16"
+                              aria-pressed={on}
+                            >
+                              <span
+                                className={`h-9 w-9 rounded-full border ${
+                                  on ? 'ring-2 ring-offset-2 ring-blue-600 border-gray-900' : light ? 'border-gray-300' : 'border-black/10'
+                                }`}
+                                style={{ backgroundColor: c.hex }}
+                              />
+                              <span className={`text-[10px] text-center ${on ? 'font-semibold text-gray-900' : 'text-gray-500'}`}>{c.name}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    ) : (
                     <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
                       {config.fields.colors.map(color => (
                         <label key={color} className="flex items-center space-x-2 cursor-pointer">
@@ -461,6 +498,7 @@ This is a quote request from the clothing page.`;
                         </label>
                       ))}
                     </div>
+                    )}
                     {formik.touched.colors && formik.errors.colors && (
                       <p className="text-red-500 text-xs mt-1">{formik.errors.colors}</p>
                     )}

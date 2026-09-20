@@ -152,7 +152,7 @@ const posts = [
     slug: 'branded-clothing-ireland-guide',
     title: 'Branded Clothing Ireland: Promotional Wear, Workwear & Company Logos',
     excerpt:
-      'How Irish businesses buy branded clothing — promotional t-shirts, company clothing with logo, embroidery vs print, from €8.50, nationwide from Ashbourne.',
+      'How Irish businesses buy branded clothing — promotional t-shirts, company clothing with logo, embroidery vs print, from €12, nationwide from Ashbourne.',
     date: '2026-09-15',
     readTime: '7 min read',
     image: '/images/apparel/POLO SHIRT MOCK UP 1.jpg',
