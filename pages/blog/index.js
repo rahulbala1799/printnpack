@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'fish-and-chip-boxes-ireland-sizes-buying-guide',
+    title: 'Fish & Chip Boxes Ireland: Small vs Large Sizes & Wholesale Buying Guide',
+    excerpt:
+      'How to buy corrugated fish & chip boxes in Ireland — small vs large sizes, 100-piece case packs, tiered wholesale pricing, and nationwide delivery from Ashbourne for chippers and takeaways.',
+    date: '2026-09-20',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/1206643.webp',
+    imageAlt:
+      'Fish and chip boxes Ireland — large corrugated chipper tray wholesale',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'custom-greaseproof-sheets-ireland-sizes-buying-guide',
     title: 'Custom Greaseproof Sheets Ireland: Sizes, MOQ & Buying Guide',
     excerpt:
