@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'luxury-die-cut-paper-bags-ireland-buying-guide',
+    title: 'Luxury Die-Cut Paper Bags Ireland: Events, Boutiques & Buying Guide',
+    excerpt:
+      'How to buy luxury die-cut paper bags in Ireland — integrated handles, 170–250 gsm stock, digital CMYK from 500 units, events and boutique buyers, and nationwide delivery from Ashbourne.',
+    date: '2026-09-21',
+    readTime: '8 min read',
+    image: '/images/products/luxury-paper-bags/luxury-paper-bags-ireland-premium-die-cut.jpg',
+    imageAlt:
+      'Luxury die-cut paper bags Ireland — cream premium boutique carrier wholesale print',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'fish-and-chip-boxes-ireland-sizes-buying-guide',
     title: 'Fish & Chip Boxes Ireland: Small vs Large Sizes & Wholesale Buying Guide',
     excerpt:
