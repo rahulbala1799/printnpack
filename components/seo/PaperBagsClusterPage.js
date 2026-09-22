@@ -188,6 +188,7 @@ export default function PaperBagsClusterPage({ config }) {
           { href: '/plain-paper-bags-ireland', label: 'Plain Paper Bags', desc: 'Kraft stock in bulk cases' },
           { href: '/wholesale-paper-bags-ireland', label: 'Wholesale Paper Bags', desc: 'Bulk case & print runs' },
           { href: '/blog/printed-paper-bag-cost-ireland', label: 'Paper Bag Cost Guide', desc: 'Pricing before you quote' },
+          { href: '/rocker-stamps-ireland', label: 'Rocker Stamps', desc: 'Brand plain kraft bags in one pass' },
         ].filter((link) => link.href !== `/${config.slug}`)}
       />
     </Layout>

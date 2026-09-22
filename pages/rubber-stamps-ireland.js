@@ -10,9 +10,13 @@ const PAGE_URL = `${SITE_URL}/rubber-stamps-ireland`;
 const HERO_IMAGE = '/images/rubber-stamps/RubberStamp_10.jpg';
 
 const stampTypes = [
-  { title: 'Business Stamps', desc: 'Company name, address, logo, invoice & received stamps for daily office use.', href: '/rubber-stamps' },
-  { title: 'Signature Stamps', desc: 'Personalised signature stamps for authorised document signing by directors and professionals.', href: '/rubber-stamps' },
-  { title: 'Traditional Hand Stamps', desc: 'Wooden handle stamps with separate ink pad — craft, occasional use, and classic style.', href: '/rubber-stamps' },
+  { title: 'Custom Rubber Stamps', desc: 'The order page. Office stamps from €15, same-day dispatch from Ashbourne.', href: '/rubber-stamps', price: '15.00' },
+  { title: 'Self-Inking Stamps', desc: 'Built-in ink pad for invoices, received stamps, and daily office use.', href: '/self-inking-stamps-ireland', price: '15.00' },
+  { title: 'Company Logo Stamps', desc: 'Logo, address, and company details for Irish businesses.', href: '/company-logo-stamps-ireland', price: '20.00' },
+  { title: 'Loyalty Card Stamps', desc: '10–12mm cafe and salon stamps for reward cards.', href: '/loyalty-card-stamps-ireland', price: '15.00' },
+  { title: 'Rocker Stamps', desc: 'Wide stamps that brand plain paper bags and cardboard boxes.', href: '/rocker-stamps-ireland', price: '50.00' },
+  { title: 'Company Seals', desc: 'Seals, certified-copy stamps, and signature stamps for solicitors and accountants.', href: '/company-seal-stamps-ireland', price: '20.00' },
+  { title: 'Clothing Name Stamps', desc: 'School uniform name stamps. Busiest in July and August.', href: '/clothing-name-stamps-ireland', price: '15.00' },
 ];
 
 const localPages = [
@@ -61,21 +65,21 @@ const itemListLd = {
   itemListElement: stampTypes.map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,
-    item: buildCatalogOffer(item.title, `${SITE_URL}${item.href}`, { price: '15.00' }).itemOffered,
+    item: buildCatalogOffer(item.title, `${SITE_URL}${item.href}`, { price: item.price }).itemOffered,
   })),
 };
 
 export default function RubberStampsIreland() {
-  const title = 'Rubber Stamps Ireland | Business, Signature & Company Stamps | Print n Pack';
+  const title = 'Rubber Stamps Ireland | Types, Prices & Same-Day Dispatch';
   const description =
-    'Custom rubber stamps in Ireland — business stamps, company logo stamps, signature stamps & traditional hand stamps. Same-day service, local collection in Ashbourne, delivery across Dublin & nationwide.';
+    'Rubber stamps in Ireland — self-inking, company logo, loyalty, rocker, company seal, and clothing name stamps. Order custom rubber stamps from €15 with same-day dispatch.';
 
   return (
     <Layout>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="keywords" content="rubber stamps ireland, custom rubber stamps, business stamps ireland, company stamp ireland, signature stamps, stamp printing ireland, personalised stamps ireland, rubber stamp printing ashbourne" />
+        <meta name="keywords" content="rubber stamps ireland, self-inking stamp, company stamp ireland, loyalty card stamp, rocker stamp, clothing name stamp" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href={PAGE_URL} />
         <meta property="og:type" content="website" />
@@ -105,13 +109,15 @@ export default function RubberStampsIreland() {
               <p className="text-sm font-semibold text-indigo-600 uppercase tracking-wider mb-3">Custom stamp printing</p>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">Rubber Stamps Ireland</h1>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                Professional custom rubber stamps for Irish businesses, schools, solicitors, and personal use.
-                Business stamps, signature stamps, company logo stamps, and traditional hand stamps — same-day
-                express service available from our Ashbourne print unit.
+                Every rubber stamp we make in Ireland, with its own page: self-inking office stamps, company logo stamps,
+                cafe loyalty stamps, rocker stamps for plain bags, company seals, and clothing name stamps for school uniforms.
+                To buy, start with a{' '}
+                <Link href="/rubber-stamps" className="text-indigo-600 hover:underline font-medium">custom rubber stamp</Link>{' '}
+                — from €15, same-day dispatch from Ashbourne, next-day delivery nationwide.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/rubber-stamps" className="inline-flex items-center bg-indigo-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-indigo-700 transition-colors">
-                  Order Custom Stamps
+                  Order a custom rubber stamp
                 </Link>
                 <Link href="/rubber-stamp-faq-ireland" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
                   Stamp FAQ
@@ -128,12 +134,12 @@ export default function RubberStampsIreland() {
       <section className="py-12 lg:py-16 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">Stamp types</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {stampTypes.map((item) => (
               <Link key={item.title} href={item.href} className="group bg-white rounded-2xl border border-gray-200 p-6 hover:border-indigo-300 hover:shadow-lg transition-all">
                 <h3 className="text-xl font-bold text-gray-900 group-hover:text-indigo-600 mb-2">{item.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed mb-3">{item.desc}</p>
-                <span className="text-indigo-600 font-semibold text-sm">From €15 — order now →</span>
+                <span className="text-indigo-600 font-semibold text-sm">From €{Number(item.price).toFixed(0)} — view →</span>
               </Link>
             ))}
           </div>

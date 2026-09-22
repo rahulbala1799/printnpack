@@ -24,6 +24,7 @@ const localPages = [
 const guides = [
   { href: '/burger-box-faq-ireland', title: 'Burger Box FAQ', desc: '20+ instant answers on plain, printed, materials & delivery.' },
   { href: '/blog/burger-boxes-ireland-guide', title: 'Burger Boxes Guide', desc: 'Plain vs printed, bagasse vs corrugated, and eco options.' },
+  { href: '/rocker-stamps-ireland', title: 'Rocker Stamps', desc: 'Brand plain burger boxes and bags with a custom stamp instead of a print run.' },
 ];
 
 const breadcrumbLd = {
@@ -148,7 +149,7 @@ export default function BurgerBoxesIreland() {
       <section className="py-12 lg:py-16 bg-slate-50 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">Guides &amp; resources</h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             {guides.map((item) => (
               <Link key={item.href} href={item.href} className="group bg-white rounded-2xl border border-gray-200 p-6 hover:border-emerald-300 hover:shadow-lg transition-all">
                 <h3 className="text-xl font-bold text-gray-900 group-hover:text-emerald-600 mb-2">{item.title}</h3>

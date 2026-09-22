@@ -80,6 +80,7 @@ export const RUBBER_STAMP_FAQS = [
     q: 'What is the difference between self-inking and traditional rubber stamps?',
     subtitle: 'Choosing the right mount type',
     a: 'Self-inking stamps have a built-in ink pad that re-inks the die automatically — clean, fast, and ideal for daily office use. Traditional hand stamps use a separate ink pad and wooden handle — lower cost, classic feel, and good for occasional stamping or craft use.',
+    link: { href: '/self-inking-stamps-ireland', label: 'Self-inking stamps Ireland' },
   },
   {
     id: 'business-stamps',
@@ -102,6 +103,7 @@ export const RUBBER_STAMP_FAQS = [
     q: 'Can you put my company logo on a rubber stamp?',
     subtitle: 'Logo stamps for Irish businesses',
     a: 'Yes. We print company logo stamps with crisp detail on professional-grade rubber. Send your logo as PDF, PNG, or AI — we check resolution and prepare a proof before manufacturing. Logo stamps work on letterheads, packaging, and official documents.',
+    link: { href: '/company-logo-stamps-ireland', label: 'Company logo stamps Ireland' },
   },
   {
     id: 'hand-stamps',
@@ -161,7 +163,8 @@ export const RUBBER_STAMP_FAQS = [
     category: 'use-cases',
     q: 'Do you make stamps for schools and teachers?',
     subtitle: 'Teacher reward and marking stamps',
-    a: 'Yes. We make custom stamps for schools — teacher marking stamps, reward stamps, library stamps, and school office stamps. Popular with primary schools across Meath and Dublin. Fast turnaround for term-start orders.',
+    a: 'Yes. We make clothing name stamps for school uniforms, plus teacher marking stamps, reward stamps, library stamps, and school office stamps. Orders pick up in July and August before term starts.',
+    link: { href: '/clothing-name-stamps-ireland', label: 'Clothing name stamps' },
   },
   {
     id: 'personalised-stamps',
@@ -175,7 +178,8 @@ export const RUBBER_STAMP_FAQS = [
     category: 'use-cases',
     q: 'Do solicitors and accountants order stamps from you?',
     subtitle: 'Professional stamp orders',
-    a: 'Yes. We regularly supply signature stamps, company stamps, and "Copy" / "Certified True Copy" stamps to solicitors, accountants, and professional services firms across Ireland. Express turnaround available for urgent orders.',
+    a: 'Yes. We supply signature stamps, company seals, and "Copy" / "Certified True Copy" stamps to solicitors, accountants, and professional services firms across Ireland. Same-day dispatch is available when the wording is confirmed.',
+    link: { href: '/company-seal-stamps-ireland', label: 'Company seals and solicitor stamps' },
   },
 
   // Local
@@ -201,7 +205,7 @@ export const RUBBER_STAMP_FAQS = [
     q: 'Where can I get a logo stamp near me in Ireland?',
     subtitle: 'Local and online stamp ordering',
     a: 'PrintNPack makes custom logo stamps from our Ashbourne print unit with delivery across Ireland. If you are in Meath or north Dublin, you can collect in person. Order online via our quote form or call +353 89 415 7369.',
-    link: { href: '/rubber-stamps', label: 'Order custom stamps' },
+    link: { href: '/company-logo-stamps-ireland', label: 'Company logo stamps' },
   },
   {
     id: 'stamp-printing',

@@ -174,7 +174,7 @@ export default function CustomEventStampNextDayDublin() {
             </Link>
             {' '}or{' '}
             <Link href="/rubber-stamps" className="text-indigo-700 hover:underline font-semibold">
-              order a custom stamp
+              custom rubber stamp
             </Link>
             .
           </p>

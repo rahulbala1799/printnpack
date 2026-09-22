@@ -184,7 +184,10 @@ export default function RubberStampFaqIreland() {
         title="Related stamp pages"
         links={[
           { href: '/rubber-stamps-ireland', label: 'Rubber Stamps Ireland', desc: 'Complete stamp printing hub' },
-          { href: '/rubber-stamps', label: 'Order Custom Stamps', desc: 'Business, signature & hand stamps' },
+          { href: '/rubber-stamps', label: 'Custom Rubber Stamps', desc: 'From €15, same-day dispatch' },
+          { href: '/self-inking-stamps-ireland', label: 'Self-Inking Stamps', desc: 'Office stamps with a built-in pad' },
+          { href: '/clothing-name-stamps-ireland', label: 'Clothing Name Stamps', desc: 'School uniform name stamps' },
+          { href: '/company-seal-stamps-ireland', label: 'Company Seals', desc: 'Solicitor and accountant stamps' },
           { href: '/rubber-stamp-printing-dublin', label: 'Stamp Printing Dublin', desc: 'Delivery across Dublin' },
           { href: '/blog/business-stamps-ireland-guide', label: 'Business Stamps Guide', desc: 'Company stamps for Irish businesses' },
           { href: '/blog/custom-event-stamp-next-day-dublin', label: 'Next-Day Event Stamp', desc: 'Rush wooden stamp delivered in one day' },

@@ -232,6 +232,7 @@ export default function PaperBagsIreland() {
           { href: '/blog/printed-paper-bag-cost-ireland', label: 'Paper Bag Cost Guide', desc: 'How printed bag pricing works' },
           { href: '/blog/kerala-cafe-printed-paper-bags-dublin', label: 'Kerala Cafe Case Study', desc: '1,000 branded bags for a Dublin café' },
           { href: '/custom-printed-coffee-cups-ireland', label: 'Custom Coffee Cups', desc: 'Branded takeaway cups' },
+          { href: '/rocker-stamps-ireland', label: 'Rocker Stamps', desc: 'Brand plain bags without a print run' },
         ]}
       />
     </Layout>

@@ -12,12 +12,12 @@ const PAGE_URL = `${SITE_URL}/rubber-stamps`;
 
 const pageFaqs = [
   {
-    q: 'How much do rubber stamps cost in Ireland?',
-    a: 'Custom rubber stamps start from around €15–€25 for a basic business stamp, with signature stamps and larger company stamps from €20–€45. Contact PrintNPack for a free quote — no minimum order.',
+    q: 'How much does a custom rubber stamp cost in Ireland?',
+    a: 'Custom rubber stamps start from €15. A self-inking office stamp is usually €15–€45. Larger rocker stamps and company seals are typically €50–€80. No minimum order.',
   },
   {
     q: 'Do you offer same-day rubber stamp printing?',
-    a: 'Yes. Same-day and next-day express service is available for urgent business stamp orders when artwork is ready. Call +353 89 415 7369 with your deadline.',
+    a: 'Yes. Same-day dispatch from Ashbourne is available when artwork is ready, with next-day delivery nationwide. Call +353 89 415 7369 with your deadline.',
   },
   {
     q: 'What is the difference between self-inking and hand stamps?',
@@ -36,8 +36,8 @@ const faqLd = {
 };
 
 const productLd = buildProductLd({
-  name: 'Rubber Stamps Ireland — Business Stamps & Custom Rubber Stamps',
-  description: 'Professional custom rubber stamps for business and personal use in Ireland. Business stamps, signature stamps, company logo stamps, and traditional hand stamps. Same-day service available.',
+  name: 'Custom Rubber Stamps Ireland',
+  description: 'Custom rubber stamps in Ireland from €15. Self-inking, logo, loyalty, rocker, and company seal stamps. Same-day dispatch from Ashbourne and next-day delivery nationwide.',
   image: `${SITE_URL}/images/rubber-stamps/RubberStamp_10.jpg`,
   url: PAGE_URL,
   price: '15.00',
@@ -49,17 +49,18 @@ const breadcrumbLd = {
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
     { '@type': 'ListItem', position: 2, name: 'Rubber Stamps Ireland', item: `${SITE_URL}/rubber-stamps-ireland` },
-    { '@type': 'ListItem', position: 3, name: 'Order Custom Stamps', item: PAGE_URL },
+    { '@type': 'ListItem', position: 3, name: 'Custom Rubber Stamps', item: PAGE_URL },
   ],
 };
 
 const relatedLinks = [
-  { href: '/printing-ashbourne', label: 'Printing Ashbourne', desc: 'Local print shop — posters, flyers & stamps' },
-  { href: '/rubber-stamps-ireland', label: 'Rubber Stamps Ireland', desc: 'Complete stamp printing hub' },
-  { href: '/rubber-stamp-faq-ireland', label: 'Stamp FAQ', desc: '25+ instant answers' },
-  { href: '/blog/business-stamps-ireland-guide', label: 'Business Stamps Guide', desc: 'Company & invoice stamps' },
-  { href: '/blog/custom-event-stamp-next-day-dublin', label: 'Next-Day Event Stamp', desc: 'Rush wooden stamp delivered in one day' },
-  { href: '/rubber-stamp-printing-ashbourne', label: 'Stamp Printing Ashbourne', desc: 'Local collection & same-day' },
+  { href: '/self-inking-stamps-ireland', label: 'Self-Inking Stamps', desc: 'Built-in ink pad, from €15' },
+  { href: '/company-logo-stamps-ireland', label: 'Company Logo Stamps', desc: 'Logo and company stamps in Ireland' },
+  { href: '/loyalty-card-stamps-ireland', label: 'Loyalty Card Stamps', desc: '10–12mm cafe and salon stamps' },
+  { href: '/rocker-stamps-ireland', label: 'Rocker Stamps', desc: 'Brand plain bags and boxes' },
+  { href: '/company-seal-stamps-ireland', label: 'Company Seals', desc: 'Solicitor, accountant, and notary stamps' },
+  { href: '/clothing-name-stamps-ireland', label: 'Clothing Name Stamps', desc: 'School uniform name stamps' },
+  { href: '/rubber-stamps-ireland', label: 'Rubber Stamps Ireland', desc: 'Stamp types, sizes, and delivery' },
   { href: '/rubber-stamp-printing-dublin', label: 'Stamp Printing Dublin', desc: 'Delivery across Dublin' },
 ];
 
@@ -95,7 +96,7 @@ const stampTypes = [
 const features = [
   {
     title: 'Same day service',
-    description: 'Same day and next day service available for urgent orders.',
+    description: 'Same-day dispatch from Ashbourne. Next-day delivery nationwide when artwork is ready.',
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -134,7 +135,7 @@ const features = [
 const specs = [
   { label: 'Types', value: 'Business, traditional hand, signature stamps' },
   { label: 'Materials', value: 'Professional-grade rubber and mounts' },
-  { label: 'Turnaround', value: 'Same day & next day available' },
+  { label: 'Turnaround', value: 'Same-day dispatch, next-day nationwide' },
   { label: 'Delivery', value: 'Nationwide Ireland' },
 ];
 
@@ -185,18 +186,18 @@ const RubberStampsPage = () => {
   return (
     <Layout>
       <Head>
-        <title>Rubber Stamps Ireland | Business Stamps — Custom Stamps from €15 | PrintNPack</title>
-        <meta name="description" content="Rubber stamps Ireland and business stamps from €15 — custom company stamps, signature stamps and logo stamps. Same-day service, local collection in Ashbourne, nationwide delivery." />
-        <meta name="keywords" content="rubber stamps ireland, business stamp, business stamps ireland, custom rubber stamps, company stamp ireland, stamp printing, signature stamps, personalised stamps ireland, logo stamp near me" />
+        <title>Custom Rubber Stamps Ireland | From €15 | Same-Day Dispatch</title>
+        <meta name="description" content="Custom rubber stamps in Ireland from €15. Same-day dispatch from Ashbourne and next-day delivery nationwide. Self-inking, logo, loyalty, and company stamps." />
+        <meta name="keywords" content="custom rubber stamp, custom rubber stamps ireland, rubber stamps ireland, self-inking stamp, company stamp ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-        <meta property="og:title" content="Rubber Stamps Ireland | Business Stamps — Custom Stamps from €15" />
-        <meta property="og:description" content="Professional custom rubber stamps for business and personal use. Same-day service, nationwide delivery." />
+        <meta property="og:title" content="Custom Rubber Stamps Ireland | From €15 | Same-Day Dispatch" />
+        <meta property="og:description" content="Custom rubber stamps from €15. Same-day dispatch from Ashbourne and next-day delivery nationwide." />
         <meta property="og:image" content="https://www.printnpack.ie/images/rubber-stamps/RubberStamp_10.jpg" />
         <meta property="og:url" content={PAGE_URL} />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Rubber Stamps Ireland | Business Stamps from €15" />
-        <meta name="twitter:description" content="Business stamps, signature stamps & company logo stamps. Same-day service available." />
+        <meta name="twitter:title" content="Custom Rubber Stamps Ireland | From €15" />
+        <meta name="twitter:description" content="Same-day dispatch from Ashbourne. Next-day delivery nationwide." />
         <meta name="twitter:image" content="https://www.printnpack.ie/images/rubber-stamps/RubberStamp_10.jpg" />
         <link rel="canonical" href={PAGE_URL} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
@@ -211,7 +212,7 @@ const RubberStampsPage = () => {
             <li>/</li>
             <li><Link href="/rubber-stamps-ireland" className="hover:text-gray-700">Rubber Stamps Ireland</Link></li>
             <li>/</li>
-            <li className="text-gray-800 font-medium">Order Stamps</li>
+            <li className="text-gray-800 font-medium">Custom Rubber Stamps</li>
           </ol>
         </div>
       </nav>
@@ -240,13 +241,13 @@ const RubberStampsPage = () => {
                 <span className="w-2 h-2 bg-indigo-500 rounded-full" />
                 Made in Ireland
               </div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">Rubber Stamps Ireland — Business Stamps &amp; Custom Stamps</h1>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">Custom Rubber Stamps Ireland</h1>
               <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
-                Custom <strong>business stamps</strong>, <strong>company logo stamps</strong>, and <strong>signature stamps</strong> for Irish businesses.
-                Self-inking and traditional hand stamps — see our{' '}
-                <Link href="/rubber-stamp-faq-ireland" className="text-indigo-600 hover:underline font-medium">stamp FAQ</Link>{' '}
-                or{' '}
-                <Link href="/blog/business-stamps-ireland-guide" className="text-indigo-600 hover:underline font-medium">business stamps guide</Link>.
+                Custom rubber stamps from €15, made in Ashbourne. Same-day dispatch and next-day delivery nationwide.
+                Choose a{' '}
+                <Link href="/self-inking-stamps-ireland" className="text-indigo-600 hover:underline font-medium">self-inking stamp</Link>,{' '}
+                <Link href="/company-logo-stamps-ireland" className="text-indigo-600 hover:underline font-medium">company logo stamp</Link>, or{' '}
+                <Link href="/rubber-stamps-ireland" className="text-indigo-600 hover:underline font-medium">browse every stamp type</Link>.
               </p>
               <div className="grid grid-cols-3 gap-3 mb-6">
                 <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">From €15</div><div className="text-xs text-gray-500">business stamp</div></div>
@@ -254,7 +255,7 @@ const RubberStampsPage = () => {
                 <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-lg sm:text-xl font-bold text-gray-900">15+</div><div className="text-xs text-gray-500">years</div></div>
               </div>
               <ul className="space-y-2.5 mb-6">
-                {['Same day service available', 'Professional quality', 'Custom designs', 'Expert support', 'Nationwide Ireland delivery'].map((point) => (
+                {['Same-day dispatch from Ashbourne', 'Next-day delivery nationwide', 'Office stamps €15–€45', 'Rocker stamps and seals €50–€80', 'No minimum order'].map((point) => (
                   <li key={point} className="flex items-start gap-2.5 text-sm text-gray-600"><CheckIcon />{point}</li>
                 ))}
               </ul>

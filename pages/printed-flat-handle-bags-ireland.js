@@ -494,6 +494,7 @@ export default function PrintedFlatHandleBagsIreland() {
           { href: '/wholesale-paper-bags-ireland', label: 'Wholesale Paper Bags', desc: 'Bulk case pricing' },
           { href: '/blog/printed-paper-bag-cost-ireland', label: 'Paper Bag Cost Guide', desc: 'Pricing before you quote' },
           { href: '/blog/kerala-cafe-printed-paper-bags-dublin', label: 'Kerala Cafe Case Study', desc: '1,000 branded bags for a Dublin café' },
+          { href: '/rocker-stamps-ireland', label: 'Rocker Stamps', desc: 'Stamp a logo on plain kraft bags' },
         ]}
       />
 

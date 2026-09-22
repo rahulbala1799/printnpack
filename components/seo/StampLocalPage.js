@@ -146,14 +146,14 @@ export default function StampLocalPage({ config }) {
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">Stamp types we make</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: 'Business Stamps', desc: 'Company name, address, logo, invoice and received stamps for daily office use.' },
-              { title: 'Signature Stamps', desc: 'Personalised signature stamps for authorised document signing.' },
-              { title: 'Traditional Hand Stamps', desc: 'Wooden handle stamps with separate ink pad for craft and occasional use.' },
+              { title: 'Self-Inking Stamps', desc: 'Built-in ink pad for invoices and daily office use.', href: '/self-inking-stamps-ireland' },
+              { title: 'Company Logo Stamps', desc: 'Logo, address, and company details on one impression.', href: '/company-logo-stamps-ireland' },
+              { title: 'Company Seals', desc: 'Certified-copy and signature stamps for solicitors and accountants.', href: '/company-seal-stamps-ireland' },
             ].map((item) => (
-              <Link key={item.title} href="/rubber-stamps" className="group bg-white rounded-2xl border border-gray-200 p-6 hover:border-indigo-300 hover:shadow-lg transition-all">
+              <Link key={item.title} href={item.href} className="group bg-white rounded-2xl border border-gray-200 p-6 hover:border-indigo-300 hover:shadow-lg transition-all">
                 <h3 className="text-xl font-bold text-gray-900 group-hover:text-indigo-600 mb-2">{item.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed mb-3">{item.desc}</p>
-                <span className="text-indigo-600 font-semibold text-sm">Order stamps →</span>
+                <span className="text-indigo-600 font-semibold text-sm">View stamp type →</span>
               </Link>
             ))}
           </div>
@@ -219,7 +219,9 @@ export default function StampLocalPage({ config }) {
         links={[
           { href: '/printing-ashbourne', label: 'Printing Ashbourne', desc: 'Local print shop — posters, flyers, stickers & more' },
           { href: '/rubber-stamps-ireland', label: 'Rubber Stamps Ireland', desc: 'Complete stamp printing hub' },
-          { href: '/rubber-stamps', label: 'Order Custom Stamps', desc: 'Business, signature & hand stamps' },
+          { href: '/rubber-stamps', label: 'Custom Rubber Stamps', desc: 'Order from €15 — same-day dispatch' },
+          { href: '/self-inking-stamps-ireland', label: 'Self-Inking Stamps', desc: 'Daily office stamps' },
+          { href: '/company-logo-stamps-ireland', label: 'Company Logo Stamps', desc: 'Logo and address stamps' },
           { href: '/blog/business-stamps-ireland-guide', label: 'Business Stamps Guide', desc: 'Company stamps for Irish businesses' },
           { href: '/rubber-stamp-faq-ireland', label: 'Stamp FAQ', desc: '25+ instant answers' },
           ...siblingLinks,

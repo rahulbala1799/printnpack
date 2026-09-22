@@ -115,9 +115,13 @@ export default function BusinessStampsIrelandGuide() {
             Browse our{' '}
             <Link href="/rubber-stamps-ireland" className="text-indigo-600 hover:underline font-medium">rubber stamps Ireland</Link>{' '}
             hub,{' '}
-            <Link href="/rubber-stamps" className="text-indigo-600 hover:underline font-medium">order custom stamps</Link>, or
+            <Link href="/rubber-stamps" className="text-indigo-600 hover:underline font-medium">custom rubber stamps</Link>, or
             read the full{' '}
             <Link href="/rubber-stamp-faq-ireland" className="text-indigo-600 hover:underline font-medium">stamp FAQ</Link>.
+            For a daily office mount, see{' '}
+            <Link href="/self-inking-stamps-ireland" className="text-indigo-600 hover:underline font-medium">self-inking stamps</Link>.
+            For a logo die, see{' '}
+            <Link href="/company-logo-stamps-ireland" className="text-indigo-600 hover:underline font-medium">company logo stamps</Link>.
           </p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">What is a company stamp?</h2>
@@ -200,6 +204,9 @@ export default function BusinessStampsIrelandGuide() {
             <li><Link href="/blog/custom-event-stamp-next-day-dublin" className="text-indigo-600 hover:underline font-medium">Custom event stamp made and delivered the next day</Link></li>
             <li><Link href="/rubber-stamp-faq-ireland" className="text-indigo-600 hover:underline font-medium">Rubber stamp FAQ — 25+ instant answers</Link></li>
             <li><Link href="/rubber-stamp-printing-dublin" className="text-indigo-600 hover:underline font-medium">Stamp printing Dublin</Link></li>
+            <li><Link href="/self-inking-stamps-ireland" className="text-indigo-600 hover:underline font-medium">Self-inking stamps Ireland</Link></li>
+            <li><Link href="/company-logo-stamps-ireland" className="text-indigo-600 hover:underline font-medium">Company logo stamps</Link></li>
+            <li><Link href="/company-seal-stamps-ireland" className="text-indigo-600 hover:underline font-medium">Company seals for solicitors and accountants</Link></li>
             <li><Link href="/rubber-stamps-ireland" className="text-indigo-600 hover:underline font-medium">Rubber stamps Ireland hub</Link></li>
           </ul>
         </div>
@@ -211,7 +218,9 @@ export default function BusinessStampsIrelandGuide() {
       <RelatedSeoLinks
         title="Related print services"
         links={[
-          { href: '/rubber-stamps', label: 'Order Rubber Stamps', desc: 'Custom company and logo stamps' },
+          { href: '/rubber-stamps', label: 'Custom Rubber Stamps', desc: 'From €15, same-day dispatch' },
+          { href: '/self-inking-stamps-ireland', label: 'Self-Inking Stamps', desc: 'Built-in ink pad for offices' },
+          { href: '/company-logo-stamps-ireland', label: 'Company Logo Stamps', desc: 'Logo stamps for Irish businesses' },
           { href: '/rubber-stamps-ireland', label: 'Rubber Stamps Ireland', desc: 'Stamp types, sizes and delivery' },
           { href: '/rubber-stamp-faq-ireland', label: 'Rubber Stamp FAQ', desc: 'Pricing, ink and artwork answers' },
           { href: '/printing-ireland', label: 'Printing Ireland', desc: 'Local print for Irish businesses' },
