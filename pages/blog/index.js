@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'wooden-cutlery-ireland-sizes-buying-guide',
+    title: 'Wooden Cutlery Ireland: Chip Forks, Sets & Wholesale Buying Guide',
+    excerpt:
+      'How to buy wooden cutlery in Ireland — chip forks, 160mm knives and forks, teaspoons, 3-in-1 sets, case packs, and nationwide wholesale delivery from Ashbourne.',
+    date: '2026-09-22',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/140046.webp',
+    imageAlt:
+      'Wooden cutlery Ireland — 3-in-1 wooden fork knife napkin set wholesale',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'luxury-die-cut-paper-bags-ireland-buying-guide',
     title: 'Luxury Die-Cut Paper Bags Ireland: Events, Boutiques & Buying Guide',
     excerpt:
