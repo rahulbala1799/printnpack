@@ -17,7 +17,7 @@ async function handler(req, res) {
     return jsonError(res, 503, getAiConfigError());
   }
 
-  const bundle = loadPeriodBundle(req.body?.period || null);
+  const bundle = await loadPeriodBundle(req.body?.period || null);
   if (!bundle.data) {
     return jsonError(res, 404, 'No Search Console data found for that period');
   }

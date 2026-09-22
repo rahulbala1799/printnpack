@@ -13,7 +13,7 @@ async function handler(req, res) {
   const requested = typeof req.query.period === 'string' ? req.query.period : '';
 
   try {
-    const bundle = loadPeriodBundle(requested || null);
+    const bundle = await loadPeriodBundle(requested || null);
 
     if (!bundle.period || !bundle.data) {
       if (!bundle.periods.some((period) => period.available)) {

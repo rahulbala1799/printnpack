@@ -7,7 +7,7 @@ import path from 'path';
 export const config = {
   api: {
     bodyParser: {
-      sizeLimit: '8mb',
+      sizeLimit: '16mb',
     },
   },
 };
@@ -32,7 +32,7 @@ async function handler(req, res) {
       const buffer = Buffer.from(String(req.body.zip), 'base64');
       const files = extractGscZip(buffer);
       const described = describePerformanceExport(files);
-      const { saved, meta } = savePerformanceExport(files, described.period, {
+      const { saved, meta } = await savePerformanceExport(files, described.period, {
         searchType: described.searchType,
         startDate: described.startDate,
         endDate: described.endDate,

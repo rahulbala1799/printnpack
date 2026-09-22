@@ -20,7 +20,7 @@ async function handler(req, res) {
   }
 
   const { recipientEmail, period } = req.body || {};
-  const bundle = loadPeriodBundle(period || null);
+  const bundle = await loadPeriodBundle(period || null);
 
   if (!bundle.data) {
     return res.status(404).json({ error: 'No Search Console data found for that period' });
