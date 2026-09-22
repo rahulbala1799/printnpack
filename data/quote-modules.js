@@ -41,9 +41,12 @@ export const QUOTE_CATALOG = [
   withMedia({ id: 'greaseproof-sheets-ireland', name: 'Greaseproof Sheets', href: '/greaseproof-sheets-ireland', moduleId: 'greaseproof', configurable: false, group: 'Packaging' }),
   withMedia({ id: 'labels-on-a-roll', name: 'Labels on a Roll', href: '/labels-on-a-roll', moduleId: 'labels', configurable: false, group: 'Stickers & Labels' }),
   withMedia({ id: 'vinyl-stickers', name: 'Vinyl Stickers', href: '/vinyl-stickers', moduleId: 'vinyl-stickers', configurable: false, group: 'Stickers & Labels' }),
-  withMedia({ id: 'roll-up-banners-ireland', name: 'Roll-Up Banners', href: '/roll-up-banners-ireland', moduleId: 'roll-up-banners', configurable: false, group: 'Wide Format' }),
-  withMedia({ id: 'extra-wide-roll-up-banners-ireland', name: 'Extra-Wide Roll-Ups', href: '/extra-wide-roll-up-banners-ireland', moduleId: 'extra-wide-roll-ups', configurable: false, group: 'Wide Format' }),
-  withMedia({ id: 'stage-backdrop-banners-ireland', name: 'Stage Backdrop Banners', href: '/stage-backdrop-banners-ireland', moduleId: 'stage-backdrops', configurable: false, group: 'Wide Format' }),
+  withMedia({ id: 'roll-up-banners-ireland', name: 'Roll-Up Banners', href: '/roll-up-banners-ireland', moduleId: 'roll-up-banners', configurable: false, group: 'Banners, Stands and Frames' }),
+  withMedia({ id: 'extra-wide-roll-up-banners-ireland', name: 'Extra-Wide Roll-Ups', href: '/extra-wide-roll-up-banners-ireland', moduleId: 'extra-wide-roll-ups', configurable: false, group: 'Banners, Stands and Frames' }),
+  withMedia({ id: 'fabric-banner-stands-ireland', name: 'Fabric Banner Stands', href: '/fabric-banner-stands-ireland', moduleId: 'fabric-banner-stands', configurable: true, group: 'Banners, Stands and Frames', price: 'Contact for quote' }),
+  withMedia({ id: 'curved-banner-stands-ireland', name: 'Curved Banner Stands', href: '/curved-banner-stands-ireland', moduleId: 'curved-banner-stands', configurable: true, group: 'Banners, Stands and Frames', price: 'Contact for quote' }),
+  withMedia({ id: 'stage-backdrop-banners-ireland', name: 'Stage Backdrop Banners', href: '/stage-backdrop-banners-ireland', moduleId: 'stage-backdrops', configurable: false, group: 'Banners, Stands and Frames' }),
+  withMedia({ id: 'vinyl-banners', name: 'Vinyl Banners', href: '/vinyl-banners', moduleId: 'vinyl-banners', configurable: false, group: 'Banners, Stands and Frames' }),
   withMedia({ id: 'custom-printed-flags-ireland', name: 'Custom Printed Flags', href: '/custom-printed-flags-ireland', moduleId: 'flags', configurable: false, group: 'Wide Format' }),
   withMedia({ id: 'posters', name: 'Posters', href: '/posters', moduleId: 'posters', configurable: false, group: 'Wide Format' }),
   withMedia({ id: 'foamex-boards', name: 'Foamex Boards', href: '/foamex-boards', moduleId: 'foamex', configurable: false, group: 'Boards' }),
@@ -118,6 +121,11 @@ export const GENERIC_MODULE_FIELDS = {
     DIMENSIONS_MM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 50 },
   ],
+  'vinyl-banners': [
+    { key: 'sizePreset', label: 'Size', type: 'chips', options: ['2×4 ft', '3×6 ft', '4×8 ft', '5×10 ft', 'Custom'] },
+    DIMENSIONS_CM,
+    { key: 'qty', label: 'Quantity', type: 'qty', min: 1 },
+  ],
   'roll-up-banners': [
     { key: 'sizePreset', label: 'Size', type: 'chips', options: ['850×2000 mm', '1000×2000 mm', 'Custom'] },
     DIMENSIONS_MM,
@@ -126,6 +134,20 @@ export const GENERIC_MODULE_FIELDS = {
   'extra-wide-roll-ups': [
     { key: 'sizePreset', label: 'Size', type: 'chips', options: ['1200 mm', '1500 mm', '2000 mm', 'Custom'] },
     DIMENSIONS_MM,
+    { key: 'qty', label: 'Quantity', type: 'qty', min: 1 },
+  ],
+  'fabric-banner-stands': [
+    { key: 'kit', label: 'Kit', type: 'chips', options: ['Complete set (frame + graphic)', 'Graphic only'] },
+    { key: 'sizePreset', label: 'Size', type: 'chips', options: ['250 × 228 cm', '300 × 230 cm', '400 × 230 cm', '500 × 230 cm', '600 × 230 cm', 'Custom'] },
+    { key: 'print', label: 'Print', type: 'chips', options: ['Single-sided', 'Double-sided'] },
+    DIMENSIONS_CM,
+    { key: 'qty', label: 'Quantity', type: 'qty', min: 1 },
+  ],
+  'curved-banner-stands': [
+    { key: 'kit', label: 'Kit', type: 'chips', options: ['Complete set (frame + graphic)', 'Print only'] },
+    { key: 'sizePreset', label: 'Size', type: 'chips', options: ['300 × 230 cm', '400 × 230 cm', '500 × 230 cm', 'Custom'] },
+    { key: 'print', label: 'Print', type: 'chips', options: ['Single-sided', 'Double-sided'] },
+    DIMENSIONS_CM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 1 },
   ],
   'stage-backdrops': [

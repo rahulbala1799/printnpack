@@ -292,6 +292,7 @@ This is a lead from the website popup form.`,
                   >
                     <option value="">Select a category</option>
                     <option value="Packaging">Food & Retail Packaging</option>
+                    <option value="Banners, Stands and Frames">Banners, Stands and Frames</option>
                     <option value="Wide Format Printing">Wide Format Printing</option>
                     <option value="Leaflets & Flyers">Leaflets & Flyers</option>
                     <option value="Foamex Boards">Foamex Boards</option>

@@ -24,8 +24,14 @@ const categoryConfig = [
     badge: 'bg-green-100 text-green-700',
   },
   {
+    name: 'Banners, Stands and Frames',
+    description: 'Vinyl banners, roll-ups, fabric stands and frames',
+    accent: 'border-indigo-500',
+    badge: 'bg-indigo-100 text-indigo-700',
+  },
+  {
     name: 'Wide Format',
-    description: 'Large format printing for signage, displays & events',
+    description: 'Flags, posters, foamex and correx boards',
     accent: 'border-purple-500',
     badge: 'bg-purple-100 text-purple-700',
   },

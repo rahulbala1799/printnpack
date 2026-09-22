@@ -131,6 +131,81 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/banner-with-frame-ireland',
+        destination: '/fabric-banner-stands-ireland',
+        permanent: true,
+      },
+      {
+        source: '/banner-with-structure-ireland',
+        destination: '/fabric-banner-stands-ireland',
+        permanent: true,
+      },
+      {
+        source: '/banner-with-stand-ireland',
+        destination: '/fabric-banner-stands-ireland',
+        permanent: true,
+      },
+      {
+        source: '/stretch-fabric-display-ireland',
+        destination: '/fabric-banner-stands-ireland',
+        permanent: true,
+      },
+      {
+        source: '/tension-fabric-display-ireland',
+        destination: '/fabric-banner-stands-ireland',
+        permanent: true,
+      },
+      {
+        source: '/straight-stretch-stand-ireland',
+        destination: '/fabric-banner-stands-ireland',
+        permanent: true,
+      },
+      {
+        source: '/media-wall-ireland',
+        destination: '/fabric-banner-stands-ireland',
+        permanent: true,
+      },
+      {
+        source: '/fabric-backdrop-stand-ireland',
+        destination: '/fabric-banner-stands-ireland',
+        permanent: true,
+      },
+      {
+        source: '/products/fabric-banner-stands-ireland',
+        destination: '/fabric-banner-stands-ireland',
+        permanent: true,
+      },
+      {
+        source: '/curved-stretch-stand-ireland',
+        destination: '/curved-banner-stands-ireland',
+        permanent: true,
+      },
+      {
+        source: '/curved-banner-with-stand-ireland',
+        destination: '/curved-banner-stands-ireland',
+        permanent: true,
+      },
+      {
+        source: '/curved-fabric-display-ireland',
+        destination: '/curved-banner-stands-ireland',
+        permanent: true,
+      },
+      {
+        source: '/curved-media-wall-ireland',
+        destination: '/curved-banner-stands-ireland',
+        permanent: true,
+      },
+      {
+        source: '/curved-exhibition-backdrop-ireland',
+        destination: '/curved-banner-stands-ireland',
+        permanent: true,
+      },
+      {
+        source: '/products/curved-banner-stands-ireland',
+        destination: '/curved-banner-stands-ireland',
+        permanent: true,
+      },
+      {
         source: '/products/vinyl-banners',
         destination: '/vinyl-banners',
         permanent: true,

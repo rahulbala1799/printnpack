@@ -42,14 +42,14 @@ export default function ClothingProductPage({ product, relatedProducts }) {
     url: pageUrl,
     price: parsePriceString(product.price),
     sku: product.id,
-    category: product.id === 'custom-sportswear-ireland' ? 'Sportswear' : product.category,
+    category: product.schemaCategory || product.category,
   });
 
-  const sportswearFaqs = product.id === 'custom-sportswear-ireland'
-    ? CLOTHING_FAQS.filter((item) => item.id === 'sportswear-ireland' || item.id === 'sportswear-price' || item.id === 'cost' || item.id === 'turnaround' || item.id === 'dublin')
-    : [];
+  const pageFaqs = (product.faqIds || [])
+    .map((id) => CLOTHING_FAQS.find((item) => item.id === id))
+    .filter(Boolean);
 
-  const faqLd = sportswearFaqs.length
+  const faqLd = pageFaqs.length
     ? {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
@@ -76,12 +76,7 @@ export default function ClothingProductPage({ product, relatedProducts }) {
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
-        {product.id === 'custom-sportswear-ireland' && (
-          <meta
-            name="keywords"
-            content="custom sportswear Ireland, printed sports t-shirts Ireland, GAA club kit printing, soccer team t-shirts Ireland, running club merch Dublin, gym staff t-shirts Ireland, AWDis Cool T print Ashbourne"
-          />
-        )}
+        {product.keywords && <meta name="keywords" content={product.keywords} />}
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
@@ -112,12 +107,12 @@ export default function ClothingProductPage({ product, relatedProducts }) {
         seoOverride={product.h1 ? { h1: product.h1, intro: product.detailedDescription } : undefined}
       />
 
-      {sportswearFaqs.length > 0 && (
+      {pageFaqs.length > 0 && (
         <section className="bg-white border-t border-gray-200">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Custom sportswear Ireland — FAQs</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">{product.faqHeading || `${product.name} — FAQs`}</h2>
             <dl className="space-y-5">
-              {sportswearFaqs.map((item) => (
+              {pageFaqs.map((item) => (
                 <div key={item.id}>
                   <dt className="font-semibold text-gray-900">{item.q}</dt>
                   <dd className="mt-1 text-gray-600 text-sm leading-relaxed">{item.a}</dd>
@@ -151,6 +146,7 @@ export default function ClothingProductPage({ product, relatedProducts }) {
         title="Related clothing pages"
         links={[
           { href: '/clothing', label: 'Branded Clothing Ireland', desc: 'T-shirts, polos, hoodies from €12' },
+          { href: '/clothing/custom-polo-shirts-ireland', label: 'Custom polo shirts Ireland', desc: 'Embroidered staff polos from €19' },
           { href: '/clothing/custom-printed-tshirts-ireland', label: 'Custom printed t-shirts', desc: 'Cotton tees from €15' },
           { href: '/clothing-faq-ireland', label: 'Clothing FAQ Ireland', desc: 'Logos, sizes and pricing' },
           { href: '/blog/branded-clothing-ireland-guide', label: 'Branded clothing guide', desc: 'Clubs, workwear and merch' },

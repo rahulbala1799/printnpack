@@ -418,6 +418,7 @@ const ContactPage = () => {
                         <option value="Request a Quote">Request a Quote</option>
                         <option value="Pizza Boxes">Pizza Boxes</option>
                         <option value="Paper Bags">Paper Bags</option>
+                        <option value="Banners, Stands and Frames">Banners, Stands and Frames</option>
                         <option value="Wide Format Products">Wide Format Products</option>
                         <option value="Roll-Up Banners">Roll-Up Banners</option>
                         <option value="Custom Packaging">Custom Packaging</option>

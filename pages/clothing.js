@@ -61,10 +61,10 @@ const itemListLd = {
 
 const heroImages = [
   '/images/apparel/TSHIRT MOCK UP 1.jpg',
-  '/images/apparel/POLO SHIRT MOCK UP 1.jpg',
+  '/images/apparel/custom-polo-shirts-ireland-embroidered-events-uniform.jpg',
   '/images/apparel/HOODIE MOCK UP 1.jpg',
   '/images/apparel/TSHIRT MOCK UP 2.jpg',
-  '/images/apparel/POLO SHIRT MOCK UP 2.jpg',
+  '/images/apparel/custom-polo-shirts-ireland-hospitality-staff.jpg',
 ];
 
 const galleryImages = [
@@ -72,9 +72,9 @@ const galleryImages = [
   '/images/apparel/TSHIRT MOCK UP 2.jpg',
   '/images/apparel/custom-printed-sportswear-ireland-dublin-running-club.jpg',
   '/images/apparel/custom-printed-sportswear-ireland-soccer-team-kit.jpg',
-  '/images/apparel/POLO SHIRT MOCK UP 1.jpg',
+  '/images/apparel/custom-polo-shirts-ireland-embroidered-events-uniform.jpg',
   '/images/apparel/HOODIE MOCK UP 1.jpg',
-  '/images/apparel/HOODIE MOCK UP 2.jpg',
+  '/images/apparel/custom-hiviz-workwear-ireland-construction-site.jpg',
 ];
 
 

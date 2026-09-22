@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { SITE_URL } from '../lib/site';
 import { buildProductListItem, parsePriceString } from '../lib/schema';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
-import { FaBoxOpen, FaPrint, FaTags, FaFileAlt, FaTshirt, FaStamp } from 'react-icons/fa';
+import { FaBoxOpen, FaPrint, FaTags, FaFileAlt, FaTshirt, FaStamp, FaFlag } from 'react-icons/fa';
 
 const PAGE_URL = `${SITE_URL}/products`;
 const PAGE_TITLE = 'Print & Packaging Products Ireland | PrintNPack Ashbourne';
@@ -31,10 +31,20 @@ const mainGroups = [
     iconBg: 'bg-orange-100 text-orange-600',
   },
   {
+    id: 'banners-stands-frames',
+    name: 'Banners, Stands and Frames',
+    shortName: 'Banners',
+    description: 'Vinyl banners, roll-ups, fabric stands and frames',
+    categories: ['Banners, Stands and Frames'],
+    icon: FaFlag,
+    activeClasses: 'bg-indigo-600 text-white border-indigo-600',
+    iconBg: 'bg-indigo-100 text-indigo-600',
+  },
+  {
     id: 'wide-format',
     name: 'Wide Format Printing',
     shortName: 'Wide Format',
-    description: 'Banners, posters, boards and flags',
+    description: 'Flags, posters, foamex and correx boards',
     categories: ['Wide Format'],
     icon: FaPrint,
     activeClasses: 'bg-purple-600 text-white border-purple-600',
@@ -113,6 +123,8 @@ const POPULAR_LINKS = [
   { label: 'Labels on a Roll', href: '/labels-on-a-roll' },
   { label: 'Premium Leaflets', href: '/premium-leaflets-ireland' },
   { label: 'Greaseproof Sheets', href: '/greaseproof-sheets-ireland' },
+  { label: 'Fabric Banner Stands', href: '/fabric-banner-stands-ireland' },
+  { label: 'Curved Banner Stands', href: '/curved-banner-stands-ireland' },
   { label: 'Stage Backdrop Banners', href: '/stage-backdrop-banners-ireland' },
   { label: 'Leaflets', href: '/services/leaflets' },
   { label: 'Printing Services', href: '/printing-ireland' },
@@ -225,7 +237,8 @@ function filterProducts(activeGroup, activeCategory, searchTerm = '') {
       (p) =>
         p.name.toLowerCase().includes(q) ||
         (p.description || '').toLowerCase().includes(q) ||
-        (p.category || '').toLowerCase().includes(q)
+        (p.category || '').toLowerCase().includes(q) ||
+        (p.searchAliases || []).some((alias) => alias.toLowerCase().includes(q) || q.includes(alias.toLowerCase()))
     );
   }
 
@@ -883,8 +896,12 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
 };
 
 export async function getServerSideProps({ query }) {
-  const groupParam = typeof query.group === 'string' ? query.group : 'packaging';
   const categoryParam = typeof query.category === 'string' ? query.category : 'all';
+  const groupFromCategory =
+    categoryParam !== 'all'
+      ? mainGroups.find((g) => g.categories.includes(categoryParam))?.id
+      : null;
+  const groupParam = typeof query.group === 'string' ? query.group : groupFromCategory || 'packaging';
   const initialGroup = mainGroups.some((g) => g.id === groupParam) ? groupParam : 'packaging';
   const groupConfig = mainGroups.find((g) => g.id === initialGroup);
   const initialCategory =

@@ -62,6 +62,8 @@ const itemListLd = {
     buildCatalogOffer('PVC Banners Ireland', `${SITE_URL}/vinyl-banners`, { price: '25.00' }).itemOffered,
     buildCatalogOffer('Roll Up Banners Ireland', `${SITE_URL}/roll-up-banners-ireland`, { price: '80.00' }).itemOffered,
     buildCatalogOffer('Extra Wide Roll Up Banners Ireland', `${SITE_URL}/extra-wide-roll-up-banners-ireland`, { price: '398.96' }).itemOffered,
+    buildCatalogOffer('Fabric Banner Stands Ireland', `${SITE_URL}/fabric-banner-stands-ireland`).itemOffered,
+    buildCatalogOffer('Curved Banner Stands Ireland', `${SITE_URL}/curved-banner-stands-ireland`).itemOffered,
     buildCatalogOffer('Large Stage Backdrop Banners Ireland', `${SITE_URL}/stage-backdrop-banners-ireland`).itemOffered,
     buildCatalogOffer('Custom Printed Flags Ireland', `${SITE_URL}/custom-printed-flags-ireland`).itemOffered,
   ].map((item, index) => ({
@@ -74,14 +76,14 @@ const itemListLd = {
 export default function BannersIreland() {
   const title = 'Banner Printing Ireland | Custom PVC & Roll-Up Banners | Print n Pack';
   const description =
-    'Banner printing Ireland — custom PVC banners, printed banners, roll-up banners, extra wide 2m roller banners and trade show displays. From Ashbourne with delivery across Dublin, Meath, Northern Ireland and nationwide.';
+    'Banner printing Ireland — custom PVC banners, roll-up banners, fabric banner stands (banner with frame / structure), extra wide 2m roller banners and trade show displays. From Ashbourne with delivery across Dublin, Meath and nationwide.';
 
   return (
     <Layout>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="keywords" content="banner printing, banner printing ireland, banners ireland, banner printing near me, banner printing dublin, banners dublin, PVC banners ireland, roll up banners ireland, extra wide roll up banners, printed banners ireland, trade show banners ireland" />
+        <meta name="keywords" content="banner printing, banner printing ireland, banners ireland, banner printing near me, banner printing dublin, banners dublin, PVC banners ireland, roll up banners ireland, fabric banner stands ireland, banner with frame, banner with structure, extra wide roll up banners, printed banners ireland, trade show banners ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href={PAGE_URL} />
         <meta property="og:type" content="website" />
@@ -130,8 +132,8 @@ export default function BannersIreland() {
 
       <section className="py-12 lg:py-16 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Wide format printing options</h2>
-          <p className="text-gray-600 mb-8 max-w-2xl">PVC for outdoor use, roll-ups for portable displays, huge stage backdrops up to 50 m, and custom flags for clubs and events.</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Banners, stands and frames</h2>
+          <p className="text-gray-600 mb-8 max-w-2xl">PVC for outdoor use, roll-ups for portable displays, fabric banner stands (banner with frame), huge stage backdrops up to 50 m, and custom flags for clubs and events.</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <Link href="/vinyl-banners" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-blue-300 hover:shadow-lg transition-all">
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 mb-2">PVC Banners</h3>
@@ -142,6 +144,16 @@ export default function BannersIreland() {
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 mb-2">Roll Up Banners Ireland</h3>
               <p className="text-gray-600 text-sm leading-relaxed mb-4">Pull up and roller banners from €80 with a heavy cassette. Artwork reprints from €35. Extra wide XXL up to €450 for 3 m × 2 m.</p>
               <span className="text-blue-600 font-semibold text-sm">View roll up banners →</span>
+            </Link>
+            <Link href="/fabric-banner-stands-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-indigo-300 hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold text-gray-900 group-hover:text-indigo-600 mb-2">Fabric Banner Stands</h3>
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">Banner with frame or structure — stretch fabric on a reusable aluminium stand. Complete kit or graphic only, 2.5–6 m, single or double sided.</p>
+              <span className="text-indigo-600 font-semibold text-sm">View fabric banner stands →</span>
+            </Link>
+            <Link href="/curved-banner-stands-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-violet-300 hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold text-gray-900 group-hover:text-violet-600 mb-2">Curved Banner Stands</h3>
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">Curved stretch stand or curved banner with stand — wraparound fabric wall, 3–5 m. Complete kit or print only. Quote from Ashbourne.</p>
+              <span className="text-violet-600 font-semibold text-sm">View curved banner stands →</span>
             </Link>
             <Link href="/extra-wide-roll-up-banners-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-orange-300 hover:shadow-lg transition-all">
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-orange-600 mb-2">Extra Wide Roll-Ups</h3>

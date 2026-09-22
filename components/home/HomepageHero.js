@@ -21,7 +21,7 @@ const slides = [
   {
     title: 'Wide Format Printing',
     subtitle: '& Signage',
-    description: 'Roll-up banners, foamex boards, correx boards, vinyl stickers & posters.',
+    description: 'Roll-up banners, fabric banner stands, foamex, correx, vinyl stickers & posters.',
     imageSrc: '/images/ifa/heroh/wide.png',
     accentColor: '#7c3aed',
   },
@@ -33,6 +33,7 @@ const quickLinks = [
   { label: 'Paper Bags', href: '/printed-flat-handle-bags-ireland' },
   { label: 'Plain Packaging', href: '/plain-packaging' },
   { label: 'Roll-Up Banners', href: '/roll-up-banners-ireland' },
+  { label: 'Fabric Banner Stands', href: '/fabric-banner-stands-ireland' },
   { label: 'Custom Flags', href: '/custom-printed-flags-ireland' },
   { label: 'Foamex Boards', href: '/foamex-boards' },
 ];

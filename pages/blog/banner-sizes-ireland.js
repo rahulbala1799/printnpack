@@ -217,12 +217,19 @@ export default function BannerSizesIreland() {
             </table>
           </div>
 
+          <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">Fabric banner stand sizes (banner with frame)</h2>
+          <p className="text-slate-700 leading-relaxed mb-4">
+            A <Link href="/fabric-banner-stands-ireland" className="text-blue-600 hover:underline font-medium">fabric banner stand</Link>{' '}
+            — also called a banner with frame, banner with structure or media wall — uses stretch fabric on an aluminium frame.
+            Typical kits: 250×228 cm, 300×230 cm, 400×230 cm, 500×230 cm and 600×230 cm.
+          </p>
+
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">How to choose the right banner size</h2>
           <ul className="list-disc pl-6 text-slate-700 mb-6 space-y-2">
             <li><strong>Shop sale or window sign:</strong> 2ft × 4ft — readable from the pavement</li>
             <li><strong>Shop front or event entrance:</strong> 3ft × 6ft — the most versatile outdoor size</li>
             <li><strong>Large building or festival:</strong> 4ft × 8ft or 5ft × 10ft</li>
-            <li><strong>Trade show or exhibition:</strong> 1000mm roll-up — or a 2m extra wide roll up for large booths</li>
+            <li><strong>Trade show or exhibition:</strong> 1000mm roll-up — or a fabric banner stand (banner with frame) from 2.5 m to 6 m</li>
             <li><strong>Reception desk or clinic:</strong> 850mm roll-up — compact and portable</li>
             <li><strong>GAA club or sports sponsor board:</strong> 3ft × 6ft PVC or 4ft × 8ft mesh for windy pitches</li>
           </ul>
@@ -256,6 +263,7 @@ export default function BannerSizesIreland() {
             <li><Link href="/blog/banner-printing-ireland-guide" className="text-blue-600 hover:underline font-medium">Banner printing cost, materials &amp; turnaround guide</Link></li>
             <li><Link href="/blog/roll-up-banner-printing-ireland" className="text-blue-600 hover:underline font-medium">Roll up banner printing Ireland</Link> — from €80 with cassette, artwork from €35</li>
             <li><Link href="/roll-up-banners-ireland" className="text-blue-600 hover:underline font-medium">Roll up banners Ireland</Link> — pull up &amp; roller banners with stand</li>
+            <li><Link href="/fabric-banner-stands-ireland" className="text-blue-600 hover:underline font-medium">Fabric banner stands Ireland</Link> — banner with frame / structure, 2.5–6 m</li>
             <li><Link href="/extra-wide-roll-up-banners-ireland" className="text-blue-600 hover:underline font-medium">Extra wide 2m roll up banners</Link> — XL to 3m high for exhibitions</li>
             <li><Link href="/blog/extra-wide-roll-up-banners-ireland-guide" className="text-blue-600 hover:underline font-medium">Extra wide roll up banner size &amp; delivery guide</Link></li>
             <li><Link href="/blog/trade-show-banners-decals-ireland" className="text-blue-600 hover:underline font-medium">Trade show banners &amp; custom decals guide</Link></li>

@@ -165,6 +165,20 @@ const guides = [
     cta: 'View flags',
   },
   {
+    href: '/fabric-banner-stands-ireland',
+    title: 'Fabric Banner Stands Ireland',
+    description: 'Banner with frame or structure — stretch fabric display, media wall, 2.5–6 m.',
+    image: '/images/banners/fabric-banner-stands/fabric-banner-stand-ireland-exhibition-media-wall.jpg',
+    cta: 'View fabric stands',
+  },
+  {
+    href: '/curved-banner-stands-ireland',
+    title: 'Curved Banner Stands Ireland',
+    description: 'Curved stretch stand or curved banner with stand — 3–5 m wraparound fabric wall.',
+    image: '/images/banners/curved-banner-stands/curved-banner-stand-ireland-curved-stretch-stand.jpg',
+    cta: 'View curved stands',
+  },
+  {
     href: '/extra-wide-roll-up-banners-ireland',
     title: 'Extra Wide Roll Up Banners',
     description: '2m XL roller banners up to 3m high — Ireland, NI, UK & EU delivery.',

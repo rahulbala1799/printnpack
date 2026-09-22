@@ -9,12 +9,10 @@ const TSHIRT_IMAGES = [
 ];
 
 const POLO_IMAGES = [
-  '/images/apparel/POLO SHIRT MOCK UP 1.jpg',
-  '/images/apparel/POLO SHIRT MOCK UP 2.jpg',
-  '/images/apparel/POLO SHIRT MOCK UP 3.jpg',
-  '/images/apparel/POLO SHIRT MOCK UP 4.jpg',
-  '/images/apparel/POLO SHIRT MOCK UP 5.jpg',
-  '/images/apparel/POLO SHIRT MOCK UP 6.jpg',
+  '/images/apparel/custom-polo-shirts-ireland-embroidered-events-uniform.jpg',
+  '/images/apparel/custom-polo-shirts-ireland-landscaping-workwear.jpg',
+  '/images/apparel/custom-polo-shirts-ireland-hospitality-staff.jpg',
+  '/images/apparel/custom-polo-shirts-ireland-golf-club-kit.jpg',
 ];
 
 const HOODIE_IMAGES = [
@@ -30,6 +28,14 @@ const SPORTSWEAR_IMAGES = [
   '/images/apparel/custom-printed-sportswear-ireland-soccer-team-kit.jpg',
   '/images/apparel/custom-printed-sportswear-ireland-club-kit-navy-white.jpg',
   '/images/apparel/custom-printed-sportswear-ireland-gym-performance-tshirt.jpg',
+];
+
+const HIVIZ_IMAGES = [
+  '/images/apparel/custom-hiviz-workwear-ireland-construction-site.jpg',
+  '/images/apparel/custom-hiviz-vest-ireland-warehouse-logistics.jpg',
+  '/images/apparel/custom-hiviz-vest-ireland-event-crew.jpg',
+  '/images/apparel/custom-hiviz-vest-ireland-roadworks.jpg',
+  '/images/apparel/custom-hiviz-vest-ireland-event-security.jpg',
 ];
 
 export const clothingHref = (product) => product.url || `/clothing/${product.id}`;
@@ -71,34 +77,50 @@ export const clothingProducts = [
   },
   {
     id: 'custom-polo-shirts-ireland',
-    name: 'Custom Polo Shirts',
+    name: 'Custom Polo Shirts Ireland',
     category: 'Apparel',
     quoteType: 'Polo T-Shirts',
     pricingKey: 'polos',
     popular: true,
+    schemaCategory: 'Polo Shirts',
+    seoTitle: 'Custom Polo Shirts Ireland | Embroidered Staff Uniforms | PrintNPack',
+    seoDescription:
+      'Custom polo shirts Ireland for hospitality, events, golf clubs and workwear. Fruit of the Loom 65/35, embroidered or printed from €19. Same price S–3XL. Delivered nationwide from Ashbourne.',
+    h1: 'Custom Polo Shirts Ireland',
+    keywords:
+      'custom polo shirts Ireland, embroidered polo shirts Ireland, company polo shirts Dublin, staff uniform polos Ireland, hospitality polo shirts, golf club polo Ireland, Fruit of the Loom polo print Ashbourne',
+    faqIds: ['polo-ireland', 'polo-price', 'cost', 'turnaround', 'dublin'],
+    faqHeading: 'Custom polo shirts Ireland — FAQs',
     description:
-      'Fruit of the Loom 65/35 polo shirts, embroidered or printed. 14 stock colours, same price S–3XL, from €19 for a single placement.',
+      'Embroidered and printed polo shirts for Irish businesses — hotels, cafés, events, grounds teams and golf clubs. Fruit of the Loom 65/35, 14 stock colours, from €19 for a left-chest logo. Same price S–3XL, delivery from Ashbourne.',
     features: [
-      'Embroidery or print on left chest, back and sleeve',
-      'Cotton pique, blend and performance polyester',
+      'Embroidery or print on left chest, back and sleeve — the usual company clothing with a logo',
+      'Fruit of the Loom 65/35 cotton/poly pique — hospitality, events, retail and outdoor teams',
+      '14 stock colours including black, bottle green, red, royal, navy and white',
+      'Same price S–3XL, minimum 5 pieces, 8% off each quantity step',
       'Standard, button-down and ribbed collars',
-      'Corporate colours including navy, black and burgundy',
-      'Sizes S–3XL — same price on every size',
-      'Nationwide delivery from Ashbourne',
+      '3–5 day turnaround, Ireland-wide delivery from Ashbourne, Co. Meath',
     ],
     detailedDescription:
-      'Polo shirts are the usual choice for company clothing with a logo — reception, floor teams and trade stands. Single placement from €19, 8% off each qty step from 5 pieces. Extra print areas +€1.50. Same price S–3XL.',
+      'Order custom polo shirts in Ireland for hotels, cafés, event staff, landscaping crews, golf clubs and office teams. We embroider or print your crest on Fruit of the Loom 65/35 polos — left chest, back or sleeve — from €19 for a single placement. Extra print areas +€1.50. Same price on every size S–3XL, from 5 pieces, with 8% off each quantity step. Proofs before stitch or print. Delivery to Dublin, Cork, Galway and every county from Ashbourne.',
     specifications: [
+      { name: 'Garment', value: 'Fruit of the Loom 65/35 polo shirt' },
       { name: 'Printing', value: 'Embroidery, screen print, digital print' },
-      { name: 'Materials', value: 'Cotton pique, cotton blend, performance polyester, organic cotton' },
+      { name: 'Materials', value: 'Cotton pique, cotton blend, performance polyester' },
       { name: 'Colours', value: 'White, Black, Deep Navy, Navy, Royal Blue, Bottle Green, Kelly Green, Purple, Burgundy, Red, Orange, Sunflower, Sky, Heather' },
       { name: 'Collar', value: 'Standard, button-down, ribbed, flat knit' },
       { name: 'Sizes', value: 'S–3XL — same price' },
       { name: 'Minimum order', value: '5 pieces' },
-      { name: 'Production time', value: '3–5 business days' },
-      { name: 'Delivery', value: 'Nationwide Ireland from Ashbourne' },
+      { name: 'Production time', value: '3–5 business days after proof' },
+      { name: 'Delivery', value: 'Nationwide Ireland from Ashbourne, Co. Meath' },
     ],
     images: POLO_IMAGES,
+    imageAlts: [
+      'Custom embroidered polo shirts Ireland — black events and hospitality staff uniform',
+      'Custom polo shirts Ireland — bottle green landscaping and grounds team workwear',
+      'Embroidered café polo shirts Ireland — red hospitality staff uniform with company logo',
+      'Custom golf club polo shirts Ireland — royal blue embroidered staff kit',
+    ],
     imageSrc: POLO_IMAGES[0],
     price: 'From €19.00',
     moq: 5,
@@ -177,6 +199,11 @@ export const clothingProducts = [
     quoteType: 'Sports Wear',
     pricingKey: 'sportswear',
     popular: true,
+    schemaCategory: 'Sportswear',
+    keywords:
+      'custom sportswear Ireland, printed sports t-shirts Ireland, GAA club kit printing, soccer team t-shirts Ireland, running club merch Dublin, gym staff t-shirts Ireland, AWDis Cool T print Ashbourne',
+    faqIds: ['sportswear-ireland', 'sportswear-price', 'cost', 'turnaround', 'dublin'],
+    faqHeading: 'Custom sportswear Ireland — FAQs',
     seoTitle: 'Custom Sportswear Ireland | Printed Club & Team Kits | PrintNPack',
     seoDescription:
       'Custom printed sportswear Ireland for GAA, soccer, running clubs and gyms. AWDis Cool T kits from €16.50, same price S–3XL, 3–5 days. Delivered nationwide from Ashbourne.',
@@ -216,33 +243,51 @@ export const clothingProducts = [
   },
   {
     id: 'custom-hiviz-workwear-ireland',
-    name: 'Hi-Viz Jackets & Workwear',
+    name: 'Hi-Viz Workwear Ireland',
     category: 'Apparel',
     quoteType: 'Hi-Viz Jackets',
     pricingKey: 'hiviz',
-    popular: false,
+    popular: true,
+    schemaCategory: 'Hi-Viz Workwear',
+    seoTitle: 'Hi-Viz Workwear Ireland | Printed Safety Vests & Tabards | PrintNPack',
+    seoDescription:
+      'Custom hi-viz workwear Ireland for sites, warehouses, road crews and events. Printed or embroidered vests from €12, EN ISO 20471 Class 2, same price S–3XL. Delivered from Ashbourne.',
+    h1: 'Hi-Viz Workwear Ireland',
+    keywords:
+      'hi viz workwear Ireland, custom hi vis vests Ireland, printed safety vests Dublin, branded hi viz tabards, event hi vis Ireland, construction hi viz printing Ashbourne',
+    faqIds: ['hiviz-ireland', 'hiviz-price', 'cost', 'turnaround', 'dublin'],
+    faqHeading: 'Hi-viz workwear Ireland — FAQs',
     description:
-      'DMS hi-vis tabards and branded workwear. Six stock colours, EN ISO 20471 Class 2, from €12 for a single placement. Same price S–3XL.',
+      'Printed hi-viz vests and tabards for Irish sites, warehouses, road crews and event staff. DMS colours including yellow, orange, pink, royal and black. From €12 for a chest logo. Same price S–3XL, delivery from Ashbourne.',
     features: [
-      'Yellow, orange, pink, royal blue, red and black',
+      'Yellow, orange, pink, royal blue, red and black stock colours',
       'EN ISO 20471 Class 2 with 50mm reflective tape',
-      'Logo on chest, back and sleeve',
-      'Print or dye-sublimation on polyester',
-      'Sizes S–3XL — same price on every size',
-      'Nationwide delivery from Ashbourne',
+      'Logo on chest, back and sleeve — print or embroidery',
+      'Site teams, warehouses, roadworks, festivals and event security',
+      'Same price S–3XL, minimum 5 pieces, 8% off each quantity step',
+      '3–5 day turnaround, Ireland-wide delivery from Ashbourne, Co. Meath',
     ],
     detailedDescription:
-      'Hi-viz workwear for site teams, events and roadside crews. DMS premium tabards, six colours. From €12 for a single placement, extra areas +€1.50, 8% off each qty step from 5 pieces.',
+      'Order custom hi-viz workwear in Ireland for construction sites, warehouses, road crews, festivals and event security. We print or embroider your logo on DMS hi-vis tabards — chest, back or sleeve — from €12 for a single placement. Extra print areas +€1.50. Same price S–3XL, from 5 pieces, with 8% off each quantity step. EN ISO 20471 Class 2. Proofs before print. Delivery to Dublin, Cork, Galway and every county from Ashbourne.',
     specifications: [
+      { name: 'Garment', value: 'DMS hi-vis tabard / safety vest' },
       { name: 'Colours', value: 'Yellow, Orange, Pink, Royal Blue, Red, Black' },
       { name: 'Standards', value: 'EN ISO 20471 Class 2 (Class 3 on request)' },
       { name: 'Printing', value: 'Print or embroidery' },
       { name: 'Sizes', value: 'S–3XL — same price' },
-      { name: 'Production time', value: '3–5 business days' },
-      { name: 'Delivery', value: 'Nationwide Ireland from Ashbourne' },
+      { name: 'Minimum order', value: '5 pieces' },
+      { name: 'Production time', value: '3–5 business days after proof' },
+      { name: 'Delivery', value: 'Nationwide Ireland from Ashbourne, Co. Meath' },
     ],
-    images: HOODIE_IMAGES,
-    imageSrc: HOODIE_IMAGES[0],
+    images: HIVIZ_IMAGES,
+    imageAlts: [
+      'Custom hi-viz workwear Ireland — yellow printed safety vest on a construction site',
+      'Custom hi-vis vest Ireland — orange warehouse and logistics workwear with company logo',
+      'Printed pink hi-viz vest Ireland — event crew safety tabard',
+      'Custom hi-viz vest Ireland — royal blue roadworks and traffic management',
+      'Black hi-viz vest Ireland — event security printed safety workwear',
+    ],
+    imageSrc: HIVIZ_IMAGES[0],
     price: 'From €12.00',
     moq: 5,
     leadTime: '3-5 business days',
