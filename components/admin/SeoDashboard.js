@@ -81,40 +81,37 @@ function MiniChart({ data }) {
 
 export default function SeoDashboard() {
   const [data, setData] = useState(null);
+  const [period, setPeriod] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [actionLoading, setActionLoading] = useState(null);
   const [aiPlan, setAiPlan] = useState(null);
-  const [uploadFiles, setUploadFiles] = useState({});
 
-  const fetchAnalysis = useCallback(async () => {
+  const fetchAnalysis = useCallback(async (nextPeriod = period) => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('/api/admin/seo/analyze', { credentials: 'include' });
+      const qs = nextPeriod ? `?period=${encodeURIComponent(nextPeriod)}` : '';
+      const res = await fetch(`/api/admin/seo/analyze${qs}`, { credentials: 'include' });
       const json = await parseApiResponse(res);
-      if (!res.ok) throw new Error(apiErrorMessage(json, 'Failed to load'));
+      if (!res.ok && !json.periods) throw new Error(apiErrorMessage(json, 'Failed to load'));
       setData(json);
+      if (!nextPeriod && json.period) setPeriod(json.period);
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [period]);
 
   useEffect(() => {
     fetchAnalysis();
   }, [fetchAnalysis]);
 
-  const handleUpload = async () => {
-    const files = {};
-    for (const [key, file] of Object.entries(uploadFiles)) {
-      if (file) files[key] = await file.text();
-    }
-    if (Object.keys(files).length === 0) {
-      alert('Select at least one CSV file to upload');
-      return;
-    }
+  const handleUpload = async (file) => {
+    const dataUrl = await readFileAsDataUrl(file);
+    const zip = String(dataUrl).split(',')[1];
+    if (!zip) throw new Error('Could not read that zip');
 
     setActionLoading('upload');
     try {
@@ -122,15 +119,13 @@ export default function SeoDashboard() {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ files }),
+        body: JSON.stringify({ zip }),
       });
       const json = await parseApiResponse(res);
       if (!res.ok) throw new Error(apiErrorMessage(json, 'Upload failed'));
-      alert(`Uploaded ${json.uploaded} files successfully`);
-      setUploadFiles({});
-      fetchAnalysis();
-    } catch (err) {
-      alert(`Upload failed: ${err.message}`);
+      setPeriod(json.period);
+      await fetchAnalysis(json.period);
+      return json;
     } finally {
       setActionLoading(null);
     }
@@ -143,7 +138,7 @@ export default function SeoDashboard() {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({}),
+        body: JSON.stringify({ period: data?.period }),
       });
       const json = await parseApiResponse(res);
       if (!res.ok) throw new Error(apiErrorMessage(json, 'Email failed'));
@@ -163,7 +158,7 @@ export default function SeoDashboard() {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({}),
+        body: JSON.stringify({ period: data?.period }),
       });
       const json = await parseApiResponse(res);
       if (!res.ok) throw new Error(apiErrorMessage(json, 'AI analysis failed'));
@@ -175,7 +170,7 @@ export default function SeoDashboard() {
     }
   };
 
-  if (loading) {
+  if (loading && !data) {
     return (
       <div className="flex items-center justify-center py-20">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600" />
@@ -183,7 +178,7 @@ export default function SeoDashboard() {
     );
   }
 
-  if (error) {
+  if (error && !data) {
     return (
       <div className="space-y-6">
         <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6">
@@ -195,20 +190,48 @@ export default function SeoDashboard() {
             </div>
           </div>
         </div>
-        <UploadSection uploadFiles={uploadFiles} setUploadFiles={setUploadFiles} onUpload={handleUpload} loading={actionLoading === 'upload'} />
+        <ZipUpload onUpload={handleUpload} loading={actionLoading === 'upload'} />
       </div>
     );
   }
 
-  const { analysis, recommendations, recSummary } = data;
+  const analysis = data?.analysis;
+  const recommendations = data?.recommendations || [];
+  const recSummary = data?.recSummary;
+  const periods = data?.periods || [];
+  const activePeriod = data?.period || period;
 
   return (
     <div className="space-y-6">
+      <PeriodSwitcher
+        periods={periods}
+        activePeriod={activePeriod}
+        onSelect={setPeriod}
+      />
+      <ZipUpload onUpload={handleUpload} loading={actionLoading === 'upload'} />
+
+      {error && (
+        <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-sm text-amber-900">
+          {error}
+        </div>
+      )}
+
+      {data?.available === false && (
+        <div className="bg-white rounded-2xl border border-slate-200 p-6 text-sm text-slate-600">
+          No {periods.find((item) => item.id === activePeriod)?.label || 'export'} uploaded yet.
+          Export that date range from Search Console and upload the zip above.
+        </div>
+      )}
+
+      {analysis && (
+      <>
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <p className="text-slate-500 text-sm">
-            {analysis.meta.dateRange} · {analysis.meta.searchType} search
+            {analysis.meta.periodLabel || analysis.meta.dateRange}
+            {formatChartRange(analysis.meta) && ` · ${formatChartRange(analysis.meta)}`}
+            {' · '}{analysis.meta.searchType} search
             {analysis.meta.importedAt && (
               <> · Updated {new Date(analysis.meta.importedAt).toLocaleDateString('en-GB')}</>
             )}
@@ -313,9 +336,9 @@ export default function SeoDashboard() {
           <FiTarget className="text-green-600" />
           <h3 className="font-semibold text-slate-900">SEO Action Items</h3>
           <div className="ml-auto flex gap-2 text-xs">
-            <span className="px-2 py-1 bg-red-100 text-red-700 rounded-full">{recSummary.critical} critical</span>
-            <span className="px-2 py-1 bg-orange-100 text-orange-700 rounded-full">{recSummary.high} high</span>
-            <span className="px-2 py-1 bg-slate-100 text-slate-600 rounded-full">{recSummary.contentGaps} gaps</span>
+            <span className="px-2 py-1 bg-red-100 text-red-700 rounded-full">{recSummary?.critical || 0} critical</span>
+            <span className="px-2 py-1 bg-orange-100 text-orange-700 rounded-full">{recSummary?.high || 0} high</span>
+            <span className="px-2 py-1 bg-slate-100 text-slate-600 rounded-full">{recSummary?.contentGaps || 0} gaps</span>
           </div>
         </div>
         <div className="divide-y divide-slate-100">
@@ -391,6 +414,17 @@ export default function SeoDashboard() {
                 </div>
               ))}
             </div>
+            {analysis.searchAppearance?.length > 0 && (
+              <div>
+                <p className="text-xs text-slate-500 uppercase mb-2">Search appearance</p>
+                {analysis.searchAppearance.map((row) => (
+                  <div key={row.name} className="flex justify-between text-sm py-1">
+                    <span>{row.name}</span>
+                    <span className="font-medium">{row.impressions.toLocaleString()} imp ({row.ctr}% CTR)</span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -404,54 +438,122 @@ export default function SeoDashboard() {
           <div className="prose prose-sm max-w-none text-slate-700 whitespace-pre-wrap">{aiPlan}</div>
         </div>
       )}
-
-      {/* Upload new data */}
-      <UploadSection uploadFiles={uploadFiles} setUploadFiles={setUploadFiles} onUpload={handleUpload} loading={actionLoading === 'upload'} />
+      </>
+      )}
     </div>
   );
 }
 
-function UploadSection({ uploadFiles, setUploadFiles, onUpload, loading }) {
-  const fileTypes = [
-    { key: 'queries', label: 'Queries.csv', required: true },
-    { key: 'pages', label: 'Pages.csv' },
-    { key: 'chart', label: 'Chart.csv' },
-    { key: 'countries', label: 'Countries.csv' },
-    { key: 'devices', label: 'Devices.csv' },
-    { key: 'filters', label: 'Filters.csv' },
-  ];
+function formatChartRange(meta) {
+  if (!meta?.startDate) return '';
+  const format = (value) => new Date(`${value}T00:00:00`).toLocaleDateString('en-IE', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
+  if (!meta.endDate || meta.endDate === meta.startDate) return format(meta.startDate);
+  return `${format(meta.startDate)} – ${format(meta.endDate)}`;
+}
+
+function readFileAsDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(reader.error || new Error('Could not read that file'));
+    reader.readAsDataURL(file);
+  });
+}
+
+function PeriodSwitcher({ periods, activePeriod, onSelect }) {
+  const tabs = [
+    { id: '24h', label: '24 hours' },
+    { id: '7d', label: '7 days' },
+    { id: '28d', label: '28 days' },
+    { id: '3m', label: '3 months' },
+  ].filter((tab) => tab.id !== '3m' || periods.some((period) => period.id === '3m' && period.available));
+
+  return (
+    <div className="flex flex-wrap gap-2">
+      {tabs.map((tab) => {
+        const stored = periods.find((period) => period.id === tab.id);
+        const active = activePeriod === tab.id;
+        return (
+          <button
+            key={tab.id}
+            type="button"
+            onClick={() => onSelect(tab.id)}
+            className={`px-3 py-1.5 rounded-lg text-sm font-medium border transition-colors ${
+              active
+                ? 'bg-blue-600 text-white border-blue-600'
+                : 'bg-white text-slate-600 border-slate-200 hover:border-blue-300'
+            }`}
+          >
+            {tab.label}
+            {stored?.available ? '' : ' · not uploaded'}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function ZipUpload({ onUpload, loading }) {
+  const [file, setFile] = useState(null);
+  const [notice, setNotice] = useState(null);
+  const [uploadError, setUploadError] = useState(null);
+
+  const handleSubmit = async () => {
+    if (!file) {
+      setUploadError('Choose the Search Console zip first');
+      return;
+    }
+    setUploadError(null);
+    setNotice(null);
+    try {
+      const result = await onUpload(file);
+      const range = result.startDate
+        ? `${result.startDate} to ${result.endDate || result.startDate}`
+        : result.dateRange;
+      setNotice(`Imported ${result.label}${range ? ` (${range})` : ''}. Analysis updated.`);
+      setFile(null);
+    } catch (err) {
+      setUploadError(err.message);
+    }
+  };
 
   return (
     <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
-      <div className="flex items-center gap-2 mb-4">
+      <div className="flex items-center gap-2 mb-2">
         <FiUpload className="text-slate-500" />
-        <h3 className="font-semibold text-slate-900">Import New Search Console Export</h3>
+        <h3 className="font-semibold text-slate-900">Upload Search Console zip</h3>
       </div>
       <p className="text-sm text-slate-500 mb-4">
-        Export from Google Search Console (Performance → Export) and upload the CSV files to refresh analysis.
+        In Google Search Console, open Performance and choose Export. Upload that zip.
+        A 24-hour, 7-day, and 28-day export are kept separately, and the date filter inside the zip decides which one it is.
       </p>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-4">
-        {fileTypes.map(({ key, label, required }) => (
-          <label key={key} className="flex items-center gap-2 text-sm">
-            <input
-              type="file"
-              accept=".csv"
-              onChange={(e) => setUploadFiles((prev) => ({ ...prev, [key]: e.target.files[0] }))}
-              className="text-xs"
-            />
-            <span className={uploadFiles[key] ? 'text-green-600 font-medium' : 'text-slate-600'}>
-              {label}{required ? ' *' : ''}
-            </span>
-          </label>
-        ))}
+      <div className="flex flex-wrap items-center gap-3">
+        <input
+          type="file"
+          accept=".zip,application/zip"
+          onChange={(event) => {
+            setFile(event.target.files?.[0] || null);
+            setNotice(null);
+            setUploadError(null);
+          }}
+          className="text-sm"
+        />
+        <button
+          type="button"
+          onClick={handleSubmit}
+          disabled={loading || !file}
+          className="px-4 py-2 bg-slate-900 text-white rounded-xl text-sm font-medium hover:bg-slate-800 disabled:opacity-50"
+        >
+          {loading ? 'Uploading…' : 'Upload and analyze'}
+        </button>
       </div>
-      <button
-        onClick={onUpload}
-        disabled={loading}
-        className="px-4 py-2 bg-slate-900 text-white rounded-xl text-sm font-medium hover:bg-slate-800 disabled:opacity-50"
-      >
-        {loading ? 'Uploading…' : 'Upload & Re-analyze'}
-      </button>
+      {file && <p className="text-xs text-slate-500 mt-2">{file.name}</p>}
+      {notice && <p className="text-sm text-green-700 mt-3">{notice}</p>}
+      {uploadError && <p className="text-sm text-red-600 mt-3">{uploadError}</p>}
     </div>
   );
 }

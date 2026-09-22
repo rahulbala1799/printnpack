@@ -1,9 +1,5 @@
 import { withAuth } from '../../../../lib/withAuth.js';
-import {
-  loadSearchConsoleData,
-  analyzeSearchConsole,
-  hasSearchConsoleData,
-} from '../../../../lib/seo/search-console.js';
+import { analyzeSearchConsole, loadPeriodBundle } from '../../../../lib/seo/search-console.js';
 import {
   generateRecommendations,
   summarizeRecommendations,
@@ -14,21 +10,37 @@ async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  if (!hasSearchConsoleData()) {
-    return res.status(404).json({
-      error: 'No Search Console data found',
-      hint: 'Upload GSC CSV exports via the SEO dashboard or run scripts/import-search-console.js',
-    });
-  }
+  const requested = typeof req.query.period === 'string' ? req.query.period : '';
 
   try {
-    const data = loadSearchConsoleData();
-    const analysis = analyzeSearchConsole(data);
+    const bundle = loadPeriodBundle(requested || null);
+
+    if (!bundle.period || !bundle.data) {
+      if (!bundle.periods.some((period) => period.available)) {
+        return res.status(404).json({
+          error: 'No Search Console data found',
+          hint: 'Upload a Performance on Search zip from Google Search Console.',
+          periods: bundle.periods,
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        available: false,
+        period: bundle.period,
+        periods: bundle.periods,
+      });
+    }
+
+    const analysis = analyzeSearchConsole(bundle.data);
     const recommendations = generateRecommendations(analysis);
     const recSummary = summarizeRecommendations(recommendations);
 
     return res.status(200).json({
       success: true,
+      available: true,
+      period: bundle.period,
+      periods: bundle.periods,
       analysis,
       recommendations,
       recSummary,

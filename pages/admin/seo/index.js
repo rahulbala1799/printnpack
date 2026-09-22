@@ -41,7 +41,7 @@ export default function AdminSeoPage() {
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-slate-900">SEO Automation</h2>
         <p className="text-slate-500 mt-1">
-          Analyze Search Console data to find heavily searched terms and prioritize SEO actions.
+          Upload a Search Console performance zip. 24-hour, 7-day, and 28-day exports stay separate and are analyzed on their own.
         </p>
       </div>
 

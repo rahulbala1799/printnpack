@@ -1,18 +1,30 @@
 import '../styles/globals.css';
 import Head from 'next/head';
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { QuoteCartProvider } from '../lib/quote-cart-context';
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+
   useEffect(() => {
-    // Initialize GTM
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       'gtm.start': new Date().getTime(),
       event: 'gtm.js'
     });
   }, []);
+
+  useEffect(() => {
+    const trackRoute = () => {
+      if (window.printNpackAnalytics && window.printNpackAnalytics.pageview) {
+        window.printNpackAnalytics.pageview();
+      }
+    };
+    router.events.on('routeChangeComplete', trackRoute);
+    return () => router.events.off('routeChangeComplete', trackRoute);
+  }, [router.events]);
 
   return (
     <>
@@ -27,7 +39,7 @@ function MyApp({ Component, pageProps }) {
 
       {/* Analytics Script */}
       <Script
-        src="/analytics.js"
+        src="/analytics.js?v=2"
         strategy="afterInteractive"
       />
 

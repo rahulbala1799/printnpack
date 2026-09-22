@@ -258,6 +258,8 @@ export default function PageViewDashboard() {
             />
           </div>
 
+          <WeeklySeo data={data?.seoWeekly} />
+
           <div className="grid lg:grid-cols-2 gap-6">
             <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
               <h3 className="font-semibold text-slate-900 mb-1 flex items-center gap-2">
@@ -512,7 +514,15 @@ export default function PageViewDashboard() {
                         )}
                       </td>
                       <td className="py-2 pr-4 text-slate-600">{row.exit_page}</td>
-                      <td className="py-2 pr-4 text-slate-700">{row.pages_visited}</td>
+                      <td className="py-2 pr-4 text-slate-700">
+                        {row.pages_visited}
+                        {row.page_path_list && (
+                          <p className="text-xs text-slate-400 max-w-xs">{row.page_path_list}</p>
+                        )}
+                        {row.entry_search_term && (
+                          <p className="text-xs text-slate-400">Search: {row.entry_search_term}</p>
+                        )}
+                      </td>
                       <td className="py-2 text-slate-600">{formatDuration(row.total_time_seconds)}</td>
                     </tr>
                   ))}
@@ -584,6 +594,73 @@ export default function PageViewDashboard() {
             </div>
           </div>
         </>
+      )}
+    </div>
+  );
+}
+
+const SEO_ACTIONS = {
+  fix_page: 'Fix the page',
+  rewrite_snippet: 'Rewrite the snippet',
+  expand: 'Expand',
+  watch: 'Watch',
+};
+
+function WeeklySeo({ data }) {
+  const pages = data?.landingPages || [];
+  const searches = data?.zeroResultSearches || [];
+  if (!pages.length && !searches.length) return null;
+
+  return (
+    <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm overflow-hidden">
+      <h3 className="font-semibold text-slate-900 mb-1">This week from Google and Bing</h3>
+      <p className="text-xs text-slate-500 mb-4">
+        Landing pages from the last 7 days, with Search Console numbers when a 7-day export is uploaded.
+      </p>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="text-left text-slate-500 border-b border-slate-100">
+              <th className="pb-2 pr-3 font-medium">Landing page</th>
+              <th className="pb-2 pr-3 font-medium text-right">Sessions</th>
+              <th className="pb-2 pr-3 font-medium text-right">Engaged</th>
+              <th className="pb-2 pr-3 font-medium text-right">Quotes</th>
+              <th className="pb-2 pr-3 font-medium text-right">Calls</th>
+              <th className="pb-2 pr-3 font-medium text-right">Impr.</th>
+              <th className="pb-2 font-medium">Next step</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pages.map((row) => (
+              <tr key={row.entry_page} className="border-b border-slate-50">
+                <td className="py-2 pr-3 font-medium text-slate-800">{row.entry_page}</td>
+                <td className="py-2 pr-3 text-right">
+                  {row.sessions}
+                  <span className="text-slate-400"> / {row.sessions_prev} prev</span>
+                </td>
+                <td className="py-2 pr-3 text-right">{row.engaged}</td>
+                <td className="py-2 pr-3 text-right">{row.quotes}</td>
+                <td className="py-2 pr-3 text-right">{row.phone_clicks}</td>
+                <td className="py-2 pr-3 text-right">{row.gsc_impressions || '—'}</td>
+                <td className="py-2 text-slate-700">{SEO_ACTIONS[row.action] || row.action}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {searches.length > 0 && (
+        <div className="mt-4 pt-4 border-t border-slate-100">
+          <p className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-2">
+            On-site searches with no product match
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {searches.map((row) => (
+              <span key={row.search_term} className="px-2 py-1 rounded-full bg-amber-50 text-amber-800 text-xs">
+                {row.search_term} · {row.searches}
+              </span>
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );

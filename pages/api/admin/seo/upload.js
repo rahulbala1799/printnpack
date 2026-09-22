@@ -1,7 +1,16 @@
+import { withAuth } from '../../../../lib/withAuth.js';
+import { getGscDataDir, savePerformanceExport } from '../../../../lib/seo/search-console.js';
+import { describePerformanceExport, extractGscZip } from '../../../../lib/seo/gsc-zip.js';
 import fs from 'fs';
 import path from 'path';
-import { withAuth } from '../../../../lib/withAuth.js';
-import { getGscDataDir } from '../../../../lib/seo/search-console.js';
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '8mb',
+    },
+  },
+};
 
 const ALLOWED_PREFIXES = {
   queries: 'Queries',
@@ -18,14 +27,38 @@ async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { files } = req.body || {};
-  if (!files || typeof files !== 'object') {
-    return res.status(400).json({
-      error: 'Invalid payload. Expected { files: { queries: "csv content", ... } }',
-    });
-  }
-
   try {
+    if (req.body?.zip) {
+      const buffer = Buffer.from(String(req.body.zip), 'base64');
+      const files = extractGscZip(buffer);
+      const described = describePerformanceExport(files);
+      const { saved, meta } = savePerformanceExport(files, described.period, {
+        searchType: described.searchType,
+        startDate: described.startDate,
+        endDate: described.endDate,
+        dayCount: described.dayCount,
+      });
+
+      return res.status(200).json({
+        success: true,
+        uploaded: saved,
+        period: meta.id,
+        label: meta.label,
+        dateRange: meta.filterValue,
+        startDate: meta.startDate,
+        endDate: meta.endDate,
+        searchType: meta.searchType,
+        importedAt: meta.importedAt,
+      });
+    }
+
+    const { files } = req.body || {};
+    if (!files || typeof files !== 'object') {
+      return res.status(400).json({
+        error: 'Upload the Search Console zip export',
+      });
+    }
+
     const dest = getGscDataDir();
     fs.mkdirSync(dest, { recursive: true });
 
@@ -33,9 +66,7 @@ async function handler(req, res) {
     for (const [key, content] of Object.entries(files)) {
       const prefix = ALLOWED_PREFIXES[key];
       if (!prefix || typeof content !== 'string') continue;
-
-      const destPath = path.join(dest, `${prefix}.csv`);
-      fs.writeFileSync(destPath, content.trim() + '\n', 'utf8');
+      fs.writeFileSync(path.join(dest, `${prefix}.csv`), `${content.trim()}\n`, 'utf8');
       uploaded += 1;
     }
 
@@ -47,7 +78,6 @@ async function handler(req, res) {
     }
 
     fs.writeFileSync(path.join(dest, '.imported'), new Date().toISOString());
-
     return res.status(200).json({
       success: true,
       uploaded,
@@ -55,8 +85,10 @@ async function handler(req, res) {
     });
   } catch (error) {
     console.error('SEO upload error:', error);
-    return res.status(500).json({
-      error: 'Failed to save Search Console data',
+    const message = error.message || 'Failed to save Search Console data';
+    const clientError = /zip|Queries\.csv|Filters\.csv|valid zip/i.test(message);
+    return res.status(clientError ? 400 : 500).json({
+      error: clientError ? message : 'Failed to save Search Console data',
       details: process.env.NODE_ENV === 'development' ? error.message : undefined,
     });
   }

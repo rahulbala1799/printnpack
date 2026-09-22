@@ -1,9 +1,5 @@
 import { withAuth } from '../../../../lib/withAuth.js';
-import {
-  loadSearchConsoleData,
-  analyzeSearchConsole,
-  hasSearchConsoleData,
-} from '../../../../lib/seo/search-console.js';
+import { analyzeSearchConsole, loadPeriodBundle } from '../../../../lib/seo/search-console.js';
 import { generateRecommendations } from '../../../../lib/seo/recommendations.js';
 import { formatSeoReportForEmail } from '../../../../lib/seo/email-report.js';
 import nodemailer from 'nodemailer';
@@ -23,14 +19,15 @@ async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  if (!hasSearchConsoleData()) {
-    return res.status(404).json({ error: 'No Search Console data found' });
+  const { recipientEmail, period } = req.body || {};
+  const bundle = loadPeriodBundle(period || null);
+
+  if (!bundle.data) {
+    return res.status(404).json({ error: 'No Search Console data found for that period' });
   }
 
-  const { recipientEmail } = req.body || {};
-
   try {
-    const data = loadSearchConsoleData();
+    const data = bundle.data;
     const analysis = analyzeSearchConsole(data);
     const recommendations = generateRecommendations(analysis);
     const html = formatSeoReportForEmail(analysis, recommendations);

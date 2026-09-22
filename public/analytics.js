@@ -11,38 +11,27 @@
   // Analytics state
   let sessionId = null;
   let pageStartTime = Date.now();
-  let isTracking = false;
-  let pageLoadTime = 0;
+  let currentVisitId = null;
+  let lastTrackedPath = '';
+  let lastTrackedAt = 0;
   
   // Initialize analytics
   function initAnalytics() {
-    if (isTracking) return;
-    
     try {
-      // Generate or retrieve session ID
       sessionId = getSessionId();
-      
-      // Track page load performance
-      trackPageLoad();
-      
-      // Track page visit
+      if (shouldSkip(window.location.pathname)) return;
       trackPageVisit();
-      
-      // Set up page visibility tracking
       setupVisibilityTracking();
-      
-      // Set up beforeunload tracking
       setupBeforeUnloadTracking();
-
-      // Track all tel: link clicks site-wide
       trackPhoneClicks();
-      
-      isTracking = true;
-      console.log('📊 Analytics tracking initialized');
-      
+      watchQuoteSubmits();
     } catch (error) {
       console.error('Analytics initialization error:', error);
     }
+  }
+
+  function shouldSkip(pathname) {
+    return pathname.startsWith('/admin') || pathname.startsWith('/staff') || pathname === '/login';
   }
   
   // Generate unique session ID
@@ -65,40 +54,37 @@
     return id;
   }
   
-  // Track page load performance
-  function trackPageLoad() {
-    if ('performance' in window) {
-      window.addEventListener('load', () => {
-        setTimeout(() => {
-          const perfData = performance.getEntriesByType('navigation')[0];
-          if (perfData) {
-            pageLoadTime = Math.round(perfData.loadEventEnd - perfData.loadEventStart);
-          }
-        }, 0);
-      });
-    }
-  }
-  
-  // Track page visit
-  function trackPageVisit() {
+  function buildPayload(eventType, extra) {
     const utm = getUtmParams();
-    const trackingData = {
+    const params = new URLSearchParams(window.location.search);
+    return Object.assign({
+      eventType: eventType,
       pageUrl: window.location.href,
       pageTitle: document.title || 'Unknown Page',
       referrer: document.referrer || '',
       userAgent: navigator.userAgent,
-      ipAddress: '127.0.0.1', // Will be replaced by server
       sessionId: sessionId,
-      loadTime: pageLoadTime,
-      timeOnPage: 0,
-      isBounce: true,
+      timeOnPage: Math.round((Date.now() - pageStartTime) / 1000),
+      isBounce: eventType === 'pageview',
       utmSource: utm.utmSource,
       utmMedium: utm.utmMedium,
       utmCampaign: utm.utmCampaign,
-    };
-    
-    // Send tracking data
-    sendAnalyticsData(trackingData);
+      searchTerm: params.get('q') || '',
+    }, extra || {});
+  }
+
+  function trackPageVisit() {
+    const path = window.location.pathname;
+    if (shouldSkip(path)) return;
+    if (path === lastTrackedPath && Date.now() - lastTrackedAt < 4000) return;
+    lastTrackedPath = path;
+    lastTrackedAt = Date.now();
+    pageStartTime = Date.now();
+    currentVisitId = null;
+
+    sendAnalyticsData(buildPayload('pageview')).then((json) => {
+      if (json && json.visitId) currentVisitId = json.visitId;
+    });
   }
   
   function getUtmParams() {
@@ -134,32 +120,15 @@
   
   // Track beforeunload (page exit)
   function setupBeforeUnloadTracking() {
-    window.addEventListener('beforeunload', () => {
-      const timeOnPage = Math.round((Date.now() - pageStartTime) / 1000);
-      
-      // Send final tracking data (navigator.sendBeacon for reliability)
-      const utm = getUtmParams();
-      const finalData = {
-        pageUrl: window.location.href,
-        pageTitle: document.title || 'Unknown Page',
-        referrer: document.referrer || '',
-        userAgent: navigator.userAgent,
-        ipAddress: '127.0.0.1',
-        sessionId: sessionId,
-        loadTime: pageLoadTime,
-        timeOnPage: timeOnPage,
-        isBounce: false,
-        utmSource: utm.utmSource,
-        utmMedium: utm.utmMedium,
-        utmCampaign: utm.utmCampaign,
-      };
-      
-      // Use sendBeacon for reliable data transmission on page exit
+    const sendEngagement = () => {
+      if (!sessionId || shouldSkip(window.location.pathname)) return;
+      const payload = buildPayload('engagement', { visitId: currentVisitId });
       if (navigator.sendBeacon) {
-        const blob = new Blob([JSON.stringify(finalData)], { type: 'application/json' });
+        const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
         navigator.sendBeacon(ANALYTICS_ENDPOINT, blob);
       }
-    });
+    };
+    window.addEventListener('pagehide', sendEngagement);
   }
   
   // Send analytics data to server
@@ -167,41 +136,22 @@
     try {
       const response = await fetch(ANALYTICS_ENDPOINT, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
       });
-      
-      if (response.ok) {
-        console.log('📊 Analytics data sent successfully');
-      } else {
-        console.warn('⚠️ Analytics data send failed:', response.status);
-      }
+      if (!response.ok) return null;
+      return response.json();
     } catch (error) {
-      console.error('❌ Analytics data send error:', error);
+      return null;
     }
   }
   
   // Track custom events
   function trackEvent(eventName, eventData = {}, options = {}) {
-    const utm = getUtmParams();
-    const eventTrackingData = {
-      pageUrl: window.location.href,
-      pageTitle: document.title || 'Unknown Page',
-      referrer: document.referrer || '',
-      userAgent: navigator.userAgent,
-      ipAddress: '127.0.0.1',
-      sessionId: sessionId,
-      loadTime: pageLoadTime,
-      timeOnPage: Math.round((Date.now() - pageStartTime) / 1000),
-      isBounce: false,
-      utmSource: utm.utmSource,
-      utmMedium: utm.utmMedium,
-      utmCampaign: utm.utmCampaign,
+    const eventTrackingData = buildPayload(eventName === 'quote_submit' ? 'quote_submit' : 'event', {
       eventName: eventName,
-      eventData: eventData
-    };
+      eventData: eventData,
+    });
 
     if (options.useBeacon && navigator.sendBeacon) {
       const blob = new Blob([JSON.stringify(eventTrackingData)], { type: 'application/json' });
@@ -237,101 +187,36 @@
     }, true);
   }
   
-  // Track form submissions
-  function trackFormSubmission(formSelector, formData = {}) {
-    const forms = document.querySelectorAll(formSelector);
-    forms.forEach(form => {
-      form.addEventListener('submit', () => {
-        trackEvent('form_submit', {
-          formId: form.id || 'unknown',
-          formAction: form.action || 'unknown',
-          ...formData
-        });
-      });
-    });
-  }
-  
-  // Track button clicks
-  function trackButtonClicks(buttonSelector, buttonData = {}) {
-    const buttons = document.querySelectorAll(buttonSelector);
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        trackEvent('button_click', {
-          buttonId: button.id || 'unknown',
-          buttonText: button.textContent?.trim() || 'unknown',
-          buttonClass: button.className || 'unknown',
-          ...buttonData
-        });
-      });
-    });
-  }
-  
-  // Track external links
-  function trackExternalLinks() {
-    const links = document.querySelectorAll('a[href^="http"]:not([href*="' + window.location.hostname + '"])');
-    links.forEach(link => {
-      link.addEventListener('click', () => {
-        trackEvent('external_link_click', {
-          linkUrl: link.href,
-          linkText: link.textContent?.trim() || 'unknown'
-        });
-      });
-    });
-  }
-  
-  // Track scroll depth
-  function trackScrollDepth() {
-    let maxScrollDepth = 0;
-    let scrollTracked = false;
-    
-    window.addEventListener('scroll', () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = Math.round((scrollTop / docHeight) * 100);
-      
-      if (scrollPercent > maxScrollDepth) {
-        maxScrollDepth = scrollPercent;
-        
-        // Track at 25%, 50%, 75%, and 100%
-        if (!scrollTracked && (scrollPercent >= 25)) {
-          trackEvent('scroll_depth', { depth: scrollPercent });
-          scrollTracked = true;
-        }
+  function watchQuoteSubmits() {
+    const originalFetch = window.fetch;
+    if (!originalFetch || window.__printnpackQuoteWatch) return;
+    window.__printnpackQuoteWatch = true;
+    window.fetch = function () {
+      const args = arguments;
+      const input = args[0];
+      const init = args[1] || {};
+      const url = typeof input === 'string' ? input : (input && input.url) || '';
+      const method = (init.method || (input && input.method) || 'GET').toUpperCase();
+      const response = originalFetch.apply(this, args);
+      if (method === 'POST' && String(url).indexOf('/api/contact') !== -1) {
+        response.then((res) => {
+          if (res && res.ok) trackEvent('quote_submit', {}, { useBeacon: true });
+        }).catch(() => {});
       }
-    });
+      return response;
+    };
   }
-  
-  // Public API
+
   window.printNpackAnalytics = {
     init: initAnalytics,
+    pageview: trackPageVisit,
     trackEvent: trackEvent,
-    trackFormSubmission: trackFormSubmission,
-    trackButtonClicks: trackButtonClicks,
-    trackExternalLinks: trackExternalLinks,
-    trackScrollDepth: trackScrollDepth,
     trackPhoneClicks: trackPhoneClicks,
   };
-  
-  // Auto-initialize when DOM is ready
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initAnalytics);
   } else {
     initAnalytics();
   }
-  
-  // Auto-initialize additional tracking
-  document.addEventListener('DOMContentLoaded', () => {
-    // Track form submissions
-    window.printNpackAnalytics.trackFormSubmission('form');
-    
-    // Track button clicks
-    window.printNpackAnalytics.trackButtonClicks('button, .btn, [role="button"]');
-    
-    // Track external links
-    window.printNpackAnalytics.trackExternalLinks();
-    
-    // Track scroll depth
-    window.printNpackAnalytics.trackScrollDepth();
-  });
-  
 })();

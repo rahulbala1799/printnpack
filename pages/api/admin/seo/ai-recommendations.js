@@ -1,10 +1,6 @@
 import { generateText } from 'ai';
 import { withAuth } from '../../../../lib/withAuth.js';
-import {
-  loadSearchConsoleData,
-  analyzeSearchConsole,
-  hasSearchConsoleData,
-} from '../../../../lib/seo/search-console.js';
+import { analyzeSearchConsole, loadPeriodBundle } from '../../../../lib/seo/search-console.js';
 import { generateRecommendations } from '../../../../lib/seo/recommendations.js';
 import { resolveAiModel, getAiConfigError, isAiConfigured } from '../../../../lib/ai/gateway.js';
 
@@ -21,12 +17,13 @@ async function handler(req, res) {
     return jsonError(res, 503, getAiConfigError());
   }
 
-  if (!hasSearchConsoleData()) {
-    return jsonError(res, 404, 'No Search Console data found');
+  const bundle = loadPeriodBundle(req.body?.period || null);
+  if (!bundle.data) {
+    return jsonError(res, 404, 'No Search Console data found for that period');
   }
 
   try {
-    const data = loadSearchConsoleData();
+    const data = bundle.data;
     const analysis = analyzeSearchConsole(data);
     const recommendations = generateRecommendations(analysis);
 
