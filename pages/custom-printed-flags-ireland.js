@@ -138,9 +138,9 @@ const productLd = buildProductLd({
 const webPageLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Custom Printed Flags Ireland | Personalised Flags for Clubs & Businesses',
+  name: 'Custom Flags Ireland | Personalised Flags for Clubs & Businesses',
   description:
-    'Custom printed flags Ireland — vibrant full-colour flags for GAA clubs, businesses, schools & events. Sublimation printing, order from 1 flag, Dublin & nationwide delivery.',
+    'Custom flags Ireland — custom printed and personalised flags for GAA clubs, businesses, schools and events. Sublimation printing, order from 1 flag, Dublin and nationwide delivery.',
   url: PAGE_URL,
   inLanguage: 'en-IE',
   isPartOf: { '@type': 'WebSite', name: 'PrintNPack Ireland', url: SITE_URL },
@@ -149,9 +149,9 @@ const webPageLd = {
 };
 
 export default function CustomPrintedFlagsIreland() {
-  const title = 'Custom Printed Flags Ireland | Personalised Flags for Clubs & Businesses';
+  const title = 'Custom Flags Ireland | Personalised Flags for Clubs & Businesses';
   const description =
-    'Custom printed flags Ireland — vibrant full-colour flags for GAA clubs, businesses, schools & events. Sublimation printing, order from 1 flag, Dublin & nationwide delivery.';
+    'Custom flags Ireland — custom printed and personalised flags for GAA clubs, businesses, schools and events. Sublimation printing, order from 1 flag, Dublin and nationwide delivery.';
 
   return (
     <Layout>
@@ -223,7 +223,7 @@ export default function CustomPrintedFlagsIreland() {
                 Wide Format · Order from 1 Flag
               </p>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-5">
-                Custom Printed Flags Ireland — Vibrant Full-Colour Flags for Clubs, Businesses &amp; Events
+                Custom Flags Ireland — Custom Printed Flags for Clubs, Businesses &amp; Events
               </h1>
               <p className="text-lg text-slate-300 mb-4 leading-relaxed">
                 Make your business, club or event stand out with high-quality{' '}
