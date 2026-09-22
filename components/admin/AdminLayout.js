@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import {
   FiGrid, FiPackage, FiMail, FiSettings, FiLogOut,
-  FiMenu, FiX, FiChevronRight, FiFileText, FiUsers, FiUserPlus, FiFileMinus, FiTrendingUp, FiPhone, FiEye,
+  FiMenu, FiX, FiChevronRight, FiFileText, FiUsers, FiUserPlus, FiFileMinus, FiTrendingUp, FiPhone, FiEye, FiFilter,
 } from 'react-icons/fi';
 
 const navItems = [
@@ -15,6 +15,7 @@ const navItems = [
   { href: '/admin/plain-products', label: 'Plain Packaging', icon: FiPackage },
   { href: '/admin/seo',          label: 'SEO Automation',  icon: FiTrendingUp },
   { href: '/admin/page-views',   label: 'Page Views',      icon: FiEye },
+  { href: '/admin/funnels',      label: 'Forms & exits',   icon: FiFilter },
   { href: '/admin/phone-clicks', label: 'Phone Clicks',    icon: FiPhone },
   { href: '/admin/blog',          label: 'Blog Posts',       icon: FiFileText },
   { href: '/admin/email-config',  label: 'Email',           icon: FiMail },

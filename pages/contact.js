@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Layout from '../components/layout/Layout';
+import { trackFunnel } from '../lib/track-funnel';
 import Head from 'next/head';
 import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock, FaWhatsapp, FaComment, FaArrowRight, FaHeadset, FaPaperPlane } from 'react-icons/fa';
 import Link from 'next/link';
@@ -58,6 +59,11 @@ const faqLd = {
 const ContactPage = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const startedRef = useRef(false);
+
+  useEffect(() => {
+    trackFunnel('contact', 'open');
+  }, []);
 
   // Form validation schema using Yup
   const contactSchema = Yup.object().shape({
@@ -94,6 +100,7 @@ const ContactPage = () => {
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       try {
         setErrorMessage('');
+        trackFunnel('contact', 'send');
         const response = await fetch('/api/contact', {
           method: 'POST',
           headers: {
@@ -110,8 +117,7 @@ const ContactPage = () => {
 
         // Show success message
         setFormSubmitted(true);
-        
-        // Track conversion
+        trackFunnel('contact', 'success');
         trackConversion();
         
         // Reset form
@@ -129,6 +135,14 @@ const ContactPage = () => {
       }
     },
   });
+
+  const markStarted = (event) => {
+    if (!startedRef.current) {
+      startedRef.current = true;
+      trackFunnel('contact', 'start');
+    }
+    formik.handleChange(event);
+  };
 
   return (
     <Layout>
@@ -352,7 +366,7 @@ const ContactPage = () => {
                           id="name"
                           name="name"
                           value={formik.values.name}
-                          onChange={formik.handleChange}
+                          onChange={markStarted}
                           onBlur={formik.handleBlur}
                           className={`w-full px-4 py-3 rounded-lg border ${
                             formik.touched.name && formik.errors.name 
@@ -375,7 +389,7 @@ const ContactPage = () => {
                           id="email"
                           name="email"
                           value={formik.values.email}
-                          onChange={formik.handleChange}
+                          onChange={markStarted}
                           onBlur={formik.handleBlur}
                           className={`w-full px-4 py-3 rounded-lg border ${
                             formik.touched.email && formik.errors.email 
@@ -399,7 +413,7 @@ const ContactPage = () => {
                         id="phone"
                         name="phone"
                         value={formik.values.phone}
-                        onChange={formik.handleChange}
+                        onChange={markStarted}
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 transition-all duration-200"
                         placeholder="+353 87 123 4567"
                       />
@@ -411,7 +425,7 @@ const ContactPage = () => {
                         id="productInterest"
                         name="productInterest"
                         value={formik.values.productInterest}
-                        onChange={formik.handleChange}
+                        onChange={markStarted}
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 transition-all duration-200"
                       >
                         <option value="General Inquiry">General Inquiry</option>
@@ -433,7 +447,7 @@ const ContactPage = () => {
                         id="message"
                         name="message"
                         value={formik.values.message}
-                        onChange={formik.handleChange}
+                        onChange={markStarted}
                         onBlur={formik.handleBlur}
                         rows="5"
                         className={`w-full px-4 py-3 rounded-lg border ${

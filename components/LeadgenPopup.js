@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { trackFunnel } from '../lib/track-funnel';
 
 const LeadgenPopup = () => {
   const router = useRouter();
@@ -11,6 +12,7 @@ const LeadgenPopup = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [showOptional, setShowOptional] = useState(false);
   const modalRef = useRef(null);
+  const startedRef = useRef(false);
 
   // Check if we should show the popup
   useEffect(() => {
@@ -27,6 +29,8 @@ const LeadgenPopup = () => {
 
       const timer = setTimeout(() => {
         setShowPopup(true);
+        startedRef.current = false;
+        trackFunnel('leadgen', 'open');
         localStorage.setItem('leadgen_popup_last_shown', Date.now().toString());
         // Trigger entrance animation
         requestAnimationFrame(() => {
@@ -54,7 +58,19 @@ const LeadgenPopup = () => {
     }
   };
 
+  const markStarted = (event) => {
+    if (!startedRef.current) {
+      startedRef.current = true;
+      trackFunnel('leadgen', 'start');
+    }
+    if (event?.target?.name === 'productsInterested' && event.target.value) {
+      trackFunnel('leadgen', 'product', { productName: event.target.value });
+    }
+    formik.handleChange(event);
+  };
+
   const handleClose = () => {
+    if (!formSubmitted) trackFunnel('leadgen', 'dismiss');
     setIsVisible(false);
     setTimeout(() => {
       setShowPopup(false);
@@ -74,6 +90,7 @@ const LeadgenPopup = () => {
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       try {
         setErrorMessage('');
+        trackFunnel('leadgen', 'send');
         const response = await fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -95,6 +112,7 @@ This is a lead from the website popup form.`,
         if (!response.ok) throw new Error(data.message || 'Something went wrong. Please try again or email us at info@printnpack.ie');
 
         setFormSubmitted(true);
+        trackFunnel('leadgen', 'success');
         trackConversion();
         localStorage.setItem('leadgen_popup_converted', 'true');
         resetForm();
@@ -233,7 +251,7 @@ This is a lead from the website popup form.`,
                       type="text"
                       name="name"
                       value={formik.values.name}
-                      onChange={formik.handleChange}
+                      onChange={markStarted}
                       onBlur={formik.handleBlur}
                       placeholder="John Smith"
                       className={`w-full px-3.5 py-2.5 bg-gray-50 border rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none ${
@@ -257,7 +275,7 @@ This is a lead from the website popup form.`,
                       type="email"
                       name="email"
                       value={formik.values.email}
-                      onChange={formik.handleChange}
+                      onChange={markStarted}
                       onBlur={formik.handleBlur}
                       placeholder="john@company.com"
                       className={`w-full px-3.5 py-2.5 bg-gray-50 border rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none ${
@@ -281,7 +299,7 @@ This is a lead from the website popup form.`,
                     id="leadgen-product"
                     name="productsInterested"
                     value={formik.values.productsInterested}
-                    onChange={formik.handleChange}
+                    onChange={markStarted}
                     className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none appearance-none"
                     style={{
                       backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E")`,
@@ -327,7 +345,7 @@ This is a lead from the website popup form.`,
                         type="tel"
                         name="phone"
                         value={formik.values.phone}
-                        onChange={formik.handleChange}
+                        onChange={markStarted}
                         placeholder="+353 1 234 5678"
                         className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none"
                       />
@@ -341,7 +359,7 @@ This is a lead from the website popup form.`,
                         type="text"
                         name="company"
                         value={formik.values.company}
-                        onChange={formik.handleChange}
+                        onChange={markStarted}
                         placeholder="Company name"
                         className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none"
                       />

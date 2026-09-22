@@ -6,7 +6,7 @@ import AdminLayout from '../../components/admin/AdminLayout';
 import products from '../../data/products';
 import {
   FiPackage, FiGrid, FiMail, FiArrowRight, FiUsers, FiUserPlus,
-  FiTrendingUp, FiAlertCircle, FiCheckCircle, FiPhone, FiEye,
+  FiTrendingUp, FiAlertCircle, FiCheckCircle, FiPhone, FiEye, FiFilter,
 } from 'react-icons/fi';
 
 const categories = [...new Set(products.map((p) => p.category))];
@@ -53,6 +53,13 @@ const quickLinks = [
     label: 'Page Views',
     desc: 'Visitors, sessions & top pages',
     color: 'bg-blue-500',
+  },
+  {
+    href: '/admin/funnels',
+    icon: FiFilter,
+    label: 'Forms & exits',
+    desc: 'Quote, contact, popup, drop-off pages',
+    color: 'bg-cyan-600',
   },
   {
     href: '/admin/phone-clicks',

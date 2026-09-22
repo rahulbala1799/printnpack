@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import { query, transaction } from '../../../lib/database';
 import { enrichPageVisit, getPagePath, parseSearchFromUrl } from '../../../lib/analytics-page-classifier';
+import { ensureFunnelTable } from '../../../lib/funnel-analytics';
 import products from '../../../data/products';
 
 function getClientIp(req) {
@@ -101,6 +102,47 @@ export default async function handler(req, res) {
 
     if (isBot(userAgent)) {
       return res.status(200).json({ success: true, ignored: true });
+    }
+
+    if (eventName === 'funnel' || eventType === 'funnel') {
+      const formType = String(eventData?.formType || '').slice(0, 40);
+      const step = String(eventData?.step || '').slice(0, 40);
+      if (!formType || !step) {
+        return res.status(400).json({ error: 'Missing funnel fields' });
+      }
+
+      const enriched = enrichPageVisit({
+        pageUrl: pageUrl || '',
+        pageTitle,
+        referrer,
+        utmSource,
+        utmMedium,
+        utmCampaign,
+      });
+
+      await ensureFunnelTable();
+      await query(
+        `
+        INSERT INTO analytics.funnel_events (
+          event_name, form_type, step, page_path, page_url, session_id,
+          product_id, product_name, traffic_source, device_type
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+        `,
+        [
+          'funnel',
+          formType,
+          step,
+          eventData.pagePath || enriched.page_path || getPagePathFromUrl(pageUrl),
+          pageUrl || null,
+          sessionId || null,
+          eventData.productId ? String(eventData.productId).slice(0, 160) : null,
+          eventData.productName ? String(eventData.productName).slice(0, 200) : null,
+          enriched.traffic_source || null,
+          getDeviceType(userAgent),
+        ]
+      );
+
+      return res.status(200).json({ success: true, message: 'Funnel step recorded' });
     }
 
     if (eventName === 'phone_click') {

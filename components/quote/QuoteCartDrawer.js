@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useQuoteCart } from '../../lib/quote-cart-context';
 import { formatQuoteMessage, resolveQuoteImage } from '../../data/quote-modules';
+import { trackFunnel } from '../../lib/track-funnel';
 import QuantityField from './QuantityField';
 import QuoteProductImage from './QuoteProductImage';
 
@@ -25,6 +26,8 @@ export default function QuoteCartDrawer() {
   const submit = async (event) => {
     event.preventDefault();
     if (!items.length) return;
+    trackFunnel('quote_cart', 'send');
+    trackFunnel('quote_builder', 'send');
     setSending(true);
     setError('');
     try {
@@ -55,6 +58,8 @@ export default function QuoteCartDrawer() {
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || data.message || 'Could not send quote');
+      trackFunnel('quote_cart', 'success');
+      trackFunnel('quote_builder', 'success');
       clear();
       setStep('success');
     } catch (err) {
@@ -185,7 +190,10 @@ export default function QuoteCartDrawer() {
               <button
                 type="button"
                 disabled={!items.length}
-                onClick={() => setStep('details')}
+                onClick={() => {
+                  setStep('details');
+                  trackFunnel('quote_cart', 'start');
+                }}
                 className="w-full rounded-xl bg-blue-600 py-3 font-semibold text-white hover:bg-blue-700 disabled:bg-blue-300"
               >
                 Next: your details
