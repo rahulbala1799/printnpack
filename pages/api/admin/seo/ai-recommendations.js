@@ -2,7 +2,11 @@ import { generateText } from 'ai';
 import { withAuth } from '../../../../lib/withAuth.js';
 import { analyzeSearchConsole, loadPeriodBundle } from '../../../../lib/seo/search-console.js';
 import { generateRecommendations } from '../../../../lib/seo/recommendations.js';
-import { resolveAiModel, getAiConfigError, isAiConfigured } from '../../../../lib/ai/gateway.js';
+import { resolveAiModel, getSeoAiModel, getAiConfigError, isAiConfigured } from '../../../../lib/ai/gateway.js';
+
+export const config = {
+  maxDuration: 300,
+};
 
 function jsonError(res, status, error, details) {
   return res.status(status).json({ success: false, error, details });
@@ -27,41 +31,39 @@ async function handler(req, res) {
     const analysis = analyzeSearchConsole(data);
     const recommendations = generateRecommendations(analysis);
 
-    const topQueries = analysis.topQueriesByImpressions.slice(0, 20);
-    const zeroClick = analysis.highDemandZeroClicks.slice(0, 15);
-    const lowCtrPages = analysis.lowCtrPages.slice(0, 10);
+    const topQueries = analysis.topQueriesByImpressions.slice(0, 8);
+    const zeroClick = analysis.highDemandZeroClicks.slice(0, 8);
+    const lowCtrPages = analysis.lowCtrPages.slice(0, 5);
 
-    const userPrompt = `Analyze this Google Search Console data and provide actionable SEO recommendations.
+    const userPrompt = `SEO action plan for printnpack.ie (${analysis.meta.dateRange}).
+${analysis.summary.totalImpressions} impressions, ${analysis.summary.totalClicks} clicks, CTR ${analysis.summary.avgCtr}%, pos ${analysis.summary.avgPosition}.
 
-PERIOD: ${analysis.meta.dateRange}
-SUMMARY: ${analysis.summary.totalImpressions} impressions, ${analysis.summary.totalClicks} clicks, ${analysis.summary.avgCtr}% CTR, avg position ${analysis.summary.avgPosition}
+Top terms:
+${topQueries.map((q) => `- ${q.name}: ${q.impressions} imp, ${q.clicks} clk, pos ${q.position.toFixed(1)}`).join('\n')}
 
-TOP SEARCHED TERMS (by impressions):
-${topQueries.map((q) => `- "${q.name}": ${q.impressions} imp, ${q.clicks} clicks, pos ${q.position.toFixed(1)}`).join('\n')}
+Zero-click demand:
+${zeroClick.map((q) => `- ${q.name}: ${q.impressions} imp, pos ${q.position.toFixed(1)}`).join('\n')}
 
-HIGH DEMAND, ZERO CLICKS:
-${zeroClick.map((q) => `- "${q.name}": ${q.impressions} imp, pos ${q.position.toFixed(1)}`).join('\n')}
+Low CTR pages:
+${lowCtrPages.map((p) => `- ${p.path}: ${p.impressions} imp, ${p.ctr}% CTR`).join('\n')}
 
-LOW CTR PAGES:
-${lowCtrPages.map((p) => `- ${p.path}: ${p.impressions} imp, ${p.ctr}% CTR, pos ${p.position.toFixed(1)}`).join('\n')}
+Mapped actions:
+${recommendations.slice(0, 6).map((r) => `- [${r.priority}] ${r.query} → ${r.targetPage || 'new page'}`).join('\n')}
 
-EXISTING RULE-BASED RECOMMENDATIONS:
-${recommendations.slice(0, 10).map((r) => `- [${r.priority}] "${r.query}" → ${r.targetPage || 'NEW PAGE NEEDED'}`).join('\n')}
-
-Provide a concise SEO action plan with:
-1. Top 5 immediate wins (this week)
-2. Top 5 content/page optimizations (this month)
-3. New content ideas based on high-impression zero-click queries
-4. Technical SEO notes (canonical URLs, meta titles, internal linking)
-
-Be specific to Irish printing/packaging market. Reference actual page paths on printnpack.ie.`;
+Return:
+1. 5 this-week wins
+2. 5 page fixes this month
+3. 5 new content ideas from zero-click terms
+4. Short technical notes
+Irish print/packaging only. Use real printnpack.ie paths. Keep it under 700 words.`;
 
     const { text } = await generateText({
-      model: resolveAiModel(),
+      model: resolveAiModel(getSeoAiModel()),
       system:
-        'You are an SEO strategist for PrintNPack (printnpack.ie), an Irish printing and packaging company in Ashbourne, Meath. Give clear, actionable recommendations.',
+        'SEO strategist for PrintNPack Ireland. Be specific and brief. No preamble.',
       messages: [{ role: 'user', content: userPrompt }],
-      maxOutputTokens: 2000,
+      maxOutputTokens: 900,
+      abortSignal: AbortSignal.timeout(90000),
     });
 
     return res.status(200).json({
@@ -76,13 +78,16 @@ Be specific to Irish printing/packaging market. Reference actual page paths on p
     const isAuthError =
       error?.name === 'GatewayAuthenticationError' ||
       /unauthenticated|authentication failed|AI Gateway/i.test(message);
+    const timedOut = error?.name === 'AbortError' || /timeout|timed out|aborted/i.test(message);
 
     return jsonError(
       res,
-      isAuthError ? 503 : 500,
+      isAuthError ? 503 : timedOut ? 504 : 500,
       isAuthError
         ? 'AI authentication failed. Check AI_GATEWAY_API_KEY or GOOGLE_GENERATIVE_AI_API_KEY in Vercel environment variables.'
-        : 'Failed to generate AI recommendations',
+        : timedOut
+          ? 'AI analysis took too long. Try again — the shorter plan should finish this time.'
+          : 'Failed to generate AI recommendations',
       message
     );
   }

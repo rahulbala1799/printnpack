@@ -164,7 +164,10 @@ export default function SeoDashboard() {
       if (!res.ok) throw new Error(apiErrorMessage(json, 'AI analysis failed'));
       setAiPlan(json.plan);
     } catch (err) {
-      alert(`AI analysis failed: ${err.message}`);
+      const message = /FUNCTION_INVOCATION_TIMEOUT|timeout|504/i.test(err.message)
+        ? 'AI analysis timed out. Refresh and try again — the request is now shorter.'
+        : err.message;
+      alert(`AI analysis failed: ${message}`);
     } finally {
       setActionLoading(null);
     }
