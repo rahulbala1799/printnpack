@@ -53,7 +53,7 @@ export default function ClothingProductPage({ product, relatedProducts }) {
     ? {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
-        mainEntity: sportswearFaqs.map(({ q, a }) => ({
+        mainEntity: pageFaqs.map(({ q, a }) => ({
           '@type': 'Question',
           name: q,
           acceptedAnswer: { '@type': 'Answer', text: a },
