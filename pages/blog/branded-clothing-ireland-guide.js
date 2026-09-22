@@ -117,7 +117,7 @@ export default function BrandedClothingIrelandGuide() {
           <ul className="list-disc pl-6 text-gray-600 space-y-2">
             <li><strong>T-shirts</strong> — Fruit of the Loom Super Premium, from €15. <Link href="/clothing/custom-printed-tshirts-ireland" className="text-blue-600 hover:underline">Custom printed t-shirts</Link>.</li>
             <li><strong>Polo shirts</strong> — the default company clothing for retail, hospitality and offices. <Link href="/clothing/custom-polo-shirts-ireland" className="text-blue-600 hover:underline">Custom polo shirts</Link>.</li>
-            <li><strong>Sports wear</strong> — club and team kits from €16.50. <Link href="/clothing/custom-sportswear-ireland" className="text-blue-600 hover:underline">Custom sports wear</Link>.</li>
+            <li><strong>Sportswear</strong> — GAA, soccer and running club kits from €16.50. <Link href="/clothing/custom-sportswear-ireland" className="text-blue-600 hover:underline">Custom sportswear Ireland</Link>.</li>
             <li><strong>Hoodies / sweatshirts</strong> — merch and winter staff wear. <Link href="/clothing/custom-hoodies-ireland" className="text-blue-600 hover:underline">Hoodies</Link> and <Link href="/clothing/custom-sweatshirts-ireland" className="text-blue-600 hover:underline">sweatshirts</Link>.</li>
             <li><strong>Hi-viz</strong> — site teams and outdoor events. <Link href="/clothing/custom-hiviz-workwear-ireland" className="text-blue-600 hover:underline">Hi-viz workwear</Link>.</li>
           </ul>

@@ -51,7 +51,7 @@ export const CLOTHING_FAQS = [
     category: 'products',
     q: 'What garments can you print?',
     subtitle: 'T-shirts, polos, hoodies, sweatshirts, hi-viz',
-    a: 'T-shirts, polo shirts, hoodies, sweatshirts and hi-viz jackets are the core range. Cotton and moisture-wicking options are available, with a full size run for staff and event teams.',
+    a: 'T-shirts, polo shirts, sportswear, hoodies, sweatshirts and hi-viz jackets are the core range. Cotton and moisture-wicking AWDis Cool T options are available for clubs and teams, with a full size run S–3XL.',
   },
   {
     id: 'print-methods',
@@ -80,5 +80,21 @@ export const CLOTHING_FAQS = [
     q: 'Do you deliver branded clothing to Dublin?',
     subtitle: 'Dublin, Meath and nationwide',
     a: 'Yes. Corporate and promotional clothing delivers across Dublin city and county, Meath, Cork, Galway and every Irish county. Collection from Ashbourne is available.',
+  },
+  {
+    id: 'sportswear-ireland',
+    category: 'products',
+    q: 'Can you print custom sportswear for Irish clubs and teams?',
+    subtitle: 'GAA, soccer, running and gym kits',
+    a: 'Yes. Custom sportswear Ireland is printed on AWDis Cool T moisture-wicking shirts for GAA, soccer, running clubs and gyms. Chest print from €16.50, same price S–3XL, minimum 5, delivered nationwide from Ashbourne.',
+    link: { href: '/clothing/custom-sportswear-ireland', label: 'Custom sportswear Ireland' },
+  },
+  {
+    id: 'sportswear-price',
+    category: 'pricing',
+    q: 'How much does custom sportswear cost in Ireland?',
+    subtitle: 'From €16.50 per shirt',
+    a: 'A single chest print on sportswear starts at €16.50. Extra print areas are +€1.50. Quantity steps from 5 pieces take 8% off. Same price on every size S–3XL. Free quote from Ashbourne.',
+    link: { href: '/clothing/custom-sportswear-ireland', label: 'Sportswear pricing' },
   },
 ];

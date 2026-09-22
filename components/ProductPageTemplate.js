@@ -97,7 +97,7 @@ export default function ProductPageTemplate({ product, seoOverride, skipBreadcru
                       >
                         <Image
                           src={img}
-                          alt={`${product.name} ${i + 1}`}
+                          alt={product.imageAlts?.[i] || `${product.name} Ireland ${i + 1}`}
                           fill
                           className="object-cover"
                           priority={i === 0}
@@ -116,7 +116,7 @@ export default function ProductPageTemplate({ product, seoOverride, skipBreadcru
                             i === currentImage ? 'border-blue-500 ring-1 ring-blue-300' : 'border-transparent opacity-70 hover:opacity-100'
                           }`}
                         >
-                          <Image src={img} alt="" fill className="object-cover" sizes="80px" />
+                          <Image src={img} alt={product.imageAlts?.[i] || ''} fill className="object-cover" sizes="80px" />
                         </button>
                       ))}
                     </div>

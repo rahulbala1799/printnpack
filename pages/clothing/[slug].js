@@ -8,6 +8,7 @@ import ProductPageTemplate from '../../components/ProductPageTemplate';
 import RelatedSeoLinks from '../../components/seo/RelatedSeoLinks';
 import { SITE_URL } from '../../lib/site';
 import { buildProductLd, parsePriceString } from '../../lib/schema';
+import { CLOTHING_FAQS } from '../../data/clothing-faq';
 
 export default function ClothingProductPage({ product, relatedProducts }) {
   if (!product) {
@@ -30,16 +31,35 @@ export default function ClothingProductPage({ product, relatedProducts }) {
   const ogImage = product.images?.[0]
     ? (product.images[0].startsWith('http') ? product.images[0] : `${SITE_URL}${product.images[0]}`)
     : '';
-  const pageTitle = `${product.name} Ireland | PrintNPack`;
-  const pageDescription = product.description;
+  const pageTitle = product.seoTitle || `${product.name} Ireland | PrintNPack`;
+  const pageDescription = product.seoDescription || product.description;
+  const productImages = (product.images || []).map((src) => (src.startsWith('http') ? src : `${SITE_URL}${src}`));
 
   const structuredData = buildProductLd({
-    name: product.name,
-    description: product.description,
-    image: product.images?.[0] ? `${SITE_URL}${product.images[0]}` : undefined,
+    name: product.h1 || product.name,
+    description: pageDescription,
+    image: productImages.length ? productImages : undefined,
     url: pageUrl,
     price: parsePriceString(product.price),
+    sku: product.id,
+    category: product.id === 'custom-sportswear-ireland' ? 'Sportswear' : product.category,
   });
+
+  const sportswearFaqs = product.id === 'custom-sportswear-ireland'
+    ? CLOTHING_FAQS.filter((item) => item.id === 'sportswear-ireland' || item.id === 'sportswear-price' || item.id === 'cost' || item.id === 'turnaround' || item.id === 'dublin')
+    : [];
+
+  const faqLd = sportswearFaqs.length
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: sportswearFaqs.map(({ q, a }) => ({
+          '@type': 'Question',
+          name: q,
+          acceptedAnswer: { '@type': 'Answer', text: a },
+        })),
+      }
+    : null;
 
   const breadcrumbLd = {
     '@context': 'https://schema.org',
@@ -56,6 +76,12 @@ export default function ClothingProductPage({ product, relatedProducts }) {
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
+        {product.id === 'custom-sportswear-ireland' && (
+          <meta
+            name="keywords"
+            content="custom sportswear Ireland, printed sports t-shirts Ireland, GAA club kit printing, soccer team t-shirts Ireland, running club merch Dublin, gym staff t-shirts Ireland, AWDis Cool T print Ashbourne"
+          />
+        )}
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
@@ -65,6 +91,7 @@ export default function ClothingProductPage({ product, relatedProducts }) {
         <link rel="canonical" href={pageUrl} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+        {faqLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />}
       </Head>
 
       <nav className="bg-gray-50 border-b border-gray-200">
@@ -79,7 +106,27 @@ export default function ClothingProductPage({ product, relatedProducts }) {
         </div>
       </nav>
 
-      <ProductPageTemplate product={product} skipBreadcrumb />
+      <ProductPageTemplate
+        product={product}
+        skipBreadcrumb
+        seoOverride={product.h1 ? { h1: product.h1, intro: product.detailedDescription } : undefined}
+      />
+
+      {sportswearFaqs.length > 0 && (
+        <section className="bg-white border-t border-gray-200">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Custom sportswear Ireland — FAQs</h2>
+            <dl className="space-y-5">
+              {sportswearFaqs.map((item) => (
+                <div key={item.id}>
+                  <dt className="font-semibold text-gray-900">{item.q}</dt>
+                  <dd className="mt-1 text-gray-600 text-sm leading-relaxed">{item.a}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+      )}
 
       {relatedProducts?.length > 0 && (
         <section className="bg-gray-50 border-t border-gray-200">
@@ -103,9 +150,10 @@ export default function ClothingProductPage({ product, relatedProducts }) {
       <RelatedSeoLinks
         title="Related clothing pages"
         links={[
-          { href: '/clothing', label: 'Branded Clothing Ireland', desc: 'All garments, from €12' },
-          { href: '/clothing-faq-ireland', label: 'Clothing FAQ', desc: 'Logos, sizes and pricing' },
-          { href: '/blog/branded-clothing-ireland-guide', label: 'Buying guide', desc: 'Workwear vs promotional clothing' },
+          { href: '/clothing', label: 'Branded Clothing Ireland', desc: 'T-shirts, polos, hoodies from €12' },
+          { href: '/clothing/custom-printed-tshirts-ireland', label: 'Custom printed t-shirts', desc: 'Cotton tees from €15' },
+          { href: '/clothing-faq-ireland', label: 'Clothing FAQ Ireland', desc: 'Logos, sizes and pricing' },
+          { href: '/blog/branded-clothing-ireland-guide', label: 'Branded clothing guide', desc: 'Clubs, workwear and merch' },
         ]}
       />
     </Layout>

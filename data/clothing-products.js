@@ -25,6 +25,13 @@ const HOODIE_IMAGES = [
   '/images/apparel/HOODIE MOCK UP 5.jpg',
 ];
 
+const SPORTSWEAR_IMAGES = [
+  '/images/apparel/custom-printed-sportswear-ireland-dublin-running-club.jpg',
+  '/images/apparel/custom-printed-sportswear-ireland-soccer-team-kit.jpg',
+  '/images/apparel/custom-printed-sportswear-ireland-club-kit-navy-white.jpg',
+  '/images/apparel/custom-printed-sportswear-ireland-gym-performance-tshirt.jpg',
+];
+
 export const clothingHref = (product) => product.url || `/clothing/${product.id}`;
 
 export const clothingProducts = [
@@ -165,32 +172,44 @@ export const clothingProducts = [
   },
   {
     id: 'custom-sportswear-ireland',
-    name: 'Custom Sports Wear',
+    name: 'Custom Sportswear Ireland',
     category: 'Apparel',
     quoteType: 'Sports Wear',
     pricingKey: 'sportswear',
-    popular: false,
+    popular: true,
+    seoTitle: 'Custom Sportswear Ireland | Printed Club & Team Kits | PrintNPack',
+    seoDescription:
+      'Custom printed sportswear Ireland for GAA, soccer, running clubs and gyms. AWDis Cool T kits from €16.50, same price S–3XL, 3–5 days. Delivered nationwide from Ashbourne.',
+    h1: 'Custom Sportswear Ireland',
     description:
-      'AWDis Cool T sports wear for clubs and teams. 9 stock colours, moisture-wicking, from €16.50 for a single placement. Same price S–3XL.',
+      'Printed sports t-shirts and club kits for Irish teams. AWDis Cool T moisture-wicking fabric, 9 stock colours, from €16.50 for a chest print. Same price S–3XL, delivery from Ashbourne to Dublin and nationwide.',
     features: [
-      'Performance and moisture-wicking fabrics',
-      'Club and team branding on chest, back and sleeves',
-      'Same price S–3XL, minimum 5 pieces',
-      '8% off each quantity step',
-      '3–5 day turnaround, Ireland-wide delivery',
+      'AWDis Cool T performance fabric — moisture-wicking for training and match day',
+      'Club and team logos on chest, back and sleeves — GAA, soccer, running and gyms',
+      '9 stock colours including royal, navy, fire red and electric yellow',
+      'Same price S–3XL, minimum 5 pieces, 8% off each quantity step',
+      'Screen print, digital print or embroidery',
+      '3–5 day turnaround, Ireland-wide delivery from Ashbourne, Co. Meath',
     ],
     detailedDescription:
-      'Sports wear for GAA, soccer, gyms and events. Single placement from €16.50, extra print areas +€1.50, 8% off each qty ladder from 5 pieces. Photos to follow.',
+      'Order custom sportswear in Ireland for GAA clubs, soccer teams, running clubs, gyms and school PE kits. We print moisture-wicking AWDis Cool T shirts with your crest — chest, back or sleeves — from €16.50 for a single placement. Extra print areas +€1.50. Same price on every size S–3XL, from 5 pieces, with 8% off each quantity step. Proofs before print. Delivery to Dublin, Cork, Galway and every county from Ashbourne.',
     specifications: [
+      { name: 'Garment', value: 'AWDis Cool T performance sports t-shirt' },
       { name: 'Printing', value: 'Screen print, digital print, embroidery' },
       { name: 'Colours', value: 'White, Black, Charcoal, Heather Grey, Royal Blue, Electric Yellow, Electric Green, Oxford Navy, Fire Red' },
       { name: 'Sizes', value: 'S–3XL — same price' },
       { name: 'Minimum order', value: '5 pieces' },
-      { name: 'Production time', value: '3–5 business days' },
-      { name: 'Delivery', value: 'Nationwide Ireland from Ashbourne' },
+      { name: 'Production time', value: '3–5 business days after proof' },
+      { name: 'Delivery', value: 'Nationwide Ireland from Ashbourne, Co. Meath' },
     ],
-    images: TSHIRT_IMAGES,
-    imageSrc: TSHIRT_IMAGES[0],
+    images: SPORTSWEAR_IMAGES,
+    imageAlts: [
+      'Custom printed sportswear Ireland — Dublin running club moisture-wicking t-shirt',
+      'Custom soccer team kit Ireland — printed sports t-shirt with club crest',
+      'Custom club sportswear Ireland — navy and white printed team t-shirts',
+      'Custom gym performance t-shirt Ireland — printed sportswear in electric yellow',
+    ],
+    imageSrc: SPORTSWEAR_IMAGES[0],
     price: 'From €16.50',
     moq: 5,
     leadTime: '3-5 business days',

@@ -70,9 +70,9 @@ const heroImages = [
 const galleryImages = [
   '/images/apparel/TSHIRT MOCK UP 1.jpg',
   '/images/apparel/TSHIRT MOCK UP 2.jpg',
-  '/images/apparel/TSHIRT MOCK UP 3.jpg',
+  '/images/apparel/custom-printed-sportswear-ireland-dublin-running-club.jpg',
+  '/images/apparel/custom-printed-sportswear-ireland-soccer-team-kit.jpg',
   '/images/apparel/POLO SHIRT MOCK UP 1.jpg',
-  '/images/apparel/POLO SHIRT MOCK UP 2.jpg',
   '/images/apparel/HOODIE MOCK UP 1.jpg',
   '/images/apparel/HOODIE MOCK UP 2.jpg',
 ];
@@ -86,7 +86,7 @@ const features = [
 ];
 
 const specs = [
-  { label: 'Products', value: 'T-shirts, polos, hoodies, sweatshirts, hi-viz' },
+  { label: 'Products', value: 'T-shirts, polos, sportswear, hoodies, sweatshirts, hi-viz' },
   { label: 'Printing', value: 'Screen print, digital print, embroidery' },
   { label: 'Materials', value: 'Cotton, moisture-wicking, safety compliant' },
   { label: 'Turnaround', value: '3–5 days, bulk discounts' },
