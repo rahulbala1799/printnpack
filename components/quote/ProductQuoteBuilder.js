@@ -110,15 +110,13 @@ export default function ProductQuoteBuilder() {
     setOpen(true);
   };
 
-  const productPicker = (
-    <QuoteProductPicker
-      items={visible}
-      selectedId={selected?.id}
-      inQuote={(id) => findByProductId(id)}
-      onSelect={pickProduct}
-      title={selectedCategory?.name || 'All products'}
-    />
-  );
+  const pickerProps = {
+    items: visible,
+    selectedId: selected?.id,
+    inQuote: (id) => findByProductId(id),
+    onSelect: pickProduct,
+    title: selectedCategory?.name || 'All products',
+  };
 
   return (
     <Dialog open={builderOpen} onOpenChange={(next) => !next && closeBuilder()}>
@@ -142,34 +140,28 @@ export default function ProductQuoteBuilder() {
 
         <SliceStep current={mobilePane} onBack={backSlice} />
 
-        <div className="hidden min-h-0 flex-1 lg:grid lg:grid-cols-[220px_300px_minmax(0,1fr)]">
-          <aside className="min-h-0 border-r border-stone-200">
+        <div className="flex min-h-0 flex-1 overflow-hidden">
+          <aside className="hidden min-h-0 w-[220px] shrink-0 border-r border-stone-200 lg:block">
             <QuoteCategoryPicker categories={CATEGORIES} selectedId={group} onSelect={pickCategory} variant="sidebar" />
           </aside>
-          <aside className="min-h-0 border-r border-stone-200">
-            <QuoteProductPicker
-              items={visible}
-              selectedId={selected?.id}
-              inQuote={(id) => findByProductId(id)}
-              onSelect={pickProduct}
-              title={selectedCategory?.name || 'All products'}
-            />
+          <aside className="hidden min-h-0 w-[300px] shrink-0 border-r border-stone-200 lg:block">
+            <QuoteProductPicker {...pickerProps} />
           </aside>
-          <section className="min-h-0">
-            <QuoteConfigurePanel selected={selected} existing={existing} onSave={save} />
-          </section>
-        </div>
-
-        <div className="min-h-0 flex-1 overflow-hidden lg:hidden">
-          <div className="h-full min-h-0">
+          <section className="min-h-0 min-w-0 flex-1 overflow-hidden">
             {mobilePane === 'categories' && (
-              <QuoteCategoryPicker categories={CATEGORIES} selectedId={group} onSelect={pickCategory} variant="slice" />
+              <div className="h-full lg:hidden">
+                <QuoteCategoryPicker categories={CATEGORIES} selectedId={group} onSelect={pickCategory} variant="slice" />
+              </div>
             )}
-            {mobilePane === 'products' && productPicker}
-            {mobilePane === 'configure' && (
+            {mobilePane === 'products' && (
+              <div className="h-full lg:hidden">
+                <QuoteProductPicker {...pickerProps} />
+              </div>
+            )}
+            <div className={mobilePane === 'configure' ? 'h-full' : 'hidden h-full lg:block'}>
               <QuoteConfigurePanel selected={selected} existing={existing} onSave={save} />
-            )}
-          </div>
+            </div>
+          </section>
         </div>
       </DialogContent>
     </Dialog>

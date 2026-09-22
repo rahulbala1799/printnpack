@@ -5,9 +5,11 @@ import GenericQuoteModule from './modules/GenericQuoteModule';
 import QuoteProductImage from './QuoteProductImage';
 
 export default function QuoteConfigurePanel({ selected, existing, onSave }) {
-  const gallery = selected?.images?.filter(Boolean)?.length
-    ? selected.images.filter(Boolean)
-    : [resolveQuoteImage(selected)].filter(Boolean);
+  const gallery = [...new Set(
+    (selected?.images?.filter(Boolean)?.length
+      ? selected.images.filter(Boolean)
+      : [resolveQuoteImage(selected)].filter(Boolean))
+  )];
   const [activeSrc, setActiveSrc] = useState(gallery[0] || null);
 
   useEffect(() => {
@@ -47,7 +49,7 @@ export default function QuoteConfigurePanel({ selected, existing, onSave }) {
                 aria-pressed={active}
                 className={`shrink-0 rounded-lg ${active ? 'ring-2 ring-blue-500 ring-offset-2' : 'opacity-80 hover:opacity-100'}`}
               >
-                <QuoteProductImage src={src} alt="" className="h-14 w-14 rounded-lg" sizes="56px" />
+                <QuoteProductImage src={src} alt="" className="h-14 w-14 max-h-14 max-w-14 shrink-0 rounded-lg" sizes="56px" />
               </button>
             );
           })}
