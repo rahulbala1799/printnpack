@@ -139,6 +139,7 @@ const staticPages = [
   { path: '/services/posters',  priority: '0.8', changefreq: 'monthly' },
   { path: '/services/vinyls',   priority: '0.8', changefreq: 'monthly' },
   { path: '/blog',              priority: '0.8', changefreq: 'weekly'  },
+  { path: '/blog/twisted-handle-paper-bags-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/wooden-cutlery-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/luxury-die-cut-paper-bags-ireland-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/fish-and-chip-boxes-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
