@@ -361,6 +361,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/business-cards',
+        destination: '/business-cards-ireland',
+        permanent: true,
+      },
+      {
         source: '/printed-greaseproof-paper-ireland',
         destination: '/greaseproof-sheets-ireland',
         permanent: true,

@@ -67,7 +67,7 @@ const categories = [
   },
   {
     name: 'Leaflets & Flyers',
-    description: 'A3, A4, A5, A6 leaflets & flyers',
+    description: 'Leaflets, flyers and business cards',
     icon: FaFileAlt,
     color: 'bg-sky-50 text-sky-600 border-sky-200',
     iconBg: 'bg-sky-100',

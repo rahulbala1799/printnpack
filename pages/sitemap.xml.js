@@ -133,6 +133,7 @@ const staticPages = [
   { path: '/clothing-faq-ireland', priority: '0.85', changefreq: 'monthly' },
   { path: '/services/leaflets', priority: '0.8', changefreq: 'monthly' },
   { path: '/premium-leaflets-ireland', priority: '0.91', changefreq: 'weekly' },
+  { path: '/business-cards-ireland', priority: '0.91', changefreq: 'weekly' },
   { path: '/greaseproof-sheets-ireland', priority: '0.91', changefreq: 'weekly' },
   { path: '/stage-backdrop-banners-ireland', priority: '0.91', changefreq: 'weekly' },
   { path: '/services/menus',    priority: '0.8', changefreq: 'monthly' },

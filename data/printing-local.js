@@ -72,9 +72,9 @@ export const PRINTING_SERVICES = [
   },
   {
     title: 'Business Cards',
-    desc: 'Business cards, appointment cards, loyalty cards and QR code cards.',
-    href: '/quote?product=Business+Cards',
-    cta: 'Get a quote',
+    desc: '85 × 55 mm cards on 350 gsm. From €35 for 100. 2 day delivery in Dublin, 4–6 days for the rest of Ireland.',
+    href: '/business-cards-ireland',
+    cta: 'View business cards',
   },
   {
     title: 'Stickers & Labels',

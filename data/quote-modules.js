@@ -1,6 +1,14 @@
 import { clothingProducts } from './clothing-products';
 import products from './products';
 import {
+  BUSINESS_CARD_DELIVERY_OPTIONS,
+  BUSINESS_CARD_GSM,
+  BUSINESS_CARD_QUANTITY_OPTIONS,
+  BUSINESS_CARD_SIZE,
+  getBusinessCardTier,
+  parseBusinessCardQty,
+} from './business-cards-options';
+import {
   GARMENT_PRICING,
   MIN_QTY,
   PRINT_COMBOS,
@@ -14,7 +22,8 @@ function productMedia(id, href, fallbackImage) {
   if (Array.isArray(match?.images)) images.push(...match.images.filter(Boolean));
   if (match?.imageSrc && !images.includes(match.imageSrc)) images.unshift(match.imageSrc);
   if (fallbackImage && !images.includes(fallbackImage)) images.unshift(fallbackImage);
-  return { image: images[0] || null, images };
+  const unique = [...new Set(images)];
+  return { image: unique[0] || null, images: unique };
 }
 
 function withMedia(entry) {
@@ -52,6 +61,7 @@ export const QUOTE_CATALOG = [
   withMedia({ id: 'foamex-boards', name: 'Foamex Boards', href: '/foamex-boards', moduleId: 'foamex', configurable: false, group: 'Boards' }),
   withMedia({ id: 'correx-boards', name: 'Correx Boards', href: '/correx-boards', moduleId: 'correx', configurable: false, group: 'Boards' }),
   withMedia({ id: 'premium-leaflets-ireland', name: 'Premium Leaflets', href: '/premium-leaflets-ireland', moduleId: 'leaflets', configurable: false, group: 'Print' }),
+  withMedia({ id: 'business-cards-ireland', name: 'Business Cards', href: '/business-cards-ireland', moduleId: 'business-cards', configurable: false, group: 'Print', price: 'From €35' }),
   withMedia({ id: 'rubber-stamps-ireland', name: 'Rubber Stamps', href: '/rubber-stamps', moduleId: 'rubber-stamps', configurable: false, group: 'Stamps' }),
 ];
 
@@ -92,23 +102,25 @@ export function getQuoteCatalogItem(id) {
 
 const DIMENSIONS_MM = { key: 'size', label: 'Size', type: 'dimensions', unit: 'mm' };
 const DIMENSIONS_CM = { key: 'size', label: 'Size', type: 'dimensions', unit: 'cm' };
+const DIMENSIONS_MM_IF_CUSTOM = { ...DIMENSIONS_MM, whenCustom: true };
+const DIMENSIONS_CM_IF_CUSTOM = { ...DIMENSIONS_CM, whenCustom: true };
 
 export const GENERIC_MODULE_FIELDS = {
   'pizza-boxes': [
     { key: 'sizePreset', label: 'Box size', type: 'chips', options: ['10 inch', '12 inch', '14 inch', 'Custom'] },
     { key: 'print', label: 'Print', type: 'chips', options: ['1 colour', '2 colour', 'Full colour'] },
-    DIMENSIONS_MM,
+    DIMENSIONS_MM_IF_CUSTOM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 500 },
   ],
   bagasse: [
     { key: 'sizePreset', label: 'Size', type: 'chips', options: ['Small', 'Regular', 'Large', 'Custom'] },
-    DIMENSIONS_MM,
+    DIMENSIONS_MM_IF_CUSTOM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 250 },
   ],
   greaseproof: [
     { key: 'sizePreset', label: 'Sheet size', type: 'chips', options: ['A4', '300×300 mm', 'Custom'] },
     { key: 'print', label: 'Print', type: 'chips', options: ['1 colour', 'Full colour'] },
-    DIMENSIONS_MM,
+    DIMENSIONS_MM_IF_CUSTOM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 500 },
   ],
   labels: [
@@ -123,31 +135,31 @@ export const GENERIC_MODULE_FIELDS = {
   ],
   'vinyl-banners': [
     { key: 'sizePreset', label: 'Size', type: 'chips', options: ['2×4 ft', '3×6 ft', '4×8 ft', '5×10 ft', 'Custom'] },
-    DIMENSIONS_CM,
+    DIMENSIONS_CM_IF_CUSTOM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 1 },
   ],
   'roll-up-banners': [
     { key: 'sizePreset', label: 'Size', type: 'chips', options: ['850×2000 mm', '1000×2000 mm', 'Custom'] },
-    DIMENSIONS_MM,
+    DIMENSIONS_MM_IF_CUSTOM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 1 },
   ],
   'extra-wide-roll-ups': [
     { key: 'sizePreset', label: 'Size', type: 'chips', options: ['1200 mm', '1500 mm', '2000 mm', 'Custom'] },
-    DIMENSIONS_MM,
+    DIMENSIONS_MM_IF_CUSTOM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 1 },
   ],
   'fabric-banner-stands': [
     { key: 'kit', label: 'Kit', type: 'chips', options: ['Complete set (frame + graphic)', 'Graphic only'] },
     { key: 'sizePreset', label: 'Size', type: 'chips', options: ['250 × 228 cm', '300 × 230 cm', '400 × 230 cm', '500 × 230 cm', '600 × 230 cm', 'Custom'] },
     { key: 'print', label: 'Print', type: 'chips', options: ['Single-sided', 'Double-sided'] },
-    DIMENSIONS_CM,
+    DIMENSIONS_CM_IF_CUSTOM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 1 },
   ],
   'curved-banner-stands': [
     { key: 'kit', label: 'Kit', type: 'chips', options: ['Complete set (frame + graphic)', 'Print only'] },
     { key: 'sizePreset', label: 'Size', type: 'chips', options: ['300 × 230 cm', '400 × 230 cm', '500 × 230 cm', 'Custom'] },
     { key: 'print', label: 'Print', type: 'chips', options: ['Single-sided', 'Double-sided'] },
-    DIMENSIONS_CM,
+    DIMENSIONS_CM_IF_CUSTOM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 1 },
   ],
   'stage-backdrops': [
@@ -156,12 +168,12 @@ export const GENERIC_MODULE_FIELDS = {
   ],
   flags: [
     { key: 'sizePreset', label: 'Flag size', type: 'chips', options: ['Small', 'Medium', 'Large', 'Custom'] },
-    DIMENSIONS_CM,
+    DIMENSIONS_CM_IF_CUSTOM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 1 },
   ],
   posters: [
     { key: 'sizePreset', label: 'Size', type: 'chips', options: ['A3', 'A2', 'A1', 'A0', 'Custom'] },
-    DIMENSIONS_MM,
+    DIMENSIONS_MM_IF_CUSTOM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 1 },
   ],
   foamex: [
@@ -176,8 +188,13 @@ export const GENERIC_MODULE_FIELDS = {
   ],
   leaflets: [
     { key: 'sizePreset', label: 'Size', type: 'chips', options: ['A6', 'A5', 'A4', 'Custom'] },
-    DIMENSIONS_MM,
+    DIMENSIONS_MM_IF_CUSTOM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 250 },
+  ],
+  'business-cards': [
+    { key: 'spec', label: 'Size & stock', type: 'note', text: `${BUSINESS_CARD_SIZE} · ${BUSINESS_CARD_GSM}` },
+    { key: 'quantity', label: 'Quantity', type: 'chips', options: BUSINESS_CARD_QUANTITY_OPTIONS },
+    { key: 'delivery', label: 'Delivery', type: 'chips', options: BUSINESS_CARD_DELIVERY_OPTIONS },
   ],
   'rubber-stamps': [
     { key: 'type', label: 'Stamp type', type: 'chips', options: ['Self-inking', 'Traditional', 'Date stamp'] },
@@ -196,6 +213,7 @@ export function getModuleFields(moduleId) {
 function fieldSummary(field, options) {
   if (field.type === 'qty') return null;
   if (field.type === 'dimensions') {
+    if (field.whenCustom && options.sizePreset !== 'Custom' && options.shape !== 'Custom') return null;
     const width = String(options.width || '').trim();
     const length = String(options.length || '').trim();
     if (!width && !length) return null;
@@ -207,6 +225,35 @@ function fieldSummary(field, options) {
 }
 
 export function buildCatalogQuoteLine(catalogItem, options = {}) {
+  if (catalogItem.moduleId === 'business-cards') {
+    const selectedQuantity = BUSINESS_CARD_QUANTITY_OPTIONS.find((option) => option === options.quantity)
+      || BUSINESS_CARD_QUANTITY_OPTIONS.find((option) => parseBusinessCardQty(option) === parseBusinessCardQty(options.quantity))
+      || BUSINESS_CARD_QUANTITY_OPTIONS[0];
+    const qty = parseBusinessCardQty(selectedQuantity) || 100;
+    const tier = getBusinessCardTier(qty);
+    const delivery = options.delivery || BUSINESS_CARD_DELIVERY_OPTIONS[0];
+    return {
+      moduleId: catalogItem.moduleId,
+      productId: catalogItem.id,
+      name: catalogItem.name,
+      href: catalogItem.href,
+      image: catalogItem.image || null,
+      images: catalogItem.images || (catalogItem.image ? [catalogItem.image] : []),
+      qty,
+      unitPrice: tier ? Math.round((tier.price / qty) * 100) / 100 : null,
+      lineTotal: tier ? tier.price : null,
+      summary: `${BUSINESS_CARD_SIZE} · ${BUSINESS_CARD_GSM} · ${delivery}`,
+      options: {
+        ...options,
+        quantity: selectedQuantity,
+        size: BUSINESS_CARD_SIZE,
+        stock: BUSINESS_CARD_GSM,
+        delivery,
+      },
+      fingerprint: `${catalogItem.moduleId}|${catalogItem.id}|${qty}|${delivery}`,
+    };
+  }
+
   const fields = getModuleFields(catalogItem.moduleId);
   const qtyField = fields.find((field) => field.type === 'qty');
   const qty = Number(options.qty) || qtyField?.min || 1;
@@ -290,6 +337,17 @@ export function repriceClothingLine(line, qty) {
 export function repriceQuoteLine(line, qty) {
   if (line.moduleId === 'clothing') {
     return { ...repriceClothingLine(line, qty), id: line.id };
+  }
+  if (line.moduleId === 'business-cards') {
+    const safeQty = Math.max(1, Number(qty) || 1);
+    const tier = getBusinessCardTier(safeQty);
+    return {
+      ...line,
+      id: line.id,
+      qty: safeQty,
+      unitPrice: tier ? Math.round((tier.price / safeQty) * 100) / 100 : null,
+      lineTotal: tier ? tier.price : null,
+    };
   }
   const safeQty = Math.max(1, Number(qty) || 1);
   const unit = line.unitPrice;

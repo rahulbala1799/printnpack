@@ -23,7 +23,16 @@ export default function GenericQuoteModule({ catalogItem, existing, onSave }) {
     return next;
   });
 
-  const setField = (key, value) => setValues((prev) => ({ ...prev, [key]: value }));
+  const setField = (key, value) => {
+    setValues((prev) => {
+      const next = { ...prev, [key]: value };
+      if (key === 'sizePreset' && value !== 'Custom') {
+        next.width = '';
+        next.length = '';
+      }
+      return next;
+    });
+  };
 
   return (
     <div className="space-y-6">
@@ -52,6 +61,14 @@ export default function GenericQuoteModule({ catalogItem, existing, onSave }) {
           );
         }
 
+        if (field.type === 'note') {
+          return (
+            <QuoteOptionField key={field.key} label={field.label}>
+              <p className="text-sm font-medium text-stone-800">{field.text}</p>
+            </QuoteOptionField>
+          );
+        }
+
         if (field.type === 'qty') {
           return (
             <QuoteOptionField key={field.key} label={field.label}>
@@ -61,6 +78,9 @@ export default function GenericQuoteModule({ catalogItem, existing, onSave }) {
         }
 
         if (field.type === 'dimensions') {
+          if (field.whenCustom && values.sizePreset !== 'Custom' && values.shape !== 'Custom') {
+            return null;
+          }
           const unit = field.unit || 'mm';
           return (
             <QuoteOptionField key={`${field.key}-dimensions`} label={`${field.label} (${unit})`}>

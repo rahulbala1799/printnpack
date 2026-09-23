@@ -26,6 +26,7 @@ const PRODUCT_LINKS = [
   { label: 'Napkins & Tableware', href: '/plain-napkins-tableware-ireland' },
   { label: 'Rubber Stamps', href: '/rubber-stamps-ireland' },
   { label: 'Leaflets & Flyers', href: '/services/leaflets' },
+  { label: 'Business Cards', href: '/business-cards-ireland' },
 ];
 
 // Accordion section for mobile

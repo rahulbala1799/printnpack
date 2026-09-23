@@ -43,7 +43,7 @@ const categoryConfig = [
   },
   {
     name: 'Leaflets',
-    description: 'High quality leaflets & flyers in all sizes',
+    description: 'Leaflets, flyers and 85 × 55 mm business cards',
     accent: 'border-sky-500',
     badge: 'bg-sky-100 text-sky-700',
   },

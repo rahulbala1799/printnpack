@@ -141,6 +141,7 @@ export default function Home() {
             catalogOffer('Custom Posters Ireland', '/posters'),
             catalogOffer('Leaflets Ireland', '/services/leaflets'),
             catalogOffer('Premium Leaflets Ireland', '/premium-leaflets-ireland'),
+            catalogOffer('Business Cards Ireland', '/business-cards-ireland'),
             catalogOffer('Greaseproof Sheets Ireland', '/greaseproof-sheets-ireland'),
             catalogOffer('Stage Backdrop Banners Ireland', '/stage-backdrop-banners-ireland'),
             catalogOffer('3m x 3m Banners Ireland', '/stage-backdrop-banners-ireland'),
