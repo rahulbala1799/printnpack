@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'twisted-handle-paper-bags-ireland-sizes-buying-guide',
+    title: 'Twisted Handle Paper Bags Ireland: Sizes, MOQ & Retail Buying Guide',
+    excerpt:
+      'How to buy twisted handle paper bags in Ireland — Small, Medium and Large sizes, 500-unit MOQ, digital CMYK branding, twisted vs flat vs die-cut, and nationwide delivery from Ashbourne.',
+    date: '2026-09-23',
+    readTime: '8 min read',
+    image: '/images/products/twisted-handle-bags/1.png',
+    imageAlt:
+      'Twisted handle paper bags Ireland — premium retail carrier bags with logo',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'wooden-cutlery-ireland-sizes-buying-guide',
     title: 'Wooden Cutlery Ireland: Chip Forks, Sets & Wholesale Buying Guide',
     excerpt:
