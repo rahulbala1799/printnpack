@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'bagasse-meal-boxes-ireland-sizes-buying-guide',
+    title: 'Bagasse Meal Boxes Ireland: Sizes, Compartments & Wholesale Buying Guide',
+    excerpt:
+      'How to buy bagasse meal boxes in Ireland — 9×9, 8×8 HP4, 1/2/3-compartment options, lunch and burger sizes, case packs, and nationwide wholesale delivery from Ashbourne.',
+    date: '2026-09-24',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/120158.webp',
+    imageAlt:
+      'Bagasse meal boxes Ireland — 8×8 HP4 compostable takeaway trays wholesale',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'twisted-handle-paper-bags-ireland-sizes-buying-guide',
     title: 'Twisted Handle Paper Bags Ireland: Sizes, MOQ & Retail Buying Guide',
     excerpt:
