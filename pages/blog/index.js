@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'flat-handle-paper-bags-ireland-sizes-buying-guide',
+    title: 'Flat Handle Paper Bags Ireland: Sizes, MOQ & Café Buying Guide',
+    excerpt:
+      'How to buy flat handle paper bags in Ireland — Small, Medium and Large sizes, 500-unit MOQ, grease-proof lining, digital CMYK branding, and nationwide delivery from Ashbourne.',
+    date: '2026-09-25',
+    readTime: '8 min read',
+    image: '/images/products/flat-handle-bags/1.png',
+    imageAlt:
+      'Flat handle paper bags Ireland — branded café and takeaway carrier bags',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'bagasse-meal-boxes-ireland-sizes-buying-guide',
     title: 'Bagasse Meal Boxes Ireland: Sizes, Compartments & Wholesale Buying Guide',
     excerpt:
