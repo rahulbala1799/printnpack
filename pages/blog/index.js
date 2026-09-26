@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'cake-cards-ireland-sizes-buying-guide',
+    title: 'Cake Cards Ireland: Round vs Square Sizes & Bakery Wholesale Buying Guide',
+    excerpt:
+      'How to buy cake cards in Ireland — round and square boards from 7″ to 12″, 100-piece case packs, tiered wholesale pricing, and nationwide delivery from Ashbourne for bakeries and cafés.',
+    date: '2026-09-26',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/1022210.webp',
+    imageAlt:
+      'Cake cards Ireland — 8 inch round cake board wholesale for bakeries',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'flat-handle-paper-bags-ireland-sizes-buying-guide',
     title: 'Flat Handle Paper Bags Ireland: Sizes, MOQ & Café Buying Guide',
     excerpt:
