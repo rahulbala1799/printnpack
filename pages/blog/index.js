@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'custom-printed-flags-ireland-sizes-buying-guide',
+    title: 'Custom Printed Flags Ireland: Sizes, Materials & Club Buying Guide',
+    excerpt:
+      'How to buy custom printed flags in Ireland — Extra Small to Extra Large sizes, polyester vs recycled vs mesh, finishing options, MOQ from one flag, and nationwide delivery from Ashbourne for clubs, schools and events.',
+    date: '2026-09-27',
+    readTime: '8 min read',
+    image: '/images/products/custom-printed-flags/custom-printed-flags-ireland-gaa-club.jpg',
+    imageAlt:
+      'Custom printed flags Ireland — full-colour GAA club flag for sports pitches',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'cake-cards-ireland-sizes-buying-guide',
     title: 'Cake Cards Ireland: Round vs Square Sizes & Bakery Wholesale Buying Guide',
     excerpt:
