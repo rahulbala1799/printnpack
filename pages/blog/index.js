@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'foil-chicken-bags-ireland-sizes-buying-guide',
+    title: 'Foil Chicken Bags Ireland: Portion vs Standard vs Large & Wholesale Buying Guide',
+    excerpt:
+      'How to buy foil chicken bags in Ireland — portion, standard and large flat sizes, 500-piece case packs, tiered wholesale pricing, and nationwide delivery from Ashbourne for rotisserie and takeaway kitchens.',
+    date: '2026-09-28',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/120705.webp',
+    imageAlt:
+      'Foil chicken bags Ireland — standard foil rotisserie bag wholesale for takeaways',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'custom-printed-flags-ireland-sizes-buying-guide',
     title: 'Custom Printed Flags Ireland: Sizes, Materials & Club Buying Guide',
     excerpt:
