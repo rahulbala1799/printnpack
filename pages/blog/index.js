@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'fabric-banner-stands-ireland-sizes-buying-guide',
+    title: 'Fabric Banner Stands Ireland: Sizes, Kits & Trade Show Buying Guide',
+    excerpt:
+      'How to buy fabric banner stands in Ireland — sizes from 2.5 m to 6 m, complete kit vs graphic only, single vs double-sided print, MOQ from one unit, and nationwide delivery from Ashbourne for exhibitions and retail.',
+    date: '2026-09-29',
+    readTime: '8 min read',
+    image: '/images/banners/fabric-banner-stands/fabric-banner-stand-ireland-exhibition-media-wall.jpg',
+    imageAlt:
+      'Fabric banner stands Ireland — exhibition media wall stretch fabric on aluminium frame',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'foil-chicken-bags-ireland-sizes-buying-guide',
     title: 'Foil Chicken Bags Ireland: Portion vs Standard vs Large & Wholesale Buying Guide',
     excerpt:
