@@ -24,6 +24,7 @@ export const NAPKIN_PRODUCT_SEO = {
     productFaqs: MOST_ASKED_NAPKIN_FAQS.slice(0, 4),
     relatedLinks: [
       { href: '/products/premium-linen-feel-napkins', label: 'Premium Linen-Feel Napkins', desc: 'Upscale airlaid napkins for hotels & weddings' },
+      { href: '/luxury-tissue-paper-ireland', label: 'Luxury Tissue Paper', desc: 'Plain colour tissue, 480 sheets per case' },
       ...SHARED_LINKS,
     ],
   },

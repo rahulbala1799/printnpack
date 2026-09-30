@@ -12,6 +12,7 @@ const HERO_IMAGE = '/images/hero/napkin.svg';
 
 const napkinTypes = [
   { title: 'Printed Paper Napkins', desc: 'Custom logo napkins for restaurants, cafes, and takeaways — cocktail, lunch, and dinner sizes.', href: '/products/printed-napkins', price: '0.05' },
+  { title: 'Luxury Tissue Paper', desc: 'Plain acid-free colour tissue, 500 × 750 mm. 480 sheets per case, 15 colours.', href: '/luxury-tissue-paper-ireland', price: '29.99', priceLabel: '€29.99 + VAT per case' },
   { title: 'Premium Linen-Feel Napkins', desc: 'Cloth-like airlaid napkins for upscale dining, hotels, and weddings.', href: '/products/premium-linen-feel-napkins', price: '0.10' },
   { title: 'Plain Wholesale Napkins', desc: 'Bulk white napkins without printing — economical for high-volume catering.', href: '/plain-napkins-tableware-ireland', price: '0.03' },
 ];
@@ -119,13 +120,13 @@ export default function NapkinsIreland() {
 
       <section className="py-12 lg:py-16 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">Napkin types</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">Napkins and luxury tissue paper</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {napkinTypes.map((item) => (
               <Link key={item.title} href={item.href} className="group bg-white rounded-2xl border border-gray-200 p-6 hover:border-amber-300 hover:shadow-lg transition-all">
                 <h3 className="text-xl font-bold text-gray-900 group-hover:text-amber-600 mb-2">{item.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed mb-3">{item.desc}</p>
-                <span className="text-amber-600 font-semibold text-sm">From €{item.price} — order now →</span>
+                <span className="text-amber-600 font-semibold text-sm">{item.priceLabel || `From €${item.price}`} — order now →</span>
               </Link>
             ))}
           </div>

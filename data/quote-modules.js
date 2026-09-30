@@ -15,6 +15,7 @@ import {
   colourRangesForGarment,
   pricePerPiece,
 } from './clothing-pricing';
+import { LUXURY_TISSUE_HREF, LUXURY_TISSUE_ID, repriceTissueLine } from './luxury-tissue-paper';
 
 function productMedia(id, href, fallbackImage) {
   const match = products.find((item) => item.id === id || item.url === href);
@@ -45,6 +46,16 @@ export const QUOTE_CATALOG = [
       group: 'Clothing',
     })
   ),
+  withMedia({
+    id: LUXURY_TISSUE_ID,
+    name: 'Luxury Tissue Paper',
+    href: LUXURY_TISSUE_HREF,
+    image: '/images/products/luxury-tissue-paper/luxury-tissue-paper-ireland-blue.jpg',
+    moduleId: 'luxury-tissue',
+    configurable: true,
+    group: 'Branded Items',
+    price: '€29.99 + VAT / 480 sheets',
+  }),
   withMedia({ id: 'custom-pizza-boxes-ireland', name: 'Custom Pizza Boxes', href: '/custom-pizza-boxes-ireland', moduleId: 'pizza-boxes', configurable: false, group: 'Packaging', price: 'From 500 units' }),
   withMedia({ id: 'eco-bagasse-burger-boxes', name: 'Bagasse Burger Boxes', href: '/eco-bagasse-burger-boxes', moduleId: 'bagasse', configurable: false, group: 'Packaging' }),
   withMedia({ id: 'greaseproof-sheets-ireland', name: 'Greaseproof Sheets', href: '/greaseproof-sheets-ireland', moduleId: 'greaseproof', configurable: false, group: 'Packaging' }),
@@ -377,6 +388,9 @@ export function repriceClothingLine(line, qty) {
 export function repriceQuoteLine(line, qty) {
   if (line.moduleId === 'clothing') {
     return { ...repriceClothingLine(line, qty), id: line.id };
+  }
+  if (line.moduleId === 'luxury-tissue') {
+    return { ...repriceTissueLine(line, qty), id: line.id };
   }
   if (line.moduleId === 'business-cards') {
     const safeQty = Math.max(1, Number(qty) || 1);

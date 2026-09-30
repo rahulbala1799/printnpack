@@ -491,8 +491,8 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/luxury-tissue-paper-ireland',
-        destination: '/custom-printed-tissue-paper-ireland',
+        source: '/products/luxury-tissue-paper',
+        destination: '/luxury-tissue-paper-ireland',
         permanent: true,
       },
       {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { resolveQuoteImage } from '../../data/quote-modules';
 import ClothingQuoteModule from './modules/ClothingQuoteModule';
 import GenericQuoteModule from './modules/GenericQuoteModule';
+import TissuePaperQuoteModule from './modules/TissuePaperQuoteModule';
 import QuoteProductImage from './QuoteProductImage';
 
 export default function QuoteConfigurePanel({ selected, existing, onSave }) {
@@ -66,6 +67,8 @@ export default function QuoteConfigurePanel({ selected, existing, onSave }) {
       </div>
       {selected.moduleId === 'clothing' ? (
         <ClothingQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
+      ) : selected.moduleId === 'luxury-tissue' ? (
+        <TissuePaperQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
       ) : (
         <GenericQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
       )}
