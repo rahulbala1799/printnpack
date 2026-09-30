@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'corrugated-clamshell-meal-boxes-ireland-sizes-buying-guide',
+    title: 'Corrugated Clamshell Meal Boxes Ireland: #8–#56 Sizes & Wholesale Buying Guide',
+    excerpt:
+      'How to buy corrugated clamshell meal boxes in Ireland — #8 burger to #12 large, #13 long and #56 portion sizes, fold-out burger meal boxes, case packs, and nationwide delivery from Ashbourne.',
+    date: '2026-09-30',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/120091.webp',
+    imageAlt:
+      'Corrugated clamshell meal boxes Ireland — #8 burger clamshell wholesale for takeaways',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'fabric-banner-stands-ireland-sizes-buying-guide',
     title: 'Fabric Banner Stands Ireland: Sizes, Kits & Trade Show Buying Guide',
     excerpt:
