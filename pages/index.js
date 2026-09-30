@@ -126,6 +126,7 @@ export default function Home() {
             catalogOffer('Banner Printing Dublin', '/banner-printing-dublin'),
             catalogOffer('Printed Banners Ireland', '/vinyl-banners'),
             catalogOffer('Roll Up Banners Ireland', '/roll-up-banners-ireland'),
+            catalogOffer('Custom Table Covers Ireland', '/custom-table-covers-ireland'),
             catalogOffer('Custom Printed Flags Ireland', '/custom-printed-flags-ireland'),
             catalogOffer('Extra Wide Roll Up Banners', '/extra-wide-roll-up-banners-ireland'),
             catalogOffer('Custom Rubber Stamps Ireland', '/rubber-stamps'),

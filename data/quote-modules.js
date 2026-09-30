@@ -56,6 +56,7 @@ export const QUOTE_CATALOG = [
   withMedia({ id: 'curved-banner-stands-ireland', name: 'Curved Banner Stands', href: '/curved-banner-stands-ireland', moduleId: 'curved-banner-stands', configurable: true, group: 'Banners, Stands and Frames', price: 'Contact for quote' }),
   withMedia({ id: 'stage-backdrop-banners-ireland', name: 'Stage Backdrop Banners', href: '/stage-backdrop-banners-ireland', moduleId: 'stage-backdrops', configurable: false, group: 'Banners, Stands and Frames' }),
   withMedia({ id: 'vinyl-banners', name: 'Vinyl Banners', href: '/vinyl-banners', moduleId: 'vinyl-banners', configurable: false, group: 'Banners, Stands and Frames' }),
+  withMedia({ id: 'custom-table-covers', name: 'Custom Table Covers', href: '/custom-table-covers-ireland', moduleId: 'table-covers', configurable: true, group: 'Banners, Stands and Frames', price: 'Contact for quote', image: '/images/table-covers/custom-table-cover-ireland.jpg' }),
   withMedia({ id: 'custom-printed-flags-ireland', name: 'Custom Printed Flags', href: '/custom-printed-flags-ireland', moduleId: 'flags', configurable: false, group: 'Wide Format' }),
   withMedia({ id: 'posters', name: 'Posters', href: '/posters', moduleId: 'posters', configurable: false, group: 'Wide Format' }),
   withMedia({ id: 'foamex-boards', name: 'Foamex Boards', href: '/foamex-boards', moduleId: 'foamex', configurable: false, group: 'Boards' }),
@@ -138,6 +139,26 @@ export const GENERIC_MODULE_FIELDS = {
     DIMENSIONS_CM_IF_CUSTOM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 1 },
   ],
+  'table-covers': [
+    {
+      key: 'sizePreset',
+      label: 'Size',
+      type: 'chips',
+      hint: 'Choose a standard size, or Custom to type your own. Use one, not both.',
+      options: ['1.2 × 0.6 m', '1.8 × 0.75 m', '2.4 × 0.75 m', '3 × 1.5 m', '6 × 1.5 m', 'Custom'],
+    },
+    {
+      key: 'size',
+      label: 'Your size',
+      type: 'dimensions',
+      unit: 'm',
+      whenCustom: true,
+      widthMax: 1.5,
+      lengthMax: 6,
+      hint: 'Width up to 1.5 m. Length up to 6 m.',
+    },
+    { key: 'qty', label: 'Quantity', type: 'qty', min: 1 },
+  ],
   'roll-up-banners': [
     { key: 'sizePreset', label: 'Size', type: 'chips', options: ['850×2000 mm', '1000×2000 mm', 'Custom'] },
     DIMENSIONS_MM_IF_CUSTOM,
@@ -208,6 +229,25 @@ export function getModuleFields(moduleId) {
     { key: 'size', label: 'Size', type: 'dimensions', unit: 'mm' },
     { key: 'qty', label: 'Quantity', type: 'qty', min: 1 },
   ];
+}
+
+export function quoteOptionError(fields, values) {
+  for (const field of fields) {
+    if (field.type !== 'dimensions') continue;
+    const showing = !field.whenCustom || values.sizePreset === 'Custom' || values.shape === 'Custom';
+    if (!showing) continue;
+    const width = Number(values.width);
+    const length = Number(values.length);
+    const unit = field.unit || 'mm';
+    if (!(width > 0) || !(length > 0)) return 'Enter both width and length.';
+    if (field.widthMax != null && width > field.widthMax) {
+      return `Width can be up to ${field.widthMax} ${unit}.`;
+    }
+    if (field.lengthMax != null && length > field.lengthMax) {
+      return `Length can be up to ${field.lengthMax} ${unit}.`;
+    }
+  }
+  return '';
 }
 
 function fieldSummary(field, options) {

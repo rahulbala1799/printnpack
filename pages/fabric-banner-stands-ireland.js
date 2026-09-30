@@ -299,6 +299,7 @@ export default function FabricBannerStandsIreland() {
           { href: '/roll-up-banners-ireland', label: 'Roll-up banners', desc: 'Cassette pull-up stands' },
           { href: '/extra-wide-roll-up-banners-ireland', label: 'Extra-wide roll-ups', desc: '2 m cassette banners' },
           { href: '/stage-backdrop-banners-ireland', label: 'Stage backdrop banners', desc: 'Huge hanging graphics' },
+          { href: '/custom-table-covers-ireland', label: 'Custom table covers', desc: 'Printed throws, every county' },
           { href: '/banner-faq-ireland', label: 'Banner FAQ Ireland', desc: 'Cost, materials and names' },
         ]}
       />

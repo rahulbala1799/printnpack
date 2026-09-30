@@ -521,6 +521,31 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/custom-table-covers',
+        destination: '/custom-table-covers-ireland',
+        permanent: true,
+      },
+      {
+        source: '/printed-table-covers-ireland',
+        destination: '/custom-table-covers-ireland',
+        permanent: true,
+      },
+      {
+        source: '/exhibition-table-covers-ireland',
+        destination: '/custom-table-covers-ireland',
+        permanent: true,
+      },
+      {
+        source: '/table-throws-ireland',
+        destination: '/custom-table-covers-ireland',
+        permanent: true,
+      },
+      {
+        source: '/fitted-table-covers-ireland',
+        destination: '/custom-table-covers-ireland',
+        permanent: true,
+      },
+      {
         source: '/disposable-gloves-ireland',
         destination: '/gloves-ireland',
         permanent: true,

@@ -96,6 +96,7 @@ const staticPages = [
   { path: '/extra-wide-roll-up-banners-ireland', priority: '0.9', changefreq: 'weekly' },
   { path: '/fabric-banner-stands-ireland', priority: '0.92', changefreq: 'weekly' },
   { path: '/curved-banner-stands-ireland', priority: '0.91', changefreq: 'weekly' },
+  { path: '/custom-table-covers-ireland', priority: '0.9', changefreq: 'weekly' },
   { path: '/rubber-stamps',   priority: '0.95', changefreq: 'weekly' },
   { path: '/rubber-stamps-ireland',        priority: '0.9',  changefreq: 'weekly' },
   { path: '/self-inking-stamps-ireland',   priority: '0.88', changefreq: 'weekly' },

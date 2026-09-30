@@ -165,6 +165,13 @@ const guides = [
     cta: 'View flags',
   },
   {
+    href: '/custom-table-covers-ireland',
+    title: 'Custom Table Covers Ireland',
+    description: 'Printed exhibition throws for events in every county. Standard sizes or your own, up to 1.5 m × 6 m.',
+    image: '/images/table-covers/custom-table-cover-ireland.jpg',
+    cta: 'View table covers',
+  },
+  {
     href: '/fabric-banner-stands-ireland',
     title: 'Fabric Banner Stands Ireland',
     description: 'Banner with frame or structure — stretch fabric display, media wall, 2.5–6 m.',

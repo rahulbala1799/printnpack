@@ -65,6 +65,7 @@ const itemListLd = {
     buildCatalogOffer('Fabric Banner Stands Ireland', `${SITE_URL}/fabric-banner-stands-ireland`).itemOffered,
     buildCatalogOffer('Curved Banner Stands Ireland', `${SITE_URL}/curved-banner-stands-ireland`).itemOffered,
     buildCatalogOffer('Large Stage Backdrop Banners Ireland', `${SITE_URL}/stage-backdrop-banners-ireland`).itemOffered,
+    buildCatalogOffer('Custom Table Covers Ireland', `${SITE_URL}/custom-table-covers-ireland`).itemOffered,
     buildCatalogOffer('Custom Printed Flags Ireland', `${SITE_URL}/custom-printed-flags-ireland`).itemOffered,
   ].map((item, index) => ({
     '@type': 'ListItem',
@@ -83,7 +84,7 @@ export default function BannersIreland() {
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="keywords" content="banner printing, banner printing ireland, banners ireland, banner printing near me, banner printing dublin, banners dublin, PVC banners ireland, roll up banners ireland, fabric banner stands ireland, banner with frame, banner with structure, extra wide roll up banners, printed banners ireland, trade show banners ireland" />
+        <meta name="keywords" content="banner printing, banner printing ireland, banners ireland, banner printing near me, banner printing dublin, banners dublin, PVC banners ireland, roll up banners ireland, fabric banner stands ireland, banner with frame, banner with structure, extra wide roll up banners, printed banners ireland, trade show banners ireland, custom table covers ireland, printed table covers ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href={PAGE_URL} />
         <meta property="og:type" content="website" />
@@ -133,7 +134,7 @@ export default function BannersIreland() {
       <section className="py-12 lg:py-16 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Banners, stands and frames</h2>
-          <p className="text-gray-600 mb-8 max-w-2xl">PVC for outdoor use, roll-ups for portable displays, fabric banner stands (banner with frame), huge stage backdrops up to 50 m, and custom flags for clubs and events.</p>
+          <p className="text-gray-600 mb-8 max-w-2xl">PVC for outdoor use, roll-ups for portable displays, fabric banner stands (banner with frame), printed table covers, huge stage backdrops up to 50 m, and custom flags for clubs and events.</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <Link href="/vinyl-banners" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-blue-300 hover:shadow-lg transition-all">
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 mb-2">PVC Banners</h3>
@@ -164,6 +165,11 @@ export default function BannersIreland() {
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-sky-700 mb-2">Stage Backdrop Banners</h3>
               <p className="text-gray-600 text-sm leading-relaxed mb-4">Huge custom large banners — 3m × 3m and any size up to 50 m. Polyester stage backdrops for festivals, conferences and theatres.</p>
               <span className="text-sky-700 font-semibold text-sm">View stage backdrops →</span>
+            </Link>
+            <Link href="/custom-table-covers-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-emerald-300 hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold text-gray-900 group-hover:text-emerald-700 mb-2">Custom Table Covers</h3>
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">Printed throws for exhibition and event tables. Standard sizes, or your own up to 1.5 m wide and 6 m long.</p>
+              <span className="text-emerald-700 font-semibold text-sm">View table covers →</span>
             </Link>
             <Link href="/custom-printed-flags-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-green-300 hover:shadow-lg transition-all">
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-green-700 mb-2">Custom Printed Flags</h3>

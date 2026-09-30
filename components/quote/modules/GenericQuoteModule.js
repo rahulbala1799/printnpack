@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { buildCatalogQuoteLine, getModuleFields } from '../../../data/quote-modules';
+import { buildCatalogQuoteLine, getModuleFields, quoteOptionError } from '../../../data/quote-modules';
 import { cn } from '../../../lib/cn';
 import QuantityField from '../QuantityField';
 import QuoteOptionField, { quoteControlClass } from '../QuoteOptionField';
@@ -9,6 +9,7 @@ export default function GenericQuoteModule({ catalogItem, existing, onSave }) {
   const initial = { ...(existing?.options || {}) };
   if (existing?.qty) initial.qty = existing.qty;
 
+  const [error, setError] = useState('');
   const [values, setValues] = useState(() => {
     const next = { ...initial };
     fields.forEach((field) => {
@@ -24,6 +25,7 @@ export default function GenericQuoteModule({ catalogItem, existing, onSave }) {
   });
 
   const setField = (key, value) => {
+    setError('');
     setValues((prev) => {
       const next = { ...prev, [key]: value };
       if (key === 'sizePreset' && value !== 'Custom') {
@@ -34,12 +36,22 @@ export default function GenericQuoteModule({ catalogItem, existing, onSave }) {
     });
   };
 
+  const save = () => {
+    const message = quoteOptionError(fields, values);
+    if (message) {
+      setError(message);
+      return;
+    }
+    onSave(buildCatalogQuoteLine(catalogItem, values));
+  };
+
   return (
     <div className="space-y-6">
       {fields.map((field) => {
         if (field.type === 'chips') {
           return (
             <QuoteOptionField key={field.key} label={field.label}>
+              {field.hint && <p className="mb-2 max-w-sm text-xs text-stone-500">{field.hint}</p>}
               <div className="flex flex-wrap justify-center gap-1.5">
                 {field.options.map((option) => (
                   <button
@@ -84,6 +96,7 @@ export default function GenericQuoteModule({ catalogItem, existing, onSave }) {
           const unit = field.unit || 'mm';
           return (
             <QuoteOptionField key={`${field.key}-dimensions`} label={`${field.label} (${unit})`}>
+              {field.hint && <p className="mb-2 max-w-sm text-xs text-stone-500">{field.hint}</p>}
               <div className="flex items-end justify-center gap-3">
                 <label className="flex flex-col items-center gap-1">
                   <span className="text-[11px] font-medium text-stone-500">Width</span>
@@ -126,10 +139,11 @@ export default function GenericQuoteModule({ catalogItem, existing, onSave }) {
         );
       })}
 
+      {error && <p className="text-sm text-red-600">{error}</p>}
       <div className="flex justify-center">
         <button
           type="button"
-          onClick={() => onSave(buildCatalogQuoteLine(catalogItem, values))}
+          onClick={save}
           className="rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700"
         >
           {existing ? 'Update quote' : 'Add to quote'}

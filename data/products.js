@@ -2868,6 +2868,30 @@ const products = [
     imageSrc: '/images/rubber-stamps/RubberStamp_10.jpg',
     price: 'From €15.00',
     leadTime: '1-3 business days'
+  },
+  {
+    id: 'custom-table-covers',
+    name: 'Custom Table Covers',
+    category: 'Banners, Stands and Frames',
+    url: '/custom-table-covers-ireland',
+    description: 'Custom printed table covers and exhibition throws for events across Ireland. Standard sizes or your own measurements, up to 1.5 m wide and 6 m long. Delivered to every county.',
+    features: [
+      'Printed exhibition and event table covers',
+      'Standard sizes from 1.2 × 0.6 m to 6 × 1.5 m',
+      'Custom size: width up to 1.5 m, length up to 6 m',
+      'Order from one cover',
+    ],
+    specifications: [
+      { name: 'Standard sizes', value: '1.2 × 0.6 m, 1.8 × 0.75 m, 2.4 × 0.75 m, 3 × 1.5 m, 6 × 1.5 m' },
+      { name: 'Custom width', value: 'Up to 1.5 m' },
+      { name: 'Custom length', value: 'Up to 6 m' },
+      { name: 'Minimum order', value: '1' },
+    ],
+    images: ['/images/table-covers/custom-table-cover-ireland.jpg'],
+    imageSrc: '/images/table-covers/custom-table-cover-ireland.jpg',
+    price: 'Contact for quote',
+    moq: 1,
+    leadTime: 'Quoted from Ashbourne',
   }
 ];
 

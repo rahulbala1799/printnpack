@@ -35,6 +35,7 @@ const quickLinks = [
   { label: 'Roll-Up Banners', href: '/roll-up-banners-ireland' },
   { label: 'Fabric Banner Stands', href: '/fabric-banner-stands-ireland' },
   { label: 'Custom Flags', href: '/custom-printed-flags-ireland' },
+  { label: 'Table Covers', href: '/custom-table-covers-ireland' },
   { label: 'Foamex Boards', href: '/foamex-boards' },
 ];
 
