@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'curved-banner-stands-ireland-sizes-buying-guide',
+    title: 'Curved Banner Stands Ireland: Sizes, Kits & Exhibition Buying Guide',
+    excerpt:
+      'How to buy curved banner stands in Ireland — sizes from 3 m to 5 m, complete kit vs print only, single vs double-sided dye sublimation, MOQ from one unit, and nationwide delivery from Ashbourne for exhibitions and photo walls.',
+    date: '2026-10-01',
+    readTime: '8 min read',
+    image:
+      '/images/banners/curved-banner-stands/curved-banner-stand-ireland-curved-stretch-stand.jpg',
+    imageAlt:
+      'Curved banner stands Ireland — curved stretch stand with printed fabric on a frame',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'corrugated-clamshell-meal-boxes-ireland-sizes-buying-guide',
     title: 'Corrugated Clamshell Meal Boxes Ireland: #8–#56 Sizes & Wholesale Buying Guide',
     excerpt:
