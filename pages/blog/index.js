@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'rpet-hinged-salad-containers-ireland-sizes-buying-guide',
+    title:
+      'rPET Hinged Salad Containers Ireland: Round vs Square vs Oval & Wholesale Buying Guide',
+    excerpt:
+      'How to buy rPET hinged salad containers in Ireland — round, square and oval sizes from 250cc to 1000cc, case packs, tiered wholesale pricing, and nationwide delivery from Ashbourne for delis and cafés.',
+    date: '2026-10-02',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/120336.webp',
+    imageAlt:
+      'rPET hinged salad containers Ireland — clear 1000cc square salad tub wholesale',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'curved-banner-stands-ireland-sizes-buying-guide',
     title: 'Curved Banner Stands Ireland: Sizes, Kits & Exhibition Buying Guide',
     excerpt:
