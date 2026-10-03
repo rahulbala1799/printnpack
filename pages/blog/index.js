@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'stage-backdrop-banners-ireland-sizes-buying-guide',
+    title: 'Stage Backdrop Banners Ireland: 3×3 m Sizes, Materials & Event Buying Guide',
+    excerpt:
+      'How to buy stage backdrop banners in Ireland — 3×3 m and huge custom sizes up to 50 m, matte vs coated vs structured polyester, ring finishing, MOQ from one banner, and nationwide delivery from Ashbourne for festivals and conferences.',
+    date: '2026-10-03',
+    readTime: '8 min read',
+    image:
+      '/images/products/stage-backdrop-banners/stage-backdrop-banners-ireland-open-air-festival.png',
+    imageAlt:
+      'Stage backdrop banners Ireland — huge custom printed festival banner on an open-air stage',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'rpet-hinged-salad-containers-ireland-sizes-buying-guide',
     title:
       'rPET Hinged Salad Containers Ireland: Round vs Square vs Oval & Wholesale Buying Guide',
