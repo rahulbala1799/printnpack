@@ -142,6 +142,7 @@ const staticPages = [
   { path: '/services/posters',  priority: '0.8', changefreq: 'monthly' },
   { path: '/services/vinyls',   priority: '0.8', changefreq: 'monthly' },
   { path: '/blog',              priority: '0.8', changefreq: 'weekly'  },
+  { path: '/blog/kraft-carriers-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/stage-backdrop-banners-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/rpet-hinged-salad-containers-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/curved-banner-stands-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
