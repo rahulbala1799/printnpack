@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'kraft-carriers-ireland-sizes-buying-guide',
+    title: 'Kraft Carriers Ireland: Small–XL Internal Handle Sizes & Wholesale Buying Guide',
+    excerpt:
+      'How to buy kraft carriers in Ireland — Small to XL internal-handle sizes, 200–250 case packs, plain vs printed bags, and nationwide delivery from Ashbourne for cafés, takeaways and retailers.',
+    date: '2026-10-04',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/180021.webp',
+    imageAlt:
+      'Kraft carriers Ireland — medium kraft internal handle bag wholesale for takeaways',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'stage-backdrop-banners-ireland-sizes-buying-guide',
     title: 'Stage Backdrop Banners Ireland: 3×3 m Sizes, Materials & Event Buying Guide',
     excerpt:
