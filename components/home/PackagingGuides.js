@@ -34,7 +34,7 @@ const guides = [
   {
     href: '/printed-flat-handle-bags-ireland',
     title: 'Printed Flat Handle Bags',
-    description: 'Custom logo takeaway bags from 500 units — kraft & white, three sizes.',
+    description: 'Custom logo takeaway bags from 20 — kraft & white, three sizes.',
     image: '/images/products/flat-handle-bags/3.png',
     cta: 'View printed bags',
   },

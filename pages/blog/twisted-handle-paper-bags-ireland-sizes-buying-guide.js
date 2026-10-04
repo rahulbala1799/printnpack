@@ -16,7 +16,7 @@ const jsonLd = {
   '@type': 'Article',
   headline: 'Twisted Handle Paper Bags Ireland: Sizes, MOQ & Retail Buying Guide',
   description:
-    'How to buy twisted handle paper bags in Ireland — Small, Medium and Large sizes, 500-unit MOQ, digital CMYK print, twisted vs flat vs die-cut, and nationwide delivery from Ashbourne.',
+    'How to buy twisted handle paper bags in Ireland — Small, Medium and Large sizes, 20-bag minimum, digital CMYK print, twisted vs flat vs die-cut, and nationwide delivery from Ashbourne.',
   image: `${siteUrl}${HERO_IMAGE}`,
   author: { '@type': 'Organization', name: 'PrintNPack Ireland', url: siteUrl },
   publisher: {
@@ -38,7 +38,7 @@ const faqLd = {
       name: 'Where can I order twisted handle paper bags in Ireland?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'PrintNPack supplies custom twisted handle paper bags across Ireland — full-colour logo printing from 500 units with nationwide delivery from Ashbourne, Co. Meath to Dublin, Cork, Galway and every county.',
+        text: 'PrintNPack supplies custom twisted handle paper bags across Ireland — full-colour logo printing from 20 bags with nationwide delivery from Ashbourne, Co. Meath to Dublin, Cork, Galway and every county.',
       },
     },
     {
@@ -54,7 +54,7 @@ const faqLd = {
       name: 'What is the minimum order for twisted handle paper bags?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Twisted handle paper bags start from 500 units. Digital CMYK printing has no plate fees, and sizes can be mixed within the same order provided each size meets the minimum for that variant.',
+        text: 'Twisted handle paper bags start from 20 bags. Digital CMYK printing has no plate fees, and sizes can be mixed within the same order provided each size meets the minimum for that variant.',
       },
     },
     {
@@ -109,7 +109,7 @@ const sizeRows = [
 export default function TwistedHandlePaperBagsIrelandSizesBuyingGuide() {
   const title = 'Twisted Handle Paper Bags Ireland: Sizes, MOQ & Retail Buying Guide';
   const description =
-    'Buy twisted handle paper bags in Ireland with confidence — Small, Medium and Large sizes, 500-unit MOQ, digital CMYK branding, and delivery to Dublin, Cork, Galway and nationwide from Ashbourne.';
+    'Buy twisted handle paper bags in Ireland with confidence — Small, Medium and Large sizes, 20-bag minimum, digital CMYK branding, and delivery to Dublin, Cork, Galway and nationwide from Ashbourne.';
 
   return (
     <Layout>
@@ -213,7 +213,7 @@ export default function TwistedHandlePaperBagsIrelandSizesBuyingGuide() {
           </p>
           <p className="text-slate-700 leading-relaxed mb-8">
             This guide explains how to buy <strong>twisted handle paper bags in Ireland</strong> —
-            Small, Medium and Large dimensions, the 500-unit MOQ, digital CMYK printing, when to
+            Small, Medium and Large dimensions, the 20-bag minimum, digital CMYK printing, when to
             choose twisted over flat or die-cut, and how{' '}
             <Link href={HUB_HREF} className="text-blue-600 hover:underline">
               PrintNPack&apos;s twisted handle range
@@ -233,7 +233,7 @@ export default function TwistedHandlePaperBagsIrelandSizesBuyingGuide() {
           <p className="text-slate-700 leading-relaxed mb-8">
             PrintNPack prints twisted handle bags on premium kraft paper (130–170 gsm) with reinforced
             bottoms. Large bags are designed to carry typical retail loads comfortably up to around 5
-            kg. Orders are custom printed from 500 units, with production typically 10–14 business days
+            kg. Orders are custom printed from 20 bags, with production typically 10–14 business days
             after artwork approval. For a wider paper-bag overview, see the{' '}
             <Link href="/paper-bags-ireland" className="text-blue-600 hover:underline">
               paper bags Ireland hub
@@ -302,7 +302,7 @@ export default function TwistedHandlePaperBagsIrelandSizesBuyingGuide() {
             />
           </div>
           <p className="text-slate-700 leading-relaxed mb-4">
-            Custom twisted handle bags start from a <strong>500-unit MOQ</strong>. PrintNPack uses
+            Custom twisted handle bags start from a <strong>20-bag minimum</strong>. PrintNPack uses
             digital CMYK printing — no plates and no setup fees — so pricing is driven by ink coverage,
             design complexity, size and quantity rather than by colour count alone. Catalogue pricing
             starts at <strong>€0.35 per unit</strong>; your quote will reflect artwork coverage and the
@@ -436,14 +436,14 @@ export default function TwistedHandlePaperBagsIrelandSizesBuyingGuide() {
             <li>List your top three till products and match Small, Medium or Large</li>
             <li>Decide kraft, white or black stock and whether you need special finishes</li>
             <li>Send logo artwork for digital CMYK — mix sizes if you need more than one</li>
-            <li>Approve the proof and place from 500 units on the twisted handle product page</li>
+            <li>Approve the proof and place from 20 bags on the twisted handle product page</li>
             <li>Take nationwide delivery or collect from Ashbourne, Co. Meath</li>
           </ol>
 
           <div className="bg-slate-900 rounded-xl p-6 mb-8 text-white not-prose">
             <p className="font-semibold mb-1">Ready to order twisted handle bags?</p>
             <p className="text-slate-400 text-sm mb-4">
-              Custom printed Small, Medium and Large twisted handle carriers from 500 units —
+              Custom printed Small, Medium and Large twisted handle carriers from 20 bags —
               delivered across Ireland from Ashbourne.
             </p>
             <div className="flex flex-wrap gap-3">
@@ -473,7 +473,7 @@ export default function TwistedHandlePaperBagsIrelandSizesBuyingGuide() {
             {[
               {
                 q: 'Where can I order twisted handle paper bags in Ireland?',
-                a: 'PrintNPack supplies custom twisted handle paper bags across Ireland — full-colour logo printing from 500 units with delivery from Ashbourne, Co. Meath to Dublin, Cork, Galway and nationwide.',
+                a: 'PrintNPack supplies custom twisted handle paper bags across Ireland — full-colour logo printing from 20 bags with delivery from Ashbourne, Co. Meath to Dublin, Cork, Galway and nationwide.',
               },
               {
                 q: 'What sizes of twisted handle paper bags are available?',
@@ -481,7 +481,7 @@ export default function TwistedHandlePaperBagsIrelandSizesBuyingGuide() {
               },
               {
                 q: 'What is the minimum order for twisted handle paper bags?',
-                a: 'Orders start from 500 units. You can mix Small, Medium and Large within the same order subject to each size variant meeting its minimum.',
+                a: 'Orders start from 20 bags. You can mix Small, Medium and Large within the same order subject to each size variant meeting its minimum.',
               },
               {
                 q: 'Twisted handle vs flat handle vs die-cut — which should Irish retailers choose?',

@@ -15,7 +15,7 @@ const jsonLd = {
   '@type': 'Article',
   headline: 'Kerala Cafe Dublin: 1,000 Custom Printed Paper Bags from PrintNPack',
   description:
-    'PrintNPack printed 1,000 branded white paper bags for Kerala Cafe in Coolmine, Dublin — a short-run café branding job with logo, Instagram QR and contact details. Custom paper bags from 500–1,000 units, nationwide from Ashbourne.',
+    'PrintNPack printed 1,000 branded white paper bags for Kerala Cafe in Coolmine, Dublin — a short-run café branding job with logo, Instagram QR and contact details. Custom paper bags from 20 bags, nationwide from Ashbourne.',
   image: `${siteUrl}${HERO_IMAGE}`,
   author: { '@type': 'Organization', name: 'PrintNPack Ireland', url: siteUrl },
   publisher: {
@@ -37,7 +37,7 @@ const faqLd = {
       name: 'Can I order only 1,000 printed paper bags in Ireland?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. PrintNPack prints custom paper bags from 500 units, so a 1,000-bag run is a practical branding quantity for independent cafés and restaurants. Kerala Cafe in Coolmine, Dublin ordered 1,000 branded white paper bags for takeaway and retail use.',
+        text: 'Yes. PrintNPack prints custom paper bags from 20 bags, so a 1,000-bag run is a practical branding quantity for independent cafés and restaurants. Kerala Cafe in Coolmine, Dublin ordered 1,000 branded white paper bags for takeaway and retail use.',
       },
     },
     {
@@ -69,7 +69,7 @@ const faqLd = {
       name: 'How long do custom printed paper bags take?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Production is typically 10–14 business days after artwork approval. Send your logo, bag style, quantity and delivery county for a quote. Printed flat handle and twisted handle bags start from 500 units.',
+        text: 'Production is typically 10–14 business days after artwork approval. Send your logo, bag style, quantity and delivery county for a quote. Printed flat handle and twisted handle bags start from 20 bags.',
       },
     },
   ],
@@ -88,7 +88,7 @@ const breadcrumbLd = {
 export default function KeralaCafePrintedPaperBagsDublin() {
   const title = 'Kerala Cafe Dublin: 1,000 Printed Paper Bags | PrintNPack';
   const description =
-    'PrintNPack printed 1,000 branded paper bags for Kerala Cafe in Coolmine, Dublin — logo, Instagram QR and contact details on a short run. Custom café bags from 500 units, delivered nationwide from Ashbourne.';
+    'PrintNPack printed 1,000 branded paper bags for Kerala Cafe in Coolmine, Dublin — logo, Instagram QR and contact details on a short run. Custom café bags from 20 bags, delivered nationwide from Ashbourne.';
 
   return (
     <Layout>
@@ -161,7 +161,7 @@ export default function KeralaCafePrintedPaperBagsDublin() {
         <div className="rounded-xl bg-emerald-50 border border-emerald-100 p-6 mb-8 not-prose">
           <p className="text-slate-700 text-sm leading-relaxed mb-4">
             Need bags like these for your café? Custom printed paper bags start from{' '}
-            <strong>500 units</strong>. Start at our{' '}
+            <strong>20 bags</strong>. Start at our{' '}
             <Link href="/paper-bags-ireland" className="text-emerald-700 hover:underline font-semibold">
               paper bags Ireland hub
             </Link>
@@ -224,7 +224,7 @@ export default function KeralaCafePrintedPaperBagsDublin() {
             <li>Stay inside a realistic branding budget</li>
           </ul>
           <p className="text-slate-700 leading-relaxed mb-8">
-            PrintNPack prints custom paper bags from <strong>500 units</strong>, so 1,000 sits comfortably
+            PrintNPack prints custom paper bags from <strong>20 bags</strong>, so 1,000 sits comfortably
             in the range we already run for Irish cafés, delis and restaurants. Larger reorders of 3,000+
             bring the unit price down when you are ready — see our{' '}
             <Link href="/blog/printed-paper-bag-cost-ireland" className="text-blue-600 hover:underline font-medium">
@@ -308,7 +308,7 @@ export default function KeralaCafePrintedPaperBagsDublin() {
             <Link href="/printed-flat-handle-bags-ireland" className="text-blue-600 hover:underline font-medium">
               printed flat handle bags
             </Link>{' '}
-            — practical for food and pastries, from 500 units, kraft or white. Boutiques and gift retail
+            — practical for food and pastries, from 20 bags, kraft or white. Boutiques and gift retail
             often prefer{' '}
             <Link href="/twisted-handle-paper-bags-ireland" className="text-blue-600 hover:underline font-medium">
               twisted handle bags
@@ -323,7 +323,7 @@ export default function KeralaCafePrintedPaperBagsDublin() {
           <div className="bg-slate-900 rounded-xl p-6 mb-8 text-white not-prose">
             <p className="font-semibold mb-1">Want branded bags like Kerala Cafe?</p>
             <p className="text-slate-400 text-sm mb-4">
-              Custom printed paper bags from 500 units — 1,000 is a typical café branding run. We
+              Custom printed paper bags from 20 bags — 1,000 is a typical café branding run. We
               deliver across Dublin and all of Ireland from Ashbourne.
             </p>
             <div className="flex flex-wrap gap-3">
@@ -353,7 +353,7 @@ export default function KeralaCafePrintedPaperBagsDublin() {
             {[
               {
                 q: 'Can I order only 1,000 printed paper bags in Ireland?',
-                a: 'Yes. PrintNPack prints custom paper bags from 500 units, so a 1,000-bag run is a practical branding quantity for independent cafés. That is exactly what we produced for Kerala Cafe in Coolmine.',
+                a: 'Yes. PrintNPack prints custom paper bags from 20 bags, so a 1,000-bag run is a practical branding quantity for independent cafés. That is exactly what we produced for Kerala Cafe in Coolmine.',
               },
               {
                 q: 'What did PrintNPack print for Kerala Cafe?',
@@ -395,7 +395,7 @@ export default function KeralaCafePrintedPaperBagsDublin() {
             {
               href: '/printed-flat-handle-bags-ireland',
               src: '/images/products/flat-handle-bags/3.png',
-              title: 'Printed Flat Handle Bags Ireland — Custom Logo from 500 Units',
+              title: 'Printed Flat Handle Bags Ireland — Custom Logo from 20 Bags',
             },
             {
               href: '/blog/coffee-cups-ireland-guide',

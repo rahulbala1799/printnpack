@@ -15,7 +15,7 @@ const jsonLd = {
   '@type': 'Article',
   headline: 'Luxury Die-Cut Paper Bags Ireland: Events, Boutiques & Buying Guide',
   description:
-    'How to buy luxury die-cut paper bags in Ireland — integrated handles, 170–250 gsm stock, digital CMYK from 500 units, events and boutique buyers, and nationwide delivery from Ashbourne.',
+    'How to buy luxury die-cut paper bags in Ireland — integrated handles, 170–250 gsm stock, digital CMYK from 20 bags, events and boutique buyers, and nationwide delivery from Ashbourne.',
   image: `${siteUrl}${HERO_IMAGE}`,
   author: { '@type': 'Organization', name: 'PrintNPack Ireland', url: siteUrl },
   publisher: {
@@ -45,7 +45,7 @@ const faqLd = {
       name: 'What is the minimum order for luxury die-cut paper bags?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Luxury die-cut paper bags start from 500 units. Digital CMYK printing has no plate fees, so short campaign and boutique runs stay practical.',
+        text: 'Luxury die-cut paper bags start from 20 bags. Digital CMYK printing has no plate fees, so short campaign and boutique runs stay practical.',
       },
     },
     {
@@ -112,7 +112,7 @@ const buyerRows = [
 export default function LuxuryDieCutPaperBagsIrelandBuyingGuide() {
   const title = 'Luxury Die-Cut Paper Bags Ireland: Events, Boutiques & Buying Guide';
   const description =
-    'How to buy luxury die-cut paper bags in Ireland — integrated handles, 170–250 gsm stock, digital CMYK from 500 units, events and boutique buyers, and nationwide delivery from Ashbourne.';
+    'How to buy luxury die-cut paper bags in Ireland — integrated handles, 170–250 gsm stock, digital CMYK from 20 bags, events and boutique buyers, and nationwide delivery from Ashbourne.';
 
   return (
     <Layout>
@@ -217,7 +217,7 @@ export default function LuxuryDieCutPaperBagsIrelandBuyingGuide() {
           <p className="text-slate-700 leading-relaxed mb-8">
             This guide explains how to buy <strong>luxury die-cut paper bags in Ireland</strong> —
             what the integrated handle means in practice, who should choose die-cut over flat or
-            twisted styles, how the 500-unit MOQ and 10–14 day production window work, and how{' '}
+            twisted styles, how the 20-bag minimum and 10–14 day production window work, and how{' '}
             <Link href={HUB_HREF} className="text-blue-600 hover:underline">
               PrintNPack&apos;s luxury paper bags
             </Link>{' '}
@@ -329,7 +329,7 @@ export default function LuxuryDieCutPaperBagsIrelandBuyingGuide() {
             />
           </div>
           <p className="text-slate-700 leading-relaxed mb-4">
-            The <strong>minimum order is 500 units</strong>. That MOQ suits boutique openings, seasonal
+            The <strong>minimum order is 20 bags</strong>. That minimum suits boutique openings, seasonal
             collections and launch campaigns without forcing industrial carton volumes. Production is
             typically <strong>10–14 business days after artwork approval</strong>, with nationwide
             delivery across Ireland.
@@ -406,7 +406,7 @@ export default function LuxuryDieCutPaperBagsIrelandBuyingGuide() {
           <ol className="list-decimal pl-6 text-slate-700 space-y-2 mb-8">
             <li>Confirm die-cut is the right style versus twisted or flat handle for your buyer</li>
             <li>Prepare logo artwork with clear margins around the integrated handle</li>
-            <li>Set quantity at 500 units or higher and request a quote on the product page</li>
+            <li>Set quantity from 20 bags or higher and request a quote on the product page</li>
             <li>Approve proofs, allow 10–14 business days for production</li>
             <li>Take nationwide delivery or discuss Ashbourne collection for Dublin-area jobs</li>
           </ol>
@@ -414,7 +414,7 @@ export default function LuxuryDieCutPaperBagsIrelandBuyingGuide() {
           <div className="bg-slate-900 rounded-xl p-6 mb-8 text-white not-prose">
             <p className="font-semibold mb-1">Ready to brand luxury die-cut bags?</p>
             <p className="text-slate-400 text-sm mb-4">
-              Custom print from 500 units on heavyweight die-cut stock — delivered across Ireland from
+              Custom print from 20 bags on heavyweight die-cut stock — delivered across Ireland from
               Ashbourne.
             </p>
             <div className="flex flex-wrap gap-3">
@@ -448,7 +448,7 @@ export default function LuxuryDieCutPaperBagsIrelandBuyingGuide() {
               },
               {
                 q: 'What is the minimum order for luxury die-cut paper bags?',
-                a: 'Luxury die-cut paper bags start from 500 units. Digital CMYK printing has no plate fees, so short campaign and boutique runs stay practical.',
+                a: 'Luxury die-cut paper bags start from 20 bags. Digital CMYK printing has no plate fees, so short campaign and boutique runs stay practical.',
               },
               {
                 q: 'How are die-cut bags different from twisted or flat handle bags?',

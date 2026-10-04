@@ -29,7 +29,7 @@ const faqLd = {
       name: 'How much do printed paper bags cost in Ireland?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Printed flat handle paper bags often start from around €0.18 per unit at 500 units. Twisted handle carrier bags typically start from around €0.35 per unit. Final pricing depends on size, ink coverage, bag style and quantity.',
+        text: 'Printed flat handle paper bags often start from around €0.18 per unit from 20 bags. Twisted handle carrier bags typically start from around €0.35 per unit. Final pricing depends on size, ink coverage, bag style and quantity.',
       },
     },
     {
@@ -37,7 +37,7 @@ const faqLd = {
       name: 'What is the minimum order for printed paper bags?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Custom printed flat handle and twisted handle paper bags usually start from 500 units. For smaller stock orders, plain kraft SOS bags are available by the case online.',
+        text: 'Custom printed flat handle and twisted handle paper bags usually start from 20 bags. For smaller stock orders, plain kraft SOS bags are available by the case online.',
       },
     },
   ],
@@ -46,7 +46,7 @@ const faqLd = {
 export default function PrintedPaperBagCostIreland() {
   const title = 'How Much Do Printed Paper Bags Cost in Ireland?';
   const description =
-    'Printed paper bag cost in Ireland explained — flat handle from €0.18/unit, twisted handle from €0.35/unit, MOQ 500, what affects pricing, and when plain case bags are cheaper.';
+    'Printed paper bag cost in Ireland explained — flat handle from €0.18/unit, twisted handle from €0.35/unit, minimum 20 bags, what affects pricing, and when plain case bags are cheaper.';
 
   return (
     <Layout>
@@ -113,7 +113,7 @@ export default function PrintedPaperBagCostIreland() {
 
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">Typical printed paper bag pricing</h2>
           <p className="text-slate-700 leading-relaxed mb-4">
-            <strong>Flat handle paper bags</strong> — economical for cafés, delis and takeaway — often start from around <strong>€0.18 per unit at 500 units</strong>. <strong>Twisted handle carrier bags</strong> — premium retail and gift packaging — typically start from around <strong>€0.35 per unit at 500 units</strong>.
+            <strong>Flat handle paper bags</strong> — economical for cafés, delis and takeaway — often start from around <strong>€0.18 per unit from 20 bags</strong>. <strong>Twisted handle carrier bags</strong> — premium retail and gift packaging — typically start from around <strong>€0.35 per unit from 20 bags</strong>.
           </p>
           <p className="text-slate-700 leading-relaxed mb-8">
             Larger runs (1,000, 3,000, 10,000+) usually reduce the per-bag cost. A 1,000-bag run is a typical café branding quantity — see how we printed{' '}
@@ -128,7 +128,7 @@ export default function PrintedPaperBagCostIreland() {
           <ul className="list-disc pl-6 text-slate-700 mb-8 space-y-2">
             <li><strong>Bag style</strong> — flat handle vs twisted handle vs SOS plain stock</li>
             <li><strong>Size</strong> — Small, Medium and Large use different amounts of paper</li>
-            <li><strong>Quantity</strong> — custom print MOQ is usually 500 units; higher volume lowers unit cost</li>
+            <li><strong>Quantity</strong> — custom print starts from 20 bags; higher volume lowers unit cost</li>
             <li><strong>Ink coverage</strong> — full-wrap designs use more ink than a centred logo</li>
             <li><strong>Paper colour</strong> — kraft, white or black base can affect material cost</li>
             <li><strong>Delivery</strong> — nationwide delivery is standard from Ashbourne, Co. Meath</li>
@@ -136,7 +136,7 @@ export default function PrintedPaperBagCostIreland() {
 
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">Custom print vs plain paper bags</h2>
           <p className="text-slate-700 leading-relaxed mb-8">
-            Custom <strong>paper bags with logo</strong> suit operators who want branded takeaway or retail packaging from 500 units. If you only need plain kraft SOS bags for everyday use,{' '}
+            Custom <strong>paper bags with logo</strong> suit operators who want branded takeaway or retail packaging from 20 bags. If you only need plain kraft SOS bags for everyday use,{' '}
             <Link href="/plain-paper-bags-ireland" className="text-blue-600 hover:underline font-medium">plain paper bags</Link>{' '}
             are usually the better fit — order by the case online. Busy sites reordering regularly should also look at{' '}
             <Link href="/wholesale-paper-bags-ireland" className="text-blue-600 hover:underline font-medium">wholesale paper bags</Link>.

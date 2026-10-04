@@ -49,8 +49,8 @@ const seoSections = [
     body: 'Flat handle paper bags are the practical branded carrier for Irish food businesses — die-cut paper loops, grease-proof lining options and three sizes for pastries, deli portions and takeaway orders.',
   },
   {
-    title: 'Logo Paper Bags from 500 Units',
-    body: 'Digital CMYK printing puts your logo on kraft or white paper with no plate fees. Mix Small, Medium and Large in one order from 500 units.',
+    title: 'Logo Paper Bags from 20 Bags',
+    body: 'Digital CMYK printing puts your logo on kraft or white paper with no plate fees. Mix Small, Medium and Large in one order from 20 bags.',
   },
   {
     title: 'Flat Handle vs Twisted Handle Paper Bags',
@@ -64,7 +64,7 @@ const seoSections = [
   },
   {
     title: 'Wholesale Printed and Plain Paper Bags',
-    body: 'Busy takeaways and retailers reorder cases with tiered pricing or plan larger custom print runs from 500 units upward.',
+    body: 'Busy takeaways and retailers reorder cases with tiered pricing or plan larger custom print runs from 20 bags upward.',
     link: { href: '/wholesale-paper-bags-ireland', label: 'wholesale paper bags' },
   },
 ];
@@ -90,11 +90,11 @@ const guides = [
 const faqs = [
   {
     q: 'Where can I order printed flat handle bags in Ireland?',
-    a: 'PrintNPack supplies printed flat handle paper bags across Ireland — full-colour CMYK printing with your logo from 500 units. We deliver nationwide to Dublin, Cork, Galway, and all counties.',
+    a: 'PrintNPack supplies printed flat handle paper bags across Ireland — full-colour CMYK printing with your logo from 20 bags. We deliver nationwide to Dublin, Cork, Galway, and all counties.',
   },
   {
     q: 'What is the minimum order for printed flat handle paper bags?',
-    a: 'Printed flat handle bags start from 500 units. You can mix sizes within the same order — Small, Medium, and Large — to suit your product range.',
+    a: 'Printed flat handle bags start from 20 bags. You can mix sizes within the same order — Small, Medium, and Large — to suit your product range.',
   },
   {
     q: 'What sizes of flat handle paper bags are available?',
@@ -137,7 +137,7 @@ const breadcrumbLd = {
 const productLd = buildProductLd({
   name: 'Printed Flat Handle Paper Bags Ireland',
   description:
-    'Custom printed flat handle paper bags for Irish retailers, cafés, and food businesses. Digital CMYK logo printing, three sizes, MOQ from 500 units, nationwide delivery.',
+    'Custom printed flat handle paper bags for Irish retailers, cafés, and food businesses. Digital CMYK logo printing, three sizes, MOQ from 20 bags, nationwide delivery.',
   image: `${SITE_URL}/images/products/flat-handle-bags/1.png`,
   url: PAGE_URL,
   price: '0.18',
@@ -148,7 +148,7 @@ const webPageLd = {
   '@type': 'WebPage',
   name: 'Printed Flat Handle Bags Ireland | Custom Logo Paper Bags',
   description:
-    'Order printed flat handle paper bags in Ireland — custom logo printing from 500 units. Kraft and white bags in three sizes, fast nationwide delivery for cafés, delis & retail.',
+    'Order printed flat handle paper bags in Ireland — custom logo printing from 20 bags. Kraft and white bags in three sizes, fast nationwide delivery for cafés, delis & retail.',
   url: PAGE_URL,
   inLanguage: 'en-IE',
   isPartOf: { '@type': 'WebSite', name: 'PrintNPack Ireland', url: SITE_URL },
@@ -157,9 +157,9 @@ const webPageLd = {
 };
 
 export default function PrintedFlatHandleBagsIreland() {
-  const title = 'Printed Flat Handle Paper Bags Ireland | Logo Takeaway Bags from 500 Units';
+  const title = 'Printed Flat Handle Paper Bags Ireland | Logo Takeaway Bags from 20 Bags';
   const description =
-    'Printed flat handle paper bags Ireland — custom logo takeaway bags from 500 units. Kraft & white bags in three sizes, from €0.18/unit, delivery to Dublin, Meath & nationwide.';
+    'Printed flat handle paper bags Ireland — custom logo takeaway bags from 20 bags. Kraft & white bags in three sizes, from €0.18/unit, delivery to Dublin, Meath & nationwide.';
 
   return (
     <Layout>
@@ -219,7 +219,7 @@ export default function PrintedFlatHandleBagsIreland() {
               </h1>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
                 <strong>Printed flat handle paper bags</strong> with your logo — the practical choice for Irish
-                cafés, delis, bakeries, and retail. Digital CMYK printing, three standard sizes, MOQ from 500
+                cafés, delis, bakeries, and retail. Digital CMYK printing, three standard sizes, minimum 20 bags
                 units, and fast nationwide delivery.
               </p>
               <div className="flex flex-wrap gap-3 mb-6">
@@ -228,7 +228,7 @@ export default function PrintedFlatHandleBagsIreland() {
                   <div className="text-xs text-gray-500">per unit</div>
                 </div>
                 <div className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-center">
-                  <div className="text-sm font-bold text-gray-900">500 units</div>
+                  <div className="text-sm font-bold text-gray-900">20 bags</div>
                   <div className="text-xs text-gray-500">MOQ</div>
                 </div>
                 <div className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-center">
@@ -301,7 +301,7 @@ export default function PrintedFlatHandleBagsIreland() {
             {[
               { title: 'Full-colour logo printing', desc: 'Digital CMYK — no plate fees. Print your logo, brand colours, and messaging on kraft or white paper.' },
               { title: 'Food-safe options', desc: 'Grease-proof lining available for hot food, pastries, and deli items. Recyclable kraft paper.' },
-              { title: 'Three practical sizes', desc: 'Small, Medium, and Large to match your product range. Mix sizes in one order from 500 units.' },
+              { title: 'Three practical sizes', desc: 'Small, Medium, and Large to match your product range. Mix sizes in one order from 20 bags.' },
             ].map((item) => (
               <div key={item.title} className="bg-white rounded-xl border border-gray-200 p-5">
                 <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
@@ -429,7 +429,7 @@ export default function PrintedFlatHandleBagsIreland() {
           <p className="text-gray-600 mb-8 max-w-3xl leading-relaxed">
             PrintNPack delivers <strong>printed flat handle bags in Dublin</strong>, Cork, Galway, Limerick,
             and nationwide. Based in Ashbourne, Co. Meath, we supply Irish cafés, delis, bakeries, and
-            retailers with branded paper bags from 500 units.
+            retailers with branded paper bags from 20 bags.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
@@ -505,7 +505,7 @@ export default function PrintedFlatHandleBagsIreland() {
             Ready to order printed flat handle bags?
           </h2>
           <p className="text-blue-100 mb-6">
-            Custom logo printing from 500 units. Three sizes, kraft or white, grease-proof lining available.
+            Custom logo printing from 20 bags. Three sizes, kraft or white, grease-proof lining available.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link

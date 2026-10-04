@@ -121,7 +121,7 @@ const products = [
       { name: 'Lining Options', value: 'Standard or grease-proof lining' },
       { name: 'Print Method', value: 'Digital CMYK printing (no plates required)' },
       { name: 'Print Coverage', value: 'Full exterior custom printing with pricing based on ink coverage' },
-      { name: 'Minimum Order', value: '500 units (can be mixed sizes)' },
+      { name: 'Minimum Order', value: '20 bags (sizes can be mixed)' },
       { name: 'Production Time', value: '10-14 business days' },
       { name: 'Delivery Options', value: 'Weekly scheduled delivery service available' },
     ],
@@ -136,7 +136,7 @@ const products = [
     ],
     imageSrc: '/images/products/flat-handle-bags/1.png',
     price: 'Starting at €0.18 per unit',
-    moq: 500,
+    moq: 20,
     leadTime: '10-14 business days',
     weeklyDelivery: 'Our weekly delivery service provides a consistent supply of branded packaging materials tailored to your business needs. This service is especially valuable for retail and food businesses that require regular packaging without maintaining large storage areas. Our team tracks your usage patterns to optimize delivery quantities, ensuring you never run short while minimizing waste. This premium service elevates your professional image while streamlining operations.'
   },
@@ -162,7 +162,7 @@ const products = [
       { name: 'Size Options', value: 'Small (8"×4.5"×10"), Medium (10"×5"×13"), Large (12"×6"×15.5")' },
       { name: 'Print Method', value: 'Digital CMYK printing (no plates required)' },
       { name: 'Print Coverage', value: 'Full exterior custom printing with pricing based on ink coverage' },
-      { name: 'Minimum Order', value: '500 units (can be mixed sizes)' },
+      { name: 'Minimum Order', value: '20 bags (sizes can be mixed)' },
       { name: 'Production Time', value: '10-14 business days' },
       { name: 'Special Features', value: 'Reinforced bottom, premium paper finish, sturdy construction' },
       { name: 'Delivery Options', value: 'Weekly scheduled delivery service available' },
@@ -177,7 +177,7 @@ const products = [
     ],
     imageSrc: '/images/products/twisted-handle-bags/1.png',
     price: 'Starting at €0.35 per unit',
-    moq: 500,
+    moq: 20,
     leadTime: '10-14 business days',
     applications: [
       'Luxury Retail & Boutiques',
@@ -228,15 +228,15 @@ const products = [
       'Ideal for promotional packaging, events, and exhibitions',
       'Fully customisable with your branding and print',
       'Die-cut integrated handles for a seamless, modern look',
-      'Digital CMYK printing with no plate fees, from 500 units'
+      'Digital CMYK printing with no plate fees, from 20 bags'
     ],
-    detailedDescription: 'Our die-cut printed paper bags are a sleek, modern option for brands that want something a bit different. With built-in handles and a clean finish, they\'re especially popular for events, exhibitions, and promotional packaging.\n\nThese custom printed paper bags are a great way to turn simple packaging into a walking advert — perfect for trade shows, product launches, and campaigns. They\'re strong, easy to carry, and available in a range of colours and finishes to match your brand.\n\nWhether you are a fashion label in Dublin, a boutique in Cork, a retailer in Galway, or a brand launching nationwide, our die-cut paper bags are fully customised with your branding and print — from 500 units with nationwide delivery from our Ashbourne, Co. Meath production facility.',
+    detailedDescription: 'Our die-cut printed paper bags are a sleek, modern option for brands that want something a bit different. With built-in handles and a clean finish, they\'re especially popular for events, exhibitions, and promotional packaging.\n\nThese custom printed paper bags are a great way to turn simple packaging into a walking advert — perfect for trade shows, product launches, and campaigns. They\'re strong, easy to carry, and available in a range of colours and finishes to match your brand.\n\nWhether you are a fashion label in Dublin, a boutique in Cork, a retailer in Galway, or a brand launching nationwide, our die-cut paper bags are fully customised with your branding and print — from 20 bags with nationwide delivery from our Ashbourne, Co. Meath production facility.',
     specifications: [
       { name: 'Material', value: 'Premium heavyweight paper stock (170-250gsm)' },
       { name: 'Handle Type', value: 'Integrated die-cut handle — no rope or twisted attachments' },
       { name: 'Color Options', value: 'Full CMYK plus custom Pantone colour matching' },
       { name: 'Print Method', value: 'Digital CMYK printing (no plates required)' },
-      { name: 'Minimum Order', value: '500 units' },
+      { name: 'Minimum Order', value: '20 bags' },
       { name: 'Production Time', value: '10-14 business days' },
       { name: 'Special Features', value: 'Die-cut seamless handles, reinforced base, premium luxury finish' },
       { name: 'Delivery Options', value: 'Nationwide delivery across Ireland, weekly scheduled delivery available' },
@@ -248,7 +248,7 @@ const products = [
     ],
     imageSrc: '/images/products/luxury-paper-bags/luxury-paper-bags-ireland-premium-die-cut.jpg',
     price: 'Starting at €0.55 per unit',
-    moq: 500,
+    moq: 20,
     leadTime: '10-14 business days',
     applications: [
       'Luxury Fashion & Apparel Brands',
@@ -267,7 +267,7 @@ const products = [
       },
       {
         question: 'What is the minimum order quantity?',
-        answer: 'Luxury die-cut paper bags start from 500 units.'
+        answer: 'Luxury die-cut paper bags start from 20 bags.'
       },
       {
         question: 'How long does production take?',

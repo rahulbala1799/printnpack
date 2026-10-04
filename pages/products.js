@@ -13,7 +13,7 @@ import { FaBoxOpen, FaPrint, FaTags, FaFileAlt, FaTshirt, FaStamp, FaFlag } from
 const PAGE_URL = `${SITE_URL}/products`;
 const PAGE_TITLE = 'Print & Packaging Products Ireland | PrintNPack Ashbourne';
 const PAGE_DESCRIPTION =
-  'Custom print and packaging products in Ireland — pizza boxes, paper bags, banners, leaflets, foamex and food packaging. Full-colour branding from 500 units, nationwide delivery from Ashbourne, Co. Meath.';
+  'Custom print and packaging products in Ireland — pizza boxes, paper bags from 20, banners, leaflets, foamex and food packaging. Nationwide delivery from Ashbourne, Co. Meath.';
 const PAGE_KEYWORDS =
   'printing ireland, print and packaging ireland, custom pizza boxes ireland, printed paper bags ireland, roll up banners ireland, leaflet printing ireland, foamex boards, food packaging ireland, packaging supplier ireland, PrintNPack';
 const OG_IMAGE = `${SITE_URL}/images/pizza-boxes/PIZZA_BOX_1.jpg`;
@@ -184,7 +184,7 @@ const RELATED_LINKS = [
   { href: '/printing-ireland', label: 'Printing Services Ireland', desc: 'Posters, flyers, stickers and business print.' },
   { href: '/pizza-boxes-ireland', label: 'Pizza Boxes Ireland', desc: 'Plain and custom printed pizza boxes for takeaways.' },
   { href: '/custom-cake-boxes-ireland', label: 'Custom Cake Boxes', desc: 'Branded bakery packaging for cupcakes and celebration cakes.' },
-  { href: '/printed-flat-handle-bags-ireland', label: 'Printed Paper Bags', desc: 'Flat handle bags with your logo, from 500 units.' },
+  { href: '/printed-flat-handle-bags-ireland', label: 'Printed Paper Bags', desc: 'Flat handle bags with your logo, from 20 bags.' },
   { href: '/hot-cups-ireland', label: 'Hot Cups & Lids Ireland', desc: 'Plain disposable coffee cups wholesale.' },
   { href: '/custom-printed-coffee-cups-ireland', label: 'Custom Printed Coffee Cups', desc: 'Branded takeaway cups Dublin & Ireland, low MOQ.' },
   { href: '/luxury-paper-bags-ireland', label: 'Luxury Paper Bags', desc: 'Premium die-cut bags for luxury brands nationwide.' },
@@ -212,7 +212,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'What is the minimum order quantity?',
-    a: 'Most custom printed packaging starts from 500 units. Printed napkins typically start from 1,000. Wide format items such as banners and boards can often be ordered as single pieces. Plain packaging MOQs vary by product.',
+    a: 'Printed paper bags start from 20. Most other custom printed packaging starts from 500 units. Printed napkins typically start from 1,000. Wide format items such as banners and boards can often be ordered as single pieces. Plain packaging MOQs vary by product.',
   },
   {
     q: 'How fast is delivery across Ireland?',
@@ -791,7 +791,7 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
             our team handles design, full-colour print and delivery from a single supplier.
           </p>
           <p className="text-gray-600 max-w-3xl leading-relaxed">
-            Most custom packaging is available from 500 units with 5–7 day production, and we also
+            Printed paper bags start from 20. Most other custom packaging is available from 500 units with 5–7 day production, and we also
             stock <Link href="/plain-packaging" className="text-blue-600 hover:underline font-medium">plain packaging</Link> for
             businesses that need volume pricing without artwork. For general business printing — posters,
             stickers, certificates and rubber stamps — see our{' '}

@@ -16,7 +16,7 @@ const jsonLd = {
   '@type': 'Article',
   headline: 'Flat Handle Paper Bags Ireland: Sizes, MOQ & Café Buying Guide',
   description:
-    'How to buy flat handle paper bags in Ireland — Small, Medium and Large sizes, 500-unit MOQ, grease-proof lining, digital CMYK print, and nationwide delivery from Ashbourne.',
+    'How to buy flat handle paper bags in Ireland — Small, Medium and Large sizes, 20-bag minimum, grease-proof lining, digital CMYK print, and nationwide delivery from Ashbourne.',
   image: `${siteUrl}${HERO_IMAGE}`,
   author: { '@type': 'Organization', name: 'PrintNPack Ireland', url: siteUrl },
   publisher: {
@@ -38,7 +38,7 @@ const faqLd = {
       name: 'Where can I order flat handle paper bags in Ireland?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'PrintNPack supplies custom printed flat handle paper bags across Ireland — full-colour logo printing from 500 units with nationwide delivery from Ashbourne, Co. Meath to Dublin, Cork, Galway and every county.',
+        text: 'PrintNPack supplies custom printed flat handle paper bags across Ireland — full-colour logo printing from 20 bags with nationwide delivery from Ashbourne, Co. Meath to Dublin, Cork, Galway and every county.',
       },
     },
     {
@@ -54,7 +54,7 @@ const faqLd = {
       name: 'What is the minimum order for flat handle paper bags?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Flat handle paper bags start from 500 units. Digital CMYK printing has no plate fees, and sizes can be mixed within the same order provided each size meets the minimum for that variant.',
+        text: 'Flat handle paper bags start from 20 bags. Digital CMYK printing has no plate fees, and sizes can be mixed within the same order provided each size meets the minimum for that variant.',
       },
     },
     {
@@ -109,7 +109,7 @@ const sizeRows = [
 export default function FlatHandlePaperBagsIrelandSizesBuyingGuide() {
   const title = 'Flat Handle Paper Bags Ireland: Sizes, MOQ & Café Buying Guide';
   const description =
-    'Buy flat handle paper bags in Ireland with confidence — Small, Medium and Large sizes, 500-unit MOQ, grease-proof lining options, and delivery to Dublin, Cork, Galway and nationwide from Ashbourne.';
+    'Buy flat handle paper bags in Ireland with confidence — Small, Medium and Large sizes, 20-bag minimum, grease-proof lining options, and delivery to Dublin, Cork, Galway and nationwide from Ashbourne.';
 
   return (
     <Layout>
@@ -213,7 +213,7 @@ export default function FlatHandlePaperBagsIrelandSizesBuyingGuide() {
           </p>
           <p className="text-slate-700 leading-relaxed mb-8">
             This guide explains how to buy <strong>flat handle paper bags in Ireland</strong> — Small,
-            Medium and Large dimensions, the 500-unit MOQ, grease-proof lining, digital CMYK printing,
+            Medium and Large dimensions, the 20-bag minimum, grease-proof lining, digital CMYK printing,
             when to choose flat over twisted or SOS, and how{' '}
             <Link href={HUB_HREF} className="text-blue-600 hover:underline">
               PrintNPack&apos;s printed flat handle range
@@ -232,7 +232,7 @@ export default function FlatHandlePaperBagsIrelandSizesBuyingGuide() {
           </p>
           <p className="text-slate-700 leading-relaxed mb-8">
             PrintNPack prints flat handle bags on premium kraft paper (100–120 gsm) with durable flat
-            paper handles. Orders are custom printed from 500 units, with production typically 10–14
+            paper handles. Orders are custom printed from 20 bags, with production typically 10–14
             business days after artwork approval. Catalogue pricing starts at{' '}
             <strong>€0.18 per unit</strong>. For a wider paper-bag overview, see the{' '}
             <Link href="/paper-bags-ireland" className="text-blue-600 hover:underline">
@@ -301,7 +301,7 @@ export default function FlatHandlePaperBagsIrelandSizesBuyingGuide() {
             />
           </div>
           <p className="text-slate-700 leading-relaxed mb-4">
-            Custom flat handle bags start from a <strong>500-unit MOQ</strong>. PrintNPack uses digital
+            Custom flat handle bags start from a <strong>20-bag minimum</strong>. PrintNPack uses digital
             CMYK printing — no plates and no setup fees — so pricing is driven by ink coverage, design
             complexity, size and quantity rather than by colour count alone. Catalogue pricing starts at{' '}
             <strong>€0.18 per unit</strong>; your quote will reflect artwork coverage and the mix of
@@ -419,7 +419,7 @@ export default function FlatHandlePaperBagsIrelandSizesBuyingGuide() {
               >
                 Kerala Cafe Dublin case study
               </Link>{' '}
-              — how a Coolmine café used a short branded paper-bag run from 500 units
+              — how a Coolmine café used a short branded paper-bag run from 20 bags
             </li>
           </ul>
 
@@ -444,14 +444,14 @@ export default function FlatHandlePaperBagsIrelandSizesBuyingGuide() {
             <li>List your top three counter products and match Small, Medium or Large</li>
             <li>Decide white or brown kraft and whether you need grease-proof lining</li>
             <li>Send logo artwork for digital CMYK — mix sizes if you need more than one</li>
-            <li>Approve the proof and place from 500 units on the flat handle product page</li>
+            <li>Approve the proof and place from 20 bags on the flat handle product page</li>
             <li>Take nationwide delivery or collect from Ashbourne, Co. Meath</li>
           </ol>
 
           <div className="bg-slate-900 rounded-xl p-6 mb-8 text-white not-prose">
             <p className="font-semibold mb-1">Ready to order flat handle bags?</p>
             <p className="text-slate-400 text-sm mb-4">
-              Custom printed Small, Medium and Large flat handle carriers from 500 units — delivered
+              Custom printed Small, Medium and Large flat handle carriers from 20 bags — delivered
               across Ireland from Ashbourne.
             </p>
             <div className="flex flex-wrap gap-3">
@@ -481,7 +481,7 @@ export default function FlatHandlePaperBagsIrelandSizesBuyingGuide() {
             {[
               {
                 q: 'Where can I order flat handle paper bags in Ireland?',
-                a: 'PrintNPack supplies custom printed flat handle paper bags across Ireland — full-colour logo printing from 500 units with delivery from Ashbourne, Co. Meath to Dublin, Cork, Galway and nationwide.',
+                a: 'PrintNPack supplies custom printed flat handle paper bags across Ireland — full-colour logo printing from 20 bags with delivery from Ashbourne, Co. Meath to Dublin, Cork, Galway and nationwide.',
               },
               {
                 q: 'What sizes of flat handle paper bags are available?',
@@ -489,7 +489,7 @@ export default function FlatHandlePaperBagsIrelandSizesBuyingGuide() {
               },
               {
                 q: 'What is the minimum order for flat handle paper bags?',
-                a: 'Orders start from 500 units. You can mix Small, Medium and Large within the same order subject to each size variant meeting its minimum.',
+                a: 'Orders start from 20 bags. You can mix Small, Medium and Large within the same order subject to each size variant meeting its minimum.',
               },
               {
                 q: 'Do flat handle bags offer grease-proof lining?',

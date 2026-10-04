@@ -120,7 +120,7 @@ const posts = [
     slug: 'flat-handle-paper-bags-ireland-sizes-buying-guide',
     title: 'Flat Handle Paper Bags Ireland: Sizes, MOQ & Café Buying Guide',
     excerpt:
-      'How to buy flat handle paper bags in Ireland — Small, Medium and Large sizes, 500-unit MOQ, grease-proof lining, digital CMYK branding, and nationwide delivery from Ashbourne.',
+      'How to buy flat handle paper bags in Ireland — Small, Medium and Large sizes, 20-bag minimum, grease-proof lining, digital CMYK branding, and nationwide delivery from Ashbourne.',
     date: '2026-09-25',
     readTime: '8 min read',
     image: '/images/products/flat-handle-bags/1.png',
@@ -144,7 +144,7 @@ const posts = [
     slug: 'twisted-handle-paper-bags-ireland-sizes-buying-guide',
     title: 'Twisted Handle Paper Bags Ireland: Sizes, MOQ & Retail Buying Guide',
     excerpt:
-      'How to buy twisted handle paper bags in Ireland — Small, Medium and Large sizes, 500-unit MOQ, digital CMYK branding, twisted vs flat vs die-cut, and nationwide delivery from Ashbourne.',
+      'How to buy twisted handle paper bags in Ireland — Small, Medium and Large sizes, 20-bag minimum, digital CMYK branding, twisted vs flat vs die-cut, and nationwide delivery from Ashbourne.',
     date: '2026-09-23',
     readTime: '8 min read',
     image: '/images/products/twisted-handle-bags/1.png',
@@ -168,7 +168,7 @@ const posts = [
     slug: 'luxury-die-cut-paper-bags-ireland-buying-guide',
     title: 'Luxury Die-Cut Paper Bags Ireland: Events, Boutiques & Buying Guide',
     excerpt:
-      'How to buy luxury die-cut paper bags in Ireland — integrated handles, 170–250 gsm stock, digital CMYK from 500 units, events and boutique buyers, and nationwide delivery from Ashbourne.',
+      'How to buy luxury die-cut paper bags in Ireland — integrated handles, 170–250 gsm stock, digital CMYK from 20 bags, events and boutique buyers, and nationwide delivery from Ashbourne.',
     date: '2026-09-21',
     readTime: '8 min read',
     image: '/images/products/luxury-paper-bags/luxury-paper-bags-ireland-premium-die-cut.jpg',
@@ -240,7 +240,7 @@ const posts = [
     slug: 'sos-grab-bags-ireland-sizes-buying-guide',
     title: 'SOS Grab Bags Ireland: Sizes, Plain vs Printed & Wholesale Buying Guide',
     excerpt:
-      'How to buy SOS grab bags in Ireland — kraft takeaway sizes, plain case packs vs custom print from 500 units, tiered wholesale pricing, and nationwide delivery from Ashbourne.',
+      'How to buy SOS grab bags in Ireland — kraft takeaway sizes, plain case packs vs custom print from 20 bags, tiered wholesale pricing, and nationwide delivery from Ashbourne.',
     date: '2026-09-16',
     readTime: '8 min read',
     image: '/images/products/sos-bags/1.png',
@@ -251,7 +251,7 @@ const posts = [
     slug: 'kerala-cafe-printed-paper-bags-dublin',
     title: 'Kerala Cafe Dublin: How 1,000 Printed Paper Bags Were Enough for Branding',
     excerpt:
-      'PrintNPack printed 1,000 branded white paper bags for Kerala Cafe in Coolmine, Dublin — logo, Instagram QR and contact details on a short café branding run from 500 units.',
+      'PrintNPack printed 1,000 branded white paper bags for Kerala Cafe in Coolmine, Dublin — logo, Instagram QR and contact details. Custom paper bags now start from 20.',
     date: '2026-09-15',
     readTime: '6 min read',
     image: '/images/blog/kerala-cafe/kerala-cafe-printed-paper-bag-dublin.jpg',

@@ -29,7 +29,7 @@ const seoSections = [
   },
   {
     title: 'Printed Twisted Handle Bags with Your Logo',
-    body: 'Digital CMYK printing puts your logo and brand colours on kraft, white or black paper — no plate fees. Custom twisted handle bags start from 500 units with mixed sizes in one order.',
+    body: 'Digital CMYK printing puts your logo and brand colours on kraft, white or black paper — no plate fees. Custom twisted handle bags start from 20 bags with mixed sizes in one order.',
   },
   {
     title: 'Twisted Handle vs Flat Handle Paper Bags',
@@ -50,15 +50,15 @@ const seoSections = [
 const faqs = [
   {
     q: 'Where can I order twisted handle paper bags in Ireland?',
-    a: 'PrintNPack supplies custom twisted handle paper bags across Ireland — full-colour logo printing from 500 units with nationwide delivery from our base in Ashbourne, Co. Meath.',
+    a: 'PrintNPack supplies custom twisted handle paper bags across Ireland — full-colour logo printing from 20 bags with nationwide delivery from our base in Ashbourne, Co. Meath.',
   },
   {
     q: 'What is the minimum order for twisted handle paper bags?',
-    a: 'Twisted handle paper bags start from 500 units. You can mix Small, Medium and Large sizes within the same order.',
+    a: 'Twisted handle paper bags start from 20 bags. You can mix Small, Medium and Large sizes within the same order.',
   },
   {
     q: 'How much do twisted handle paper bags cost?',
-    a: 'Pricing depends on size, ink coverage and quantity — typically from around €0.35 per unit at 500 units. See our paper bag cost guide for a full breakdown.',
+    a: 'Pricing depends on size, ink coverage and quantity — typically from around €0.35 per unit from 20 bags. See our paper bag cost guide for a full breakdown.',
   },
   {
     q: 'Who uses twisted handle paper bags?',
@@ -93,7 +93,7 @@ const breadcrumbLd = {
 const productLd = buildProductLd({
   name: 'Twisted Handle Paper Bags Ireland',
   description:
-    'Premium twisted handle paper carrier bags for Irish boutiques, gift shops and retail. Custom logo printing, three sizes, MOQ from 500 units, nationwide delivery.',
+    'Premium twisted handle paper carrier bags for Irish boutiques, gift shops and retail. Custom logo printing, three sizes, MOQ from 20 bags, nationwide delivery.',
   image: `${SITE_URL}/images/products/twisted-handle-bags/1.png`,
   url: PAGE_URL,
   price: '0.35',
@@ -102,7 +102,7 @@ const productLd = buildProductLd({
 export default function TwistedHandlePaperBagsIreland() {
   const title = 'Twisted Handle Paper Bags Ireland | Premium Retail Carrier Bags with Logo';
   const description =
-    'Twisted handle paper bags Ireland for boutiques, gift shops and retail. Custom logo printing from 500 units — premium rope-style handles, three sizes, delivery nationwide from Ashbourne, Co. Meath.';
+    'Twisted handle paper bags Ireland for boutiques, gift shops and retail. Custom logo printing from 20 bags — premium rope-style handles, three sizes, delivery nationwide from Ashbourne, Co. Meath.';
 
   return (
     <Layout>
@@ -146,7 +146,7 @@ export default function TwistedHandlePaperBagsIreland() {
                 Twisted Handle Paper Bags Ireland — Premium Retail Carrier Bags with Logo
               </h1>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                <strong>Twisted handle paper bags</strong> with your logo — the premium choice for Irish boutiques, gift shops, fashion retail and branded gifting. Rope-style handles, digital CMYK printing, MOQ from 500 units.
+                <strong>Twisted handle paper bags</strong> with your logo — the premium choice for Irish boutiques, gift shops, fashion retail and branded gifting. Rope-style handles, digital CMYK printing, MOQ from 20 bags.
               </p>
               <div className="flex flex-wrap gap-3 mb-6">
                 <div className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-center">
@@ -154,7 +154,7 @@ export default function TwistedHandlePaperBagsIreland() {
                   <div className="text-xs text-gray-500">per unit</div>
                 </div>
                 <div className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-center">
-                  <div className="text-sm font-bold text-gray-900">500 units</div>
+                  <div className="text-sm font-bold text-gray-900">20 bags</div>
                   <div className="text-xs text-gray-500">MOQ</div>
                 </div>
                 <div className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-center">
@@ -270,7 +270,7 @@ export default function TwistedHandlePaperBagsIreland() {
       <section className="py-12 lg:py-16 bg-purple-600">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Ready to order twisted handle bags?</h2>
-          <p className="text-purple-100 mb-6">Premium retail carrier bags with your logo — from 500 units, three sizes, nationwide delivery.</p>
+          <p className="text-purple-100 mb-6">Premium retail carrier bags with your logo — from 20 bags, three sizes, nationwide delivery.</p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link href="/quote" className="inline-flex items-center bg-white text-purple-600 font-semibold px-6 py-3 rounded-xl hover:bg-purple-50 transition-colors">Get a Free Quote</Link>
             <Link href="/contact" className="inline-flex items-center bg-purple-500 text-white font-semibold px-6 py-3 rounded-xl border border-purple-400 hover:bg-purple-400 transition-colors">Contact Us</Link>

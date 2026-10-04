@@ -34,7 +34,7 @@ const faqLd = {
       name: 'Where can I order printed flat handle bags in Ireland?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'PrintNPack supplies printed flat handle paper bags across Ireland with custom logo printing from 500 units. Order online at printnpack.ie/printed-flat-handle-bags-ireland for kraft and white bags in three sizes with nationwide delivery.',
+        text: 'PrintNPack supplies printed flat handle paper bags across Ireland with custom logo printing from 20 bags. Order online at printnpack.ie/printed-flat-handle-bags-ireland for kraft and white bags in three sizes with nationwide delivery.',
       },
     },
     {
@@ -340,7 +340,7 @@ export default function PaperBagsWithLogoIreland() {
           <ul className="space-y-3 mb-8 text-slate-700">
             <li className="flex gap-3">
               <span className="text-blue-600 font-bold">→</span>
-              <span><strong>Order in bulk where you can.</strong> Per-unit cost drops significantly between 500 and 5,000 bags. If you have storage space, a larger run will almost always pay for itself.</span>
+              <span><strong>Order in bulk where you can.</strong> The minimum is 20 bags, and the per-bag cost drops as the run gets larger. If you have storage space, a bigger run will almost always pay for itself.</span>
             </li>
             <li className="flex gap-3">
               <span className="text-blue-600 font-bold">→</span>

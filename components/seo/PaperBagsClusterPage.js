@@ -183,7 +183,7 @@ export default function PaperBagsClusterPage({ config }) {
         title="Related paper bag pages"
         links={[
           { href: HUB, label: 'Paper Bags Ireland', desc: 'Printed, plain & wholesale hub' },
-          { href: '/printed-flat-handle-bags-ireland', label: 'Printed Flat Handle Bags', desc: 'Logo takeaway bags from 500 units' },
+          { href: '/printed-flat-handle-bags-ireland', label: 'Printed Flat Handle Bags', desc: 'Logo takeaway bags from 20 bags' },
           { href: '/twisted-handle-paper-bags-ireland', label: 'Twisted Handle Bags', desc: 'Premium retail carrier bags' },
           { href: '/plain-paper-bags-ireland', label: 'Plain Paper Bags', desc: 'Kraft stock in bulk cases' },
           { href: '/wholesale-paper-bags-ireland', label: 'Wholesale Paper Bags', desc: 'Bulk case & print runs' },

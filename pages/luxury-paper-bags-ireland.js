@@ -78,7 +78,7 @@ const seoSections = [
   },
   {
     title: 'Luxury Paper Bags with Logo — Fully Customisable',
-    body: 'Every luxury paper bag is fully customised with your branding and print — your logo, brand colours, and messaging, produced with digital CMYK printing from 500 units with no plate fees.',
+    body: 'Every luxury paper bag is fully customised with your branding and print — your logo, brand colours, and messaging, produced with digital CMYK printing from 20 bags with no plate fees.',
     link: { href: '/paper-bags-ireland', label: 'paper bags Ireland hub' },
   },
 ];
@@ -92,11 +92,11 @@ const guides = [
 const faqs = [
   {
     q: 'Where can I order luxury paper bags in Ireland for my brand?',
-    a: 'PrintNPack supplies luxury die-cut printed paper bags to premium brands, boutiques and retailers all across Ireland — full-colour logo printing from 500 units, with nationwide delivery from Ashbourne, Co. Meath.',
+    a: 'PrintNPack supplies luxury die-cut printed paper bags to premium brands, boutiques and retailers all across Ireland — full-colour logo printing from 20 bags, with nationwide delivery from Ashbourne, Co. Meath.',
   },
   {
     q: 'What is the minimum order quantity for luxury paper bags?',
-    a: 'Luxury die-cut paper bags start from 500 units.',
+    a: 'Luxury die-cut paper bags start from 20 bags.',
   },
   {
     q: 'What makes die-cut paper bags different from twisted or flat handle bags?',
@@ -135,7 +135,7 @@ const breadcrumbLd = {
 const productLd = buildProductLd({
   name: 'Luxury Die-Cut Paper Bags Ireland',
   description:
-    'Luxury die-cut printed paper bags for premium Irish brands. Built-in handles, custom logo printing, MOQ from 500 units, nationwide delivery.',
+    'Luxury die-cut printed paper bags for premium Irish brands. Built-in handles, custom logo printing, MOQ from 20 bags, nationwide delivery.',
   image: `${SITE_URL}${HERO_IMAGE}`,
   url: PAGE_URL,
   price: '0.55',
@@ -146,7 +146,7 @@ const webPageLd = {
   '@type': 'WebPage',
   name: 'Luxury Paper Bags Ireland | Premium Die-Cut Carrier Bags',
   description:
-    'Luxury paper bags Ireland for premium brands — die-cut printed carrier bags with built-in handles and custom logo printing. Nationwide delivery from 500 units.',
+    'Luxury paper bags Ireland for premium brands — die-cut printed carrier bags with built-in handles and custom logo printing. Nationwide delivery from 20 bags.',
   url: PAGE_URL,
   inLanguage: 'en-IE',
   isPartOf: { '@type': 'WebSite', name: 'PrintNPack Ireland', url: SITE_URL },
@@ -157,7 +157,7 @@ const webPageLd = {
 export default function LuxuryPaperBagsIreland() {
   const title = 'Luxury Paper Bags Ireland | Premium Die-Cut Carrier Bags for Luxury Brands';
   const description =
-    'Luxury paper bags Ireland for premium brands — die-cut printed carrier bags with built-in handles and custom logo printing. Nationwide delivery, from 500 units.';
+    'Luxury paper bags Ireland for premium brands — die-cut printed carrier bags with built-in handles and custom logo printing. Nationwide delivery, from 20 bags.';
 
   return (
     <Layout>
@@ -233,7 +233,7 @@ export default function LuxuryPaperBagsIreland() {
                   <div className="text-xs text-gray-400">branding &amp; print</div>
                 </div>
                 <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-center">
-                  <div className="text-sm font-bold text-white">500 units</div>
+                  <div className="text-sm font-bold text-white">20 bags</div>
                   <div className="text-xs text-gray-400">MOQ</div>
                 </div>
                 <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-center">
@@ -417,7 +417,7 @@ export default function LuxuryPaperBagsIreland() {
           <p className="text-gray-600 mb-8 max-w-3xl leading-relaxed">
             PrintNPack delivers <strong>luxury paper bags to Dublin</strong>, Cork, Galway, Limerick, and
             every county in Ireland. Based in Ashbourne, Co. Meath, we supply luxury fashion houses,
-            boutiques, jewellers and hospitality brands with premium branded packaging from 500 units.
+            boutiques, jewellers and hospitality brands with premium branded packaging from 20 bags.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
@@ -493,7 +493,7 @@ export default function LuxuryPaperBagsIreland() {
             Ready to elevate your brand&apos;s packaging?
           </h2>
           <p className="text-gray-400 mb-6">
-            Die-cut printed paper bags with custom branding, from 500 units, delivered nationwide across
+            Die-cut printed paper bags with custom branding, from 20 bags, delivered nationwide across
             Ireland.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
