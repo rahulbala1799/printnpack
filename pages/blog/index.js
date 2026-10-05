@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'premium-leaflets-ireland-materials-buying-guide',
+    title: 'Premium Leaflets Ireland: Metallic, Pearl & PVC Materials Buying Guide',
+    excerpt:
+      'How to buy premium leaflets in Ireland — metallic gold, silver and white, pearl marble, sulfate cardboard and waterproof PVC paper, sizes from A7 to A4, and nationwide delivery from Ashbourne for luxury brands and events.',
+    date: '2026-10-05',
+    readTime: '8 min read',
+    image: '/images/products/premium-leaflets/premium-leaflets-ireland-metallic-gold.jpg',
+    imageAlt:
+      'Premium leaflets Ireland — metallic gold special material flyer stock',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'kraft-carriers-ireland-sizes-buying-guide',
     title: 'Kraft Carriers Ireland: Small–XL Internal Handle Sizes & Wholesale Buying Guide',
     excerpt:
