@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'cupcake-boxes-ireland-sizes-buying-guide',
+    title: 'Cupcake Boxes Ireland: 6-Cavity Inserts, Cases & Wholesale Buying Guide',
+    excerpt:
+      'How to buy cupcake boxes in Ireland — 6-cavity boxes with inserts (242×165×75 mm), tulip and white muffin cases, hinged cake containers, case packs, and nationwide delivery from Ashbourne for bakeries and cafés.',
+    date: '2026-10-06',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/230000.webp',
+    imageAlt:
+      'Cupcake boxes Ireland — 6-cavity white cupcake box with inserts wholesale for bakeries',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'premium-leaflets-ireland-materials-buying-guide',
     title: 'Premium Leaflets Ireland: Metallic, Pearl & PVC Materials Buying Guide',
     excerpt:
