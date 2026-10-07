@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'custom-table-covers-ireland-sizes-buying-guide',
+    title: 'Custom Table Covers Ireland: Sizes, MOQ & Exhibition Buying Guide',
+    excerpt:
+      'How to buy custom printed table covers in Ireland — sizes from 1.2 × 0.6 m to 6 × 1.5 m, custom measurements up to 1.5 m × 6 m, MOQ from one cover, and nationwide delivery from Ashbourne for exhibitions and events.',
+    date: '2026-10-07',
+    readTime: '8 min read',
+    image: '/images/table-covers/custom-table-cover-ireland.jpg',
+    imageAlt:
+      'Custom table covers Ireland — fitted printed exhibition throw for event tables',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'cupcake-boxes-ireland-sizes-buying-guide',
     title: 'Cupcake Boxes Ireland: 6-Cavity Inserts, Cases & Wholesale Buying Guide',
     excerpt:
