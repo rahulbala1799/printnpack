@@ -16,7 +16,7 @@ import {
   pricePerPiece,
 } from './clothing-pricing';
 import { LUXURY_TISSUE_HREF, LUXURY_TISSUE_ID, repriceTissueLine } from './luxury-tissue-paper';
-import { WEDDING_PRODUCTS, weddingModuleFields } from './wedding-products';
+import { WEDDING_PRODUCTS, weddingBoardSizeError, weddingModuleFields } from './wedding-products';
 
 function productMedia(id, href, fallbackImage) {
   const match = products.find((item) => item.id === id || item.url === href);
@@ -269,6 +269,10 @@ export function quoteOptionError(fields, values) {
     }
     if (field.lengthMax != null && length > field.lengthMax) {
       return `Length can be up to ${field.lengthMax} ${unit}.`;
+    }
+    if (field.sheet) {
+      const sheetError = weddingBoardSizeError(width, length);
+      if (sheetError) return sheetError;
     }
   }
   return '';

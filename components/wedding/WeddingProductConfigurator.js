@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { buildCatalogQuoteLine, getQuoteCatalogItem } from '../../data/quote-modules';
+import { weddingBoardSizeError } from '../../data/wedding-products';
 import { cn } from '../../lib/cn';
 import { useQuoteCart } from '../../lib/quote-cart-context';
 import { trackWedding } from '../../lib/track-funnel';
@@ -28,6 +29,14 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
   );
   const [qty, setQty] = useState(product.minQty);
   const [added, setAdded] = useState(false);
+  const [thicknessId, setThicknessId] = useState(
+    () => product.thicknesses?.find((item) => item.recommended)?.id || product.thicknesses?.[0]?.id || ''
+  );
+  const [finish, setFinish] = useState(product.finishes?.[0] || '');
+  const [customSize, setCustomSize] = useState(false);
+  const [widthMm, setWidthMm] = useState('');
+  const [lengthMm, setLengthMm] = useState('');
+  const [sizeError, setSizeError] = useState('');
   const startedRef = useRef(false);
   const markStarted = () => {
     if (startedRef.current) return;
@@ -36,6 +45,7 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
   };
 
   const size = product.sizes.find((item) => item.id === sizeId) || firstSize;
+  const thickness = product.thicknesses?.find((item) => item.id === thicknessId) || product.thicknesses?.[0];
   const image = product.gallery[imageIndex] || product.gallery[0];
   const quantity = Math.max(product.minQty, Number(qty) || product.minQty);
   // Warm the cache for the other photos so switching is instant.
@@ -50,15 +60,19 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
   const pickSize = (id) => {
     markStarted();
     setSizeId(id);
-    const match = product.gallery.findIndex((item) => item.sizeId === id);
-    if (match >= 0) setImageIndex(match);
+    if (!product.board) {
+      const match = product.gallery.findIndex((item) => item.sizeId === id);
+      if (match >= 0) setImageIndex(match);
+    }
     setAdded(false);
   };
 
   const pickImage = (index) => {
     setImageIndex(index);
-    const next = product.gallery[index];
-    if (next?.sizeId) setSizeId(next.sizeId);
+    if (!product.board) {
+      const next = product.gallery[index];
+      if (next?.sizeId) setSizeId(next.sizeId);
+    }
     setAdded(false);
   };
 
@@ -66,12 +80,40 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
     markStarted();
     const catalogItem = getQuoteCatalogItem(product.id);
     if (!catalogItem) return;
-    const options = { sizePreset: size.chip, qty: quantity };
-    product.fixed.forEach((item) => {
-      options[item.key] = item.value;
-    });
+    const options = { qty: quantity };
+    if (product.board) {
+      if (customSize) {
+        const message = weddingBoardSizeError(widthMm, lengthMm);
+        if (message) {
+          setSizeError(message);
+          return;
+        }
+        options.sizePreset = 'Custom';
+        options.width = String(Math.round(Number(widthMm)));
+        options.length = String(Math.round(Number(lengthMm)));
+      } else {
+        options.sizePreset = size.chip;
+      }
+      options.thickness = thickness.chip;
+      options.finish = finish;
+      product.fixed.forEach((item) => {
+        options[item.key] = item.value;
+      });
+      setSizeError('');
+    } else {
+      options.sizePreset = size.chip;
+      product.fixed.forEach((item) => {
+        options[item.key] = item.value;
+      });
+    }
     addItem(buildCatalogQuoteLine(catalogItem, options));
     setAdded(true);
+  };
+
+  const choosePreset = (id) => {
+    setCustomSize(false);
+    setSizeError('');
+    pickSize(id);
   };
 
   return (
@@ -137,15 +179,53 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
       </div>
 
       <div className="space-y-5 bg-white p-5 ring-1 ring-[#d5ddd2] sm:p-6">
-        <Step number="1" title={product.sizeLabel}>
+        {product.board && (
+          <Step number="1" title="Thickness">
+            <div className="grid gap-2 sm:grid-cols-2">
+              {product.thicknesses.map((item) => {
+                const selected = item.id === thicknessId;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => {
+                      markStarted();
+                      setThicknessId(item.id);
+                      setAdded(false);
+                    }}
+                    aria-pressed={selected}
+                    className={cn(
+                      'px-4 py-3 text-left transition',
+                      selected
+                        ? 'bg-[#3d4c3a] text-[#f3f1eb]'
+                        : 'bg-[#f7f6f1] text-[#243028] ring-1 ring-[#d5ddd2] hover:ring-[#5a6a52]'
+                    )}
+                  >
+                    <span className={`${displayClass} block text-2xl leading-tight`}>{item.name}</span>
+                    <span className={cn('mt-1 block text-xs leading-relaxed', selected ? 'text-[#e7eee4]' : 'text-[#3d483b]')}>
+                      {item.detail}
+                    </span>
+                    {item.recommended && (
+                      <span className={cn('mt-2 block text-[10px] font-semibold uppercase tracking-[0.16em]', selected ? 'text-[#c4a46a]' : 'text-[#8a7240]')}>
+                        Most chosen
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </Step>
+        )}
+
+        <Step number={product.board ? '2' : '1'} title={product.sizeLabel}>
           <div className={cn('grid gap-2', sizeCols)}>
             {product.sizes.map((item) => {
-              const selected = item.id === sizeId;
+              const selected = !customSize && item.id === sizeId;
               return (
                 <button
                   key={item.id}
                   type="button"
-                  onClick={() => pickSize(item.id)}
+                  onClick={() => (product.board ? choosePreset(item.id) : pickSize(item.id))}
                   aria-pressed={selected}
                   className={cn(
                     'px-4 py-3 text-left transition',
@@ -170,9 +250,97 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
               );
             })}
           </div>
+          {product.board && (
+            <div className="mt-3">
+              <button
+                type="button"
+                onClick={() => {
+                  markStarted();
+                  setCustomSize(true);
+                  setAdded(false);
+                }}
+                aria-pressed={customSize}
+                className={cn(
+                  'px-4 py-3 text-left text-sm font-semibold transition',
+                  customSize
+                    ? 'bg-[#3d4c3a] text-[#f3f1eb]'
+                    : 'bg-[#f7f6f1] text-[#243028] ring-1 ring-[#d5ddd2] hover:ring-[#5a6a52]'
+                )}
+              >
+                Custom size
+              </button>
+              {customSize && (
+                <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                  <label className="text-xs text-[#5c6658]" htmlFor={`${product.id}-width`}>
+                    Width (mm)
+                    <input
+                      id={`${product.id}-width`}
+                      type="number"
+                      min="100"
+                      value={widthMm}
+                      onChange={(event) => {
+                        markStarted();
+                        setWidthMm(event.target.value);
+                        setSizeError('');
+                        setAdded(false);
+                      }}
+                      className="mt-1 w-full border border-[#d5ddd2] bg-white px-3 py-2 text-sm text-[#243028]"
+                    />
+                  </label>
+                  <label className="text-xs text-[#5c6658]" htmlFor={`${product.id}-length`}>
+                    Length (mm)
+                    <input
+                      id={`${product.id}-length`}
+                      type="number"
+                      min="100"
+                      value={lengthMm}
+                      onChange={(event) => {
+                        markStarted();
+                        setLengthMm(event.target.value);
+                        setSizeError('');
+                        setAdded(false);
+                      }}
+                      className="mt-1 w-full border border-[#d5ddd2] bg-white px-3 py-2 text-sm text-[#243028]"
+                    />
+                  </label>
+                  <p className="text-xs text-[#5c6658] sm:col-span-2">
+                    The long side can be up to 2440 mm and the short side up to 1220 mm.
+                  </p>
+                  {sizeError && <p className="text-xs text-[#8a3b32] sm:col-span-2">{sizeError}</p>}
+                </div>
+              )}
+            </div>
+          )}
         </Step>
 
-        <Step number="2" title="Quantity">
+        {product.board && (
+          <Step number="3" title="Finish">
+            <div className="flex flex-wrap gap-2">
+              {product.finishes.map((item) => (
+                <button
+                  key={item}
+                  type="button"
+                  onClick={() => {
+                    markStarted();
+                    setFinish(item);
+                    setAdded(false);
+                  }}
+                  aria-pressed={finish === item}
+                  className={cn(
+                    'px-4 py-2 text-sm font-semibold transition',
+                    finish === item
+                      ? 'bg-[#3d4c3a] text-[#f3f1eb]'
+                      : 'bg-[#f7f6f1] text-[#243028] ring-1 ring-[#d5ddd2] hover:ring-[#5a6a52]'
+                  )}
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          </Step>
+        )}
+
+        <Step number={product.board ? '4' : '2'} title="Quantity">
           <div className="flex flex-wrap gap-2">
             {product.quantities.map((value) => (
               <button
@@ -213,7 +381,7 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
           </label>
         </Step>
 
-        <Step number="3" title="Included">
+        <Step number={product.board ? '5' : '3'} title="Included">
           <ul className="grid gap-2 sm:grid-cols-2">
             {product.fixed.map((item) => (
               <li key={item.key} className="bg-[#f7f6f1] px-4 py-2 ring-1 ring-[#d5ddd2]">
@@ -227,10 +395,14 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
         <div className="bg-[#3d4c3a] p-4 text-[#f3f1eb]">
           <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#d7e2d2]">Your selection</p>
           <p className={`${displayClass} mt-1 text-2xl leading-tight`}>
-            {size.name} · {quantity} {product.unit}
+            {product.board && `${thickness.name} · `}
+            {product.board && customSize ? `${widthMm || '—'} × ${lengthMm || '—'} mm` : size.name}
+            {' · '}
+            {quantity} {product.unit}
           </p>
           <p className="mt-1 text-xs text-[#d7e2d2]">
             {product.fixed.map((item) => item.value).join(' · ')}
+            {product.board ? ` · ${finish}` : ''}
           </p>
           <div className="mt-4 flex flex-wrap items-center gap-4">
             <button

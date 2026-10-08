@@ -246,6 +246,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/products/wedding-boards-ireland',
+        destination: '/wedding-boards-ireland',
+        permanent: true,
+      },
+      {
         source: '/products/ncr-pads-ireland',
         destination: '/ncr-pads-ireland',
         permanent: true,

@@ -17,10 +17,14 @@ const btnPrimary = 'inline-flex items-center justify-center bg-[#2f3d2d] px-6 py
 const btnLine = 'inline-flex items-center justify-center border px-6 py-3.5 text-sm font-bold uppercase tracking-[0.12em] transition-colors';
 
 const ALSO = [
-  ['Wedding invitations', 'Invitation cards, save the dates, RSVP and details cards, liners and belly bands.'],
-  ['Menus and place cards', 'Menu cards, place cards, order of the day and thank-you cards in matching type.'],
-  ['Welcome signs and seating charts', 'Engraved acrylic and wood signs, table numbers, cake toppers and favour tags.'],
-  ['Monogram stamps, banners and decals', 'Monogram rubber stamps, roll-up banners, window decals and favour stickers.'],
+  { title: 'Wedding invitations', desc: 'Invitation cards, save the dates, RSVP and details cards, liners and belly bands.' },
+  { title: 'Menus and place cards', desc: 'Menu cards, place cards, order of the day and thank-you cards in matching type.' },
+  {
+    title: 'Wedding boards',
+    desc: 'Foamex welcome boards, seating plans and order-of-the-day signs, printed in full colour and cut to size.',
+    href: '/wedding-boards-ireland',
+  },
+  { title: 'Monogram stamps, banners and decals', desc: 'Monogram rubber stamps, roll-up banners, window decals and favour stickers.' },
 ];
 
 function Img({ image, className = '', sizes = '(max-width: 1024px) 100vw, 50vw', eager = false }) {
@@ -324,17 +328,26 @@ export default function WeddingRegionPage({ regionId }) {
               </h2>
             </div>
             <ul className="mt-10 grid gap-6 sm:grid-cols-2">
-              {ALSO.map(([title, desc]) => (
-                <li key={title} className="border border-[#e0d6bf] bg-white p-6">
-                  <h3 className={`${display.className} text-2xl font-medium`}>{title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[#55544b]">{desc}</p>
-                  <button
-                    type="button"
-                    onClick={() => openEnquiry(`${title} (${region.short})`)}
-                    className="mt-4 border-b border-[#b8975a] pb-1 text-xs font-bold uppercase tracking-[0.18em] text-[#2f3d2d] hover:text-[#8a7240]"
-                  >
-                    Request a quote
-                  </button>
+              {ALSO.map((item) => (
+                <li key={item.title} className="border border-[#e0d6bf] bg-white p-6">
+                  <h3 className={`${display.className} text-2xl font-medium`}>{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[#55544b]">{item.desc}</p>
+                  {item.href ? (
+                    <Link
+                      href={item.href}
+                      className="mt-4 inline-flex border-b border-[#b8975a] pb-1 text-xs font-bold uppercase tracking-[0.18em] text-[#2f3d2d] hover:text-[#8a7240]"
+                    >
+                      Choose a board
+                    </Link>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => openEnquiry(`${item.title} (${region.short})`)}
+                      className="mt-4 border-b border-[#b8975a] pb-1 text-xs font-bold uppercase tracking-[0.18em] text-[#2f3d2d] hover:text-[#8a7240]"
+                    >
+                      Request a quote
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>

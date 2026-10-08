@@ -97,6 +97,12 @@ export default function WeddingProductPage({ product }) {
               <h2 className={`${display.className} text-4xl text-[#243028]`}>{product.introTitle}</h2>
               <p className="mt-4 leading-relaxed">{product.intro}</p>
               <ul className="mt-6 text-sm">
+                {product.thicknesses?.map((item) => (
+                  <li key={item.id} className="flex items-baseline justify-between gap-4 border-b border-[#d5ddd2] py-2">
+                    <span className={`${display.className} text-2xl text-[#243028]`}>{item.name}</span>
+                    <span className="text-right text-[#5a6a52]">{item.detail}</span>
+                  </li>
+                ))}
                 {product.sizes.map((size) => (
                   <li key={size.id} className="flex items-baseline justify-between gap-4 border-b border-[#d5ddd2] py-2">
                     <span className={`${display.className} text-2xl text-[#243028]`}>{size.name}</span>

@@ -109,8 +109,10 @@ const OTHER_CATEGORIES = [
     image: 'venue',
     position: 'left center',
     zoom: 'origin-[22%_50%] scale-[1.45]',
-    items: ['Welcome signs', 'Seating charts', 'Table numbers', 'Cake toppers'],
+    items: ['Welcome boards', 'Seating plans', 'Order of the day', 'Table numbers'],
     label: 'Wedding welcome signs and seating charts',
+    href: '/wedding-boards-ireland',
+    linkLabel: 'Wedding boards',
   },
   {
     id: 'venue',
@@ -230,7 +232,7 @@ export default function WeddingPrintingIreland() {
               Wedding Printing <span className="italic">Ireland</span>
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#efe9dc] sm:text-lg">
-              Invitations, addressed envelopes, personalised napkins, menus, monogram stamps and welcome signs.
+              Invitations, addressed envelopes, personalised napkins, menus, monogram stamps and foamex welcome boards.
               Designed to match, proofed before print, made in Ashbourne, Co. Meath and delivered across Ireland.
             </p>
             <div className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row">
@@ -239,6 +241,9 @@ export default function WeddingPrintingIreland() {
               </Link>
               <Link href="/wedding-envelopes-ireland" className={`${btnLine} border-[#e3cc9c] text-[#faf7f2] hover:bg-white/10`}>
                 Wedding envelopes
+              </Link>
+              <Link href="/wedding-boards-ireland" className={`${btnLine} border-[#e3cc9c] text-[#faf7f2] hover:bg-white/10`}>
+                Wedding boards
               </Link>
               <button type="button" onClick={ask()} className={`${btnLine} border-white/40 text-[#faf7f2] hover:bg-white/10`}>
                 Get a wedding quote
@@ -359,13 +364,23 @@ export default function WeddingPrintingIreland() {
                         </li>
                       ))}
                     </ul>
-                    <button
-                      type="button"
-                      onClick={ask(category.label)}
-                      className="mt-5 inline-flex items-center border-b border-[#e3cc9c] pb-1 text-xs font-bold uppercase tracking-[0.18em] text-[#faf7f2] hover:text-[#e3cc9c]"
-                    >
-                      Request a quote
-                    </button>
+                    <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+                      {category.href && (
+                        <Link
+                          href={category.href}
+                          className="inline-flex items-center border-b border-[#e3cc9c] pb-1 text-xs font-bold uppercase tracking-[0.18em] text-[#faf7f2] hover:text-[#e3cc9c]"
+                        >
+                          {category.linkLabel}
+                        </Link>
+                      )}
+                      <button
+                        type="button"
+                        onClick={ask(category.label)}
+                        className="inline-flex items-center border-b border-[#e3cc9c] pb-1 text-xs font-bold uppercase tracking-[0.18em] text-[#faf7f2] hover:text-[#e3cc9c]"
+                      >
+                        Request a quote
+                      </button>
+                    </div>
                   </div>
                 </article>
               ))}

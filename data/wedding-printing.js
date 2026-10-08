@@ -239,19 +239,19 @@ export const WEDDING_COLLECTIONS = [
     eyebrow: 'At the entrance',
     title: 'Wedding signs, table numbers and cake toppers',
     intro:
-      'Acrylic and wood, laser-cut and engraved. Welcome boards, the seating chart, a number for every table, and a topper for the cake.',
+      'Foamex wedding boards for the welcome sign and the seating plan, plus acrylic and wood for table numbers and the cake topper.',
     items: [
       {
         title: 'Welcome signs',
-        desc: 'An engraved acrylic or wood board for the door, the porch or the ceremony entrance.',
-        href: '/contact',
-        cta: 'Ask for a quote',
+        desc: 'A foamex welcome board for the door, the porch or the ceremony entrance. 3 mm, 5 mm, 5.5 mm or 10 mm.',
+        href: '/wedding-boards-ireland',
+        cta: 'Choose a board',
       },
       {
         title: 'Seating charts',
-        desc: 'Guest names and table numbers on one engraved board, sized for the venue.',
-        href: '/contact',
-        cta: 'Ask for a quote',
+        desc: 'Guest names and table numbers on one foamex seating plan, cut to the size of the venue.',
+        href: '/wedding-boards-ireland',
+        cta: 'Choose a board',
       },
       {
         title: 'Table numbers',

@@ -126,6 +126,7 @@ const POPULAR_LINKS = [
   { label: 'Labels on a Roll', href: '/labels-on-a-roll' },
   { label: 'Wedding Envelopes', href: '/wedding-envelopes-ireland' },
   { label: 'Wedding Napkins', href: '/wedding-napkins-ireland' },
+  { label: 'Wedding Boards', href: '/wedding-boards-ireland' },
   { label: 'Premium Leaflets', href: '/premium-leaflets-ireland' },
   { label: 'Business Cards', href: '/business-cards-ireland' },
   { label: 'NCR Pads', href: '/ncr-pads-ireland' },

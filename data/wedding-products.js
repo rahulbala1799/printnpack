@@ -186,6 +186,119 @@ export const WEDDING_PRODUCTS = [
       },
     ],
   },
+  {
+    id: 'wedding-boards-ireland',
+    moduleId: 'wedding-boards',
+    path: '/wedding-boards-ireland',
+    name: 'Wedding Boards',
+    h1: 'Wedding boards',
+    tagline: 'Foamex welcome signs, seating plans and order-of-the-day boards.',
+    metaTitle: 'Wedding Boards Ireland | Foamex Welcome Signs & Seating Plans',
+    metaDescription:
+      'Wedding boards printed on foamex in Ireland. Welcome signs, seating plan boards, order of the day boards and entrance signs. 3 mm, 5 mm, 5.5 mm or 10 mm, cut to size. Quote from Ashbourne.',
+    keywords: [
+      'wedding boards ireland',
+      'wedding welcome board',
+      'wedding welcome sign',
+      'foamex wedding sign',
+      'foam board wedding sign',
+      'forex wedding sign',
+      'pvc foam wedding board',
+      'wedding seating chart board',
+      'wedding seating plan board',
+      'wedding table plan board',
+      'order of the day board',
+      'wedding entrance sign',
+      'unplugged ceremony sign',
+      'cards and gifts wedding sign',
+      'personalised wedding sign ireland',
+      'large wedding sign printing',
+      'wedding sign dublin',
+      '5mm foamex wedding sign',
+    ].join(', '),
+    unit: 'boards',
+    board: true,
+    previewRatio: '3 / 2',
+    galleryTitle: 'Boards for the day',
+    sizeLabel: 'Board size',
+    thicknesses: [
+      { id: '5mm', name: '5 mm', chip: '5 mm', detail: 'The usual thickness for a welcome board or seating plan.', recommended: true },
+      { id: '3mm', name: '3 mm', chip: '3 mm', detail: 'Light. Suits a board that hangs or leans for the day.' },
+      { id: '5.5mm', name: '5.5 mm', chip: '5.5 mm', detail: 'A little stiffer than 5 mm, for a larger board.' },
+      { id: '10mm', name: '10 mm', chip: '10 mm', detail: 'The stiffest sheet, for a freestanding entrance board.' },
+    ],
+    finishes: ['Unlaminated', 'Laminated'],
+    sizes: [
+      { id: 'a1', name: 'A1', dimensions: '594 × 841 mm', chip: 'A1 · 594 × 841 mm', detail: 'The usual welcome board.', recommended: true },
+      { id: 'a2', name: 'A2', dimensions: '420 × 594 mm', chip: 'A2 · 420 × 594 mm', detail: 'A smaller sign, such as cards and gifts or unplugged ceremony.' },
+      { id: 'a0', name: 'A0', dimensions: '841 × 1189 mm', chip: 'A0 · 841 × 1189 mm', detail: 'A large seating plan or entrance board.' },
+      { id: '60x90', name: '60 × 90 cm', dimensions: '600 × 900 mm', chip: '60 × 90 cm', detail: 'A portrait board for the door or the easel.' },
+      { id: '70x100', name: '70 × 100 cm', dimensions: '700 × 1000 mm', chip: '70 × 100 cm', detail: 'Room for a long seating plan.' },
+      { id: 'full', name: '8 × 4 ft', dimensions: '2440 × 1220 mm', chip: '8 × 4 ft sheet', detail: 'The full foamex sheet.' },
+    ],
+    fixed: [{ key: 'material', label: 'Material', value: 'Foamex' }, { key: 'print', label: 'Print', value: 'Full colour' }],
+    quantities: [1, 2, 3, 5, 10],
+    minQty: 1,
+    gallery: [
+      photo(
+        'wedding-foamex-welcome-board-ireland',
+        1024,
+        682,
+        'a1',
+        'Foamex wedding welcome board for Aoife and Daniel at a stone venue entrance',
+        'Welcome board'
+      ),
+      photo(
+        'wedding-foamex-seating-plan-ireland',
+        1024,
+        682,
+        'a1',
+        'Foamex wedding seating plan, find your seat, printed for eight tables',
+        'Seating plan'
+      ),
+      photo(
+        'wedding-foamex-order-of-day-ireland',
+        1024,
+        682,
+        'a1',
+        'Foamex order of the day wedding board on an easel outside a marquee',
+        'Order of the day'
+      ),
+      photo(
+        'wedding-foamex-photo-story-board-ireland',
+        1024,
+        682,
+        'a1',
+        'Foamex photo board, our story so far, on a wedding reception table',
+        'Photo board'
+      ),
+    ],
+    introTitle: 'One foamex sheet, cut to the sign you need',
+    intro:
+      'A wedding board is a foamex sheet, also called foam board, Forex or PVC foam board, printed in full colour and cut to size. Couples use it as a welcome sign, a seating plan, a table plan, an order of the day, or a small sign for cards and gifts or an unplugged ceremony. Choose 3 mm, 5 mm, 5.5 mm or 10 mm.',
+    faqs: [
+      {
+        q: 'What is a wedding board?',
+        a: 'It is a printed foamex sheet. People also search for it as a wedding welcome board, a foam board wedding sign, a Forex sign or a PVC foam board. The same sheet is used for the welcome sign, the seating plan and the order of the day.',
+      },
+      {
+        q: 'What thickness should I choose?',
+        a: '5 mm is the usual choice for a welcome board or seating plan. 3 mm is lighter, 5.5 mm is a little stiffer, and 10 mm stands more firmly at an entrance. These are the same thicknesses as our foamex sheets.',
+      },
+      {
+        q: 'What sizes can you cut?',
+        a: 'A2, A1, A0, 60 × 90 cm, 70 × 100 cm, or the full 8 × 4 ft sheet (2440 × 1220 mm). A custom size is fine as long as it fits that sheet.',
+      },
+      {
+        q: 'Can the board be laminated?',
+        a: 'Yes. Choose unlaminated or laminated. Lamination gives the print a wipeable finish, which helps if the board is near a door.',
+      },
+      {
+        q: 'Do you deliver wedding boards across Ireland?',
+        a: 'Yes. Boards are printed in Ashbourne, Co. Meath. You can collect locally, or we deliver across Ireland. We also post to the UK and the EU, with the cost confirmed in your quote.',
+      },
+    ],
+  },
 ];
 
 export function getWeddingProduct(id) {
@@ -197,7 +310,37 @@ export function sizeChips(product) {
 }
 
 /** Field list for the quote builder, built from the same product config. */
+/** A foamex board must fit the 8 × 4 ft sheet, either way up. */
+export function weddingBoardSizeError(width, length) {
+  const w = Number(width);
+  const h = Number(length);
+  if (!(w > 0) || !(h > 0)) return 'Enter both width and length.';
+  if (w < 100 || h < 100) return 'Each side must be at least 100 mm.';
+  const long = Math.max(w, h);
+  const short = Math.min(w, h);
+  if (long > 2440 || short > 1220) return 'The board must fit an 8 × 4 ft sheet (2440 × 1220 mm).';
+  return '';
+}
+
 export function weddingModuleFields(product) {
+  if (product.board) {
+    return [
+      { key: 'thickness', label: 'Thickness', type: 'chips', options: product.thicknesses.map((item) => item.chip) },
+      { key: 'sizePreset', label: 'Size', type: 'chips', options: [...sizeChips(product), 'Custom'] },
+      {
+        key: 'size',
+        label: 'Custom size',
+        type: 'dimensions',
+        unit: 'mm',
+        whenCustom: true,
+        sheet: true,
+        hint: 'Long side up to 2440 mm, short side up to 1220 mm.',
+      },
+      { key: 'finish', label: 'Finish', type: 'chips', options: product.finishes },
+      ...product.fixed.map((item) => ({ key: item.key, label: item.label, type: 'chips', options: [item.value] })),
+      { key: 'qty', label: 'Quantity', type: 'qty', min: product.minQty },
+    ];
+  }
   return [
     { key: 'sizePreset', label: product.sizeLabel, type: 'chips', options: sizeChips(product) },
     ...product.fixed.map((item) => ({ key: item.key, label: item.label, type: 'chips', options: [item.value] })),
