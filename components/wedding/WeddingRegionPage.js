@@ -18,11 +18,23 @@ const btnLine = 'inline-flex items-center justify-center border px-6 py-3.5 text
 
 const ALSO = [
   { title: 'Wedding invitations', desc: 'Invitation cards, save the dates, RSVP and details cards, liners and belly bands.' },
-  { title: 'Menus and place cards', desc: 'Menu cards, place cards, order of the day and thank-you cards in matching type.' },
+  {
+    title: 'Menus and place cards',
+    desc: 'A5, A6, DL and tent menus, and a tent or flat place card for every guest, on 350 gsm card.',
+    href: '/wedding-menus-place-cards-ireland',
+    linkLabel: 'Choose a card',
+  },
+  {
+    title: 'Order of the day and thank-you cards',
+    desc: 'The day’s running order, and a thank-you card to send after the wedding, on A5, A6 or DL.',
+    href: '/wedding-order-thank-you-cards-ireland',
+    linkLabel: 'Choose a card',
+  },
   {
     title: 'Wedding boards',
     desc: 'Foamex welcome boards, seating plans and order-of-the-day signs, printed in full colour and cut to size.',
     href: '/wedding-boards-ireland',
+    linkLabel: 'Choose a board',
   },
   { title: 'Monogram stamps, banners and decals', desc: 'Monogram rubber stamps, roll-up banners, window decals and favour stickers.' },
 ];
@@ -146,6 +158,9 @@ export default function WeddingRegionPage({ regionId }) {
   const { openEnquiry, openBuilder } = useQuoteCart();
   const napkins = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-napkins-ireland');
   const envelopes = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-envelopes-ireland');
+  const menus = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-menus-place-cards-ireland');
+  const dayCards = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-order-thank-you-cards-ireland');
+  const place = region.id === 'uk' ? 'UK' : 'Europe';
   const pageUrl = `${SITE_URL}${region.path}`;
   const other = Object.values(WEDDING_REGIONS).filter((item) => item.id !== region.id);
 
@@ -154,16 +169,31 @@ export default function WeddingRegionPage({ regionId }) {
       product: napkins,
       hero: napkins.gallery[1],
       contain: true,
-      h3: `Personalised wedding napkins ${region.id === 'uk' ? 'UK' : 'Europe'}`,
+      h3: `Personalised wedding napkins ${place}`,
       body: `White airlaid napkins printed in full colour with your names, date, monogram or artwork. 20 × 20 cm or 10 × 20 cm, from ${napkins.minQty} napkins.`,
       specs: ['Airlaid white', 'Full colour', '20 × 20 or 10 × 20 cm'],
     },
     {
       product: envelopes,
       hero: envelopes.gallery[2],
-      h3: `Printed wedding envelopes ${region.id === 'uk' ? 'UK' : 'Europe'}`,
+      h3: `Printed wedding envelopes ${place}`,
       body: `C6, C5 and DL envelopes printed in full colour, with a return address on the flap and guest names and addresses on the front. From ${envelopes.minQty} envelopes.`,
       specs: ['C6, C5 or DL', 'Full colour', 'Guest addressing'],
+    },
+    {
+      product: menus,
+      hero: menus.gallery[1],
+      h3: `Wedding menus and place cards ${place}`,
+      body: `A5, A6, DL and tent menus, plus a tent or flat place card for every guest. 350 gsm card, full colour both sides, from ${menus.minQty} cards.`,
+      specs: ['A5, A6, DL or tent', 'Place cards', '350 gsm'],
+    },
+    {
+      product: dayCards,
+      hero: dayCards.gallery[0],
+      contain: true,
+      h3: `Order of the day and thank-you cards ${place}`,
+      body: `The day’s running order, and a thank-you card for after the wedding. A5, A6 or DL, from ${dayCards.minQty} cards.`,
+      specs: ['Order of the day', 'Thank-you cards', 'A5, A6 or DL'],
     },
   ];
 
@@ -337,7 +367,7 @@ export default function WeddingRegionPage({ regionId }) {
                       href={item.href}
                       className="mt-4 inline-flex border-b border-[#b8975a] pb-1 text-xs font-bold uppercase tracking-[0.18em] text-[#2f3d2d] hover:text-[#8a7240]"
                     >
-                      Choose a board
+                      {item.linkLabel || 'Choose a card'}
                     </Link>
                   ) : (
                     <button

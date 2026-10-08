@@ -117,6 +117,8 @@ const staticPages = [
   { path: '/wedding-envelopes-ireland',    priority: '0.85', changefreq: 'weekly' },
   { path: '/wedding-napkins-ireland',      priority: '0.85', changefreq: 'weekly' },
   { path: '/wedding-boards-ireland',       priority: '0.85', changefreq: 'weekly' },
+  { path: '/wedding-menus-place-cards-ireland', priority: '0.85', changefreq: 'weekly' },
+  { path: '/wedding-order-thank-you-cards-ireland', priority: '0.85', changefreq: 'weekly' },
   { path: '/napkin-faq-ireland',           priority: '0.88', changefreq: 'monthly' },
   { path: '/napkin-printing-ashbourne',   priority: '0.88', changefreq: 'monthly' },
   { path: '/napkin-printing-dublin',      priority: '0.88', changefreq: 'monthly' },

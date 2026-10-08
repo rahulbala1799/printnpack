@@ -251,6 +251,16 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/products/wedding-menus-place-cards-ireland',
+        destination: '/wedding-menus-place-cards-ireland',
+        permanent: true,
+      },
+      {
+        source: '/products/wedding-order-thank-you-cards-ireland',
+        destination: '/wedding-order-thank-you-cards-ireland',
+        permanent: true,
+      },
+      {
         source: '/products/ncr-pads-ireland',
         destination: '/ncr-pads-ireland',
         permanent: true,

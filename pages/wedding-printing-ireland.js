@@ -101,6 +101,10 @@ const OTHER_CATEGORIES = [
     position: 'center',
     items: ['Menu cards', 'Place cards', 'Order of the day', 'Thank-you cards'],
     label: 'Wedding menus and place cards',
+    links: [
+      { href: '/wedding-menus-place-cards-ireland', label: 'Menus and place cards' },
+      { href: '/wedding-order-thank-you-cards-ireland', label: 'Order of the day' },
+    ],
   },
   {
     id: 'signs',
@@ -170,9 +174,13 @@ export default function WeddingPrintingIreland() {
   const ask = (label) => () => openEnquiry(label || null);
   const napkins = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-napkins-ireland');
   const envelopes = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-envelopes-ireland');
+  const menus = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-menus-place-cards-ireland');
+  const dayCards = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-order-thank-you-cards-ireland');
   const featured = [
     { product: napkins, badge: 'Most popular', from: `From ${napkins.minQty} napkins`, specs: ['Airlaid white', 'Full colour', '20 × 20 cm or 10 × 20 cm'], hero: napkins.gallery[1], contain: true },
     { product: envelopes, badge: 'Quote online', from: `From ${envelopes.minQty} envelopes`, specs: ['C6, C5 or DL', 'Full colour print', 'Guest addressing'], hero: envelopes.gallery[2] },
+    { product: menus, badge: 'Quote online', from: `From ${menus.minQty} cards`, specs: ['A5, A6, DL or tent', 'Place cards', '350 gsm, both sides'], hero: menus.gallery[1] },
+    { product: dayCards, badge: 'Quote online', from: `From ${dayCards.minQty} cards`, specs: ['Order of the day', 'Thank-you cards', 'A5, A6 or DL'], hero: dayCards.gallery[0], contain: true },
   ];
   const btnPrimary = 'inline-flex items-center justify-center bg-[#2f3d2d] px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-[#faf7f2] transition-colors hover:bg-[#222d21]';
   const btnGold = 'inline-flex items-center justify-center px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-[#2b2a26] transition-colors hover:brightness-95';
@@ -365,14 +373,15 @@ export default function WeddingPrintingIreland() {
                       ))}
                     </ul>
                     <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
-                      {category.href && (
+                      {(category.links || (category.href ? [{ href: category.href, label: category.linkLabel }] : [])).map((link) => (
                         <Link
-                          href={category.href}
+                          key={link.href}
+                          href={link.href}
                           className="inline-flex items-center border-b border-[#e3cc9c] pb-1 text-xs font-bold uppercase tracking-[0.18em] text-[#faf7f2] hover:text-[#e3cc9c]"
                         >
-                          {category.linkLabel}
+                          {link.label}
                         </Link>
-                      )}
+                      ))}
                       <button
                         type="button"
                         onClick={ask(category.label)}
