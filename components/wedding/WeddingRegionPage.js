@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Cormorant_Garamond, Nunito_Sans, Pinyon_Script } from 'next/font/google';
 import Layout from '../layout/Layout';
 import { useQuoteCart } from '../../lib/quote-cart-context';
 import { WEDDING_PRODUCTS } from '../../data/wedding-products';
@@ -9,10 +8,7 @@ import { WEDDING_IMAGES, WEDDING_PAGE_PATH } from '../../data/wedding-printing';
 import { WEDDING_REGIONS, weddingAlternateLinks } from '../../data/wedding-regions';
 import { PARCEL_RATES, PACKET_RATES, SHIPPING_RATES_CHECKED, ZONE_2_COUNTRIES, ZONE_3_COUNTRIES } from '../../data/shipping-rates';
 import { SITE_PHONE_DISPLAY, SITE_PHONE_TEL, SITE_URL, SITE_WHATSAPP_URL } from '../../lib/site';
-
-const display = Cormorant_Garamond({ subsets: ['latin'], weight: ['400', '500', '600'], style: ['normal', 'italic'], display: 'swap' });
-const script = Pinyon_Script({ subsets: ['latin'], weight: '400', display: 'swap' });
-const text = Nunito_Sans({ subsets: ['latin'], weight: ['400', '600', '700'], display: 'swap' });
+import { display, script, text } from './wedding-fonts';
 
 const GOLD = '#b8975a';
 

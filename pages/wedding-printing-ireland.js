@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Cormorant_Garamond, Nunito_Sans, Pinyon_Script } from 'next/font/google';
 import Layout from '../components/layout/Layout';
 import { useQuoteCart } from '../lib/quote-cart-context';
 import { WEDDING_PRODUCTS } from '../data/wedding-products';
@@ -16,25 +15,7 @@ import {
   WEDDING_PAGE_PATH,
   WEDDING_TITLE,
 } from '../data/wedding-printing';
-
-const display = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  style: ['normal', 'italic'],
-  display: 'swap',
-});
-
-const script = Pinyon_Script({
-  subsets: ['latin'],
-  weight: '400',
-  display: 'swap',
-});
-
-const text = Nunito_Sans({
-  subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  display: 'swap',
-});
+import { display, script, text } from '../components/wedding/wedding-fonts';
 
 const PAGE_URL = `${SITE_URL}${WEDDING_PAGE_PATH}`;
 

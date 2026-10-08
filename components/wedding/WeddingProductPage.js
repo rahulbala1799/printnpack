@@ -1,26 +1,13 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Cormorant_Garamond, Nunito_Sans } from 'next/font/google';
 import Layout from '../layout/Layout';
 import WeddingProductConfigurator from './WeddingProductConfigurator';
 import { WEDDING_PRODUCTS } from '../../data/wedding-products';
 import { WEDDING_PAGE_PATH } from '../../data/wedding-printing';
 import { buildProductLd } from '../../lib/schema';
 import { SITE_PHONE_DISPLAY, SITE_PHONE_TEL, SITE_URL, SITE_WHATSAPP_URL } from '../../lib/site';
-
-const display = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['500', '600'],
-  style: ['normal', 'italic'],
-  display: 'swap',
-});
-
-const text = Nunito_Sans({
-  subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  display: 'swap',
-});
+import { display, text } from './wedding-fonts';
 
 /** The shared layout for every wedding product page. Content comes from the product config. */
 export default function WeddingProductPage({ product }) {
