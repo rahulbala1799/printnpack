@@ -11,12 +11,15 @@ const PERIODS = [
 const FORM_LABELS = {
   quote_builder: 'Quote builder',
   quote_cart: 'Quote basket',
+  quote_enquiry: 'Quick enquiry',
+  wedding: 'Wedding printing',
   leadgen: 'Lead popup',
   contact: 'Contact form',
 };
 
 const STEP_LABELS = {
   open: 'Opened',
+  view: 'Viewed the page',
   start: 'Started typing',
   product: 'Entered a product',
   send: 'Clicked send',
@@ -163,6 +166,9 @@ export default function FunnelDashboard() {
   }, [fetchStats]);
 
   const quote = data?.quote || {};
+  const quoteCart = data?.quoteCart || {};
+  const quoteEnquiry = data?.quoteEnquiry || {};
+  const wedding = data?.wedding || {};
   const leadgen = data?.leadgen || {};
   const contact = data?.contact || {};
 
@@ -207,8 +213,8 @@ export default function FunnelDashboard() {
             <StatCard label="Entered a product" value={quote.products || 0} sub={`${quote.openToProduct || 0}% of opens`} icon={FiPackage} color="purple" />
             <StatCard
               label="Clicked send"
-              value={(quote.sent || 0) + (leadgen.sent || 0) + (contact.sent || 0)}
-              sub="Quote, contact form, and popup"
+              value={(quote.sent || 0) + (quoteEnquiry.sent || 0) + (leadgen.sent || 0) + (contact.sent || 0)}
+              sub="Quote builder, quick enquiry, contact, and popup"
               icon={FiSend}
               color="green"
             />
@@ -221,7 +227,7 @@ export default function FunnelDashboard() {
             />
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-4">
+          <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-4">
             <FunnelCard
               title="Quote builder"
               hint="Opened → added a product → clicked send"
@@ -229,7 +235,38 @@ export default function FunnelDashboard() {
                 { label: 'Opened', value: quote.opened || 0, rate: 100 },
                 { label: 'Entered a product', value: quote.products || 0, rate: quote.openToProduct || 0 },
                 { label: 'Clicked send', value: quote.sent || 0, rate: quote.openToSend || 0 },
-                { label: 'Quote sent', value: quote.success || 0, rate: quote.openToSend || 0 },
+                { label: 'Quote sent', value: quote.success || 0 },
+              ]}
+            />
+            <FunnelCard
+              title="Quote basket"
+              hint="Opened the basket → sent the quote"
+              steps={[
+                { label: 'Opened', value: quoteCart.opened || 0, rate: 100 },
+                { label: 'Clicked send', value: quoteCart.sent || 0, rate: quoteCart.openToSend || 0 },
+                { label: 'Quote sent', value: quoteCart.success || 0 },
+              ]}
+            />
+            <FunnelCard
+              title="Quick enquiry"
+              hint="Message us form inside the quote builder"
+              steps={[
+                { label: 'Opened', value: quoteEnquiry.opened || 0, rate: 100 },
+                { label: 'Started typing', value: quoteEnquiry.started || 0, rate: quoteEnquiry.startToSend || 0 },
+                { label: 'Clicked send', value: quoteEnquiry.sent || 0, rate: quoteEnquiry.openToSend || 0 },
+                { label: 'Message sent', value: quoteEnquiry.success || 0 },
+                { label: 'Closed without sending', value: quoteEnquiry.dismissed || 0 },
+              ]}
+            />
+            <FunnelCard
+              title="Wedding printing"
+              hint="Wedding pages, then a quote or a message"
+              steps={[
+                { label: 'Viewed a wedding page', value: wedding.opened || 0, rate: 100 },
+                { label: 'Started a quote', value: wedding.started || 0, rate: wedding.openToStart || 0 },
+                { label: 'Added a wedding product', value: wedding.products || 0, rate: wedding.openToProduct || 0 },
+                { label: 'Clicked send', value: wedding.sent || 0, rate: wedding.openToSend || 0 },
+                { label: 'Sent', value: wedding.success || 0 },
               ]}
             />
             <FunnelCard

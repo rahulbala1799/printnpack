@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useQuoteCart } from '../../lib/quote-cart-context';
 import { formatQuoteMessage, resolveQuoteImage } from '../../data/quote-modules';
-import { trackFunnel } from '../../lib/track-funnel';
+import { isWeddingRef, trackFunnel, trackWedding } from '../../lib/track-funnel';
 import QuantityField from './QuantityField';
 import QuoteProductImage from './QuoteProductImage';
 
@@ -26,8 +26,16 @@ export default function QuoteCartDrawer() {
   const submit = async (event) => {
     event.preventDefault();
     if (!items.length) return;
+    const weddingLines = items.filter((item) => isWeddingRef(item.moduleId, item.productId, item.href, item.name));
+    const weddingMeta = weddingLines.length
+      ? {
+          productId: weddingLines[0].productId || null,
+          productName: weddingLines.map((item) => item.name).join(', ').slice(0, 200),
+        }
+      : null;
     trackFunnel('quote_cart', 'send');
     trackFunnel('quote_builder', 'send');
+    if (weddingMeta) trackWedding('send', weddingMeta);
     setSending(true);
     setError('');
     try {
@@ -60,6 +68,7 @@ export default function QuoteCartDrawer() {
       if (!response.ok) throw new Error(data.error || data.message || 'Could not send quote');
       trackFunnel('quote_cart', 'success');
       trackFunnel('quote_builder', 'success');
+      if (weddingMeta) trackWedding('success', weddingMeta);
       clear();
       setStep('success');
     } catch (err) {

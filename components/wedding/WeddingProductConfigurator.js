@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { buildCatalogQuoteLine, getQuoteCatalogItem } from '../../data/quote-modules';
 import { cn } from '../../lib/cn';
 import { useQuoteCart } from '../../lib/quote-cart-context';
+import { trackWedding } from '../../lib/track-funnel';
 
 function Step({ number, title, children }) {
   return (
@@ -27,6 +28,12 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
   );
   const [qty, setQty] = useState(product.minQty);
   const [added, setAdded] = useState(false);
+  const startedRef = useRef(false);
+  const markStarted = () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    trackWedding('start', { productId: product.id, productName: product.name });
+  };
 
   const size = product.sizes.find((item) => item.id === sizeId) || firstSize;
   const image = product.gallery[imageIndex] || product.gallery[0];
@@ -41,6 +48,7 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
   const sizeCols = product.sizes.length > 2 ? 'sm:grid-cols-3' : 'sm:grid-cols-2';
 
   const pickSize = (id) => {
+    markStarted();
     setSizeId(id);
     const match = product.gallery.findIndex((item) => item.sizeId === id);
     if (match >= 0) setImageIndex(match);
@@ -55,6 +63,7 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
   };
 
   const addToQuote = () => {
+    markStarted();
     const catalogItem = getQuoteCatalogItem(product.id);
     if (!catalogItem) return;
     const options = { sizePreset: size.chip, qty: quantity };
@@ -170,6 +179,7 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
                 key={value}
                 type="button"
                 onClick={() => {
+                  markStarted();
                   setQty(value);
                   setAdded(false);
                 }}
@@ -193,6 +203,7 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
               min={product.minQty}
               value={qty}
               onChange={(event) => {
+                markStarted();
                 setQty(event.target.value);
                 setAdded(false);
               }}

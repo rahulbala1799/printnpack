@@ -8,9 +8,11 @@ import { WEDDING_PAGE_PATH } from '../../data/wedding-printing';
 import { buildProductLd } from '../../lib/schema';
 import { SITE_PHONE_DISPLAY, SITE_PHONE_TEL, SITE_URL, SITE_WHATSAPP_URL } from '../../lib/site';
 import { display, text } from './wedding-fonts';
+import { useWeddingPageView } from './useWeddingPageView';
 
 /** The shared layout for every wedding product page. Content comes from the product config. */
 export default function WeddingProductPage({ product }) {
+  useWeddingPageView(product.name);
   const pageUrl = `${SITE_URL}${product.path}`;
   const title = `${product.metaTitle} | Print n Pack`;
   const heroImage = `${SITE_URL}${product.gallery[0].src}`;

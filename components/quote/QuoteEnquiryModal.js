@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Dialog } from '../ui/dialog';
 import { QUOTE_CATALOG, getQuoteCategories } from '../../data/quote-modules';
 import { useQuoteCart } from '../../lib/quote-cart-context';
-import { trackFunnel } from '../../lib/track-funnel';
+import { isWeddingRef, trackFunnel, trackWedding } from '../../lib/track-funnel';
 import { SITE_PHONE_DISPLAY, SITE_PHONE_TEL, SITE_WHATSAPP_URL } from '../../lib/site';
 
 const OTHER = '__other';
@@ -22,6 +22,8 @@ export default function QuoteEnquiryModal() {
   const [form, setForm] = useState(EMPTY);
   const [status, setStatus] = useState('idle'); // idle | sending | sent
   const [error, setError] = useState('');
+  const startedRef = useRef(false);
+  const sentRef = useRef(false);
 
   // Reset every time the modal opens, preselecting the product being viewed.
   useEffect(() => {
@@ -35,14 +37,35 @@ export default function QuoteEnquiryModal() {
     }
     setStatus('idle');
     setError('');
+    startedRef.current = false;
+    sentRef.current = false;
   }, [enquiryOpen, enquiryProductId]);
 
   if (!enquiryOpen) return null;
 
-  const set = (key) => (event) => setForm((prev) => ({ ...prev, [key]: event.target.value }));
-
   const selectedItem = QUOTE_CATALOG.find((item) => item.id === form.product);
   const productLabel = form.product === OTHER ? form.custom.trim() : selectedItem?.name || '';
+  const enquiryMeta = {
+    productId: selectedItem?.id || null,
+    productName: (productLabel || (typeof enquiryProductId === 'string' ? enquiryProductId : '')).slice(0, 200) || null,
+  };
+  const onWedding = isWeddingRef(window.location.pathname, selectedItem?.id, selectedItem?.group, enquiryMeta.productName);
+
+  const markStarted = () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    trackFunnel('quote_enquiry', 'start', enquiryMeta);
+  };
+
+  const set = (key) => (event) => {
+    markStarted();
+    setForm((prev) => ({ ...prev, [key]: event.target.value }));
+  };
+
+  const requestClose = () => {
+    if (!sentRef.current) trackFunnel('quote_enquiry', 'dismiss', enquiryMeta);
+    closeEnquiry();
+  };
   const groups = getQuoteCategories().filter((category) => category.id !== 'All');
 
   const submit = async (event) => {
@@ -54,7 +77,8 @@ export default function QuoteEnquiryModal() {
     if (!form.message.trim()) return setError('Please tell us what you want.');
 
     setStatus('sending');
-    trackFunnel('quote_enquiry', 'send');
+    trackFunnel('quote_enquiry', 'send', enquiryMeta);
+    if (onWedding) trackWedding('send', enquiryMeta);
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -70,7 +94,9 @@ export default function QuoteEnquiryModal() {
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(data.message || 'Could not send your message.');
-      trackFunnel('quote_enquiry', 'success');
+      sentRef.current = true;
+      trackFunnel('quote_enquiry', 'success', enquiryMeta);
+      if (onWedding) trackWedding('success', enquiryMeta);
       setStatus('sent');
     } catch (err) {
       setStatus('idle');
@@ -79,7 +105,7 @@ export default function QuoteEnquiryModal() {
   };
 
   return (
-    <Dialog open={enquiryOpen} onOpenChange={(next) => !next && closeEnquiry()}>
+    <Dialog open={enquiryOpen} onOpenChange={(next) => !next && requestClose()}>
       <div
         role="dialog"
         aria-modal="true"
@@ -93,7 +119,7 @@ export default function QuoteEnquiryModal() {
           </div>
           <button
             type="button"
-            onClick={closeEnquiry}
+            onClick={requestClose}
             className="-mr-2 rounded-full p-2 text-stone-400 hover:bg-stone-100 hover:text-stone-700"
             aria-label="Close"
           >
@@ -110,7 +136,7 @@ export default function QuoteEnquiryModal() {
             </p>
             <button
               type="button"
-              onClick={closeEnquiry}
+              onClick={requestClose}
               className="mt-6 rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-700"
             >
               Done

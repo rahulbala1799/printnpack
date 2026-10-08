@@ -9,6 +9,7 @@ import { WEDDING_REGIONS, weddingAlternateLinks } from '../../data/wedding-regio
 import { PARCEL_RATES, PACKET_RATES, SHIPPING_RATES_CHECKED, ZONE_2_COUNTRIES, ZONE_3_COUNTRIES } from '../../data/shipping-rates';
 import { SITE_PHONE_DISPLAY, SITE_PHONE_TEL, SITE_URL, SITE_WHATSAPP_URL } from '../../lib/site';
 import { display, script, text } from './wedding-fonts';
+import { useWeddingPageView } from './useWeddingPageView';
 
 const GOLD = '#b8975a';
 
@@ -137,6 +138,7 @@ function DeliveryCosts({ region }) {
 
 export default function WeddingRegionPage({ regionId }) {
   const region = WEDDING_REGIONS[regionId];
+  useWeddingPageView(region ? `Wedding printing ${region.short}` : 'Wedding printing');
   const { openEnquiry, openBuilder } = useQuoteCart();
   const napkins = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-napkins-ireland');
   const envelopes = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-envelopes-ireland');

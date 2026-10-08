@@ -16,6 +16,7 @@ import {
   WEDDING_TITLE,
 } from '../data/wedding-printing';
 import { display, script, text } from '../components/wedding/wedding-fonts';
+import { useWeddingPageView } from '../components/wedding/useWeddingPageView';
 
 const PAGE_URL = `${SITE_URL}${WEDDING_PAGE_PATH}`;
 
@@ -162,6 +163,7 @@ function Eyebrow({ children, light = false }) {
 }
 
 export default function WeddingPrintingIreland() {
+  useWeddingPageView('Wedding Printing Ireland');
   const { openEnquiry, openBuilder } = useQuoteCart();
   const ask = (label) => () => openEnquiry(label || null);
   const napkins = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-napkins-ireland');
