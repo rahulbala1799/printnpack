@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'soup-containers-ireland-sizes-buying-guide',
+    title: 'Soup Containers Ireland: 8–32oz Sizes, Lids & Wholesale Buying Guide',
+    excerpt:
+      'How to buy plain soup containers in Ireland — Spiritpak sizes from 8oz to 32oz, paper vs plastic lids, combi packs, compostable options, and nationwide delivery from Ashbourne for cafés and takeaways.',
+    date: '2026-10-08',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/10984485.webp',
+    imageAlt:
+      'Soup containers Ireland — 16oz Spiritpak soup cup wholesale for cafés',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'custom-table-covers-ireland-sizes-buying-guide',
     title: 'Custom Table Covers Ireland: Sizes, MOQ & Exhibition Buying Guide',
     excerpt:
