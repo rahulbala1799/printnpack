@@ -16,6 +16,7 @@ import {
   pricePerPiece,
 } from './clothing-pricing';
 import { LUXURY_TISSUE_HREF, LUXURY_TISSUE_ID, repriceTissueLine } from './luxury-tissue-paper';
+import { WEDDING_PRODUCTS, weddingModuleFields } from './wedding-products';
 
 function productMedia(id, href, fallbackImage) {
   const match = products.find((item) => item.id === id || item.url === href);
@@ -74,6 +75,17 @@ export const QUOTE_CATALOG = [
   withMedia({ id: 'correx-boards', name: 'Correx Boards', href: '/correx-boards', moduleId: 'correx', configurable: false, group: 'Boards' }),
   withMedia({ id: 'premium-leaflets-ireland', name: 'Premium Leaflets', href: '/premium-leaflets-ireland', moduleId: 'leaflets', configurable: false, group: 'Print' }),
   withMedia({ id: 'business-cards-ireland', name: 'Business Cards', href: '/business-cards-ireland', moduleId: 'business-cards', configurable: false, group: 'Print', price: 'From €35' }),
+  ...WEDDING_PRODUCTS.map((product) =>
+    withMedia({
+      id: product.id,
+      name: product.name,
+      href: product.path,
+      image: product.gallery[0].web,
+      moduleId: product.moduleId,
+      configurable: false,
+      group: 'Wedding',
+    })
+  ),
   withMedia({ id: 'rubber-stamps-ireland', name: 'Rubber Stamps', href: '/rubber-stamps', moduleId: 'rubber-stamps', configurable: false, group: 'Stamps' }),
 ];
 
@@ -233,6 +245,7 @@ export const GENERIC_MODULE_FIELDS = {
     DIMENSIONS_MM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 1 },
   ],
+  ...Object.fromEntries(WEDDING_PRODUCTS.map((product) => [product.moduleId, weddingModuleFields(product)])),
 };
 
 export function getModuleFields(moduleId) {

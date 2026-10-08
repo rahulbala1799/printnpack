@@ -236,6 +236,21 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/products/wedding-envelopes-ireland',
+        destination: '/wedding-envelopes-ireland',
+        permanent: true,
+      },
+      {
+        source: '/products/wedding-napkins-ireland',
+        destination: '/wedding-napkins-ireland',
+        permanent: true,
+      },
+      {
+        source: '/products/ncr-pads-ireland',
+        destination: '/ncr-pads-ireland',
+        permanent: true,
+      },
+      {
         source: '/disposable-coffee-cups-ireland',
         destination: '/hot-cups-ireland',
         permanent: true,

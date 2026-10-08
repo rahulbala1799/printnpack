@@ -3,6 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import QuoteCartDrawer from '../quote/QuoteCartDrawer';
 import ProductQuoteBuilder from '../quote/ProductQuoteBuilder';
+import QuoteEnquiryModal from '../quote/QuoteEnquiryModal';
 
 const Layout = ({ children }) => {
   return (
@@ -14,6 +15,7 @@ const Layout = ({ children }) => {
       <Footer />
       <QuoteCartDrawer />
       <ProductQuoteBuilder />
+      <QuoteEnquiryModal />
     </div>
   );
 };

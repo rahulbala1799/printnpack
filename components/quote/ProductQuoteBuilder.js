@@ -58,6 +58,8 @@ export default function ProductQuoteBuilder() {
     findByProductId,
     upsertItem,
     setOpen,
+    enquiryOpen,
+    openEnquiry,
   } = useQuoteCart();
 
   const [group, setGroup] = useState('All');
@@ -119,13 +121,20 @@ export default function ProductQuoteBuilder() {
   };
 
   return (
-    <Dialog open={builderOpen} onOpenChange={(next) => !next && closeBuilder()}>
+    <Dialog open={builderOpen} onOpenChange={(next) => !next && !enquiryOpen && closeBuilder()}>
       <DialogContent onClose={closeBuilder}>
         <DialogHeader className="hidden lg:block">
           <DialogTitle>Build a quote</DialogTitle>
           <DialogDescription>
             Category, product, then options. Each product is unique — adding it again updates that line.
           </DialogDescription>
+          <button
+            type="button"
+            onClick={() => openEnquiry(selected?.id || null)}
+            className="absolute right-14 top-3 rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-100"
+          >
+            Not sure? Message us · reply in 1 hour
+          </button>
         </DialogHeader>
         <div className="flex items-center justify-between border-b border-stone-200 bg-white px-4 py-3 pr-12 lg:hidden">
           <div>
@@ -136,6 +145,13 @@ export default function ProductQuoteBuilder() {
               {mobilePane === 'configure' && (selected?.name || 'Options')}
             </p>
           </div>
+          <button
+            type="button"
+            onClick={() => openEnquiry(selected?.id || null)}
+            className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700"
+          >
+            Ask us
+          </button>
         </div>
 
         <SliceStep current={mobilePane} onBack={backSlice} />

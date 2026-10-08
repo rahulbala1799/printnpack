@@ -7,6 +7,7 @@ const QUICK_LINKS = [
   { label: 'About Us', href: '/about' },
   { label: 'Products', href: '/products' },
   { label: 'Plain Packaging', href: '/plain-packaging' },
+  { label: 'Wedding Printing', href: '/wedding-printing-ireland' },
   { label: 'Services', href: '/services' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
@@ -27,6 +28,7 @@ const PRODUCT_LINKS = [
   { label: 'Rubber Stamps', href: '/rubber-stamps-ireland' },
   { label: 'Leaflets & Flyers', href: '/services/leaflets' },
   { label: 'Business Cards', href: '/business-cards-ireland' },
+  { label: 'NCR Pads', href: '/ncr-pads-ireland' },
 ];
 
 // Accordion section for mobile

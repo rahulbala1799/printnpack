@@ -8,7 +8,7 @@ import QuoteProductImage from './QuoteProductImage';
 const inputClass = 'w-full rounded-lg border border-stone-300 bg-white px-3 py-2.5 text-sm text-stone-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100';
 
 export default function QuoteCartDrawer() {
-  const { items, open, setOpen, removeItem, updateQty, clear, subtotal, openBuilder } = useQuoteCart();
+  const { items, open, setOpen, removeItem, updateQty, clear, subtotal, openBuilder, openEnquiry } = useQuoteCart();
   const [step, setStep] = useState('basket');
   const [error, setError] = useState('');
   const [sending, setSending] = useState(false);
@@ -198,7 +198,12 @@ export default function QuoteCartDrawer() {
               >
                 Next: your details
               </button>
-              <p className="text-center text-xs text-stone-500">We reply within 2 hours</p>
+              <p className="text-center text-xs text-stone-500">
+                We reply within 2 hours ·{' '}
+                <button type="button" onClick={() => openEnquiry()} className="font-semibold text-blue-600 hover:underline">
+                  Just have a question?
+                </button>
+              </p>
             </div>
           </>
         )}
