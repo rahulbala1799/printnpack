@@ -98,6 +98,8 @@ export default function FoamexFaqIreland() {
           <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-3xl">
             Everything Irish businesses ask about foamex boards — pricing, thickness, printing, indoor vs outdoor use,
             and local delivery in Ashbourne and Dublin.{' '}
+            <Link href="/blog/foamex-boards-ireland-guide" className="text-violet-600 hover:underline font-medium">Foamex board guide</Link>
+            {' '}covers thickness and from-prices.{' '}
             <Link href="/foamex-boards" className="text-violet-600 hover:underline font-medium">Order foamex boards</Link>{' '}
             or call <a href="tel:+353894157369" className="text-violet-600 hover:underline font-medium">+353 89 415 7369</a>.
           </p>
@@ -183,9 +185,9 @@ export default function FoamexFaqIreland() {
       <RelatedSeoLinks
         title="Related foamex pages"
         links={[
-          { href: '/foamex-ireland', label: 'Foamex Ireland', desc: 'Complete foamex printing hub' },
+          { href: '/blog/foamex-boards-ireland-guide', label: 'Foamex board guide', desc: 'Thickness, from-prices and how to order' },
           { href: '/foamex-boards', label: 'Order Foamex Boards', desc: '3mm, 5mm & 10mm PVC foam signage' },
-          { href: '/foamex-printing-dublin', label: 'Foamex Printing Dublin', desc: 'Delivery across Dublin' },
+          { href: '/foamex-ireland', label: 'Foamex Ireland', desc: 'Complete foamex printing hub' },
           { href: '/correx-boards', label: 'Correx Boards', desc: 'Outdoor signage alternative' },
         ]}
       />

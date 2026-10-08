@@ -133,6 +133,13 @@ export default function FoamexLocalPage({ config }) {
                   Call +353 89 415 7369
                 </a>
               </div>
+              {config.slug === 'foamex-printing-ashbourne' && (
+                <p className="text-sm text-gray-600 mt-4">
+                  Thickness and from-prices are on the{' '}
+                  <Link href="/blog/foamex-boards-ireland-guide" className="text-violet-600 hover:underline font-medium">foamex board guide</Link>.
+                  Order on the boards page.
+                </p>
+              )}
             </div>
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg bg-gray-100">
               <Image src={HERO_IMAGE} alt={`${config.title} — custom foamex PVC foam board signage`} fill className="object-cover" priority sizes="(max-width: 1024px) 100vw, 50vw" />
@@ -216,15 +223,27 @@ export default function FoamexLocalPage({ config }) {
 
       <RelatedSeoLinks
         title="Related foamex pages"
-        links={[
-          { href: '/printing-ashbourne', label: 'Printing Ashbourne', desc: 'Local print shop — signs, banners & boards' },
-          { href: '/foamex-ireland', label: 'Foamex Ireland', desc: 'Complete foamex printing hub' },
-          { href: '/foamex-boards', label: 'Order Foamex Boards', desc: '3mm, 5mm & 10mm PVC foam signage' },
-          { href: '/blog/foamex-boards-ireland-guide', label: 'Foamex Boards Guide', desc: 'Thickness, sizes & material tips' },
-          { href: '/foamex-faq-ireland', label: 'Foamex FAQ', desc: '25+ instant answers' },
-          { href: '/correx-boards', label: 'Correx Boards', desc: 'Outdoor signage alternative' },
-          ...siblingLinks,
-        ]}
+        links={
+          config.slug === 'foamex-printing-ashbourne'
+            ? [
+                { href: '/blog/foamex-boards-ireland-guide', label: 'Foamex board guide', desc: 'Thickness, from-prices and how to order' },
+                { href: '/foamex-boards', label: 'Order Foamex Boards', desc: '3mm, 5mm & 10mm PVC foam signage' },
+                { href: '/printing-ashbourne', label: 'Printing Ashbourne', desc: 'Local print shop — signs, banners & boards' },
+                { href: '/foamex-ireland', label: 'Foamex Ireland', desc: 'Complete foamex printing hub' },
+                { href: '/foamex-faq-ireland', label: 'Foamex FAQ', desc: '25+ instant answers' },
+                { href: '/correx-boards', label: 'Correx Boards', desc: 'Outdoor signage alternative' },
+                ...siblingLinks,
+              ]
+            : [
+                { href: '/printing-ashbourne', label: 'Printing Ashbourne', desc: 'Local print shop — signs, banners & boards' },
+                { href: '/foamex-ireland', label: 'Foamex Ireland', desc: 'Complete foamex printing hub' },
+                { href: '/foamex-boards', label: 'Order Foamex Boards', desc: '3mm, 5mm & 10mm PVC foam signage' },
+                { href: '/blog/foamex-boards-ireland-guide', label: 'Foamex Boards Guide', desc: 'Thickness, sizes & material tips' },
+                { href: '/foamex-faq-ireland', label: 'Foamex FAQ', desc: '25+ instant answers' },
+                { href: '/correx-boards', label: 'Correx Boards', desc: 'Outdoor signage alternative' },
+                ...siblingLinks,
+              ]
+        }
       />
     </Layout>
   );

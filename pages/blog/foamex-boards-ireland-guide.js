@@ -18,7 +18,7 @@ const jsonLd = {
   author: { '@type': 'Organization', name: 'PrintNPack Ireland', url: siteUrl },
   publisher: { '@type': 'Organization', name: 'PrintNPack Ireland', logo: { '@type': 'ImageObject', url: `${siteUrl}/favicon.ico` } },
   datePublished: '2026-06-21',
-  dateModified: '2026-09-10',
+  dateModified: '2026-10-07',
   mainEntityOfPage: { '@type': 'WebPage', '@id': PAGE_URL },
 };
 
@@ -52,6 +52,33 @@ const faqLd = {
     },
   ],
 };
+
+const buyableBoards = [
+  {
+    name: '3mm foamex board',
+    size: 'Wall signs and short displays',
+    price: '€15',
+    detail: 'Per sheet, from',
+    href: '/foamex-boards',
+    cta: 'Order this board',
+  },
+  {
+    name: '5mm foamex board',
+    size: 'Exhibitions and retail — most ordered',
+    price: '€18',
+    detail: 'Per sheet, from',
+    href: '/foamex-boards',
+    cta: 'Order this board',
+  },
+  {
+    name: '10mm foamex board',
+    size: 'Freestanding displays',
+    price: '€28',
+    detail: 'Per sheet, from',
+    href: '/foamex-boards',
+    cta: 'Order this board',
+  },
+];
 
 const breadcrumbLd = {
   '@context': 'https://schema.org',
@@ -110,8 +137,23 @@ export default function FoamexBoardsIrelandGuide() {
           <p className="text-lg text-gray-600 leading-relaxed">
             Foamex boards are one of the most versatile signage materials for Irish businesses — lightweight,
             rigid, and print-ready for shop displays, exhibition panels, and office graphics.
-            This guide covers thickness, sizes, materials, and how to order from an Irish printer.
+            Printed boards start from €15 a sheet. Order on the{' '}
+            <Link href="/foamex-boards" className="text-violet-600 hover:underline">foamex boards page</Link>.
           </p>
+
+          <div className="not-prose grid sm:grid-cols-3 gap-4 my-8">
+            {buyableBoards.map((board) => (
+              <div key={board.name} className="rounded-2xl border border-violet-100 bg-violet-50 p-5 flex flex-col">
+                <h3 className="font-bold text-gray-900 text-lg">{board.name}</h3>
+                <p className="text-sm text-gray-500 mt-1">{board.size}</p>
+                <p className="text-3xl font-bold text-gray-900 mt-4">{board.price}</p>
+                <p className="text-sm text-gray-600 mt-1">{board.detail}</p>
+                <Link href={board.href} className="mt-6 inline-flex items-center justify-center bg-violet-600 text-white font-semibold px-4 py-3 rounded-xl hover:bg-violet-700 transition-colors">
+                  {board.cta}
+                </Link>
+              </div>
+            ))}
+          </div>
 
           <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">What is foamex?</h2>
           <p className="text-gray-600 leading-relaxed">

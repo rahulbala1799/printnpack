@@ -22,8 +22,8 @@ const localPages = [
 ];
 
 const guides = [
+  { href: '/blog/foamex-boards-ireland-guide', title: 'Foamex board guide', desc: 'Thickness, from-prices, sheet sizes, and how to order.' },
   { href: '/foamex-faq-ireland', title: 'Foamex FAQ', desc: '25+ instant answers on pricing, thickness, printing & delivery.' },
-  { href: '/blog/foamex-boards-ireland-guide', title: 'Foamex Boards Guide', desc: 'Thickness, sizes, indoor vs outdoor, and material comparison.' },
 ];
 
 const breadcrumbLd = {
@@ -99,13 +99,16 @@ export default function FoamexIreland() {
                 Custom foamex board printing for Irish shops, exhibitions, offices, and events.
                 UV-printed PVC foam signage in 3mm, 5mm, and 10mm — custom sizes up to 8ft × 4ft,
                 with optional laminate and mounting from our Ashbourne print unit.
+                Thickness and from-prices are on the{' '}
+                <Link href="/blog/foamex-boards-ireland-guide" className="text-violet-600 hover:underline font-medium">foamex board guide</Link>.
+                Order on the boards page.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/foamex-boards" className="inline-flex items-center bg-violet-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-violet-700 transition-colors">
                   Order Foamex Boards
                 </Link>
-                <Link href="/foamex-faq-ireland" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
-                  Foamex FAQ
+                <Link href="/blog/foamex-boards-ireland-guide" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
+                  Foamex board guide
                 </Link>
               </div>
             </div>
