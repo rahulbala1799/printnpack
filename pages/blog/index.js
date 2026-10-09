@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'business-cards-ireland-quantities-buying-guide',
+    title: 'Business Cards Ireland: Quantities, 350 gsm & Dublin Delivery Buying Guide',
+    excerpt:
+      'How to buy business cards in Ireland — fixed 85 × 55 mm on 350 gsm, packs from 100 (€35) to 1,000 (€160), 2 day Dublin delivery and 4–6 days nationwide from Ashbourne.',
+    date: '2026-10-09',
+    readTime: '8 min read',
+    image: '/images/products/business-cards/business-cards-ireland-stack.jpg',
+    imageAlt:
+      'Business cards Ireland — 350 gsm stack of 85 × 55 mm cards',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'soup-containers-ireland-sizes-buying-guide',
     title: 'Soup Containers Ireland: 8–32oz Sizes, Lids & Wholesale Buying Guide',
     excerpt:
