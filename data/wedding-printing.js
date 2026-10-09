@@ -190,6 +190,12 @@ export const WEDDING_COLLECTIONS = [
         href: '/wedding-order-thank-you-cards-ireland',
         cta: 'Choose a card',
       },
+      {
+        title: 'Wedding coasters',
+        desc: 'Round 9 × 9 cm coasters, 8 ply, with the names, the date or a monogram.',
+        href: '/wedding-coasters-ireland',
+        cta: 'Choose a coaster',
+      },
     ],
   },
   {

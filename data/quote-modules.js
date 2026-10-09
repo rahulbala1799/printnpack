@@ -16,6 +16,7 @@ import {
   pricePerPiece,
 } from './clothing-pricing';
 import { LUXURY_TISSUE_HREF, LUXURY_TISSUE_ID, repriceTissueLine } from './luxury-tissue-paper';
+import { COASTER_BOARD, COASTER_SIDES, COASTER_SIZES, PRINTED_COASTER_MIN } from './coasters-options';
 import { WEDDING_PRODUCTS, weddingBoardSizeError, weddingModuleFields } from './wedding-products';
 
 function productMedia(id, href, fallbackImage) {
@@ -75,12 +76,13 @@ export const QUOTE_CATALOG = [
   withMedia({ id: 'correx-boards', name: 'Correx Boards', href: '/correx-boards', moduleId: 'correx', configurable: false, group: 'Boards' }),
   withMedia({ id: 'premium-leaflets-ireland', name: 'Premium Leaflets', href: '/premium-leaflets-ireland', moduleId: 'leaflets', configurable: false, group: 'Print' }),
   withMedia({ id: 'business-cards-ireland', name: 'Business Cards', href: '/business-cards-ireland', moduleId: 'business-cards', configurable: false, group: 'Print', price: 'From €35' }),
+  withMedia({ id: 'printed-coasters-ireland', name: 'Printed Coasters', href: '/printed-coasters-ireland', moduleId: 'printed-coasters', configurable: false, group: 'Print' }),
   ...WEDDING_PRODUCTS.map((product) =>
     withMedia({
       id: product.id,
       name: product.name,
       href: product.path,
-      image: product.gallery[0].web,
+      image: product.gallery[0]?.web || null,
       moduleId: product.moduleId,
       configurable: false,
       group: 'Wedding',
@@ -234,6 +236,13 @@ export const GENERIC_MODULE_FIELDS = {
     { key: 'sizePreset', label: 'Size', type: 'chips', options: ['A6', 'A5', 'A4', 'Custom'] },
     DIMENSIONS_MM_IF_CUSTOM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 250 },
+  ],
+  'printed-coasters': [
+    { key: 'sizePreset', label: 'Coaster', type: 'chips', options: COASTER_SIZES.map((size) => size.chip) },
+    { key: 'sides', label: 'Print', type: 'chips', options: COASTER_SIDES },
+    { key: 'board', label: 'Board', type: 'chips', options: [COASTER_BOARD] },
+    { key: 'colour', label: 'Colour', type: 'chips', options: ['Full colour'] },
+    { key: 'qty', label: 'Quantity', type: 'qty', min: PRINTED_COASTER_MIN },
   ],
   'business-cards': [
     { key: 'spec', label: 'Size & stock', type: 'note', text: `${BUSINESS_CARD_SIZE} · ${BUSINESS_CARD_GSM}` },

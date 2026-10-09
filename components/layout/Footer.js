@@ -28,6 +28,7 @@ const PRODUCT_LINKS = [
   { label: 'Rubber Stamps', href: '/rubber-stamps-ireland' },
   { label: 'Leaflets & Flyers', href: '/services/leaflets' },
   { label: 'Business Cards', href: '/business-cards-ireland' },
+  { label: 'Printed Coasters', href: '/printed-coasters-ireland' },
   { label: 'NCR Pads', href: '/ncr-pads-ireland' },
 ];
 

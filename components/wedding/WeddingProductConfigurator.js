@@ -37,6 +37,9 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
   const [widthMm, setWidthMm] = useState('');
   const [lengthMm, setLengthMm] = useState('');
   const [sizeError, setSizeError] = useState('');
+  const [choiceValues, setChoiceValues] = useState(() =>
+    Object.fromEntries((product.choices || []).map((item) => [item.key, item.options[0]]))
+  );
   const startedRef = useRef(false);
   const markStarted = () => {
     if (startedRef.current) return;
@@ -102,6 +105,7 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
       setSizeError('');
     } else {
       options.sizePreset = size.chip;
+      Object.assign(options, choiceValues);
       product.fixed.forEach((item) => {
         options[item.key] = item.value;
       });
@@ -123,16 +127,18 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
           className="relative w-full overflow-hidden bg-[#ebe8df]"
           style={{ aspectRatio: product.previewRatio || '1 / 1' }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            key={image.web}
-            src={image.web}
-            alt={image.alt}
-            width={image.width}
-            height={image.height}
-            decoding="async"
-            className="absolute inset-0 h-full w-full object-contain"
-          />
+          {image && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              key={image.web}
+              src={image.web}
+              alt={image.alt}
+              width={image.width}
+              height={image.height}
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-contain"
+            />
+          )}
           {product.gallery.length > 1 && (
             <>
               <button
@@ -175,7 +181,7 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
             </button>
           ))}
         </div>
-        <p className="mt-1 text-sm text-[#5a6a52]">{image.caption}</p>
+        {image?.caption && <p className="mt-1 text-sm text-[#5a6a52]">{image.caption}</p>}
       </div>
 
       <div className="space-y-5 bg-white p-5 ring-1 ring-[#d5ddd2] sm:p-6">
@@ -340,7 +346,34 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
           </Step>
         )}
 
-        <Step number={product.board ? '4' : '2'} title="Quantity">
+        {product.choices?.map((choice, index) => (
+          <Step key={choice.key} number={String(product.board ? 4 + index : 2 + index)} title={choice.label}>
+            <div className="flex flex-wrap gap-2">
+              {choice.options.map((option) => (
+                <button
+                  key={option}
+                  type="button"
+                  onClick={() => {
+                    markStarted();
+                    setChoiceValues((current) => ({ ...current, [choice.key]: option }));
+                    setAdded(false);
+                  }}
+                  aria-pressed={choiceValues[choice.key] === option}
+                  className={cn(
+                    'px-4 py-2 text-sm font-semibold transition',
+                    choiceValues[choice.key] === option
+                      ? 'bg-[#3d4c3a] text-[#f3f1eb]'
+                      : 'bg-[#f7f6f1] text-[#243028] ring-1 ring-[#d5ddd2] hover:ring-[#5a6a52]'
+                  )}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </Step>
+        ))}
+
+        <Step number={String((product.board ? 4 : 2) + (product.choices?.length || 0))} title="Quantity">
           <div className="flex flex-wrap gap-2">
             {product.quantities.map((value) => (
               <button
@@ -381,7 +414,7 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
           </label>
         </Step>
 
-        <Step number={product.board ? '5' : '3'} title="Included">
+        <Step number={String((product.board ? 5 : 3) + (product.choices?.length || 0))} title="Included">
           <ul className="grid gap-2 sm:grid-cols-2">
             {product.fixed.map((item) => (
               <li key={item.key} className="bg-[#f7f6f1] px-4 py-2 ring-1 ring-[#d5ddd2]">
@@ -401,8 +434,11 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
             {quantity} {product.unit}
           </p>
           <p className="mt-1 text-xs text-[#d7e2d2]">
-            {product.fixed.map((item) => item.value).join(' · ')}
-            {product.board ? ` · ${finish}` : ''}
+            {[
+              ...product.fixed.map((item) => item.value),
+              ...Object.values(choiceValues),
+              product.board ? finish : '',
+            ].filter(Boolean).join(' · ')}
           </p>
           <div className="mt-4 flex flex-wrap items-center gap-4">
             <button

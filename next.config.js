@@ -261,6 +261,16 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/products/wedding-coasters-ireland',
+        destination: '/wedding-coasters-ireland',
+        permanent: true,
+      },
+      {
+        source: '/products/printed-coasters-ireland',
+        destination: '/printed-coasters-ireland',
+        permanent: true,
+      },
+      {
         source: '/products/ncr-pads-ireland',
         destination: '/ncr-pads-ireland',
         permanent: true,

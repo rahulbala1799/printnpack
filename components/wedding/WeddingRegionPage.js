@@ -25,6 +25,12 @@ const ALSO = [
     linkLabel: 'Choose a card',
   },
   {
+    title: 'Wedding coasters',
+    desc: 'Round 9 × 9 cm coasters, 8 ply, printed with the names, the date or a monogram.',
+    href: '/wedding-coasters-ireland',
+    linkLabel: 'Choose a coaster',
+  },
+  {
     title: 'Order of the day and thank-you cards',
     desc: 'The day’s running order, and a thank-you card to send after the wedding, on A5, A6 or DL.',
     href: '/wedding-order-thank-you-cards-ireland',

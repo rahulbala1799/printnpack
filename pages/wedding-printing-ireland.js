@@ -99,11 +99,12 @@ const OTHER_CATEGORIES = [
     title: 'Menus, place cards & order of the day',
     image: 'table',
     position: 'center',
-    items: ['Menu cards', 'Place cards', 'Order of the day', 'Thank-you cards'],
+    items: ['Menu cards', 'Place cards', 'Wedding coasters', 'Thank-you cards'],
     label: 'Wedding menus and place cards',
     links: [
       { href: '/wedding-menus-place-cards-ireland', label: 'Menus and place cards' },
       { href: '/wedding-order-thank-you-cards-ireland', label: 'Order of the day' },
+      { href: '/wedding-coasters-ireland', label: 'Wedding coasters' },
     ],
   },
   {
@@ -176,11 +177,13 @@ export default function WeddingPrintingIreland() {
   const envelopes = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-envelopes-ireland');
   const menus = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-menus-place-cards-ireland');
   const dayCards = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-order-thank-you-cards-ireland');
+  const coasters = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-coasters-ireland');
   const featured = [
     { product: napkins, badge: 'Most popular', from: `From ${napkins.minQty} napkins`, specs: ['Airlaid white', 'Full colour', '20 × 20 cm or 10 × 20 cm'], hero: napkins.gallery[1], contain: true },
     { product: envelopes, badge: 'Quote online', from: `From ${envelopes.minQty} envelopes`, specs: ['C6, C5 or DL', 'Full colour print', 'Guest addressing'], hero: envelopes.gallery[2] },
     { product: menus, badge: 'Quote online', from: `From ${menus.minQty} cards`, specs: ['A5, A6, DL or tent', 'Place cards', '350 gsm, both sides'], hero: menus.gallery[1] },
     { product: dayCards, badge: 'Quote online', from: `From ${dayCards.minQty} cards`, specs: ['Order of the day', 'Thank-you cards', 'A5, A6 or DL'], hero: dayCards.gallery[0], contain: true },
+    { product: coasters, badge: 'Quote online', from: `From ${coasters.minQty} coasters`, specs: ['Round 9 × 9 cm', '8 ply', 'One side or both'], hero: coasters.gallery[0], contain: true },
   ];
   const btnPrimary = 'inline-flex items-center justify-center bg-[#2f3d2d] px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-[#faf7f2] transition-colors hover:bg-[#222d21]';
   const btnGold = 'inline-flex items-center justify-center px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-[#2b2a26] transition-colors hover:brightness-95';
@@ -240,7 +243,7 @@ export default function WeddingPrintingIreland() {
               Wedding Printing <span className="italic">Ireland</span>
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#efe9dc] sm:text-lg">
-              Invitations, addressed envelopes, personalised napkins, menus, monogram stamps and foamex welcome boards.
+              Invitations, addressed envelopes, personalised napkins, menus, coasters, monogram stamps and foamex welcome boards.
               Designed to match, proofed before print, made in Ashbourne, Co. Meath and delivered across Ireland.
             </p>
             <div className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row">

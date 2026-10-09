@@ -1,3 +1,4 @@
+import { COASTER_BOARD, COASTER_SIDES, COASTER_SIZES } from './coasters-options';
 import { WEDDING_IMAGES } from './wedding-printing';
 
 const WEDDING_DIR = '/images/wedding';
@@ -550,6 +551,78 @@ export const WEDDING_PRODUCTS = [
       },
     ],
   },
+  {
+    id: 'wedding-coasters-ireland',
+    moduleId: 'wedding-coasters',
+    path: '/wedding-coasters-ireland',
+    name: 'Wedding Coasters',
+    h1: 'Wedding coasters',
+    tagline: 'Round 9 × 9 cm coasters, 8 ply, with your names, date or monogram.',
+    metaTitle: 'Wedding Coasters Ireland | Round 9 × 9 cm, 8 Ply',
+    metaDescription:
+      'Wedding coasters printed in Ireland. Round 9 × 9 cm, 8 ply, full colour on one or both sides, from 50. Names, a date or a monogram. Quote from Ashbourne.',
+    keywords: [
+      'wedding coasters ireland',
+      'wedding beer mats',
+      'personalised wedding coasters',
+      'wedding drink coasters',
+      'monogram coasters',
+      'names and date coasters',
+      'round wedding coasters',
+      '9x9 wedding coasters',
+      '8 ply wedding coasters',
+      'bar coasters wedding',
+      'wedding coasters dublin',
+    ].join(', '),
+    unit: 'coasters',
+    previewRatio: '1 / 1',
+    galleryTitle: 'Coasters for the drinks',
+    sizeLabel: 'Coaster',
+    sizes: COASTER_SIZES,
+    choices: [{ key: 'sides', label: 'Print', options: COASTER_SIDES }],
+    fixed: [
+      { key: 'board', label: 'Board', value: COASTER_BOARD },
+      { key: 'print', label: 'Colour', value: 'Full colour' },
+    ],
+    quantities: [50, 100, 150, 200, 300, 500],
+    minQty: 50,
+    gallery: [
+      photo('wedding-coaster-navy-oconnors-ireland', 1024, 1024, 'round9',
+        'Round wedding coaster with a navy A R monogram for The O’Connors and the date 24 August 2027',
+        'Monogram'),
+      photo('wedding-coaster-terracotta-sophie-daniel-ireland', 1024, 1024, 'round9',
+        'Round wedding coaster with Sophie and Daniel in terracotta script and a wildflower wreath',
+        'Names and date'),
+      photo('wedding-coaster-blush-ej-ireland', 1024, 1024, 'round9',
+        'Round wedding coaster with blush florals and the initials E and J',
+        'Initials'),
+    ],
+    introTitle: 'A mat for every glass',
+    intro:
+      'Wedding coasters are round, 9 × 9 cm, on 8 ply board, printed in full colour. Add the names, the date, a monogram or a small wreath. Print one side or both. Order from 50, enough for the drinks reception with a few spare.',
+    faqs: [
+      {
+        q: 'What size are wedding coasters?',
+        a: 'One size: round, 9 × 9 cm.',
+      },
+      {
+        q: 'What are they printed on?',
+        a: '8 ply board. The print is full colour, on one side or both.',
+      },
+      {
+        q: 'Can you print our names or a monogram?',
+        a: 'Yes. Send the names, date, monogram or artwork and we will set it up and send a proof before printing.',
+      },
+      {
+        q: 'What is the minimum order?',
+        a: 'From 50 coasters. Choose 50, 100 or 200, or type the number of guests.',
+      },
+      {
+        q: 'Do you deliver wedding coasters across Ireland?',
+        a: 'Yes. Coasters are printed in Ashbourne, Co. Meath. You can collect locally, or we deliver across Ireland. We also post to the UK and the EU, with the cost confirmed in your quote.',
+      },
+    ],
+  },
 ];
 
 export function getWeddingProduct(id) {
@@ -594,6 +667,7 @@ export function weddingModuleFields(product) {
   }
   return [
     { key: 'sizePreset', label: product.sizeLabel, type: 'chips', options: sizeChips(product) },
+    ...(product.choices || []).map((item) => ({ key: item.key, label: item.label, type: 'chips', options: item.options })),
     ...product.fixed.map((item) => ({ key: item.key, label: item.label, type: 'chips', options: [item.value] })),
     { key: 'qty', label: 'Quantity', type: 'qty', min: product.minQty },
   ];

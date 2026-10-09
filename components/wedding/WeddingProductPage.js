@@ -15,7 +15,8 @@ export default function WeddingProductPage({ product }) {
   useWeddingPageView(product.name);
   const pageUrl = `${SITE_URL}${product.path}`;
   const title = `${product.metaTitle} | Print n Pack`;
-  const heroImage = `${SITE_URL}${product.gallery[0].src}`;
+  const hero = product.gallery[0];
+  const heroImage = hero ? `${SITE_URL}${hero.src}` : undefined;
   const introImage = product.gallery[1] || product.gallery[0];
   const others = WEDDING_PRODUCTS.filter((item) => item.id !== product.id);
 
@@ -59,9 +60,9 @@ export default function WeddingProductPage({ product }) {
         <meta property="og:title" content={title} />
         <meta property="og:description" content={product.metaDescription} />
         <meta property="og:url" content={pageUrl} />
-        <meta property="og:image" content={heroImage} />
+        {heroImage && <meta property="og:image" content={heroImage} />}
         <meta property="og:locale" content="en_IE" />
-        <link rel="preload" as="image" href={product.gallery[0].web} />
+        {hero && <link rel="preload" as="image" href={hero.web} />}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
@@ -138,7 +139,7 @@ export default function WeddingProductPage({ product }) {
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
+        {product.gallery.length > 0 && <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
           <h2 className={`${display.className} mb-8 text-4xl text-[#243028]`}>{product.galleryTitle}</h2>
           <div className="columns-2 gap-3 sm:gap-4 lg:columns-4">
             {product.gallery.map((image) => (
@@ -159,7 +160,7 @@ export default function WeddingProductPage({ product }) {
               </figure>
             ))}
           </div>
-        </section>
+        </section>}
 
         <section className="bg-[#f7f6f1]">
           <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
