@@ -151,6 +151,7 @@ const staticPages = [
   { path: '/services/posters',  priority: '0.8', changefreq: 'monthly' },
   { path: '/services/vinyls',   priority: '0.8', changefreq: 'monthly' },
   { path: '/blog',              priority: '0.8', changefreq: 'weekly'  },
+  { path: '/blog/business-cards-ireland-quantities-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/soup-containers-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/custom-table-covers-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/cupcake-boxes-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
