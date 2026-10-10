@@ -26,7 +26,7 @@ const guides = [
   { href: '/napkin-faq-ireland', title: 'Napkin FAQ', desc: '25+ instant answers on pricing, sizes, materials & delivery.' },
   { href: '/blog/custom-napkins-uk-ireland-europe', title: 'Custom Napkins UK, Ireland & Europe', desc: 'Printed napkins for restaurants, weddings and hotels — Ireland, UK and EU delivery.' },
   { href: '/blog/personalised-napkins-ireland-guide', title: 'Personalised Napkins Guide', desc: 'Sizes, materials, wedding napkins & branding tips for Irish businesses.' },
-  { href: '/wedding-kraft-napkins-ireland', title: 'Custom Kraft Wedding Napkins', desc: 'Brown kraft napkins with names, a date or a monogram. Delivered across Ireland.' },
+  { href: '/wedding-kraft-napkins-ireland', title: 'Brown, Eco-Friendly and Recycled Wedding Napkins', desc: 'Unbleached kraft napkins with names, a date or a monogram. Delivered across Ireland.' },
 ];
 
 const breadcrumbLd = {

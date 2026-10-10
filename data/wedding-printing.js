@@ -66,6 +66,9 @@ export const WEDDING_KEYWORDS = [
   'personalised wedding napkins ireland',
   'custom wedding napkins',
   'kraft wedding napkins',
+  'brown wedding napkins',
+  'eco-friendly wedding napkins',
+  'recycled wedding napkins',
   'custom kraft napkins',
   'wedding napkins dublin',
   'linen wedding napkins',
@@ -92,7 +95,7 @@ export const WEDDING_FAQS = [
   },
   {
     q: 'Do you print personalised wedding napkins?',
-    a: 'Yes. White airlaid wedding napkins are printed in full colour, and custom kraft wedding napkins are printed with names, a date or a monogram. Both come in 20 × 20 cm and 10 × 20 cm, from 50 napkins, and we deliver them across Ireland, the UK and the EU.',
+    a: 'Yes. White airlaid wedding napkins are printed in full colour. Brown, eco-friendly and recycled wedding napkins are unbleached kraft, custom printed with names, a date or a monogram. Both come in 20 × 20 cm and 10 × 20 cm, from 50 napkins, and we deliver them across Ireland, the UK and the EU.',
   },
   {
     q: 'Can you make a wedding monogram stamp?',
@@ -221,8 +224,8 @@ export const WEDDING_COLLECTIONS = [
         cta: 'Choose a size',
       },
       {
-        title: 'Kraft wedding napkins',
-        desc: 'Custom print on brown kraft, with names, a date or a monogram. 20 × 20 cm or 10 × 20 cm, from 50, delivered nationwide.',
+        title: 'Brown, eco-friendly and recycled wedding napkins',
+        desc: 'Unbleached brown kraft, custom printed with names, a date or a monogram. The eco-friendly and recycled wedding napkin, 20 × 20 cm or 10 × 20 cm, from 50, delivered nationwide.',
         href: '/wedding-kraft-napkins-ireland',
         cta: 'Choose kraft napkins',
       },
