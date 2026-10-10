@@ -37,6 +37,8 @@ export const WEDDING_REGIONS = {
       'wedding stationery uk',
       'wedding invitations printing uk',
       'airlaid wedding napkins uk',
+      'kraft wedding napkins uk',
+      'custom kraft napkins uk',
       'personalised napkins england',
       'wedding napkins scotland',
       'wedding printing wales',
@@ -60,7 +62,7 @@ export const WEDDING_REGIONS = {
     faqs: [
       {
         q: 'Do you deliver personalised wedding napkins to the UK?',
-        a: 'Yes. Wedding napkins are printed in Ashbourne, Co. Meath and posted to England, Scotland, Wales and Northern Ireland. They are white airlaid, printed in full colour, in 20 × 20 cm and 10 × 20 cm, from 50 napkins. Delivery to Great Britain starts at €21 and your quote shows the cost for your order.',
+        a: 'Yes. Wedding napkins are printed in Ashbourne, Co. Meath and posted to England, Scotland, Wales and Northern Ireland. White airlaid napkins are printed in full colour. Custom kraft napkins are brown paper with names, a date or a monogram. Both are 20 × 20 cm and 10 × 20 cm, from 50 napkins. Delivery to Great Britain starts at €21 and your quote shows the cost for your order.',
       },
       {
         q: 'How much is delivery to the UK?',
@@ -103,6 +105,8 @@ export const WEDDING_REGIONS = {
       'wedding printing europe',
       'personalised wedding napkins europe',
       'custom wedding napkins eu',
+      'kraft wedding napkins europe',
+      'custom kraft napkins eu',
       'printed wedding envelopes europe',
       'wedding stationery europe',
       'destination wedding printing',
@@ -131,7 +135,7 @@ export const WEDDING_REGIONS = {
     faqs: [
       {
         q: 'Do you deliver personalised wedding napkins across Europe?',
-        a: 'Yes. Wedding napkins are printed in Ashbourne, Ireland and delivered to EU countries including France, Germany, Spain, Italy and the Netherlands. They are white airlaid, printed in full colour, in 20 × 20 cm and 10 × 20 cm, from 50 napkins. Delivery starts at €21 and your quote shows the cost for your order.',
+        a: 'Yes. Wedding napkins are printed in Ashbourne, Ireland and delivered to EU countries including France, Germany, Spain, Italy and the Netherlands. White airlaid napkins are printed in full colour. Custom kraft napkins are brown paper with names, a date or a monogram. Both are 20 × 20 cm and 10 × 20 cm, from 50 napkins. Delivery starts at €21 and your quote shows the cost for your order.',
       },
       {
         q: 'How much is delivery to Europe?',

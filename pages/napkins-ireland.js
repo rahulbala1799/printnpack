@@ -26,6 +26,7 @@ const guides = [
   { href: '/napkin-faq-ireland', title: 'Napkin FAQ', desc: '25+ instant answers on pricing, sizes, materials & delivery.' },
   { href: '/blog/custom-napkins-uk-ireland-europe', title: 'Custom Napkins UK, Ireland & Europe', desc: 'Printed napkins for restaurants, weddings and hotels — Ireland, UK and EU delivery.' },
   { href: '/blog/personalised-napkins-ireland-guide', title: 'Personalised Napkins Guide', desc: 'Sizes, materials, wedding napkins & branding tips for Irish businesses.' },
+  { href: '/wedding-kraft-napkins-ireland', title: 'Custom Kraft Wedding Napkins', desc: 'Brown kraft napkins with names, a date or a monogram. Delivered across Ireland.' },
 ];
 
 const breadcrumbLd = {
@@ -68,7 +69,7 @@ export default function NapkinsIreland() {
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="keywords" content="napkins ireland, printed napkins ireland, personalised napkins ireland, branded napkins, napkin printing ireland, linen feel napkins, cocktail napkins, wedding napkins ireland, paper napkins ireland, napkin printing ashbourne, custom napkins, custom napkins uk, custom napkins ireland" />
+        <meta name="keywords" content="napkins ireland, printed napkins ireland, personalised napkins ireland, branded napkins, napkin printing ireland, linen feel napkins, cocktail napkins, wedding napkins ireland, kraft wedding napkins, custom napkins, custom napkins uk, custom napkins ireland, paper napkins ireland, napkin printing ashbourne" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href={PAGE_URL} />
         <meta property="og:type" content="website" />

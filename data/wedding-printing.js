@@ -64,6 +64,9 @@ export const WEDDING_KEYWORDS = [
   'order of the day printing ireland',
   'order of service printing',
   'personalised wedding napkins ireland',
+  'custom wedding napkins',
+  'kraft wedding napkins',
+  'custom kraft napkins',
   'wedding napkins dublin',
   'linen wedding napkins',
   'wedding monogram stamp',
@@ -89,7 +92,7 @@ export const WEDDING_FAQS = [
   },
   {
     q: 'Do you print personalised wedding napkins?',
-    a: 'Yes. Wedding napkins are white airlaid, printed in full colour, in 20 × 20 cm and 10 × 20 cm, from 50 napkins. Add names, a monogram, a wreath or a date, then build the quote online.',
+    a: 'Yes. White airlaid wedding napkins are printed in full colour, and custom kraft wedding napkins are printed with names, a date or a monogram. Both come in 20 × 20 cm and 10 × 20 cm, from 50 napkins, and we deliver them across Ireland, the UK and the EU.',
   },
   {
     q: 'Can you make a wedding monogram stamp?',
@@ -216,6 +219,12 @@ export const WEDDING_COLLECTIONS = [
         desc: 'The slim size for the place setting, printed in full colour on white airlaid. Quantities from 50.',
         href: '/wedding-napkins-ireland',
         cta: 'Choose a size',
+      },
+      {
+        title: 'Kraft wedding napkins',
+        desc: 'Custom print on brown kraft, with names, a date or a monogram. 20 × 20 cm or 10 × 20 cm, from 50, delivered nationwide.',
+        href: '/wedding-kraft-napkins-ireland',
+        cta: 'Choose kraft napkins',
       },
       {
         title: 'Napkins Ireland',
