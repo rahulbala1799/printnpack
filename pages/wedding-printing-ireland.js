@@ -181,7 +181,7 @@ export default function WeddingPrintingIreland() {
   const kraftNapkins = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-kraft-napkins-ireland');
   const featured = [
     { product: napkins, badge: 'Most popular', from: `From ${napkins.minQty} napkins`, specs: ['Airlaid white', 'Full colour', '20 × 20 cm or 10 × 20 cm'], hero: napkins.gallery[1], contain: true },
-    { product: kraftNapkins, badge: 'Custom kraft', from: `From ${kraftNapkins.minQty} napkins`, specs: ['Brown kraft', 'Custom print', '20 × 20 cm or 10 × 20 cm'], hero: kraftNapkins.gallery[0], contain: true },
+    { product: kraftNapkins, badge: 'Eco-friendly', from: `From ${kraftNapkins.minQty} napkins`, specs: ['Brown kraft', 'Eco-friendly', '20 × 20 cm or 10 × 20 cm'], hero: kraftNapkins.gallery[0], contain: true },
     { product: envelopes, badge: 'Quote online', from: `From ${envelopes.minQty} envelopes`, specs: ['C6, C5 or DL', 'Full colour print', 'Guest addressing'], hero: envelopes.gallery[2] },
     { product: menus, badge: 'Quote online', from: `From ${menus.minQty} cards`, specs: ['A5, A6, DL or tent', 'Place cards', '350 gsm, both sides'], hero: menus.gallery[1] },
     { product: dayCards, badge: 'Quote online', from: `From ${dayCards.minQty} cards`, specs: ['Order of the day', 'Thank-you cards', 'A5, A6 or DL'], hero: dayCards.gallery[0], contain: true },
@@ -431,7 +431,7 @@ export default function WeddingPrintingIreland() {
                 ))}
               </ul>
               <p className="mt-4 text-sm leading-relaxed text-[#55544b]">
-                For a brown paper napkin, the custom kraft range takes a monogram, the names and the date, and we deliver it with the rest of the wedding print.
+                For brown, eco-friendly or recycled wedding napkins, the kraft range is unbleached paper with a monogram, the names and the date, delivered with the rest of the wedding print.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href="/wedding-napkins-ireland" className={btnPrimary}>Build your napkin quote</Link>

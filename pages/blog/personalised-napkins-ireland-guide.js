@@ -158,8 +158,8 @@ export default function PersonalisedNapkinsIrelandGuide() {
             Personalised wedding napkins are a popular detail for Irish receptions. Common designs include couple names,
             wedding date, monogram, or a custom illustration. Linen-feel napkins are the most popular material for weddings
             because they photograph well and feel premium on the table. Custom{' '}
-            <Link href="/wedding-kraft-napkins-ireland" className="text-amber-600 hover:underline">kraft wedding napkins</Link>{' '}
-            are the brown paper option, printed with the names, the date or a monogram, and delivered nationwide.
+            <Link href="/wedding-kraft-napkins-ireland" className="text-amber-600 hover:underline">brown, eco-friendly and recycled wedding napkins</Link>{' '}
+            are unbleached kraft, printed with the names, the date or a monogram, and delivered nationwide.
           </p>
           <p className="text-gray-600 leading-relaxed">
             Order at least 3–4 weeks before your event to allow for artwork approval and production (typically 5–10 business days).

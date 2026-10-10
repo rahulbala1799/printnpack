@@ -31,8 +31,8 @@ const ALSO = [
     linkLabel: 'Choose a coaster',
   },
   {
-    title: 'Kraft wedding napkins',
-    desc: 'Custom print on brown kraft, with the names, the date or a monogram, delivered with the rest of the stationery.',
+    title: 'Brown and eco-friendly wedding napkins',
+    desc: 'Unbleached kraft for couples searching brown, eco-friendly or recycled wedding napkins, printed with the names, the date or a monogram.',
     href: '/wedding-kraft-napkins-ireland',
     linkLabel: 'Choose kraft napkins',
   },
@@ -190,9 +190,9 @@ export default function WeddingRegionPage({ regionId }) {
       product: kraftNapkins,
       hero: kraftNapkins.gallery[0],
       contain: true,
-      h3: `Custom kraft wedding napkins ${place}`,
-      body: `Brown kraft napkins printed with your names, date or monogram. 20 × 20 cm or 10 × 20 cm, from ${kraftNapkins.minQty} napkins, delivered to ${place}.`,
-      specs: ['Brown kraft', 'Custom print', 'Delivered'],
+      h3: `Brown eco-friendly wedding napkins ${place}`,
+      body: `Unbleached brown kraft for eco-friendly and recycled wedding napkins, printed with your names, date or monogram. 20 × 20 cm or 10 × 20 cm, from ${kraftNapkins.minQty} napkins, delivered to ${place}.`,
+      specs: ['Brown kraft', 'Eco-friendly', 'Delivered'],
     },
     {
       product: envelopes,

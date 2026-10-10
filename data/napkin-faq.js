@@ -155,8 +155,8 @@ export const NAPKIN_FAQS = [
     category: 'use-cases',
     q: 'Do you print wedding napkins in Ireland?',
     subtitle: 'Personalised napkins for weddings and events',
-    a: 'Yes. We print custom wedding napkins with couple names, monograms, dates and artwork. White airlaid napkins take full colour. Kraft wedding napkins are brown paper with a custom monogram, names or date. Both are delivered across Ireland, with posting to the UK and the EU. Order with time for a proof — typically 5–10 business days of production plus delivery.',
-    link: { href: '/wedding-kraft-napkins-ireland', label: 'Kraft wedding napkins' },
+    a: 'Yes. We print custom wedding napkins with couple names, monograms, dates and artwork. White airlaid napkins take full colour. Brown, eco-friendly and recycled wedding napkins are unbleached kraft with a custom monogram, names or date. Both are delivered across Ireland, with posting to the UK and the EU. Order with time for a proof — typically 5–10 business days of production plus delivery.',
+    link: { href: '/wedding-kraft-napkins-ireland', label: 'Brown eco-friendly wedding napkins' },
   },
   {
     id: 'catering-napkins',
