@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'cold-cups-ireland-sizes-buying-guide',
+    title: 'Cold Cups Ireland: Chill Paper & rPET Juice Sizes Buying Guide',
+    excerpt:
+      'How to buy plain cold cups in Ireland — Chill PE paper cups from 9oz to 22oz, Greenspirit rPET juice cups (JC1/JC2), matching flat and dome lids, and nationwide delivery from Ashbourne for cafés and juice bars.',
+    date: '2026-10-10',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/10427.webp',
+    imageAlt:
+      'Cold cups Ireland — 12oz Chill PE paper cold cup wholesale for cafés',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'business-cards-ireland-quantities-buying-guide',
     title: 'Business Cards Ireland: Quantities, 350 gsm & Dublin Delivery Buying Guide',
     excerpt:
