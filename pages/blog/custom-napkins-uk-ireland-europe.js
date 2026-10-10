@@ -394,7 +394,9 @@ export default function CustomNapkinsUkIrelandEurope() {
             <p className="text-gray-600 leading-relaxed">
               Couples searching for personalised napkins (the UK and Irish spelling) usually want names, a date,
               or a monogram on dinner or cocktail stock. Linen-feel is the usual choice because it looks like
-              cloth in photographs. Paper is fine for larger guest lists and bar stations.
+              cloth in photographs. Paper is fine for larger guest lists and bar stations. Custom{' '}
+              <Link href="/wedding-kraft-napkins-ireland" className="text-amber-600 hover:underline">kraft wedding napkins</Link>{' '}
+              are brown kraft with a monogram, the names and the date, delivered in Ireland, the UK and the EU.
             </p>
             <p className="text-gray-600 leading-relaxed">
               Order 3–4 weeks before the wedding: artwork proof, 5–10 business days of production, then delivery
@@ -576,6 +578,7 @@ export default function CustomNapkinsUkIrelandEurope() {
         links={[
           { href: '/napkins-ireland', label: 'Napkins Ireland', desc: 'Printed, linen-feel & wholesale hub' },
           { href: '/products/printed-napkins', label: 'Printed Napkins', desc: 'Custom logo napkins from €0.05' },
+          { href: '/wedding-kraft-napkins-ireland', label: 'Kraft Wedding Napkins', desc: 'Custom kraft napkins, delivered in Ireland, the UK and the EU' },
           { href: '/products/premium-linen-feel-napkins', label: 'Linen-Feel Napkins', desc: 'Airlaid napkins for hotels & weddings' },
           { href: '/blog/personalised-napkins-ireland-guide', label: 'Personalised Napkins Guide', desc: 'Sizes, materials & Irish wedding tips' },
           { href: '/napkin-faq-ireland', label: 'Napkin FAQ', desc: '25+ answers on price, sizes & delivery' },

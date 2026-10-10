@@ -31,6 +31,12 @@ const ALSO = [
     linkLabel: 'Choose a coaster',
   },
   {
+    title: 'Kraft wedding napkins',
+    desc: 'Custom print on brown kraft, with the names, the date or a monogram, delivered with the rest of the stationery.',
+    href: '/wedding-kraft-napkins-ireland',
+    linkLabel: 'Choose kraft napkins',
+  },
+  {
     title: 'Order of the day and thank-you cards',
     desc: 'The day’s running order, and a thank-you card to send after the wedding, on A5, A6 or DL.',
     href: '/wedding-order-thank-you-cards-ireland',
@@ -163,6 +169,7 @@ export default function WeddingRegionPage({ regionId }) {
   useWeddingPageView(region ? `Wedding printing ${region.short}` : 'Wedding printing');
   const { openEnquiry, openBuilder } = useQuoteCart();
   const napkins = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-napkins-ireland');
+  const kraftNapkins = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-kraft-napkins-ireland');
   const envelopes = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-envelopes-ireland');
   const menus = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-menus-place-cards-ireland');
   const dayCards = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-order-thank-you-cards-ireland');
@@ -178,6 +185,14 @@ export default function WeddingRegionPage({ regionId }) {
       h3: `Personalised wedding napkins ${place}`,
       body: `White airlaid napkins printed in full colour with your names, date, monogram or artwork. 20 × 20 cm or 10 × 20 cm, from ${napkins.minQty} napkins.`,
       specs: ['Airlaid white', 'Full colour', '20 × 20 or 10 × 20 cm'],
+    },
+    {
+      product: kraftNapkins,
+      hero: kraftNapkins.gallery[0],
+      contain: true,
+      h3: `Custom kraft wedding napkins ${place}`,
+      body: `Brown kraft napkins printed with your names, date or monogram. 20 × 20 cm or 10 × 20 cm, from ${kraftNapkins.minQty} napkins, delivered to ${place}.`,
+      specs: ['Brown kraft', 'Custom print', 'Delivered'],
     },
     {
       product: envelopes,

@@ -136,6 +136,7 @@ const POPULAR_LINKS = [
   { label: 'Labels on a Roll', href: '/labels-on-a-roll' },
   { label: 'Wedding Envelopes', href: '/wedding-envelopes-ireland' },
   { label: 'Wedding Napkins', href: '/wedding-napkins-ireland' },
+  { label: 'Kraft Wedding Napkins', href: '/wedding-kraft-napkins-ireland' },
   { label: 'Wedding Boards', href: '/wedding-boards-ireland' },
   { label: 'Wedding Menus', href: '/wedding-menus-place-cards-ireland' },
   { label: 'Order of the Day Cards', href: '/wedding-order-thank-you-cards-ireland' },

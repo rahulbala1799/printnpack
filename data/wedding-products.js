@@ -185,6 +185,98 @@ export const WEDDING_PRODUCTS = [
         q: 'Do you deliver wedding napkins across Ireland?',
         a: 'Yes. Napkins are printed in Ashbourne, Co. Meath. You can collect locally, or we deliver to Dublin, Cork, Galway and every county in Ireland. We also post to the UK and across the EU, with the cost confirmed in your quote.',
       },
+      {
+        q: 'Do you print kraft wedding napkins as well as white airlaid?',
+        a: 'Yes. Custom kraft wedding napkins are brown kraft, printed with names, a date or a monogram, in the same 20 × 20 cm and 10 × 20 cm sizes, from 50. We deliver them across Ireland.',
+      },
+    ],
+  },
+  {
+    id: 'wedding-kraft-napkins-ireland',
+    moduleId: 'wedding-kraft-napkins',
+    path: '/wedding-kraft-napkins-ireland',
+    name: 'Kraft Wedding Napkins',
+    h1: 'Kraft wedding napkins',
+    tagline: 'Custom kraft napkins, printed with your names, date or monogram.',
+    metaTitle: 'Custom Kraft Wedding Napkins Ireland | Names & Monogram',
+    metaDescription:
+      'Custom kraft wedding napkins in Ireland. Names, a date or a monogram on brown kraft, 20 × 20 cm or 10 × 20 cm, from 50. Delivered nationwide.',
+    keywords: [
+      'custom kraft wedding napkins',
+      'kraft wedding napkins ireland',
+      'custom wedding napkins',
+      'custom napkins wedding',
+      'wedding napkins ireland',
+      'personalised kraft napkins',
+      'brown kraft napkins',
+      'kraft napkin printing',
+      'monogram wedding napkins',
+      'custom printed napkins ireland',
+      'kraft napkins dublin',
+      'eco wedding napkins',
+    ].join(', '),
+    unit: 'napkins',
+    previewRatio: '1 / 1',
+    galleryTitle: 'Kraft napkin ideas',
+    sizeLabel: 'Napkin size',
+    sizeHint: 'Two sizes',
+    sizes: [
+      {
+        id: '20x20',
+        name: '20 × 20 cm',
+        dimensions: '20 × 20 cm',
+        chip: '20 × 20 cm',
+        detail: 'The square kraft napkin, for cocktails, canapés and the drinks reception.',
+        recommended: true,
+      },
+      {
+        id: '10x20',
+        name: '10 × 20 cm',
+        dimensions: '10 × 20 cm',
+        chip: '10 × 20 cm',
+        detail: 'The slim kraft napkin, for the place setting on the plate.',
+      },
+    ],
+    fixed: [
+      { key: 'paper', label: 'Paper', value: 'Kraft' },
+      { key: 'print', label: 'Print', value: 'Custom print' },
+    ],
+    quantities: [50, 100, 200, 300, 500, 1000],
+    minQty: 50,
+    gallery: [
+      photo(
+        'wedding-napkin-20x20-kraft-ar-ireland',
+        1000,
+        1000,
+        '20x20',
+        'Custom kraft wedding napkins in Ireland, printed with an A and R monogram wreath and the date 24 August 2027',
+        'Monogram and date, 20 × 20 cm'
+      ),
+    ],
+    introTitle: 'Custom print on brown kraft',
+    intro:
+      'Kraft wedding napkins are brown paper, printed with the names, the date, a monogram or a wreath. The dark print sits cleanly on the kraft. Choose the square 20 × 20 cm napkin for the drinks, or the slim 10 × 20 cm napkin for the plate. Order from 50. We deliver across Ireland, and we post to the UK and the EU.',
+    faqs: [
+      {
+        q: 'What are custom kraft wedding napkins?',
+        a: 'They are brown kraft napkins, printed to order with your names, a date, a monogram or a wreath. The usual wedding sizes are 20 × 20 cm and 10 × 20 cm.',
+      },
+      {
+        q: 'What sizes do kraft wedding napkins come in?',
+        a: '20 × 20 cm, the square napkin for cocktails and the drinks reception, and 10 × 20 cm, the slim napkin for the place setting.',
+      },
+      {
+        q: 'Can you print a custom monogram, names or date?',
+        a: 'Yes. Send the names, the date and the artwork, such as a monogram or a wreath. We set it up, send a proof, and print once you approve it.',
+      },
+      {
+        q: 'What is the minimum order for kraft wedding napkins?',
+        a: 'From 50 napkins. Choose 50, 100, 200 or another quantity in the quote builder.',
+      },
+      {
+        q: 'Do you deliver custom kraft wedding napkins?',
+        a: 'Yes. Napkins are printed in Ashbourne, Co. Meath. You can collect locally, or we deliver to Dublin, Cork, Galway and every county in Ireland. We also post to the UK and across the EU, with the cost confirmed in your quote.',
+      },
     ],
   },
   {

@@ -178,8 +178,10 @@ export default function WeddingPrintingIreland() {
   const menus = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-menus-place-cards-ireland');
   const dayCards = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-order-thank-you-cards-ireland');
   const coasters = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-coasters-ireland');
+  const kraftNapkins = WEDDING_PRODUCTS.find((p) => p.id === 'wedding-kraft-napkins-ireland');
   const featured = [
     { product: napkins, badge: 'Most popular', from: `From ${napkins.minQty} napkins`, specs: ['Airlaid white', 'Full colour', '20 × 20 cm or 10 × 20 cm'], hero: napkins.gallery[1], contain: true },
+    { product: kraftNapkins, badge: 'Custom kraft', from: `From ${kraftNapkins.minQty} napkins`, specs: ['Brown kraft', 'Custom print', '20 × 20 cm or 10 × 20 cm'], hero: kraftNapkins.gallery[0], contain: true },
     { product: envelopes, badge: 'Quote online', from: `From ${envelopes.minQty} envelopes`, specs: ['C6, C5 or DL', 'Full colour print', 'Guest addressing'], hero: envelopes.gallery[2] },
     { product: menus, badge: 'Quote online', from: `From ${menus.minQty} cards`, specs: ['A5, A6, DL or tent', 'Place cards', '350 gsm, both sides'], hero: menus.gallery[1] },
     { product: dayCards, badge: 'Quote online', from: `From ${dayCards.minQty} cards`, specs: ['Order of the day', 'Thank-you cards', 'A5, A6 or DL'], hero: dayCards.gallery[0], contain: true },
@@ -243,7 +245,7 @@ export default function WeddingPrintingIreland() {
               Wedding Printing <span className="italic">Ireland</span>
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#efe9dc] sm:text-lg">
-              Invitations, addressed envelopes, personalised napkins, menus, coasters, monogram stamps and foamex welcome boards.
+              Invitations, addressed envelopes, personalised and kraft napkins, menus, coasters, monogram stamps and foamex welcome boards.
               Designed to match, proofed before print, made in Ashbourne, Co. Meath and delivered across Ireland.
             </p>
             <div className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row">
@@ -428,8 +430,14 @@ export default function WeddingPrintingIreland() {
                   </li>
                 ))}
               </ul>
+              <p className="mt-4 text-sm leading-relaxed text-[#55544b]">
+                For a brown paper napkin, the custom kraft range takes a monogram, the names and the date, and we deliver it with the rest of the wedding print.
+              </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href="/wedding-napkins-ireland" className={btnPrimary}>Build your napkin quote</Link>
+                <Link href="/wedding-kraft-napkins-ireland" className={`${btnLine} border-[#2f3d2d] text-[#2f3d2d] hover:bg-[#2f3d2d] hover:text-white`}>
+                  Kraft wedding napkins
+                </Link>
                 <Link href="/napkins-ireland" className={`${btnLine} border-[#2f3d2d] text-[#2f3d2d] hover:bg-[#2f3d2d] hover:text-white`}>
                   Napkin range
                 </Link>

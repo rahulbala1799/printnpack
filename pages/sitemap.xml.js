@@ -116,6 +116,7 @@ const staticPages = [
   { path: '/wedding-printing-europe',      priority: '0.8', changefreq: 'weekly' },
   { path: '/wedding-envelopes-ireland',    priority: '0.85', changefreq: 'weekly' },
   { path: '/wedding-napkins-ireland',      priority: '0.85', changefreq: 'weekly' },
+  { path: '/wedding-kraft-napkins-ireland', priority: '0.85', changefreq: 'weekly' },
   { path: '/wedding-boards-ireland',       priority: '0.85', changefreq: 'weekly' },
   { path: '/wedding-menus-place-cards-ireland', priority: '0.85', changefreq: 'weekly' },
   { path: '/wedding-order-thank-you-cards-ireland', priority: '0.85', changefreq: 'weekly' },
