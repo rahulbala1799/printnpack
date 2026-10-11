@@ -182,6 +182,12 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
           ))}
         </div>
         {image?.caption && <p className="mt-1 text-sm text-[#5a6a52]">{image.caption}</p>}
+        {product.tip && (
+          <p className="mt-3 border border-[#d5ddd2] bg-white px-4 py-3 text-sm leading-relaxed text-[#3d483b]">
+            <span className="font-semibold text-[#243028]">Tip. </span>
+            {product.tip}
+          </p>
+        )}
       </div>
 
       <div className="space-y-5 bg-white p-5 ring-1 ring-[#d5ddd2] sm:p-6">
@@ -458,7 +464,7 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
           </div>
           {added && (
             <p className="mt-3 text-xs text-[#d7e2d2]">
-              Added. Add other wedding print from the Wedding category in the quote builder.
+              {product.addedNote || 'Added. Add other wedding print from the Wedding category in the quote builder.'}
             </p>
           )}
         </div>

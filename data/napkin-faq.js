@@ -151,6 +151,14 @@ export const NAPKIN_FAQS = [
     link: { href: '/products/printed-napkins', label: 'Restaurant napkins' },
   },
   {
+    id: 'cocktail-napkins',
+    category: 'use-cases',
+    q: 'Do you print cocktail napkins in Ireland?',
+    subtitle: '10 × 10 cm closed, for weddings and restaurants',
+    a: 'Yes. Cocktail napkin printing is a white napkin, 10 × 10 cm when closed and 20 × 40 cm when open. Weddings print names, a date or a monogram. Restaurants, bars and cafés print a logo. Order from 50. Keep the design in the middle — a border on the edge can be cut off.',
+    link: { href: '/cocktail-napkins-ireland', label: 'Cocktail napkin printing' },
+  },
+  {
     id: 'wedding-napkins',
     category: 'use-cases',
     q: 'Do you print wedding napkins in Ireland?',

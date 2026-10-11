@@ -17,6 +17,7 @@ import {
 } from './clothing-pricing';
 import { LUXURY_TISSUE_HREF, LUXURY_TISSUE_ID, repriceTissueLine } from './luxury-tissue-paper';
 import { COASTER_BOARD, COASTER_SIDES, COASTER_SIZES, PRINTED_COASTER_MIN } from './coasters-options';
+import { COCKTAIL_NAPKIN_PRODUCT } from './cocktail-napkins';
 import { WEDDING_PRODUCTS, weddingBoardSizeError, weddingModuleFields } from './wedding-products';
 
 function productMedia(id, href, fallbackImage) {
@@ -88,6 +89,15 @@ export const QUOTE_CATALOG = [
       group: 'Wedding',
     })
   ),
+  withMedia({
+    id: COCKTAIL_NAPKIN_PRODUCT.id,
+    name: COCKTAIL_NAPKIN_PRODUCT.name,
+    href: COCKTAIL_NAPKIN_PRODUCT.path,
+    image: COCKTAIL_NAPKIN_PRODUCT.gallery[0]?.web || null,
+    moduleId: COCKTAIL_NAPKIN_PRODUCT.moduleId,
+    configurable: false,
+    group: 'Napkins',
+  }),
   withMedia({ id: 'rubber-stamps-ireland', name: 'Rubber Stamps', href: '/rubber-stamps', moduleId: 'rubber-stamps', configurable: false, group: 'Stamps' }),
 ];
 
@@ -255,6 +265,7 @@ export const GENERIC_MODULE_FIELDS = {
     { key: 'qty', label: 'Quantity', type: 'qty', min: 1 },
   ],
   ...Object.fromEntries(WEDDING_PRODUCTS.map((product) => [product.moduleId, weddingModuleFields(product)])),
+  [COCKTAIL_NAPKIN_PRODUCT.moduleId]: weddingModuleFields(COCKTAIL_NAPKIN_PRODUCT),
 };
 
 export function getModuleFields(moduleId) {

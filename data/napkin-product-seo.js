@@ -23,6 +23,7 @@ export const NAPKIN_PRODUCT_SEO = {
     price: '0.05',
     productFaqs: MOST_ASKED_NAPKIN_FAQS.slice(0, 4),
     relatedLinks: [
+      { href: '/cocktail-napkins-ireland', label: 'Cocktail Napkins Ireland', desc: '10 × 10 cm closed, for weddings, restaurants and bars' },
       { href: '/wedding-kraft-napkins-ireland', label: 'Kraft Wedding Napkins', desc: 'Custom kraft napkins with names, a date or a monogram' },
       { href: '/products/premium-linen-feel-napkins', label: 'Premium Linen-Feel Napkins', desc: 'Upscale airlaid napkins for hotels & weddings' },
       { href: '/luxury-tissue-paper-ireland', label: 'Luxury Tissue Paper', desc: 'Plain colour tissue, 480 sheets per case' },
