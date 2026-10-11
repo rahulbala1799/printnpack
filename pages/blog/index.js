@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'ncr-pads-ireland-duplicate-triplicate-buying-guide',
+    title: 'NCR Pads Ireland: Duplicate vs Triplicate, A6–A4 & Sets Buying Guide',
+    excerpt:
+      'How to buy custom printed NCR pads in Ireland — duplicate vs triplicate, A6, A5 and A4 sizes, 25–100 sets per pad, PMS numbering, and nationwide delivery from Ashbourne for trades and hospitality.',
+    date: '2026-10-11',
+    readTime: '8 min read',
+    image: '/images/products/ncr-pads/ncr-pads-ireland-triplicate-book.webp',
+    imageAlt:
+      'NCR pads Ireland — triplicate invoice book with colour copy sheets',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'cold-cups-ireland-sizes-buying-guide',
     title: 'Cold Cups Ireland: Chill Paper & rPET Juice Sizes Buying Guide',
     excerpt:
