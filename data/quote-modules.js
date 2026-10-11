@@ -98,6 +98,14 @@ export const QUOTE_CATALOG = [
     configurable: false,
     group: 'Napkins',
   }),
+  withMedia({
+    id: 'cocktail-napkins',
+    name: 'Cocktail Napkins',
+    href: '/products/cocktail-napkins',
+    moduleId: 'cocktail-napkin-print',
+    configurable: false,
+    group: 'Napkins',
+  }),
   withMedia({ id: 'rubber-stamps-ireland', name: 'Rubber Stamps', href: '/rubber-stamps', moduleId: 'rubber-stamps', configurable: false, group: 'Stamps' }),
 ];
 
@@ -246,6 +254,13 @@ export const GENERIC_MODULE_FIELDS = {
     { key: 'sizePreset', label: 'Size', type: 'chips', options: ['A6', 'A5', 'A4', 'Custom'] },
     DIMENSIONS_MM_IF_CUSTOM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 250 },
+  ],
+  'cocktail-napkin-print': [
+    { key: 'sizePreset', label: 'Napkin', type: 'chips', options: ['10 × 10 cm closed'] },
+    { key: 'open', label: 'Open size', type: 'chips', options: ['20 × 40 cm'] },
+    { key: 'paper', label: 'Paper', type: 'chips', options: ['White'] },
+    { key: 'print', label: 'Print', type: 'chips', options: ['Custom print'] },
+    { key: 'qty', label: 'Quantity', type: 'qty', min: 50 },
   ],
   'printed-coasters': [
     { key: 'sizePreset', label: 'Coaster', type: 'chips', options: COASTER_SIZES.map((size) => size.chip) },

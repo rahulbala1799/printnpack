@@ -11,6 +11,7 @@ const PAGE_URL = `${SITE_URL}/napkins-ireland`;
 const HERO_IMAGE = '/images/hero/napkin.svg';
 
 const napkinTypes = [
+  { title: 'Cocktail Napkins', desc: 'White logo napkins for restaurants, bars and cafés. 10 × 10 cm closed, 20 × 40 cm open.', href: '/products/cocktail-napkins', priceLabel: 'Quote from 50' },
   { title: 'Printed Paper Napkins', desc: 'Custom logo napkins for restaurants, cafes, and takeaways — cocktail, lunch, and dinner sizes.', href: '/products/printed-napkins', price: '0.05' },
   { title: 'Luxury Tissue Paper', desc: 'Plain acid-free colour tissue, 500 × 750 mm. 480 sheets per case, 15 colours.', href: '/luxury-tissue-paper-ireland', price: '29.99', priceLabel: '€29.99 + VAT per case' },
   { title: 'Premium Linen-Feel Napkins', desc: 'Cloth-like airlaid napkins for upscale dining, hotels, and weddings.', href: '/products/premium-linen-feel-napkins', price: '0.10' },
@@ -42,7 +43,7 @@ const itemListLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: 'Napkins Ireland',
-  itemListElement: napkinTypes.map((item, index) => ({
+  itemListElement: napkinTypes.filter((item) => item.price).map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     item: buildCatalogOffer(item.title, `${SITE_URL}${item.href}`, { price: item.price }).itemOffered,
@@ -104,8 +105,8 @@ export default function NapkinsIreland() {
                 Printed in Ashbourne and delivered nationwide.
               </p>
               <div className="flex flex-wrap gap-3">
-                <Link href="/cocktail-napkins-ireland" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors">
-                  Cocktail napkin printing
+                <Link href="/products/cocktail-napkins" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors">
+                  Cocktail napkins
                 </Link>
                 <Link href="/products/printed-napkins" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
                   Order Printed Napkins
@@ -125,18 +126,23 @@ export default function NapkinsIreland() {
       <section className="py-12 lg:py-16 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-sm font-semibold text-amber-600 uppercase tracking-wider mb-3">Cocktail napkins</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Printed cocktail napkins for weddings and restaurants</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Printed cocktail napkins for restaurants and bars</h2>
           <p className="text-gray-600 leading-relaxed max-w-3xl mb-8">
-            One white cocktail napkin, two uses. Closed it is 10 × 10 cm. Open it is 20 × 40 cm.
-            Print names and a date for the wedding, or a logo for the restaurant, bar or café. From 50, delivered across Ireland.
+            White cocktail napkins with your logo. Closed, 10 × 10 cm. Open, 20 × 40 cm.
+            Order from 50 for a restaurant, bar or café. Wedding artwork can be added on the cocktail napkin printing page.
           </p>
           <div className="grid sm:grid-cols-2 gap-6 mb-8">
             <Image src="/images/napkins/cocktail-napkin-salty-cod-ireland.webp" alt="Printed cocktail napkin in Ireland for a fish and chips restaurant" width={1024} height={936} className="w-full h-auto" />
             <Image src="/images/napkins/cocktail-napkin-tamarind-lane-ireland.webp" alt="Custom cocktail napkin printed with an Indian restaurant logo" width={1024} height={936} className="w-full h-auto" />
           </div>
-          <Link href="/cocktail-napkins-ireland" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors">
-            Build a cocktail napkin quote
-          </Link>
+          <div className="flex flex-wrap gap-3">
+            <Link href="/products/cocktail-napkins" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors">
+              Cocktail napkin product
+            </Link>
+            <Link href="/cocktail-napkins-ireland" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
+              Cocktail napkin printing page
+            </Link>
+          </div>
         </div>
       </section>
 

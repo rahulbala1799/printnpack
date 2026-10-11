@@ -23,10 +23,49 @@ export const NAPKIN_PRODUCT_SEO = {
     price: '0.05',
     productFaqs: MOST_ASKED_NAPKIN_FAQS.slice(0, 4),
     relatedLinks: [
+      { href: '/products/cocktail-napkins', label: 'Cocktail Napkins', desc: 'White 10 × 10 cm napkins, 20 × 40 cm open' },
       { href: '/cocktail-napkins-ireland', label: 'Cocktail Napkins Ireland', desc: '10 × 10 cm closed, for weddings, restaurants and bars' },
       { href: '/wedding-kraft-napkins-ireland', label: 'Kraft Wedding Napkins', desc: 'Custom kraft napkins with names, a date or a monogram' },
       { href: '/products/premium-linen-feel-napkins', label: 'Premium Linen-Feel Napkins', desc: 'Upscale airlaid napkins for hotels & weddings' },
       { href: '/luxury-tissue-paper-ireland', label: 'Luxury Tissue Paper', desc: 'Plain colour tissue, 480 sheets per case' },
+      ...SHARED_LINKS,
+    ],
+  },
+  'cocktail-napkins': {
+    title: 'Cocktail Napkins Ireland | Printed Logo Napkins for Restaurants',
+    description:
+      'Cocktail napkin printing in Ireland. White napkins, 10 × 10 cm closed and 20 × 40 cm open, custom printed for restaurants, bars and cafés. From 50. Delivered nationwide.',
+    keywords:
+      'cocktail napkins ireland, cocktail napkin printing ireland, printed cocktail napkins, custom cocktail napkins, restaurant cocktail napkins, bar cocktail napkins, 10x10 cocktail napkins, logo napkins ireland, printed napkins ireland',
+    h1: 'Cocktail Napkins Ireland',
+    intro:
+      'White cocktail napkins printed with your logo for restaurants, bars and cafés. Closed, the napkin is 10 × 10 cm. Open, it is 20 × 40 cm. Order from 50 and we deliver across Ireland.',
+    productFaqs: [
+      {
+        q: 'What size are the cocktail napkins?',
+        a: 'Closed, the cocktail napkin is 10 × 10 cm. Open, it is 20 × 40 cm.',
+      },
+      {
+        q: 'Who are these cocktail napkins for?',
+        a: 'Restaurants, bars, cafés, takeaways and hotels. Print a logo or a short name in the middle of the napkin.',
+      },
+      {
+        q: 'Should the design have a border?',
+        a: 'No. Keep the logo and the words in the middle. A frame, a border or a shape along the edge often gets cut off, because a napkin is not always cut with a perfectly straight edge.',
+      },
+      {
+        q: 'What is the minimum order?',
+        a: 'From 50 napkins. Choose 50, 100, 200 or up to 1,000 in the quote builder, or type your own number.',
+      },
+      {
+        q: 'Do you deliver cocktail napkins across Ireland?',
+        a: 'Yes. We print in Ashbourne, Co. Meath, and deliver nationwide. UK and EU postage is confirmed in the quote.',
+      },
+    ],
+    relatedLinks: [
+      { href: '/cocktail-napkins-ireland', label: 'Cocktail napkin printing', desc: 'The cocktail napkin page, including wedding print' },
+      { href: '/products/printed-napkins', label: 'Printed Paper Napkins', desc: 'Cocktail, lunch and dinner sizes' },
+      { href: '/products/premium-linen-feel-napkins', label: 'Premium Linen-Feel Napkins', desc: 'Airlaid napkins for hotels and dining' },
       ...SHARED_LINKS,
     ],
   },

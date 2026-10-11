@@ -46,6 +46,7 @@ export const COCKTAIL_NAPKIN_PRODUCT = {
   addedNote: 'Added. We will price the cocktail napkins and confirm delivery.',
   relatedTitle: 'More napkins',
   related: [
+    { id: 'cocktail-product', name: 'Cocktail napkins', path: '/products/cocktail-napkins' },
     { id: 'wedding-napkins', name: 'Wedding napkins', path: '/wedding-napkins-ireland' },
     { id: 'kraft-napkins', name: 'Kraft wedding napkins', path: '/wedding-kraft-napkins-ireland' },
     { id: 'printed-napkins', name: 'Printed napkins', path: '/products/printed-napkins' },

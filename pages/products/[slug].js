@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import products, { getProductBySlug, getRelatedProducts } from '../../data/products';
 import ProductPageTemplate from '../../components/ProductPageTemplate';
+import CocktailNapkinConfigurator from '../../components/napkins/CocktailNapkinConfigurator';
 import RelatedSeoLinks from '../../components/seo/RelatedSeoLinks';
 import { NAPKIN_PRODUCT_SEO } from '../../data/napkin-product-seo';
 import { SITE_URL } from '../../lib/site';
@@ -108,7 +109,12 @@ const ProductDetail = ({ product, relatedProducts }) => {
         </nav>
       )}
 
-      <ProductPageTemplate product={product} seoOverride={napkinSeo} skipBreadcrumb={!!napkinSeo} />
+      <ProductPageTemplate
+        product={product}
+        seoOverride={napkinSeo}
+        skipBreadcrumb={!!napkinSeo}
+        belowHero={product.id === 'cocktail-napkins' ? <CocktailNapkinConfigurator /> : null}
+      />
 
       {napkinSeo?.productFaqs?.length > 0 && (
         <section className="bg-white border-t border-gray-100">
