@@ -171,7 +171,7 @@ export const WEDDING_PRODUCTS = [
     faqs: [
       {
         q: 'What napkins do you print for weddings?',
-        a: 'White airlaid napkins, printed in full colour, in 20 × 20 cm and 10 × 20 cm.',
+        a: 'White airlaid napkins, printed in full colour, in 20 × 20 cm and 10 × 20 cm. Cocktail napkins are a separate size: 10 × 10 cm closed and 20 × 40 cm open, for weddings and for restaurants.',
       },
       {
         q: 'What is the minimum order?',

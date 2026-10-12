@@ -17,6 +17,7 @@ import {
 } from './clothing-pricing';
 import { LUXURY_TISSUE_HREF, LUXURY_TISSUE_ID, repriceTissueLine } from './luxury-tissue-paper';
 import { COASTER_BOARD, COASTER_SIDES, COASTER_SIZES, PRINTED_COASTER_MIN } from './coasters-options';
+import { COCKTAIL_NAPKIN_PRODUCT } from './cocktail-napkins';
 import { WEDDING_PRODUCTS, weddingBoardSizeError, weddingModuleFields } from './wedding-products';
 
 function productMedia(id, href, fallbackImage) {
@@ -88,6 +89,23 @@ export const QUOTE_CATALOG = [
       group: 'Wedding',
     })
   ),
+  withMedia({
+    id: COCKTAIL_NAPKIN_PRODUCT.id,
+    name: COCKTAIL_NAPKIN_PRODUCT.name,
+    href: COCKTAIL_NAPKIN_PRODUCT.path,
+    image: COCKTAIL_NAPKIN_PRODUCT.gallery[0]?.web || null,
+    moduleId: COCKTAIL_NAPKIN_PRODUCT.moduleId,
+    configurable: false,
+    group: 'Napkins',
+  }),
+  withMedia({
+    id: 'cocktail-napkins',
+    name: 'Cocktail Napkins',
+    href: '/products/cocktail-napkins',
+    moduleId: 'cocktail-napkin-print',
+    configurable: false,
+    group: 'Napkins',
+  }),
   withMedia({ id: 'rubber-stamps-ireland', name: 'Rubber Stamps', href: '/rubber-stamps', moduleId: 'rubber-stamps', configurable: false, group: 'Stamps' }),
 ];
 
@@ -237,6 +255,13 @@ export const GENERIC_MODULE_FIELDS = {
     DIMENSIONS_MM_IF_CUSTOM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 250 },
   ],
+  'cocktail-napkin-print': [
+    { key: 'sizePreset', label: 'Napkin', type: 'chips', options: ['10 × 10 cm closed'] },
+    { key: 'open', label: 'Open size', type: 'chips', options: ['20 × 40 cm'] },
+    { key: 'paper', label: 'Paper', type: 'chips', options: ['White'] },
+    { key: 'print', label: 'Print', type: 'chips', options: ['Custom print'] },
+    { key: 'qty', label: 'Quantity', type: 'qty', min: 50 },
+  ],
   'printed-coasters': [
     { key: 'sizePreset', label: 'Coaster', type: 'chips', options: COASTER_SIZES.map((size) => size.chip) },
     { key: 'sides', label: 'Print', type: 'chips', options: COASTER_SIDES },
@@ -255,6 +280,7 @@ export const GENERIC_MODULE_FIELDS = {
     { key: 'qty', label: 'Quantity', type: 'qty', min: 1 },
   ],
   ...Object.fromEntries(WEDDING_PRODUCTS.map((product) => [product.moduleId, weddingModuleFields(product)])),
+  [COCKTAIL_NAPKIN_PRODUCT.moduleId]: weddingModuleFields(COCKTAIL_NAPKIN_PRODUCT),
 };
 
 export function getModuleFields(moduleId) {

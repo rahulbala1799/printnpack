@@ -111,6 +111,7 @@ const staticPages = [
   { path: '/rubber-stamp-printing-dublin', priority: '0.88', changefreq: 'monthly' },
   // Napkin cluster
   { path: '/napkins-ireland',              priority: '0.9',  changefreq: 'weekly' },
+  { path: '/cocktail-napkins-ireland',     priority: '0.9',  changefreq: 'weekly' },
   { path: '/wedding-printing-ireland',     priority: '0.85', changefreq: 'weekly' },
   { path: '/wedding-printing-uk',          priority: '0.8', changefreq: 'weekly' },
   { path: '/wedding-printing-europe',      priority: '0.8', changefreq: 'weekly' },

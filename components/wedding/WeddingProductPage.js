@@ -12,20 +12,25 @@ import { useWeddingPageView } from './useWeddingPageView';
 
 /** The shared layout for every wedding product page. Content comes from the product config. */
 export default function WeddingProductPage({ product }) {
-  useWeddingPageView(product.name);
+  useWeddingPageView(product.trackWedding === false ? null : product.name);
   const pageUrl = `${SITE_URL}${product.path}`;
   const title = `${product.metaTitle} | Print n Pack`;
   const hero = product.gallery[0];
   const heroImage = hero ? `${SITE_URL}${hero.src}` : undefined;
   const introImage = product.gallery[1] || product.gallery[0];
-  const others = WEDDING_PRODUCTS.filter((item) => item.id !== product.id);
+  const sectionHref = product.sectionHref || WEDDING_PAGE_PATH;
+  const sectionLabel = product.sectionLabel || 'Wedding printing';
+  const sectionName = product.sectionName || 'Wedding Printing Ireland';
+  const others = product.related || WEDDING_PRODUCTS.filter((item) => item.id !== product.id);
+  const relatedTitle = product.relatedTitle || 'More for the wedding';
+  const relatedHub = product.relatedHub || { href: WEDDING_PAGE_PATH, label: 'All wedding printing' };
 
   const productLd = buildProductLd({
     name: product.metaTitle.split('|')[0].trim(),
     description: product.metaDescription,
     image: heroImage,
     url: pageUrl,
-    category: 'Wedding printing',
+    category: product.category || 'Wedding printing',
   });
 
   const breadcrumbLd = {
@@ -33,7 +38,7 @@ export default function WeddingProductPage({ product }) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Wedding Printing Ireland', item: `${SITE_URL}${WEDDING_PAGE_PATH}` },
+      { '@type': 'ListItem', position: 2, name: sectionName, item: `${SITE_URL}${sectionHref}` },
       { '@type': 'ListItem', position: 3, name: product.name, item: pageUrl },
     ],
   };
@@ -74,7 +79,7 @@ export default function WeddingProductPage({ product }) {
             <ol className="flex flex-wrap items-center gap-2 text-sm text-[#5c6658]">
               <li><Link href="/" className="hover:text-[#243028]">Home</Link></li>
               <li>/</li>
-              <li><Link href={WEDDING_PAGE_PATH} className="hover:text-[#243028]">Wedding printing</Link></li>
+              <li><Link href={sectionHref} className="hover:text-[#243028]">{sectionLabel}</Link></li>
               <li>/</li>
               <li className="font-semibold text-[#243028]">{product.h1}</li>
             </ol>
@@ -82,7 +87,7 @@ export default function WeddingProductPage({ product }) {
         </nav>
 
         <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:py-14">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#5a6a52]">Wedding printing</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#5a6a52]">{sectionLabel}</p>
           <h1 className={`${display.className} mt-3 max-w-3xl text-4xl leading-tight text-[#243028] sm:text-5xl`}>
             {product.h1}
           </h1>
@@ -97,6 +102,12 @@ export default function WeddingProductPage({ product }) {
             <div>
               <h2 className={`${display.className} text-4xl text-[#243028]`}>{product.introTitle}</h2>
               <p className="mt-4 leading-relaxed">{product.intro}</p>
+              {product.tip && (
+                <p className="mt-4 border border-[#d5ddd2] bg-white px-4 py-3 text-sm leading-relaxed">
+                  <span className="font-semibold text-[#243028]">Tip. </span>
+                  {product.tip}
+                </p>
+              )}
               <ul className="mt-6 text-sm">
                 {product.thicknesses?.map((item) => (
                   <li key={item.id} className="flex items-baseline justify-between gap-4 border-b border-[#d5ddd2] py-2">
@@ -174,15 +185,15 @@ export default function WeddingProductPage({ product }) {
               ))}
             </div>
 
-            <h3 className={`${display.className} mt-12 text-3xl text-[#243028]`}>More for the wedding</h3>
+            <h3 className={`${display.className} mt-12 text-3xl text-[#243028]`}>{relatedTitle}</h3>
             <div className="mt-4 flex flex-wrap gap-3">
               {others.map((item) => (
                 <Link key={item.id} href={item.path} className="bg-[#3d4c3a] px-5 py-3 text-sm font-semibold text-[#f3f1eb] hover:bg-[#2c382b]">
                   {item.name}
                 </Link>
               ))}
-              <Link href={WEDDING_PAGE_PATH} className="border border-[#3d4c3a] px-5 py-3 text-sm font-semibold text-[#3d4c3a]">
-                All wedding printing
+              <Link href={relatedHub.href} className="border border-[#3d4c3a] px-5 py-3 text-sm font-semibold text-[#3d4c3a]">
+                {relatedHub.label}
               </Link>
             </div>
             <div className="mt-6 flex flex-wrap gap-3">

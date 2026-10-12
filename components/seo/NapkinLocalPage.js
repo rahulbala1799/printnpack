@@ -146,6 +146,7 @@ export default function NapkinLocalPage({ config }) {
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">Napkin types we print</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {[
+              { title: 'Cocktail Napkins', desc: 'White 10 × 10 cm napkins, 20 × 40 cm open, printed with your logo. From 50.', href: '/products/cocktail-napkins' },
               { title: 'Printed Paper Napkins', desc: 'Custom logo napkins in cocktail, lunch, and dinner sizes — from €0.05 per unit.', href: '/products/printed-napkins' },
               { title: 'Linen-Feel Napkins', desc: 'Premium airlaid napkins with cloth-like texture for upscale dining and weddings.', href: '/products/premium-linen-feel-napkins' },
               { title: 'Plain Wholesale Napkins', desc: 'Bulk white napkins without printing — economical for high-volume catering.', href: '/plain-napkins-tableware-ireland' },

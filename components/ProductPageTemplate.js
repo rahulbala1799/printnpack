@@ -19,7 +19,7 @@ const FeatureIcon = () => (
   </svg>
 );
 
-export default function ProductPageTemplate({ product, seoOverride, skipBreadcrumb = false }) {
+export default function ProductPageTemplate({ product, seoOverride, skipBreadcrumb = false, belowHero = null }) {
   const [currentImage, setCurrentImage] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(null);
@@ -209,6 +209,8 @@ export default function ProductPageTemplate({ product, seoOverride, skipBreadcru
           </div>
         </div>
       </section>
+
+      {belowHero}
 
       {/* Features */}
       {features.length > 0 && (

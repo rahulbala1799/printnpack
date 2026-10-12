@@ -246,6 +246,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/products/cocktail-napkins-ireland',
+        destination: '/cocktail-napkins-ireland',
+        permanent: true,
+      },
+      {
         source: '/products/wedding-kraft-napkins-ireland',
         destination: '/wedding-kraft-napkins-ireland',
         permanent: true,
