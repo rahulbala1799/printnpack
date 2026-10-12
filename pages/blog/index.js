@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'portion-pots-ireland-pp-vs-paper-buying-guide',
+    title: 'Portion Pots Ireland: PP Clear vs Paper, 1–4oz & Lids Buying Guide',
+    excerpt:
+      'How to buy plain portion pots in Ireland — PP clear 2oz/4oz (PP2/PP3) vs white paper PE pots (PP1), matching lids, paper soufflé cups, and nationwide delivery from Ashbourne for takeaways and cafés.',
+    date: '2026-10-12',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/120043.webp',
+    imageAlt:
+      'Portion pots Ireland — 2oz PP clear sauce pot wholesale for takeaways',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'ncr-pads-ireland-duplicate-triplicate-buying-guide',
     title: 'NCR Pads Ireland: Duplicate vs Triplicate, A6–A4 & Sets Buying Guide',
     excerpt:
