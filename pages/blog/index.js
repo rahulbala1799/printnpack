@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'printed-coasters-ireland-9x9-moq-buying-guide',
+    title: 'Printed Coasters Ireland: Round 9×9 cm, 8 Ply & MOQ Buying Guide',
+    excerpt:
+      'How to buy printed coasters in Ireland — fixed round 9 × 9 cm on 8 ply board, full colour on one or both sides, quantities from 50, and nationwide delivery from Ashbourne for bars, cafés and hotels.',
+    date: '2026-10-13',
+    readTime: '8 min read',
+    image: '/images/coasters/coaster-harbour-bean-ireland.webp',
+    imageAlt:
+      'Printed coasters Ireland — round 8 ply coaster with coffee logo for Galway cafés',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'portion-pots-ireland-pp-vs-paper-buying-guide',
     title: 'Portion Pots Ireland: PP Clear vs Paper, 1–4oz & Lids Buying Guide',
     excerpt:
