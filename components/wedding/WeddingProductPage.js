@@ -68,7 +68,7 @@ export default function WeddingProductPage({ product }) {
         {heroImage && <meta property="og:image" content={heroImage} />}
         <meta property="og:locale" content="en_IE" />
         {hero && <link rel="preload" as="image" href={hero.web} />}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
+        {productLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} /> : null}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       </Head>

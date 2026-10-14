@@ -13,9 +13,9 @@ const HERO_ALT =
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Kerala Cafe Dublin: 1,000 Custom Printed Paper Bags from PrintNPack',
+  headline: 'Printed Paper Bags for a Dublin Café — 1,000 Bags, One Short Run',
   description:
-    'PrintNPack printed 1,000 branded white paper bags for Kerala Cafe in Coolmine, Dublin — a short-run café branding job with logo, Instagram QR and contact details. Custom paper bags from 20 bags, nationwide from Ashbourne.',
+    'Printed paper bags for a Dublin café: 1,000 branded bags with a logo, Instagram QR and contact details. Custom café bags from 20, delivered nationwide from Ashbourne. A PrintNPack job for Kerala Cafe in Coolmine.',
   image: `${siteUrl}${HERO_IMAGE}`,
   author: { '@type': 'Organization', name: 'PrintNPack Ireland', url: siteUrl },
   publisher: {
@@ -81,14 +81,14 @@ const breadcrumbLd = {
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
     { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteUrl}/blog` },
-    { '@type': 'ListItem', position: 3, name: 'Kerala Cafe Printed Paper Bags Dublin', item: PAGE_URL },
+    { '@type': 'ListItem', position: 3, name: 'Printed Paper Bags Dublin', item: PAGE_URL },
   ],
 };
 
 export default function KeralaCafePrintedPaperBagsDublin() {
-  const title = 'Kerala Cafe Dublin: 1,000 Printed Paper Bags | PrintNPack';
+  const title = 'Printed Paper Bags Dublin | Café Bags from 20 | PrintNPack';
   const description =
-    'PrintNPack printed 1,000 branded paper bags for Kerala Cafe in Coolmine, Dublin — logo, Instagram QR and contact details on a short run. Custom café bags from 20 bags, delivered nationwide from Ashbourne.';
+    'Printed paper bags for a Dublin café — 1,000 branded bags with logo, QR code and contact details. Custom café bags from 20, delivered nationwide. A PrintNPack job for Kerala Cafe, Coolmine.';
 
   return (
     <Layout>
@@ -97,7 +97,7 @@ export default function KeralaCafePrintedPaperBagsDublin() {
         <meta name="description" content={description} />
         <meta
           name="keywords"
-          content="kerala cafe dublin paper bags, printed paper bags dublin, branded paper bags ireland, custom paper bags 1000, paper bags with logo ireland, cafe branding bags ireland, short run printed paper bags, coolmine cafe packaging, printnpack paper bags"
+          content="printed paper bags dublin, branded paper bags ireland, paper bags with logo ireland, cafe paper bags ireland, short run printed paper bags, custom paper bags 1000, coolmine dublin packaging, printnpack paper bags"
         />
         <meta name="author" content="PrintNPack Ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
@@ -129,7 +129,7 @@ export default function KeralaCafePrintedPaperBagsDublin() {
           <span>/</span>
           <Link href="/blog" className="hover:text-slate-700">Blog</Link>
           <span>/</span>
-          <span className="text-slate-900">Kerala Cafe Paper Bags</span>
+          <span className="text-slate-900">Printed Paper Bags Dublin</span>
         </nav>
 
         <div className="flex items-center gap-3 mb-4">
@@ -138,12 +138,19 @@ export default function KeralaCafePrintedPaperBagsDublin() {
         </div>
 
         <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight mb-6">
-          Kerala Cafe Dublin: How 1,000 Printed Paper Bags Were Enough for Branding
+          Printed Paper Bags for a Dublin Café — 1,000 Bags Was Enough
         </h1>
 
-        <p className="text-lg text-slate-600 leading-relaxed mb-8">
+        <p className="text-lg text-slate-600 leading-relaxed mb-4">
           Independent cafés rarely need a factory-size bag order. Kerala Cafe in Coolmine only needed{' '}
-          <strong>1,000 branded paper bags</strong> — and PrintNPack printed them.
+          <strong>1,000 printed paper bags</strong> — and PrintNPack printed them.
+        </p>
+        <p className="text-slate-600 leading-relaxed mb-8">
+          This is a PrintNPack print job, not the café&apos;s own site. To order the same style, see{' '}
+          <Link href="/paper-bags-ireland" className="text-emerald-700 hover:underline font-semibold">
+            branded paper bags
+          </Link>{' '}
+          from 20 bags.
         </p>
 
         <div className="relative rounded-2xl overflow-hidden mb-8 border border-slate-100 bg-[#efeae3]">

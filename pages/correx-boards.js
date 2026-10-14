@@ -157,7 +157,7 @@ const CorrexBoardsPage = () => {
         <meta property="og:url" content="https://www.printnpack.ie/correx-boards" />
         <meta property="og:type" content="website" />
         <link rel="canonical" href={PAGE_URL} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
+        {productLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} /> : null}
       </Head>
 
       {/* ── Breadcrumb ── */}

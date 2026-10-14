@@ -40,7 +40,7 @@ export const PLAIN_PAPER_BAGS_CONFIG = {
     {
       title: 'Upgrade to Printed Bags with Logo',
       body: 'When you are ready for branded packaging, custom printed paper bags with your logo start from 20 bags on flat handle and twisted handle styles.',
-      link: { href: '/paper-bags-ireland', label: 'paper bags Ireland hub' },
+      link: { href: '/paper-bags-ireland', label: 'branded paper bags' },
     },
   ],
   faqs: [

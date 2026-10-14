@@ -4,7 +4,6 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
-import { buildProductLd } from '../lib/schema';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 
 const PAGE_URL = `${SITE_URL}/custom-printed-coffee-cups-ireland`;
@@ -127,20 +126,12 @@ const breadcrumbLd = {
   ],
 };
 
-const productLd = buildProductLd({
-  name: 'Custom Printed Coffee Cups Ireland',
-  description:
-    'Custom printed coffee cups for cafés and restaurants in Ireland and Northern Ireland. Low MOQ, logo printing, food-safe materials, nationwide delivery.',
-  image: `${SITE_URL}${HERO_IMAGE}`,
-  url: PAGE_URL,
-});
-
 const webPageLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Custom Coffee Cups Ireland | Printed Takeaway Cups Dublin & NI',
+  name: 'Custom Coffee Cups Ireland | Printed 8oz, 12oz & 16oz Cups',
   description:
-    'Branded coffee cups Dublin & Ireland — custom printed takeaway cups with low MOQ for cafés, restaurants and events. Logo printing, food-safe cups, delivery across Ireland and Northern Ireland.',
+    'Custom printed coffee cups in 8oz, 12oz and 16oz for cafés in Dublin, Ireland and Northern Ireland. Logo print, low minimum order and food-safe cups.',
   url: PAGE_URL,
   inLanguage: 'en-IE',
   isPartOf: { '@type': 'WebSite', name: 'PrintNPack Ireland', url: SITE_URL },
@@ -149,9 +140,9 @@ const webPageLd = {
 };
 
 export default function CustomPrintedCoffeeCupsIreland() {
-  const title = 'Custom Coffee Cups Ireland | Printed Takeaway Cups Dublin & NI';
+  const title = 'Custom Coffee Cups Ireland | Printed 8oz, 12oz & 16oz Cups';
   const description =
-    'Custom coffee cups Ireland — printed takeaway cups with your logo, low MOQ, food-safe cups. Delivery across Dublin, Ireland and Northern Ireland from Ashbourne.';
+    'Custom printed coffee cups in 8oz, 12oz and 16oz for cafés in Dublin, Ireland and Northern Ireland. Logo print, low minimum order, food-safe cups from Ashbourne.';
 
   return (
     <Layout>
@@ -183,7 +174,6 @@ export default function CustomPrintedCoffeeCupsIreland() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
       </Head>
 
       <nav className="bg-stone-50 border-b border-stone-200">
@@ -209,13 +199,12 @@ export default function CustomPrintedCoffeeCupsIreland() {
                 Low MOQ · Ireland &amp; Northern Ireland
               </p>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-5">
-                Custom Coffee Cups Ireland — Printed Takeaway Cups for Dublin, NI &amp; Nationwide
+                Custom Coffee Cups Ireland — Printed 8oz, 12oz &amp; 16oz Cups
               </h1>
               <p className="text-lg text-stone-300 mb-4 leading-relaxed">
-                PrintNPack supplies high-quality <strong className="text-white">custom printed coffee cups</strong> to
-                cafés, coffee shops, restaurants, hotels, events and takeaway businesses throughout Ireland and
-                Northern Ireland. With low minimum order quantities available, businesses of every size can order
-                professionally branded coffee cups without committing to excessively large volumes.
+                PrintNPack prints <strong className="text-white">8oz, 12oz and 16oz coffee cups</strong> with your logo
+                for cafés, coffee shops, restaurants, hotels and takeaways across Ireland and Northern Ireland.
+                Low minimum orders mean a single shop can brand its cups without a factory-size run.
               </p>
               <p className="text-stone-400 mb-8 leading-relaxed">
                 Our bespoke coffee cups can be customised with your logo, brand colours, artwork and promotional
@@ -226,8 +215,8 @@ export default function CustomPrintedCoffeeCupsIreland() {
 
               <div className="flex flex-wrap gap-3 mb-8">
                 <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-center">
-                  <div className="text-sm font-bold text-amber-400">Low MOQ</div>
-                  <div className="text-xs text-stone-400">available</div>
+                  <div className="text-sm font-bold text-amber-400">8oz–16oz</div>
+                  <div className="text-xs text-stone-400">printed cups</div>
                 </div>
                 <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-center">
                   <div className="text-sm font-bold text-white">Full colour</div>

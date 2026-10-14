@@ -144,7 +144,7 @@ export default function PaperBagsWithLogoIreland() {
           <p className="text-slate-700 text-sm leading-relaxed mb-4">
             <strong>Educational guide</strong> — for ordering, start at our{' '}
             <Link href="/paper-bags-ireland" className="text-emerald-700 hover:underline font-semibold">
-              paper bags Ireland hub
+              branded paper bags
             </Link>
             {' '}or go straight to{' '}
             <Link href="/printed-flat-handle-bags-ireland" className="text-emerald-700 hover:underline font-semibold">

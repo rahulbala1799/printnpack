@@ -67,7 +67,7 @@ export default function PrintedCoastersIreland() {
         <meta property="og:description" content={description} />
         <meta property="og:url" content={PAGE_URL} />
         {COASTER_IMAGES[0] && <meta property="og:image" content={`${SITE_URL}${COASTER_IMAGES[0].src}`} />}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
+        {productLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} /> : null}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       </Head>
 

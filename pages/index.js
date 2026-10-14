@@ -17,6 +17,7 @@ export default function Home() {
   const siteUrl = SITE_URL;
   const catalogOffer = (name, path) =>
     buildCatalogOffer(name, `${siteUrl}${path}`, { price: startingPriceForUrl(path) });
+  const pricedOffers = (offers) => offers.filter(Boolean);
   const siteName = 'PrintNPack Ireland';
   const title = 'PrintNPack Ireland | Print Shop Near Me — Ashbourne, Co. Meath';
   const description = "Print shop near me in Ashbourne, Co. Meath — PrintNPack prints posters, photo printing, flyers, banners, rubber stamps, stickers and custom packaging. Call +353 89 415 7369 or visit Unit 14 Ashbourne Business Centre. Nationwide delivery across Ireland.";
@@ -91,22 +92,23 @@ export default function Home() {
         {
           '@type': 'OfferCatalog',
           name: 'Custom Printed Packaging',
-          itemListElement: [
+          itemListElement: pricedOffers([
             catalogOffer('Pizza Boxes Ireland', '/pizza-boxes-ireland'),
             catalogOffer('Custom Printed Pizza Boxes', '/custom-pizza-boxes-ireland'),
             catalogOffer('Custom Cake Boxes Ireland', '/custom-cake-boxes-ireland'),
+            catalogOffer('Paper Bags Ireland', '/paper-bags-ireland'),
             catalogOffer('Printed Flat Handle Bags Ireland', '/printed-flat-handle-bags-ireland'),
             catalogOffer('Paper Bags with Logo', '/printed-flat-handle-bags-ireland'),
             catalogOffer('Burger Boxes Ireland', '/burger-boxes-ireland'),
             catalogOffer('Plain Burger Boxes', '/plain-burger-boxes-ireland'),
             catalogOffer('Custom Burger Boxes', '/custom-burger-boxes-ireland'),
             catalogOffer('Bagasse Burger Boxes', '/eco-bagasse-burger-boxes'),
-          ],
+          ]),
         },
         {
           '@type': 'OfferCatalog',
           name: 'Plain Packaging Wholesale',
-          itemListElement: [
+          itemListElement: pricedOffers([
             catalogOffer('Wholesale Food Containers', '/plain-packaging'),
             catalogOffer('Hot Cups & Lids Ireland', '/hot-cups-ireland'),
             catalogOffer('Disposable Gloves Ireland', '/gloves-ireland'),
@@ -115,12 +117,12 @@ export default function Home() {
             catalogOffer('Biobox Containers', '/biobox-containers-ireland'),
             catalogOffer('Catering Supplies Ireland', '/plain-packaging'),
             catalogOffer('Disposable Packaging', '/plain-packaging'),
-          ],
+          ]),
         },
         {
           '@type': 'OfferCatalog',
           name: 'Print Solutions',
-          itemListElement: [
+          itemListElement: pricedOffers([
             catalogOffer('Printing Services Ireland', '/printing-ireland'),
             catalogOffer('Banners Ireland', '/banners-ireland'),
             catalogOffer('Banner Printing Dublin', '/banner-printing-dublin'),
@@ -137,7 +139,7 @@ export default function Home() {
             catalogOffer('Printed Napkins Ireland', '/products/printed-napkins'),
             catalogOffer('Luxury Tissue Paper Ireland', '/luxury-tissue-paper-ireland'),
             catalogOffer('Foamex Ireland', '/foamex-ireland'),
-            catalogOffer('Foamex Boards Ireland', '/foamex-boards'),
+            catalogOffer('Foamex Board Ireland', '/foamex-boards'),
             catalogOffer('Vinyl Banners Ireland', '/vinyl-banners'),
             catalogOffer('Pull Up Banners Meath', '/pull-up-banners-meath'),
             catalogOffer('Custom Posters Ireland', '/posters'),
@@ -152,7 +154,7 @@ export default function Home() {
             catalogOffer('Custom Decals Ireland', '/vinyl-stickers'),
             catalogOffer('Vinyl Banners', '/vinyl-banners'),
             catalogOffer('Vinyl Stickers Ireland', '/vinyl-stickers'),
-          ],
+          ]),
         },
       ],
     },

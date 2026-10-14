@@ -88,18 +88,16 @@ const breadcrumbLd = {
   ],
 };
 
-const productLd = {
-  ...buildProductLd({
-    name: 'Curved Banner Stands Ireland',
-    description:
-      'Curved banner stands Ireland — curved stretch stand or curved banner with stand. Printed stretch fabric on a curved aluminium frame. Complete set or print only. Delivered from Ashbourne.',
-    image: gallery.map((item) => `${SITE_URL}${item.src}`),
-    url: PAGE_URL,
-    sku: 'curved-banner-stands-ireland',
-    category: 'Banners, Stands and Frames',
-  }),
-  alternateName: ALTERNATE_NAMES,
-};
+const pricedProduct = buildProductLd({
+  name: 'Curved Banner Stands Ireland',
+  description:
+    'Curved banner stands Ireland — curved stretch stand or curved banner with stand. Printed stretch fabric on a curved aluminium frame. Complete set or print only. Delivered from Ashbourne.',
+  image: gallery.map((item) => `${SITE_URL}${item.src}`),
+  url: PAGE_URL,
+  sku: 'curved-banner-stands-ireland',
+  category: 'Banners, Stands and Frames',
+});
+const productLd = pricedProduct ? { ...pricedProduct, alternateName: ALTERNATE_NAMES } : null;
 
 export default function CurvedBannerStandsIreland() {
   const { openBuilder } = useQuoteCart();
@@ -124,7 +122,7 @@ export default function CurvedBannerStandsIreland() {
         <meta property="og:description" content={description} />
         <meta property="og:url" content={PAGE_URL} />
         <meta property="og:image" content={`${SITE_URL}${HERO_IMAGE}`} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
+        {productLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} /> : null}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       </Head>

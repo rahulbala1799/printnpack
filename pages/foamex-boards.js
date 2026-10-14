@@ -24,9 +24,9 @@ const faqLd = {
 };
 
 const productLd = buildProductLd({
-  name: 'Foamex Boards Ireland — Custom PVC Foam Signage',
+  name: 'Foamex Board Ireland — 3mm, 5mm & 10mm from €15',
   description:
-    'Custom foamex board printing in Ireland — 3mm, 5mm, 5.5mm, and 10mm PVC foam signage for exhibitions, retail, and indoor displays. UV print, custom sizes up to 8ft × 4ft.',
+    'Foamex board printing in Ireland from €15. 3mm, 5mm and 10mm PVC foam boards for exhibitions, retail and indoor signs, cut up to 8ft × 4ft.',
   image: `${SITE_URL}/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif`,
   url: PAGE_URL,
   price: '15.00',
@@ -184,11 +184,11 @@ const FoamexBoardsPage = () => {
   return (
     <Layout>
       <Head>
-        <title>Foamex Boards Ireland | Custom PVC Foam Signage & Printing | Print n Pack</title>
-        <meta name="description" content="Custom foamex board printing in Ireland — 3mm, 5mm & 10mm PVC foam signage for exhibitions, retail & indoor displays. UV print, sizes up to 8ft × 4ft. Free quote, nationwide delivery." />
+        <title>Foamex Board Ireland | 3mm, 5mm & 10mm from €15 | Print n Pack</title>
+        <meta name="description" content="Foamex board Ireland from €15 a sheet. 3mm, 5mm and 10mm PVC foam boards for exhibitions, retail and indoor signs, up to 8ft × 4ft. Nationwide delivery." />
         <meta name="keywords" content="foamex boards ireland, foamex printing, foam board printing, pvc foamex, foamex signs, foamex panels, 5mm foamex, foamex board printing, exhibition panels ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
-        <meta property="og:title" content="Foamex Boards Ireland | Custom PVC Foam Signage" />
+        <meta property="og:title" content="Foamex Board Ireland | 3mm, 5mm & 10mm from €15" />
         <meta property="og:description" content="UV-printed foamex boards for exhibitions, shop signage, and indoor displays. 3mm, 5mm, 5.5mm, and 10mm thicknesses. Custom sizes, Ireland-wide delivery." />
         <meta property="og:image" content="https://www.printnpack.ie/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif" />
         <meta property="og:url" content={PAGE_URL} />
@@ -196,7 +196,7 @@ const FoamexBoardsPage = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content="https://www.printnpack.ie/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.avif" />
         <link rel="canonical" href={PAGE_URL} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
+        {productLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} /> : null}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       </Head>
@@ -275,7 +275,7 @@ const FoamexBoardsPage = () => {
               </div>
 
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">
-                Foamex Boards Ireland
+                Foamex Board Ireland — 3mm, 5mm &amp; 10mm from €15
               </h1>
 
               <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">

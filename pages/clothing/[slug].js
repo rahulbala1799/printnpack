@@ -84,7 +84,7 @@ export default function ClothingProductPage({ product, relatedProducts }) {
         <meta property="og:url" content={pageUrl} />
         <meta property="og:type" content="product" />
         <link rel="canonical" href={pageUrl} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+        {structuredData ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} /> : null}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
         {faqLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />}
       </Head>

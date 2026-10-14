@@ -11,7 +11,7 @@ const HERO_IMAGE = '/ifa/product/foamex/3mm-Printed-Foamex-Boards-XL-Displays.av
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Foamex Board Ireland | 3mm, 5mm & 10mm Printed Foam Signs',
+  headline: 'Foamex Board Thickness Guide | 3mm vs 5mm vs 10mm',
   description:
     'Foamex board printing in Ireland — 3mm, 5mm and 10mm PVC foam signs. Sheet sizes, indoor vs outdoor, foamex vs Correx, and how to order from Ashbourne.',
   image: `${siteUrl}${HERO_IMAGE}`,
@@ -91,9 +91,9 @@ const breadcrumbLd = {
 };
 
 export default function FoamexBoardsIrelandGuide() {
-  const title = 'Foamex Board Ireland | 3mm, 5mm & 10mm Printed Foam Signs';
+  const title = 'Foamex Board Thickness Guide | 3mm vs 5mm vs 10mm';
   const description =
-    'Foamex board Ireland for retail, exhibitions and indoor signs. Compare 3mm vs 5mm vs 10mm, standard sheet sizes, foamex vs Correx, and order printed boards from Ashbourne.';
+    'Compare 3mm, 5mm and 10mm foamex board for retail and exhibitions. Sheet sizes, indoor use, and how it differs from Correx. Order printed boards from €15.';
 
   return (
     <Layout>
@@ -138,7 +138,7 @@ export default function FoamexBoardsIrelandGuide() {
             Foamex boards are one of the most versatile signage materials for Irish businesses — lightweight,
             rigid, and print-ready for shop displays, exhibition panels, and office graphics.
             Printed boards start from €15 a sheet. Order on the{' '}
-            <Link href="/foamex-boards" className="text-violet-600 hover:underline">foamex boards page</Link>.
+            <Link href="/foamex-boards" className="text-violet-600 hover:underline">foamex board</Link>.
           </p>
 
           <div className="not-prose grid sm:grid-cols-3 gap-4 my-8">

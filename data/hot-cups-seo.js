@@ -177,12 +177,12 @@ export const HOT_CUPS_HUB_FAQS = [
 ];
 
 export const HOT_CUPS_HUB_CONFIG = {
-  metaTitle: 'Disposable Coffee Cups Ireland | Hot Cups & Lids Wholesale Supplier',
+  metaTitle: 'Disposable Coffee Cups Ireland | 8oz, 12oz & 16oz from €17',
   metaDescription:
-    'Coffee cup supplier Ireland — wholesale disposable hot cups & lids in 8oz, 12oz & 16oz. Plain double wall, compostable & kraft cups from €17/case. Takeaway cups for cafes. Nationwide delivery.',
+    'Disposable coffee cups Ireland — 8oz, 12oz and 16oz hot cups and lids from €17 a case. Plain double wall, compostable and kraft takeaway cups. Nationwide delivery.',
   keywords:
     'disposable coffee cups ireland, coffee cup supplier ireland, hot cups ireland, paper cups wholesale, takeaway cups ireland, disposable cups ireland, wholesale coffee cups, 8oz coffee cups, 12oz coffee cups, 16oz coffee cups, hot cup lids, compostable coffee cups, double wall cups, cafe cups ireland',
-  h1: 'Disposable Coffee Cups Ireland — Hot Cups & Lids Wholesale',
+  h1: 'Disposable Coffee Cups Ireland — 8oz, 12oz & 16oz from €17',
   heroLabel: '71 SKUs · 8oz to 16oz · cups & lids · case pricing',
   intro:
     'Wholesale disposable coffee cups and lids for Irish cafes, coffee shops, delis, hotels and caterers. PrintNPack stocks plain 8oz, 10oz, 12oz and 16oz double wall and single wall paper cups, compostable Greenspirit aqueous cups, kraft ripple cups and matching lids — all with tiered case pricing and fast nationwide delivery. No print MOQ — order plain takeaway stock today.',

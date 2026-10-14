@@ -122,7 +122,7 @@ export default function TwistedHandlePaperBagsIreland() {
         <meta property="og:image" content={`${SITE_URL}/images/products/twisted-handle-bags/1.png`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
+        {productLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} /> : null}
       </Head>
 
       <nav className="bg-gray-50 border-b border-gray-200">

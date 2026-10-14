@@ -12,9 +12,9 @@ const CRICKET_IMAGE = '/images/products/custom-printed-flags/custom-printed-flag
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Custom Printed Flags Ireland: Sizes, Materials & Club Buying Guide',
+  headline: 'Custom Printed Flags Ireland | Sizes 100×70 to 200×100 cm',
   description:
-    'How to buy custom printed flags in Ireland — sizes from Extra Small to Extra Large, polyester vs recycled vs mesh, finishing options, MOQ from one flag, and nationwide delivery from Ashbourne.',
+    'Custom printed flags in Ireland from 1 flag. Sizes from 100×70 cm to 200×100 cm, in polyester, recycled polyester and mesh, for clubs and businesses.',
   image: `${siteUrl}${HERO_IMAGE}`,
   author: { '@type': 'Organization', name: 'PrintNPack Ireland', url: siteUrl },
   publisher: {
@@ -121,9 +121,9 @@ const sizeRows = [
 ];
 
 export default function CustomPrintedFlagsIrelandSizesBuyingGuide() {
-  const title = 'Custom Printed Flags Ireland: Sizes, Materials & Club Buying Guide';
+  const title = 'Custom Printed Flags Ireland | Sizes 100×70 to 200×100 cm';
   const description =
-    'Buy custom printed flags in Ireland with confidence — sizes from Extra Small to Extra Large, polyester vs recycled vs mesh, finishing options, MOQ from one flag, and delivery to Dublin, Cork, Galway and nationwide from Ashbourne.';
+    'Custom printed flags in Ireland from 1 flag. Sizes from 100×70 cm to 200×100 cm, polyester, recycled and mesh. Clubs and businesses, delivery nationwide from Ashbourne.';
 
   return (
     <Layout>
@@ -182,7 +182,7 @@ export default function CustomPrintedFlagsIrelandSizesBuyingGuide() {
         </div>
 
         <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight mb-6">
-          Custom Printed Flags Ireland: Sizes, Materials &amp; Club Buying Guide
+          Custom Printed Flags Ireland — Sizes from 100×70 to 200×100 cm
         </h1>
 
         <div className="grid grid-cols-3 gap-3 mb-8">

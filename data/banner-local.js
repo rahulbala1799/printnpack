@@ -21,10 +21,10 @@ export const BANNER_LOCAL_PAGES = {
   dublin: {
     slug: 'banner-printing-dublin',
     title: 'Banner Printing Dublin',
-    metaTitle: 'Banner Printing Dublin | Banners Dublin & Custom PVC Banners',
+    metaTitle: 'Banner Printing Dublin | PVC Banners from €25',
     metaDescription:
-      'Banner printing Dublin — custom PVC banners, roll-up banners and printed banners for shops, events and exhibitions. Banners Dublin delivery across city & county. Free quote from PrintNPack.',
-    h1: 'Banner Printing Dublin — Banners Dublin & PVC Roll-Ups',
+      'Banner printing Dublin from €25. Custom PVC banners and roll-up banners for shops, events and exhibitions, delivered across Dublin city and county.',
+    h1: 'Banner Printing Dublin — PVC Banners from €25',
     intro:
       'Looking for banner printing Dublin or banners Dublin for your shop, restaurant, exhibition or promotion? PrintNPack prints custom PVC banners, roll-up banners, and event graphics for Dublin retailers, restaurants, corporate offices, trade shows, and pop-up campaigns. Based in Ashbourne, Co. Meath, we deliver across Dublin city and county with design help, artwork proofing, and practical advice on materials and finishing.',
     localAreas: ['Dublin City', 'Dublin South', 'Dublin North', 'Swords', 'Blanchardstown', 'Tallaght', 'Dún Laoghaire'],

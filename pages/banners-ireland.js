@@ -62,11 +62,6 @@ const itemListLd = {
     buildCatalogOffer('PVC Banners Ireland', `${SITE_URL}/vinyl-banners`, { price: '25.00' }).itemOffered,
     buildCatalogOffer('Roll Up Banners Ireland', `${SITE_URL}/roll-up-banners-ireland`, { price: '80.00' }).itemOffered,
     buildCatalogOffer('Extra Wide Roll Up Banners Ireland', `${SITE_URL}/extra-wide-roll-up-banners-ireland`, { price: '398.96' }).itemOffered,
-    buildCatalogOffer('Fabric Banner Stands Ireland', `${SITE_URL}/fabric-banner-stands-ireland`).itemOffered,
-    buildCatalogOffer('Curved Banner Stands Ireland', `${SITE_URL}/curved-banner-stands-ireland`).itemOffered,
-    buildCatalogOffer('Large Stage Backdrop Banners Ireland', `${SITE_URL}/stage-backdrop-banners-ireland`).itemOffered,
-    buildCatalogOffer('Custom Table Covers Ireland', `${SITE_URL}/custom-table-covers-ireland`).itemOffered,
-    buildCatalogOffer('Custom Printed Flags Ireland', `${SITE_URL}/custom-printed-flags-ireland`).itemOffered,
   ].map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,
@@ -75,9 +70,9 @@ const itemListLd = {
 };
 
 export default function BannersIreland() {
-  const title = 'Banner Printing Ireland | Custom PVC & Roll-Up Banners | Print n Pack';
+  const title = 'Banner Printing Ireland | PVC & Roll-Up Banners from €25';
   const description =
-    'Banner printing Ireland — custom PVC banners, roll-up banners, fabric banner stands (banner with frame / structure), extra wide 2m roller banners and trade show displays. From Ashbourne with delivery across Dublin, Meath and nationwide.';
+    'Banner printing Ireland from €25. Custom PVC banners, roll-up banners and trade show displays, delivered across Dublin, Meath and nationwide from Ashbourne.';
 
   return (
     <Layout>
@@ -112,7 +107,7 @@ export default function BannersIreland() {
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <div>
               <p className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-3">Ireland&apos;s local banner printer</p>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">Banner Printing Ireland</h1>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">Banner Printing Ireland — PVC Banners from €25</h1>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
                 Need a banner for a shop, school, event, sports club, restaurant, market or promotion? Print n Pack prints custom{' '}
                 <strong>PVC banners</strong>, <strong>roll-up banners</strong>, event banners and display graphics for customers across{' '}

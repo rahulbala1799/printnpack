@@ -98,22 +98,25 @@ const breadcrumbLd = {
   ],
 };
 
-const productLd = {
-  ...buildProductLd({
-    name: 'Custom Table Covers Ireland',
-    description:
-      'Custom printed table covers and exhibition table throws for events across Ireland. Standard sizes or your own, up to 1.5 m wide and 6 m long. Delivered to every county from Ashbourne.',
-    image: `${SITE_URL}${HERO_IMAGE}`,
-    url: PAGE_URL,
-    sku: 'custom-table-covers-ireland',
-    category: 'Banners, Stands and Frames',
-  }),
-  alternateName: ALTERNATE_NAMES,
-  areaServed: COUNTIES.map((name) => ({
-    '@type': 'AdministrativeArea',
-    name: `County ${name}, Ireland`,
-  })),
-};
+const pricedProduct = buildProductLd({
+  name: 'Custom Table Covers Ireland',
+  description:
+    'Custom printed table covers and exhibition table throws for events across Ireland. Standard sizes or your own, up to 1.5 m wide and 6 m long. Delivered to every county from Ashbourne.',
+  image: `${SITE_URL}${HERO_IMAGE}`,
+  url: PAGE_URL,
+  sku: 'custom-table-covers-ireland',
+  category: 'Banners, Stands and Frames',
+});
+const productLd = pricedProduct
+  ? {
+      ...pricedProduct,
+      alternateName: ALTERNATE_NAMES,
+      areaServed: COUNTIES.map((name) => ({
+        '@type': 'AdministrativeArea',
+        name: `County ${name}, Ireland`,
+      })),
+    }
+  : null;
 
 const webPageLd = {
   '@context': 'https://schema.org',
@@ -158,7 +161,7 @@ export default function CustomTableCoversIreland() {
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={`${SITE_URL}${HERO_IMAGE}`} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
+        {productLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} /> : null}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageLd) }} />

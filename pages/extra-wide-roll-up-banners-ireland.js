@@ -266,7 +266,7 @@ const ExtraWideRollUpBannersPage = () => {
         <meta name="twitter:description" content="2m-wide XL roller banners up to 3m. UV print, Silver XL stand. Delivery across Ireland, Northern Ireland, UK and EU." />
         <meta name="twitter:image" content={HERO_IMG} />
         <link rel="canonical" href={PAGE_URL} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
+        {productLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} /> : null}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       </Head>
