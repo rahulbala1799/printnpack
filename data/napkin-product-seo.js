@@ -5,6 +5,7 @@ const byId = (id) => NAPKIN_FAQS.find((faq) => faq.id === id);
 const SHARED_LINKS = [
   { href: '/napkins-ireland', label: 'Napkins Ireland', desc: 'Complete napkin printing hub' },
   { href: '/napkin-faq-ireland', label: 'Napkin FAQ', desc: '25+ instant answers' },
+  { href: '/blog/custom-printed-napkins', label: 'Custom Printed Napkins', desc: '10 × 10 cm cocktail, wedding napkins and kraft, from 50' },
   { href: '/blog/custom-napkins-uk-ireland-europe', label: 'Custom Napkins UK, Ireland & Europe', desc: 'Printed napkins for Ireland, the UK and EU' },
   { href: '/blog/personalised-napkins-ireland-guide', label: 'Personalised Napkins Guide', desc: 'Sizes, materials & wedding tips' },
   { href: '/napkin-printing-ashbourne', label: 'Napkin Printing Ashbourne', desc: 'Local collection & delivery' },

@@ -6,6 +6,17 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'custom-printed-napkins',
+    title: 'Custom Printed Napkins | 10×10 cm Cocktail, Wedding and Kraft',
+    excerpt:
+      'Printed napkins from 50. Cocktail and beverage napkins at 10 × 10 cm, white wedding napkins at 20 × 20 cm and 10 × 20 cm, and brown kraft. Tell us the idea and we design it.',
+    date: '2026-10-14',
+    readTime: '7 min read',
+    image: '/images/wedding/wedding-napkins-20x20-airlaid-bar-ireland.webp',
+    imageAlt: 'Custom printed napkins — green wreath monogram on a 20 × 20 cm wedding napkin',
+    category: 'Napkin printing',
+  },
+  {
     slug: 'round-kraft-bowls-ireland-sizes-buying-guide',
     title: 'Round Kraft Bowls Ireland: 750–1300ml Sizes & Lids Buying Guide',
     excerpt:

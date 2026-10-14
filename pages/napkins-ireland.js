@@ -24,6 +24,7 @@ const localPages = [
 ];
 
 const guides = [
+  { href: '/blog/custom-printed-napkins', title: 'Custom Printed Napkins', desc: '10 × 10 cm cocktail, white wedding napkins and brown kraft, from 50.' },
   { href: '/napkin-faq-ireland', title: 'Napkin FAQ', desc: '25+ instant answers on pricing, sizes, materials & delivery.' },
   { href: '/blog/custom-napkins-uk-ireland-europe', title: 'Custom Napkins UK, Ireland & Europe', desc: 'Printed napkins for restaurants, weddings and hotels — Ireland, UK and EU delivery.' },
   { href: '/blog/personalised-napkins-ireland-guide', title: 'Personalised Napkins Guide', desc: 'Sizes, materials, wedding napkins & branding tips for Irish businesses.' },
