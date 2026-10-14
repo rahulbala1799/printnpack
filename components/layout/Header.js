@@ -61,8 +61,8 @@ const Header = () => {
     { name: 'Home', path: '/', icon: <FaHome /> },
     { name: 'About', path: '/about', icon: <FaInfoCircle /> },
     { name: 'Products', path: '/products', icon: <FaBoxOpen /> },
-    { name: 'Plain Packaging', path: '/plain-packaging', icon: <FaBox /> },
-    { name: 'Wedding Printing', path: '/wedding-printing-ireland', icon: <FaRing /> },
+    { name: 'Plain', path: '/plain-packaging', icon: <FaBox /> },
+    { name: 'Wedding', path: '/wedding-printing-ireland', icon: <FaRing /> },
     { name: 'Services', path: '/services', icon: <FaTools /> },
     { name: 'Blog', path: '/blog', icon: <FaNewspaper /> },
     { name: 'Contact', path: '/contact', icon: <FaPhoneAlt /> },
@@ -115,7 +115,7 @@ const Header = () => {
                   <li key={item.path}>
                     <Link
                       href={item.path}
-                      className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors"
+                      className="whitespace-nowrap px-2.5 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors xl:px-3"
                     >
                       {item.name}
                     </Link>
