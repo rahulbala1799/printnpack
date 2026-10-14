@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'round-kraft-bowls-ireland-sizes-buying-guide',
+    title: 'Round Kraft Bowls Ireland: 750–1300ml Sizes & Lids Buying Guide',
+    excerpt:
+      'How to buy plain round kraft bowls in Ireland — PE kraft 750ml (KB3), 900ml and 1300ml (KB4), matching PET lids, case packs, and nationwide delivery from Ashbourne for poke, salad and noodle takeaways.',
+    date: '2026-10-14',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/120074.webp',
+    imageAlt:
+      'Round kraft bowls Ireland — 750ml PE kraft bowl wholesale for takeaways',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'printed-coasters-ireland-9x9-moq-buying-guide',
     title: 'Printed Coasters Ireland: Round 9×9 cm, 8 Ply & MOQ Buying Guide',
     excerpt:
