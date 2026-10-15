@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -433,6 +433,9 @@ const guides = [
 ];
 
 export default function PackagingGuides() {
+  const [expanded, setExpanded] = useState(false);
+  const visible = expanded ? guides : guides.slice(0, 4);
+
   return (
     <section className="py-8 sm:py-12 bg-slate-50 border-y border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -446,11 +449,13 @@ export default function PackagingGuides() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {guides.map((guide) => (
+          {visible.map((guide, index) => (
             <Link
               key={guide.href}
               href={guide.href}
-              className="group flex gap-4 bg-white rounded-xl border border-gray-200 p-4 sm:p-5 hover:border-blue-200 hover:shadow-md transition-all"
+              className={`group flex gap-4 bg-white rounded-xl border border-gray-200 p-4 sm:p-5 hover:border-blue-200 hover:shadow-md transition-all ${
+                !expanded && index === 3 ? 'hidden lg:flex' : ''
+              }`}
             >
               <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100">
                 <Image
@@ -473,6 +478,20 @@ export default function PackagingGuides() {
               </div>
             </Link>
           ))}
+        </div>
+
+        <div className="mt-6 text-center">
+          <button
+            type="button"
+            aria-expanded={expanded}
+            onClick={() => setExpanded((open) => !open)}
+            className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-800 transition hover:border-slate-400"
+          >
+            {expanded ? 'Show fewer' : 'Show all guides'}
+            <svg className={`h-4 w-4 transition ${expanded ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
         </div>
       </div>
     </section>

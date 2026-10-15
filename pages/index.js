@@ -4,14 +4,11 @@ import Head from 'next/head';
 import { SITE_URL } from '../lib/site';
 import { buildCatalogOffer, startingPriceForUrl } from '../lib/schema';
 import HomepageHero from '../components/home/HomepageHero';
+import WeddingShowcase from '../components/home/WeddingShowcase';
 import TrustBar from '../components/home/TrustBar';
 import CategoryGrid from '../components/home/CategoryGrid';
-import PopularProducts from '../components/home/PopularProducts';
 import PackagingGuides from '../components/home/PackagingGuides';
 import PlainPackagingShowcase from '../components/home/PlainPackagingShowcase';
-import AllProductsGrid from '../components/home/AllProductsGrid';
-import QuickServices from '../components/home/QuickServices';
-import HomepageCTA from '../components/home/HomepageCTA';
 
 export default function Home() {
   const siteUrl = SITE_URL;
@@ -327,8 +324,9 @@ export default function Home() {
         />
       </Head>
 
-      {/* Hero with search */}
       <HomepageHero />
+
+      <WeddingShowcase />
 
       {/* Trust/USP bar */}
       <TrustBar />
@@ -336,22 +334,10 @@ export default function Home() {
       {/* Browse by category */}
       <CategoryGrid />
 
-      {/* Most popular products */}
-      <PopularProducts />
-
       <PackagingGuides />
 
       {/* Plain Packaging Wholesale Showcase */}
       <PlainPackagingShowcase />
-
-      {/* All products by category */}
-      <AllProductsGrid />
-
-      {/* Why choose us / Services */}
-      <QuickServices />
-
-      {/* Final CTA */}
-      <HomepageCTA />
     </Layout>
   );
 }

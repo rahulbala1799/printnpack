@@ -15,11 +15,13 @@ const sizes = [
   { size: 'Large', dimensions: '12" × 6" × 15.5"', use: 'Larger purchases, department stores, events' },
 ];
 
+const HERO_IMAGE = '/images/products/twisted-handle-bags/moss-mist.jpg';
+
 const galleryImages = [
-  { src: '/images/products/twisted-handle-bags/1.png', alt: 'Twisted handle paper bags Ireland – premium retail carrier bags with logo' },
-  { src: '/images/products/twisted-handle-bags/2.png', alt: 'Custom twisted handle paper bags Ireland – boutique branding' },
-  { src: '/images/products/twisted-handle-bags/4.png', alt: 'Printed twisted handle bags Ireland – white kraft retail bag' },
-  { src: '/images/products/twisted-handle-bags/5.png', alt: 'Branded twisted handle carrier bags Ireland – gift shop packaging' },
+  { src: '/images/products/twisted-handle-bags/moss-mist.jpg', alt: 'Printed white twisted handle paper bags for a skincare brand' },
+  { src: '/images/products/twisted-handle-bags/nest-nook.jpg', alt: 'Printed white twisted handle bags in several sizes for a homewares shop' },
+  { src: '/images/products/twisted-handle-bags/morning-crumb.jpg', alt: 'Printed white twisted handle bakery bags with a custom logo' },
+  { src: '/images/products/twisted-handle-bags/olive-oak.jpg', alt: 'Printed white twisted handle bags for a delicatessen' },
 ];
 
 const seoSections = [
@@ -94,7 +96,7 @@ const productLd = buildProductLd({
   name: 'Twisted Handle Paper Bags Ireland',
   description:
     'Premium twisted handle paper carrier bags for Irish boutiques, gift shops and retail. Custom logo printing, three sizes, MOQ from 20 bags, nationwide delivery.',
-  image: `${SITE_URL}/images/products/twisted-handle-bags/1.png`,
+  image: `${SITE_URL}${HERO_IMAGE}`,
   url: PAGE_URL,
   price: '0.35',
 });
@@ -119,7 +121,7 @@ export default function TwistedHandlePaperBagsIreland() {
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={PAGE_URL} />
-        <meta property="og:image" content={`${SITE_URL}/images/products/twisted-handle-bags/1.png`} />
+        <meta property="og:image" content={`${SITE_URL}${HERO_IMAGE}`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
         {productLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} /> : null}
@@ -171,8 +173,8 @@ export default function TwistedHandlePaperBagsIreland() {
                 </Link>
               </div>
             </div>
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
-              <Image src="/images/products/twisted-handle-bags/1.png" alt="Twisted handle paper bags Ireland – premium retail carrier bags with custom logo" fill className="object-cover" priority sizes="(max-width: 1024px) 100vw, 50vw" unoptimized={process.env.NODE_ENV === 'production'} />
+            <div className="relative aspect-[3/2] rounded-2xl overflow-hidden shadow-lg">
+              <Image src={HERO_IMAGE} alt="Printed white twisted handle paper bags with rope handles and a custom logo" fill className="object-cover" priority sizes="(max-width: 1024px) 100vw, 50vw" unoptimized={process.env.NODE_ENV === 'production'} />
             </div>
           </div>
         </div>
@@ -230,7 +232,7 @@ export default function TwistedHandlePaperBagsIreland() {
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">Twisted handle bag examples</h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {galleryImages.map((img) => (
-              <div key={img.src} className="relative aspect-square rounded-xl overflow-hidden border border-gray-200 bg-white">
+              <div key={img.src} className="relative aspect-[3/2] rounded-xl overflow-hidden border border-gray-200 bg-white">
                 <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="(max-width: 1024px) 50vw, 25vw" unoptimized={process.env.NODE_ENV === 'production'} />
               </div>
             ))}

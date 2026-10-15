@@ -1,232 +1,700 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { FaWhatsapp } from 'react-icons/fa';
+import { SITE_WHATSAPP_URL } from '../../lib/site';
+import { trackFunnel } from '../../lib/track-funnel';
 
-const slides = [
+const PRODUCTS = [
   {
-    title: 'Custom Packaging & Print',
-    subtitle: 'for Irish Businesses',
-    description: 'Premium quality packaging, wide format printing, leaflets & more. Low MOQs, fast delivery.',
-    imageSrc: '/images/ifa/heroh/pizza.png',
-    accentColor: '#2563eb',
+    id: 'bags',
+    name: 'Paper bags',
+    label: 'Bags',
+    points: ['Quick turnaround', 'Low MOQ', 'From 20 bags'],
+    line: 'Rope-handle carrier bags printed with your logo, for cafés and shops across Ireland.',
+    href: '/twisted-handle-paper-bags-ireland',
+    image: '/images/hero/month/paper-bags-harbour.png',
+    alt: 'Custom printed paper bags with rope handles, low minimum order, Ireland',
+    glow: 'rgba(147, 197, 253, 0.85)',
+    glow2: 'rgba(196, 181, 253, 0.7)',
   },
   {
-    title: 'Paper Bags & Retail',
-    subtitle: 'Packaging Solutions',
-    description: 'Flat handle, twisted handle, and SOS bags. Fully customised with your branding.',
-    imageSrc: '/images/ifa/heroh/bag.png',
-    accentColor: '#059669',
+    id: 'napkins',
+    name: 'Airlaid napkins',
+    label: 'Napkins',
+    points: ['Quick turnaround', 'Low MOQ', 'Cloth feel'],
+    line: 'Printed airlaid napkins for restaurants, hotels and events.',
+    href: '/products/premium-linen-feel-napkins',
+    image: '/images/hero/month/airlaid-napkins.png',
+    alt: 'Custom printed airlaid napkins with a cloth feel, quick turnaround, Ireland',
+    glow: 'rgba(186, 230, 253, 0.9)',
+    glow2: 'rgba(221, 214, 254, 0.75)',
   },
   {
-    title: 'Wide Format Printing',
-    subtitle: '& Signage',
-    description: 'Roll-up banners, fabric banner stands, foamex, correx, vinyl stickers & posters.',
-    imageSrc: '/images/ifa/heroh/wide.png',
-    accentColor: '#7c3aed',
+    id: 'banner',
+    name: 'Free standing banners',
+    label: 'Banner',
+    points: ['Quick turnaround', 'Low MOQ', 'Fabric stand'],
+    line: 'Stretch fabric banner stands for exhibitions, shops and receptions.',
+    href: '/fabric-banner-stands-ireland',
+    image: '/images/hero/month/fabric-banner.png',
+    alt: 'Free standing stretch fabric banner stand for exhibitions in Ireland',
+    glow: 'rgba(125, 211, 252, 0.8)',
+    glow2: 'rgba(165, 243, 252, 0.7)',
+  },
+  {
+    id: 'flags',
+    name: 'Custom flags',
+    label: 'Flags',
+    points: ['Quick turnaround', 'Low MOQ', 'From one flag'],
+    line: 'Feather flags and pole flags, printed in full colour for cafés, clubs and events.',
+    href: '/custom-printed-flags-ireland',
+    image: '/images/hero/month/flags.png',
+    alt: 'Custom printed feather flag and pole flag, from one flag, Ireland',
+    glow: 'rgba(253, 186, 116, 0.75)',
+    glow2: 'rgba(153, 246, 228, 0.7)',
+  },
+  {
+    id: 'pizza',
+    name: 'Pizza boxes',
+    label: 'Pizza boxes',
+    points: ['Quick turnaround', 'Low MOQ', 'Your logo'],
+    line: 'Kraft pizza boxes printed for takeaways and pizzerias in Ireland.',
+    href: '/custom-pizza-boxes-ireland',
+    image: '/images/hero/month/pizza-box.png',
+    alt: 'Custom printed kraft pizza boxes with your logo, Ireland',
+    glow: 'rgba(253, 186, 116, 0.8)',
+    glow2: 'rgba(254, 215, 170, 0.75)',
   },
 ];
 
-const quickLinks = [
-  { label: 'Pizza Boxes', href: '/pizza-boxes-ireland' },
-  { label: 'Cake Boxes', href: '/custom-cake-boxes-ireland' },
-  { label: 'Paper Bags', href: '/printed-flat-handle-bags-ireland' },
-  { label: 'Plain Packaging', href: '/plain-packaging' },
-  { label: 'Roll-Up Banners', href: '/roll-up-banners-ireland' },
-  { label: 'Fabric Banner Stands', href: '/fabric-banner-stands-ireland' },
-  { label: 'Custom Flags', href: '/custom-printed-flags-ireland' },
-  { label: 'Table Covers', href: '/custom-table-covers-ireland' },
-  { label: 'Foamex Boards', href: '/foamex-boards' },
-];
+const SLIDE_MS = 6500;
 
-const HomepageHero = () => {
-  const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState('');
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const timeoutRef = useRef(null);
+const emptyForm = (products) => ({
+  name: '',
+  phone: '',
+  email: '',
+  company: '',
+  products: products || '',
+  message: '',
+});
 
-  const goToSlide = useCallback((nextIndex) => {
-    if (nextIndex === currentSlide) return;
-    setIsTransitioning(true);
-    timeoutRef.current = setTimeout(() => {
-      setCurrentSlide(nextIndex);
-      requestAnimationFrame(() => {
-        setIsTransitioning(false);
-      });
-    }, 400);
-  }, [currentSlide]);
+function validateForm(values) {
+  const errors = {};
+  if (!values.name.trim()) errors.name = 'Name is required';
+  const digits = values.phone.replace(/\D/g, '');
+  if (!values.phone.trim()) errors.phone = 'Number is required';
+  else if (digits.length < 7) errors.phone = 'Enter a valid phone number';
+  if (!values.email.trim()) errors.email = 'Email is required';
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) errors.email = 'Enter a valid email';
+  if (!values.message.trim()) errors.message = 'Message is required';
+  return errors;
+}
+
+function Field({ id, label, required, error, children }) {
+  return (
+    <div>
+      <label htmlFor={id} className="mb-1.5 flex items-center justify-between text-[13px] font-medium text-slate-500">
+        <span>
+          {label}
+          {required ? <span className="text-blue-600"> *</span> : null}
+        </span>
+        {!required ? <span className="text-[11px] font-normal text-slate-400">Optional</span> : null}
+      </label>
+      {children}
+      {error ? (
+        <p id={`${id}-error`} className="mt-1.5 text-sm text-rose-600">
+          {error}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
+const inputClass = (invalid) =>
+  `w-full rounded-2xl border bg-slate-50 px-4 py-3 text-base text-slate-900 placeholder:text-slate-400 transition focus:bg-white focus:outline-none focus:ring-4 ${
+    invalid
+      ? 'border-rose-300 focus:border-rose-400 focus:ring-rose-100'
+      : 'border-slate-200 focus:border-blue-500 focus:ring-blue-500/10'
+  }`;
+
+export function HeroContactModal({
+  open,
+  productName,
+  onClose,
+  source = 'homepage-hero',
+  sourceLabel = 'Homepage hero',
+  tone = 'default',
+}) {
+  return (
+    <AnimatePresence>
+      {open ? (
+        <HeroContactPanel
+          key="hero-contact"
+          productName={productName}
+          onClose={onClose}
+          source={source}
+          sourceLabel={sourceLabel}
+          tone={tone}
+        />
+      ) : null}
+    </AnimatePresence>
+  );
+}
+
+function HeroContactPanel({ productName, onClose, source, sourceLabel, tone }) {
+  const titleId = useId();
+  const dialogRef = useRef(null);
+  const startedRef = useRef(false);
+  const reduceMotion = useReducedMotion();
+  const [view, setView] = useState('choose');
+  const [values, setValues] = useState(() => emptyForm(productName));
+  const [errors, setErrors] = useState({});
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const next = (currentSlide + 1) % slides.length;
-      goToSlide(next);
-    }, 6000);
-    return () => {
-      clearInterval(interval);
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    trackFunnel('contact', 'open', { source });
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const frame = requestAnimationFrame(() => dialogRef.current?.focus());
+    const onKey = (event) => {
+      if (event.key === 'Escape') onClose();
     };
-  }, [currentSlide, goToSlide]);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      cancelAnimationFrame(frame);
+      document.body.style.overflow = previous;
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [onClose, source]);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+  const whatsappHref = `${SITE_WHATSAPP_URL}?text=${encodeURIComponent(
+    `Hi PrintNPack, I'm interested in ${productName}.`
+  )}`;
+
+  const markStarted = () => {
+    if (!startedRef.current) {
+      startedRef.current = true;
+      trackFunnel('contact', 'start', { source });
     }
   };
 
+  const update = (event) => {
+    markStarted();
+    const { name, value } = event.target;
+    setValues((current) => ({ ...current, [name]: value }));
+    setErrors((current) => ({ ...current, [name]: undefined }));
+  };
+
+  const submit = async (event) => {
+    event.preventDefault();
+    const nextErrors = validateForm(values);
+    setErrors(nextErrors);
+    if (Object.keys(nextErrors).length) return;
+
+    setSubmitting(true);
+    setSubmitError('');
+    const productInterest = values.products.trim() || productName;
+    try {
+      trackFunnel('contact', 'send', { source });
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: values.name.trim(),
+          email: values.email.trim(),
+          phone: values.phone.trim(),
+          company: values.company.trim(),
+          productInterest,
+          message: values.message.trim(),
+          source: sourceLabel,
+          subject: `${sourceLabel} enquiry — ${productInterest}`,
+        }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(data.message || data.error || 'Failed to send message');
+      }
+      trackFunnel('contact', 'success', { source });
+      setView('sent');
+    } catch (error) {
+      setSubmitError(error.message || 'Failed to send message. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const rise = reduceMotion
+    ? { duration: 0 }
+    : { duration: 0.38, ease: [0.22, 1, 0.36, 1] };
+
+  const title =
+    view === 'form' ? 'Send a message' : view === 'sent' ? 'Message sent' : 'How should we talk?';
+  const subtitle =
+    view === 'form'
+      ? 'A few details is enough. We’ll come back with a price.'
+      : view === 'sent'
+        ? 'We’ll be in touch shortly.'
+        : 'Tell us what you need. Quotes usually go out within 2 hours.';
+  const classic = tone === 'wedding';
+
   return (
-    <section className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #f0f4ff 0%, #e8eef9 30%, #f5f0ff 60%, #f0f4ff 100%)' }}>
-      {/* Soft background shapes */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          className="absolute rounded-full"
-          style={{
-            width: '500px',
-            height: '500px',
-            top: '-150px',
-            right: '-100px',
-            background: 'radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%)',
-          }}
-        />
-        <div
-          className="absolute rounded-full"
-          style={{
-            width: '400px',
-            height: '400px',
-            bottom: '-100px',
-            left: '-80px',
-            background: 'radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 70%)',
-          }}
-        />
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 1px)',
-          backgroundSize: '32px 32px'
-        }} />
-      </div>
+    <motion.div className="fixed inset-0 z-[80] flex items-end justify-center sm:items-center sm:p-6">
+      <motion.button
+        type="button"
+        aria-label="Close contact dialog"
+        onClick={onClose}
+        className="absolute inset-0 bg-slate-950/45 backdrop-blur-md"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={rise}
+      />
+      <motion.div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        tabIndex={-1}
+        initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 28 }}
+        animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+        exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
+        transition={rise}
+        className={`relative z-10 flex max-h-[min(94vh,820px)] w-full max-w-[560px] flex-col overflow-hidden rounded-t-[28px] shadow-[0_30px_80px_-24px_rgba(15,23,42,0.55)] outline-none sm:rounded-[28px] ${
+          classic ? 'bg-[#faf7f2]' : 'bg-white'
+        }`}
+      >
+        <div className={`pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full blur-3xl ${classic ? 'bg-[#e7d3a1]/80' : 'bg-blue-200/70'}`} />
+        <div className={`pointer-events-none absolute -left-10 top-24 h-40 w-40 rounded-full blur-3xl ${classic ? 'bg-[#f3e6c8]' : 'bg-sky-100'}`} />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center py-8 sm:py-10 lg:py-16 gap-6 lg:gap-12">
-          {/* Left content */}
-          <div className="lg:w-1/2 z-10 text-center lg:text-left">
-            {/* Trust badge */}
-            <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-white/70 backdrop-blur-sm rounded-full px-3 sm:px-4 py-1 sm:py-1.5 mb-4 sm:mb-5 shadow-sm border border-gray-100">
-              <span className="text-amber-400 text-xs sm:text-sm">★★★★★</span>
-              <span className="text-gray-600 text-xs sm:text-sm font-medium">Trusted Irish Business</span>
-              <span className="text-[10px] sm:text-xs bg-emerald-500 text-white px-1.5 sm:px-2 py-0.5 rounded-full">Irish Made</span>
-            </div>
-
-            {/* Animated text container */}
-            <div
-              style={{
-                transition: 'opacity 0.4s ease, transform 0.4s ease',
-                opacity: isTransitioning ? 0 : 1,
-                transform: isTransitioning ? 'translateY(8px)' : 'translateY(0)',
-              }}
-            >
-              <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold tracking-tight leading-tight mb-2 text-gray-800">
-                {slides[currentSlide].title}
-                <span
-                  className="block mt-0.5 sm:mt-1"
-                  style={{ color: slides[currentSlide].accentColor }}
-                >
-                  {slides[currentSlide].subtitle}
-                </span>
-              </h1>
-              <p className="text-sm sm:text-base lg:text-lg text-gray-500 mb-4 sm:mb-6 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                {slides[currentSlide].description}
+        <div className="relative shrink-0 px-5 pb-1 pt-3 sm:px-7 sm:pt-6">
+          <div className="mx-auto mb-4 h-1.5 w-10 rounded-full bg-slate-200 sm:hidden" />
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className={`inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] ${
+                classic ? 'bg-[#f3ead6] text-[#8a7240]' : 'bg-blue-50 tracking-[0.14em] text-blue-700'
+              }`}>
+                {productName}
               </p>
+              <h2 id={titleId} className="mt-3 text-[1.65rem] font-semibold tracking-tight text-slate-950">
+                {title}
+              </h2>
+              <p className="mt-1.5 max-w-sm text-sm leading-relaxed text-slate-500">{subtitle}</p>
             </div>
+            <button
+              type="button"
+              onClick={onClose}
+              className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition hover:bg-slate-200 hover:text-slate-900"
+              aria-label="Close"
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
 
-            {/* Search bar */}
-            <form onSubmit={handleSearch} className="relative max-w-lg mx-auto lg:mx-0 mb-4 sm:mb-5">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search products... e.g. pizza boxes, leaflets"
-                className="w-full px-4 sm:px-5 py-3 sm:py-3.5 pr-12 sm:pr-14 rounded-xl bg-white text-gray-900 placeholder-gray-400 shadow-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent text-base"
-              />
+        <div className="relative min-h-0 flex-1 overflow-y-auto px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-4 sm:px-7 sm:pb-7">
+          {view === 'choose' && (
+            <div className="grid gap-3">
+              <button
+                type="button"
+                onClick={() => setView('form')}
+                className={`group relative overflow-hidden rounded-[22px] p-4 text-left text-white shadow-[0_18px_40px_-20px_rgba(15,23,42,0.9)] transition hover:-translate-y-0.5 sm:p-5 ${
+                  classic ? 'bg-[#2f3d2d]' : 'bg-slate-950'
+                }`}
+              >
+                <span className={`pointer-events-none absolute -right-6 -top-10 h-32 w-32 rounded-full blur-2xl ${
+                  classic ? 'bg-[#d9c398]/40' : 'bg-blue-500/40 transition group-hover:bg-blue-400/50'
+                }`} />
+                <span className="relative flex items-center gap-4">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/15">
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 10h8M8 14h5M6 19l-2 2V6a2 2 0 012-2h12a2 2 0 012 2v9a2 2 0 01-2 2H6z" />
+                    </svg>
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-base font-semibold">Send a message</span>
+                    <span className="mt-0.5 block text-sm text-white/70">Name, number, email and what you need.</span>
+                  </span>
+                  <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition group-hover:translate-x-0.5 ${
+                    classic ? 'bg-[#f6efe2] text-[#2f3d2d]' : 'bg-white text-slate-950'
+                  }`}>
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </span>
+                </span>
+              </button>
+
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`group flex items-center gap-4 rounded-[22px] border p-4 text-left transition hover:-translate-y-0.5 sm:p-5 ${
+                  classic
+                    ? 'border-[#e0d6bf] bg-[#f6efe2] hover:border-[#d9c398]'
+                    : 'border-emerald-200/80 bg-gradient-to-br from-emerald-50 to-white hover:border-emerald-300'
+                }`}
+              >
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#25D366] text-white shadow-[0_10px_24px_-12px_rgba(37,211,102,0.9)]">
+                  <FaWhatsapp className="h-6 w-6" />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block text-base font-semibold text-slate-950">WhatsApp</span>
+                  <span className="mt-0.5 block text-sm text-slate-500">We typically reply 24 hrs a day.</span>
+                </span>
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-emerald-700 ring-1 ring-emerald-100 transition group-hover:translate-x-0.5">
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </span>
+              </a>
+            </div>
+          )}
+
+          {view === 'form' && (
+            <form onSubmit={submit} className="space-y-4" noValidate>
+              <button
+                type="button"
+                onClick={() => setView('choose')}
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition hover:text-slate-900"
+              >
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+                Back
+              </button>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Field id="hero-name" label="Name" required error={errors.name}>
+                  <input
+                    id="hero-name"
+                    name="name"
+                    autoComplete="name"
+                    value={values.name}
+                    onChange={update}
+                    aria-invalid={Boolean(errors.name)}
+                    aria-describedby={errors.name ? 'hero-name-error' : undefined}
+                    placeholder="Alex Byrne"
+                    className={inputClass(errors.name)}
+                  />
+                </Field>
+                <Field id="hero-phone" label="Number" required error={errors.phone}>
+                  <input
+                    id="hero-phone"
+                    name="phone"
+                    type="tel"
+                    autoComplete="tel"
+                    inputMode="tel"
+                    value={values.phone}
+                    onChange={update}
+                    aria-invalid={Boolean(errors.phone)}
+                    aria-describedby={errors.phone ? 'hero-phone-error' : undefined}
+                    placeholder="089 000 0000"
+                    className={inputClass(errors.phone)}
+                  />
+                </Field>
+                <Field id="hero-email" label="Email" required error={errors.email}>
+                  <input
+                    id="hero-email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    value={values.email}
+                    onChange={update}
+                    aria-invalid={Boolean(errors.email)}
+                    aria-describedby={errors.email ? 'hero-email-error' : undefined}
+                    placeholder="you@cafe.ie"
+                    className={inputClass(errors.email)}
+                  />
+                </Field>
+                <Field id="hero-company" label="Company">
+                  <input
+                    id="hero-company"
+                    name="company"
+                    autoComplete="organization"
+                    value={values.company}
+                    onChange={update}
+                    placeholder="Your café or shop"
+                    className={inputClass(false)}
+                  />
+                </Field>
+              </div>
+
+              <Field id="hero-products" label="Products">
+                <input
+                  id="hero-products"
+                  name="products"
+                  value={values.products}
+                  onChange={update}
+                  placeholder="e.g. paper bags, napkins"
+                  className={inputClass(false)}
+                />
+              </Field>
+
+              <Field id="hero-message" label="Message" required error={errors.message}>
+                <textarea
+                  id="hero-message"
+                  name="message"
+                  rows={3}
+                  value={values.message}
+                  onChange={update}
+                  aria-invalid={Boolean(errors.message)}
+                  aria-describedby={errors.message ? 'hero-message-error' : undefined}
+                  placeholder="Quantity, sizes, and when you need them."
+                  className={`${inputClass(errors.message)} resize-none`}
+                />
+              </Field>
+
+              {submitError ? (
+                <p className="rounded-2xl bg-rose-50 px-4 py-3 text-sm text-rose-700">{submitError}</p>
+              ) : null}
+
               <button
                 type="submit"
-                className="absolute right-1.5 sm:right-2 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white p-2 sm:p-2.5 rounded-lg transition-colors"
+                disabled={submitting}
+                className={`inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[15px] font-semibold text-white transition disabled:cursor-not-allowed disabled:opacity-60 ${
+                  classic
+                    ? 'bg-[#2f3d2d] tracking-[0.04em] hover:bg-[#243024]'
+                    : 'bg-blue-600 shadow-[0_16px_36px_-16px_rgba(37,99,235,0.95)] hover:bg-blue-700'
+                }`}
               >
-                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </button>
-            </form>
-
-            {/* Quick links */}
-            <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center lg:justify-start">
-              <span className="text-gray-400 text-xs sm:text-sm py-1">Popular:</span>
-              {quickLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-xs sm:text-sm bg-white/80 hover:bg-white text-gray-600 hover:text-gray-900 px-2.5 sm:px-3 py-1 rounded-full transition-colors border border-gray-200 hover:border-gray-300 shadow-sm"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-
-            {/* USP pills */}
-            <div className="flex flex-wrap gap-2 sm:gap-4 mt-4 sm:mt-6 justify-center lg:justify-start">
-              {['Quote reply in 2 hours', 'Fast Delivery', 'Same-Day Dispatch'].map((text) => (
-                <div key={text} className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm text-gray-500">
-                  <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                {submitting ? 'Sending…' : 'Send message'}
+                {submitting ? null : (
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
-                  {text}
-                </div>
-              ))}
-            </div>
-          </div>
+                )}
+              </button>
+              <p className="text-center text-xs text-slate-400">We only use this to reply about your order.</p>
+            </form>
+          )}
 
-          {/* Right - Product images with crossfade */}
-          <div className="lg:w-1/2 flex items-center justify-center">
-            <div className="relative w-48 h-48 sm:w-72 sm:h-72 lg:w-96 lg:h-96">
-              {slides.map((slide, index) => (
-                <div
-                  key={slide.imageSrc}
-                  className="absolute inset-0"
-                  style={{
-                    transition: 'opacity 0.8s ease',
-                    opacity: index === currentSlide && !isTransitioning ? 1 : 0,
-                  }}
+          {view === 'sent' && (
+            <div className="px-2 py-6 text-center">
+              <div className="relative mx-auto mb-5 flex h-16 w-16 items-center justify-center">
+                <span className="absolute inset-0 rounded-full bg-emerald-200/70 blur-md" />
+                <span className="relative flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500 text-white">
+                  <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </span>
+              </div>
+              <p className="text-sm text-slate-500">Quotes usually go out within 2 hours.</p>
+              <button
+                type="button"
+                onClick={onClose}
+                className="mt-6 inline-flex rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+              >
+                Close
+              </button>
+            </div>
+          )}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+const HomepageHero = () => {
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [contactProduct, setContactProduct] = useState(PRODUCTS[0].name);
+  const [run, setRun] = useState(0);
+  const product = PRODUCTS[index];
+
+  const closeModal = useCallback(() => setModalOpen(false), []);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setPaused(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (paused || modalOpen) return undefined;
+    const timer = window.setTimeout(() => {
+      setIndex((current) => (current + 1) % PRODUCTS.length);
+    }, SLIDE_MS);
+    return () => window.clearTimeout(timer);
+  }, [paused, modalOpen, index, run]);
+
+  const selectProduct = (nextIndex) => {
+    setIndex(nextIndex);
+    setRun((current) => current + 1);
+  };
+
+  const openContact = () => {
+    setContactProduct(product.name);
+    setModalOpen(true);
+  };
+
+  return (
+    <>
+      <section
+        className="relative overflow-hidden border-b border-slate-100 bg-white"
+        onMouseEnter={() => {
+          if (window.matchMedia('(hover: hover)').matches) setPaused(true);
+        }}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <div className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-sky-100/80 blur-3xl" />
+        <div className="pointer-events-none absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-indigo-100/70 blur-3xl" />
+        <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+          <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
+            <div className="order-2 text-center lg:order-1 lg:text-left">
+              <div className="grid">
+                {PRODUCTS.map((item, itemIndex) => {
+                  const active = itemIndex === index;
+                  const Title = active ? 'h1' : 'p';
+                  return (
+                    <div
+                      key={item.id}
+                      className={`col-start-1 row-start-1 transition-opacity duration-500 ${
+                        active ? 'opacity-100' : 'pointer-events-none opacity-0'
+                      }`}
+                      aria-hidden={!active}
+                    >
+                      <Title className="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
+                        {item.name}
+                      </Title>
+                      <p className="mx-auto mt-3 max-w-md text-lg font-medium text-slate-800 lg:mx-0">
+                        {item.points.join('. ')}.
+                      </p>
+                      <p className="mx-auto mt-2 max-w-md text-base leading-relaxed text-slate-500 lg:mx-0">
+                        {item.line}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center lg:justify-start">
+                <button
+                  type="button"
+                  onClick={openContact}
+                  className="group relative inline-flex h-14 items-center justify-between gap-5 overflow-hidden rounded-full bg-slate-950 pl-6 pr-2 text-[15px] font-semibold text-white shadow-[0_18px_40px_-16px_rgba(15,23,42,0.8)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_44px_-14px_rgba(37,99,235,0.65)] sm:min-w-[196px]"
                 >
-                  <Image
-                    src={slide.imageSrc}
-                    alt={slide.title}
-                    fill
-                    className="object-contain"
-                    style={{ filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.1))' }}
-                    priority={index === 0}
-                    sizes="(max-width: 640px) 192px, (max-width: 1024px) 288px, 384px"
-                    unoptimized={process.env.NODE_ENV === 'production'}
-                  />
+                  <span className="pointer-events-none absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-blue-500/50 to-transparent" />
+                  <span className="relative">Contact us</span>
+                  <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-950 transition duration-300 group-hover:translate-x-0.5">
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </span>
+                </button>
+                <div className="grid sm:min-w-[230px]">
+                  {PRODUCTS.map((item, itemIndex) => {
+                    const active = itemIndex === index;
+                    return (
+                      <Link
+                        key={item.id}
+                        href={item.href}
+                        tabIndex={active ? 0 : -1}
+                        aria-hidden={!active}
+                        className={`group col-start-1 row-start-1 inline-flex h-14 items-center justify-between gap-5 rounded-full border border-white/80 bg-white/75 pl-6 pr-2 text-[15px] font-semibold text-slate-900 shadow-[0_12px_32px_-18px_rgba(15,23,42,0.55)] ring-1 ring-slate-200/80 backdrop-blur-md transition duration-500 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_36px_-16px_rgba(15,23,42,0.4)] ${
+                          active ? 'opacity-100' : 'pointer-events-none opacity-0'
+                        }`}
+                      >
+                        <span className="whitespace-nowrap">View {item.label.toLowerCase()}</span>
+                        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-950 text-white transition duration-300 group-hover:translate-x-0.5 group-hover:bg-blue-600">
+                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          </svg>
+                        </span>
+                      </Link>
+                    );
+                  })}
                 </div>
-              ))}
+              </div>
+            </div>
+
+            <div className="order-1 lg:order-2">
+              <div className="relative mx-auto w-full max-w-xl" style={{ aspectRatio: '1 / 1' }}>
+                {PRODUCTS.map((item, itemIndex) => {
+                  const active = itemIndex === index;
+                  return (
+                    <div
+                      key={item.id}
+                      className={`absolute inset-0 transition-opacity duration-700 ${
+                        active ? 'opacity-100' : 'pointer-events-none opacity-0'
+                      }`}
+                      aria-hidden={!active}
+                    >
+                      <div
+                        className="pointer-events-none absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
+                        style={{ background: item.glow }}
+                      />
+                      <div
+                        className="pointer-events-none absolute right-[6%] top-[10%] h-36 w-36 rounded-full blur-2xl"
+                        style={{ background: item.glow2 }}
+                      />
+                      <div
+                        className="pointer-events-none absolute bottom-[8%] left-[4%] h-28 w-28 rounded-full blur-2xl"
+                        style={{ background: item.glow2 }}
+                      />
+                      <Link
+                        href={item.href}
+                        aria-label={`View ${item.name}`}
+                        tabIndex={active ? 0 : -1}
+                        className="absolute inset-0"
+                      >
+                        <Image
+                          src={item.image}
+                          alt={item.alt}
+                          fill
+                          priority={itemIndex === 0}
+                          sizes="(max-width: 1024px) 90vw, 520px"
+                          className="object-contain drop-shadow-[0_28px_40px_rgba(15,23,42,0.16)]"
+                          unoptimized={process.env.NODE_ENV === 'production'}
+                        />
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Slide indicators */}
-        <div className="flex justify-center gap-2 pb-4 sm:pb-6">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              aria-label={`Go to slide ${index + 1}`}
-              className={`h-1.5 rounded-full transition-all duration-500 ${
-                index === currentSlide ? 'w-8 bg-blue-500' : 'w-2 bg-gray-300 hover:bg-gray-400'
-              }`}
-            />
-          ))}
+          <div
+            className="mt-8 flex gap-2 overflow-x-auto pb-1 sm:grid sm:grid-cols-5 sm:overflow-visible"
+            role="tablist"
+            aria-label="Featured print"
+          >
+            {PRODUCTS.map((item, itemIndex) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={itemIndex === index}
+                  onClick={() => selectProduct(itemIndex)}
+                  className="min-w-[7.25rem] flex-1 rounded-2xl bg-white/70 px-3 py-3 text-left ring-1 ring-slate-200/80 transition hover:bg-white sm:min-w-0"
+                >
+                  <span className="relative mx-auto block h-14 w-full">
+                    <Image
+                      src={item.image}
+                      alt=""
+                      fill
+                      sizes="120px"
+                      className="object-contain"
+                      unoptimized={process.env.NODE_ENV === 'production'}
+                    />
+                  </span>
+                  <span className="mt-2 block text-center text-xs font-medium text-slate-600 sm:text-sm">
+                    {item.label}
+                  </span>
+                </button>
+              ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <HeroContactModal open={modalOpen} productName={contactProduct} onClose={closeModal} />
+    </>
   );
 };
 

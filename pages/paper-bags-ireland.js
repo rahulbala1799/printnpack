@@ -31,7 +31,7 @@ const childPages = [
     href: '/twisted-handle-paper-bags-ireland',
     title: 'Twisted Handle Bags',
     desc: 'Premium paper carrier bags for boutiques, gift shops and retail.',
-    image: '/images/products/twisted-handle-bags/1.png',
+    image: '/images/products/twisted-handle-bags/moss-mist.jpg',
     accent: 'purple',
   },
   {

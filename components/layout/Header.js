@@ -76,25 +76,6 @@ const Header = () => {
     <header className={`sticky top-0 z-50 transition-all duration-200 ${scrolled ? 'shadow-md' : 'shadow-sm'}`}>
       <MobileSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
-      {/* Top bar - desktop only */}
-      <div className="hidden lg:block bg-slate-900 text-white">
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center h-9 text-sm">
-          <div className="flex items-center gap-6">
-            <a href="tel:+353894157369" className="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors">
-              <FaPhone className="text-xs" />
-              <span>+353 89 415 7369</span>
-            </a>
-            <a href="mailto:info@printnpack.ie" className="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors">
-              <FaEnvelope className="text-xs" />
-              <span>info@printnpack.ie</span>
-            </a>
-          </div>
-          <div className="text-xs font-semibold text-sky-300">
-            Quote replies within 2 hours
-          </div>
-        </div>
-      </div>
-
       {/* Main navigation */}
       <div className={`bg-white border-b border-slate-200 transition-all duration-200 ${scrolled ? 'py-2' : 'py-3'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
@@ -252,8 +233,9 @@ const Header = () => {
         onClick={() => setIsOpen(false)}
       >      </div>
 
-      <div className="bg-blue-600 text-center text-[13px] font-semibold leading-none text-white sm:text-sm">
-        <p className="px-4 py-2">We reply to quote requests within 2 hours</p>
+      <div className="relative overflow-hidden bg-slate-950 text-center text-[13px] font-semibold leading-none text-white sm:text-sm">
+        <span className="pointer-events-none absolute inset-y-0 left-0 w-[min(36rem,80%)] bg-gradient-to-r from-blue-500/50 to-transparent" />
+        <p className="relative px-4 py-2">We reply to quote requests within 2 hours</p>
       </div>
     </header>
   );

@@ -1,94 +1,77 @@
 import React from 'react';
 import Link from 'next/link';
-import {
-  FaBoxOpen,
-  FaShoppingBag,
-  FaLeaf,
-  FaPrint,
-  FaUtensils,
-  FaFileAlt,
-  FaTags
-} from 'react-icons/fa';
+import Image from 'next/image';
 
 const categories = [
   {
     name: 'Food Packaging',
     description: 'Pizza boxes, burger boxes, grab bags',
-    icon: FaUtensils,
-    color: 'bg-orange-50 text-orange-600 border-orange-200',
-    iconBg: 'bg-orange-100',
+    image: '/images/products/pizza-boxes/white/pizza-box-1000x1000w.webp',
+    alt: 'Printed pizza boxes',
     href: '/pizza-boxes-ireland',
     productCount: 3,
   },
   {
     name: 'Retail Packaging',
     description: 'Flat handle, twisted handle & flat bags',
-    icon: FaShoppingBag,
-    color: 'bg-blue-50 text-blue-600 border-blue-200',
-    iconBg: 'bg-blue-100',
+    image: '/images/products/twisted-handle-bags/moss-mist.jpg',
+    alt: 'Printed twisted-handle paper bags',
     href: '/printed-flat-handle-bags-ireland',
     productCount: 3,
   },
   {
     name: 'Eco-Friendly',
     description: 'Sustainable bagasse packaging',
-    icon: FaLeaf,
-    color: 'bg-green-50 text-green-600 border-green-200',
-    iconBg: 'bg-green-100',
+    image: '/images/plain-packaging/1206653.webp',
+    alt: 'Bagasse burger box',
     href: '/products?group=packaging&category=Eco-Friendly+Packaging',
     productCount: 1,
   },
   {
     name: 'Banners, Stands and Frames',
     description: 'Vinyl, roll-ups, fabric stands',
-    icon: FaPrint,
-    color: 'bg-indigo-50 text-indigo-600 border-indigo-200',
-    iconBg: 'bg-indigo-100',
+    image: '/images/hero/month/fabric-banner.png',
+    alt: 'Free-standing fabric banner',
     href: '/products?group=banners-stands-frames',
     productCount: 6,
   },
   {
     name: 'Wide Format',
     description: 'Flags, posters and boards',
-    icon: FaPrint,
-    color: 'bg-purple-50 text-purple-600 border-purple-200',
-    iconBg: 'bg-purple-100',
+    image: '/images/products/custom-printed-flags/custom-printed-flags-ireland-gaa-club.jpg',
+    alt: 'Custom printed flag',
     href: '/products?group=wide-format',
     productCount: 4,
   },
   {
     name: 'Stickers and Labels',
     description: 'Vinyl stickers and labels on a roll',
-    icon: FaTags,
-    color: 'bg-pink-50 text-pink-600 border-pink-200',
-    iconBg: 'bg-pink-100',
+    image: '/images/products/labels-on-a-roll/labels-on-a-roll-ireland-round-jar-product-label.png',
+    alt: 'Round product label on a jar',
     href: '/products?group=stickers-labels',
     productCount: 2,
   },
   {
     name: 'Leaflets & Flyers',
     description: 'Leaflets, flyers and business cards',
-    icon: FaFileAlt,
-    color: 'bg-sky-50 text-sky-600 border-sky-200',
-    iconBg: 'bg-sky-100',
+    image: '/images/products/premium-leaflets/premium-leaflets-ireland-metallic-gold.jpg',
+    alt: 'Metallic gold printed leaflet',
     href: '/products?group=leaflets',
     productCount: 4,
   },
   {
     name: 'Hospitality',
     description: 'Napkins, cups, gloves & tableware',
-    icon: FaBoxOpen,
-    color: 'bg-amber-50 text-amber-600 border-amber-200',
-    iconBg: 'bg-amber-100',
+    image: '/images/products/premium-linen-feel-napkins/airlaid-kinetic-labs-ireland.jpg',
+    alt: 'Printed airlaid napkin',
     href: '/plain-napkins-tableware-ireland',
     productCount: 58,
   },
   {
     name: 'Catering Supplies',
     description: 'Hot cups, gloves, refuse sacks & more',
-    icon: FaUtensils,
-    color: 'bg-stone-50 text-stone-700 border-stone-200',
-    iconBg: 'bg-stone-100',
+    image: '/images/products/custom-printed-coffee-cups/branded-coffee-cups-dublin-ireland-matte-black-gold.jpg',
+    alt: 'Printed takeaway coffee cup',
     href: '/plain-packaging',
     productCount: 736,
   },
@@ -97,7 +80,7 @@ const categories = [
 const CategoryGrid = () => {
   return (
     <section className="py-8 sm:py-12 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 sm:mb-8">
           <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
             Browse by Category
@@ -107,30 +90,41 @@ const CategoryGrid = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-2 sm:gap-4">
-          {categories.map((cat) => {
-            const IconComponent = cat.icon;
-            return (
-              <Link
-                key={cat.name}
-                href={cat.href}
-                className={`group flex flex-col items-center p-3 sm:p-5 rounded-xl border ${cat.color} hover:shadow-md transition-all duration-200 hover:-translate-y-0.5`}
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+          {categories.map((cat) => (
+            <Link
+              key={cat.name}
+              href={cat.href}
+              className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md"
+            >
+              <div
+                className="relative bg-[#f3f4f6]"
+                style={{ aspectRatio: '1 / 1' }}
               >
-                <div className={`w-9 h-9 sm:w-12 sm:h-12 rounded-xl ${cat.iconBg} flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform`}>
-                  <IconComponent className="w-4 h-4 sm:w-6 sm:h-6" />
+                <div className="absolute inset-3 sm:inset-4">
+                  <Image
+                    src={cat.image}
+                    alt={cat.alt}
+                    fill
+                    sizes="(max-width: 640px) 42vw, 180px"
+                    quality={60}
+                    className="object-contain"
+                  />
                 </div>
-                <h3 className="font-semibold text-[10px] sm:text-sm text-gray-900 text-center leading-tight">
+              </div>
+              <div className="px-3 py-3 sm:px-4 sm:py-4 text-center">
+                <h3 className="min-h-[2.5rem] text-sm sm:text-base font-semibold leading-tight text-slate-900">
                   {cat.name}
                 </h3>
-                <p className="text-[9px] sm:text-xs text-gray-500 text-center mt-0.5 sm:mt-1 line-clamp-2 hidden sm:block">
+                <p className="mt-1 min-h-[2.25rem] text-xs sm:text-sm leading-snug text-slate-500">
                   {cat.description}
                 </p>
-                <span className="mt-1 sm:mt-2 text-[9px] sm:text-xs font-medium opacity-70">
+                <p className="mt-2 text-[11px] font-medium text-slate-400">
                   {cat.productCount} {cat.productCount === 1 ? 'product' : 'products'}
-                </span>
-              </Link>
-            );
-          })}
+                </p>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </section>

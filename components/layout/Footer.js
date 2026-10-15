@@ -14,22 +14,12 @@ const QUICK_LINKS = [
 ];
 
 const PRODUCT_LINKS = [
-  { label: 'Printing Services', href: '/printing-ireland' },
   { label: 'Pizza Boxes', href: '/pizza-boxes-ireland' },
-  { label: 'Custom Pizza Boxes', href: '/custom-pizza-boxes-ireland' },
-  { label: 'Plain Pizza Boxes', href: '/plain-pizza-boxes-ireland' },
-  { label: 'Pizza Box FAQ', href: '/pizza-box-faq-ireland' },
-  { label: 'Paper Bags Ireland', href: '/paper-bags-ireland' },
-  { label: 'Hot Cups & Lids', href: '/hot-cups-ireland' },
+  { label: 'Paper Bags', href: '/paper-bags-ireland' },
   { label: 'Banners & Roll-Ups', href: '/banners-ireland' },
-  { label: 'Burger Boxes', href: '/burger-boxes-ireland' },
-  { label: 'Disposable Gloves', href: '/gloves-ireland' },
+  { label: 'Hot Cups & Lids', href: '/hot-cups-ireland' },
   { label: 'Napkins & Tableware', href: '/plain-napkins-tableware-ireland' },
-  { label: 'Rubber Stamps', href: '/rubber-stamps-ireland' },
-  { label: 'Leaflets & Flyers', href: '/services/leaflets' },
   { label: 'Business Cards', href: '/business-cards-ireland' },
-  { label: 'Printed Coasters', href: '/printed-coasters-ireland' },
-  { label: 'NCR Pads', href: '/ncr-pads-ireland' },
 ];
 
 // Accordion section for mobile
