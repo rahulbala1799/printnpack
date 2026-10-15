@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'kraft-food-trays-ireland-sizes-buying-guide',
+    title: 'Kraft Food Trays Ireland: ½lb–3lb Greenspirit Sizes & Wholesale Buying Guide',
+    excerpt:
+      'How to buy plain kraft food trays in Ireland — Greenspirit paper trays from ½lb to 3lb, windowed and compostable corrugated options, case packs, and nationwide delivery from Ashbourne for chippers and street food.',
+    date: '2026-10-15',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/120266.webp',
+    imageAlt:
+      'Kraft food trays Ireland — ½lb Greenspirit paper tray wholesale for chippers',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'custom-printed-napkins',
     title: 'Custom Printed Napkins | 10×10 cm Cocktail, Wedding and Kraft',
     excerpt:

@@ -155,6 +155,7 @@ const staticPages = [
   { path: '/services/posters',  priority: '0.8', changefreq: 'monthly' },
   { path: '/services/vinyls',   priority: '0.8', changefreq: 'monthly' },
   { path: '/blog',              priority: '0.8', changefreq: 'weekly'  },
+  { path: '/blog/kraft-food-trays-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/round-kraft-bowls-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/printed-coasters-ireland-9x9-moq-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/portion-pots-ireland-pp-vs-paper-buying-guide', priority: '0.88', changefreq: 'monthly' },
