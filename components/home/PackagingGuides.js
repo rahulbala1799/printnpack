@@ -464,7 +464,6 @@ export default function PackagingGuides() {
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                   sizes="96px"
-                  unoptimized={process.env.NODE_ENV === 'production'}
                 />
               </div>
               <div className="min-w-0">

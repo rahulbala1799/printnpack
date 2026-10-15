@@ -5,32 +5,32 @@ const steps = [
   {
     title: 'Send an enquiry',
     description: 'Tell us the product, quantity and when you need it.',
-    image: '/images/process/enquiry.png',
+    image: '/images/process/enquiry.webp',
     alt: 'Customer sending a print enquiry for bags, leaflets and a banner',
   },
   {
     title: 'Quote in 2 hours',
     description: 'A clear price, usually the same morning.',
-    image: '/images/process/quote.png',
+    image: '/images/process/quote.webp',
     alt: 'Support specialist replying to a quote with a two-hour turnaround',
     highlight: true,
   },
   {
     title: 'Design with us',
     description: 'We help with the artwork and the packaging.',
-    image: '/images/process/design.png',
+    image: '/images/process/design.webp',
     alt: 'Designers working together on custom packaging artwork',
   },
   {
     title: 'Approve the quote',
     description: 'You confirm the price before anything is printed.',
-    image: '/images/process/approve.png',
+    image: '/images/process/approve.webp',
     alt: 'Customer approving a clear quote in euro on a tablet',
   },
   {
     title: 'Printed for you',
     description: 'Wide-format and packaging, made in Ashbourne.',
-    image: '/images/process/print.png',
+    image: '/images/process/print.webp',
     alt: 'Wide-format printer producing a colourful banner',
   },
 ];

@@ -14,7 +14,8 @@ const PRODUCTS = [
     points: ['Quick turnaround', 'Low MOQ', 'From 20 bags'],
     line: 'Rope-handle carrier bags printed with your logo, for cafés and shops across Ireland.',
     href: '/twisted-handle-paper-bags-ireland',
-    image: '/images/hero/month/paper-bags-harbour.png',
+    image: '/images/hero/month/paper-bags-harbour.webp',
+    thumb: '/images/hero/month/paper-bags-harbour-thumb.webp',
     alt: 'Custom printed paper bags with rope handles, low minimum order, Ireland',
     glow: 'rgba(147, 197, 253, 0.85)',
     glow2: 'rgba(196, 181, 253, 0.7)',
@@ -26,7 +27,8 @@ const PRODUCTS = [
     points: ['Quick turnaround', 'Low MOQ', 'Cloth feel'],
     line: 'Printed airlaid napkins for restaurants, hotels and events.',
     href: '/products/premium-linen-feel-napkins',
-    image: '/images/hero/month/airlaid-napkins.png',
+    image: '/images/hero/month/airlaid-napkins.webp',
+    thumb: '/images/hero/month/airlaid-napkins-thumb.webp',
     alt: 'Custom printed airlaid napkins with a cloth feel, quick turnaround, Ireland',
     glow: 'rgba(186, 230, 253, 0.9)',
     glow2: 'rgba(221, 214, 254, 0.75)',
@@ -38,7 +40,8 @@ const PRODUCTS = [
     points: ['Quick turnaround', 'Low MOQ', 'Fabric stand'],
     line: 'Stretch fabric banner stands for exhibitions, shops and receptions.',
     href: '/fabric-banner-stands-ireland',
-    image: '/images/hero/month/fabric-banner.png',
+    image: '/images/hero/month/fabric-banner.webp',
+    thumb: '/images/hero/month/fabric-banner-thumb.webp',
     alt: 'Free standing stretch fabric banner stand for exhibitions in Ireland',
     glow: 'rgba(125, 211, 252, 0.8)',
     glow2: 'rgba(165, 243, 252, 0.7)',
@@ -50,7 +53,8 @@ const PRODUCTS = [
     points: ['Quick turnaround', 'Low MOQ', 'From one flag'],
     line: 'Feather flags and pole flags, printed in full colour for cafés, clubs and events.',
     href: '/custom-printed-flags-ireland',
-    image: '/images/hero/month/flags.png',
+    image: '/images/hero/month/flags.webp',
+    thumb: '/images/hero/month/flags-thumb.webp',
     alt: 'Custom printed feather flag and pole flag, from one flag, Ireland',
     glow: 'rgba(253, 186, 116, 0.75)',
     glow2: 'rgba(153, 246, 228, 0.7)',
@@ -62,7 +66,8 @@ const PRODUCTS = [
     points: ['Quick turnaround', 'Low MOQ', 'Your logo'],
     line: 'Kraft pizza boxes printed for takeaways and pizzerias in Ireland.',
     href: '/custom-pizza-boxes-ireland',
-    image: '/images/hero/month/pizza-box.png',
+    image: '/images/hero/month/pizza-box.webp',
+    thumb: '/images/hero/month/pizza-box-thumb.webp',
     alt: 'Custom printed kraft pizza boxes with your logo, Ireland',
     glow: 'rgba(253, 186, 116, 0.8)',
     glow2: 'rgba(254, 215, 170, 0.75)',
@@ -505,7 +510,27 @@ const HomepageHero = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [contactProduct, setContactProduct] = useState(PRODUCTS[0].name);
   const [run, setRun] = useState(0);
+  const [loadedSlides, setLoadedSlides] = useState(() => new Set([0]));
   const product = PRODUCTS[index];
+
+  useEffect(() => {
+    setLoadedSlides((prev) => {
+      if (prev.has(index)) return prev;
+      const next = new Set(prev);
+      next.add(index);
+      return next;
+    });
+    const nextIndex = (index + 1) % PRODUCTS.length;
+    const timer = window.setTimeout(() => {
+      setLoadedSlides((prev) => {
+        if (prev.has(nextIndex)) return prev;
+        const next = new Set(prev);
+        next.add(nextIndex);
+        return next;
+      });
+    }, 1000);
+    return () => window.clearTimeout(timer);
+  }, [index]);
 
   const closeModal = useCallback(() => setModalOpen(false), []);
 
@@ -643,15 +668,17 @@ const HomepageHero = () => {
                         tabIndex={active ? 0 : -1}
                         className="absolute inset-0"
                       >
-                        <Image
-                          src={item.image}
-                          alt={item.alt}
-                          fill
-                          priority={itemIndex === 0}
-                          sizes="(max-width: 1024px) 90vw, 520px"
-                          className="object-contain drop-shadow-[0_28px_40px_rgba(15,23,42,0.16)]"
-                          unoptimized={process.env.NODE_ENV === 'production'}
-                        />
+                        {loadedSlides.has(itemIndex) && (
+                          <Image
+                            src={item.image}
+                            alt={item.alt}
+                            fill
+                            priority={itemIndex === 0}
+                            sizes="(max-width: 1024px) 90vw, 520px"
+                            className="object-contain drop-shadow-[0_28px_40px_rgba(15,23,42,0.16)]"
+                            unoptimized={process.env.NODE_ENV === 'production'}
+                          />
+                        )}
                       </Link>
                     </div>
                   );
@@ -676,10 +703,10 @@ const HomepageHero = () => {
                 >
                   <span className="relative mx-auto block h-14 w-full">
                     <Image
-                      src={item.image}
+                      src={item.thumb}
                       alt=""
                       fill
-                      sizes="120px"
+                      sizes="80px"
                       className="object-contain"
                       unoptimized={process.env.NODE_ENV === 'production'}
                     />

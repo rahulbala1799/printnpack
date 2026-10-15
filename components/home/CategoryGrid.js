@@ -30,7 +30,7 @@ const categories = [
   {
     name: 'Banners, Stands and Frames',
     description: 'Vinyl, roll-ups, fabric stands',
-    image: '/images/hero/month/fabric-banner.png',
+    image: '/images/hero/month/fabric-banner.webp',
     alt: 'Free-standing fabric banner',
     href: '/products?group=banners-stands-frames',
     productCount: 6,
