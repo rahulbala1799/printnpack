@@ -5,6 +5,7 @@ import { SITE_URL } from '../lib/site';
 import { buildCatalogOffer, startingPriceForUrl } from '../lib/schema';
 import HomepageHero from '../components/home/HomepageHero';
 import WeddingShowcase from '../components/home/WeddingShowcase';
+import FeaturedBannerSections from '../components/home/FeaturedBannerSections';
 import TrustBar from '../components/home/TrustBar';
 import CategoryGrid from '../components/home/CategoryGrid';
 import PackagingGuides from '../components/home/PackagingGuides';
@@ -327,6 +328,8 @@ export default function Home() {
       <HomepageHero />
 
       <WeddingShowcase />
+
+      <FeaturedBannerSections />
 
       {/* Trust/USP bar */}
       <TrustBar />
