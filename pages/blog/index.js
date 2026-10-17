@@ -6,6 +6,30 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'foil-film-parchment-ireland-buying-guide',
+    title: 'Catering Foil, Film & Parchment Ireland: Roll Sizes & Wholesale Buying Guide',
+    excerpt:
+      'How to buy plain catering foil, cling film and baking parchment in Ireland — 18″ foil 75m/90m, 12″ and 18″ cling film 300m, 50m parchment, WM refill dispensers, case packs, and nationwide delivery from Ashbourne.',
+    date: '2026-10-17',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/220001.webp',
+    imageAlt:
+      'Catering foil Ireland — 18 inch heavy duty aluminium foil 90m wholesale',
+    category: 'Wholesale Guide',
+  },
+  {
+    slug: 'premium-linen-feel-napkins-ireland-sizes-buying-guide',
+    title: 'Premium Linen-Feel Napkins Ireland: 25×25–48×48 cm Sizes & MOQ Buying Guide',
+    excerpt:
+      'How to buy premium linen-feel (airlaid) napkins in Ireland — cocktail 25×25 cm, dinner 40×40 cm and premium 48×48 cm, fold options, 1,000 MOQ, logo print from €0.10, and nationwide delivery from Ashbourne for hotels and restaurants.',
+    date: '2026-10-16',
+    readTime: '8 min read',
+    image: '/images/products/premium-linen-feel-napkins/airlaid-kinetic-labs-ireland.jpg',
+    imageAlt:
+      'Premium linen-feel napkins Ireland — white airlaid napkin with logo print for hospitality',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'kraft-food-trays-ireland-sizes-buying-guide',
     title: 'Kraft Food Trays Ireland: ½lb–3lb Greenspirit Sizes & Wholesale Buying Guide',
     excerpt:
