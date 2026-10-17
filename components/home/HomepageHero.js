@@ -75,6 +75,7 @@ const PRODUCTS = [
 ];
 
 const SLIDE_MS = 6500;
+const MOBILE_PANEL = '#1a7f45';
 
 const emptyForm = (products) => ({
   name: '',
@@ -561,17 +562,17 @@ const HomepageHero = () => {
   return (
     <>
       <section
-        className="relative overflow-hidden border-b border-slate-100 bg-white"
+        className="relative overflow-hidden border-b border-slate-100 bg-[#f4f3ea] lg:bg-white"
         onMouseEnter={() => {
           if (window.matchMedia('(hover: hover)').matches) setPaused(true);
         }}
         onMouseLeave={() => setPaused(false)}
       >
-        <div className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-sky-100/80 blur-3xl" />
-        <div className="pointer-events-none absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-indigo-100/70 blur-3xl" />
+        <div className="pointer-events-none absolute -left-24 top-0 hidden h-72 w-72 rounded-full bg-sky-100/80 blur-3xl lg:block" />
+        <div className="pointer-events-none absolute -right-16 bottom-0 hidden h-80 w-80 rounded-full bg-indigo-100/70 blur-3xl lg:block" />
         <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
-          <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
-            <div className="order-2 text-center lg:order-1 lg:text-left">
+          <div className="grid items-center gap-0 lg:grid-cols-2 lg:gap-14">
+            <div className="order-1 text-center lg:order-1 lg:text-left">
               <div className="grid">
                 {PRODUCTS.map((item, itemIndex) => {
                   const active = itemIndex === index;
@@ -579,18 +580,18 @@ const HomepageHero = () => {
                   return (
                     <div
                       key={item.id}
-                      className={`col-start-1 row-start-1 transition-opacity duration-500 ${
+                      className={`col-start-1 row-start-1 flex flex-col transition-opacity duration-500 ${
                         active ? 'opacity-100' : 'pointer-events-none opacity-0'
                       }`}
                       aria-hidden={!active}
                     >
-                      <Title className="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
+                      <Title className="text-[2.05rem] font-bold leading-[1.15] tracking-tight text-neutral-950 sm:text-5xl lg:text-5xl lg:font-semibold lg:text-slate-900">
                         {item.name}
                       </Title>
-                      <p className="mx-auto mt-3 max-w-md text-lg font-medium text-slate-800 lg:mx-0">
+                      <p className="order-3 mx-auto mt-5 max-w-md text-base font-medium text-neutral-950 lg:order-2 lg:mx-0 lg:mt-3 lg:text-lg lg:text-slate-800">
                         {item.points.join('. ')}.
                       </p>
-                      <p className="mx-auto mt-2 max-w-md text-base leading-relaxed text-slate-500 lg:mx-0">
+                      <p className="order-2 mx-auto mt-3 max-w-[20rem] text-[15px] leading-relaxed text-neutral-800 sm:max-w-md sm:text-base lg:order-3 lg:mx-0 lg:mt-2 lg:text-slate-500">
                         {item.line}
                       </p>
                     </div>
@@ -598,7 +599,35 @@ const HomepageHero = () => {
                 })}
               </div>
 
-              <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center lg:justify-start">
+              <div className="mt-6 lg:hidden">
+                <div className="flex items-center justify-center gap-3">
+                  <button
+                    type="button"
+                    onClick={openContact}
+                    className="rounded-full bg-neutral-950 px-5 py-3 text-[15px] font-semibold text-white"
+                  >
+                    Contact us
+                  </button>
+                  <a
+                    href={`${SITE_WHATSAPP_URL}?text=${encodeURIComponent(`Hi PrintNPack, I'm interested in ${product.name}.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-full bg-neutral-950 px-5 py-3 text-[15px] font-semibold text-white"
+                  >
+                    WhatsApp
+                  </a>
+                </div>
+                <div className="mt-3 flex justify-center">
+                  <Link
+                    href={product.href}
+                    className="rounded-full bg-neutral-950 px-6 py-3 text-[15px] font-semibold text-white"
+                  >
+                    View {product.label.toLowerCase()}
+                  </Link>
+                </div>
+              </div>
+
+              <div className="mt-8 hidden flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center lg:flex lg:justify-start">
                 <button
                   type="button"
                   onClick={openContact}
@@ -638,48 +667,65 @@ const HomepageHero = () => {
               </div>
             </div>
 
-            <div className="order-1 lg:order-2">
-              <div className="relative mx-auto w-full max-w-xl" style={{ aspectRatio: '1 / 1' }}>
+            <div className="order-2 mt-8 lg:order-2 lg:mt-0">
+              <div className="relative mx-auto w-full max-w-xl lg:aspect-square">
                 {PRODUCTS.map((item, itemIndex) => {
                   const active = itemIndex === index;
                   return (
                     <div
                       key={item.id}
-                      className={`absolute inset-0 transition-opacity duration-700 ${
+                      className={`${active ? 'relative lg:absolute lg:inset-0' : 'absolute inset-0'} transition-opacity duration-700 ${
                         active ? 'opacity-100' : 'pointer-events-none opacity-0'
                       }`}
                       aria-hidden={!active}
                     >
-                      <div
-                        className="pointer-events-none absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
-                        style={{ background: item.glow }}
-                      />
-                      <div
-                        className="pointer-events-none absolute right-[6%] top-[10%] h-36 w-36 rounded-full blur-2xl"
-                        style={{ background: item.glow2 }}
-                      />
-                      <div
-                        className="pointer-events-none absolute bottom-[8%] left-[4%] h-28 w-28 rounded-full blur-2xl"
-                        style={{ background: item.glow2 }}
-                      />
-                      <Link
-                        href={item.href}
-                        aria-label={`View ${item.name}`}
-                        tabIndex={active ? 0 : -1}
-                        className="absolute inset-0"
-                      >
-                        {loadedSlides.has(itemIndex) && (
-                          <Image
-                            src={item.image}
-                            alt={item.alt}
-                            fill
-                            priority={itemIndex === 0}
-                            sizes="(max-width: 1024px) 90vw, 520px"
-                            className="object-contain drop-shadow-[0_28px_40px_rgba(15,23,42,0.16)]"
-                            unoptimized={process.env.NODE_ENV === 'production'}
-                          />
-                        )}
-                      </Link>
+                      <div className="rounded-[1.75rem] px-5 py-8 lg:hidden" style={{ background: MOBILE_PANEL }}>
+                        <div className="relative mx-auto h-[300px] w-full">
+                          {loadedSlides.has(itemIndex) && (
+                            <Image
+                              src={item.image}
+                              alt={item.alt}
+                              fill
+                              priority={itemIndex === 0}
+                              sizes="86vw"
+                              className="object-contain"
+                              unoptimized={process.env.NODE_ENV === 'production'}
+                            />
+                          )}
+                        </div>
+                      </div>
+                      <div className="absolute inset-0 hidden lg:block">
+                        <div
+                          className="pointer-events-none absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
+                          style={{ background: item.glow }}
+                        />
+                        <div
+                          className="pointer-events-none absolute right-[6%] top-[10%] h-36 w-36 rounded-full blur-2xl"
+                          style={{ background: item.glow2 }}
+                        />
+                        <div
+                          className="pointer-events-none absolute bottom-[8%] left-[4%] h-28 w-28 rounded-full blur-2xl"
+                          style={{ background: item.glow2 }}
+                        />
+                        <Link
+                          href={item.href}
+                          aria-label={`View ${item.name}`}
+                          tabIndex={active ? 0 : -1}
+                          className="absolute inset-0"
+                        >
+                          {loadedSlides.has(itemIndex) && (
+                            <Image
+                              src={item.image}
+                              alt={item.alt}
+                              fill
+                              priority={itemIndex === 0}
+                              sizes="520px"
+                              className="object-contain drop-shadow-[0_28px_40px_rgba(15,23,42,0.16)]"
+                              unoptimized={process.env.NODE_ENV === 'production'}
+                            />
+                          )}
+                        </Link>
+                      </div>
                     </div>
                   );
                 })}
@@ -688,7 +734,7 @@ const HomepageHero = () => {
           </div>
 
           <div
-            className="mt-8 flex gap-2 overflow-x-auto pb-1 sm:grid sm:grid-cols-5 sm:overflow-visible"
+            className="mt-8 hidden gap-2 pb-1 lg:grid lg:grid-cols-5"
             role="tablist"
             aria-label="Featured print"
           >

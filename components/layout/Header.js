@@ -1,21 +1,10 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import {
   FaPhone,
-  FaEnvelope,
-  FaBars,
-  FaTimes,
   FaChevronRight,
-  FaHome,
-  FaInfoCircle,
-  FaBoxOpen,
-  FaTools,
-  FaPhoneAlt,
-  FaSearch,
-  FaBox,
-  FaNewspaper,
-  FaRing
+  FaSearch
 } from 'react-icons/fa';
 import SearchBar from '../search/SearchBar';
 import MobileSearch from '../search/MobileSearch';
@@ -27,14 +16,26 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [menuTop, setMenuTop] = useState(64);
+  const barRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+      if (barRef.current) setMenuTop(barRef.current.getBoundingClientRect().bottom);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, []);
+
+  useEffect(() => {
+    if (isOpen && barRef.current) setMenuTop(barRef.current.getBoundingClientRect().bottom);
+  }, [isOpen, scrolled]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -58,14 +59,14 @@ const Header = () => {
   }, [isOpen]);
 
   const menuItems = [
-    { name: 'Home', path: '/', icon: <FaHome /> },
-    { name: 'About', path: '/about', icon: <FaInfoCircle /> },
-    { name: 'Products', path: '/products', icon: <FaBoxOpen /> },
-    { name: 'Plain', path: '/plain-packaging', icon: <FaBox /> },
-    { name: 'Wedding', path: '/wedding-printing-ireland', icon: <FaRing /> },
-    { name: 'Services', path: '/services', icon: <FaTools /> },
-    { name: 'Blog', path: '/blog', icon: <FaNewspaper /> },
-    { name: 'Contact', path: '/contact', icon: <FaPhoneAlt /> },
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+    { name: 'Products', path: '/products' },
+    { name: 'Plain', path: '/plain-packaging' },
+    { name: 'Wedding', path: '/wedding-printing-ireland' },
+    { name: 'Services', path: '/services' },
+    { name: 'Blog', path: '/blog' },
+    { name: 'Contact', path: '/contact' },
   ];
 
   const handleMenuItemClick = () => {
@@ -77,7 +78,7 @@ const Header = () => {
       <MobileSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
       {/* Main navigation */}
-      <div className={`bg-white border-b border-slate-200 transition-all duration-200 ${scrolled ? 'py-2' : 'py-3'}`}>
+      <div ref={barRef} className={`bg-white border-b border-slate-200 transition-all duration-200 ${scrolled ? 'py-2' : 'py-3'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
@@ -88,24 +89,8 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
-            <nav aria-label="Main Navigation">
-              <ul className="flex items-center gap-1">
-                {menuItems.map((item) => (
-                  <li key={item.path}>
-                    <Link
-                      href={item.path}
-                      className="whitespace-nowrap px-2.5 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors xl:px-3"
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            <div className="flex items-center gap-2 ml-4 pl-4 border-l border-slate-200">
+          <div className="flex items-center gap-2">
+            <div className="hidden items-center gap-2 md:flex">
               <SearchBar />
               <QuoteCartButton />
               <button
@@ -116,21 +101,19 @@ const Header = () => {
                 Get Quote
               </button>
             </div>
-          </div>
-
-          {/* Mobile actions */}
-          <div className="md:hidden flex items-center gap-2">
-            <QuoteCartButton className="px-2" />
-            <a href="tel:+353894157369" className="p-2 text-slate-600" aria-label="Call Us">
-              <FaPhone className="text-base" />
-            </a>
-            <button
-              onClick={() => setIsSearchOpen(true)}
-              className="p-2 text-slate-600"
-              aria-label="Search products"
-            >
-              <FaSearch className="text-base" />
-            </button>
+            <div className="flex items-center gap-2 md:hidden">
+              <QuoteCartButton className="px-2" />
+              <a href="tel:+353894157369" className="p-2 text-slate-600" aria-label="Call Us">
+                <FaPhone className="text-base" />
+              </a>
+              <button
+                onClick={() => setIsSearchOpen(true)}
+                className="p-2 text-slate-600"
+                aria-label="Search products"
+              >
+                <FaSearch className="text-base" />
+              </button>
+            </div>
             <button
               id="hamburger"
               aria-label="Toggle Menu"
@@ -147,91 +130,30 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation Drawer */}
       <div
         id="navMenu"
-        className={`fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-50 ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed inset-x-0 bottom-0 z-40 overflow-y-auto bg-white ${
+          isOpen ? '' : 'hidden'
         }`}
+        style={{ top: menuTop }}
       >
-        <div className="flex justify-between items-center p-5 border-b border-slate-200">
-          <span className="text-lg font-bold text-slate-900">
-            print<span className="text-blue-600">N</span>pack
-          </span>
-          <button
-            aria-label="Close Menu"
-            className="p-2 text-slate-500 hover:text-slate-700"
-            onClick={() => setIsOpen(false)}
-          >
-            <FaTimes size={20} />
-          </button>
-        </div>
-
-        <nav className="px-3 py-4">
-          <ul className="space-y-1">
-            <li className={`opacity-0 ${isOpen ? 'animate-slide-in-right' : ''} mobile-menu-item-0`}>
-              <button
-                onClick={() => {
-                  setIsOpen(false);
-                  setTimeout(() => setIsSearchOpen(true), 300);
-                }}
-                className="flex w-full items-center p-3 rounded-lg text-slate-700 hover:bg-slate-50 transition-colors"
-              >
-                <span className="mr-3 text-slate-400"><FaSearch /></span>
-                <span className="font-medium text-sm">Search Products</span>
-              </button>
-            </li>
-
-            {menuItems.map((item, index) => (
-              <li
-                key={item.path}
-                className={`opacity-0 ${isOpen ? 'animate-slide-in-right' : ''} mobile-menu-item-${index + 1}`}
-              >
+        <nav aria-label="Menu">
+          <ul className="border-t border-slate-200">
+            {menuItems.map((item) => (
+              <li key={item.path}>
                 <Link
                   href={item.path}
-                  className="flex items-center p-3 rounded-lg text-slate-700 hover:bg-slate-50 transition-colors"
+                  className="flex items-center justify-between px-5 py-5 text-[17px] font-medium text-neutral-900 active:bg-slate-50"
                   onClick={handleMenuItemClick}
                 >
-                  <span className="mr-3 text-slate-400">{item.icon}</span>
-                  <span className="font-medium text-sm">{item.name}</span>
-                  <FaChevronRight className="ml-auto text-slate-300 text-xs" />
+                  {item.name}
+                  <FaChevronRight className="text-[11px] text-neutral-400" aria-hidden="true" />
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
-
-        <div className="border-t border-slate-200 p-5 mt-2">
-          <div className="space-y-3">
-            <a href="tel:+353894157369" className="flex items-center text-sm text-slate-600 hover:text-slate-900">
-              <FaPhone className="text-slate-400 mr-3 text-xs" />
-              +353 89 415 7369
-            </a>
-            <a href="mailto:info@printnpack.ie" className="flex items-center text-sm text-slate-600 hover:text-slate-900">
-              <FaEnvelope className="text-slate-400 mr-3 text-xs" />
-              info@printnpack.ie
-            </a>
-            <button
-              type="button"
-              className="w-full flex items-center justify-center bg-blue-600 text-white py-3 rounded-lg mt-3 hover:bg-blue-700 transition-colors text-sm font-medium"
-              onClick={() => {
-                handleMenuItemClick();
-                openBuilder();
-              }}
-            >
-              Get a Free Quote
-            </button>
-          </div>
-        </div>
       </div>
-
-      {/* Overlay */}
-      <div
-        className={`fixed inset-0 bg-black/40 transition-opacity duration-300 ${
-          isOpen ? 'opacity-100 z-40' : 'opacity-0 pointer-events-none'
-        }`}
-        onClick={() => setIsOpen(false)}
-      >      </div>
 
       <div className="relative overflow-hidden bg-slate-950 text-center text-[13px] font-semibold leading-none text-white sm:text-sm">
         <span className="pointer-events-none absolute inset-y-0 left-0 w-[min(36rem,80%)] bg-gradient-to-r from-blue-500/50 to-transparent" />
