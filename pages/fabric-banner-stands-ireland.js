@@ -299,6 +299,7 @@ export default function FabricBannerStandsIreland() {
         title="Related banners, stands and frames"
         links={[
           { href: '/curved-banner-stands-ireland', label: 'Curved banner stands', desc: 'Curved stretch stand / media wall' },
+          { href: '/pop-up-walls-ireland', label: 'Pop-up display stands', desc: 'Folding pop-up wall' },
           { href: '/banners-ireland', label: 'Banner printing Ireland', desc: 'PVC, roll-ups and displays' },
           { href: '/roll-up-banners-ireland', label: 'Roll-up banners', desc: 'Cassette pull-up stands' },
           { href: '/extra-wide-roll-up-banners-ireland', label: 'Extra-wide roll-ups', desc: '2 m cassette banners' },

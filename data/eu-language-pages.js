@@ -7,7 +7,7 @@ const PRODUCTS = {
   xxl: { href: '/extra-wide-roll-up-banners-ireland#quote-builder', price: '398.96', from: '€398.96' },
   fabric: { href: '/fabric-banner-stands-ireland', price: null, from: null },
   curved: { href: '/curved-banner-stands-ireland', price: null, from: null },
-  popup: { href: '/quote', price: '489.30', from: '€489.30' },
+  popup: { href: '/pop-up-walls-ireland', price: '511.65', from: '€511.65' },
   stage: { href: '/stage-backdrop-banners-ireland', price: null, from: null },
   tables: { href: '/custom-table-covers-ireland', price: null, from: null },
   flags: { href: '/custom-printed-flags-ireland', price: null, from: null },

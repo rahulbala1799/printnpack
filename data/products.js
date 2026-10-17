@@ -1,4 +1,5 @@
 import { clothingProducts } from './clothing-products';
+import { POPUP_WALL_GALLERY } from './popup-walls';
 
 const products = [
   {
@@ -891,6 +892,63 @@ const products = [
       'Event and conference backdrops',
       'Photo walls and curved media walls',
       'Retail and launch activations',
+    ],
+  },
+  {
+    id: 'pop-up-walls-ireland',
+    name: 'Best Pop-up Display Stands Ireland',
+    category: 'Banners, Stands and Frames',
+    url: '/pop-up-walls-ireland',
+    searchAliases: [
+      'pop-up display stand',
+      'pop up display stand',
+      'pop-up wall',
+      'pop up wall',
+      'pop-up stand',
+      'pop up stand',
+      'exhibition pop-up',
+      'exhibition backwall',
+      'fabric pop-up stand',
+      'straight pop-up wall',
+      'curved pop-up display',
+      'led pop-up display',
+      'backlit pop-up stand',
+      'best pop-up display stands Ireland',
+      'most affordable pop-up stands Ireland',
+    ],
+    description:
+      'The best pop-up display stands in Ireland, and the most affordable. Folding pop-up wall, straight or curved, full stand or fabric only. Delivery included. Ex VAT.',
+    features: [
+      'Full stand, or fabric only for a frame you already have',
+      'Straight sizes from 151 × 224 cm to 445 × 224 cm',
+      'One curved size, 233 × 224 cm, front print only',
+      'Front only or front and back on straight walls',
+      'Optional LED on backlit fabric',
+      'Optional foot plate and blockout cloth',
+      'Delivery to Ireland included, ex VAT',
+    ],
+    detailedDescription:
+      'PrintNPack makes the best pop-up display stands in Ireland, and the most affordable. A pop-up wall is a folding exhibition frame with a printed fabric panel — the same product people search as pop-up stand or exhibition backwall. Order a complete stand or a replacement fabric. Straight or curved. Optional LED. Delivery nationwide from Ashbourne, Co. Meath is included.',
+    specifications: [
+      { name: 'Also called', value: 'Pop-up wall, pop-up stand, exhibition backwall, fabric pop-up stand' },
+      { name: 'Kit', value: 'Full stand or fabric only' },
+      { name: 'Print', value: 'Front only, or front and back on straight walls' },
+      { name: 'Straight sizes', value: '151×224, 224×224, 298×224, 298×298, 371×224, 371×298, 445×224 cm' },
+      { name: 'Curved size', value: '233×224 cm, 57 cm deep, front only' },
+      { name: 'Lighting', value: 'None, or LED on backlit fabric' },
+      { name: 'Minimum order', value: '1' },
+      { name: 'Delivery', value: 'Included to Ireland, ex VAT' },
+    ],
+    images: POPUP_WALL_GALLERY.map((item) => item.src),
+    imageSrc: POPUP_WALL_GALLERY[0].src,
+    price: 'From €511.65 ex VAT',
+    moq: 1,
+    leadTime: 'Included in the quoted delivery',
+    applications: [
+      'Exhibition stands and trade shows',
+      'Conference and presentation backdrops',
+      'Photo walls',
+      'Retail and launch events',
     ],
   },
   {

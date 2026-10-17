@@ -18,6 +18,7 @@ import {
 import { LUXURY_TISSUE_HREF, LUXURY_TISSUE_ID, repriceTissueLine } from './luxury-tissue-paper';
 import { COASTER_BOARD, COASTER_SIDES, COASTER_SIZES, PRINTED_COASTER_MIN } from './coasters-options';
 import { COCKTAIL_NAPKIN_PRODUCT } from './cocktail-napkins';
+import { buildPopupWallQuoteLine } from './popup-walls';
 import { WEDDING_PRODUCTS, weddingBoardSizeError, weddingModuleFields } from './wedding-products';
 
 function productMedia(id, href, fallbackImage) {
@@ -68,6 +69,7 @@ export const QUOTE_CATALOG = [
   withMedia({ id: 'extra-wide-roll-up-banners-ireland', name: 'Extra-Wide Roll-Ups', href: '/extra-wide-roll-up-banners-ireland', moduleId: 'extra-wide-roll-ups', configurable: false, group: 'Banners, Stands and Frames' }),
   withMedia({ id: 'fabric-banner-stands-ireland', name: 'Fabric Banner Stands', href: '/fabric-banner-stands-ireland', moduleId: 'fabric-banner-stands', configurable: true, group: 'Banners, Stands and Frames', price: 'Contact for quote' }),
   withMedia({ id: 'curved-banner-stands-ireland', name: 'Curved Banner Stands', href: '/curved-banner-stands-ireland', moduleId: 'curved-banner-stands', configurable: true, group: 'Banners, Stands and Frames', price: 'Contact for quote' }),
+  withMedia({ id: 'pop-up-walls-ireland', name: 'Pop-up Display Stands', href: '/pop-up-walls-ireland', moduleId: 'popup-walls', configurable: true, group: 'Banners, Stands and Frames', price: 'From €511.65 ex VAT' }),
   withMedia({ id: 'stage-backdrop-banners-ireland', name: 'Stage Backdrop Banners', href: '/stage-backdrop-banners-ireland', moduleId: 'stage-backdrops', configurable: false, group: 'Banners, Stands and Frames' }),
   withMedia({ id: 'vinyl-banners', name: 'Vinyl Banners', href: '/vinyl-banners', moduleId: 'vinyl-banners', configurable: false, group: 'Banners, Stands and Frames' }),
   withMedia({ id: 'custom-table-covers', name: 'Custom Table Covers', href: '/custom-table-covers-ireland', moduleId: 'table-covers', configurable: true, group: 'Banners, Stands and Frames', price: 'Contact for quote', image: '/images/table-covers/custom-table-cover-ireland.jpg' }),
@@ -328,6 +330,9 @@ function fieldSummary(field, options) {
 }
 
 export function buildCatalogQuoteLine(catalogItem, options = {}) {
+  if (catalogItem.moduleId === 'popup-walls') {
+    return buildPopupWallQuoteLine(catalogItem, options);
+  }
   if (catalogItem.moduleId === 'business-cards') {
     const selectedQuantity = BUSINESS_CARD_QUANTITY_OPTIONS.find((option) => option === options.quantity)
       || BUSINESS_CARD_QUANTITY_OPTIONS.find((option) => parseBusinessCardQty(option) === parseBusinessCardQty(options.quantity))
@@ -443,6 +448,13 @@ export function repriceQuoteLine(line, qty) {
   }
   if (line.moduleId === 'luxury-tissue') {
     return { ...repriceTissueLine(line, qty), id: line.id };
+  }
+  if (line.moduleId === 'popup-walls') {
+    const next = buildPopupWallQuoteLine(
+      { id: line.productId, name: line.name, href: line.href, image: line.image, images: line.images },
+      { ...(line.options || {}), qty }
+    );
+    return next ? { ...next, id: line.id } : { ...line, qty };
   }
   if (line.moduleId === 'business-cards') {
     const safeQty = Math.max(1, Number(qty) || 1);

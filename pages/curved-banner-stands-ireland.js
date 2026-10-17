@@ -279,6 +279,7 @@ export default function CurvedBannerStandsIreland() {
       <RelatedSeoLinks
         title="Related banners, stands and frames"
         links={[
+          { href: '/pop-up-walls-ireland', label: 'Pop-up display stands', desc: 'Folding pop-up wall' },
           { href: '/fabric-banner-stands-ireland', label: 'Fabric banner stands', desc: 'Straight banner with frame' },
           { href: '/banners-ireland', label: 'Banner printing Ireland', desc: 'PVC, roll-ups and displays' },
           { href: '/roll-up-banners-ireland', label: 'Roll-up banners', desc: 'Cassette pull-up stands' },
