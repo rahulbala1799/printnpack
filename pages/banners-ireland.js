@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
 import { buildCatalogOffer } from '../lib/schema';
+import { HreflangLinks, LanguageBar, OgLocaleAlternates } from '../components/seo/LanguageAlternates';
 
 const PAGE_URL = `${SITE_URL}/banners-ireland`;
 const HERO_IMAGE = '/ifa/product/banner/20221019_184306722822_e66498_Promo-banner.webp';
@@ -82,6 +83,9 @@ export default function BannersIreland() {
         <meta name="keywords" content="banner printing, banner printing ireland, banners ireland, banner printing near me, banner printing dublin, banners dublin, PVC banners ireland, roll up banners ireland, fabric banner stands ireland, banner with frame, banner with structure, extra wide roll up banners, printed banners ireland, trade show banners ireland, custom table covers ireland, printed table covers ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href={PAGE_URL} />
+        <meta property="og:locale" content="en_IE" />
+        <HreflangLinks cluster="banners" />
+        <OgLocaleAlternates cluster="banners" currentOg="en_IE" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
@@ -91,6 +95,8 @@ export default function BannersIreland() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }} />
       </Head>
+
+      <LanguageBar cluster="banners" locale="en" />
 
       <nav className="bg-gray-50 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">

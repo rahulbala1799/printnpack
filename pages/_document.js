@@ -1,8 +1,11 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main, NextScript } from 'next/document'
+import { documentLangFromPage } from '../data/eu-language-pages'
 
-export default function Document() {
-  return (
-    <Html lang="en">
+class MyDocument extends Document {
+  render() {
+    const lang = documentLangFromPage(this.props.__NEXT_DATA__?.page || '')
+    return (
+    <Html lang={lang}>
       <Head>
         {/* Google Tag Manager */}
         <script
@@ -45,5 +48,8 @@ export default function Document() {
         <NextScript />
       </body>
     </Html>
-  )
-} 
+    )
+  }
+}
+
+export default MyDocument 

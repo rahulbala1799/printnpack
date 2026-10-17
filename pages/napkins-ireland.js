@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
 import { buildCatalogOffer } from '../lib/schema';
+import { HreflangLinks, LanguageBar, OgLocaleAlternates } from '../components/seo/LanguageAlternates';
 import { MOST_ASKED_NAPKIN_FAQS } from '../data/napkin-faq';
 
 const PAGE_URL = `${SITE_URL}/napkins-ireland`;
@@ -74,6 +75,9 @@ export default function NapkinsIreland() {
         <meta name="keywords" content="cocktail napkins ireland, cocktail napkin printing ireland, printed cocktail napkins, wedding cocktail napkins, restaurant cocktail napkins, napkins ireland, printed napkins ireland, personalised napkins ireland, napkin printing ireland, wedding napkins ireland, custom napkins ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href={PAGE_URL} />
+        <meta property="og:locale" content="en_IE" />
+        <HreflangLinks cluster="napkins" />
+        <OgLocaleAlternates cluster="napkins" currentOg="en_IE" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
@@ -83,6 +87,8 @@ export default function NapkinsIreland() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }} />
       </Head>
+
+      <LanguageBar cluster="napkins" locale="en" />
 
       <nav className="bg-gray-50 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">

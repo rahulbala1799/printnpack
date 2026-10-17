@@ -6,6 +6,7 @@ import { NAPKINS_TABLEWARE_PRODUCT_IDS } from '../data/napkins-tableware-seo';
 import { HOT_CUPS_PRODUCT_IDS } from '../data/hot-cups-seo';
 import { GLOVES_PRODUCT_IDS } from '../data/gloves-seo';
 import { SITE_URL } from '../lib/site';
+import { euSitemapEntries } from '../data/eu-language-pages';
 
 // ── Pizza box cluster (page-1 priority) ─────────────────────────────────────
 const PIZZA_PLAIN_PRODUCT_IDS = new Set(
@@ -86,6 +87,7 @@ const staticPages = [
   { path: '/labels-on-a-roll', priority: '0.85', changefreq: 'weekly' },
   // Banner cluster
   { path: '/banners-ireland',              priority: '0.9',  changefreq: 'weekly' },
+  ...euSitemapEntries(),
   { path: '/banner-faq-ireland',           priority: '0.88', changefreq: 'monthly' },
   { path: '/banner-printing-ashbourne',   priority: '0.88', changefreq: 'monthly' },
   { path: '/banner-printing-dublin',       priority: '0.88', changefreq: 'monthly' },

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
 import { buildProductLd } from '../lib/schema';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
+import { HreflangLinks, LanguageBar, OgLocaleAlternates } from '../components/seo/LanguageAlternates';
 import { useQuoteCart } from '../lib/quote-cart-context';
 
 const PAGE_PATH = '/fabric-banner-stands-ireland';
@@ -129,6 +130,9 @@ export default function FabricBannerStandsIreland() {
         />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href={PAGE_URL} />
+        <meta property="og:locale" content="en_IE" />
+        <HreflangLinks cluster="stands" />
+        <OgLocaleAlternates cluster="stands" currentOg="en_IE" />
         <meta property="og:type" content="product" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
@@ -138,6 +142,8 @@ export default function FabricBannerStandsIreland() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       </Head>
+
+      <LanguageBar cluster="stands" locale="en" />
 
       <nav className="bg-gray-50 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">

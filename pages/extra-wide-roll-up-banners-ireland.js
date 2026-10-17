@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ExtraWideRollUpBannerQuoteForm from '../components/ExtraWideRollUpBannerQuoteForm';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
+import { HreflangLinks, LanguageBar, OgLocaleAlternates } from '../components/seo/LanguageAlternates';
 import { SITE_URL } from '../lib/site';
 import { buildOffer } from '../lib/schema';
 import {
@@ -254,6 +255,8 @@ const ExtraWideRollUpBannersPage = () => {
         <meta name="geo.placename" content="Ashbourne, Co. Meath, Ireland" />
         <meta property="og:locale" content="en_IE" />
         <meta property="og:locale:alternate" content="en_GB" />
+        <HreflangLinks cluster="xxl" />
+        <OgLocaleAlternates cluster="xxl" currentOg="en_IE" />
         <meta property="og:title" content={EXTRA_WIDE_TITLE} />
         <meta property="og:description" content={EXTRA_WIDE_DESCRIPTION} />
         <meta property="og:image" content={HERO_IMG} />
@@ -270,6 +273,8 @@ const ExtraWideRollUpBannersPage = () => {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       </Head>
+
+      <LanguageBar cluster="xxl" locale="en" />
 
       <nav className="bg-gray-50 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">

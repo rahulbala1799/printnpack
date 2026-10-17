@@ -8,3 +8,6 @@ Disallow: /test-homepage
 
 # Sitemap location
 Sitemap: https://www.printnpack.ie/sitemap.xml
+
+# Plain-language page list for answer engines
+# https://www.printnpack.ie/llms.txt

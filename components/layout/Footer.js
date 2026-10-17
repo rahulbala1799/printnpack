@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import { footerLanguageGroups } from '../../data/eu-language-pages';
 
 const QUICK_LINKS = [
   { label: 'Home', href: '/' },
@@ -188,6 +189,26 @@ const Footer = () => {
               </Link>
             </div>
           </FooterAccordion>
+        </div>
+
+        <div className="border-t border-slate-800 py-6">
+          <p className="text-xs uppercase tracking-wide text-slate-500 mb-3">France · Deutschland · España</p>
+          <div className="grid sm:grid-cols-3 gap-4">
+            {footerLanguageGroups().map((group) => (
+              <div key={group.href}>
+                <Link href={group.href} className="text-sm font-semibold text-slate-200 hover:text-white">
+                  {group.label}
+                </Link>
+                <div className="flex flex-wrap gap-x-3 gap-y-1 mt-1">
+                  {group.links.map((link) => (
+                    <Link key={link.href} href={link.href} className="text-xs text-slate-400 hover:text-white">
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Bottom bar */}
