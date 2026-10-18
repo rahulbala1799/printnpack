@@ -158,6 +158,7 @@ const staticPages = [
   { path: '/services/posters',  priority: '0.8', changefreq: 'monthly' },
   { path: '/services/vinyls',   priority: '0.8', changefreq: 'monthly' },
   { path: '/blog',              priority: '0.8', changefreq: 'weekly'  },
+  { path: '/blog/custom-printed-coffee-cups-ireland-sizes-moq-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/foil-film-parchment-ireland-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/premium-linen-feel-napkins-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/kraft-food-trays-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
