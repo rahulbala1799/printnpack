@@ -2,6 +2,7 @@ import crypto from 'crypto';
 import { query, transaction } from '../../../lib/database';
 import { enrichPageVisit, getPagePath, parseSearchFromUrl } from '../../../lib/analytics-page-classifier';
 import { ensureFunnelTable } from '../../../lib/funnel-analytics';
+import { ensureContactClickChannel } from '../../../lib/phone-click-analytics';
 import products from '../../../data/products';
 
 function getClientIp(req) {
@@ -46,23 +47,26 @@ async function recordPhoneClick({
   ipAddress,
   sessionId,
   eventData = {},
+  channel = 'phone',
 }) {
   const ipHash = hashIp(ipAddress);
   const deviceType = getDeviceType(userAgent);
   const pagePath = eventData.pagePath || getPagePathFromUrl(pageUrl);
+  const safeChannel = channel === 'whatsapp' ? 'whatsapp' : 'phone';
 
+  await ensureContactClickChannel();
   await query(
     `
     INSERT INTO analytics.phone_click_events (
       page_url, page_path, page_title, phone_href, link_text, location,
-      session_id, device_type, referrer, user_agent, ip_address_hash
-    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+      session_id, device_type, referrer, user_agent, ip_address_hash, channel
+    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
     `,
     [
       pageUrl,
       pagePath,
       pageTitle || null,
-      eventData.phoneHref || 'tel:unknown',
+      eventData.phoneHref || (safeChannel === 'whatsapp' ? 'https://wa.me/unknown' : 'tel:unknown'),
       eventData.linkText || null,
       eventData.location || 'unknown',
       sessionId || null,
@@ -70,6 +74,7 @@ async function recordPhoneClick({
       referrer || null,
       userAgent || null,
       ipHash,
+      safeChannel,
     ]
   );
 }
@@ -145,11 +150,12 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, message: 'Funnel step recorded' });
     }
 
-    if (eventName === 'phone_click') {
+    if (eventName === 'phone_click' || eventName === 'whatsapp_click') {
       if (!pageUrl || !eventData?.phoneHref) {
-        return res.status(400).json({ error: 'Missing phone click fields' });
+        return res.status(400).json({ error: 'Missing contact click fields' });
       }
 
+      const channel = eventName === 'whatsapp_click' ? 'whatsapp' : 'phone';
       await recordPhoneClick({
         pageUrl,
         pageTitle,
@@ -158,11 +164,12 @@ export default async function handler(req, res) {
         ipAddress,
         sessionId,
         eventData,
+        channel,
       });
 
       return res.status(200).json({
         success: true,
-        message: 'Phone click recorded successfully',
+        message: channel === 'whatsapp' ? 'WhatsApp click recorded successfully' : 'Phone click recorded successfully',
       });
     }
 
@@ -187,6 +194,15 @@ export default async function handler(req, res) {
     const ipHash = hashIp(ipAddress);
     const deviceType = getDeviceType(userAgent);
     const country = String(req.headers['x-vercel-ip-country'] || '').slice(0, 2).toUpperCase() || null;
+    const cityHeader = req.headers['x-vercel-ip-city'];
+    let city = null;
+    if (cityHeader) {
+      try {
+        city = decodeURIComponent(String(cityHeader)).slice(0, 80);
+      } catch {
+        city = String(cityHeader).slice(0, 80);
+      }
+    }
     const searched = parseSearchFromUrl(pageUrl);
     const enriched = enrichPageVisit({
       pageUrl,
@@ -301,11 +317,11 @@ export default async function handler(req, res) {
           device_type, country, session_id, load_time_ms, time_on_page_seconds, is_bounce,
           page_path, page_type, product_family, product_slug, product_name,
           traffic_source, referrer_domain, utm_source, utm_medium, utm_campaign, is_landing_page,
-          record_kind, search_term, utm_term, search_result_count
+          record_kind, search_term, utm_term, search_result_count, city
         ) VALUES (
           $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,
           $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22,
-          'pageview', $23, $24, $25
+          'pageview', $23, $24, $25, $26
         )
         RETURNING id
         `,
@@ -335,6 +351,7 @@ export default async function handler(req, res) {
           searched.search_term,
           searched.utm_term,
           searchResultCount,
+          city,
         ]
       );
       visitId = inserted.rows[0]?.id || null;
@@ -353,20 +370,21 @@ export default async function handler(req, res) {
                 last_page = $1,
                 session_end = NOW(),
                 is_active = true,
-                entry_search_term = COALESCE(entry_search_term, $2)
+                entry_search_term = COALESCE(entry_search_term, $2),
+                city = COALESCE(city, $4)
             WHERE session_id = $3
             `,
-            [pageUrl, searched.search_term, sessionId]
+            [pageUrl, searched.search_term, sessionId, city]
           );
         } else {
           await client.query(
             `
             INSERT INTO analytics.user_sessions (
-              session_id, ip_address_hash, user_agent, device_type, country,
+              session_id, ip_address_hash, user_agent, device_type, country, city,
               first_page, last_page, pages_visited, total_time_seconds,
               entry_page_path, entry_traffic_source, entry_referrer_domain, entry_product_family,
               utm_source, utm_medium, utm_campaign, entry_search_term
-            ) VALUES ($1, $2, $3, $4, $5, $6, $7, 1, $8, $9, $10, $11, $12, $13, $14, $15, $16)
+            ) VALUES ($1, $2, $3, $4, $5, $17, $6, $7, 1, $8, $9, $10, $11, $12, $13, $14, $15, $16)
             `,
             [
               sessionId,
@@ -385,6 +403,7 @@ export default async function handler(req, res) {
               enriched.utm_medium,
               enriched.utm_campaign,
               searched.search_term,
+              city,
             ]
           );
         }
@@ -405,7 +424,7 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error('Analytics tracking error:', error);
 
-    if (req.body?.eventName === 'phone_click') {
+    if (req.body?.eventName === 'phone_click' || req.body?.eventName === 'whatsapp_click') {
       return res.status(500).json({
         error: 'Failed to record phone click',
         details: process.env.NODE_ENV === 'development' ? error.message : undefined,

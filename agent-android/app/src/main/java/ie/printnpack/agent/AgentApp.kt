@@ -146,12 +146,15 @@ private fun LoginScreen(api: AgentApi, onReady: () -> Unit) {
 
 @Composable
 private fun InboxScreen(api: AgentApi, onOpen: (String) -> Unit, onSignOut: () -> Unit) {
+    var tab by remember { mutableStateOf("Visitors") }
     var chats by remember { mutableStateOf<List<ChatSummary>>(emptyList()) }
+    var visitors by remember { mutableStateOf<List<Visitor>>(emptyList()) }
     var error by remember { mutableStateOf("") }
 
     LaunchedEffect(Unit) {
         while (true) {
             try {
+                visitors = withContext(Dispatchers.IO) { api.visitors() }
                 chats = withContext(Dispatchers.IO) { api.chats() }
                 error = ""
             } catch (err: Exception) {
@@ -170,14 +173,36 @@ private fun InboxScreen(api: AgentApi, onOpen: (String) -> Unit, onSignOut: () -
             Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            Text("Live chats", fontSize = 22.sp, fontWeight = FontWeight.Bold, color = Ink)
+            Text(if (tab == "Visitors") "Live visitors" else "Live chats", fontSize = 22.sp, fontWeight = FontWeight.Bold, color = Ink)
             TextButton(onClick = onSignOut) { Text("Sign out") }
         }
+        Row(Modifier.padding(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            listOf("Visitors", "Chats").forEach { name ->
+                TextButton(onClick = { tab = name }) {
+                    Text(name, color = if (tab == name) Blue else Color(0xFF64748B), fontWeight = FontWeight.SemiBold)
+                }
+            }
+        }
         if (error.isNotBlank()) Text(error, color = Color(0xFFDC2626), modifier = Modifier.padding(horizontal = 16.dp))
-        if (chats.isEmpty() && error.isBlank()) {
+        if (tab == "Visitors" && visitors.isEmpty() && error.isBlank()) {
+            Text("Nobody on the site right now.", modifier = Modifier.padding(16.dp), color = Color(0xFF64748B))
+        }
+        if (tab == "Chats" && chats.isEmpty() && error.isBlank()) {
             Text("No website chats yet.", modifier = Modifier.padding(16.dp), color = Color(0xFF64748B))
         }
         LazyColumn(Modifier.fillMaxSize()) {
+            if (tab == "Visitors") {
+                items(visitors, key = { it.id }) { visitor ->
+                    Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp)) {
+                        Text(visitor.place.ifBlank { "Visitor" } + " · " + visitor.device, fontWeight = FontWeight.SemiBold)
+                        Text("From ${visitor.source} · landed ${visitor.landed}", color = Color(0xFF64748B), fontSize = 13.sp)
+                        if (visitor.next.isNotBlank()) Text("Then ${visitor.next}", color = Color(0xFF64748B), fontSize = 13.sp)
+                        Text("Now ${visitor.current}", color = Ink, fontSize = 14.sp)
+                        if (visitor.invite.isNotBlank()) Text(visitor.invite, color = Blue, fontSize = 13.sp)
+                    }
+                }
+                return@LazyColumn
+            }
             items(chats, key = { it.id }) { chat ->
                 Column(
                     Modifier

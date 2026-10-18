@@ -116,6 +116,52 @@ export default function SiteChatWidget() {
 
   useEffect(() => () => abortRef.current?.abort(), []);
 
+  useEffect(() => {
+    const openWith = (event) => {
+      const message = event.detail?.message;
+      if (message) {
+        setMessages((current) => {
+          if (current.some((item) => item.content === message)) return current;
+          return [...current, { role: 'assistant', content: message }];
+        });
+      }
+      setOpen(true);
+    };
+    window.addEventListener('printnpack-open-chat', openWith);
+    return () => window.removeEventListener('printnpack-open-chat', openWith);
+  }, []);
+
+  async function attachArtwork(file) {
+    if (!file) return;
+    setError('');
+    const data = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result || '').split(',')[1] || '');
+      reader.onerror = () => reject(new Error('Could not read that file.'));
+      reader.readAsDataURL(file);
+    });
+    const response = await fetch('/api/chat/artwork', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chatId: chatIdRef.current || undefined,
+        page: router.asPath || '/',
+        filename: file.name,
+        mime: file.type,
+        data,
+        sessionId: window.localStorage.getItem('analytics_session_id') || '',
+      }),
+    });
+    const body = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(body.message || 'Artwork was not saved.');
+    if (body.chatId) {
+      chatIdRef.current = body.chatId;
+      window.sessionStorage.setItem('printnpack-chat-id', body.chatId);
+      setChatId(body.chatId);
+    }
+    setMessages((current) => [...current, { role: 'user', content: `Artwork attached: ${file.name}` }]);
+  }
+
   if (path.startsWith('/staff') || path.startsWith('/admin')) return null;
 
   async function send(text) {
@@ -287,6 +333,19 @@ export default function SiteChatWidget() {
               send(draft);
             }}
           >
+            <label className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-slate-200 text-xs font-semibold text-slate-600" title="Attach artwork">
+              Art
+              <input
+                type="file"
+                accept="image/png,image/jpeg,image/webp,application/pdf"
+                className="sr-only"
+                onChange={(event) => {
+                  const file = event.target.files?.[0];
+                  event.target.value = '';
+                  attachArtwork(file).catch((err) => setError(err.message));
+                }}
+              />
+            </label>
             <label htmlFor="site-chat-input" className="sr-only">Message</label>
             <input
               id="site-chat-input"

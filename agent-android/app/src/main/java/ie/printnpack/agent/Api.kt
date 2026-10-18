@@ -10,6 +10,18 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.util.concurrent.TimeUnit
 
+data class Visitor(
+    val id: String,
+    val place: String,
+    val device: String,
+    val source: String,
+    val landed: String,
+    val next: String,
+    val current: String,
+    val invite: String,
+    val trail: String,
+)
+
 data class ChatSummary(
     val id: String,
     val page: String,
@@ -71,6 +83,33 @@ class AgentApi(context: Context) {
             if (token.isBlank()) throw IllegalStateException("Sign-in did not return a session")
             saveToken(token)
             return token
+        }
+    }
+
+    fun visitors(): List<Visitor> {
+        val payload = get("/api/staff/visitors")
+        val rows = payload.optJSONArray("visitors") ?: JSONArray()
+        return buildList {
+            for (index in 0 until rows.length()) {
+                val row = rows.getJSONObject(index)
+                val trailRows = row.optJSONArray("trail") ?: JSONArray()
+                val trail = buildList {
+                    for (step in 0 until trailRows.length()) add(trailRows.optString(step))
+                }
+                add(
+                    Visitor(
+                        id = row.optString("id"),
+                        place = row.optString("city").ifBlank { row.optString("country") },
+                        device = row.optString("device"),
+                        source = row.optString("source"),
+                        landed = row.optString("landed"),
+                        next = row.optString("next"),
+                        current = row.optString("current"),
+                        invite = row.optString("invite"),
+                        trail = trail.joinToString(" → "),
+                    )
+                )
+            }
         }
     }
 

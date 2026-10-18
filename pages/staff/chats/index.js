@@ -22,6 +22,9 @@ export default function StaffChatsPage() {
   const [thread, setThread] = useState(null);
   const [draft, setDraft] = useState('');
   const [error, setError] = useState('');
+  const [pane, setPane] = useState('chats');
+  const [visitors, setVisitors] = useState([]);
+  const [artwork, setArtwork] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -83,6 +86,25 @@ export default function StaffChatsPage() {
     };
   }, [user, activeId]);
 
+  useEffect(() => {
+    if (!user || pane === 'chats') return undefined;
+    let stop = false;
+    async function loadPane() {
+      const url = pane === 'visitors' ? '/api/staff/visitors' : '/api/staff/artwork';
+      const res = await fetch(url, { credentials: 'include' });
+      if (!res.ok || stop) return;
+      const data = await res.json();
+      if (pane === 'visitors') setVisitors(data.visitors || []);
+      else setArtwork(data.artwork || []);
+    }
+    loadPane();
+    const timer = setInterval(loadPane, 4000);
+    return () => {
+      stop = true;
+      clearInterval(timer);
+    };
+  }, [user, pane]);
+
   async function act(action, text) {
     setError('');
     const res = await fetch(`/api/staff/chats/${activeId}`, {
@@ -117,6 +139,51 @@ export default function StaffChatsPage() {
         <title>Live chats — Staff — PrintNPack</title>
         <meta name="robots" content="noindex, nofollow" />
       </Head>
+      <div className="staff-body flex gap-2 pb-3">
+        {['chats', 'visitors', 'artwork'].map((item) => (
+          <button
+            key={item}
+            type="button"
+            onClick={() => setPane(item)}
+            className={`rounded-full px-4 py-1.5 text-sm font-medium ${pane === item ? 'bg-slate-950 text-white' : 'bg-white text-slate-600'}`}
+          >
+            {item === 'chats' ? 'Live chats' : item === 'visitors' ? 'Live visitors' : 'Artwork'}
+          </button>
+        ))}
+      </div>
+      {pane === 'visitors' && (
+        <div className="staff-body space-y-3 pb-8">
+          {visitors.length === 0 && <p className="text-sm text-slate-500">Nobody on the site in the last 15 minutes.</p>}
+          {visitors.map((visitor) => (
+            <article key={visitor.id} className="rounded-2xl bg-white px-4 py-3">
+              <p className="text-sm font-semibold text-slate-900">
+                {visitor.city || visitor.country || 'Visitor'} · {visitor.device || 'desktop'}
+              </p>
+              <p className="mt-1 text-xs text-slate-500">
+                Landed from {visitor.source}{visitor.referrer ? ` (${visitor.referrer})` : ''} on {visitor.landed || 'the site'}
+                {visitor.next ? ` · next ${visitor.next}` : ''}
+              </p>
+              <p className="mt-1 text-sm text-slate-800">Now on {visitor.current || 'the site'}</p>
+              {visitor.trail?.length > 0 && (
+                <p className="mt-1 text-xs text-slate-500">{visitor.trail.join(' → ')}</p>
+              )}
+              {visitor.invite && <p className="mt-1 text-xs text-blue-700">Bubble: {visitor.invite}</p>}
+            </article>
+          ))}
+        </div>
+      )}
+      {pane === 'artwork' && (
+        <div className="staff-body space-y-2 pb-8">
+          {artwork.length === 0 && <p className="text-sm text-slate-500">No artwork uploaded yet.</p>}
+          {artwork.map((file) => (
+            <a key={file.id} href={`/api/staff/artwork/${file.id}`} className="block rounded-2xl bg-white px-4 py-3 text-sm">
+              <span className="font-semibold text-slate-900">{file.filename}</span>
+              <span className="mt-1 block text-xs text-slate-500">{file.email || file.page || 'Website chat'} · {Math.ceil((file.size || 0) / 1024)} KB</span>
+            </a>
+          ))}
+        </div>
+      )}
+      {pane === 'chats' && (
       <div className="staff-body grid gap-4 pb-8 md:grid-cols-[16rem_1fr]">
         <aside className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
           {chats.length === 0 && <p className="p-4 text-sm text-slate-500">No website chats yet.</p>}
@@ -189,6 +256,7 @@ export default function StaffChatsPage() {
           )}
         </section>
       </div>
+      )}
     </StaffLayout>
   );
 }
