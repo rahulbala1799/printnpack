@@ -76,6 +76,8 @@ export default async function handler(req, res) {
 
     setAuthCookie(res, token);
 
+    const forAgent = String(req.headers['x-client'] || '') === 'printnpack-agent';
+
     return res.status(200).json({
       user: {
         id: user.id,
@@ -84,6 +86,7 @@ export default async function handler(req, res) {
         must_change_password: !!user.must_change_password,
       },
       mustChangePassword: !!user.must_change_password,
+      ...(forAgent ? { token } : {}),
     });
   } catch (error) {
     console.error('Staff login error:', error);

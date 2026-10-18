@@ -5,6 +5,7 @@ import '../../styles/staff-dashboard.css';
 
 const navItems = [
   { href: '/staff', label: 'Home', icon: 'home' },
+  { href: '/staff/chats', label: 'Chats', icon: 'chat' },
   { href: '/staff/outbound-sales', label: 'Log Visit', icon: 'pin' },
   { href: '/staff/pricelist-builder', label: 'Pricelist', icon: 'pricelist' },
   { href: '/staff/orders', label: 'Orders', icon: 'cart' },
@@ -17,6 +18,11 @@ const icons = {
     <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
       <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
       <polyline points="9 22 9 12 15 12 15 22" />
+    </svg>
+  ),
+  chat: (
+    <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
     </svg>
   ),
   pin: (

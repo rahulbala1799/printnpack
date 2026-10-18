@@ -62,8 +62,53 @@ export default function SiteChatWidget() {
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState('');
   const [messages, setMessages] = useState([WELCOME]);
+  const [mode, setMode] = useState('ai');
+  const [chatId, setChatId] = useState('');
   const listRef = useRef(null);
   const abortRef = useRef(null);
+  const sendingRef = useRef(false);
+  const chatIdRef = useRef('');
+
+  useEffect(() => {
+    const saved = window.sessionStorage.getItem('printnpack-chat-id') || '';
+    if (saved) {
+      chatIdRef.current = saved;
+      setChatId(saved);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!open || !chatId) return undefined;
+    let stop = false;
+
+    async function pull() {
+      if (sendingRef.current) return;
+      try {
+        const response = await fetch(`/api/chat?chatId=${encodeURIComponent(chatId)}`);
+        if (!response.ok) return;
+        const data = await response.json();
+        if (stop) return;
+        setMode(data.status === 'human' ? 'human' : 'ai');
+        const incoming = Array.isArray(data.messages) ? data.messages : [];
+        setMessages((current) => {
+          const localOnly = current.every((message) => message.local);
+          if (localOnly && incoming.length) return [WELCOME, ...incoming];
+          const known = new Set(current.map((message) => message.id).filter(Boolean));
+          const staff = incoming.filter((message) => message.role === 'staff' && message.id && !known.has(message.id));
+          return staff.length ? [...current, ...staff] : current;
+        });
+      } catch {
+        // The next poll retries.
+      }
+    }
+
+    pull();
+    const timer = setInterval(pull, 2500);
+    return () => {
+      stop = true;
+      clearInterval(timer);
+    };
+  }, [open, chatId]);
 
   useEffect(() => {
     if (listRef.current) listRef.current.scrollTop = listRef.current.scrollHeight;
@@ -78,18 +123,20 @@ export default function SiteChatWidget() {
     if (!content || status === 'sending') return;
 
     const history = [
-      ...messages.filter((message) => !message.local).map(({ role, content: body }) => ({ role, content: body })),
+      ...messages
+        .filter((message) => !message.local && message.content)
+        .map(({ role, content: body }) => ({
+          role: role === 'staff' ? 'assistant' : role,
+          content: role === 'staff' ? `Team member: ${body}` : body,
+        })),
       { role: 'user', content },
     ];
 
-    setMessages((current) => [
-      ...current,
-      { role: 'user', content },
-      { role: 'assistant', content: '', pending: true },
-    ]);
+    setMessages((current) => [...current, { role: 'user', content }]);
     setDraft('');
     setError('');
     setStatus('sending');
+    sendingRef.current = true;
 
     const controller = new AbortController();
     abortRef.current = controller;
@@ -102,14 +149,36 @@ export default function SiteChatWidget() {
         body: JSON.stringify({
           messages: history,
           page: router.asPath || '/',
+          chatId: chatIdRef.current || undefined,
         }),
       });
+
+      const nextChatId = response.headers.get('x-chat-id');
+      if (nextChatId) {
+        chatIdRef.current = nextChatId;
+        window.sessionStorage.setItem('printnpack-chat-id', nextChatId);
+        setChatId(nextChatId);
+      }
+
+      const isJson = (response.headers.get('content-type') || '').includes('application/json');
+      if (isJson) {
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.message || 'The assistant is unavailable.');
+        if (data.chatId) {
+          chatIdRef.current = data.chatId;
+          window.sessionStorage.setItem('printnpack-chat-id', data.chatId);
+          setChatId(data.chatId);
+        }
+        if (data.mode === 'human') setMode('human');
+        return;
+      }
 
       if (!response.ok) {
         const data = await response.json().catch(() => ({}));
         throw new Error(data.message || 'The assistant is unavailable.');
       }
 
+      setMessages((current) => [...current, { role: 'assistant', content: '', pending: true }]);
       const reader = response.body?.getReader();
       if (!reader) throw new Error('The assistant is unavailable.');
       const decoder = new TextDecoder();
@@ -140,6 +209,7 @@ export default function SiteChatWidget() {
       setError(err.message || 'Something went wrong.');
       setMessages((current) => current.filter((message) => !message.pending || message.content));
     } finally {
+      sendingRef.current = false;
       setStatus('idle');
     }
   }
@@ -154,7 +224,9 @@ export default function SiteChatWidget() {
           <header className="flex items-center justify-between bg-slate-950 px-4 py-3 text-white">
             <div>
               <p className="text-sm font-semibold">printNpack</p>
-              <p className="text-xs text-slate-300">Quotes and product questions</p>
+              <p className="text-xs text-slate-300">
+                {mode === 'human' ? 'You are chatting with the team' : 'Quotes and product questions'}
+              </p>
             </div>
             <button
               type="button"
@@ -168,14 +240,19 @@ export default function SiteChatWidget() {
 
           <div ref={listRef} className="flex-1 space-y-3 overflow-y-auto bg-slate-50 px-3 py-3">
             {messages.map((message, index) => (
-              <div key={`${message.role}-${index}`} className={message.role === 'user' ? 'flex justify-end' : 'flex justify-start'}>
+              <div key={message.id || `${message.role}-${index}`} className={message.role === 'user' ? 'flex justify-end' : 'flex justify-start'}>
                 <div
                   className={`max-w-[85%] rounded-2xl px-3 py-2 text-sm leading-relaxed ${
                     message.role === 'user'
                       ? 'bg-blue-600 text-white'
-                      : 'border border-slate-200 bg-white text-slate-800'
+                      : message.role === 'staff'
+                        ? 'border border-emerald-200 bg-emerald-50 text-slate-800'
+                        : 'border border-slate-200 bg-white text-slate-800'
                   }`}
                 >
+                  {message.role === 'staff' && (
+                    <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-emerald-700">PrintNPack team</p>
+                  )}
                   {message.pending && !message.content ? (
                     <span className="text-slate-400">Typing…</span>
                   ) : (

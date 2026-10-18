@@ -9,6 +9,7 @@ import {
 } from '../../lib/ai/gateway';
 import { buildSystemPrompt } from '../../lib/chat/knowledge';
 import { submitEnquiry } from '../../lib/leads/submit-enquiry';
+import { addChatMessage, getChat, listMessages, openChat, rememberVisitorEmail } from '../../lib/chat/sessions';
 
 export const config = {
   maxDuration: 60,
@@ -73,7 +74,37 @@ function phoneWasTyped(phone, transcript) {
   return typed.includes(wanted) || typed.includes(local) || typed.includes(`0${local}`);
 }
 
+function publicMessage(row) {
+  return {
+    id: row.id,
+    role: row.role,
+    content: row.content,
+    createdAt: row.created_at,
+  };
+}
+
 export default async function handler(req, res) {
+  if (req.method === 'GET') {
+    try {
+      const chat = await getChat(req.query.chatId);
+      if (!chat) {
+        res.status(404).json({ message: 'Chat not found.' });
+        return;
+      }
+      const since = typeof req.query.since === 'string' ? req.query.since : null;
+      const messages = await listMessages(chat.id, since);
+      res.status(200).json({
+        chatId: chat.id,
+        status: chat.status,
+        messages: messages.map(publicMessage),
+      });
+    } catch (error) {
+      console.error('Site chat read error:', error?.message || error);
+      res.status(500).json({ message: 'Chat is unavailable.' });
+    }
+    return;
+  }
+
   if (req.method !== 'POST') {
     res.status(405).json({ message: 'Method not allowed' });
     return;
@@ -104,7 +135,23 @@ export default async function handler(req, res) {
   const model = getChatAiModel();
   const customerLeftContact = /[^\s@]+@[^\s@]+\.[^\s@]+/.test(transcript);
 
+  let chat = null;
   try {
+    chat = await openChat({ id: req.body?.chatId, page });
+    await addChatMessage(chat.id, 'user', last.content);
+    await rememberVisitorEmail(chat.id, transcript);
+  } catch (error) {
+    console.error('Site chat save error:', error?.message || error);
+    chat = null;
+  }
+
+  if (chat?.status === 'human') {
+    res.status(200).json({ mode: 'human', chatId: chat.id });
+    return;
+  }
+
+  try {
+    if (chat?.id) res.setHeader('X-Chat-Id', chat.id);
     const result = streamText({
       model: resolveAiModel(model),
       system: buildSystemPrompt(page, last.content),
@@ -163,6 +210,12 @@ export default async function handler(req, res) {
         }),
       } } : {}),
     });
+
+    if (chat?.id) {
+      result.text
+        .then((text) => addChatMessage(chat.id, 'assistant', text))
+        .catch((error) => console.error('Site chat reply save error:', error?.message || error));
+    }
 
     result.pipeTextStreamToResponse(res);
   } catch (error) {
