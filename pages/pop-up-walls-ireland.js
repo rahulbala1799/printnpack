@@ -32,6 +32,10 @@ const ALTERNATE_NAMES = [
   'Straight pop-up wall',
   'Curved pop-up display',
   'LED pop-up display',
+  'Portable exhibition stand',
+  'Trade show backdrop',
+  'Folding display wall',
+  'Fabric display stand',
 ];
 
 const faqs = [
@@ -132,7 +136,7 @@ export default function PopupWallsIreland() {
         <meta name="description" content={description} />
         <meta
           name="keywords"
-          content="best pop-up display stands Ireland, most affordable pop-up stands Ireland, pop-up display stand Ireland, pop-up wall, pop-up stand, exhibition pop-up stand, exhibition backwall, fabric pop-up stand, curved pop-up display"
+          content="best pop-up display stands Ireland, most affordable pop-up stands Ireland, pop-up display stand Ireland, pop-up wall, pop-up stand, exhibition pop-up stand, exhibition backwall, fabric pop-up stand, curved pop-up display, portable exhibition stand, trade show backdrop, folding display wall, fabric display stand"
         />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href={PAGE_URL} />
@@ -172,7 +176,8 @@ export default function PopupWallsIreland() {
               </p>
               <p className="text-gray-600 mb-6 leading-relaxed">
                 Most people search <strong>pop-up display stand</strong>, <strong>pop-up stand</strong> or{' '}
-                <strong>exhibition backwall</strong>. Straight sizes from 151 cm wide, or one curved wall.
+                <strong>exhibition backwall</strong>. The same stand is also called a portable exhibition stand,
+                a trade show backdrop or a folding display wall. Straight sizes from 151 cm wide, or one curved wall.
                 Full stand, or fabric only if you already have the frame. Optional LED. From €{FROM_PRICE} ex VAT,
                 with delivery to Ireland included.
               </p>
@@ -312,6 +317,8 @@ export default function PopupWallsIreland() {
       <RelatedSeoLinks
         title="Related banners, stands and frames"
         links={[
+          { href: '/freestanding-led-frames-ireland', label: 'Freestanding LED frames', desc: 'Double-sided edge-lit frame' },
+          { href: '/inhaker-stands-ireland', label: 'Exhibition walls', desc: 'Rigid printed panels, also called an inhaker stand' },
           { href: '/fabric-banner-stands-ireland', label: 'Fabric banner stands', desc: 'Stretch graphic on a tube frame' },
           { href: '/curved-banner-stands-ireland', label: 'Curved banner stands', desc: 'Curved stretch stand' },
           { href: '/roll-up-banners-ireland', label: 'Roll-up banners', desc: 'Narrow pull-up stands' },

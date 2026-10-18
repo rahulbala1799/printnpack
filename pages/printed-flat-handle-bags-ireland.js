@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -6,21 +6,31 @@ import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
 import { buildProductLd } from '../lib/schema';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
+import { useQuoteCart } from '../lib/quote-cart-context';
+import { getQuoteCatalogItem } from '../data/quote-modules';
+import {
+  BROWN_FLAT_HANDLE_EXAMPLES,
+  BROWN_FLAT_HANDLE_HERO,
+  BROWN_FLAT_HANDLE_SIZES,
+  BROWN_FLAT_HANDLE_WARNING,
+  brownFlatHandleDimensions,
+  brownFlatHandleFromPrice,
+  brownFlatHandlePreview,
+  buildBrownFlatHandleQuoteLine,
+} from '../data/brown-flat-handle-bags';
+import BrownFlatHandleConfigurator from '../components/flat-handle-bags/BrownFlatHandleConfigurator';
 
 const PAGE_URL = `${SITE_URL}/printed-flat-handle-bags-ireland`;
 
-const sizes = [
-  { size: 'Small', dimensions: '8" × 5" × 10"', use: 'Café pastries, small retail items, deli portions' },
-  { size: 'Medium', dimensions: '10" × 6" × 12"', use: 'Most popular — standard takeaway and retail orders' },
-  { size: 'Large', dimensions: '12" × 7" × 14"', use: 'Larger orders, multi-item retail, catering' },
-];
+const FROM_PRICE = brownFlatHandleFromPrice().toFixed(2);
 
-const galleryImages = [
-  { src: '/images/products/flat-handle-bags/1.png', alt: 'Printed flat handle paper bags Ireland – custom logo branding' },
-  { src: '/images/products/flat-handle-bags/3.png', alt: 'Custom flat handle bags Dublin – branded kraft paper bag' },
-  { src: '/images/products/flat-handle-bags/5.png', alt: 'Flat handle paper bags with logo Ireland – full colour print' },
-  { src: '/images/products/flat-handle-bags/2.png', alt: 'Printed flat handle takeaway bags Ireland – café and deli' },
-];
+const sizes = BROWN_FLAT_HANDLE_SIZES.map((size) => ({
+  size: size.label,
+  dimensions: brownFlatHandleDimensions(size),
+  use: size.use,
+}));
+
+const galleryImages = [BROWN_FLAT_HANDLE_HERO, ...BROWN_FLAT_HANDLE_EXAMPLES];
 
 const relatedBags = [
   {
@@ -46,11 +56,11 @@ const relatedBags = [
 const seoSections = [
   {
     title: 'Printed Flat Handle Bags for Cafés, Delis and Takeaway',
-    body: 'Flat handle paper bags are the practical branded carrier for Irish food businesses — die-cut paper loops, grease-proof lining options and three sizes for pastries, deli portions and takeaway orders.',
+    body: 'Flat handle paper bags are the practical branded carrier for Irish food businesses — die-cut paper loops on brown kraft, in four sizes for pastries, deli portions and takeaway orders.',
   },
   {
-    title: 'Logo Paper Bags from 20 Bags',
-    body: 'Digital CMYK printing puts your logo on kraft or white paper with no plate fees. Mix Small, Medium and Large in one order from 20 bags.',
+    title: 'Logo Paper Bags from 25 Bags',
+    body: 'Digital CMYK printing puts your logo on brown kraft paper with no plate fees. Small, Medium, Large and XL start from 25 bags. The price in the builder is indicative and changes with ink use.',
   },
   {
     title: 'Flat Handle vs Twisted Handle Paper Bags',
@@ -64,7 +74,7 @@ const seoSections = [
   },
   {
     title: 'Wholesale Printed and Plain Paper Bags',
-    body: 'Busy takeaways and retailers reorder cases with tiered pricing or plan larger custom print runs from 20 bags upward.',
+    body: 'Busy takeaways and retailers reorder cases with tiered pricing or plan larger custom print runs from 25 bags upward.',
     link: { href: '/wholesale-paper-bags-ireland', label: 'wholesale paper bags' },
   },
 ];
@@ -90,15 +100,15 @@ const guides = [
 const faqs = [
   {
     q: 'Where can I order printed flat handle bags in Ireland?',
-    a: 'PrintNPack supplies printed flat handle paper bags across Ireland — full-colour CMYK printing with your logo from 20 bags. We deliver nationwide to Dublin, Cork, Galway, and all counties.',
+    a: 'PrintNPack supplies printed brown flat handle paper bags across Ireland — full-colour CMYK printing with your logo from 25 bags. We deliver nationwide to Dublin, Cork, Galway, and all counties.',
   },
   {
     q: 'What is the minimum order for printed flat handle paper bags?',
-    a: 'Printed flat handle bags start from 20 bags. You can mix sizes within the same order — Small, Medium, and Large — to suit your product range.',
+    a: 'Printed brown flat handle bags start from 25 bags. Sizes are Small, Medium, Large and XL.',
   },
   {
     q: 'What sizes of flat handle paper bags are available?',
-    a: 'We offer three standard sizes: Small (8"×5"×10"), Medium (10"×6"×12"), and Large (12"×7"×14"). Medium is the most popular for Irish cafés, delis, and takeaway businesses.',
+    a: 'Four brown kraft sizes: Small 190 × 80 × 250 mm, Medium 220 × 100 × 250 mm, Large 260 × 140 × 290 mm, and XL 320 × 240 × 320 mm.',
   },
   {
     q: 'Can you print my logo on flat handle paper bags?',
@@ -137,10 +147,10 @@ const breadcrumbLd = {
 const productLd = buildProductLd({
   name: 'Printed Flat Handle Paper Bags Ireland',
   description:
-    'Custom printed flat handle paper bags for Irish retailers, cafés, and food businesses. Digital CMYK logo printing, three sizes, MOQ from 20 bags, nationwide delivery.',
-  image: `${SITE_URL}/images/products/flat-handle-bags/1.png`,
+    'Brown flat handle printed paper bags for Irish cafés, delis and retailers. Indicative prices from 25 bags. Nationwide delivery.',
+  image: `${SITE_URL}/images/products/brown-flat-handle/large.jpg`,
   url: PAGE_URL,
-  price: '0.18',
+  price: FROM_PRICE,
 });
 
 const webPageLd = {
@@ -148,7 +158,7 @@ const webPageLd = {
   '@type': 'WebPage',
   name: 'Printed Flat Handle Bags Ireland | Custom Logo Paper Bags',
   description:
-    'Order printed flat handle paper bags in Ireland — custom logo printing from 20 bags. Kraft and white bags in three sizes, fast nationwide delivery for cafés, delis & retail.',
+    'Order brown flat handle printed paper bags in Ireland — custom logo printing from 25 bags. Four sizes, indicative prices, nationwide delivery.',
   url: PAGE_URL,
   inLanguage: 'en-IE',
   isPartOf: { '@type': 'WebSite', name: 'PrintNPack Ireland', url: SITE_URL },
@@ -157,9 +167,14 @@ const webPageLd = {
 };
 
 export default function PrintedFlatHandleBagsIreland() {
-  const title = 'Printed Flat Handle Paper Bags Ireland | Logo Takeaway Bags from 20 Bags';
+  const { addItem } = useQuoteCart();
+  const catalogItem = getQuoteCatalogItem('printed-flat-handle-bags-ireland');
+  const [shown, setShown] = useState(BROWN_FLAT_HANDLE_HERO);
+  const title = 'Brown Flat Handle Printed Bags Ireland | Logo Takeaway Bags';
   const description =
-    'Printed flat handle paper bags Ireland — custom logo takeaway bags from 20 bags. Kraft & white bags in three sizes, from €0.18/unit, delivery to Dublin, Meath & nationwide.';
+    'Brown flat handle printed paper bags Ireland — custom logo takeaway bags from 25 bags. Four kraft sizes, indicative prices from €' +
+    FROM_PRICE +
+    ' a bag, delivery to Dublin, Meath and nationwide.';
 
   return (
     <Layout>
@@ -180,13 +195,13 @@ export default function PrintedFlatHandleBagsIreland() {
         <meta property="og:url" content={PAGE_URL} />
         <meta property="og:site_name" content="PrintNPack Ireland" />
         <meta property="og:locale" content="en_IE" />
-        <meta property="og:image" content={`${SITE_URL}/images/products/flat-handle-bags/1.png`} />
+        <meta property="og:image" content={`${SITE_URL}/images/products/brown-flat-handle/large.jpg`} />
         <meta property="og:image:alt" content="Printed flat handle paper bags Ireland – custom logo branding" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={`${SITE_URL}/images/products/flat-handle-bags/1.png`} />
+        <meta name="twitter:image" content={`${SITE_URL}/images/products/brown-flat-handle/large.jpg`} />
 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
@@ -206,60 +221,61 @@ export default function PrintedFlatHandleBagsIreland() {
         </div>
       </nav>
 
-      {/* Hero */}
       <section className="bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 items-start">
             <div>
               <p className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-3">
-                Custom Printed Paper Bags
+                Custom printed paper bags · Ireland
               </p>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">
-                Printed Flat Handle Paper Bags Ireland — Custom Logo Takeaway Bags
+                Brown flat handle printed bags
               </h1>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                <strong>Printed flat handle paper bags</strong> with your logo — the practical choice for Irish
-                cafés, delis, bakeries, and retail. Digital CMYK printing, three standard sizes, minimum 20 bags
-                units, and fast nationwide delivery.
+              <p className="text-lg text-gray-600 mb-4 leading-relaxed">
+                Brown kraft <strong>flat handle paper bags</strong> with your logo, for cafés, delis and retail.
+                Four sizes. Orders from 25 bags.
               </p>
-              <div className="flex flex-wrap gap-3 mb-6">
-                <div className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-center">
-                  <div className="text-sm font-bold text-gray-900">From €0.18</div>
-                  <div className="text-xs text-gray-500">per unit</div>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                The large bag is 260 × 140 × 290 mm. At 25 bags it is €1.00 double-sided or €0.80 single-sided.
+                At 5,000 bags the small bag is €0.25, the large bag is €0.30, and the XL bag is €0.35, double-sided.
+              </p>
+              <figure className="hidden lg:block">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-slate-100">
+                  <Image
+                    key={shown.src}
+                    src={shown.src}
+                    alt={shown.alt}
+                    fill
+                    className="object-contain"
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                  />
                 </div>
-                <div className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-center">
-                  <div className="text-sm font-bold text-gray-900">20 bags</div>
-                  <div className="text-xs text-gray-500">MOQ</div>
+                <div className="mt-3 grid grid-cols-4 gap-2">
+                  {galleryImages.map((item) => (
+                    <button
+                      key={item.src}
+                      type="button"
+                      onClick={() => setShown(item)}
+                      className={`relative aspect-[3/4] overflow-hidden rounded-lg border bg-slate-100 ${
+                        shown.src === item.src ? 'border-blue-600 ring-2 ring-blue-200' : 'border-gray-200'
+                      }`}
+                      aria-label={item.alt}
+                    >
+                      <Image src={item.src} alt="" fill className="object-contain" sizes="120px" />
+                    </button>
+                  ))}
                 </div>
-                <div className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-center">
-                  <div className="text-sm font-bold text-gray-900">10–14 days</div>
-                  <div className="text-xs text-gray-500">production</div>
-                </div>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  href="/quote"
-                  className="inline-flex items-center gap-2 bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors"
-                >
-                  Get a Free Quote
-                </Link>
-                <a
-                  href="tel:+353894157369"
-                  className="inline-flex items-center gap-2 bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors"
-                >
-                  Call +353 89 415 7369
-                </a>
-              </div>
+                <figcaption className="mt-2 text-sm text-gray-500">
+                  Example print. Your own artwork goes on the bag.
+                </figcaption>
+              </figure>
             </div>
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
-              <Image
-                src="/images/products/flat-handle-bags/1.png"
-                alt="Printed flat handle paper bags Ireland – custom logo kraft bags for takeaway and retail"
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                unoptimized={process.env.NODE_ENV === 'production'}
+            <div id="configure" className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm sm:p-6">
+              <h2 className="mb-4 text-lg font-bold text-gray-900">Build your printed bags</h2>
+              <BrownFlatHandleConfigurator
+                onChange={(priced) => setShown(brownFlatHandlePreview(priced))}
+                onSubmit={(priced) => addItem(buildBrownFlatHandleQuoteLine(catalogItem, priced))}
               />
             </div>
           </div>
@@ -301,7 +317,7 @@ export default function PrintedFlatHandleBagsIreland() {
             {[
               { title: 'Full-colour logo printing', desc: 'Digital CMYK — no plate fees. Print your logo, brand colours, and messaging on kraft or white paper.' },
               { title: 'Food-safe options', desc: 'Grease-proof lining available for hot food, pastries, and deli items. Recyclable kraft paper.' },
-              { title: 'Three practical sizes', desc: 'Small, Medium, and Large to match your product range. Mix sizes in one order from 20 bags.' },
+              { title: 'Four brown kraft sizes', desc: 'Small, Medium, Large and XL. The price falls as the quantity steps up, and a larger bag costs more at 5,000.' },
             ].map((item) => (
               <div key={item.title} className="bg-white rounded-xl border border-gray-200 p-5">
                 <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
@@ -368,7 +384,7 @@ export default function PrintedFlatHandleBagsIreland() {
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
             Printed flat handle bag examples
           </h2>
-          <p className="text-gray-600 mb-8">Custom logo printing on kraft and white flat handle paper bags.</p>
+          <p className="text-gray-600 mb-8">Example prints on brown kraft bags with internal flat handles.</p>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {galleryImages.map((img) => (
               <div key={img.src} className="relative aspect-square rounded-xl overflow-hidden border border-gray-200 bg-white">
@@ -429,7 +445,7 @@ export default function PrintedFlatHandleBagsIreland() {
           <p className="text-gray-600 mb-8 max-w-3xl leading-relaxed">
             PrintNPack delivers <strong>printed flat handle bags in Dublin</strong>, Cork, Galway, Limerick,
             and nationwide. Based in Ashbourne, Co. Meath, we supply Irish cafés, delis, bakeries, and
-            retailers with branded paper bags from 20 bags.
+            retailers with branded paper bags from 25 bags.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
@@ -505,11 +521,11 @@ export default function PrintedFlatHandleBagsIreland() {
             Ready to order printed flat handle bags?
           </h2>
           <p className="text-blue-100 mb-6">
-            Custom logo printing from 20 bags. Three sizes, kraft or white, grease-proof lining available.
+            Brown kraft bags with your logo, from 25 bags. {BROWN_FLAT_HANDLE_WARNING}
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
-              href="/quote"
+              href="#configure"
               className="inline-flex items-center bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors"
             >
               Get a Free Quote

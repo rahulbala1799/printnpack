@@ -3,6 +3,10 @@ import { resolveQuoteImage } from '../../data/quote-modules';
 import ClothingQuoteModule from './modules/ClothingQuoteModule';
 import GenericQuoteModule from './modules/GenericQuoteModule';
 import PopupWallQuoteModule from './modules/PopupWallQuoteModule';
+import LedFrameQuoteModule from './modules/LedFrameQuoteModule';
+import InhakerStandQuoteModule from './modules/InhakerStandQuoteModule';
+import BeachFlagQuoteModule from './modules/BeachFlagQuoteModule';
+import BrownFlatHandleQuoteModule from './modules/BrownFlatHandleQuoteModule';
 import TissuePaperQuoteModule from './modules/TissuePaperQuoteModule';
 import QuoteProductImage from './QuoteProductImage';
 
@@ -70,6 +74,14 @@ export default function QuoteConfigurePanel({ selected, existing, onSave }) {
         <ClothingQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
       ) : selected.moduleId === 'popup-walls' ? (
         <PopupWallQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
+      ) : selected.moduleId === 'led-frames' ? (
+        <LedFrameQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
+      ) : selected.moduleId === 'inhaker-stands' ? (
+        <InhakerStandQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
+      ) : selected.moduleId === 'beach-flags' ? (
+        <BeachFlagQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
+      ) : selected.moduleId === 'brown-flat-handle' ? (
+        <BrownFlatHandleQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
       ) : selected.moduleId === 'luxury-tissue' ? (
         <TissuePaperQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
       ) : (

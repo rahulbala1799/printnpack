@@ -10,6 +10,7 @@ let local = fs.readFileSync(path.join(root, '.env.local'), 'utf8');
 const KEYS = [
   'JWT_SECRET', 'JWT_EXPIRY', 'GMAIL_USER', 'GMAIL_APP_PASSWORD',
   'CRON_SECRET', 'ADMIN_EMAIL', 'ADMIN_PASSWORD', 'INVOICE_AI_MODEL',
+  'PRINT_COM_API_KEY',
 ];
 
 function getVal(content, key) {

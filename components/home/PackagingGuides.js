@@ -158,9 +158,9 @@ const guides = [
     cta: 'Read the printing guide',
   },
   {
-    href: '/custom-printed-flags-ireland',
-    title: 'Custom Printed Flags Ireland',
-    description: 'Full-colour flags for GAA clubs, businesses & events — order from 1 flag.',
+    href: '/flags-ireland',
+    title: 'Flags Ireland',
+    description: 'Beach flags, feather flags and custom flags for clubs and businesses.',
     image: '/images/products/custom-printed-flags/custom-printed-flags-ireland-gaa-club.jpg',
     cta: 'View flags',
   },

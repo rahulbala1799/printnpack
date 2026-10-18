@@ -22,6 +22,7 @@ const CATEGORY_ORDER = [
   'Hospitality Products',
   'Branded Items',
   'Banners, Stands and Frames',
+  'Flags',
   'Wide Format',
   'Stickers & Labels',
   'Leaflets',

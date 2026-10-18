@@ -42,10 +42,20 @@ const mainGroups = [
     iconBg: 'bg-indigo-100 text-indigo-600',
   },
   {
+    id: 'flags',
+    name: 'Flags',
+    shortName: 'Flags',
+    description: 'Beach flags, feather flags and custom flags',
+    categories: ['Flags'],
+    icon: FaFlag,
+    activeClasses: 'bg-green-700 text-white border-green-700',
+    iconBg: 'bg-green-100 text-green-700',
+  },
+  {
     id: 'wide-format',
     name: 'Wide Format Printing',
     shortName: 'Wide Format',
-    description: 'Flags, posters, foamex and correx boards',
+    description: 'Posters, foamex and correx boards',
     categories: ['Wide Format'],
     icon: FaPrint,
     activeClasses: 'bg-purple-600 text-white border-purple-600',
@@ -205,7 +215,7 @@ const RELATED_LINKS = [
   { href: '/printing-ireland', label: 'Printing Services Ireland', desc: 'Posters, flyers, stickers and business print.' },
   { href: '/pizza-boxes-ireland', label: 'Pizza Boxes Ireland', desc: 'Plain and custom printed pizza boxes for takeaways.' },
   { href: '/custom-cake-boxes-ireland', label: 'Custom Cake Boxes', desc: 'Branded bakery packaging for cupcakes and celebration cakes.' },
-  { href: '/printed-flat-handle-bags-ireland', label: 'Printed Paper Bags', desc: 'Flat handle bags with your logo, from 20 bags.' },
+  { href: '/printed-flat-handle-bags-ireland', label: 'Printed Paper Bags', desc: 'Brown flat handle bags with your logo, from 25 bags.' },
   { href: '/hot-cups-ireland', label: 'Hot Cups & Lids Ireland', desc: 'Plain disposable coffee cups wholesale.' },
   { href: '/custom-printed-coffee-cups-ireland', label: 'Custom Printed Coffee Cups', desc: 'Branded takeaway cups Dublin & Ireland, low MOQ.' },
   { href: '/luxury-paper-bags-ireland', label: 'Luxury Paper Bags', desc: 'Premium die-cut bags for luxury brands nationwide.' },
@@ -297,7 +307,7 @@ const ProductCard = ({ product, priority = false }) => {
             fill
             priority={priority}
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            className="object-cover group-hover:scale-[1.03] transition-transform duration-300"
+            className={`${product.imageFit === 'contain' ? 'object-contain p-2' : 'object-cover group-hover:scale-[1.03]'} transition-transform duration-300`}
           />
         )}
 

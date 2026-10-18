@@ -4,8 +4,39 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FaSearch, FaTimes } from 'react-icons/fa';
 import products from '../../data/products';
+import { getPlainProductPath } from '../../lib/plain-product-urls';
 
-const SearchBar = ({ isMobile = false, onClose }) => {
+function isUsableImage(src) {
+  return Boolean(src) && !src.includes('css-placeholder') && !src.includes('logos/logo');
+}
+
+function printedMatches(term) {
+  return products
+    .filter((product) => product && !product.hidden && product.name)
+    .filter((product) => {
+      const haystack = [
+        product.name,
+        product.category,
+        product.description,
+        ...(product.features || []),
+        ...(product.searchAliases || []),
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+      return haystack.includes(term);
+    })
+    .map((product) => ({
+      id: `print:${product.id}`,
+      name: product.name,
+      category: product.category || 'Custom print',
+      href: product.url || `/products/${product.id}`,
+      image: isUsableImage(product.imageSrc) ? product.imageSrc : '',
+      kind: 'Custom print',
+    }));
+}
+
+const SearchBar = ({ isMobile = false, onClose, className = '', variant = 'default' }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -25,16 +56,34 @@ const SearchBar = ({ isMobile = false, onClose }) => {
   }, []);
   
   useEffect(() => {
-    if (searchTerm.length >= 2) {
-      const filteredProducts = products.filter(product =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.category.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setSearchResults(filteredProducts.slice(0, 5)); // Limit to 5 results for better UX
-    } else {
+    const term = searchTerm.trim().toLowerCase();
+    if (term.length < 2) {
       setSearchResults([]);
+      return undefined;
     }
+    let cancelled = false;
+    const printed = printedMatches(term).slice(0, 5);
+    setSearchResults(printed);
+    import('../../data/plain-products').then(({ PLAIN_PRODUCTS }) => {
+      if (cancelled) return;
+      const plain = PLAIN_PRODUCTS.filter((product) => {
+        const haystack = `${product.name} ${product.code || ''} ${product.category || ''}`.toLowerCase();
+        return haystack.includes(term);
+      })
+        .slice(0, 4)
+        .map((product) => ({
+          id: `plain:${product.id}`,
+          name: product.name,
+          category: product.category || 'Plain stock',
+          href: getPlainProductPath(product),
+          image: isUsableImage(product.imageSrc) ? product.imageSrc : '',
+          kind: 'Plain stock',
+        }));
+      setSearchResults([...printed, ...plain]);
+    }).catch(() => {});
+    return () => {
+      cancelled = true;
+    };
   }, [searchTerm]);
   
   const handleSearch = (e) => {
@@ -62,7 +111,7 @@ const SearchBar = ({ isMobile = false, onClose }) => {
   return (
     <div 
       ref={searchRef} 
-      className={`relative ${isMobile ? 'w-full' : 'w-64 md:w-72 xl:w-80'}`}
+      className={`relative ${isMobile ? 'w-full' : className || 'w-64 md:w-72 xl:w-80'}`}
     >
       <form onSubmit={handleSearch} className="relative">
         <input
@@ -71,11 +120,13 @@ const SearchBar = ({ isMobile = false, onClose }) => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onFocus={() => setIsSearchFocused(true)}
-          className={`w-full py-2 pl-10 pr-10 rounded-lg ${
-            isMobile 
-              ? 'bg-white/10 text-white placeholder-white/70 border border-white/20 focus:border-white/50'
-              : 'bg-white/90 text-blue-900 border border-gray-300 focus:border-blue-500'
-          } focus:outline-none focus:ring-1 focus:ring-blue-500`}
+          className={`w-full pl-11 pr-10 focus:outline-none ${
+            isMobile
+              ? 'rounded-lg border border-white/20 bg-white/10 py-2 text-white placeholder-white/70 focus:border-white/50 focus:ring-1 focus:ring-blue-500'
+              : variant === 'header'
+                ? 'h-11 rounded-full border border-slate-200 bg-slate-50 text-[15px] text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/20'
+                : 'rounded-lg border border-gray-300 bg-white/90 py-2 text-blue-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500'
+          }`}
         />
         <div className={`absolute inset-y-0 left-0 flex items-center pl-3 ${isMobile ? 'text-white/70' : 'text-blue-600'}`}>
           <FaSearch />
@@ -96,23 +147,25 @@ const SearchBar = ({ isMobile = false, onClose }) => {
         <div className={`absolute z-50 w-full mt-1 bg-white shadow-lg rounded-lg overflow-hidden max-h-[80vh] overflow-y-auto ${isMobile ? 'border border-blue-500' : 'border border-gray-200'}`}>
           <div className="divide-y divide-gray-100">
             {searchResults.map((product) => (
-              <Link 
-                href={product.url || `/products/${product.id}`} 
+              <Link
+                href={product.href}
                 key={product.id}
                 onClick={handleResultClick}
                 className="flex items-center p-3 hover:bg-gray-50 transition-colors"
               >
-                <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded">
-                  <Image
-                    src={product.imageSrc}
-                    alt={product.name}
-                    fill
-                    className="object-cover"
-                  />
+                <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded bg-slate-100">
+                  {product.image ? (
+                    <Image
+                      src={product.image}
+                      alt=""
+                      fill
+                      className="object-cover"
+                    />
+                  ) : null}
                 </div>
-                <div className="ml-3 flex-grow">
-                  <p className="text-sm font-medium text-gray-900">{product.name}</p>
-                  <p className="text-xs text-gray-500 truncate">{product.category}</p>
+                <div className="ml-3 flex-grow min-w-0">
+                  <p className="text-sm font-medium text-gray-900 truncate">{product.name}</p>
+                  <p className="text-xs text-gray-500 truncate">{product.kind} · {product.category}</p>
                 </div>
               </Link>
             ))}

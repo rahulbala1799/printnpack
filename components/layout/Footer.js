@@ -18,6 +18,7 @@ const PRODUCT_LINKS = [
   { label: 'Pizza Boxes', href: '/pizza-boxes-ireland' },
   { label: 'Paper Bags', href: '/paper-bags-ireland' },
   { label: 'Banners & Roll-Ups', href: '/banners-ireland' },
+  { label: 'Flags', href: '/flags-ireland' },
   { label: 'Hot Cups & Lids', href: '/hot-cups-ireland' },
   { label: 'Napkins & Tableware', href: '/plain-napkins-tableware-ireland' },
   { label: 'Business Cards', href: '/business-cards-ireland' },

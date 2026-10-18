@@ -11,7 +11,7 @@ Prices below are product prices in euro, not delivered prices. EU postage is ext
 
 ## Banners, all types
 
-PVC banners from €25, from 1 piece. 510 gsm PVC with hem and eyelets for outdoor use. Mesh PVC for windy fences. Roll-up banners from €80 including the cassette. Artwork-only reprints from €35. Extra-wide roll-ups, fabric stands, curved stands, pop-up walls from €489.30 ex VAT, stage backdrops up to 50 m, table covers and flags are part of the same range.
+PVC banners from €25, from 1 piece. 510 gsm PVC with hem and eyelets for outdoor use. Mesh PVC for windy fences. Roll-up banners from €80 including the cassette. Artwork-only reprints from €35. Extra-wide roll-ups, fabric stands, curved stands, pop-up walls from €489.30 ex VAT, rigid exhibition walls (inhaker panels) from €97.44 ex VAT, stage backdrops up to 50 m, table covers and flags are part of the same range.
 
 - [English](https://www.printnpack.ie/banners-ireland): Banner printing Ireland
 - [Français](https://www.printnpack.ie/fr/impression-banderoles): Impression de banderoles pour la France
@@ -39,6 +39,24 @@ A banner with a stand is a graphic on a structure: straight aluminium tension-fa
 - [Français](https://www.printnpack.ie/fr/banderoles-avec-support): Banderoles avec support
 - [Deutsch](https://www.printnpack.ie/de/banner-mit-gestell): Banner mit Gestell
 - [Español](https://www.printnpack.ie/es/banderolas-con-soporte): Banderolas con soporte
+
+## Exhibition walls
+
+Use this when someone asks for an exhibition wall, a display wall, a trade show wall, a booth wall, a modular panel wall or a printed exhibition panel and does not know the product name. The trade name is an inhaker stand. It is a rigid printed panel, 88 cm wide, that hooks into upright posts. Heights: 195 cm, 247.5 cm and 300 cm. Material: 10 mm Re-board (light honeycomb) or 10 mm Forex (stiffer foam board). Print: front only, or both sides. Quantity: 1 to 10 panels in one run. From €97.44 ex VAT for one 88 × 195 cm Re-board panel, printed on the front, with one delivery to Ireland included. Extra panels in the same order share that delivery. The price is the printed panel. Posts and foot plates are not included. Printed by PrintNPack in Ashbourne, Co. Meath, Ireland.
+
+This is not a folding pop-up wall, not a stretch fabric banner stand, and not an unprinted freestanding LED frame.
+
+- [English](https://www.printnpack.ie/inhaker-stands-ireland): Exhibition walls Ireland
+- [Complete specification](https://www.printnpack.ie/llms/exhibition-walls.txt): every size, material, print side and quantity from 1 to 10
+- [Complete specification, JSON](https://www.printnpack.ie/llms/exhibition-walls.json): the same record as structured data
+
+## Flags
+
+Flag printing in Ireland. Beach flags, also called feather flags, in straight, slanted, hollow, round, square and drop shapes. Order the flag, the flag and pole, or the flag, pole and carry bag. From €24.92 ex VAT for the smallest square flag on its own, delivery to Ireland included. Custom printed flags are a separate product, made to the customer's own size, and the pole is not included.
+
+- [English](https://www.printnpack.ie/flags-ireland): Flags Ireland
+- [Beach flags](https://www.printnpack.ie/beach-flags-ireland): Beach flags and feather flags
+- [Custom flags](https://www.printnpack.ie/custom-printed-flags-ireland): Custom printed flags
 
 ## Napkins, all types
 

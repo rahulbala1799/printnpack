@@ -23,7 +23,7 @@ const childPages = [
   {
     href: '/printed-flat-handle-bags-ireland',
     title: 'Printed Flat Handle Bags',
-    desc: 'Logo takeaway bags for cafés, delis and retail — from 20 bags.',
+    desc: 'Brown kraft logo bags for cafés, delis and retail — from 25 bags.',
     image: '/images/products/flat-handle-bags/3.png',
     accent: 'blue',
   },
@@ -51,7 +51,7 @@ const childPages = [
 ];
 
 const hubSections = [
-  { title: 'Branded Paper Bags with Your Logo', body: 'Branded paper bags start at €0.18 for a printed flat-handle bag and €0.35 for a twisted-handle carrier, from 20 bags. That is the order most cafés, delis and shops in Ireland place when they want a logo on the bag rather than a plain kraft case.' },
+  { title: 'Branded Paper Bags with Your Logo', body: 'Printed brown flat-handle bags start at €0.20 a bag at 5,000, and twisted-handle carriers start at €0.35. Flat handle orders start at 25 bags. That is the order most cafés, delis and shops in Ireland place when they want a logo on the bag rather than a plain kraft case.' },
   { title: 'Luxury Paper Bags for Premium Irish Brands', body: 'Die-cut luxury paper bags with built-in handles and bespoke foil, emboss and lamination finishes give luxury fashion, jewellery and hospitality brands packaging as premium as their product.', link: { href: '/luxury-paper-bags-ireland', label: 'luxury paper bags' } },
   { title: 'Printed Paper Bags for Retail, Food and Events', body: 'From café pastries to boutique purchases and event giveaways, printed paper carrier bags keep your business name in customers\' hands after they leave.' },
   { title: 'Flat Handle vs Twisted Handle Paper Bags', body: 'Flat handle bags suit economical takeaway and food service. Twisted handle bags suit premium retail, gift shops and boutiques where presentation matters more.' },
@@ -73,8 +73,8 @@ const buyableBags = [
   {
     name: 'Printed flat-handle bag',
     size: 'Small, medium or large',
-    price: '€0.18',
-    detail: 'Per bag · minimum order 20',
+    price: '€0.20',
+    detail: 'Per bag at 5,000 · minimum order 25',
     href: '/printed-flat-handle-bags-ireland',
     cta: 'Order printed bags',
   },
@@ -120,7 +120,7 @@ const itemListLd = {
       position: 2,
       name: 'Branded flat-handle paper bag',
       url: `${SITE_URL}/printed-flat-handle-bags-ireland`,
-      price: '0.18',
+      price: '0.20',
       image: `${SITE_URL}/images/products/flat-handle-bags/3.png`,
     }),
     buildProductListItem({
@@ -134,9 +134,9 @@ const itemListLd = {
 };
 
 export default function PaperBagsIreland() {
-  const title = 'Paper Bags Ireland | Branded Bags from €0.18 & Kraft Cases';
+  const title = 'Paper Bags Ireland | Branded Bags from €0.20 & Kraft Cases';
   const description =
-    'Paper bags Ireland for cafés and shops. Branded paper bags with your logo from 20 bags at €0.18. Brown kraft SOS cases from €24.44. Delivery across Dublin and nationwide.';
+    'Paper bags Ireland for cafés and shops. Brown flat handle printed bags from 25 bags, from €0.20. Brown kraft SOS cases from €24.44. Delivery across Dublin and nationwide.';
 
   return (
     <Layout>
@@ -174,7 +174,7 @@ export default function PaperBagsIreland() {
                 Paper Bags Ireland — Branded Logo Bags, Kraft &amp; Wholesale
               </h1>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                <strong>Branded paper bags</strong> with your logo from 20 bags at €0.18, plus brown kraft SOS cases from €24.44. Flat handle, twisted handle and wholesale bags, delivered across <strong>Dublin, Meath and nationwide</strong>.
+                <strong>Branded paper bags</strong> with your logo. Brown flat handle bags from 25 bags, from €0.20, plus brown kraft SOS cases from €24.44. Flat handle, twisted handle and wholesale bags, delivered across <strong>Dublin, Meath and nationwide</strong>.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/quote" className="inline-flex items-center gap-2 bg-emerald-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-emerald-700 transition-colors">
@@ -195,7 +195,7 @@ export default function PaperBagsIreland() {
       <section className="py-12 lg:py-16 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Bags you can order</h2>
-          <p className="text-gray-600 mb-8 max-w-2xl">Plain kraft by the case, or printed bags with your logo from 20.</p>
+          <p className="text-gray-600 mb-8 max-w-2xl">Plain kraft by the case, or printed flat handle bags with your logo from 25.</p>
           <div className="grid md:grid-cols-3 gap-4">
             {buyableBags.map((bag) => (
               <div key={bag.name} className="rounded-2xl border border-gray-200 bg-slate-50 p-6 flex flex-col">
@@ -303,7 +303,7 @@ export default function PaperBagsIreland() {
       <RelatedSeoLinks
         title="Related packaging for Irish food & retail"
         links={[
-          { href: '/printed-flat-handle-bags-ireland', label: 'Printed Flat Handle Bags', desc: 'Logo takeaway bags from 20 bags' },
+          { href: '/printed-flat-handle-bags-ireland', label: 'Printed Flat Handle Bags', desc: 'Brown kraft logo bags from 25 bags' },
           { href: '/plain-paper-bags-ireland', label: 'Plain Paper Bags', desc: 'Brown kraft and SOS bags in bulk' },
           { href: '/wholesale-paper-bags-ireland', label: 'Wholesale Paper Bags', desc: 'Case pricing for retailers and cafés' },
           { href: '/pizza-boxes-ireland', label: 'Pizza Boxes Ireland', desc: 'Plain and printed pizza boxes' },

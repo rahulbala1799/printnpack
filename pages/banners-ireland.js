@@ -147,6 +147,16 @@ export default function BannersIreland() {
               <p className="text-gray-600 text-sm leading-relaxed mb-4">Pull up and roller banners from €80 with a heavy cassette. Artwork reprints from €35. Extra wide XXL up to €450 for 3 m × 2 m.</p>
               <span className="text-blue-600 font-semibold text-sm">View roll up banners →</span>
             </Link>
+            <Link href="/inhaker-stands-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-stone-400 hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold text-gray-900 group-hover:text-stone-800 mb-2">Exhibition Walls</h3>
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">Printed exhibition wall, also called an inhaker stand. Rigid panels, 88 cm wide, in Re-board or Forex. Posts and plates are not included.</p>
+              <span className="text-stone-800 font-semibold text-sm">View exhibition walls →</span>
+            </Link>
+            <Link href="/freestanding-led-frames-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-sky-300 hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold text-gray-900 group-hover:text-sky-700 mb-2">Freestanding LED Frames</h3>
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">Double-sided edge-lit frame, supplied unprinted. 80, 150 or 200 cm wide. Aluminium, black or white. Flat feet or wheels.</p>
+              <span className="text-sky-700 font-semibold text-sm">View LED frames →</span>
+            </Link>
             <Link href="/fabric-banner-stands-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-indigo-300 hover:shadow-lg transition-all">
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-indigo-600 mb-2">Fabric Banner Stands</h3>
               <p className="text-gray-600 text-sm leading-relaxed mb-4">Banner with frame or structure — stretch fabric on a reusable aluminium stand. Complete kit or graphic only, 2.5–6 m, single or double sided.</p>
@@ -172,10 +182,10 @@ export default function BannersIreland() {
               <p className="text-gray-600 text-sm leading-relaxed mb-4">Printed throws for exhibition and event tables. Standard sizes, or your own up to 1.5 m wide and 6 m long.</p>
               <span className="text-emerald-700 font-semibold text-sm">View table covers →</span>
             </Link>
-            <Link href="/custom-printed-flags-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-green-300 hover:shadow-lg transition-all">
-              <h3 className="text-xl font-bold text-gray-900 group-hover:text-green-700 mb-2">Custom Printed Flags</h3>
-              <p className="text-gray-600 text-sm leading-relaxed mb-4">Full-colour sublimation flags for GAA clubs, businesses and events. Order from one flag with eyelets, pole sleeves and more.</p>
-              <span className="text-green-700 font-semibold text-sm">View custom flags →</span>
+            <Link href="/flags-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-green-300 hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold text-gray-900 group-hover:text-green-700 mb-2">Flags</h3>
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">Beach flags and feather flags, plus custom flags for clubs and businesses.</p>
+              <span className="text-green-700 font-semibold text-sm">View flags →</span>
             </Link>
           </div>
         </div>

@@ -11,3 +11,6 @@ Sitemap: https://www.printnpack.ie/sitemap.xml
 
 # Plain-language page list for answer engines
 # https://www.printnpack.ie/llms.txt
+# Complete exhibition-wall record (sizes, materials, print, every quantity price)
+# https://www.printnpack.ie/llms/exhibition-walls.txt
+# https://www.printnpack.ie/llms/exhibition-walls.json

@@ -19,6 +19,10 @@ import { LUXURY_TISSUE_HREF, LUXURY_TISSUE_ID, repriceTissueLine } from './luxur
 import { COASTER_BOARD, COASTER_SIDES, COASTER_SIZES, PRINTED_COASTER_MIN } from './coasters-options';
 import { COCKTAIL_NAPKIN_PRODUCT } from './cocktail-napkins';
 import { buildPopupWallQuoteLine } from './popup-walls';
+import { buildLedFrameQuoteLine, ledFrameFromPrice } from './led-frames';
+import { buildInhakerQuoteLine, inhakerFromPrice } from './inhaker-stands';
+import { beachFlagFromPrice, buildBeachFlagQuoteLine } from './beach-flags';
+import { buildBrownFlatHandleQuoteLine, brownFlatHandleFromPrice } from './brown-flat-handle-bags';
 import { WEDDING_PRODUCTS, weddingBoardSizeError, weddingModuleFields } from './wedding-products';
 
 function productMedia(id, href, fallbackImage) {
@@ -60,6 +64,7 @@ export const QUOTE_CATALOG = [
     group: 'Branded Items',
     price: '€29.99 + VAT / 480 sheets',
   }),
+  withMedia({ id: 'printed-flat-handle-bags-ireland', name: 'Brown Flat Handle Printed Bags', href: '/printed-flat-handle-bags-ireland', moduleId: 'brown-flat-handle', configurable: true, group: 'Packaging', price: `From €${brownFlatHandleFromPrice().toFixed(2)} ex VAT` }),
   withMedia({ id: 'custom-pizza-boxes-ireland', name: 'Custom Pizza Boxes', href: '/custom-pizza-boxes-ireland', moduleId: 'pizza-boxes', configurable: false, group: 'Packaging', price: 'From 500 units' }),
   withMedia({ id: 'eco-bagasse-burger-boxes', name: 'Bagasse Burger Boxes', href: '/eco-bagasse-burger-boxes', moduleId: 'bagasse', configurable: false, group: 'Packaging' }),
   withMedia({ id: 'greaseproof-sheets-ireland', name: 'Greaseproof Sheets', href: '/greaseproof-sheets-ireland', moduleId: 'greaseproof', configurable: false, group: 'Packaging' }),
@@ -70,10 +75,13 @@ export const QUOTE_CATALOG = [
   withMedia({ id: 'fabric-banner-stands-ireland', name: 'Fabric Banner Stands', href: '/fabric-banner-stands-ireland', moduleId: 'fabric-banner-stands', configurable: true, group: 'Banners, Stands and Frames', price: 'Contact for quote' }),
   withMedia({ id: 'curved-banner-stands-ireland', name: 'Curved Banner Stands', href: '/curved-banner-stands-ireland', moduleId: 'curved-banner-stands', configurable: true, group: 'Banners, Stands and Frames', price: 'Contact for quote' }),
   withMedia({ id: 'pop-up-walls-ireland', name: 'Pop-up Display Stands', href: '/pop-up-walls-ireland', moduleId: 'popup-walls', configurable: true, group: 'Banners, Stands and Frames', price: 'From €511.65 ex VAT' }),
+  withMedia({ id: 'freestanding-led-frames-ireland', name: 'Freestanding LED Frames', href: '/freestanding-led-frames-ireland', moduleId: 'led-frames', configurable: true, group: 'Banners, Stands and Frames', price: `From €${ledFrameFromPrice().toFixed(2)} ex VAT` }),
+  withMedia({ id: 'inhaker-stands-ireland', name: 'Exhibition Walls', href: '/inhaker-stands-ireland', moduleId: 'inhaker-stands', configurable: true, group: 'Banners, Stands and Frames', price: `From €${inhakerFromPrice().toFixed(2)} ex VAT` }),
   withMedia({ id: 'stage-backdrop-banners-ireland', name: 'Stage Backdrop Banners', href: '/stage-backdrop-banners-ireland', moduleId: 'stage-backdrops', configurable: false, group: 'Banners, Stands and Frames' }),
   withMedia({ id: 'vinyl-banners', name: 'Vinyl Banners', href: '/vinyl-banners', moduleId: 'vinyl-banners', configurable: false, group: 'Banners, Stands and Frames' }),
   withMedia({ id: 'custom-table-covers', name: 'Custom Table Covers', href: '/custom-table-covers-ireland', moduleId: 'table-covers', configurable: true, group: 'Banners, Stands and Frames', price: 'Contact for quote', image: '/images/table-covers/custom-table-cover-ireland.jpg' }),
-  withMedia({ id: 'custom-printed-flags-ireland', name: 'Custom Printed Flags', href: '/custom-printed-flags-ireland', moduleId: 'flags', configurable: false, group: 'Wide Format' }),
+  withMedia({ id: 'beach-flags-ireland', name: 'Beach Flags', href: '/beach-flags-ireland', moduleId: 'beach-flags', configurable: true, group: 'Flags', price: `From €${beachFlagFromPrice().toFixed(2)} ex VAT` }),
+  withMedia({ id: 'custom-printed-flags-ireland', name: 'Custom Printed Flags', href: '/custom-printed-flags-ireland', moduleId: 'flags', configurable: false, group: 'Flags' }),
   withMedia({ id: 'posters', name: 'Posters', href: '/posters', moduleId: 'posters', configurable: false, group: 'Wide Format' }),
   withMedia({ id: 'foamex-boards', name: 'Foamex Boards', href: '/foamex-boards', moduleId: 'foamex', configurable: false, group: 'Boards' }),
   withMedia({ id: 'correx-boards', name: 'Correx Boards', href: '/correx-boards', moduleId: 'correx', configurable: false, group: 'Boards' }),
@@ -333,6 +341,18 @@ export function buildCatalogQuoteLine(catalogItem, options = {}) {
   if (catalogItem.moduleId === 'popup-walls') {
     return buildPopupWallQuoteLine(catalogItem, options);
   }
+  if (catalogItem.moduleId === 'led-frames') {
+    return buildLedFrameQuoteLine(catalogItem, options);
+  }
+  if (catalogItem.moduleId === 'inhaker-stands') {
+    return buildInhakerQuoteLine(catalogItem, options);
+  }
+  if (catalogItem.moduleId === 'beach-flags') {
+    return buildBeachFlagQuoteLine(catalogItem, options);
+  }
+  if (catalogItem.moduleId === 'brown-flat-handle') {
+    return buildBrownFlatHandleQuoteLine(catalogItem, options);
+  }
   if (catalogItem.moduleId === 'business-cards') {
     const selectedQuantity = BUSINESS_CARD_QUANTITY_OPTIONS.find((option) => option === options.quantity)
       || BUSINESS_CARD_QUANTITY_OPTIONS.find((option) => parseBusinessCardQty(option) === parseBusinessCardQty(options.quantity))
@@ -448,6 +468,34 @@ export function repriceQuoteLine(line, qty) {
   }
   if (line.moduleId === 'luxury-tissue') {
     return { ...repriceTissueLine(line, qty), id: line.id };
+  }
+  if (line.moduleId === 'beach-flags') {
+    const next = buildBeachFlagQuoteLine(
+      { id: line.productId, name: line.name, href: line.href, image: line.image, images: line.images },
+      { ...(line.options || {}), qty }
+    );
+    return next ? { ...next, id: line.id } : { ...line, qty };
+  }
+  if (line.moduleId === 'inhaker-stands') {
+    const next = buildInhakerQuoteLine(
+      { id: line.productId, name: line.name, href: line.href, image: line.image, images: line.images },
+      { ...(line.options || {}), qty }
+    );
+    return next ? { ...next, id: line.id } : { ...line, qty };
+  }
+  if (line.moduleId === 'led-frames') {
+    const next = buildLedFrameQuoteLine(
+      { id: line.productId, name: line.name, href: line.href, image: line.image, images: line.images },
+      { ...(line.options || {}), qty }
+    );
+    return next ? { ...next, id: line.id } : { ...line, qty };
+  }
+  if (line.moduleId === 'brown-flat-handle') {
+    const next = buildBrownFlatHandleQuoteLine(
+      { id: line.productId, name: line.name, href: line.href, image: line.image, images: line.images },
+      { ...(line.options || {}), qty }
+    );
+    return next ? { ...next, id: line.id } : { ...line, qty };
   }
   if (line.moduleId === 'popup-walls') {
     const next = buildPopupWallQuoteLine(

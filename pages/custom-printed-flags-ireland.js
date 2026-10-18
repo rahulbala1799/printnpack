@@ -439,6 +439,8 @@ export default function CustomPrintedFlagsIreland() {
       <RelatedSeoLinks
         title="More wide format printing"
         links={[
+          { href: '/flags-ireland', label: 'Flags', desc: 'Beach flags and custom flags' },
+          { href: '/beach-flags-ireland', label: 'Beach flags', desc: 'Feather, drop and square flags' },
           { href: '/banners-ireland', label: 'Banners Ireland', desc: 'PVC banners, roll-ups and wide format hub' },
           { href: '/vinyl-banners', label: 'Vinyl Banners', desc: 'Outdoor PVC banner printing' },
           { href: '/roll-up-banners-ireland', label: 'Roll Up Banners', desc: 'Portable trade show displays' },
