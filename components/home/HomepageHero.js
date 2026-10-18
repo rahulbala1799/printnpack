@@ -14,6 +14,12 @@ const PRODUCTS = [
     points: ['Quick turnaround', 'Low MOQ', 'From 20 bags'],
     line: 'Rope-handle carrier bags printed with your logo, for cafés and shops across Ireland.',
     href: '/twisted-handle-paper-bags-ireland',
+    links: [
+      { label: 'Flat handle bags', href: '/printed-flat-handle-bags-ireland' },
+      { label: 'Twisted handle', href: '/twisted-handle-paper-bags-ireland' },
+      { label: 'All paper bags', href: '/paper-bags-ireland' },
+    ],
+    panel: '#1e4b7a',
     image: '/images/hero/month/paper-bags-harbour.webp',
     thumb: '/images/hero/month/paper-bags-harbour-thumb.webp',
     alt: 'Custom printed paper bags with rope handles, low minimum order, Ireland',
@@ -27,6 +33,12 @@ const PRODUCTS = [
     points: ['Quick turnaround', 'Low MOQ', 'Cloth feel'],
     line: 'Printed airlaid napkins for restaurants, hotels and events.',
     href: '/products/premium-linen-feel-napkins',
+    links: [
+      { label: 'Cocktail napkins', href: '/products/cocktail-napkins' },
+      { label: 'Linen-feel napkins', href: '/products/premium-linen-feel-napkins' },
+      { label: 'All napkins', href: '/napkins-ireland' },
+    ],
+    panel: '#1a4550',
     image: '/images/hero/month/airlaid-napkins.webp',
     thumb: '/images/hero/month/airlaid-napkins-thumb.webp',
     alt: 'Custom printed airlaid napkins with a cloth feel, quick turnaround, Ireland',
@@ -40,6 +52,12 @@ const PRODUCTS = [
     points: ['Quick turnaround', 'Low MOQ', 'Fabric stand'],
     line: 'Stretch fabric banner stands for exhibitions, shops and receptions.',
     href: '/fabric-banner-stands-ireland',
+    links: [
+      { label: 'Fabric stands', href: '/fabric-banner-stands-ireland' },
+      { label: 'Roll-up banners', href: '/roll-up-banners-ireland' },
+      { label: 'All banners', href: '/banners-ireland' },
+    ],
+    panel: '#243056',
     image: '/images/hero/month/fabric-banner.webp',
     thumb: '/images/hero/month/fabric-banner-thumb.webp',
     alt: 'Free standing stretch fabric banner stand for exhibitions in Ireland',
@@ -53,6 +71,12 @@ const PRODUCTS = [
     points: ['Quick turnaround', 'Low MOQ', 'From one flag'],
     line: 'Feather flags and pole flags, printed in full colour for cafés, clubs and events.',
     href: '/custom-printed-flags-ireland',
+    links: [
+      { label: 'Beach flags', href: '/beach-flags-ireland' },
+      { label: 'Custom flags', href: '/custom-printed-flags-ireland' },
+      { label: 'All flags', href: '/flags-ireland' },
+    ],
+    panel: '#3a4630',
     image: '/images/hero/month/flags.webp',
     thumb: '/images/hero/month/flags-thumb.webp',
     alt: 'Custom printed feather flag and pole flag, from one flag, Ireland',
@@ -66,6 +90,12 @@ const PRODUCTS = [
     points: ['Quick turnaround', 'Low MOQ', 'Your logo'],
     line: 'Kraft pizza boxes printed for takeaways and pizzerias in Ireland.',
     href: '/custom-pizza-boxes-ireland',
+    links: [
+      { label: 'Pizza boxes', href: '/custom-pizza-boxes-ireland' },
+      { label: 'Cake boxes', href: '/custom-cake-boxes-ireland' },
+      { label: 'All boxes', href: '/pizza-boxes-ireland' },
+    ],
+    panel: '#3f3428',
     image: '/images/hero/month/pizza-box.webp',
     thumb: '/images/hero/month/pizza-box-thumb.webp',
     alt: 'Custom printed kraft pizza boxes with your logo, Ireland',
@@ -510,7 +540,6 @@ const HomepageHero = () => {
   const [paused, setPaused] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [contactProduct, setContactProduct] = useState(PRODUCTS[0].name);
-  const [run, setRun] = useState(0);
   const [loadedSlides, setLoadedSlides] = useState(() => new Set([0]));
   const product = PRODUCTS[index];
 
@@ -547,12 +576,7 @@ const HomepageHero = () => {
       setIndex((current) => (current + 1) % PRODUCTS.length);
     }, SLIDE_MS);
     return () => window.clearTimeout(timer);
-  }, [paused, modalOpen, index, run]);
-
-  const selectProduct = (nextIndex) => {
-    setIndex(nextIndex);
-    setRun((current) => current + 1);
-  };
+  }, [paused, modalOpen, index]);
 
   const openContact = () => {
     setContactProduct(product.name);
@@ -562,206 +586,98 @@ const HomepageHero = () => {
   return (
     <>
       <section
-        className="relative overflow-hidden border-b border-slate-100 bg-[#f4f3ea] lg:bg-white"
+        className="relative overflow-hidden border-b border-stone-200 bg-[#f4f3ea]"
         onMouseEnter={() => {
           if (window.matchMedia('(hover: hover)').matches) setPaused(true);
         }}
         onMouseLeave={() => setPaused(false)}
       >
-        <div className="pointer-events-none absolute -left-24 top-0 hidden h-72 w-72 rounded-full bg-sky-100/80 blur-3xl lg:block" />
-        <div className="pointer-events-none absolute -right-16 bottom-0 hidden h-80 w-80 rounded-full bg-indigo-100/70 blur-3xl lg:block" />
-        <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
-          <div className="grid items-center gap-0 lg:grid-cols-2 lg:gap-14">
-            <div className="order-1 text-center lg:order-1 lg:text-left">
-              <div className="grid">
-                {PRODUCTS.map((item, itemIndex) => {
-                  const active = itemIndex === index;
-                  const Title = active ? 'h1' : 'p';
-                  return (
-                    <div
-                      key={item.id}
-                      className={`col-start-1 row-start-1 flex flex-col transition-opacity duration-500 ${
-                        active ? 'opacity-100' : 'pointer-events-none opacity-0'
-                      }`}
-                      aria-hidden={!active}
-                    >
-                      <Title className="text-[2.05rem] font-bold leading-[1.15] tracking-tight text-neutral-950 sm:text-5xl lg:text-5xl lg:font-semibold lg:text-slate-900">
-                        {item.name}
-                      </Title>
-                      <p className="order-3 mx-auto mt-5 max-w-md text-base font-medium text-neutral-950 lg:order-2 lg:mx-0 lg:mt-3 lg:text-lg lg:text-slate-800">
-                        {item.points.join('. ')}.
-                      </p>
-                      <p className="order-2 mx-auto mt-3 max-w-[20rem] text-[15px] leading-relaxed text-neutral-800 sm:max-w-md sm:text-base lg:order-3 lg:mx-0 lg:mt-2 lg:text-slate-500">
-                        {item.line}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
+        <div className="relative mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+          <div className="mx-auto max-w-2xl text-center">
+            <div className="grid">
+              {PRODUCTS.map((item, itemIndex) => {
+                const active = itemIndex === index;
+                const Title = active ? 'h1' : 'p';
+                return (
+                  <div
+                    key={item.id}
+                    className={`col-start-1 row-start-1 flex flex-col transition-opacity duration-500 ${
+                      active ? 'opacity-100' : 'pointer-events-none opacity-0'
+                    }`}
+                    aria-hidden={!active}
+                  >
+                    <Title className="text-[2.05rem] font-bold leading-[1.15] tracking-tight text-neutral-950 sm:text-5xl lg:text-6xl">
+                      {item.name}
+                    </Title>
+                    <p className="order-3 mx-auto mt-5 max-w-md text-base font-medium text-neutral-950 lg:text-lg">
+                      {item.points.join('. ')}.
+                    </p>
+                    <p className="order-2 mx-auto mt-3 max-w-[20rem] text-[15px] leading-relaxed text-neutral-800 sm:max-w-md sm:text-base">
+                      {item.line}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
 
-              <div className="mt-6 lg:hidden">
-                <div className="flex items-center justify-center gap-3">
-                  <button
-                    type="button"
-                    onClick={openContact}
-                    className="rounded-full bg-neutral-950 px-5 py-3 text-[15px] font-semibold text-white"
-                  >
-                    Contact us
-                  </button>
-                  <a
-                    href={`${SITE_WHATSAPP_URL}?text=${encodeURIComponent(`Hi PrintNPack, I'm interested in ${product.name}.`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-full bg-neutral-950 px-5 py-3 text-[15px] font-semibold text-white"
-                  >
-                    WhatsApp
-                  </a>
-                </div>
-                <div className="mt-3 flex justify-center">
-                  <Link
-                    href={product.href}
-                    className="rounded-full bg-neutral-950 px-6 py-3 text-[15px] font-semibold text-white"
-                  >
-                    View {product.label.toLowerCase()}
-                  </Link>
-                </div>
-              </div>
-
-              <div className="mt-8 hidden flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center lg:flex lg:justify-start">
+            <div className="mt-6">
+              <div className="flex items-center justify-center gap-3">
                 <button
                   type="button"
                   onClick={openContact}
-                  className="group relative inline-flex h-14 items-center justify-between gap-5 overflow-hidden rounded-full bg-slate-950 pl-6 pr-2 text-[15px] font-semibold text-white shadow-[0_18px_40px_-16px_rgba(15,23,42,0.8)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_44px_-14px_rgba(37,99,235,0.65)] sm:min-w-[196px]"
+                  className="rounded-full bg-neutral-950 px-5 py-3 text-[15px] font-semibold text-white"
                 >
-                  <span className="pointer-events-none absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-blue-500/50 to-transparent" />
-                  <span className="relative">Contact us</span>
-                  <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-950 transition duration-300 group-hover:translate-x-0.5">
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </span>
+                  Contact us
                 </button>
-                <div className="grid sm:min-w-[230px]">
-                  {PRODUCTS.map((item, itemIndex) => {
-                    const active = itemIndex === index;
-                    return (
-                      <Link
-                        key={item.id}
-                        href={item.href}
-                        tabIndex={active ? 0 : -1}
-                        aria-hidden={!active}
-                        className={`group col-start-1 row-start-1 inline-flex h-14 items-center justify-between gap-5 rounded-full border border-white/80 bg-white/75 pl-6 pr-2 text-[15px] font-semibold text-slate-900 shadow-[0_12px_32px_-18px_rgba(15,23,42,0.55)] ring-1 ring-slate-200/80 backdrop-blur-md transition duration-500 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_36px_-16px_rgba(15,23,42,0.4)] ${
-                          active ? 'opacity-100' : 'pointer-events-none opacity-0'
-                        }`}
-                      >
-                        <span className="whitespace-nowrap">View {item.label.toLowerCase()}</span>
-                        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-950 text-white transition duration-300 group-hover:translate-x-0.5 group-hover:bg-blue-600">
-                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                          </svg>
-                        </span>
-                      </Link>
-                    );
-                  })}
-                </div>
+                <a
+                  href={`${SITE_WHATSAPP_URL}?text=${encodeURIComponent(`Hi PrintNPack, I'm interested in ${product.name}.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full bg-neutral-950 px-5 py-3 text-[15px] font-semibold text-white"
+                >
+                  WhatsApp
+                </a>
               </div>
-            </div>
-
-            <div className="order-2 mt-8 lg:order-2 lg:mt-0">
-              <div className="relative mx-auto w-full max-w-xl lg:aspect-square">
-                {PRODUCTS.map((item, itemIndex) => {
-                  const active = itemIndex === index;
-                  return (
-                    <div
-                      key={item.id}
-                      className={`${active ? 'relative lg:absolute lg:inset-0' : 'absolute inset-0'} transition-opacity duration-700 ${
-                        active ? 'opacity-100' : 'pointer-events-none opacity-0'
-                      }`}
-                      aria-hidden={!active}
-                    >
-                      <div className="rounded-[1.75rem] px-5 py-8 lg:hidden" style={{ background: MOBILE_PANEL }}>
-                        <div className="relative mx-auto h-[300px] w-full">
-                          {loadedSlides.has(itemIndex) && (
-                            <Image
-                              src={item.image}
-                              alt={item.alt}
-                              fill
-                              priority={itemIndex === 0}
-                              sizes="86vw"
-                              className="object-contain"
-                              unoptimized={process.env.NODE_ENV === 'production'}
-                            />
-                          )}
-                        </div>
-                      </div>
-                      <div className="absolute inset-0 hidden lg:block">
-                        <div
-                          className="pointer-events-none absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
-                          style={{ background: item.glow }}
-                        />
-                        <div
-                          className="pointer-events-none absolute right-[6%] top-[10%] h-36 w-36 rounded-full blur-2xl"
-                          style={{ background: item.glow2 }}
-                        />
-                        <div
-                          className="pointer-events-none absolute bottom-[8%] left-[4%] h-28 w-28 rounded-full blur-2xl"
-                          style={{ background: item.glow2 }}
-                        />
-                        <Link
-                          href={item.href}
-                          aria-label={`View ${item.name}`}
-                          tabIndex={active ? 0 : -1}
-                          className="absolute inset-0"
-                        >
-                          {loadedSlides.has(itemIndex) && (
-                            <Image
-                              src={item.image}
-                              alt={item.alt}
-                              fill
-                              priority={itemIndex === 0}
-                              sizes="520px"
-                              className="object-contain drop-shadow-[0_28px_40px_rgba(15,23,42,0.16)]"
-                              unoptimized={process.env.NODE_ENV === 'production'}
-                            />
-                          )}
-                        </Link>
-                      </div>
-                    </div>
-                  );
-                })}
+              <div className="mt-3 flex justify-center">
+                <Link
+                  href={product.href}
+                  className="rounded-full bg-neutral-950 px-6 py-3 text-[15px] font-semibold text-white"
+                >
+                  View {product.label.toLowerCase()}
+                </Link>
               </div>
             </div>
           </div>
 
-          <div
-            className="mt-8 hidden gap-2 pb-1 lg:grid lg:grid-cols-5"
-            role="tablist"
-            aria-label="Featured print"
-          >
-            {PRODUCTS.map((item, itemIndex) => (
-                <button
+          <div className="relative mx-auto mt-8 w-full max-w-5xl">
+            {PRODUCTS.map((item, itemIndex) => {
+              const active = itemIndex === index;
+              return (
+                <div
                   key={item.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={itemIndex === index}
-                  onClick={() => selectProduct(itemIndex)}
-                  className="min-w-[7.25rem] flex-1 rounded-2xl bg-white/70 px-3 py-3 text-left ring-1 ring-slate-200/80 transition hover:bg-white sm:min-w-0"
+                  className={`${active ? 'relative' : 'absolute inset-0'} transition-opacity duration-700 ${
+                    active ? 'opacity-100' : 'pointer-events-none opacity-0'
+                  }`}
+                  aria-hidden={!active}
                 >
-                  <span className="relative mx-auto block h-14 w-full">
-                    <Image
-                      src={item.thumb}
-                      alt=""
-                      fill
-                      sizes="80px"
-                      className="object-contain"
-                      unoptimized={process.env.NODE_ENV === 'production'}
-                    />
-                  </span>
-                  <span className="mt-2 block text-center text-xs font-medium text-slate-600 sm:text-sm">
-                    {item.label}
-                  </span>
-                </button>
-              ))}
+                  <div className="rounded-[1.75rem] px-5 py-8 lg:px-16 lg:py-12" style={{ background: MOBILE_PANEL }}>
+                    <div className="relative mx-auto h-[300px] w-full lg:h-[460px]">
+                      {loadedSlides.has(itemIndex) && (
+                        <Image
+                          src={item.image}
+                          alt={item.alt}
+                          fill
+                          priority={itemIndex === 0}
+                          sizes="(max-width: 1024px) 86vw, 900px"
+                          className="object-contain"
+                          unoptimized={process.env.NODE_ENV === 'production'}
+                        />
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
