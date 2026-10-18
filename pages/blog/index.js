@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'custom-printed-coffee-cups-ireland-sizes-moq-buying-guide',
+    title: 'Custom Printed Coffee Cups Ireland: 8–16oz Sizes, Low MOQ & Buying Guide',
+    excerpt:
+      'How to buy custom printed coffee cups in Ireland — 8oz, 10oz, 12oz and 16oz takeaway sizes, one-colour vs full-colour logo print, low MOQ, and nationwide delivery from Ashbourne across Ireland and Northern Ireland.',
+    date: '2026-10-18',
+    readTime: '8 min read',
+    image:
+      '/images/products/custom-printed-coffee-cups/branded-coffee-cups-dublin-ireland-matte-black-gold.jpg',
+    imageAlt:
+      'Custom printed coffee cups Ireland — matte black takeaway cup with gold logo for Dublin cafés',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'foil-film-parchment-ireland-buying-guide',
     title: 'Catering Foil, Film & Parchment Ireland: Roll Sizes & Wholesale Buying Guide',
     excerpt:
