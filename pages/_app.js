@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { QuoteCartProvider } from '../lib/quote-cart-context';
+import SiteChatWidget from '../components/chat/SiteChatWidget';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -51,6 +52,7 @@ function MyApp({ Component, pageProps }) {
       `}</style>
       <QuoteCartProvider>
         <Component {...pageProps} />
+        <SiteChatWidget />
       </QuoteCartProvider>
     </>
   );
