@@ -3,6 +3,7 @@ import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock, FaWhatsapp, FaComment, FaArrowRight, FaHeadset, FaPaperPlane, FaCalculator } from 'react-icons/fa';
 import Link from 'next/link';
+import { SITE_WHATSAPP_URL } from '../lib/site';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -123,7 +124,7 @@ const QuotePage = () => {
               <h3 className="text-xl font-bold mb-3">WhatsApp</h3>
               <p className="text-gray-600 mb-5">Get a quick quote via WhatsApp for faster response</p>
               <a 
-                href="https://wa.me/353894400155" 
+                href={SITE_WHATSAPP_URL} 
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleWhatsAppClick}

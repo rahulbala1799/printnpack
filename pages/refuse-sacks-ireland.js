@@ -3,7 +3,7 @@ import Layout from '../components/layout/Layout';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { SITE_URL } from '../lib/site';
+import { SITE_PHONE_DISPLAY, SITE_PHONE_TEL, SITE_URL } from '../lib/site';
 import { PLAIN_PRODUCTS, getPlainProductPath, getPlainProductPathById } from '../data/plain-products';
 import PackagingIcon, { isPlaceholderImage } from '../components/PackagingIcon';
 import { buildProductListItem } from '../lib/schema';
@@ -391,10 +391,10 @@ export default function RefuseSacksIreland() {
               Browse Refuse Sacks
             </Link>
             <a
-              href="tel:+353894400155"
+              href={`tel:${SITE_PHONE_TEL}`}
               className="bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-3 px-8 rounded-xl border border-gray-700 transition-colors text-sm"
             >
-              Call +353 89 440 0155
+              Call {SITE_PHONE_DISPLAY}
             </a>
           </div>
         </div>

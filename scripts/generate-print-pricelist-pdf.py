@@ -51,7 +51,7 @@ B_MARGIN = 1.6 * cm
 COMPANY_NAME  = "Print N Pack Ireland"
 COMPANY_URL   = "www.printnpack.ie"
 COMPANY_EMAIL = "info@printnpack.ie"
-COMPANY_PHONE = "+353 89 440 0155"
+COMPANY_PHONE = "+353 89 415 7369"
 COMPANY_ADDR  = "Unit 14 Ashbourne Business Centre, Ashbourne, Co. Meath"
 
 RESTAURANT_ORDER = [
