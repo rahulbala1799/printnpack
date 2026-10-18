@@ -61,6 +61,11 @@ export default async function handler(req, res) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
+    const forAgent = String(req.headers['x-client'] || '') === 'printnpack-agent';
+    if (forAgent && user.role !== 'admin') {
+      return res.status(403).json({ error: 'This app is for an admin account.' });
+    }
+
     // Update last login
     await query(
       'UPDATE users SET last_login_at = now() WHERE id = $1',
@@ -77,14 +82,15 @@ export default async function handler(req, res) {
     // Set cookie
     setAuthCookie(res, token);
 
-    // Return user info (no password hash)
+    // Return user info (no password hash). The phone app also needs the token.
     return res.status(200).json({
       user: {
         id: user.id,
         email: user.email,
         name: user.name,
         role: user.role
-      }
+      },
+      ...(forAgent ? { token } : {}),
     });
   } catch (error) {
     console.error('Login error:', error);

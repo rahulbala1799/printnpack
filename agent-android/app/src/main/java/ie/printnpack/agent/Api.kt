@@ -51,14 +51,14 @@ class AgentApi(context: Context) {
         prefs.edit().clear().apply()
     }
 
-    fun login(userId: String, password: String): String {
+    fun login(email: String, password: String): String {
         val body = JSONObject()
-            .put("user_id", userId)
+            .put("email", email)
             .put("password", password)
             .toString()
             .toRequestBody(jsonType)
         val request = Request.Builder()
-            .url("${BuildConfig.API_BASE_URL}/api/auth/staff-login")
+            .url("${BuildConfig.API_BASE_URL}/api/auth/login")
             .header("X-Client", "printnpack-agent")
             .post(body)
             .build()

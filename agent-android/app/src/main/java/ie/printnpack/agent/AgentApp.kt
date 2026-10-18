@@ -32,7 +32,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -82,7 +84,7 @@ fun AgentApp() {
 @Composable
 private fun LoginScreen(api: AgentApi, onReady: () -> Unit) {
     val scope = rememberCoroutineScope()
-    var userId by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var busy by remember { mutableStateOf(false) }
     var error by remember { mutableStateOf("") }
@@ -98,11 +100,12 @@ private fun LoginScreen(api: AgentApi, onReady: () -> Unit) {
         Text("Live chats", color = Color(0xFF64748B))
         Spacer(Modifier.height(24.dp))
         OutlinedTextField(
-            value = userId,
-            onValueChange = { userId = it },
-            label = { Text("Staff user ID") },
+            value = email,
+            onValueChange = { email = it },
+            label = { Text("Admin email") },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         )
         Spacer(Modifier.height(12.dp))
         OutlinedTextField(
@@ -124,7 +127,7 @@ private fun LoginScreen(api: AgentApi, onReady: () -> Unit) {
                 error = ""
                 scope.launch {
                     try {
-                        withContext(Dispatchers.IO) { api.login(userId.trim(), password) }
+                        withContext(Dispatchers.IO) { api.login(email.trim(), password) }
                         onReady()
                     } catch (err: Exception) {
                         error = err.message ?: "Sign-in failed"
@@ -133,7 +136,7 @@ private fun LoginScreen(api: AgentApi, onReady: () -> Unit) {
                     }
                 }
             },
-            enabled = !busy && userId.isNotBlank() && password.isNotBlank(),
+            enabled = !busy && email.isNotBlank() && password.isNotBlank(),
             modifier = Modifier.fillMaxWidth(),
         ) {
             Text(if (busy) "Signing in…" else "Sign in")
