@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { SITE_URL } from '../lib/site';
 import { buildCatalogOffer, startingPriceForUrl } from '../lib/schema';
 import HomepageHero from '../components/home/HomepageHero';
+import ExploreCategories from '../components/home/ExploreCategories';
 import WeddingShowcase from '../components/home/WeddingShowcase';
 import FeaturedBannerSections from '../components/home/FeaturedBannerSections';
 import TrustBar from '../components/home/TrustBar';
@@ -331,6 +332,8 @@ export default function Home() {
       </Head>
 
       <HomepageHero />
+
+      <ExploreCategories />
 
       <WeddingShowcase />
 
