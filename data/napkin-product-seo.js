@@ -1,4 +1,5 @@
-import { MOST_ASKED_NAPKIN_FAQS, NAPKIN_FAQS } from './napkin-faq';
+import { NAPKIN_FAQS } from './napkin-faq';
+import { PRINTED_NAPKIN_FAQS } from './printed-napkins';
 
 const byId = (id) => NAPKIN_FAQS.find((faq) => faq.id === id);
 
@@ -15,14 +16,13 @@ const SHARED_LINKS = [
 
 export const NAPKIN_PRODUCT_SEO = {
   'printed-napkins': {
-    title: 'Printed Napkins Ireland | Custom Branded & Cocktail Napkins | Print n Pack',
+    title: 'Printed Napkins Ireland | Custom Logo Napkins from 25 | Print n Pack',
     description:
-      'Custom printed napkins for Irish restaurants, cafes & caterers — cocktail, lunch & dinner sizes. Logo printing from €0.05/unit, 1,000 MOQ. Delivery nationwide from Ashbourne.',
-    keywords: 'printed napkins ireland, personalised napkins ireland, branded napkins, cocktail napkins, paper napkins, napkin printing ireland, restaurant napkins, custom napkins, custom napkins uk, custom napkins ireland',
+      'Custom printed napkins for Irish restaurants, cafes and caterers. 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm, from 25. Quote online. Delivery from Ashbourne.',
+    keywords: 'printed napkins ireland, personalised napkins ireland, branded napkins, cocktail napkins, paper napkins, napkin printing ireland, restaurant napkins, custom napkins, 10x20 napkins, 20x20 napkins',
     h1: 'Printed Napkins Ireland',
-    intro: 'Custom printed napkins with your logo for restaurants, cafes, takeaways, and catering businesses across Ireland. Cocktail, lunch, and dinner sizes — from €0.05 per unit.',
-    price: '0.05',
-    productFaqs: MOST_ASKED_NAPKIN_FAQS.slice(0, 4),
+    intro: 'Custom printed napkins with your logo. Choose 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 or 20 × 20 cm, from 25 napkins. We confirm the price before printing.',
+    productFaqs: PRINTED_NAPKIN_FAQS,
     relatedLinks: [
       { href: '/products/cocktail-napkins', label: 'Cocktail Napkins', desc: 'White 10 × 10 cm napkins, 20 × 40 cm open' },
       { href: '/cocktail-napkins-ireland', label: 'Cocktail Napkins Ireland', desc: '10 × 10 cm closed, for weddings, restaurants and bars' },
@@ -65,28 +65,25 @@ export const NAPKIN_PRODUCT_SEO = {
     ],
     relatedLinks: [
       { href: '/cocktail-napkins-ireland', label: 'Cocktail napkin printing', desc: 'The cocktail napkin page, including wedding print' },
-      { href: '/products/printed-napkins', label: 'Printed Paper Napkins', desc: 'Cocktail, lunch and dinner sizes' },
-      { href: '/products/premium-linen-feel-napkins', label: 'Premium Linen-Feel Napkins', desc: 'Airlaid napkins for hotels and dining' },
+      { href: '/products/premium-linen-feel-napkins', label: 'Premium Linen-Feel Napkins', desc: '10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm' },
       ...SHARED_LINKS,
     ],
   },
   'premium-linen-feel-napkins': {
-    title: 'Linen-Feel Napkins Ireland | Premium Printed Napkins | Print n Pack',
+    title: 'Linen-Feel Napkins Ireland | From €0.24 | Print n Pack',
     description:
-      'Premium linen-feel napkins with custom logo printing for Irish hotels, restaurants & weddings. Cloth-like airlaid texture from €0.10/unit. Weekly delivery available.',
-    keywords: 'linen feel napkins ireland, premium napkins, wedding napkins ireland, airlaid napkins, branded napkins, personalised napkins, napkin printing',
+      'Premium linen-feel napkins for Irish hotels, restaurants and weddings. 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm, from €0.24 and from 25. Real tiered pricing by quantity.',
+    keywords: 'linen feel napkins ireland, premium napkins, wedding napkins ireland, airlaid napkins, branded napkins, personalised napkins, napkin printing, 10x10 cocktail napkins',
     h1: 'Premium Linen-Feel Napkins Ireland',
-    intro: 'Elegant linen-feel napkins with custom printing — the cloth-like texture Irish hotels, fine dining restaurants, and wedding planners choose for upscale table settings.',
-    price: '0.10',
-    productFaqs: [
-      byId('linen-feel-vs-paper'),
-      byId('linen-feel-cost'),
-      byId('wedding-napkins'),
-      byId('weekly-delivery'),
-    ].filter(Boolean),
+    intro: 'Linen-feel napkins printed with your logo. From €0.24 per napkin ex VAT, from 25. The price drops as your quantity goes up.',
+    price: '0.24',
+    lowPrice: '0.24',
+    highPrice: '1.31',
+    productFaqs: PRINTED_NAPKIN_FAQS,
     relatedLinks: [
+      { href: '/products/cocktail-napkins', label: 'Cocktail Napkins', desc: 'The 10 × 10 cm cocktail napkin page' },
+      { href: '/cocktail-napkins-ireland', label: 'Cocktail Napkins Ireland', desc: '10 × 10 cm closed, for weddings, restaurants and bars' },
       { href: '/wedding-kraft-napkins-ireland', label: 'Kraft Wedding Napkins', desc: 'Custom kraft napkins for weddings, delivered nationwide' },
-      { href: '/products/printed-napkins', label: 'Printed Paper Napkins', desc: 'Economical branded napkins from €0.05' },
       ...SHARED_LINKS,
     ],
   },

@@ -16,7 +16,7 @@ export default function NapkinLocalPage({ config }) {
   const faqs = [
     {
       q: `How much do printed napkins cost in ${config.title.replace('Napkin Printing ', '')}?`,
-      a: 'Custom printed napkins start from around €0.05 per unit (1,000 MOQ), with premium linen-feel napkins from €0.10 per unit. Contact us for a free quote based on size, material, and quantity.',
+      a: 'Printed napkins are quoted from 25 pieces. Choose the size and quantity and we confirm the price before printing.',
     },
     {
       q: 'How long does napkin printing take?',
@@ -77,7 +77,7 @@ export default function NapkinLocalPage({ config }) {
       },
     },
     areaServed: config.localAreas.map((name) => ({ '@type': 'Place', name })),
-    offers: buildOffer({ url: pageUrl, price: '0.05' }),
+    offers: buildOffer({ url: pageUrl, price: '0.18' }),
   };
 
   const siblingLinks = Object.values(NAPKIN_LOCAL_PAGES)
@@ -126,7 +126,7 @@ export default function NapkinLocalPage({ config }) {
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">{config.h1}</h1>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">{config.intro}</p>
               <div className="flex flex-wrap gap-3">
-                <Link href="/products/printed-napkins" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors">
+                <Link href="/products/premium-linen-feel-napkins" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors">
                   Order Printed Napkins
                 </Link>
                 <a href="tel:+353894157369" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
@@ -147,7 +147,7 @@ export default function NapkinLocalPage({ config }) {
           <div className="grid md:grid-cols-3 gap-6">
             {[
               { title: 'Cocktail Napkins', desc: 'White 10 × 10 cm napkins, 20 × 40 cm open, printed with your logo. From 50.', href: '/products/cocktail-napkins' },
-              { title: 'Printed Paper Napkins', desc: 'Custom logo napkins in cocktail, lunch, and dinner sizes — from €0.05 per unit.', href: '/products/printed-napkins' },
+              { title: 'Printed Paper Napkins', desc: '10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm, from 25.', href: '/products/premium-linen-feel-napkins' },
               { title: 'Linen-Feel Napkins', desc: 'Premium airlaid napkins with cloth-like texture for upscale dining and weddings.', href: '/products/premium-linen-feel-napkins' },
               { title: 'Plain Wholesale Napkins', desc: 'Bulk white napkins without printing — economical for high-volume catering.', href: '/plain-napkins-tableware-ireland' },
             ].map((item) => (
@@ -209,7 +209,7 @@ export default function NapkinLocalPage({ config }) {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Ready to order branded napkins?</h2>
           <p className="text-amber-100 mb-6">Tell us your napkin size, quantity, and logo — we will help with artwork and pricing.</p>
           <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/products/printed-napkins" className="inline-flex items-center bg-white text-amber-600 font-semibold px-6 py-3 rounded-xl hover:bg-amber-50 transition-colors">Order Printed Napkins</Link>
+            <Link href="/products/premium-linen-feel-napkins" className="inline-flex items-center bg-white text-amber-600 font-semibold px-6 py-3 rounded-xl hover:bg-amber-50 transition-colors">Order Printed Napkins</Link>
             <Link href="/napkin-faq-ireland" className="inline-flex items-center bg-amber-500 text-white font-semibold px-6 py-3 rounded-xl border border-amber-400 hover:bg-amber-400 transition-colors">Napkin FAQ</Link>
           </div>
         </div>
@@ -220,7 +220,7 @@ export default function NapkinLocalPage({ config }) {
         links={[
           { href: '/printing-ashbourne', label: 'Printing Ashbourne', desc: 'Local print shop — posters, flyers, stickers & more' },
           { href: '/napkins-ireland', label: 'Napkins Ireland', desc: 'Complete napkin printing hub' },
-          { href: '/products/printed-napkins', label: 'Printed Napkins', desc: 'Custom logo napkins from €0.05' },
+          { href: '/products/premium-linen-feel-napkins', label: 'Printed Napkins', desc: 'Five sizes, from 25 napkins' },
           { href: '/blog/custom-napkins-uk-ireland-europe', label: 'Custom Napkins UK, Ireland & Europe', desc: 'Ireland, UK and EU delivery guide' },
           { href: '/blog/personalised-napkins-ireland-guide', label: 'Personalised Napkins Guide', desc: 'Sizes, materials & wedding tips' },
           { href: '/napkin-faq-ireland', label: 'Napkin FAQ', desc: '25+ instant answers' },

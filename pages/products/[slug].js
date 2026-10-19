@@ -5,6 +5,7 @@ import Link from 'next/link';
 import products, { getProductBySlug, getRelatedProducts } from '../../data/products';
 import ProductPageTemplate from '../../components/ProductPageTemplate';
 import CocktailNapkinConfigurator from '../../components/napkins/CocktailNapkinConfigurator';
+import PrintedNapkinConfigurator from '../../components/napkins/PrintedNapkinConfigurator';
 import RelatedSeoLinks from '../../components/seo/RelatedSeoLinks';
 import { NAPKIN_PRODUCT_SEO } from '../../data/napkin-product-seo';
 import { SITE_URL } from '../../lib/site';
@@ -48,6 +49,8 @@ const ProductDetail = ({ product, relatedProducts }) => {
     image: product.images?.[0] ? `${SITE_URL}${product.images[0]}` : undefined,
     url: pageUrl,
     price: napkinSeo?.price || parsePriceString(product.price),
+    lowPrice: napkinSeo?.lowPrice,
+    highPrice: napkinSeo?.highPrice,
   });
 
   const breadcrumbLd = napkinSeo ? {
@@ -111,12 +114,52 @@ const ProductDetail = ({ product, relatedProducts }) => {
         </nav>
       )}
 
-      <ProductPageTemplate
-        product={product}
-        seoOverride={napkinSeo}
-        skipBreadcrumb={!!napkinSeo}
-        belowHero={product.id === 'cocktail-napkins' ? <CocktailNapkinConfigurator /> : null}
-      />
+      {product.id === 'premium-linen-feel-napkins' ? (
+        <>
+          <section className="bg-white py-12 lg:py-16">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <PrintedNapkinConfigurator />
+            </div>
+          </section>
+          <section className="bg-slate-50 border-t border-gray-100 py-12 lg:py-16">
+            <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Why choose premium linen-feel napkins</h2>
+              <p className="text-gray-600 leading-relaxed mb-8">{product.detailedDescription}</p>
+              <div className="grid gap-8 sm:grid-cols-2">
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">What's included</h3>
+                  <ul className="space-y-2">
+                    {product.features?.map((feature) => (
+                      <li key={feature} className="flex items-start gap-2 text-gray-600">
+                        <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Specifications</h3>
+                  <dl className="divide-y divide-gray-200 rounded-xl border border-gray-200 bg-white overflow-hidden">
+                    {product.specifications?.map((spec) => (
+                      <div key={spec.name} className="flex justify-between gap-4 px-4 py-3 text-sm">
+                        <dt className="font-medium text-gray-700">{spec.name}</dt>
+                        <dd className="text-right text-gray-600">{spec.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </section>
+        </>
+      ) : (
+        <ProductPageTemplate
+          product={product}
+          seoOverride={napkinSeo}
+          skipBreadcrumb={!!napkinSeo}
+          belowHero={product.id === 'cocktail-napkins' ? <CocktailNapkinConfigurator /> : null}
+        />
+      )}
 
       {napkinSeo?.productFaqs?.length > 0 && (
         <section className="bg-white border-t border-gray-100">

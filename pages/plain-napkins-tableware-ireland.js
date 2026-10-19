@@ -306,7 +306,7 @@ export default function PlainNapkinsTablewareIreland() {
             <div>
               <h2 className="text-xl font-bold text-gray-900 mb-3">Need branded napkins with your logo?</h2>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Custom printed napkins start from €0.05 per unit on our{' '}
+                Custom printed napkins start from 25 on our{' '}
                 <Link href="/napkins-ireland" className="text-amber-700 hover:underline font-medium">
                   napkins Ireland
                 </Link>{' '}

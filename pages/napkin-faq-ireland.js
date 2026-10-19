@@ -98,7 +98,7 @@ export default function NapkinFaqIreland() {
           <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-3xl">
             Everything Irish businesses ask about printed napkins — pricing, sizes, materials, wedding napkins,
             and local delivery in Ashbourne and Dublin.{' '}
-            <Link href="/products/printed-napkins" className="text-amber-600 hover:underline font-medium">Order printed napkins</Link>{' '}
+            <Link href="/products/premium-linen-feel-napkins" className="text-amber-600 hover:underline font-medium">Order printed napkins</Link>{' '}
             or call <a href="tel:+353894157369" className="text-amber-600 hover:underline font-medium">+353 89 415 7369</a>.
           </p>
 
@@ -128,7 +128,7 @@ export default function NapkinFaqIreland() {
           {filteredFaqs.length === 0 ? (
             <div className="rounded-2xl border border-gray-200 bg-white p-8 text-center">
               <p className="text-gray-900 font-semibold mb-2">No matching questions found</p>
-              <Link href="/products/printed-napkins" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors mt-4">Ask us directly</Link>
+              <Link href="/products/premium-linen-feel-napkins" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors mt-4">Ask us directly</Link>
             </div>
           ) : (
             <div className="space-y-10">
@@ -173,7 +173,7 @@ export default function NapkinFaqIreland() {
           <h2 className="text-2xl font-bold text-gray-900 mb-3">Still have questions?</h2>
           <p className="text-gray-600 mb-6">Tell us your napkin size, quantity, and logo — we help with artwork and pricing.</p>
           <div className="flex flex-wrap gap-3">
-            <Link href="/products/printed-napkins" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors">Order Printed Napkins</Link>
+            <Link href="/products/premium-linen-feel-napkins" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors">Order Printed Napkins</Link>
             <Link href="/napkin-printing-ashbourne" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">Napkin Printing Ashbourne</Link>
             <Link href="/blog/custom-napkins-uk-ireland-europe" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">Custom Napkins UK &amp; Europe</Link>
             <Link href="/blog/personalised-napkins-ireland-guide" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">Personalised Napkins Guide</Link>
@@ -185,7 +185,7 @@ export default function NapkinFaqIreland() {
         title="Related napkin pages"
         links={[
           { href: '/napkins-ireland', label: 'Napkins Ireland', desc: 'Complete napkin printing hub' },
-          { href: '/products/printed-napkins', label: 'Printed Napkins', desc: 'Custom logo napkins from €0.05' },
+          { href: '/products/premium-linen-feel-napkins', label: 'Printed Napkins', desc: 'Five sizes, from 25 napkins' },
           { href: '/napkin-printing-dublin', label: 'Napkin Printing Dublin', desc: 'Delivery across Dublin' },
           { href: '/blog/custom-napkins-uk-ireland-europe', label: 'Custom Napkins UK, Ireland & Europe', desc: 'Ireland, UK and EU delivery guide' },
           { href: '/blog/personalised-napkins-ireland-guide', label: 'Personalised Napkins Guide', desc: 'Sizes, materials & wedding tips' },

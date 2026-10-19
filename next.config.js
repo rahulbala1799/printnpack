@@ -6,6 +6,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/products-v2',
+        destination: '/products',
+        permanent: false,
+      },
+      {
         source: '/pizza-boxes',
         destination: '/pizza-boxes-ireland',
         permanent: true,
@@ -248,6 +253,11 @@ const nextConfig = {
       {
         source: '/products/cocktail-napkins-ireland',
         destination: '/cocktail-napkins-ireland',
+        permanent: true,
+      },
+      {
+        source: '/products/printed-napkins',
+        destination: '/products/premium-linen-feel-napkins',
         permanent: true,
       },
       {

@@ -127,7 +127,7 @@ export const NAPKINS_TABLEWARE_HUB_FAQS = [
   },
   {
     q: 'Can I get custom printed napkins instead of plain?',
-    a: 'Yes. For branded napkins with your logo, see our custom printed napkins from €0.05 per unit. Plain wholesale napkins on this page are unbranded stock for immediate case orders.',
+    a: 'Yes. For branded napkins with your logo, use the printed napkins quote builder. Sizes start at 10 × 10 cm cocktail and the minimum is 25. Plain wholesale napkins on this page are unbranded stock for immediate case orders.',
   },
 ];
 

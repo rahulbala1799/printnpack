@@ -470,7 +470,7 @@ export default function CustomCakeBoxesIrelandBuyingGuide() {
             {
               href: '/blog/personalised-napkins-ireland-guide',
               src: '/images/hero/napkin.svg',
-              title: 'Personalised Napkins Ireland | Printed Napkins from €0.05',
+              title: 'Personalised Napkins Ireland | Printed Napkins from 25',
             },
             {
               href: '/blog/plain-packaging-wholesale-ireland',

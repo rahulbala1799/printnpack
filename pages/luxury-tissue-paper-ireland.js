@@ -421,7 +421,7 @@ export default function LuxuryTissuePaperIreland() {
       <RelatedSeoLinks
         title="Next to napkins in the catalogue"
         links={[
-          { href: '/products/printed-napkins', label: 'Printed Napkins', desc: 'Custom logo napkins from €0.05' },
+          { href: '/products/premium-linen-feel-napkins', label: 'Printed Napkins', desc: 'Five sizes, from 25 napkins' },
           { href: '/napkins-ireland', label: 'Napkins Ireland', desc: 'Printed, linen-feel and plain napkins' },
           { href: '/plain-napkins-tableware-ireland', label: 'Plain Napkins Wholesale', desc: 'Bulk white napkins by the case' },
           { href: '/luxury-paper-bags-ireland', label: 'Luxury Paper Bags', desc: 'Carrier bags for the same counter' },

@@ -21,7 +21,7 @@ const IMG_PLAIN = '/images/plain-packaging/160006.webp';
 
 const title = 'Custom Napkins UK, Ireland & Europe | Printed & Personalised Guide';
 const description =
-  'Custom napkins for restaurants, pubs, hotels and weddings across Ireland, the UK and Europe. Printed logo napkins from €0.05, linen-feel options, sizes, and delivery from Ashbourne.';
+  'Custom napkins for restaurants, pubs, hotels and weddings across Ireland, the UK and Europe. Printed logo napkins from 25, linen-feel options, sizes, and delivery from Ashbourne.';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -68,7 +68,7 @@ const faqLd = {
       name: 'Where can I buy custom napkins in Ireland and the UK?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'PrintNPack prints custom napkins in Ashbourne, Co. Meath, Ireland and delivers across Ireland, Northern Ireland, the UK mainland, and EU addresses. Restaurants, pubs, hotels, caterers and wedding planners can order printed logo napkins from 1,000 units.',
+        text: 'PrintNPack prints custom napkins in Ashbourne, Co. Meath, Ireland and delivers across Ireland, Northern Ireland, the UK mainland, and EU addresses. Printed logo napkins start from 25.',
       },
     },
     {
@@ -76,7 +76,7 @@ const faqLd = {
       name: 'How much do custom printed napkins cost?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Custom printed paper napkins start from around €0.05 per unit with a 1,000-unit minimum. Premium linen-feel (airlaid) napkins start from around €0.10 per unit. Price depends on size, ply, print colours and quantity. UK and EU courier is quoted on the order.',
+        text: 'Printed paper napkins are quoted from 25 pieces. Choose the size and quantity and we confirm the price before printing. Premium linen-feel napkins are quoted separately. UK and EU courier is confirmed on the quote.',
       },
     },
     {
@@ -247,7 +247,7 @@ export default function CustomNapkinsUkIrelandEurope() {
             <p className="text-gray-600 leading-relaxed">
               PrintNPack prints them in Ireland and delivers across the island, into the UK, and to EU addresses
               on request. If you already know the spec you need, start with{' '}
-              <Link href="/products/printed-napkins" className="text-amber-600 hover:underline">printed napkins</Link>
+              <Link href="/products/premium-linen-feel-napkins" className="text-amber-600 hover:underline">printed napkins</Link>
               {' '}or{' '}
               <Link href="/products/premium-linen-feel-napkins" className="text-amber-600 hover:underline">premium linen-feel napkins</Link>.
             </p>
@@ -333,12 +333,12 @@ export default function CustomNapkinsUkIrelandEurope() {
             <p className="text-gray-600 leading-relaxed">
               <strong>Printed paper napkins</strong> are the economical choice for high-volume restaurants,
               takeaways and pubs. A one- or two-colour logo holds well, unit cost stays low, and 2-ply is enough
-              for everyday service. They start from around €0.05 per unit.
+              for everyday service. Order from 25 and we confirm the price before printing.
             </p>
             <p className="text-gray-600 leading-relaxed">
               <strong>Linen-feel napkins</strong> use airlaid paper with a cloth-like texture. They are thicker,
               more absorbent, and photograph like fabric — which is why hotels from Dublin to Amsterdam specify
-              them for restaurants and events. They start from around €0.10 per unit.{' '}
+              them for restaurants and events. They start from €0.24. The price depends on the quantity and the design.{' '}
               <Link href="/products/premium-linen-feel-napkins" className="text-amber-600 hover:underline">
                 View linen-feel napkins
               </Link>
@@ -500,13 +500,13 @@ export default function CustomNapkinsUkIrelandEurope() {
                 <tbody>
                   <tr className="bg-white">
                     <td className="px-4 py-3 font-medium text-gray-900">Printed paper napkins</td>
-                    <td className="px-4 py-3 text-gray-600">€0.05 / unit</td>
-                    <td className="px-4 py-3 text-gray-600">1,000</td>
+                    <td className="px-4 py-3 text-gray-600">On quote</td>
+                    <td className="px-4 py-3 text-gray-600">25</td>
                   </tr>
                   <tr className="bg-gray-50">
                     <td className="px-4 py-3 font-medium text-gray-900">Premium linen-feel napkins</td>
-                    <td className="px-4 py-3 text-gray-600">€0.10 / unit</td>
-                    <td className="px-4 py-3 text-gray-600">1,000</td>
+                    <td className="px-4 py-3 text-gray-600">From €0.24</td>
+                    <td className="px-4 py-3 text-gray-600">25</td>
                   </tr>
                   <tr className="bg-white">
                     <td className="px-4 py-3 font-medium text-gray-900">Plain wholesale napkins</td>
@@ -556,10 +556,10 @@ export default function CustomNapkinsUkIrelandEurope() {
           <section className="mt-12 p-6 bg-amber-50 rounded-2xl border border-amber-100">
             <h2 className="text-xl font-bold text-gray-900 mb-3">Order custom napkins for Ireland, the UK or Europe</h2>
             <p className="text-gray-600 mb-4">
-              Printed napkins from €0.05. Linen-feel from €0.10. Free quote, artwork support, and delivery from Ashbourne.
+              Printed napkins from 25. We confirm the price before printing. Artwork support and delivery from Ashbourne.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link href="/products/printed-napkins" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors">
+              <Link href="/products/premium-linen-feel-napkins" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors">
                 Order printed napkins
               </Link>
               <Link href="/napkins-ireland" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
@@ -577,7 +577,7 @@ export default function CustomNapkinsUkIrelandEurope() {
         title="Related napkin pages"
         links={[
           { href: '/napkins-ireland', label: 'Napkins Ireland', desc: 'Printed, linen-feel & wholesale hub' },
-          { href: '/products/printed-napkins', label: 'Printed Napkins', desc: 'Custom logo napkins from €0.05' },
+          { href: '/products/premium-linen-feel-napkins', label: 'Printed Napkins', desc: 'Five sizes, from 25 napkins' },
           { href: '/wedding-kraft-napkins-ireland', label: 'Kraft Wedding Napkins', desc: 'Custom kraft napkins, delivered in Ireland, the UK and the EU' },
           { href: '/products/premium-linen-feel-napkins', label: 'Linen-Feel Napkins', desc: 'Airlaid napkins for hotels & weddings' },
           { href: '/blog/personalised-napkins-ireland-guide', label: 'Personalised Napkins Guide', desc: 'Sizes, materials & Irish wedding tips' },

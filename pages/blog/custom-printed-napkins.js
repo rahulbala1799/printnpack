@@ -344,11 +344,11 @@ export default function CustomPrintedNapkins() {
           the proof, then we print. All three napkins start at 50.
         </p>
         <p className="text-slate-600 leading-relaxed">
-          Lunch and dinner napkins in a larger restaurant run, from 1,000, are a separate order.{' '}
-          <Link href="/blog/custom-napkins-uk-ireland-europe" className="text-amber-700 hover:underline font-medium">
-            That guide
-          </Link>{' '}
-          covers those sizes. This page is the short run: cocktail, wedding and kraft.
+          Restaurant napkins in 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm start from 25 on the{' '}
+          <Link href="/products/premium-linen-feel-napkins" className="text-amber-700 hover:underline font-medium">
+            printed napkins quote builder
+          </Link>
+          . This page is the short run: cocktail, wedding and kraft.
         </p>
 
         <h2 id="delivery" className="text-2xl font-bold text-slate-900 mt-14 mb-4 scroll-mt-24">

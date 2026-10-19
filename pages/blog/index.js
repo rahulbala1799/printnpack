@@ -58,7 +58,7 @@ const posts = [
     slug: 'premium-linen-feel-napkins-ireland-sizes-buying-guide',
     title: 'Premium Linen-Feel Napkins Ireland: 25×25–48×48 cm Sizes & MOQ Buying Guide',
     excerpt:
-      'How to buy premium linen-feel (airlaid) napkins in Ireland — cocktail 25×25 cm, dinner 40×40 cm and premium 48×48 cm, fold options, 1,000 MOQ, logo print from €0.10, and nationwide delivery from Ashbourne for hotels and restaurants.',
+      'How to buy premium linen-feel napkins in Ireland — 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm, from €0.24 and from 25. The price depends on the quantity and the design.',
     date: '2026-10-16',
     readTime: '8 min read',
     image: '/images/products/premium-linen-feel-napkins/airlaid-kinetic-labs-ireland.jpg',
@@ -560,7 +560,7 @@ const posts = [
     slug: 'custom-napkins-uk-ireland-europe',
     title: 'Custom Napkins UK, Ireland & Europe: Printed, Personalised & Branded Guide',
     excerpt:
-      'Custom printed napkins for restaurants, pubs, hotels and weddings across Ireland, the UK and Europe — sizes, linen-feel vs paper, pricing from €0.05, and delivery from Ashbourne.',
+      'Custom printed napkins for restaurants, pubs, hotels and weddings across Ireland, the UK and Europe — sizes, linen-feel vs paper, quotes from 25, and delivery from Ashbourne.',
     date: '2026-08-27',
     readTime: '12 min read',
     image: '/images/blog/custom-napkins/custom-napkins-uk-ireland-restaurant-table.jpg',
@@ -646,9 +646,9 @@ const posts = [
   },
   {
     slug: 'personalised-napkins-ireland-guide',
-    title: 'Personalised Napkins Ireland | Printed Napkins from €0.05',
+    title: 'Personalised Napkins Ireland | Printed Napkins from 25',
     excerpt:
-      'Personalised and branded napkins from €0.05 — cocktail vs dinner sizes, linen-feel wedding napkins, and how to order in Ireland.',
+      'Personalised and branded napkins from 25 — cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm, plus linen-feel wedding napkins.',
     date: '2026-06-21',
     readTime: '8 min read',
     image: '/images/hero/napkin.svg',
@@ -813,7 +813,7 @@ const posts = [
     slug: 'printed-paper-bag-cost-ireland',
     title: 'How Much Do Printed Paper Bags Cost in Ireland?',
     excerpt:
-      'Printed paper bag pricing explained — flat handle from €0.18/unit, twisted handle from €0.35/unit, MOQ 500, and when plain case bags are cheaper.',
+      'Printed paper bag pricing explained — flat handle from €0.24/unit, twisted handle from €0.35/unit, MOQ 500, and when plain case bags are cheaper.',
     date: '2026-06-23',
     readTime: '5 min read',
     image: '/images/products/flat-handle-bags/1.png',

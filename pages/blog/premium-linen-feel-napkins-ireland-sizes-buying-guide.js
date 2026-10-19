@@ -18,9 +18,9 @@ const WEDDING_IMAGE = '/images/wedding/wedding-napkins-20x20-airlaid-bar-ireland
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Premium Linen-Feel Napkins Ireland: 25×25–48×48 cm Sizes & MOQ Buying Guide',
+  headline: 'Premium Linen-Feel Napkins Ireland: Sizes, From €0.24',
   description:
-    'How to buy premium linen-feel (airlaid) napkins in Ireland — cocktail 25×25 cm, dinner 40×40 cm and premium 48×48 cm, fold options, 1,000 MOQ, logo print from €0.10, and delivery from Ashbourne.',
+    'How to buy premium linen-feel napkins in Ireland — 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm, from €0.24 and from 25. The price depends on the quantity and the design.',
   image: `${siteUrl}${HERO_IMAGE}`,
   author: { '@type': 'Organization', name: 'PrintNPack Ireland', url: siteUrl },
   publisher: {
@@ -50,7 +50,7 @@ const faqLd = {
       name: 'What sizes are available for linen-feel napkins?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Three airlaid sizes: cocktail 25 × 25 cm, dinner 40 × 40 cm, and premium 48 × 48 cm.',
+        text: '10 × 10 cm cocktail, 10 × 20 cm, 12 × 20 cm, 15 × 20 cm and 20 × 20 cm.',
       },
     },
     {
@@ -58,7 +58,7 @@ const faqLd = {
       name: 'What is the minimum order for premium linen-feel napkins?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: '1,000 units. Lead time is typically 7–10 business days after artwork is agreed.',
+        text: '25 napkins. The price is confirmed from the quantity and the design.',
       },
     },
     {
@@ -66,7 +66,7 @@ const faqLd = {
       name: 'How much do linen-feel napkins cost in Ireland?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Premium linen-feel napkins start at €0.10 per unit. Final pricing depends on size, colour, fold and print coverage — confirm the live quote on the product page before you order.',
+        text: 'From €0.24. The price depends on the quantity and the design. Add the size and quantity to the quote and we confirm it before printing.',
       },
     },
     {
@@ -82,7 +82,7 @@ const faqLd = {
       name: 'How do linen-feel napkins differ from 10 × 10 cm cocktail paper napkins?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Linen-feel napkins are thicker airlaid stock in 25 × 25 cm, 40 × 40 cm or 48 × 48 cm, with a 1,000-piece MOQ. Standard printed cocktail napkins are white paper at 10 × 10 cm closed (20 × 40 cm open) and can start from 50.',
+        text: 'Linen-feel napkins include a 10 × 10 cm cocktail size, plus 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm, from 25 and from €0.24. The separate cocktail napkin page is the white 10 × 10 cm napkin, open 20 × 40 cm, from 50, with no price on the page.',
       },
     },
   ],
@@ -104,21 +104,11 @@ const breadcrumbLd = {
 };
 
 const sizeRows = [
-  {
-    size: 'Cocktail linen-feel',
-    dims: '25 × 25 cm',
-    use: 'Drinks receptions, hotel bars, canapé service',
-  },
-  {
-    size: 'Dinner linen-feel',
-    dims: '40 × 40 cm',
-    use: 'Restaurant covers, hotel dining rooms, catering tables',
-  },
-  {
-    size: 'Premium linen-feel',
-    dims: '48 × 48 cm',
-    use: 'Fine dining, wedding plates, luxury hotel banquet',
-  },
+  { size: 'Cocktail', dims: '10 × 10 cm', use: 'Bars, drinks receptions and canapé service' },
+  { size: '10 × 20 cm', dims: '10 × 20 cm', use: 'Cafés and smaller place settings' },
+  { size: '12 × 20 cm', dims: '12 × 20 cm', use: 'Lunch service and casual dining' },
+  { size: '15 × 20 cm', dims: '15 × 20 cm', use: 'Restaurants and hotel covers' },
+  { size: '20 × 20 cm', dims: '20 × 20 cm', use: 'Dinner, weddings and banquet tables' },
 ];
 
 const foldRows = [
@@ -130,9 +120,9 @@ const foldRows = [
 
 export default function PremiumLinenFeelNapkinsIrelandSizesBuyingGuide() {
   const title =
-    'Premium Linen-Feel Napkins Ireland: 25×25–48×48 cm Sizes & MOQ Buying Guide';
+    'Premium Linen-Feel Napkins Ireland: Sizes, From €0.24';
   const description =
-    'Buy premium linen-feel napkins in Ireland — airlaid cocktail 25×25 cm, dinner 40×40 cm and premium 48×48 cm, folds, logo print from €0.10, 1,000 MOQ, and delivery to Dublin, Cork, Galway from Ashbourne.';
+    'Buy premium linen-feel napkins in Ireland — 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm, from €0.24 and from 25. The price depends on the quantity and the design.';
 
   return (
     <Layout>
@@ -203,7 +193,7 @@ export default function PremiumLinenFeelNapkinsIrelandSizesBuyingGuide() {
         </div>
 
         <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight mb-6">
-          Premium Linen-Feel Napkins Ireland: 25×25–48×48 cm Sizes &amp; MOQ Buying Guide
+          Premium Linen-Feel Napkins Ireland: five sizes, from €0.24
         </h1>
 
         <div className="grid grid-cols-3 gap-3 mb-8">
@@ -251,9 +241,8 @@ export default function PremiumLinenFeelNapkinsIrelandSizesBuyingGuide() {
             <Link href={HUB_HREF} className="text-blue-600 hover:underline">
               premium linen-feel napkins in Ireland
             </Link>{' '}
-            — the three catalogue sizes (25 × 25 cm, 40 × 40 cm, 48 × 48 cm), fold options, colours,
-            1,000-piece MOQ, print from €0.10 per unit, and delivery from Ashbourne. It is not a guide
-            to thin 10 × 10 cm cocktail paper napkins; those sit on a different product line.
+            — 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm, from €0.24 and from 25.
+            The price depends on the quantity and the design. The separate cocktail napkin page stays up for the white 10 × 10 cm napkin.
           </p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">
@@ -316,23 +305,17 @@ export default function PremiumLinenFeelNapkinsIrelandSizesBuyingGuide() {
           </div>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">
-            Cocktail 25 × 25 cm vs dinner 40 × 40 cm vs premium 48 × 48 cm
+            10 × 10 cm cocktail through to 20 × 20 cm
           </h2>
           <p className="text-slate-700 leading-relaxed mb-4">
-            <strong>25 × 25 cm cocktail linen-feel</strong> suits drinks receptions, hotel lounges and
-            canapé trays where you want airlaid quality without a full dinner square. It is still a
-            hospitality napkin — not the same SKU as white paper cocktail napkins at 10 × 10 cm closed.
+            <strong>10 × 10 cm</strong> is the cocktail size, for bars, drinks receptions and canapé service.
+            The same size has its own cocktail napkin page, kept for search, with no price shown there.
           </p>
           <p className="text-slate-700 leading-relaxed mb-4">
-            <strong>40 × 40 cm dinner</strong> is the everyday restaurant and hotel dining size: large
-            enough for a place setting, easy to quarter-fold, and the most common airlaid order for
-            Ashbourne accounts that restock weekly.
+            <strong>10 × 20, 12 × 20 and 15 × 20 cm</strong> cover cafés, lunch service and restaurant covers.
           </p>
           <p className="text-slate-700 leading-relaxed mb-8">
-            <strong>48 × 48 cm premium</strong> is the luxury cover — fine dining, wedding plate
-            service and banquet tables where the napkin should read as cloth from across the room.
-            If you only stock one airlaid size for mixed service, dinner 40 × 40 cm is usually the
-            safest first order.
+            <strong>20 × 20 cm</strong> is the dinner and wedding size. From €0.24, and the price depends on the quantity and the design.
           </p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">
@@ -366,11 +349,9 @@ export default function PremiumLinenFeelNapkinsIrelandSizesBuyingGuide() {
             MOQ, price and lead time — what the catalogue states
           </h2>
           <p className="text-slate-700 leading-relaxed mb-4">
-            Minimum order is <strong>1,000 units</strong>. Pricing starts at{' '}
-            <strong>€0.10 per unit</strong>; size, colour, fold and ink coverage move the quote.
-            Production is typically <strong>7–10 business days</strong> after artwork is agreed. Confirm
-            the live total on the product page — this guide does not invent pack prices beyond that
-            published starting figure.
+            Minimum order is <strong>25 napkins</strong>. Pricing starts at{' '}
+            <strong>€0.24</strong>. The price depends on the quantity and the design.
+            Add the size and quantity on the product page and we confirm it before printing.
           </p>
           <p className="text-slate-700 leading-relaxed mb-8">
             Need a smaller printed run for a drinks reception? White paper cocktail napkins start from
@@ -378,8 +359,7 @@ export default function PremiumLinenFeelNapkinsIrelandSizesBuyingGuide() {
             <Link href="/blog/custom-printed-napkins" className="text-blue-600 hover:underline">
               custom printed napkins
             </Link>{' '}
-            line (10 × 10 cm closed). Linen-feel is the upgrade when the table must feel premium and you
-            can meet the 1,000 MOQ.
+            line (10 × 10 cm closed). Linen-feel is the same family of sizes, from 25, with a starting price of €0.24.
           </p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">
@@ -427,10 +407,10 @@ export default function PremiumLinenFeelNapkinsIrelandSizesBuyingGuide() {
             How to order premium linen-feel napkins in Ireland
           </h2>
           <ol className="list-decimal pl-6 text-slate-700 space-y-2 mb-8">
-            <li>Choose size — 25 × 25 cm cocktail, 40 × 40 cm dinner, or 48 × 48 cm premium</li>
+            <li>Choose size — 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 or 20 × 20 cm</li>
             <li>Pick colour (white, cream, black, company blue or custom) and fold style</li>
             <li>Decide plain airlaid or up to 4-colour logo print</li>
-            <li>Plan for the 1,000-piece MOQ and 7–10 business day lead time</li>
+            <li>Order from 25. The price starts at €0.24 and depends on the quantity and the design</li>
             <li>
               Order via the{' '}
               <Link href={HUB_HREF} className="text-blue-600 hover:underline">
@@ -444,8 +424,7 @@ export default function PremiumLinenFeelNapkinsIrelandSizesBuyingGuide() {
           <div className="bg-slate-900 rounded-xl p-6 mb-8 text-white not-prose">
             <p className="font-semibold mb-1">Ready to order linen-feel napkins?</p>
             <p className="text-slate-400 text-sm mb-4">
-              Airlaid cocktail, dinner and premium sizes with logo print from €0.10 — delivered across
-              Ireland from Ashbourne.
+              Five sizes, from €0.24 and from 25. The price depends on the quantity and the design.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
@@ -478,15 +457,15 @@ export default function PremiumLinenFeelNapkinsIrelandSizesBuyingGuide() {
               },
               {
                 q: 'What sizes are available for linen-feel napkins?',
-                a: 'Three airlaid sizes: cocktail 25 × 25 cm, dinner 40 × 40 cm, and premium 48 × 48 cm.',
+                a: '10 × 10 cm cocktail, 10 × 20 cm, 12 × 20 cm, 15 × 20 cm and 20 × 20 cm.',
               },
               {
                 q: 'What is the minimum order for premium linen-feel napkins?',
-                a: '1,000 units. Lead time is typically 7–10 business days after artwork is agreed.',
+                a: '25 napkins. The price is confirmed from the quantity and the design.',
               },
               {
                 q: 'How much do linen-feel napkins cost in Ireland?',
-                a: 'Premium linen-feel napkins start at €0.10 per unit. Final pricing depends on size, colour, fold and print coverage — confirm the live quote on the product page before you order.',
+                a: 'From €0.24. The price depends on the quantity and the design. Add the size and quantity to the quote and we confirm it before printing.',
               },
               {
                 q: 'Can I print a logo on airlaid linen-feel napkins?',
@@ -494,7 +473,7 @@ export default function PremiumLinenFeelNapkinsIrelandSizesBuyingGuide() {
               },
               {
                 q: 'How do linen-feel napkins differ from 10 × 10 cm cocktail paper napkins?',
-                a: 'Linen-feel napkins are thicker airlaid stock in 25 × 25 cm, 40 × 40 cm or 48 × 48 cm, with a 1,000-piece MOQ. Standard printed cocktail napkins are white paper at 10 × 10 cm closed (20 × 40 cm open) and can start from 50.',
+                a: 'Linen-feel napkins include a 10 × 10 cm cocktail size, plus 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm, from 25 and from €0.24. The separate cocktail napkin page is the white 10 × 10 cm napkin, from 50, with no price on the page.',
               },
             ].map(({ q, a }) => (
               <div key={q} className="border-l-4 border-slate-400 pl-5">
@@ -510,7 +489,7 @@ export default function PremiumLinenFeelNapkinsIrelandSizesBuyingGuide() {
             {
               href: '/blog/personalised-napkins-ireland-guide',
               src: WEDDING_IMAGE,
-              title: 'Personalised Napkins Ireland | Printed Napkins from €0.05',
+              title: 'Personalised Napkins Ireland | Printed Napkins from 25',
             },
             {
               href: '/blog/custom-printed-napkins',

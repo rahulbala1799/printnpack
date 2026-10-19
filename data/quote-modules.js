@@ -18,6 +18,7 @@ import {
 import { LUXURY_TISSUE_HREF, LUXURY_TISSUE_ID, repriceTissueLine } from './luxury-tissue-paper';
 import { COASTER_BOARD, COASTER_SIDES, COASTER_SIZES, PRINTED_COASTER_MIN } from './coasters-options';
 import { COCKTAIL_NAPKIN_PRODUCT } from './cocktail-napkins';
+import { PRINTED_NAPKIN_MIN, PRINTED_NAPKIN_PRINT, PRINTED_NAPKIN_SIZES, getNapkinLineTotal, getNapkinUnitPrice } from './printed-napkins';
 import { buildPopupWallQuoteLine } from './popup-walls';
 import { buildLedFrameQuoteLine, ledFrameFromPrice } from './led-frames';
 import { buildInhakerQuoteLine, inhakerFromPrice } from './inhaker-stands';
@@ -101,6 +102,15 @@ export const QUOTE_CATALOG = [
       group: 'Wedding',
     })
   ),
+  withMedia({
+    id: 'premium-linen-feel-napkins',
+    name: 'Premium Linen-Feel Napkins',
+    href: '/products/premium-linen-feel-napkins',
+    moduleId: 'printed-napkins',
+    configurable: false,
+    group: 'Napkins',
+    price: 'From €0.24',
+  }),
   withMedia({
     id: COCKTAIL_NAPKIN_PRODUCT.id,
     name: COCKTAIL_NAPKIN_PRODUCT.name,
@@ -267,6 +277,11 @@ export const GENERIC_MODULE_FIELDS = {
     DIMENSIONS_MM_IF_CUSTOM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 250 },
   ],
+  'printed-napkins': [
+    { key: 'sizePreset', label: 'Size', type: 'chips', options: PRINTED_NAPKIN_SIZES.map((size) => size.chip) },
+    { key: 'print', label: 'Print', type: 'chips', options: PRINTED_NAPKIN_PRINT },
+    { key: 'qty', label: 'Quantity', type: 'qty', min: PRINTED_NAPKIN_MIN },
+  ],
   'cocktail-napkin-print': [
     { key: 'sizePreset', label: 'Napkin', type: 'chips', options: ['10 × 10 cm closed'] },
     { key: 'open', label: 'Open size', type: 'chips', options: ['20 × 40 cm'] },
@@ -358,6 +373,26 @@ export function buildCatalogQuoteLine(catalogItem, options = {}) {
   if (catalogItem.moduleId === 'brown-flat-handle') {
     return buildBrownFlatHandleQuoteLine(catalogItem, options);
   }
+  if (catalogItem.moduleId === 'printed-napkins') {
+    const entered = Number(options.qty);
+    const qty = Math.max(PRINTED_NAPKIN_MIN, Number.isFinite(entered) && entered > 0 ? Math.round(entered) : PRINTED_NAPKIN_MIN);
+    const size = PRINTED_NAPKIN_SIZES.find((item) => item.chip === options.sizePreset) || PRINTED_NAPKIN_SIZES[0];
+    const unit = getNapkinUnitPrice(size.id, qty);
+    return {
+      moduleId: catalogItem.moduleId,
+      productId: catalogItem.id,
+      name: catalogItem.name,
+      href: catalogItem.href,
+      image: catalogItem.image || null,
+      images: catalogItem.images || (catalogItem.image ? [catalogItem.image] : []),
+      qty,
+      unitPrice: unit,
+      lineTotal: getNapkinLineTotal(size.id, qty),
+      summary: `${size.chip} · ${options.print || PRINTED_NAPKIN_PRINT[0]}`,
+      options: { ...options, qty },
+      fingerprint: `${catalogItem.moduleId}|${catalogItem.id}`,
+    };
+  }
   if (catalogItem.moduleId === 'business-cards') {
     const selectedQuantity = BUSINESS_CARD_QUANTITY_OPTIONS.find((option) => option === options.quantity)
       || BUSINESS_CARD_QUANTITY_OPTIONS.find((option) => parseBusinessCardQty(option) === parseBusinessCardQty(options.quantity))
@@ -389,7 +424,9 @@ export function buildCatalogQuoteLine(catalogItem, options = {}) {
 
   const fields = getModuleFields(catalogItem.moduleId);
   const qtyField = fields.find((field) => field.type === 'qty');
-  const qty = Number(options.qty) || qtyField?.min || 1;
+  const minimum = qtyField?.min || 1;
+  const entered = Number(options.qty);
+  const qty = Math.max(minimum, Number.isFinite(entered) && entered > 0 ? Math.round(entered) : minimum);
   const summary = fields
     .map((field) => fieldSummary(field, options))
     .filter(Boolean)
@@ -474,15 +511,15 @@ export function repriceQuoteLine(line, qty) {
   if (line.moduleId === 'luxury-tissue') {
     return { ...repriceTissueLine(line, qty), id: line.id };
   }
-  if (line.moduleId === 'vinyl-cut-letters') {
-    const next = buildVinylLetterQuoteLine(
+  if (line.moduleId === 'beach-flags') {
+    const next = buildBeachFlagQuoteLine(
       { id: line.productId, name: line.name, href: line.href, image: line.image, images: line.images },
       { ...(line.options || {}), qty }
     );
     return next ? { ...next, id: line.id } : { ...line, qty };
   }
-  if (line.moduleId === 'beach-flags') {
-    const next = buildBeachFlagQuoteLine(
+  if (line.moduleId === 'vinyl-cut-letters') {
+    const next = buildVinylLetterQuoteLine(
       { id: line.productId, name: line.name, href: line.href, image: line.image, images: line.images },
       { ...(line.options || {}), qty }
     );

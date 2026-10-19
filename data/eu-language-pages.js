@@ -12,8 +12,8 @@ const PRODUCTS = {
   tables: { href: '/custom-table-covers-ireland', price: null, from: null },
   flags: { href: '/custom-printed-flags-ireland', price: null, from: null },
   cocktail: { href: '/products/cocktail-napkins', price: null, from: null },
-  printed: { href: '/products/printed-napkins', price: '0.05', from: '€0.05' },
-  linen: { href: '/products/premium-linen-feel-napkins', price: '0.10', from: '€0.10' },
+  printed: { href: '/products/premium-linen-feel-napkins', price: null, from: null },
+  linen: { href: '/products/premium-linen-feel-napkins', price: '0.24', from: '€0.24' },
   plain: { href: '/plain-napkins-tableware-ireland', price: '0.03', from: '€0.03' },
   wedding: { href: '/wedding-napkins-ireland', price: null, from: null },
   kraft: { href: '/wedding-kraft-napkins-ireland', price: null, from: null },
@@ -206,13 +206,13 @@ const COPY = {
       shortLabel: 'Serviettes',
       title: 'Serviettes personnalisées | Cocktail, restaurant et mariage | France',
       description:
-        'Serviettes en papier personnalisées pour la France. Cocktail 10 × 10 cm dès 50 pièces, serviettes logo dès 0,05 €, airlaid effet lin. Imprimées en Irlande, livrées dans l’UE.',
+        'Serviettes en papier personnalisées pour la France. Cocktail 10 × 10 cm dès 50 pièces, serviettes effet lin dès 0,24 €. Imprimées en Irlande, livrées dans l’UE.',
       keywords:
         'serviettes personnalisées, serviettes en papier avec logo, serviettes cocktail, serviettes de table imprimées, serviettes mariage, serviettes restaurant, airlaid, impression serviettes France',
       eyebrow: 'Serviettes, tous types',
       h1: 'Serviettes personnalisées pour la France',
       heroAlt: 'Serviette cocktail imprimée avec un logo de restaurant',
-      lead: 'PrintNPack imprime des serviettes personnalisées à Ashbourne, en Irlande, pour les restaurants, bars, hôtels et mariages en France. Serviette cocktail blanche, 10 × 10 cm fermée et 20 × 40 cm ouverte, dès 50 pièces. Serviettes papier avec logo dès 0,05 € (souvent 1 000 pièces). Airlaid effet lin dès 0,10 €. Le port vers la France est chiffré avec le devis.',
+      lead: 'PrintNPack imprime des serviettes personnalisées à Ashbourne, en Irlande, pour les restaurants, bars, hôtels et mariages en France. Serviette cocktail blanche, 10 × 10 cm fermée et 20 × 40 cm ouverte, dès 50 pièces. Serviettes effet lin dès 0,24 €, dès 25 pièces. Le prix dépend de la quantité et du motif. Le port vers la France est chiffré avec le devis.',
       cta: 'Voir les serviettes cocktail',
       sections: [
         {
@@ -225,7 +225,7 @@ const COPY = {
         {
           heading: 'Restaurants, mariages et envoi',
           paragraphs: [
-            'Les serviettes papier imprimées et l’airlaid partent en général de 1 000 pièces, dès 0,05 € et 0,10 € l’unité. Les serviettes blanches sans impression se commandent à la caisse, dès environ 0,03 €, pour les gros volumes. Le papier de soie couleur, 500 × 750 mm, est vendu par boîte de 480 feuilles.',
+            'Les serviettes effet lin partent de 25 pièces, dès 0,24 €. Le prix dépend de la quantité et du motif. Les serviettes blanches sans impression se commandent à la caisse, dès environ 0,03 €, pour les gros volumes. Le papier de soie couleur, 500 × 750 mm, est vendu par boîte de 480 feuilles.',
             'Nous imprimons en Irlande et expédions en France, en Belgique et en Suisse. Comptez le transport dans le devis, surtout pour un mariage daté : passez commande trois à quatre semaines avant. Les fiches produit sont en anglais.',
           ],
         },
@@ -233,16 +233,16 @@ const COPY = {
       facts: [
         { label: 'Cocktail', value: '10 × 10 cm fermé, dès 50' },
         { label: 'Ouverte', value: '20 × 40 cm' },
-        { label: 'Papier logo', value: 'Dès 0,05 €, souvent 1 000' },
-        { label: 'Effet lin', value: 'Airlaid dès 0,10 €, 1 000' },
+        { label: 'Effet lin', value: 'Dès 0,24 €, dès 25' },
+        { label: 'Quantité', value: 'Dès 25 pièces' },
         { label: 'Sans impression', value: 'Dès environ 0,03 € à la caisse' },
         { label: 'Déjeuner / dîner', value: '33 cm et 40 cm' },
         { label: 'Expédition', value: 'France, port au devis' },
       ],
       products: {
         cocktail: { title: 'Serviettes cocktail', desc: 'Blanches, 10 × 10 cm fermées. Logo ou faire-part. Dès 50.' },
-        printed: { title: 'Serviettes papier logo', desc: 'Cocktail, déjeuner et dîner. Dès 0,05 €, minimum souvent 1 000.' },
-        linen: { title: 'Effet lin', desc: 'Airlaid type tissu pour hôtel, gastronomie et mariage. Dès 0,10 €.' },
+        printed: { title: 'Serviettes papier logo', desc: '10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 et 20 × 20 cm. Dès 25 pièces, prix sur devis.' },
+        linen: { title: 'Effet lin', desc: 'Dès 0,24 €. Le prix dépend de la quantité et du motif. Dès 25 pièces.' },
         plain: { title: 'Serviettes en gros', desc: 'Blanches sans impression, à la caisse. Dès environ 0,03 €.' },
         wedding: { title: 'Serviettes de mariage', desc: 'Prénoms, date ou monogramme sur papier ou effet lin.' },
         kraft: { title: 'Kraft mariage', desc: 'Papier écru non blanchi, noms ou monogramme.' },
@@ -250,7 +250,7 @@ const COPY = {
       faqs: [
         { q: 'Livrez-vous des serviettes personnalisées en France ?', a: 'Oui. Elles sont imprimées à Ashbourne, en Irlande, et expédiées en France, en Belgique et en Suisse. Le port est confirmé sur le devis. L’envoi reste dans l’UE.' },
         { q: 'Quel est le minimum pour des serviettes cocktail ?', a: '50 pièces. Fermées, elles mesurent 10 × 10 cm. Ouvertes, 20 × 40 cm. Convient à un bar, un restaurant ou un vin d’honneur.' },
-        { q: 'Quel est le prix d’une serviette avec logo ?', a: 'Les serviettes papier imprimées partent d’environ 0,05 € l’unité, en général dès 1 000 pièces. L’airlaid effet lin part d’environ 0,10 €, même minimum. Le cocktail personnalisé part de 50 pièces.' },
+        { q: 'Quel est le prix d’une serviette avec logo ?', a: 'Les serviettes effet lin partent de 0,24 €. Le prix dépend de la quantité et du motif. Minimum 25 pièces. Le cocktail personnalisé part de 50 pièces.' },
         { q: 'Quelle taille pour un restaurant ?', a: 'Le 33 cm 2 plis couvre le café et la brasserie. Le cocktail va sous le verre. Le 40 cm va à l’hôtel, à la gastronomie et au dîner de mariage.' },
         { q: 'Peut-on imprimer un mariage ?', a: 'Oui. Prénoms, date ou monogramme, sur papier blanc, effet lin ou kraft écru. Commandez trois à quatre semaines avant la date. Le port vers le lieu en France est au devis.' },
         { q: 'Les serviettes sans logo existent-elles ?', a: 'Oui. Serviettes blanches en gros, à la caisse, dès environ 0,03 €, pour la restauration à fort volume.' },
@@ -439,13 +439,13 @@ const COPY = {
       shortLabel: 'Servietten',
       title: 'Servietten bedrucken | Cocktail, Restaurant und Hochzeit | Deutschland',
       description:
-        'Papierservietten mit Logo für Deutschland. Cocktailservietten 10 × 10 cm ab 50 Stück, Logo-Servietten ab 0,05 €, Airlaid in Leinenoptik. Gedruckt in Irland, Versand in der EU.',
+        'Papierservietten mit Logo für Deutschland. Cocktailservietten 10 × 10 cm ab 50 Stück, Servietten in Leinenoptik ab 0,24 €. Gedruckt in Irland, Versand in der EU.',
       keywords:
         'Servietten bedrucken, Papierservietten mit Logo, Cocktailservietten, Servietten personalisiert, Hochzeitsservietten, Restaurant Servietten, Airlaid, Serviettendruck Deutschland',
       eyebrow: 'Servietten, alle Arten',
       h1: 'Servietten bedrucken für Deutschland',
       heroAlt: 'Bedruckte Cocktailserviette mit Restaurantlogo',
-      lead: 'PrintNPack bedruckt Servietten in Ashbourne, Irland, für Restaurants, Bars, Hotels und Hochzeiten in Deutschland. Weiße Cocktailserviette, geschlossen 10 × 10 cm und offen 20 × 40 cm, ab 50 Stück. Papierservietten mit Logo ab 0,05 €, meist ab 1.000 Stück. Airlaid in Leinenoptik ab 0,10 €. Der Versand nach Deutschland wird im Angebot genannt.',
+      lead: 'PrintNPack bedruckt Servietten in Ashbourne, Irland, für Restaurants, Bars, Hotels und Hochzeiten in Deutschland. Weiße Cocktailserviette, geschlossen 10 × 10 cm und offen 20 × 40 cm, ab 50 Stück. Servietten in Leinenoptik ab 0,24 €, ab 25 Stück. Der Preis hängt von Menge und Motiv ab. Der Versand nach Deutschland wird im Angebot genannt.',
       cta: 'Cocktailservietten ansehen',
       sections: [
         {
@@ -458,7 +458,7 @@ const COPY = {
         {
           heading: 'Gastronomie, Hochzeit, Versand',
           paragraphs: [
-            'Bedruckte Papierservietten und Airlaid starten meist bei 1.000 Stück, ab 0,05 € bzw. 0,10 € je Stück. Weiße Servietten ohne Druck gibt es im Karton, ab etwa 0,03 €, für hohe Mengen. Farbiges Seidenpapier, 500 × 750 mm, kommt mit 480 Bogen je Karton.',
+            'Servietten in Leinenoptik starten bei 25 Stück, ab 0,24 €. Der Preis hängt von Menge und Motiv ab. Weiße Servietten ohne Druck gibt es im Karton, ab etwa 0,03 €, für hohe Mengen. Farbiges Seidenpapier, 500 × 750 mm, kommt mit 480 Bogen je Karton.',
             'Wir drucken in Irland und liefern nach Deutschland, Österreich und in die Schweiz. Die Fracht gehört ins Angebot, besonders bei einem festen Hochzeitstermin: drei bis vier Wochen vorher bestellen. Die Produktseiten sind auf Englisch.',
           ],
         },
@@ -466,16 +466,16 @@ const COPY = {
       facts: [
         { label: 'Cocktail', value: '10 × 10 cm geschlossen, ab 50' },
         { label: 'Offen', value: '20 × 40 cm' },
-        { label: 'Mit Logo', value: 'Ab 0,05 €, meist 1.000' },
-        { label: 'Leinenoptik', value: 'Airlaid ab 0,10 €, 1.000' },
+        { label: 'Leinenoptik', value: 'Ab 0,24 €, ab 25' },
+        { label: 'Menge', value: 'Ab 25 Stück' },
         { label: 'Unbedruckt', value: 'Ab etwa 0,03 € im Karton' },
         { label: 'Lunch / Dinner', value: '33 cm und 40 cm' },
         { label: 'Versand', value: 'Deutschland, Fracht im Angebot' },
       ],
       products: {
         cocktail: { title: 'Cocktailservietten', desc: 'Weiß, 10 × 10 cm geschlossen. Logo oder Namen. Ab 50.' },
-        printed: { title: 'Papierservietten mit Logo', desc: 'Cocktail, Lunch und Dinner. Ab 0,05 €, meist ab 1.000.' },
-        linen: { title: 'Leinenoptik', desc: 'Airlaid für Hotel, Fine Dining und Hochzeit. Ab 0,10 €.' },
+        printed: { title: 'Papierservietten mit Logo', desc: '10 × 10 cm Cocktail, 10 × 20, 12 × 20, 15 × 20 und 20 × 20 cm. Ab 25 Stück, Preis auf Anfrage.' },
+        linen: { title: 'Leinenoptik', desc: 'Ab 0,24 €. Der Preis hängt von Menge und Motiv ab. Ab 25 Stück.' },
         plain: { title: 'Servietten im Karton', desc: 'Weiß, ohne Druck. Ab etwa 0,03 €.' },
         wedding: { title: 'Hochzeitsservietten', desc: 'Namen, Datum oder Monogramm auf Papier oder Airlaid.' },
         kraft: { title: 'Kraft, Hochzeit', desc: 'Ungebleichtes Papier, Namen oder Monogramm.' },
@@ -483,7 +483,7 @@ const COPY = {
       faqs: [
         { q: 'Liefern Sie bedruckte Servietten nach Deutschland?', a: 'Ja. Sie werden in Ashbourne, Irland, gedruckt und nach Deutschland, Österreich und in die Schweiz versendet. Die Fracht steht im Angebot. Der Versand bleibt in der EU.' },
         { q: 'Wie viele Cocktailservietten sind das Minimum?', a: '50 Stück. Geschlossen 10 × 10 cm, offen 20 × 40 cm. Für Bar, Restaurant oder Empfang.' },
-        { q: 'Was kostet eine Serviette mit Logo?', a: 'Bedrucktes Papier beginnt bei etwa 0,05 € je Stück, in der Regel ab 1.000 Stück. Airlaid in Leinenoptik beginnt bei etwa 0,10 €, gleiche Menge. Personalisierte Cocktailservietten gibt es ab 50 Stück.' },
+        { q: 'Was kostet eine Serviette mit Logo?', a: 'Servietten in Leinenoptik beginnen bei 0,24 €. Der Preis hängt von Menge und Motiv ab. Minimum 25 Stück. Personalisierte Cocktailservietten gibt es ab 50 Stück.' },
         { q: 'Welche Größe für ein Restaurant?', a: '33 cm, 2-lagig, für Café und Alltag. Cocktail unter dem Glas. 40 cm für Hotel, Fine Dining und das Hochzeitsessen.' },
         { q: 'Geht eine Hochzeit?', a: 'Ja. Namen, Datum oder Monogramm auf Weiß, Leinenoptik oder Kraft. Drei bis vier Wochen vor dem Termin bestellen. Die Fracht zur Location in Deutschland wird angeboten.' },
         { q: 'Gibt es Servietten ohne Logo?', a: 'Ja. Weiße Großmengen im Karton, ab etwa 0,03 €, für viel Frequenz in der Gastronomie.' },
@@ -672,13 +672,13 @@ const COPY = {
       shortLabel: 'Servilletas',
       title: 'Servilletas personalizadas | Cóctel, restaurante y boda | España',
       description:
-        'Servilletas de papel personalizadas para España. Cóctel de 10 × 10 cm desde 50 unidades, con logo desde 0,05 €, airlaid efecto lino. Impresas en Irlanda, envío en la UE.',
+        'Servilletas de papel personalizadas para España. Cóctel de 10 × 10 cm desde 50 unidades, efecto lino desde 0,24 €. Impresas en Irlanda, envío en la UE.',
       keywords:
         'servilletas personalizadas, servilletas de papel con logo, servilletas de cóctel, servilletas impresas, servilletas de boda, servilletas para restaurante, airlaid, España',
       eyebrow: 'Servilletas, todos los tipos',
       h1: 'Servilletas personalizadas para España',
       heroAlt: 'Servilleta de cóctel impresa con el logo de un restaurante',
-      lead: 'PrintNPack imprime servilletas personalizadas en Ashbourne, Irlanda, para restaurantes, bares, hoteles y bodas en España. Servilleta de cóctel blanca, 10 × 10 cm cerrada y 20 × 40 cm abierta, desde 50 unidades. Servilletas de papel con logo desde 0,05 €, a menudo 1.000 unidades. Airlaid efecto lino desde 0,10 €. El porte a España se confirma con el presupuesto.',
+      lead: 'PrintNPack imprime servilletas personalizadas en Ashbourne, Irlanda, para restaurantes, bares, hoteles y bodas en España. Servilleta de cóctel blanca, 10 × 10 cm cerrada y 20 × 40 cm abierta, desde 50 unidades. Servilletas efecto lino desde 0,24 €, desde 25 unidades. El precio depende de la cantidad y del diseño. El porte a España se confirma con el presupuesto.',
       cta: 'Ver servilletas de cóctel',
       sections: [
         {
@@ -691,7 +691,7 @@ const COPY = {
         {
           heading: 'Restaurantes, bodas y envío',
           paragraphs: [
-            'Las servilletas de papel impresas y el airlaid suelen empezar en 1.000 unidades, desde 0,05 € y 0,10 €. Las blancas sin impresión se piden por caja, desde unos 0,03 €, para mucho volumen. El papel de seda de color, 500 × 750 mm, va en cajas de 480 hojas.',
+            'Las servilletas efecto lino empiezan en 25 unidades, desde 0,24 €. El precio depende de la cantidad y del diseño. Las blancas sin impresión se piden por caja, desde unos 0,03 €, para mucho volumen. El papel de seda de color, 500 × 750 mm, va en cajas de 480 hojas.',
             'Imprimimos en Irlanda y enviamos a España. Cuente el transporte en el presupuesto, sobre todo si la boda tiene fecha: pida con tres o cuatro semanas. Las fichas de producto están en inglés.',
           ],
         },
@@ -699,16 +699,16 @@ const COPY = {
       facts: [
         { label: 'Cóctel', value: '10 × 10 cm cerrada, desde 50' },
         { label: 'Abierta', value: '20 × 40 cm' },
-        { label: 'Con logo', value: 'Desde 0,05 €, a menudo 1.000' },
-        { label: 'Efecto lino', value: 'Airlaid desde 0,10 €, 1.000' },
+        { label: 'Efecto lino', value: 'Desde 0,24 €, desde 25' },
+        { label: 'Cantidad', value: 'Desde 25 unidades' },
         { label: 'Sin impresión', value: 'Desde unos 0,03 € por caja' },
         { label: 'Lunch / cena', value: '33 cm y 40 cm' },
         { label: 'Envío', value: 'España, porte en el presupuesto' },
       ],
       products: {
         cocktail: { title: 'Servilletas de cóctel', desc: 'Blancas, 10 × 10 cm cerradas. Logo o nombres. Desde 50.' },
-        printed: { title: 'Papel con logo', desc: 'Cóctel, lunch y cena. Desde 0,05 €, mínimo habitual 1.000.' },
-        linen: { title: 'Efecto lino', desc: 'Airlaid para hotel, alta cocina y boda. Desde 0,10 €.' },
+        printed: { title: 'Papel con logo', desc: 'Cóctel 10 × 10 cm, 10 × 20, 12 × 20, 15 × 20 y 20 × 20 cm. Desde 25 unidades, precio bajo presupuesto.' },
+        linen: { title: 'Efecto lino', desc: 'Desde 0,24 €. El precio depende de la cantidad y del diseño. Desde 25.' },
         plain: { title: 'Servilletas al por mayor', desc: 'Blancas sin impresión, por caja. Desde unos 0,03 €.' },
         wedding: { title: 'Servilletas de boda', desc: 'Nombres, fecha o monograma en papel o efecto lino.' },
         kraft: { title: 'Kraft de boda', desc: 'Papel crudo sin blanquear, nombres o monograma.' },
@@ -716,7 +716,7 @@ const COPY = {
       faqs: [
         { q: '¿Envían servilletas personalizadas a España?', a: 'Sí. Se imprimen en Ashbourne, Irlanda, y se envían a España. El porte se confirma en el presupuesto. El envío sigue dentro de la UE.' },
         { q: '¿Cuál es el mínimo de servilletas de cóctel?', a: '50 unidades. Cerradas miden 10 × 10 cm. Abiertas, 20 × 40 cm. Sirven para un bar, un restaurante o un cóctel.' },
-        { q: '¿Cuánto cuesta una servilleta con logo?', a: 'El papel impreso empieza en unos 0,05 € por unidad, en general desde 1.000. El airlaid efecto lino empieza en unos 0,10 €, con el mismo mínimo. El cóctel personalizado sale desde 50 unidades.' },
+        { q: '¿Cuánto cuesta una servilleta con logo?', a: 'El efecto lino empieza en 0,24 €. El precio depende de la cantidad y del diseño. Mínimo 25 unidades. El cóctel personalizado sale desde 50 unidades.' },
         { q: '¿Qué tamaño para un restaurante?', a: '33 cm y 2 capas para cafetería y servicio diario. Cóctel bajo el vaso. 40 cm para hotel, alta cocina y cena de boda.' },
         { q: '¿Se puede imprimir una boda?', a: 'Sí. Nombres, fecha o monograma en blanco, efecto lino o kraft. Pida con tres o cuatro semanas. El porte al lugar en España va en el presupuesto.' },
         { q: '¿Hay servilletas sin logo?', a: 'Sí. Blancas al por mayor, por caja, desde unos 0,03 €, para hostelería de mucho volumen.' },
@@ -851,6 +851,110 @@ function buildProducts(cluster, productCopy) {
   });
 }
 
+const DELIVERY_AREAS = {
+  de: [
+    { country: 'Deutschland', cities: ['Berlin', 'München', 'Hamburg', 'Köln', 'Frankfurt', 'Stuttgart', 'Düsseldorf', 'Leipzig', 'Dresden', 'Hannover', 'Nürnberg', 'Bremen', 'Essen', 'Dortmund'] },
+    { country: 'Österreich', cities: ['Wien', 'Graz', 'Linz', 'Salzburg'] },
+    { country: 'Schweiz', cities: ['Zürich', 'Genf', 'Basel', 'Bern'] },
+  ],
+  fr: [
+    { country: 'France', cities: ['Paris', 'Lyon', 'Marseille', 'Toulouse', 'Lille', 'Bordeaux', 'Nantes', 'Strasbourg', 'Nice'] },
+    { country: 'Belgique', cities: ['Bruxelles'] },
+    { country: 'Suisse', cities: ['Genève'] },
+  ],
+  es: [
+    { country: 'España', cities: ['Madrid', 'Barcelona', 'Valencia', 'Sevilla', 'Bilbao', 'Málaga', 'Zaragoza'] },
+  ],
+};
+
+function joinAnd(items, andWord) {
+  if (items.length < 2) return items.join('');
+  return `${items.slice(0, -1).join(', ')} ${andWord} ${items[items.length - 1]}`;
+}
+
+function deliveryPlacePhrase(localeId) {
+  const groups = DELIVERY_AREAS[localeId];
+  if (localeId === 'de') {
+    const [germany, austria, switzerland] = groups;
+    return `${joinAnd(germany.cities, 'und')}, sowie ${joinAnd(austria.cities, 'und')}, ${joinAnd(switzerland.cities, 'und')}`;
+  }
+  if (localeId === 'fr') {
+    const [france, belgium, switzerland] = groups;
+    return `${joinAnd(france.cities, 'et')}, ainsi qu’à ${belgium.cities[0]} et à ${switzerland.cities[0]}`;
+  }
+  return joinAnd(groups[0].cities, 'y');
+}
+
+function areaServedPlaces(localeId) {
+  return DELIVERY_AREAS[localeId].flatMap((group) => group.cities.map((name) => ({
+    '@type': 'City',
+    name,
+    containedInPlace: { '@type': 'Country', name: group.country },
+  })));
+}
+
+const CITY_FAQ = {
+  de: {
+    banners: {
+      q: 'Bannerdruck in München, Berlin oder Hamburg?',
+      a: (where) => `Ja. Der Bannerdruck entsteht in Ashbourne, Irland, und geht an eine Adresse in ${where}. Die Fracht steht im Angebot.`,
+    },
+    napkins: {
+      q: 'Servietten bedrucken für Köln, Frankfurt oder Wien?',
+      a: (where) => `Ja. Die Servietten werden in Ashbourne, Irland, bedruckt und an eine Adresse in ${where} geschickt. Die Fracht steht im Angebot.`,
+    },
+    xxl: {
+      q: 'XXL-Roll-up für eine Messe in München, Berlin oder Düsseldorf?',
+      a: (where) => `Ja. Das XXL-Roll-up wird in Ashbourne, Irland, gedruckt und an eine Messeadresse in ${where} geschickt. Die Fracht steht im Angebot.`,
+    },
+    stands: {
+      q: 'Messewand oder Textilspannrahmen für München, Berlin oder Hamburg?',
+      a: (where) => `Ja. Messewand und Textilspannrahmen werden in Ashbourne, Irland, gedruckt und an eine Adresse in ${where} geschickt. Die Fracht für den Rahmen steht im Angebot.`,
+    },
+  },
+  fr: {
+    banners: {
+      q: 'Impression de banderoles à Paris, Lyon ou Marseille ?',
+      a: (where) => `Oui. L’impression se fait à Ashbourne, en Irlande, puis l’envoi part vers une adresse à ${where}. Le port est confirmé avec le devis.`,
+    },
+    napkins: {
+      q: 'Serviettes personnalisées à Paris, Lyon ou Bruxelles ?',
+      a: (where) => `Oui. Les serviettes sont imprimées à Ashbourne, en Irlande, et expédiées à une adresse à ${where}. Le port est confirmé avec le devis.`,
+    },
+    xxl: {
+      q: 'Roll-up XXL pour un salon à Paris, Lyon ou Lille ?',
+      a: (where) => `Oui. Le roll-up XXL est imprimé à Ashbourne, en Irlande, et expédié vers un parc d’exposition à ${where}. Le port est confirmé avec le devis.`,
+    },
+    stands: {
+      q: 'Banderole avec support à Paris, Lyon ou Marseille ?',
+      a: (where) => `Oui. La banderole avec support est imprimée à Ashbourne, en Irlande, et expédiée à une adresse à ${where}. Le port du cadre est confirmé avec le devis.`,
+    },
+  },
+  es: {
+    banners: {
+      q: '¿Impresión de banderolas en Madrid, Barcelona o Valencia?',
+      a: (where) => `Sí. La impresión se hace en Ashbourne, Irlanda, y el envío sale hacia una dirección en ${where}. El porte se confirma con el presupuesto.`,
+    },
+    napkins: {
+      q: '¿Servilletas personalizadas en Madrid, Barcelona o Sevilla?',
+      a: (where) => `Sí. Las servilletas se imprimen en Ashbourne, Irlanda, y se envían a una dirección en ${where}. El porte se confirma con el presupuesto.`,
+    },
+    xxl: {
+      q: '¿Roll up XXL para una feria en Madrid, Barcelona o Bilbao?',
+      a: (where) => `Sí. El roll up XXL se imprime en Ashbourne, Irlanda, y se envía a un recinto ferial en ${where}. El porte se confirma con el presupuesto.`,
+    },
+    stands: {
+      q: '¿Banderola con soporte en Madrid, Barcelona o Valencia?',
+      a: (where) => `Sí. La banderola con soporte se imprime en Ashbourne, Irlanda, y se envía a una dirección en ${where}. El porte de la estructura se confirma con el presupuesto.`,
+    },
+  },
+};
+
+function cityDeliveryFaq(localeId, clusterId) {
+  const copy = CITY_FAQ[localeId][clusterId];
+  return { q: copy.q, a: copy.a(deliveryPlacePhrase(localeId)) };
+}
+
 function buildPage(localeId, clusterId) {
   const locale = LOCALES[localeId];
   const cluster = CLUSTERS[clusterId];
@@ -885,7 +989,8 @@ function buildPage(localeId, clusterId) {
     sections: copy.sections,
     facts: copy.facts,
     products: buildProducts(clusterId, copy.products),
-    faqs: copy.faqs,
+    faqs: [...copy.faqs, cityDeliveryFaq(localeId, clusterId)],
+    areaServed: areaServedPlaces(localeId),
     orderNote: ui.orderNote,
     faqHeading: ui.faqHeading,
     rangeHeading: ui.rangeHeading,
