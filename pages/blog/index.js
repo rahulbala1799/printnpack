@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'flat-kraft-food-bags-ireland-sizes-buying-guide',
+    title: 'Flat Kraft Food Bags Ireland: 3lb–9QT Sizes & Wholesale Buying Guide',
+    excerpt:
+      'How to buy plain flat kraft food bags in Ireland — brown kraft from 3lb to 9QT, measured sizes such as 8.5×11″ and 10×12″, case packs, and nationwide delivery from Ashbourne for chippers, bakeries and takeaways.',
+    date: '2026-10-19',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/199962.webp',
+    imageAlt:
+      'Flat kraft food bags Ireland — 3lb brown kraft bags wholesale for takeaways',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'custom-printed-coffee-cups-ireland-sizes-moq-buying-guide',
     title: 'Custom Printed Coffee Cups Ireland: 8–16oz Sizes, Low MOQ & Buying Guide',
     excerpt:
