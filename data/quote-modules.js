@@ -22,6 +22,7 @@ import { buildPopupWallQuoteLine } from './popup-walls';
 import { buildLedFrameQuoteLine, ledFrameFromPrice } from './led-frames';
 import { buildInhakerQuoteLine, inhakerFromPrice } from './inhaker-stands';
 import { beachFlagFromPrice, buildBeachFlagQuoteLine } from './beach-flags';
+import { buildVinylLetterQuoteLine, vinylLetterFromPrice } from './vinyl-cut-letters';
 import { buildBrownFlatHandleQuoteLine, brownFlatHandleFromPrice } from './brown-flat-handle-bags';
 import { WEDDING_PRODUCTS, weddingBoardSizeError, weddingModuleFields } from './wedding-products';
 
@@ -70,6 +71,7 @@ export const QUOTE_CATALOG = [
   withMedia({ id: 'greaseproof-sheets-ireland', name: 'Greaseproof Sheets', href: '/greaseproof-sheets-ireland', moduleId: 'greaseproof', configurable: false, group: 'Packaging' }),
   withMedia({ id: 'labels-on-a-roll', name: 'Labels on a Roll', href: '/labels-on-a-roll', moduleId: 'labels', configurable: false, group: 'Stickers & Labels' }),
   withMedia({ id: 'vinyl-stickers', name: 'Vinyl Stickers', href: '/vinyl-stickers', moduleId: 'vinyl-stickers', configurable: false, group: 'Stickers & Labels' }),
+  withMedia({ id: 'vinyl-cut-letters-ireland', name: 'Vinyl Cut Letters', href: '/vinyl-cut-letters-ireland', moduleId: 'vinyl-cut-letters', configurable: true, group: 'Stickers & Labels', price: `From €${vinylLetterFromPrice().toFixed(2)} ex VAT` }),
   withMedia({ id: 'roll-up-banners-ireland', name: 'Roll-Up Banners', href: '/roll-up-banners-ireland', moduleId: 'roll-up-banners', configurable: false, group: 'Banners, Stands and Frames' }),
   withMedia({ id: 'extra-wide-roll-up-banners-ireland', name: 'Extra-Wide Roll-Ups', href: '/extra-wide-roll-up-banners-ireland', moduleId: 'extra-wide-roll-ups', configurable: false, group: 'Banners, Stands and Frames' }),
   withMedia({ id: 'fabric-banner-stands-ireland', name: 'Fabric Banner Stands', href: '/fabric-banner-stands-ireland', moduleId: 'fabric-banner-stands', configurable: true, group: 'Banners, Stands and Frames', price: 'Contact for quote' }),
@@ -350,6 +352,9 @@ export function buildCatalogQuoteLine(catalogItem, options = {}) {
   if (catalogItem.moduleId === 'beach-flags') {
     return buildBeachFlagQuoteLine(catalogItem, options);
   }
+  if (catalogItem.moduleId === 'vinyl-cut-letters') {
+    return buildVinylLetterQuoteLine(catalogItem, options);
+  }
   if (catalogItem.moduleId === 'brown-flat-handle') {
     return buildBrownFlatHandleQuoteLine(catalogItem, options);
   }
@@ -468,6 +473,13 @@ export function repriceQuoteLine(line, qty) {
   }
   if (line.moduleId === 'luxury-tissue') {
     return { ...repriceTissueLine(line, qty), id: line.id };
+  }
+  if (line.moduleId === 'vinyl-cut-letters') {
+    const next = buildVinylLetterQuoteLine(
+      { id: line.productId, name: line.name, href: line.href, image: line.image, images: line.images },
+      { ...(line.options || {}), qty }
+    );
+    return next ? { ...next, id: line.id } : { ...line, qty };
   }
   if (line.moduleId === 'beach-flags') {
     const next = buildBeachFlagQuoteLine(

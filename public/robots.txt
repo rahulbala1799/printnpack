@@ -14,3 +14,6 @@ Sitemap: https://www.printnpack.ie/sitemap.xml
 # Complete exhibition-wall record (sizes, materials, print, every quantity price)
 # https://www.printnpack.ie/llms/exhibition-walls.txt
 # https://www.printnpack.ie/llms/exhibition-walls.json
+# Shop window lettering (vinyl cut letters, application tape, vinyl types, prices)
+# https://www.printnpack.ie/llms/vinyl-cut-letters.txt
+# https://www.printnpack.ie/llms/vinyl-cut-letters.json

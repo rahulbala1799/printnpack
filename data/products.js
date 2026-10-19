@@ -3,6 +3,7 @@ import { POPUP_WALL_GALLERY } from './popup-walls';
 import { LED_FRAME_GALLERY, ledFrameFromPrice } from './led-frames';
 import { INHAKER_GALLERY, inhakerFromPrice } from './inhaker-stands';
 import { beachFlagFromPrice } from './beach-flags';
+import { VINYL_LETTER_GALLERY, VINYL_LETTER_IMAGE, vinylLetterFromPrice } from './vinyl-cut-letters';
 
 const products = [
   {
@@ -1811,6 +1812,65 @@ const products = [
         answer: 'Correx is made from polypropylene, which is recyclable (recycling code 5). While it\'s a plastic product, it uses significantly less material than solid plastic alternatives due to its twin-wall fluted structure. For clients with strong environmental priorities, we offer collection and recycling services for used signs (minimum quantities apply), or guidance on local recycling options. For short-term indoor applications where outdoor durability isn\'t required, we also offer eco-friendly alternatives like cardboard display board.'
       }
     ]
+  },
+  {
+    id: 'vinyl-cut-letters-ireland',
+    name: 'Vinyl Cut Letters Ireland',
+    category: 'Stickers & Labels',
+    url: '/vinyl-cut-letters-ireland',
+    searchAliases: [
+      'vinyl cut letters',
+      'cut vinyl letters',
+      'shop window letters',
+      'shop window lettering',
+      'letters for a shop window',
+      'shop window vinyl',
+      'opening hours on the window',
+      'gold letters for a shop',
+      'gold vinyl letters',
+      'frosted window film',
+      'window vinyl letters',
+      'vinyl sign letters',
+      'self-adhesive letters',
+      'oracal letters',
+      'kiss-cut vinyl letters',
+      'application tape letters',
+    ],
+    description:
+      'Shop window lettering in Ireland. Vinyl cut letters arrive on application tape so you can put a shop name or opening hours on the glass yourself. Delivery included. Ex VAT.',
+    features: [
+      'Arrives on application tape, ready to put on the glass',
+      'White, black, colour, gold, silver and frosted film',
+      'Width 10–300 cm, height 10–120 cm',
+      'Common sizes and your own size',
+      '1 to 50 cuts, 1 to 20 copies',
+      'Delivery to Ireland included, ex VAT',
+    ],
+    detailedDescription:
+      `Shop window lettering for a shop name, opening hours or a phone number. The letters are cut from one colour of vinyl and supplied on application tape, so you put them on the glass yourself. White and black, bright colours, gold and silver metallic, or frosted window film. Set any width from 10 to 300 cm and any height from 10 to 120 cm. From €${vinylLetterFromPrice().toFixed(2)} ex VAT for a 10 × 10 cm white gloss letter with one cut, delivery to Ireland included. A full-colour printed decal is a vinyl sticker. A large printed PVC sheet is a vinyl banner.`,
+    specifications: [
+      { name: 'Also called', value: 'Shop window lettering, letters for a shop window, gold vinyl letters, frosted window film' },
+      { name: 'Size', value: 'Width 10–300 cm, height 10–120 cm' },
+      { name: 'Material', value: 'Oracal 751 gloss, matt and metallic, or frosted window film' },
+      { name: 'Finish', value: 'Kiss-cut on application tape. Unprinted. Apply it yourself.' },
+      { name: 'Cuts', value: '1 to 50 contour lines' },
+      { name: 'Copies', value: '1 to 20, one delivery shared' },
+      { name: 'Minimum order', value: '1 piece' },
+      { name: 'Delivery', value: 'Included to Ireland, ex VAT' },
+    ],
+    images: VINYL_LETTER_GALLERY.map((item) => item.src),
+    imageSrc: VINYL_LETTER_IMAGE.src,
+    imageFit: 'contain',
+    price: `From €${vinylLetterFromPrice().toFixed(2)} ex VAT`,
+    moq: 1,
+    leadTime: 'Included in the quoted delivery',
+    applications: [
+      'Shop name on the window',
+      'Opening hours on the door or window',
+      'Gold letters for a cafe, barber or salon',
+      'Frosted film for a till or treatment room',
+      'Glass office lettering',
+    ],
   },
   {
     id: 'vinyl-stickers',

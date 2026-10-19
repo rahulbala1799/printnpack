@@ -53,6 +53,7 @@ const breadcrumbLd = {
 };
 
 const relatedLinks = [
+  { href: '/vinyl-cut-letters-ireland', label: 'Vinyl cut letters', desc: 'Shop window lettering in one colour' },
   { href: '/banners-ireland', label: 'Banners Ireland', desc: 'Complete banner printing hub' },
   { href: '/banner-faq-ireland', label: 'Banner FAQ', desc: '40+ instant answers' },
   { href: '/blog/banner-sizes-ireland', label: 'Banner Sizes Guide', desc: '2×4, 3×6, 4×8 & roll-up dimensions' },

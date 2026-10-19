@@ -158,6 +158,7 @@ export default function Home() {
             catalogOffer('Custom Decals Ireland', '/vinyl-stickers'),
             catalogOffer('Vinyl Banners', '/vinyl-banners'),
             catalogOffer('Vinyl Stickers Ireland', '/vinyl-stickers'),
+            catalogOffer('Vinyl Cut Letters Ireland', '/vinyl-cut-letters-ireland'),
           ]),
         },
       ],

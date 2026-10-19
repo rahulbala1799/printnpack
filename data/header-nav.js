@@ -75,9 +75,10 @@ export const HEADER_CATEGORIES = [
     name: 'Stickers',
     href: '/vinyl-stickers',
     summary: 'Vinyl stickers and decals',
-    match: ['/vinyl-sticker'],
+    match: ['/vinyl-sticker', '/vinyl-cut-letters'],
     products: [
       { name: 'Vinyl stickers', href: '/vinyl-stickers' },
+      { name: 'Vinyl cut letters', href: '/vinyl-cut-letters-ireland' },
     ],
   },
   {

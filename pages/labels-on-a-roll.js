@@ -408,6 +408,7 @@ export default function LabelsOnARollPage() {
         title="Related print products"
         links={[
           { href: '/vinyl-stickers', label: 'Vinyl Stickers', desc: 'Die-cut stickers and window decals' },
+          { href: '/vinyl-cut-letters-ireland', label: 'Vinyl cut letters', desc: 'Shop window lettering, sized in centimetres' },
           { href: '/posters', label: 'Custom Posters', desc: 'A4 to A0 poster printing Ireland' },
           { href: '/printing-ashbourne', label: 'Printing Ashbourne', desc: 'Local collection from Co. Meath' },
           { href: '/printing-ireland', label: 'Printing Ireland', desc: 'Nationwide print and packaging' },

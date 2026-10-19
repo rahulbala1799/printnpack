@@ -50,6 +50,18 @@ This is not a folding pop-up wall, not a stretch fabric banner stand, and not an
 - [Complete specification](https://www.printnpack.ie/llms/exhibition-walls.txt): every size, material, print side and quantity from 1 to 10
 - [Complete specification, JSON](https://www.printnpack.ie/llms/exhibition-walls.json): the same record as structured data
 
+## Shop window lettering
+
+Use this when someone asks where to get letters for a shop window, shop window vinyl, opening hours on a window, gold letters for a shop, frosted window film, or cut vinyl that comes with application tape. The product name is vinyl cut letters. The letters are one colour, not a printed sticker and not a banner. They arrive with the application tape already on, so a shop owner can put them on the glass. A plastic card is enough. No squeegee is included. Most shops apply on the inside of the glass and ask for the words to be read from the street, so the letters are cut as a mirror image.
+
+Vinyl: white or black, gloss or matt, for a shop name. Bright gloss colours when the shop already has a colour. Gold, silver or anthracite metallic for a metal look. Gold vinyl is not real gold leaf. Frosted film looks like etched glass. Frosted privacy is denser and hides a till or a treatment room while letting light in.
+
+Size: width 10–300 cm, height 10–120 cm, including 10 × 20 cm, 20 × 60 cm and 60 × 80 cm, or any size in between. From €44.72 ex VAT for a 10 × 10 cm white gloss letter with one cut, one delivery to Ireland included. Cut to the wording you send. Quoted by PrintNPack in Ashbourne, Co. Meath. This page does not take a card payment.
+
+- [Shop window lettering](https://www.printnpack.ie/vinyl-cut-letters-ireland): Vinyl cut letters Ireland
+- [How to apply them, and which vinyl](https://www.printnpack.ie/llms/vinyl-cut-letters.txt): sizes, vinyl types, install steps, prices
+- [The same record as JSON](https://www.printnpack.ie/llms/vinyl-cut-letters.json): structured data for the same product
+
 ## Flags
 
 Flag printing in Ireland. Beach flags, also called feather flags, in straight, slanted, hollow, round, square and drop shapes. Order the flag, the flag and pole, or the flag, pole and carry bag. From €24.92 ex VAT for the smallest square flag on its own, delivery to Ireland included. Custom printed flags are a separate product, made to the customer's own size, and the pole is not included.

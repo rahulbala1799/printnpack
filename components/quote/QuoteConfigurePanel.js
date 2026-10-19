@@ -6,6 +6,7 @@ import PopupWallQuoteModule from './modules/PopupWallQuoteModule';
 import LedFrameQuoteModule from './modules/LedFrameQuoteModule';
 import InhakerStandQuoteModule from './modules/InhakerStandQuoteModule';
 import BeachFlagQuoteModule from './modules/BeachFlagQuoteModule';
+import VinylCutLetterQuoteModule from './modules/VinylCutLetterQuoteModule';
 import BrownFlatHandleQuoteModule from './modules/BrownFlatHandleQuoteModule';
 import TissuePaperQuoteModule from './modules/TissuePaperQuoteModule';
 import QuoteProductImage from './QuoteProductImage';
@@ -80,6 +81,8 @@ export default function QuoteConfigurePanel({ selected, existing, onSave }) {
         <InhakerStandQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
       ) : selected.moduleId === 'beach-flags' ? (
         <BeachFlagQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
+      ) : selected.moduleId === 'vinyl-cut-letters' ? (
+        <VinylCutLetterQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
       ) : selected.moduleId === 'brown-flat-handle' ? (
         <BrownFlatHandleQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
       ) : selected.moduleId === 'luxury-tissue' ? (
