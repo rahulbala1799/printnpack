@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'pop-up-display-stands-ireland-sizes-buying-guide',
+    title: 'Pop-up Display Stands Ireland: Straight vs Curved Sizes & Buying Guide',
+    excerpt:
+      'How to buy pop-up display stands in Ireland — straight sizes from 151×224 cm to 445×224 cm, curved 233×224 cm, full stand vs fabric only, optional LED, from €511.65 ex VAT with Ireland delivery included from Ashbourne.',
+    date: '2026-10-20',
+    readTime: '8 min read',
+    image: '/images/banners/popup-walls/popup-wall-straight.jpg',
+    imageAlt:
+      'Pop-up display stands Ireland — straight fabric exhibition wall for trade shows',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'flat-kraft-food-bags-ireland-sizes-buying-guide',
     title: 'Flat Kraft Food Bags Ireland: 3lb–9QT Sizes & Wholesale Buying Guide',
     excerpt:
