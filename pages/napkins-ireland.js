@@ -9,7 +9,7 @@ import { HreflangLinks, LanguageBar, OgLocaleAlternates } from '../components/se
 import { MOST_ASKED_NAPKIN_FAQS } from '../data/napkin-faq';
 
 const PAGE_URL = `${SITE_URL}/napkins-ireland`;
-const HERO_IMAGE = '/images/hero/napkin.svg';
+const HERO_IMAGE = '/images/napkins/cocktail-napkin-salty-cod-ireland.webp';
 
 const napkinTypes = [
   { title: 'Cocktail Napkins', desc: 'White logo napkins for restaurants, bars and cafés. 10 × 10 cm closed, 20 × 40 cm open.', href: '/products/cocktail-napkins', priceLabel: '10 × 10 cm' },
@@ -122,8 +122,15 @@ export default function NapkinsIreland() {
                 </Link>
               </div>
             </div>
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg bg-amber-50 flex items-center justify-center p-12">
-              <Image src={HERO_IMAGE} alt="Custom printed napkins Ireland — branded restaurant and wedding napkins" width={360} height={360} className="object-contain" priority />
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg bg-amber-50">
+              <Image
+                src={HERO_IMAGE}
+                alt="Printed cocktail napkin in Ireland for a fish and chips restaurant"
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
           </div>
         </div>
