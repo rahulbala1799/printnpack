@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'bagasse-plates-bowls-ireland-sizes-buying-guide',
+    title: 'Bagasse Plates & Bowls Ireland: 7″–9″ Sizes & Wholesale Buying Guide',
+    excerpt:
+      'How to buy plain bagasse plates and bowls in Ireland — 7″ and 9″ round plates, 10.5×8″ oval plates, 9oz–32oz bowls, case packs, and nationwide delivery from Ashbourne for catering and cafés.',
+    date: '2026-10-21',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/109756.webp',
+    imageAlt:
+      'Bagasse plates Ireland — 9 inch round compostable plate wholesale for catering',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'pop-up-display-stands-ireland-sizes-buying-guide',
     title: 'Pop-up Display Stands Ireland: Straight vs Curved Sizes & Buying Guide',
     excerpt:
