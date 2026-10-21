@@ -21,6 +21,10 @@ export default function StaffChatsPage() {
   const [activeId, setActiveId] = useState('');
   const [thread, setThread] = useState(null);
   const [draft, setDraft] = useState('');
+  const [helperOpen, setHelperOpen] = useState(false);
+  const [helperNote, setHelperNote] = useState('');
+  const [helperReply, setHelperReply] = useState('');
+  const [helperBusy, setHelperBusy] = useState(false);
   const [error, setError] = useState('');
   const [pane, setPane] = useState('chats');
   const [visitors, setVisitors] = useState([]);
@@ -153,7 +157,7 @@ export default function StaffChatsPage() {
       </div>
       {pane === 'visitors' && (
         <div className="staff-body space-y-3 pb-8">
-          {visitors.length === 0 && <p className="text-sm text-slate-500">Nobody on the site in the last 15 minutes.</p>}
+          {visitors.length === 0 && <p className="text-sm text-slate-500">Nobody on the site right now.</p>}
           {visitors.map((visitor) => (
             <article key={visitor.id} className="rounded-2xl bg-white px-4 py-3">
               <p className="text-sm font-semibold text-slate-900">
@@ -168,6 +172,33 @@ export default function StaffChatsPage() {
                 <p className="mt-1 text-xs text-slate-500">{visitor.trail.join(' → ')}</p>
               )}
               {visitor.invite && <p className="mt-1 text-xs text-blue-700">Bubble: {visitor.invite}</p>}
+              <form
+                className="mt-3 flex gap-2"
+                onSubmit={async (event) => {
+                  event.preventDefault();
+                  const form = event.currentTarget;
+                  const input = form.elements.namedItem('hello');
+                  const text = input && 'value' in input ? String(input.value).trim() : '';
+                  if (!text) return;
+                  const res = await fetch('/api/staff/visitors/start', {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sessionId: visitor.id, text }),
+                  });
+                  const data = await res.json().catch(() => ({}));
+                  if (!res.ok) {
+                    window.alert(data.error || 'Could not start the chat');
+                    return;
+                  }
+                  if (input && 'value' in input) input.value = '';
+                  if (data.chatId) setActiveId(data.chatId);
+                  setPane('chats');
+                }}
+              >
+                <input name="hello" placeholder="Message them" className="min-w-0 flex-1 rounded-full border border-slate-200 px-3 py-2 text-sm" />
+                <button type="submit" className="rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white">Send</button>
+              </form>
             </article>
           ))}
         </div>
@@ -195,7 +226,7 @@ export default function StaffChatsPage() {
               className={`block w-full border-b border-slate-100 px-4 py-3 text-left ${activeId === chat.id ? 'bg-slate-50' : ''}`}
             >
               <span className="flex items-center justify-between gap-2 text-xs text-slate-500">
-                <span>{chat.status === 'human' ? 'You have this' : 'Assistant'}</span>
+                <span>{chat.status === 'human' ? 'You have this' : 'Waiting'}</span>
                 <span>{timeLabel(chat.lastMessageAt)}</span>
               </span>
               <span className="mt-1 block truncate text-sm font-medium text-slate-900">
@@ -217,7 +248,7 @@ export default function StaffChatsPage() {
                 </div>
                 {status === 'human' ? (
                   <button type="button" onClick={() => act('release')} className="rounded-full border border-slate-200 px-3 py-1 text-xs font-medium">
-                    Hand back to assistant
+                    Mark as waiting
                   </button>
                 ) : (
                   <button type="button" onClick={() => act('takeover')} className="rounded-full bg-slate-950 px-3 py-1 text-xs font-medium text-white">
@@ -235,6 +266,64 @@ export default function StaffChatsPage() {
                 ))}
               </div>
               {error && <p className="px-4 text-xs text-red-600">{error}</p>}
+              <div className="border-t border-slate-100 px-3 pt-3">
+                <button type="button" onClick={() => setHelperOpen((open) => !open)} className="text-sm font-semibold text-blue-600">
+                  Reply with AI
+                </button>
+                {helperOpen && (
+                  <div className="mt-2 space-y-2">
+                    <input
+                      value={helperNote}
+                      onChange={(event) => setHelperNote(event.target.value)}
+                      placeholder="What do you want to say?"
+                      className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none"
+                    />
+                    <button
+                      type="button"
+                      disabled={helperBusy || !helperNote.trim()}
+                      onClick={async () => {
+                        setHelperBusy(true);
+                        setError('');
+                        try {
+                          const res = await fetch('/api/staff/chats/draft', {
+                            method: 'POST',
+                            credentials: 'include',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ text: helperNote.trim(), messages: thread?.messages || [] }),
+                          });
+                          const data = await res.json().catch(() => ({}));
+                          if (!res.ok) throw new Error(data.error || 'Could not refine that');
+                          setHelperReply(data.reply || '');
+                        } catch (err) {
+                          setError(err.message);
+                        } finally {
+                          setHelperBusy(false);
+                        }
+                      }}
+                      className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-semibold text-white disabled:opacity-40"
+                    >
+                      {helperBusy ? 'Refining…' : 'Refine'}
+                    </button>
+                    {helperReply && (
+                      <div>
+                        <p className="text-sm text-slate-800">{helperReply}</p>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setDraft(helperReply);
+                            setHelperOpen(false);
+                            setHelperNote('');
+                            setHelperReply('');
+                          }}
+                          className="mt-1 text-sm font-semibold text-blue-600"
+                        >
+                          Insert
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
               <form
                 className="flex gap-2 border-t border-slate-100 p-3"
                 onSubmit={(event) => {

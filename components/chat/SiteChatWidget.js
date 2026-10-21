@@ -6,8 +6,10 @@ import { FaCommentDots, FaPaperPlane, FaTimes } from 'react-icons/fa';
 const WELCOME = {
   local: true,
   role: 'assistant',
-  content: 'Ask about printing, packaging, or a price. I can send your enquiry straight to the PrintNPack team.',
+  content: 'Need any help? We are live and answer queries until 12 AM, and we usually reply very fast. Ask your question and leave your details so the team can reply.',
 };
+
+const PROMPT = 'Need any help? We usually reply very fast. We are live and answer queries until 12 AM.';
 
 const SUGGESTIONS = ['I need a quote', 'Custom pizza boxes', 'Pop-up display stands', 'Plain packaging'];
 
@@ -20,7 +22,18 @@ function safeHref(href) {
   return '';
 }
 
-function MessageBody({ text }) {
+function mergeThread(current, incoming) {
+  const pending = current.filter((message) => {
+    if (message.local || message.pending) return true;
+    if (!message.id) {
+      return !incoming.some((row) => row.role === message.role && row.content === message.content);
+    }
+    return false;
+  });
+  return [...pending.filter((message) => message.local), ...incoming, ...pending.filter((message) => !message.local)];
+}
+
+function MessageBody({ text, onNavigate }) {
   const parts = [];
   const pattern = /\[([^\]]+)\]\(([^)\s]+)\)/g;
   let last = 0;
@@ -31,9 +44,20 @@ function MessageBody({ text }) {
   while ((match = pattern.exec(source))) {
     if (match.index > last) parts.push(source.slice(last, match.index));
     const href = safeHref(match[2]);
-    if (href.startsWith('/')) {
+    const sitePath = href.startsWith('https://www.printnpack.ie/')
+      ? href.slice('https://www.printnpack.ie'.length)
+      : href;
+    if (sitePath.startsWith('/')) {
       parts.push(
-        <Link key={key} href={href} className="font-semibold underline">
+        <Link
+          key={key}
+          href={sitePath}
+          className="font-semibold underline"
+          onClick={(event) => {
+            event.preventDefault();
+            onNavigate?.(sitePath);
+          }}
+        >
           {match[1]}
         </Link>
       );
@@ -64,10 +88,14 @@ export default function SiteChatWidget() {
   const [messages, setMessages] = useState([WELCOME]);
   const [mode, setMode] = useState('ai');
   const [chatId, setChatId] = useState('');
+  const [needsLead, setNeedsLead] = useState(false);
+  const [lead, setLead] = useState({ name: '', email: '', phone: '' });
+  const [nudge, setNudge] = useState(false);
   const listRef = useRef(null);
   const abortRef = useRef(null);
-  const sendingRef = useRef(false);
   const chatIdRef = useRef('');
+  const openRef = useRef(false);
+  const modeRef = useRef('ai');
 
   useEffect(() => {
     const saved = window.sessionStorage.getItem('printnpack-chat-id') || '';
@@ -78,37 +106,162 @@ export default function SiteChatWidget() {
   }, []);
 
   useEffect(() => {
+    openRef.current = open;
+  }, [open]);
+
+  useEffect(() => {
+    const close = () => setOpen(false);
+    router.events.on('routeChangeStart', close);
+    return () => router.events.off('routeChangeStart', close);
+  }, [router.events]);
+
+  useEffect(() => {
+    const phoneQuery = window.matchMedia('(max-width: 767px)');
+    const phone = phoneQuery.matches;
+    const key = phone ? 'printnpack-ask-nudge-phone' : 'printnpack-ask-nudge';
+    try {
+      if (phone) {
+        if (window.sessionStorage.getItem(key)) return undefined;
+      } else if (window.localStorage.getItem(key) === new Date().toISOString().slice(0, 10)) {
+        return undefined;
+      }
+    } catch {
+      return undefined;
+    }
+    const delay = phone ? 6000 + Math.floor(Math.random() * 5000) : 12000;
+    const timer = window.setTimeout(() => {
+      if (openRef.current) return;
+      setNudge(true);
+    }, delay);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  function dismissNudge() {
+    setNudge(false);
+    const phone = window.matchMedia('(max-width: 767px)').matches;
+    try {
+      if (phone) window.sessionStorage.setItem('printnpack-ask-nudge-phone', '1');
+      else window.localStorage.setItem('printnpack-ask-nudge', new Date().toISOString().slice(0, 10));
+    } catch {
+      // The prompt can show again next visit.
+    }
+  }
+
+  useEffect(() => {
+    if (open && nudge) dismissNudge();
+  }, [open, nudge]);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const scrollY = window.scrollY;
+    const { style } = document.body;
+    const previous = {
+      overflow: style.overflow,
+      position: style.position,
+      top: style.top,
+      width: style.width,
+    };
+    style.overflow = 'hidden';
+    style.position = 'fixed';
+    style.top = `-${scrollY}px`;
+    style.width = '100%';
+    const onKey = (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      style.overflow = previous.overflow;
+      style.position = previous.position;
+      style.top = previous.top;
+      style.width = previous.width;
+      window.scrollTo(0, scrollY);
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
+
+  useEffect(() => {
+    modeRef.current = mode;
+    if (mode === 'human') setNeedsLead(false);
+  }, [mode]);
+
+  useEffect(() => {
     if (!open || !chatId) return undefined;
     let stop = false;
-
-    async function pull() {
-      if (sendingRef.current) return;
-      try {
-        const response = await fetch(`/api/chat?chatId=${encodeURIComponent(chatId)}`);
-        if (!response.ok) return;
-        const data = await response.json();
-        if (stop) return;
-        setMode(data.status === 'human' ? 'human' : 'ai');
+    fetch(`/api/chat?chatId=${encodeURIComponent(chatId)}`)
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data) => {
+        if (!data || stop) return;
+        const human = data.status === 'human';
+        modeRef.current = human ? 'human' : 'ai';
+        setMode(human ? 'human' : 'ai');
         const incoming = Array.isArray(data.messages) ? data.messages : [];
-        setMessages((current) => {
-          const localOnly = current.every((message) => message.local);
-          if (localOnly && incoming.length) return [WELCOME, ...incoming];
-          const known = new Set(current.map((message) => message.id).filter(Boolean));
-          const staff = incoming.filter((message) => message.role === 'staff' && message.id && !known.has(message.id));
-          return staff.length ? [...current, ...staff] : current;
-        });
-      } catch {
-        // The next poll retries.
-      }
-    }
-
-    pull();
-    const timer = setInterval(pull, 2500);
+        setNeedsLead(!human && data.hasLead === false && incoming.some((row) => row.role === 'user'));
+        setMessages((current) => mergeThread(current, incoming));
+      })
+      .catch(() => {});
     return () => {
       stop = true;
-      clearInterval(timer);
     };
   }, [open, chatId]);
+
+  useEffect(() => {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    if (!chatId || !supabaseUrl || !anonKey) return undefined;
+
+    const socketUrl = `${supabaseUrl.replace(/^https:/, 'wss:').replace(/\/$/, '')}/realtime/v1/websocket?apikey=${encodeURIComponent(anonKey)}&vsn=1.0.0`;
+    const socket = new WebSocket(socketUrl);
+    let ref = 0;
+    const send = (topic, event, payload) => {
+      if (socket.readyState !== WebSocket.OPEN) return;
+      ref += 1;
+      socket.send(JSON.stringify({ topic, event, payload, ref: String(ref) }));
+    };
+
+    socket.onopen = () => {
+      send(`realtime:live-chat-${chatId}`, 'phx_join', {
+        config: {
+          broadcast: { ack: false, self: false },
+          presence: { enabled: false },
+          private: false,
+        },
+        access_token: anonKey,
+      });
+    };
+
+    socket.onmessage = (event) => {
+      let data;
+      try {
+        data = JSON.parse(event.data);
+      } catch {
+        return;
+      }
+      if (data.event !== 'broadcast') return;
+      const payload = data.payload?.payload;
+      if (!payload?.content) return;
+      if (payload.status === 'human' || payload.status === 'ai') {
+        modeRef.current = payload.status;
+        setMode(payload.status);
+      }
+      if (payload.role === 'staff' && !openRef.current) setOpen(true);
+      setMessages((current) => {
+        if (payload.id && current.some((message) => message.id === payload.id)) return current;
+        const pending = current.findIndex((message) => !message.id && message.role === payload.role && message.content === payload.content);
+        if (pending >= 0) {
+          const copy = [...current];
+          copy[pending] = { ...copy[pending], id: payload.id };
+          return copy;
+        }
+        return [...current, { id: payload.id, role: payload.role, content: payload.content }];
+      });
+    };
+
+    const beat = setInterval(() => send('phoenix', 'heartbeat', {}), 25000);
+    return () => {
+      clearInterval(beat);
+      socket.close();
+    };
+  }, [chatId]);
 
   useEffect(() => {
     if (listRef.current) listRef.current.scrollTop = listRef.current.scrollHeight;
@@ -117,12 +270,79 @@ export default function SiteChatWidget() {
   useEffect(() => () => abortRef.current?.abort(), []);
 
   useEffect(() => {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    const visitorSession = window.localStorage.getItem('analytics_session_id') || '';
+    if (!visitorSession || !supabaseUrl || !anonKey) return undefined;
+
+    const socketUrl = `${supabaseUrl.replace(/^https:/, 'wss:').replace(/\/$/, '')}/realtime/v1/websocket?apikey=${encodeURIComponent(anonKey)}&vsn=1.0.0`;
+    const socket = new WebSocket(socketUrl);
+    let ref = 0;
+    const sendFrame = (topic, event, payload) => {
+      if (socket.readyState !== WebSocket.OPEN) return;
+      ref += 1;
+      socket.send(JSON.stringify({ topic, event, payload, ref: String(ref) }));
+    };
+    socket.onopen = () => {
+      sendFrame(`realtime:live-visitor-${visitorSession}`, 'phx_join', {
+        config: {
+          broadcast: { ack: false, self: false },
+          presence: { enabled: false },
+          private: false,
+        },
+        access_token: anonKey,
+      });
+    };
+    socket.onmessage = (event) => {
+      let data;
+      try {
+        data = JSON.parse(event.data);
+      } catch {
+        return;
+      }
+      if (data.event !== 'broadcast') return;
+      const payload = data.payload?.payload;
+      if (!payload?.content || payload.role !== 'staff') return;
+      if (payload.chatId) {
+        chatIdRef.current = payload.chatId;
+        window.sessionStorage.setItem('printnpack-chat-id', payload.chatId);
+        setChatId(payload.chatId);
+      }
+      modeRef.current = 'human';
+      setMode('human');
+      setMessages((current) => {
+        if (payload.id && current.some((message) => message.id === payload.id)) return current;
+        return [...current, { id: payload.id, role: 'staff', content: payload.content }];
+      });
+      if (!openRef.current) {
+        window.dispatchEvent(new CustomEvent('printnpack-staff-ping', { detail: { message: payload.content } }));
+      } else {
+        setOpen(true);
+      }
+    };
+    const beat = setInterval(() => sendFrame('phoenix', 'heartbeat', {}), 25000);
+    return () => {
+      clearInterval(beat);
+      socket.close();
+    };
+  }, []);
+
+  useEffect(() => {
     const openWith = (event) => {
       const message = event.detail?.message;
+      const role = event.detail?.role || 'assistant';
+      const nextChatId = event.detail?.chatId;
+      if (nextChatId) {
+        chatIdRef.current = nextChatId;
+        window.sessionStorage.setItem('printnpack-chat-id', nextChatId);
+        setChatId(nextChatId);
+        modeRef.current = 'human';
+        setMode('human');
+      }
       if (message) {
         setMessages((current) => {
-          if (current.some((item) => item.content === message)) return current;
-          return [...current, { role: 'assistant', content: message }];
+          if (current.some((item) => item.content === message && item.role === role)) return current;
+          return [...current, { role, content: message }];
         });
       }
       setOpen(true);
@@ -164,25 +384,41 @@ export default function SiteChatWidget() {
 
   if (path.startsWith('/staff') || path.startsWith('/admin')) return null;
 
+  function rememberChat(id) {
+    if (!id) return;
+    chatIdRef.current = id;
+    window.sessionStorage.setItem('printnpack-chat-id', id);
+    setChatId(id);
+  }
+
+  function applyReply(data) {
+    if (data.chatId) rememberChat(data.chatId);
+    if (data.mode === 'human') {
+      modeRef.current = 'human';
+      setMode('human');
+      setNeedsLead(false);
+    } else if (data.mode === 'lead') {
+      setNeedsLead(true);
+    } else if (data.hasLead) {
+      setNeedsLead(false);
+    }
+    if (data.message?.content) {
+      setMessages((current) => {
+        if (data.message.id && current.some((message) => message.id === data.message.id)) return current;
+        return [...current, data.message];
+      });
+    }
+  }
+
   async function send(text) {
     const content = String(text || '').trim();
     if (!content || status === 'sending') return;
-
-    const history = [
-      ...messages
-        .filter((message) => !message.local && message.content)
-        .map(({ role, content: body }) => ({
-          role: role === 'staff' ? 'assistant' : role,
-          content: role === 'staff' ? `Team member: ${body}` : body,
-        })),
-      { role: 'user', content },
-    ];
 
     setMessages((current) => [...current, { role: 'user', content }]);
     setDraft('');
     setError('');
     setStatus('sending');
-    sendingRef.current = true;
+    if (modeRef.current !== 'human') setNeedsLead(true);
 
     const controller = new AbortController();
     abortRef.current = controller;
@@ -193,98 +429,88 @@ export default function SiteChatWidget() {
         headers: { 'Content-Type': 'application/json' },
         signal: controller.signal,
         body: JSON.stringify({
-          messages: history,
+          messages: [{ role: 'user', content }],
           page: router.asPath || '/',
           chatId: chatIdRef.current || undefined,
+          sessionId: window.localStorage.getItem('analytics_session_id') || '',
         }),
       });
-
-      const nextChatId = response.headers.get('x-chat-id');
-      if (nextChatId) {
-        chatIdRef.current = nextChatId;
-        window.sessionStorage.setItem('printnpack-chat-id', nextChatId);
-        setChatId(nextChatId);
-      }
-
-      const isJson = (response.headers.get('content-type') || '').includes('application/json');
-      if (isJson) {
-        const data = await response.json().catch(() => ({}));
-        if (!response.ok) throw new Error(data.message || 'The assistant is unavailable.');
-        if (data.chatId) {
-          chatIdRef.current = data.chatId;
-          window.sessionStorage.setItem('printnpack-chat-id', data.chatId);
-          setChatId(data.chatId);
-        }
-        if (data.mode === 'human') setMode('human');
-        return;
-      }
-
-      if (!response.ok) {
-        const data = await response.json().catch(() => ({}));
-        throw new Error(data.message || 'The assistant is unavailable.');
-      }
-
-      setMessages((current) => [...current, { role: 'assistant', content: '', pending: true }]);
-      const reader = response.body?.getReader();
-      if (!reader) throw new Error('The assistant is unavailable.');
-      const decoder = new TextDecoder();
-      let full = '';
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        full += decoder.decode(value, { stream: true });
-        const next = full;
-        setMessages((current) => {
-          const copy = [...current];
-          copy[copy.length - 1] = { role: 'assistant', content: next, pending: true };
-          return copy;
-        });
-      }
-
-      setMessages((current) => {
-        const copy = [...current];
-        copy[copy.length - 1] = {
-          role: 'assistant',
-          content: full.trim() || 'Sorry, I missed that. Call 089 415 7369 or email info@printnpack.ie.',
-        };
-        return copy;
-      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.message || 'The team is unavailable. Call 089 415 7369.');
+      applyReply(data);
     } catch (err) {
       if (err?.name === 'AbortError') return;
       setError(err.message || 'Something went wrong.');
-      setMessages((current) => current.filter((message) => !message.pending || message.content));
     } finally {
-      sendingRef.current = false;
+      setStatus('idle');
+    }
+  }
+
+  async function submitLead(event) {
+    event.preventDefault();
+    if (status === 'sending') return;
+    setError('');
+    setStatus('sending');
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          lead,
+          page: router.asPath || '/',
+          chatId: chatIdRef.current || undefined,
+          sessionId: window.localStorage.getItem('analytics_session_id') || '',
+        }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.message || 'Could not send your details.');
+      applyReply(data);
+      setLead({ name: '', email: '', phone: '' });
+    } catch (err) {
+      setError(err.message || 'Something went wrong.');
+    } finally {
       setStatus('idle');
     }
   }
 
   return (
-    <div className="fixed bottom-4 right-4 z-[65] flex flex-col items-end">
+    <>
       {open && (
-        <section
-          className="mb-3 flex h-[min(34rem,calc(100dvh-6rem))] w-[min(24rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl"
-          aria-label="PrintNPack chat"
-        >
-          <header className="flex items-center justify-between bg-slate-950 px-4 py-3 text-white">
-            <div>
+        <div className="fixed inset-0 z-[80] flex items-end justify-end md:p-4">
+          <button
+            type="button"
+            className="absolute inset-0 bg-slate-950/50"
+            aria-label="Close chat"
+            onClick={() => setOpen(false)}
+          />
+          <section
+            role="dialog"
+            aria-modal="true"
+            aria-label="PrintNPack chat"
+            className="relative flex h-[100dvh] w-full flex-col overflow-hidden bg-white md:h-[min(36rem,calc(100dvh-2rem))] md:w-[min(24rem,calc(100vw-2rem))] md:rounded-2xl md:border md:border-slate-200 md:shadow-2xl"
+          >
+          <header
+            className="flex items-center justify-between gap-3 bg-slate-950 px-4 py-3 text-white"
+            style={{ paddingTop: 'max(0.75rem, env(safe-area-inset-top))' }}
+          >
+            <div className="min-w-0">
               <p className="text-sm font-semibold">printNpack</p>
               <p className="text-xs text-slate-300">
-                {mode === 'human' ? 'You are chatting with the team' : 'Quotes and product questions'}
+                {mode === 'human' ? 'You are chatting with the team' : 'Live until 12 AM · we reply fast'}
               </p>
             </div>
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="rounded-full p-2 text-slate-300 hover:bg-white/10 hover:text-white"
+              className="flex h-11 shrink-0 items-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-slate-950"
               aria-label="Close chat"
             >
-              <FaTimes />
+              <FaTimes aria-hidden="true" />
+              Close
             </button>
           </header>
 
-          <div ref={listRef} className="flex-1 space-y-3 overflow-y-auto bg-slate-50 px-3 py-3">
+          <div ref={listRef} className="flex-1 space-y-3 overflow-y-auto overscroll-contain bg-slate-50 px-3 py-3">
             {messages.map((message, index) => (
               <div key={message.id || `${message.role}-${index}`} className={message.role === 'user' ? 'flex justify-end' : 'flex justify-start'}>
                 <div
@@ -302,14 +528,20 @@ export default function SiteChatWidget() {
                   {message.pending && !message.content ? (
                     <span className="text-slate-400">Typing…</span>
                   ) : (
-                    <MessageBody text={message.content} />
+                    <MessageBody
+                      text={message.content}
+                      onNavigate={(href) => {
+                        setOpen(false);
+                        router.push(href);
+                      }}
+                    />
                   )}
                 </div>
               </div>
             ))}
           </div>
 
-          {messages.length === 1 && (
+          {messages.filter((message) => !message.local).length === 0 && !needsLead && (
             <div className="flex flex-wrap gap-2 border-t border-slate-100 bg-white px-3 py-2">
               {SUGGESTIONS.map((suggestion) => (
                 <button
@@ -326,8 +558,50 @@ export default function SiteChatWidget() {
 
           {error && <p className="px-3 pb-1 text-xs text-red-600">{error}</p>}
 
+          {needsLead && (
+            <form className="space-y-2 border-t border-slate-200 bg-white px-3 py-3" onSubmit={submitLead}>
+              <p className="text-xs font-medium text-slate-600">Your details, so the team can reply</p>
+              <input
+                value={lead.name}
+                onChange={(event) => setLead((current) => ({ ...current, name: event.target.value }))}
+                placeholder="Name"
+                autoComplete="name"
+                required
+                maxLength={120}
+                className="w-full rounded-xl border border-slate-200 px-3 py-2 text-[16px] outline-none focus:border-blue-500"
+              />
+              <input
+                type="email"
+                value={lead.email}
+                onChange={(event) => setLead((current) => ({ ...current, email: event.target.value }))}
+                placeholder="Email"
+                autoComplete="email"
+                required
+                maxLength={160}
+                className="w-full rounded-xl border border-slate-200 px-3 py-2 text-[16px] outline-none focus:border-blue-500"
+              />
+              <input
+                type="tel"
+                value={lead.phone}
+                onChange={(event) => setLead((current) => ({ ...current, phone: event.target.value }))}
+                placeholder="Phone"
+                autoComplete="tel"
+                maxLength={40}
+                className="w-full rounded-xl border border-slate-200 px-3 py-2 text-[16px] outline-none focus:border-blue-500"
+              />
+              <button
+                type="submit"
+                disabled={status === 'sending' || lead.name.trim().length < 2 || !lead.email.trim()}
+                className="w-full rounded-xl bg-slate-950 px-3 py-2 text-sm font-semibold text-white disabled:opacity-40"
+              >
+                Send to the team
+              </button>
+            </form>
+          )}
+
           <form
             className="flex items-center gap-2 border-t border-slate-200 bg-white p-3"
+            style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
             onSubmit={(event) => {
               event.preventDefault();
               send(draft);
@@ -351,9 +625,9 @@ export default function SiteChatWidget() {
               id="site-chat-input"
               value={draft}
               onChange={(event) => setDraft(event.target.value)}
-              placeholder="Ask about a product or price"
+              placeholder={needsLead ? 'Add anything else' : 'What do you need?'}
               maxLength={1000}
-              className="min-w-0 flex-1 rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none focus:border-blue-500"
+              className="min-w-0 flex-1 rounded-xl border border-slate-200 px-3 py-2 text-[16px] outline-none focus:border-blue-500"
             />
             <button
               type="submit"
@@ -364,18 +638,50 @@ export default function SiteChatWidget() {
               <FaPaperPlane className="text-sm" />
             </button>
           </form>
-        </section>
+          </section>
+        </div>
       )}
 
-      <button
-        type="button"
-        onClick={() => setOpen((value) => !value)}
-        className="flex items-center gap-2 rounded-full bg-blue-600 px-4 py-3 text-sm font-semibold text-white shadow-lg hover:bg-blue-700"
-        aria-expanded={open}
-      >
-        <FaCommentDots />
-        {open ? 'Close' : 'Ask us'}
-      </button>
-    </div>
+      {!open && (
+        <div
+          className="fixed bottom-4 right-4 z-[65] flex max-w-[min(18rem,calc(100vw-2rem))] flex-col items-end gap-2"
+          style={{ marginBottom: 'env(safe-area-inset-bottom)' }}
+        >
+          {nudge && (
+            <div className="flex items-start gap-2 rounded-2xl border border-slate-200 bg-white p-3 text-left shadow-xl">
+              <button
+                type="button"
+                onClick={() => setOpen(true)}
+                className="text-left text-sm font-medium leading-snug text-slate-900"
+              >
+                <span className="mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-emerald-700">
+                  <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
+                  Live until 12 AM
+                </span>
+                {PROMPT}
+              </button>
+              <button
+                type="button"
+                onClick={dismissNudge}
+                className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-slate-500"
+                aria-label="Dismiss"
+              >
+                <FaTimes className="text-xs" />
+              </button>
+            </div>
+          )}
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="flex items-center gap-2 rounded-full bg-blue-600 px-4 py-3 text-sm font-semibold text-white shadow-lg hover:bg-blue-700"
+            aria-expanded={false}
+          >
+            <span className="h-2 w-2 rounded-full bg-emerald-300" aria-hidden="true" />
+            <FaCommentDots />
+            Ask us
+          </button>
+        </div>
+      )}
+    </>
   );
 }

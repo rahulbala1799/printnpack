@@ -1,15 +1,7 @@
-import { streamText, tool, stepCountIs } from 'ai';
-import { z } from 'zod';
-import {
-  getChatAiModel,
-  chatProviderOptions,
-  getAiConfigError,
-  isAiConfigured,
-  resolveAiModel,
-} from '../../lib/ai/gateway';
-import { buildSystemPrompt } from '../../lib/chat/knowledge';
 import { submitEnquiry } from '../../lib/leads/submit-enquiry';
-import { addChatMessage, getChat, listMessages, openChat, rememberVisitorEmail } from '../../lib/chat/sessions';
+import { broadcastLive, liveMessage } from '../../lib/chat/live';
+import { notifyChatMessage } from '../../lib/push/visitors';
+import { addChatMessage, getChat, listMessages, openChat, rememberVisitorEmail, rememberVisitorName } from '../../lib/chat/sessions';
 
 export const config = {
   maxDuration: 60,
@@ -18,6 +10,9 @@ export const config = {
     bodyParser: { sizeLimit: '64kb' },
   },
 };
+
+const ASK_DETAILS = 'Leave your name, email, and phone number. The team will reply here. We are live until 12 AM and usually answer very fast.';
+const THANKS = 'Thanks, the team has your details and will reply here. We are live until 12 AM and usually answer very fast.';
 
 const hits = new Map();
 
@@ -51,36 +46,31 @@ function sanitizeMessages(input) {
     }));
 }
 
-function userTranscript(messages) {
-  return messages.filter((message) => message.role === 'user').map((message) => message.content).join('\n');
-}
-
-function digits(value) {
-  return String(value || '').replace(/\D/g, '');
-}
-
-function nameWasTyped(name, transcript) {
-  const hay = transcript.toLowerCase();
-  const parts = name.toLowerCase().split(/[^a-z0-9']+/).filter((part) => part.length >= 3);
-  if (!parts.length) return hay.includes(name.toLowerCase());
-  return parts.every((part) => hay.includes(part));
-}
-
-function phoneWasTyped(phone, transcript) {
-  const wanted = digits(phone);
-  if (wanted.length < 7) return false;
-  const typed = digits(transcript);
-  const local = wanted.replace(/^353/, '');
-  return typed.includes(wanted) || typed.includes(local) || typed.includes(`0${local}`);
-}
-
 function publicMessage(row) {
   return {
     id: row.id,
     role: row.role,
     content: row.content,
-    createdAt: row.created_at,
+    createdAt: row.created_at || row.createdAt,
   };
+}
+
+function validEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || '').trim());
+}
+
+function readLead(body) {
+  const lead = body?.lead;
+  if (!lead || typeof lead !== 'object') return null;
+  return {
+    name: String(lead.name || '').replace(/\s+/g, ' ').trim().slice(0, 120),
+    email: String(lead.email || '').trim().toLowerCase().slice(0, 160),
+    phone: String(lead.phone || '').replace(/\s+/g, ' ').trim().slice(0, 40),
+  };
+}
+
+function hasLead(chat) {
+  return Boolean(chat?.visitor_email && chat?.visitor_name);
 }
 
 export default async function handler(req, res) {
@@ -96,6 +86,7 @@ export default async function handler(req, res) {
       res.status(200).json({
         chatId: chat.id,
         status: chat.status,
+        hasLead: hasLead(chat),
         messages: messages.map(publicMessage),
       });
     } catch (error) {
@@ -110,20 +101,16 @@ export default async function handler(req, res) {
     return;
   }
 
-  if (!isAiConfigured()) {
-    res.status(503).json({ message: getAiConfigError() });
-    return;
-  }
-
   const ip = clientIp(req);
   if (limited(`chat:${ip}`, 20, 10 * 60 * 1000)) {
     res.status(429).json({ message: 'Too many messages. Call 089 415 7369 or email info@printnpack.ie.' });
     return;
   }
 
+  const lead = readLead(req.body);
   const messages = sanitizeMessages(req.body?.messages);
   const last = messages[messages.length - 1];
-  if (!last || last.role !== 'user') {
+  if (!lead && (!last || last.role !== 'user')) {
     res.status(400).json({ message: 'Send a message to start.' });
     return;
   }
@@ -131,99 +118,124 @@ export default async function handler(req, res) {
   const page = typeof req.body?.page === 'string' && req.body.page.startsWith('/')
     ? req.body.page.slice(0, 180)
     : '/';
-  const transcript = userTranscript(messages);
-  const model = getChatAiModel();
-  const customerLeftContact = /[^\s@]+@[^\s@]+\.[^\s@]+/.test(transcript);
 
   let chat = null;
   try {
-    chat = await openChat({ id: req.body?.chatId, page });
-    await addChatMessage(chat.id, 'user', last.content);
-    await rememberVisitorEmail(chat.id, transcript);
+    const sessionId = typeof req.body?.sessionId === 'string' ? req.body.sessionId : '';
+    const opened = await openChat({ id: req.body?.chatId, page, sessionId });
+    chat = opened?.id ? await getChat(opened.id) : null;
   } catch (error) {
     console.error('Site chat save error:', error?.message || error);
     chat = null;
   }
 
-  if (chat?.status === 'human') {
-    res.status(200).json({ mode: 'human', chatId: chat.id });
+  if (chat && last?.role === 'user') {
+    try {
+      const incoming = liveMessage('user', last.content, chat.status || 'ai');
+      await addChatMessage(chat.id, 'user', last.content, incoming.id);
+      await rememberVisitorEmail(chat.id, last.content);
+      await broadcastLive(chat.id, incoming);
+      notifyChatMessage({ chatId: chat.id, text: last.content }).catch((error) => {
+        console.error('Message push failed:', error?.message || error);
+      });
+      chat = await getChat(chat.id);
+    } catch (error) {
+      console.error('Site chat save error:', error?.message || error);
+    }
+  }
+
+  if (lead) {
+    if (lead.name.length < 2) {
+      res.status(400).json({ message: 'Enter your name.' });
+      return;
+    }
+    if (!validEmail(lead.email)) {
+      res.status(400).json({ message: 'Enter a valid email address.' });
+      return;
+    }
+    if (!chat?.id) {
+      res.status(503).json({ message: 'Chat is unavailable. Call 089 415 7369 or email info@printnpack.ie.' });
+      return;
+    }
+    if (hasLead(chat)) {
+      res.status(200).json({ mode: 'waiting', chatId: chat.id, hasLead: true });
+      return;
+    }
+    if (limited(`lead:${ip}`, 5, 60 * 60 * 1000)) {
+      res.status(429).json({ message: 'An enquiry was already sent. Call 089 415 7369 or email info@printnpack.ie.' });
+      return;
+    }
+
+    const history = await listMessages(chat.id);
+    const question = history
+      .filter((row) => row.role === 'user')
+      .map((row) => row.content)
+      .join('\n')
+      .slice(0, 2000);
+    const summary = [
+      question || 'Website chat enquiry',
+      '',
+      `Phone: ${lead.phone || 'not given'}`,
+      `Page: ${page}`,
+    ].join('\n');
+
+    const result = await submitEnquiry({
+      name: lead.name,
+      email: lead.email,
+      phone: lead.phone,
+      message: summary,
+      productInterest: question.slice(0, 160),
+      source: 'Website chat',
+      subject: 'Website chat enquiry',
+      page,
+    });
+    if (!result.ok) {
+      res.status(result.status || 500).json({ message: result.message || 'Could not send that. Call 089 415 7369.' });
+      return;
+    }
+
+    await rememberVisitorName(chat.id, lead.name);
+    await rememberVisitorEmail(chat.id, lead.email);
+    const note = liveMessage('assistant', THANKS, 'ai');
+    await addChatMessage(chat.id, 'assistant', note.content, note.id);
+    await broadcastLive(chat.id, note);
+    res.status(200).json({
+      mode: 'waiting',
+      chatId: chat.id,
+      hasLead: true,
+      message: publicMessage(note),
+    });
     return;
   }
 
-  try {
-    if (chat?.id) res.setHeader('X-Chat-Id', chat.id);
-    const result = streamText({
-      model: resolveAiModel(model),
-      system: buildSystemPrompt(page, last.content),
-      messages,
-      stopWhen: stepCountIs(3),
-      maxOutputTokens: 400,
-      providerOptions: chatProviderOptions(model),
-      ...(customerLeftContact ? { tools: {
-        submitEnquiry: tool({
-          description: 'Send the customer enquiry to PrintNPack. Call only after the customer has typed their name and email and wants a quote, a callback, or an order.',
-          inputSchema: z.object({
-            name: z.string(),
-            email: z.string(),
-            phone: z.string().optional(),
-            company: z.string().optional(),
-            product: z.string().optional(),
-            message: z.string().describe('What they want quoted, including size and quantity if they gave them'),
-          }),
-          execute: async ({ name, email, phone, company, product, message }) => {
-            const typedEmail = String(email || '').trim().toLowerCase();
-            if (!typedEmail || !transcript.toLowerCase().includes(typedEmail)) {
-              return { sent: false, error: 'Ask the customer to type their email address. Do not invent one.' };
-            }
-            if (!nameWasTyped(name, transcript)) {
-              return { sent: false, error: 'Ask the customer to type their name.' };
-            }
-            if (limited(`lead:${ip}`, 5, 60 * 60 * 1000)) {
-              return { sent: false, error: 'An enquiry was already sent. Ask them to call 089 415 7369.' };
-            }
-
-            const typedPhone = phone && phoneWasTyped(phone, transcript) ? phone : '';
-            const typedCompany = company && transcript.toLowerCase().includes(company.toLowerCase()) ? company : '';
-            const summary = [
-              String(message || '').trim(),
-              '',
-              `Page: ${page}`,
-              'Customer wrote:',
-              transcript.slice(0, 2000),
-            ].join('\n');
-
-            const result = await submitEnquiry({
-              name,
-              email: typedEmail,
-              phone: typedPhone,
-              company: typedCompany,
-              message: summary,
-              productInterest: product,
-              source: 'Website chat',
-              subject: `Website chat — ${product || 'enquiry'}`,
-              page,
-            });
-
-            if (!result.ok) return { sent: false, error: result.message };
-            return { sent: true };
-          },
-        }),
-      } } : {}),
-    });
-
-    if (chat?.id) {
-      result.text
-        .then((text) => addChatMessage(chat.id, 'assistant', text))
-        .catch((error) => console.error('Site chat reply save error:', error?.message || error));
-    }
-
-    result.pipeTextStreamToResponse(res);
-  } catch (error) {
-    console.error('Site chat error:', error?.message || error);
-    if (!res.headersSent) {
-      res.status(500).json({
-        message: 'The assistant is unavailable. Call 089 415 7369 or email info@printnpack.ie.',
-      });
-    }
+  if (chat?.status === 'human') {
+    res.status(200).json({ mode: 'human', chatId: chat.id, hasLead: hasLead(chat) });
+    return;
   }
+
+  if (!chat?.id) {
+    res.status(503).json({ message: 'Chat is unavailable. Call 089 415 7369 or email info@printnpack.ie.' });
+    return;
+  }
+
+  if (hasLead(chat)) {
+    res.status(200).json({ mode: 'waiting', chatId: chat.id, hasLead: true });
+    return;
+  }
+
+  const history = await listMessages(chat.id);
+  const alreadyAsked = history.some((row) => row.role === 'assistant' && row.content === ASK_DETAILS);
+  let prompt = null;
+  if (!alreadyAsked) {
+    prompt = liveMessage('assistant', ASK_DETAILS, 'ai');
+    await addChatMessage(chat.id, 'assistant', prompt.content, prompt.id);
+    await broadcastLive(chat.id, prompt);
+  }
+
+  res.status(200).json({
+    mode: 'lead',
+    chatId: chat.id,
+    hasLead: false,
+    message: prompt ? publicMessage(prompt) : undefined,
+  });
 }
