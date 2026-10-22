@@ -96,12 +96,20 @@ export default function SiteChatWidget() {
   const chatIdRef = useRef('');
   const openRef = useRef(false);
   const modeRef = useRef('ai');
+  const hasLeadRef = useRef(false);
 
   useEffect(() => {
-    const saved = window.sessionStorage.getItem('printnpack-chat-id') || '';
-    if (saved) {
-      chatIdRef.current = saved;
-      setChatId(saved);
+    try {
+      hasLeadRef.current = window.localStorage.getItem('printnpack-chat-lead') === '1';
+      const saved = window.localStorage.getItem('printnpack-chat-id')
+        || window.sessionStorage.getItem('printnpack-chat-id')
+        || '';
+      if (saved) {
+        chatIdRef.current = saved;
+        setChatId(saved);
+      }
+    } catch {
+      hasLeadRef.current = false;
     }
   }, []);
 
@@ -194,8 +202,9 @@ export default function SiteChatWidget() {
         const human = data.status === 'human';
         modeRef.current = human ? 'human' : 'ai';
         setMode(human ? 'human' : 'ai');
+        if (data.hasLead) markLeadSaved();
         const incoming = Array.isArray(data.messages) ? data.messages : [];
-        setNeedsLead(!human && data.hasLead === false && incoming.some((row) => row.role === 'user'));
+        setNeedsLead(!human && data.hasLead === false && !hasLeadRef.current && incoming.some((row) => row.role === 'user'));
         setMessages((current) => mergeThread(current, incoming));
       })
       .catch(() => {});
@@ -303,11 +312,7 @@ export default function SiteChatWidget() {
       if (data.event !== 'broadcast') return;
       const payload = data.payload?.payload;
       if (!payload?.content || payload.role !== 'staff') return;
-      if (payload.chatId) {
-        chatIdRef.current = payload.chatId;
-        window.sessionStorage.setItem('printnpack-chat-id', payload.chatId);
-        setChatId(payload.chatId);
-      }
+      if (payload.chatId) rememberChat(payload.chatId);
       modeRef.current = 'human';
       setMode('human');
       setMessages((current) => {
@@ -333,9 +338,7 @@ export default function SiteChatWidget() {
       const role = event.detail?.role || 'assistant';
       const nextChatId = event.detail?.chatId;
       if (nextChatId) {
-        chatIdRef.current = nextChatId;
-        window.sessionStorage.setItem('printnpack-chat-id', nextChatId);
-        setChatId(nextChatId);
+        rememberChat(nextChatId);
         modeRef.current = 'human';
         setMode('human');
       }
@@ -374,11 +377,7 @@ export default function SiteChatWidget() {
     });
     const body = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(body.message || 'Artwork was not saved.');
-    if (body.chatId) {
-      chatIdRef.current = body.chatId;
-      window.sessionStorage.setItem('printnpack-chat-id', body.chatId);
-      setChatId(body.chatId);
-    }
+    if (body.chatId) rememberChat(body.chatId);
     setMessages((current) => [...current, { role: 'user', content: `Artwork attached: ${file.name}` }]);
   }
 
@@ -387,17 +386,33 @@ export default function SiteChatWidget() {
   function rememberChat(id) {
     if (!id) return;
     chatIdRef.current = id;
-    window.sessionStorage.setItem('printnpack-chat-id', id);
+    try {
+      window.sessionStorage.setItem('printnpack-chat-id', id);
+      window.localStorage.setItem('printnpack-chat-id', id);
+    } catch {
+      // The chat still continues for this page view.
+    }
     setChatId(id);
+  }
+
+  function markLeadSaved() {
+    hasLeadRef.current = true;
+    try {
+      window.localStorage.setItem('printnpack-chat-lead', '1');
+    } catch {
+      // The server still knows the details for this chat.
+    }
+    setNeedsLead(false);
   }
 
   function applyReply(data) {
     if (data.chatId) rememberChat(data.chatId);
+    if (data.hasLead) markLeadSaved();
     if (data.mode === 'human') {
       modeRef.current = 'human';
       setMode('human');
       setNeedsLead(false);
-    } else if (data.mode === 'lead') {
+    } else if (data.mode === 'lead' && !hasLeadRef.current) {
       setNeedsLead(true);
     } else if (data.hasLead) {
       setNeedsLead(false);
@@ -418,7 +433,6 @@ export default function SiteChatWidget() {
     setDraft('');
     setError('');
     setStatus('sending');
-    if (modeRef.current !== 'human') setNeedsLead(true);
 
     const controller = new AbortController();
     abortRef.current = controller;

@@ -196,6 +196,13 @@ export default async function handler(req, res) {
 
     await rememberVisitorName(chat.id, lead.name);
     await rememberVisitorEmail(chat.id, lead.email);
+    const leadNote = [question.split('\n')[0] || 'New chat', lead.phone ? `Phone ${lead.phone}` : '']
+      .filter(Boolean)
+      .join(' · ')
+      .slice(0, 160);
+    await notifyChatMessage({ chatId: chat.id, text: leadNote }).catch((error) => {
+      console.error('Lead push failed:', error?.message || error);
+    });
     const note = liveMessage('assistant', THANKS, 'ai');
     await addChatMessage(chat.id, 'assistant', note.content, note.id);
     await broadcastLive(chat.id, note);
