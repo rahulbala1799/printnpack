@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { PLAIN_PRODUCTS } from '../../data/plain-products';
 
 const categories = [
   {
@@ -81,7 +82,7 @@ const categories = [
     image: '/images/products/custom-printed-coffee-cups/branded-coffee-cups-dublin-ireland-matte-black-gold.jpg',
     alt: 'Printed takeaway coffee cup',
     href: '/plain-packaging',
-    productCount: 736,
+    productCount: PLAIN_PRODUCTS.length,
   },
 ];
 

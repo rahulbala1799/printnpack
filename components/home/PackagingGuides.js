@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { PLAIN_PRODUCTS } from '../../data/plain-products';
 
 const guides = [
   {
@@ -419,7 +420,7 @@ const guides = [
   {
     href: '/plain-packaging',
     title: 'Plain Packaging Wholesale',
-    description: '736+ unbranded catering products — cups, gloves, bags & more.',
+    description: `${PLAIN_PRODUCTS.length} unbranded catering products — cups, gloves, bags & more.`,
     image: '/images/ifa/heroh/logos/logo.png',
     cta: 'Browse catalogue',
   },

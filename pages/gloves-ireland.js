@@ -320,7 +320,7 @@ export default function GlovesIreland() {
             Nitrile for food prep, vinyl for economical handling, deli-fit and poly for sandwich counters.
           </p>
           <div className="grid sm:grid-cols-2 gap-5">
-            {gloveTypes.map(({ title, desc, link, ids }) => (
+            {gloveTypes.filter(({ ids }) => ids.some((id) => gloves.some((product) => product.id === id))).map(({ title, desc, link, ids }) => (
               <div key={title} className="bg-white border border-gray-200 rounded-2xl p-6">
                 <h3 className="font-bold text-gray-900 text-lg mb-2">{title}</h3>
                 <p className="text-sm text-gray-600 mb-4">{desc}</p>

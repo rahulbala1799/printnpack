@@ -493,6 +493,56 @@ const PLAIN_IMAGE_OVERRIDES = {
   '1216DOYRD': '/images/plain-packaging/1216DOYRD.webp',
   'CTL26OVPU': '/images/plain-packaging/CTL26OVPU.webp',
   'CTL32ROPU': '/images/plain-packaging/CTL32ROPU.webp',
+  '100029': '/images/plain-packaging/100029.webp',
+  '100057': '/images/plain-packaging/100057.webp',
+  '100058': '/images/plain-packaging/100058.webp',
+  '10123': '/images/plain-packaging/10123.webp',
+  '10200': '/images/plain-packaging/10200.webp',
+  '12012WH': '/images/plain-packaging/12012WH.webp',
+  '120117WH': '/images/plain-packaging/120117WH.webp',
+  '120342': '/images/plain-packaging/120342.webp',
+  '120346': '/images/plain-packaging/120346.webp',
+  '1221031': '/images/plain-packaging/1221031.webp',
+  '123301': '/images/plain-packaging/123301.webp',
+  'CTOV250': '/images/plain-packaging/CTOV250.webp',
+  'CTOV375': '/images/plain-packaging/CTOV375.webp',
+  'CTOV500': '/images/plain-packaging/CTOV500.webp',
+  'CTOV1000': '/images/plain-packaging/CTOV1000.webp',
+  'CTRD375': '/images/plain-packaging/CTRD375.webp',
+  'CTRD500': '/images/plain-packaging/CTRD500.webp',
+  'CTRD750': '/images/plain-packaging/CTRD750.webp',
+  'CTRD1000': '/images/plain-packaging/CTRD1000.webp',
+  'CTSQ250': '/images/plain-packaging/CTSQ250.webp',
+  'CTSQ375': '/images/plain-packaging/CTSQ375.webp',
+  'CTSQ500': '/images/plain-packaging/CTSQ500.webp',
+  'CTSQ750': '/images/plain-packaging/CTSQ750.webp',
+  'CTSQ1000': '/images/plain-packaging/CTSQ1000.webp',
+  '100209': '/images/plain-packaging/100209.webp',
+  '100215': '/images/plain-packaging/100215.webp',
+  '100216': '/images/plain-packaging/100216.webp',
+  '103718': '/images/plain-packaging/103718.webp',
+  '10802': '/images/plain-packaging/10802.webp',
+  '10802P': '/images/plain-packaging/10802P.webp',
+  '10921': '/images/plain-packaging/10921.webp',
+  '109211': '/images/plain-packaging/109211.webp',
+  '11002': '/images/plain-packaging/11002.webp',
+  '11003': '/images/plain-packaging/11003.webp',
+  '120592': '/images/plain-packaging/120592.webp',
+  '12066516': '/images/plain-packaging/12066516.webp',
+  '1206661': '/images/plain-packaging/1206661.webp',
+  '170050': '/images/plain-packaging/170050.webp',
+  '100083': '/images/plain-packaging/100083.webp',
+  '100084': '/images/plain-packaging/100084.webp',
+  '20107': '/images/plain-packaging/20107.webp',
+  '210035': '/images/plain-packaging/210035.webp',
+  '4.5DOYRD': '/images/plain-packaging/4.5DOYRD.webp',
+  '5.5DOYRD': '/images/plain-packaging/5.5DOYRD.webp',
+  '7.5DOYRD': '/images/plain-packaging/7.5DOYRD.webp',
+  '9.5DOYRD': '/images/plain-packaging/9.5DOYRD.webp',
+  'CTC341': '/images/plain-packaging/CTC341.webp',
+  'CTC343': '/images/plain-packaging/CTC343.webp',
+  'L8DNOW-D': '/images/plain-packaging/L8DNOW-D.webp',
+  'PB12RD': '/images/plain-packaging/PB12RD.webp',
 };
 
 function applyImageOverrides(products) {
@@ -503,8 +553,20 @@ function applyImageOverrides(products) {
   });
 }
 
-export const PLAIN_PRODUCTS = applyImageOverrides(TIERED_PLAIN_PRODUCTS);
-export const CATEGORIES = ['All', ...TIERED_CATEGORIES];
+function hasPlainProductPhoto(product) {
+  const src = product?.imageSrc || '';
+  return Boolean(src) && !src.includes('/images/ifa/heroh/logos/logo.png');
+}
+
+const ALL_PLAIN_PRODUCTS = applyImageOverrides(TIERED_PLAIN_PRODUCTS);
+// Products with no photo stay in the data file but are not shown on the site.
+export const PLAIN_PRODUCTS = ALL_PLAIN_PRODUCTS.filter(hasPlainProductPhoto);
+export const CATEGORIES = [
+  'All',
+  ...TIERED_CATEGORIES.filter((category) =>
+    PLAIN_PRODUCTS.some((product) => product.category === category)
+  ),
+];
 
 const SLUG_INDEX = new Map();
 PLAIN_PRODUCTS.forEach((product) => {

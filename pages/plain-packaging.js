@@ -711,6 +711,25 @@ export default function PlainPackagingPage() {
     }
   }, [router.query.category]);
 
+  useEffect(() => {
+    const chip = document.getElementById(`plain-cat-${activeCategory}`);
+    const row = chip?.parentElement;
+    if (!chip || !row) return;
+    row.scrollTo({ left: Math.max(0, chip.offsetLeft - 12), behavior: 'smooth' });
+  }, [activeCategory]);
+
+  useEffect(() => {
+    const header = document.querySelector('header');
+    if (!header) return undefined;
+    const apply = () => {
+      document.documentElement.style.setProperty('--catalog-sticky-top', `${header.offsetHeight}px`);
+    };
+    apply();
+    const observer = new ResizeObserver(apply);
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, []);
+
   // Persist quote whenever it changes (after initial hydration)
   useEffect(() => {
     if (!quoteHydrated) return;
@@ -809,7 +828,11 @@ export default function PlainPackagingPage() {
   const handleCategoryChange = (c) => { setActiveCategory(c); setCurrentPage(1); };
   const handlePriceChange = (r) => { setPriceRange(r); setCurrentPage(1); };
   const handleSortChange = (s) => { setSort(s); setCurrentPage(1); };
-  const handleSearchChange = (v) => { setSearch(v); setCurrentPage(1); };
+  const handleSearchChange = (v) => {
+    setSearch(v);
+    setCurrentPage(1);
+    if (v.trim()) setActiveCategory('All');
+  };
 
   const PER_PAGE_OPTIONS = [30, 50, 100, 200, 'All'];
   const totalFiltered = filtered.length;
@@ -868,7 +891,7 @@ export default function PlainPackagingPage() {
               ? HOT_CUPS_CATEGORY_SEO.pageDescription
               : isGlovesCategory
                 ? GLOVES_CATEGORY_SEO.pageDescription
-                : '736 plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland.';
+                : `${PLAIN_PRODUCTS.length} plain unbranded packaging products. Napkins, bags, boxes, cups and more. Tiered case pricing, fast delivery across Ireland.`;
   const canonicalPath = isPizzaCategory
     ? 'https://www.printnpack.ie/plain-packaging?category=Pizza+Boxes'
     : isCateringEquipment
@@ -900,20 +923,20 @@ export default function PlainPackagingPage() {
                 ? 'Disposable Gloves Wholesale'
                 : 'Plain Packaging';
   const pageSubheading = isBioboxCategory
-    ? '9 kraft & white biobox SKUs · case packs · tiered B2B pricing'
+    ? `${categoryCounts['Biobox'] || 0} kraft & white biobox SKUs · case packs · tiered B2B pricing`
     : isPizzaCategory
-      ? 'Kraft corrugated pizza boxes · case packs · tiered pricing'
+      ? `${categoryCounts['Pizza Boxes'] || 0} kraft corrugated pizza boxes · case packs · tiered pricing`
       : isCateringEquipment
         ? 'Heat sealers, chafing fuel & kitchen supplies · wholesale'
         : isRefuseSackCategory
-          ? '21 refuse sack SKUs · black, clear & compactor bags · tiered pricing'
+          ? `${categoryCounts['Refuse Sack'] || 0} refuse sack SKUs · black, clear & compactor bags · tiered pricing`
           : isNapkinsTablewareCategory
-            ? '58 napkin & tableware SKUs · white, kraft & airlaid · tiered pricing'
+            ? `${categoryCounts['Napkins & Tableware'] || 0} napkin & tableware SKUs · white, kraft & airlaid · tiered pricing`
             : isHotCupsCategory
-              ? '71 hot cup & lid SKUs · 8oz to 16oz · double wall & compostable · tiered pricing'
+              ? `${categoryCounts['Hot Cups & Lids'] || 0} hot cup & lid SKUs · 8oz to 16oz · double wall & compostable · tiered pricing`
               : isGlovesCategory
-                ? '38 glove SKUs · nitrile, vinyl & poly · S to XL · tiered pricing'
-                : '736 products · 55 categories · 4-tier volume pricing';
+                ? `${categoryCounts['Gloves'] || 0} glove SKUs · nitrile, vinyl & poly · S to XL · tiered pricing`
+                : `${PLAIN_PRODUCTS.length} products · ${CATEGORIES.length - 1} categories · 4-tier volume pricing`;
 
   return (
     <Layout>
@@ -930,7 +953,7 @@ export default function PlainPackagingPage() {
         <meta property="og:locale" content="en_IE" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Plain Packaging — Wholesale Catering Supplies | PrintNPack Ireland" />
-        <meta name="twitter:description" content="736 plain unbranded packaging products. Tiered case pricing, fast delivery Ireland." />
+        <meta name="twitter:description" content={`${PLAIN_PRODUCTS.length} plain unbranded packaging products. Tiered case pricing, fast delivery Ireland.`} />
       </Head>
 
       <div className="overflow-x-hidden min-w-0">
@@ -1034,7 +1057,7 @@ export default function PlainPackagingPage() {
       </div>
 
       {activeCategory === 'All' && (
-        <div className="bg-stone-50 border-b border-stone-200">
+        <div className="hidden sm:block bg-stone-50 border-b border-stone-200">
           <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-4">
             <h2 className="text-sm font-bold text-stone-900 mb-1">Wholesale category hubs</h2>
             <p className="text-xs text-stone-500 mb-3">Guides, FAQs &amp; full SKU lists for popular catering lines</p>
@@ -1054,8 +1077,8 @@ export default function PlainPackagingPage() {
         </div>
       )}
 
-      {/* ── Browse by category: 4 visible, then "Show 4 more" (max 12), then "View all" → modal ── */}
-      <div className="bg-white border-b border-stone-200">
+      {/* ── Browse by category: desktop grid. Phones use the sticky category row. ── */}
+      <div className="hidden lg:block bg-white border-b border-stone-200">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex items-baseline justify-between gap-3 mb-2 sm:mb-3">
             <div className="min-w-0">
@@ -1167,7 +1190,7 @@ export default function PlainPackagingPage() {
       )}
 
       {/* ── Sticky top bar: search + filter trigger + quote ────────────────────── */}
-      <div className="sticky top-0 z-30 bg-white border-b border-stone-200 shadow-sm">
+      <div className="sticky z-30 bg-white border-b border-stone-200 shadow-sm" style={{ top: 'var(--catalog-sticky-top, 117px)' }}>
         <div className="max-w-screen-xl mx-auto px-3 sm:px-6 py-2 sm:py-2.5 flex items-center gap-1.5 sm:gap-2 min-w-0">
 
           {/* Search — 16px font prevents iOS zoom on focus; min-w-0 prevents flex overflow */}
@@ -1188,6 +1211,14 @@ export default function PlainPackagingPage() {
               </button>
             )}
           </div>
+
+          <button
+            type="button"
+            onClick={() => setCategoryModalOpen(true)}
+            className="lg:hidden flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-stone-200 bg-white text-stone-700 flex-shrink-0"
+          >
+            Categories
+          </button>
 
           {/* Mobile filter button */}
           <button
@@ -1218,27 +1249,31 @@ export default function PlainPackagingPage() {
           </button>
         </div>
 
-        {/* Quick category chips: top categories always visible when sticky */}
+        {/* Every category, one tap. The row scrolls sideways on a phone. */}
         <div className="border-t border-stone-100">
-          <div className="max-w-screen-xl mx-auto px-3 sm:px-6 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar">
-            <span className="text-[10px] sm:text-xs font-medium text-stone-400 flex-shrink-0">Quick:</span>
+          <div className="max-w-screen-xl mx-auto px-3 sm:px-6 py-2 flex items-center gap-2 overflow-x-auto no-scrollbar">
             <button
+              id="plain-cat-All"
+              type="button"
               onClick={() => handleCategoryChange('All')}
-              className={`flex-shrink-0 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-semibold transition-all ${
-                activeCategory === 'All' ? 'bg-stone-900 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+              className={`flex-shrink-0 px-3 py-2 rounded-full text-sm font-semibold min-h-[40px] ${
+                activeCategory === 'All' ? 'bg-stone-900 text-white' : 'bg-stone-100 text-stone-700'
               }`}
             >
               All
             </button>
-            {categoriesWithCount.slice(0, 10).map(({ name, count }) => (
+            {categoriesWithCount.map(({ name, count }) => (
               <button
                 key={name}
+                id={`plain-cat-${name}`}
+                type="button"
                 onClick={() => handleCategoryChange(name)}
-                className={`flex-shrink-0 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-semibold transition-all whitespace-nowrap ${
-                  activeCategory === name ? 'bg-stone-900 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                className={`flex-shrink-0 px-3 py-2 rounded-full text-sm font-semibold whitespace-nowrap min-h-[40px] ${
+                  activeCategory === name ? 'bg-stone-900 text-white' : 'bg-stone-100 text-stone-700'
                 }`}
               >
-                {name} <span className="opacity-70 hidden sm:inline">({count})</span>
+                {name === 'Containersandtaway' ? 'Takeaway Containers' : name === 'Foil,Film, Parchment' ? 'Foil, Film & Parchment' : name}
+                <span className="ml-1 tabular-nums opacity-60">{count}</span>
               </button>
             ))}
           </div>
