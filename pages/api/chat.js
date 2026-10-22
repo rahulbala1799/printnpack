@@ -11,8 +11,8 @@ export const config = {
   },
 };
 
-const ASK_DETAILS = 'Leave your name, email, and phone number. The team will reply here. We are live until 12 AM and usually answer very fast.';
-const THANKS = 'Thanks, the team has your details and will reply here. We are live until 12 AM and usually answer very fast.';
+const ASK_DETAILS = 'Please share your name, email, and phone in case the chat disconnects, so we can still get back to you.';
+const THANKS = 'Thanks, we have your details. We will reply here, and we can still reach you if the chat drops.';
 
 const hits = new Map();
 

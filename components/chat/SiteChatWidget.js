@@ -6,7 +6,7 @@ import { FaCommentDots, FaPaperPlane, FaTimes } from 'react-icons/fa';
 const WELCOME = {
   local: true,
   role: 'assistant',
-  content: 'Need any help? We are live and answer queries until 12 AM, and we usually reply very fast. Ask your question and leave your details so the team can reply.',
+  content: 'Need any help? We are live until 12 AM and usually reply very fast. Ask your question, and share your details in case the chat disconnects.',
 };
 
 const PROMPT = 'Need any help? We usually reply very fast. We are live and answer queries until 12 AM.';
@@ -560,7 +560,7 @@ export default function SiteChatWidget() {
 
           {needsLead && (
             <form className="space-y-2 border-t border-slate-200 bg-white px-3 py-3" onSubmit={submitLead}>
-              <p className="text-xs font-medium text-slate-600">Your details, so the team can reply</p>
+              <p className="text-xs font-medium text-slate-600">Please share your details in case the chat disconnects.</p>
               <input
                 value={lead.name}
                 onChange={(event) => setLead((current) => ({ ...current, name: event.target.value }))}
