@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'freestanding-led-frames-ireland-sizes-buying-guide',
+    title: 'Freestanding LED Frames Ireland: 80–200 cm Sizes & Buying Guide',
+    excerpt:
+      'How to buy freestanding LED frames in Ireland — 80×200, 150×200 and 200×200 cm sizes, 120 mm vs 160 mm depth, aluminium/black/white, flat feet or wheels, from €1,098.54 ex VAT with Ireland delivery included from Ashbourne.',
+    date: '2026-10-22',
+    readTime: '8 min read',
+    image: '/images/banners/led-frames/led-frame-80x200.jpg',
+    imageAlt:
+      'Freestanding LED frames Ireland — 80×200 cm aluminium lightbox for Dublin exhibitions',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'bagasse-plates-bowls-ireland-sizes-buying-guide',
     title: 'Bagasse Plates & Bowls Ireland: 7″–9″ Sizes & Wholesale Buying Guide',
     excerpt:
