@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'sandwich-wraps-packaging-ireland-sizes-buying-guide',
+    title: 'Sandwich & Wraps Packaging Ireland: Wedges, Bags & Window Sizes Buying Guide',
+    excerpt:
+      'How to buy plain sandwich and wraps packaging in Ireland — kraft and rPET deep-fill wedges, baguette and bloomer film packs, tortilla packs, 210×210 and 250×250 mm windowed kraft bags, platter boxes, and nationwide delivery from Ashbourne.',
+    date: '2026-10-23',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/10802.webp',
+    imageAlt:
+      'Sandwich packaging Ireland — clear rPET deep-fill sandwich wedge wholesale for Dublin delis',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'freestanding-led-frames-ireland-sizes-buying-guide',
     title: 'Freestanding LED Frames Ireland: 80–200 cm Sizes & Buying Guide',
     excerpt:
