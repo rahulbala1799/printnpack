@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'inhaker-exhibition-walls-ireland-sizes-buying-guide',
+    title: 'Exhibition Walls Ireland: Inhaker Panel Sizes 88×195–300 cm & Buying Guide',
+    excerpt:
+      'How to buy printed inhaker exhibition walls in Ireland — 88×195, 88×247.5 and 88×300 cm panels, 10 mm Re-board vs Forex, front or both sides, from €97.44 ex VAT with Ireland delivery included from Ashbourne.',
+    date: '2026-10-24',
+    readTime: '8 min read',
+    image: '/images/banners/inhaker/inhaker-hero.jpg',
+    imageAlt:
+      'Exhibition walls Ireland — printed inhaker panels hooked into a trade show wall for Dublin',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'sandwich-wraps-packaging-ireland-sizes-buying-guide',
     title: 'Sandwich & Wraps Packaging Ireland: Wedges, Bags & Window Sizes Buying Guide',
     excerpt:
