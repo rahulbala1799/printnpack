@@ -96,14 +96,18 @@ function linenPhoto(file, alt) {
 }
 
 export const PRINTED_NAPKIN_IMAGES = [
-  linenPhoto('airlaid-kinetic-labs-ireland.jpg', 'White linen-feel napkin printed with the Kinetic Labs logo'),
-  linenPhoto('airlaid-oakline-partners-ireland.jpg', 'White linen-feel napkin printed with the Oakline Partners oak leaf'),
-  linenPhoto('airlaid-cavan-court-ireland.jpg', 'White linen-feel napkin printed with the Cavan Court Hotel crest'),
-  linenPhoto('airlaid-greenstone-ireland.jpg', 'White linen-feel napkin printed with the Greenstone Property Group logo'),
-  linenPhoto('airlaid-nova-dental-ireland.jpg', 'White linen-feel napkin printed with the Nova Dental logo'),
+  linenPhoto('airlaid-kinetic-labs-ireland.jpg', 'Custom printed napkin with the Kinetic Labs logo'),
+  linenPhoto('airlaid-oakline-partners-ireland.jpg', 'Custom printed napkin with the Oakline Partners oak leaf'),
+  linenPhoto('airlaid-cavan-court-ireland.jpg', 'Custom printed napkin with the Cavan Court Hotel crest'),
+  linenPhoto('airlaid-greenstone-ireland.jpg', 'Custom printed napkin with the Greenstone Property Group logo'),
+  linenPhoto('airlaid-nova-dental-ireland.jpg', 'Custom printed napkin with the Nova Dental logo'),
 ];
 
 export const PRINTED_NAPKIN_FAQS = [
+  {
+    q: 'Do you do custom printed napkins?',
+    a: 'Yes. Custom printed napkins for restaurants, cafés and caterers. Choose 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 or 20 × 20 cm, full colour or 1 colour, from 25 napkins. The napkins are linen-feel airlaid, printed with your logo. We confirm the price before printing.',
+  },
   {
     q: 'What sizes can I order?',
     a: '10 × 10 cm cocktail napkins, 10 × 20 cm, 12 × 20 cm, 15 × 20 cm and 20 × 20 cm.',

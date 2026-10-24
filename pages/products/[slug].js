@@ -59,7 +59,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
       { '@type': 'ListItem', position: 2, name: 'Napkins Ireland', item: `${SITE_URL}/napkins-ireland` },
-      { '@type': 'ListItem', position: 3, name: product.name, item: pageUrl },
+      { '@type': 'ListItem', position: 3, name: napkinSeo.h1, item: pageUrl },
     ],
   } : null;
 
@@ -108,7 +108,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
               <li>/</li>
               <li><Link href="/napkins-ireland" className="hover:text-gray-700">Napkins Ireland</Link></li>
               <li>/</li>
-              <li className="text-gray-800 font-medium">{product.name}</li>
+              <li className="text-gray-800 font-medium">{napkinSeo.h1}</li>
             </ol>
           </div>
         </nav>
@@ -123,8 +123,10 @@ const ProductDetail = ({ product, relatedProducts }) => {
           </section>
           <section className="bg-slate-50 border-t border-gray-100 py-12 lg:py-16">
             <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Why choose premium linen-feel napkins</h2>
-              <p className="text-gray-600 leading-relaxed mb-8">{product.detailedDescription}</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Custom printed napkins for restaurants and caterers</h2>
+              <p className="text-gray-600 leading-relaxed mb-8">
+                Custom printed napkins for restaurants, cafés and caterers. Choose 10 × 10 cm cocktail, 10 × 20 cm, 12 × 20 cm, 15 × 20 cm or 20 × 20 cm, then full colour or 1 colour. The minimum is 25 napkins. Add the order to a quote and we confirm the price before printing. The napkins are linen-feel airlaid, so they have a cloth-like feel, and they are printed with your logo.
+              </p>
               <div className="grid gap-8 sm:grid-cols-2">
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-3">What's included</h3>

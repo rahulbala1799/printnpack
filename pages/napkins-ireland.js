@@ -14,7 +14,7 @@ const HERO_IMAGE = '/images/napkins/cocktail-napkin-salty-cod-ireland.webp';
 const napkinTypes = [
   { title: 'Cocktail Napkins', desc: 'White logo napkins for restaurants, bars and cafés. 10 × 10 cm closed, 20 × 40 cm open.', href: '/products/cocktail-napkins', priceLabel: '10 × 10 cm' },
   { title: 'Luxury Tissue Paper', desc: 'Plain acid-free colour tissue, 500 × 750 mm. 480 sheets per case, 15 colours.', href: '/luxury-tissue-paper-ireland', price: '29.99', priceLabel: '€29.99 + VAT per case' },
-  { title: 'Premium Linen-Feel Napkins', desc: '10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm. The price depends on the quantity and the design.', href: '/products/premium-linen-feel-napkins', price: '0.24', priceLabel: 'From €0.24' },
+  { title: 'Custom Printed Napkins', desc: 'Logo napkins for restaurants, cafés and caterers. 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm, from 25.', href: '/products/premium-linen-feel-napkins', price: '0.24', priceLabel: 'From €0.24' },
   { title: 'Plain Wholesale Napkins', desc: 'Bulk white napkins without printing — economical for high-volume catering.', href: '/plain-napkins-tableware-ireland', price: '0.03' },
 ];
 
@@ -115,7 +115,7 @@ export default function NapkinsIreland() {
                   Cocktail napkins
                 </Link>
                 <Link href="/products/premium-linen-feel-napkins" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
-                  Linen-feel napkins from €0.24
+                  Custom printed napkins from €0.24
                 </Link>
                 <Link href="/napkin-faq-ireland" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
                   Napkin FAQ
@@ -228,7 +228,7 @@ export default function NapkinsIreland() {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Ready to order branded napkins?</h2>
           <p className="text-amber-100 mb-6">From €0.24. The price depends on the quantity and the design. From 25 napkins.</p>
           <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/products/premium-linen-feel-napkins" className="inline-flex items-center bg-white text-amber-600 font-semibold px-6 py-3 rounded-xl hover:bg-amber-50 transition-colors">Linen-feel napkins</Link>
+            <Link href="/products/premium-linen-feel-napkins" className="inline-flex items-center bg-white text-amber-600 font-semibold px-6 py-3 rounded-xl hover:bg-amber-50 transition-colors">Custom printed napkins</Link>
             <a href="tel:+353894157369" className="inline-flex items-center bg-amber-500 text-white font-semibold px-6 py-3 rounded-xl border border-amber-400 hover:bg-amber-400 transition-colors">Call +353 89 415 7369</a>
           </div>
         </div>

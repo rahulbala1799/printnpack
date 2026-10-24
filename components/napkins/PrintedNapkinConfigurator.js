@@ -68,11 +68,11 @@ export default function PrintedNapkinConfigurator() {
       </div>
 
       <div>
-        <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-blue-600">Linen-feel napkins</p>
-        <h1 className="mb-3 text-2xl font-bold text-slate-900 sm:text-3xl">Premium linen-feel napkins</h1>
+        <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-blue-600">Napkin printing</p>
+        <h1 className="mb-3 text-2xl font-bold text-slate-900 sm:text-3xl">Custom printed napkins</h1>
         <p className="mb-2 text-2xl font-bold text-slate-900">From €{LINEN_NAPKIN_FROM}</p>
         <p className="mb-6 leading-relaxed text-slate-600">
-          Choose a size, full colour or 1 colour, and a quantity from {PRINTED_NAPKIN_MIN}. Cocktail napkins are the 10 × 10 cm size, cut down from a larger napkin, so they cost a little more per unit. The price per unit drops as the quantity goes up.
+          Custom printed napkins with your logo. Choose 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 or 20 × 20 cm, from {PRINTED_NAPKIN_MIN} napkins. Full colour or 1 colour. The napkins are linen-feel airlaid. Cocktail napkins are the 10 × 10 cm size, cut down from a larger napkin, so they cost a little more per unit. The price per unit drops as the quantity goes up, and we confirm it before printing.
         </p>
 
         <fieldset className="mb-6">

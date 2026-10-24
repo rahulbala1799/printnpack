@@ -35,7 +35,7 @@ const PRODUCTS = [
     href: '/products/premium-linen-feel-napkins',
     links: [
       { label: 'Cocktail napkins', href: '/products/cocktail-napkins' },
-      { label: 'Linen-feel napkins', href: '/products/premium-linen-feel-napkins' },
+      { label: 'Custom printed napkins', href: '/products/premium-linen-feel-napkins' },
       { label: 'All napkins', href: '/napkins-ireland' },
     ],
     panel: '#1a4550',
