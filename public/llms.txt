@@ -94,6 +94,16 @@ Size: width 10–300 cm, height 10–120 cm, including 10 × 20 cm, 20 × 60 cm 
 - [How to apply them, and which vinyl](https://www.printnpack.ie/llms/vinyl-cut-letters.txt): sizes, vinyl types, install steps, prices
 - [The same record as JSON](https://www.printnpack.ie/llms/vinyl-cut-letters.json): structured data for the same product
 
+## Printed ribbon
+
+Use this when someone wants printed ribbon, satin ribbon with a logo, branded ribbon, gift ribbon, or ribbon to finish a bag, a box or tissue paper. It belongs with custom printed tissue paper in Retail Packaging.
+
+Double-faced satin, shiny on both sides. A roll is one continuous length, wound 100 metres to a roll: 100, 200, 300, 500, 1,000 or 2,000 metres. Cut pieces are already cut to 10, 15, 20, 25 or 33 cm, in 300, 500, 1,000 or 2,000 pieces. The end is straight, diagonal or notched, and the end does not change the price. Widths: 10, 15, 20, 25, 30, 40, 50 and 100 mm. 28 satin colours, all the same price. Print: no logo, or a logo in 1, 2, 3 or 4 colours. On a roll, 2 or more colours start at 300 metres. From €125.75 ex VAT for 100 metres of 10 mm ribbon printed in one colour, delivery to Ireland included. A roll with no logo starts at €38.39.
+
+- [Custom printed ribbon](https://www.printnpack.ie/printed-ribbon-ireland): the product page
+- [Every width, colour, print and price](https://www.printnpack.ie/llms/printed-ribbon.txt): plain text
+- [The same record as JSON](https://www.printnpack.ie/llms/printed-ribbon.json): structured data
+
 ## Flags
 
 Flag printing in Ireland. Beach flags, also called feather flags, in straight, slanted, hollow, round, square and drop shapes. Order the flag, the flag and pole, or the flag, pole and carry bag. From €24.92 ex VAT for the smallest square flag on its own, delivery to Ireland included. Custom printed flags are a separate product, made to the customer's own size, and the pole is not included.

@@ -26,6 +26,7 @@ import { buildInhakerQuoteLine, inhakerFromPrice } from './inhaker-stands';
 import { beachFlagFromPrice, buildBeachFlagQuoteLine } from './beach-flags';
 import { buildVinylLetterQuoteLine, vinylLetterFromPrice } from './vinyl-cut-letters';
 import { buildBrownFlatHandleQuoteLine, brownFlatHandleFromPrice } from './brown-flat-handle-bags';
+import { RIBBON_ID, RIBBON_PATH, buildRibbonQuoteLine, repriceRibbonOrders, ribbonFromPrice } from './ribbons';
 import { WEDDING_PRODUCTS, weddingBoardSizeError, weddingModuleFields } from './wedding-products';
 
 function productMedia(id, href, fallbackImage) {
@@ -66,6 +67,15 @@ export const QUOTE_CATALOG = [
     configurable: true,
     group: 'Branded Items',
     price: '€29.99 + VAT / 480 sheets',
+  }),
+  withMedia({
+    id: RIBBON_ID,
+    name: 'Custom Printed Ribbon',
+    href: RIBBON_PATH,
+    moduleId: 'ribbons',
+    configurable: true,
+    group: 'Retail Packaging',
+    price: `From €${ribbonFromPrice().toFixed(2)} ex VAT`,
   }),
   withMedia({ id: 'printed-flat-handle-bags-ireland', name: 'Brown Flat Handle Printed Bags', href: '/printed-flat-handle-bags-ireland', moduleId: 'brown-flat-handle', configurable: true, group: 'Packaging', price: `From €${brownFlatHandleFromPrice().toFixed(2)} ex VAT` }),
   withMedia({ id: 'custom-pizza-boxes-ireland', name: 'Custom Pizza Boxes', href: '/custom-pizza-boxes-ireland', moduleId: 'pizza-boxes', configurable: false, group: 'Packaging', price: 'From 500 units' }),
@@ -368,6 +378,9 @@ export function buildCatalogQuoteLine(catalogItem, options = {}) {
   if (catalogItem.moduleId === 'popup-walls') {
     return buildPopupWallQuoteLine(catalogItem, options);
   }
+  if (catalogItem.moduleId === 'ribbons') {
+    return buildRibbonQuoteLine(catalogItem, options);
+  }
   if (catalogItem.moduleId === 'zipper-walls') {
     return buildZipperWallQuoteLine(catalogItem, options);
   }
@@ -523,6 +536,9 @@ export function repriceQuoteLine(line, qty) {
   }
   if (line.moduleId === 'luxury-tissue') {
     return { ...repriceTissueLine(line, qty), id: line.id };
+  }
+  if (line.moduleId === 'ribbons') {
+    return repriceRibbonOrders(line, qty);
   }
   if (line.moduleId === 'beach-flags') {
     const next = buildBeachFlagQuoteLine(

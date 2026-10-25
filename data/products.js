@@ -6,6 +6,7 @@ import { beachFlagFromPrice } from './beach-flags';
 import { zipperCatalogProducts } from './zipper-walls';
 import { exhibitionCatalogProduct } from './exhibition-stands';
 import { VINYL_LETTER_GALLERY, VINYL_LETTER_IMAGE, vinylLetterFromPrice } from './vinyl-cut-letters';
+import { ribbonFromPrice, RIBBON_GALLERY } from './ribbons';
 
 const products = [
   {
@@ -456,6 +457,45 @@ const products = [
       },
     ],
     weeklyDelivery: 'Our delivery service keeps ecommerce and retail brands stocked with branded tissue paper on a schedule that suits your operation — with account management for repeat orders.'
+  },
+  {
+    id: 'printed-ribbon-ireland',
+    name: 'Custom Printed Ribbon',
+    url: '/printed-ribbon-ireland',
+    category: 'Retail Packaging',
+    description: 'Custom printed satin ribbon in Ireland. A roll from 100 metres, or pieces already cut to length. Widths from 10 mm to 100 mm, 28 colours, your logo in 1 to 4 colours. Delivery to Ireland included.',
+    features: [
+      'A roll, or pieces already cut',
+      'Widths from 10 mm to 100 mm',
+      '28 satin colours, same price',
+      'No logo, or a logo in 1 to 4 colours',
+      'Cut pieces in 10, 15, 20, 25 or 33 cm',
+      'Straight, diagonal or notched end',
+    ],
+    detailedDescription: 'PrintNPack supplies custom printed satin ribbon in Ireland for bags, boxes, tissue and gifts. The ribbon is double-faced satin, shiny on both sides. Order a roll and cut the bows yourself, or order pieces that are already cut.\n\nA roll is 100, 200, 300, 500, 1,000 or 2,000 metres, wound 100 metres to a roll. Cut pieces are 10, 15, 20, 25 or 33 cm, from 300 pieces, with a straight, diagonal or notched end. Widths are 10, 15, 20, 25, 30, 40, 50 and 100 mm. There are 28 colours, and the colour does not change the price.\n\nPrint is no logo, or your logo in 1, 2, 3 or 4 colours. On a roll, 2 or more colours start at 300 metres. The price is ex VAT and includes delivery to Ireland.',
+    specifications: [
+      { name: 'Material', value: 'Double-faced satin, about 1 mm, shiny on both sides' },
+      { name: 'Form', value: 'A roll, or pieces already cut' },
+      { name: 'Widths', value: '10, 15, 20, 25, 30, 40, 50 and 100 mm' },
+      { name: 'Colours', value: '28 satin colours. The colour does not change the price' },
+      { name: 'Print', value: 'No logo, or a logo in 1, 2, 3 or 4 colours' },
+      { name: 'Roll lengths', value: '100, 200, 300, 500, 1,000 or 2,000 metres, wound 100 metres to a roll' },
+      { name: 'Cut lengths', value: '10, 15, 20, 25 or 33 cm' },
+      { name: 'Cut quantity', value: '300, 500, 1,000 or 2,000 pieces' },
+      { name: 'Cut end', value: 'Straight, diagonal or notch. The end does not change the price' },
+      { name: 'Delivery', value: 'Included to Ireland. Price is ex VAT' },
+    ],
+    images: RIBBON_GALLERY.map((item) => item.src),
+    imageSrc: RIBBON_GALLERY[0].src,
+    price: `From €${ribbonFromPrice().toFixed(2)} ex VAT`,
+    moq: '100 metres, or 300 cut pieces',
+    leadTime: 'Standard production. Delivery to Ireland is included in the price.',
+    applications: [
+      'Gift wrapping',
+      'Retail bags and boxes',
+      'Ecommerce unboxing',
+      'Corporate gifts',
+    ],
   },
   {
     id: 'sos-grab-bags',

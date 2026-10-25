@@ -23,6 +23,9 @@ Sitemap: https://www.printnpack.ie/sitemap.xml
 # Shop window lettering (vinyl cut letters, application tape, vinyl types, prices)
 # https://www.printnpack.ie/llms/vinyl-cut-letters.txt
 # https://www.printnpack.ie/llms/vinyl-cut-letters.json
+# Printed satin ribbon (roll or cut pieces, widths, colours, logo colours, every price)
+# https://www.printnpack.ie/llms/printed-ribbon.txt
+# https://www.printnpack.ie/llms/printed-ribbon.json
 # Custom printed napkins (sizes, Ireland and Europe delivery, every quantity price)
 # https://www.printnpack.ie/llms/custom-printed-napkins.txt
 # https://www.printnpack.ie/llms/custom-printed-napkins.json

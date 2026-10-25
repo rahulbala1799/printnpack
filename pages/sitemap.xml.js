@@ -76,6 +76,9 @@ const staticPages = [
   { path: '/luxury-paper-bags-ireland',      priority: '0.92', changefreq: 'weekly' },
   { path: '/luxury-magnetic-closure-boxes-ireland', priority: '0.92', changefreq: 'weekly' },
   { path: '/custom-printed-tissue-paper-ireland', priority: '0.91', changefreq: 'weekly' },
+  { path: '/printed-ribbon-ireland', priority: '0.91', changefreq: 'weekly' },
+  { path: '/llms/printed-ribbon.txt', priority: '0.4', changefreq: 'weekly' },
+  { path: '/llms/printed-ribbon.json', priority: '0.4', changefreq: 'weekly' },
   { path: '/luxury-tissue-paper-ireland', priority: '0.92', changefreq: 'weekly' },
   { path: '/eco-bagasse-burger-boxes',    priority: '0.85', changefreq: 'weekly' },
   // Burger box cluster

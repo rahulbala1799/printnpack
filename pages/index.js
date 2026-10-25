@@ -149,6 +149,7 @@ export default function Home() {
             catalogOffer('Napkins Ireland', '/napkins-ireland'),
             catalogOffer('Custom Printed Napkins', '/custom-printed-napkins'),
             catalogOffer('Luxury Tissue Paper Ireland', '/luxury-tissue-paper-ireland'),
+            catalogOffer('Custom Printed Ribbon Ireland', '/printed-ribbon-ireland'),
             catalogOffer('Foamex Ireland', '/foamex-ireland'),
             catalogOffer('Foamex Board Ireland', '/foamex-boards'),
             catalogOffer('Vinyl Banners Ireland', '/vinyl-banners'),
@@ -352,7 +353,6 @@ export default function Home() {
 
       {/* Browse by category */}
       <CategoryGrid />
-
 
       <PackagingGuides />
 

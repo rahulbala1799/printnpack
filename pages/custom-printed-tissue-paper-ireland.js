@@ -457,6 +457,7 @@ export default function CustomPrintedTissuePaperIreland() {
       <RelatedSeoLinks
         title="More luxury packaging for Irish brands"
         links={[
+          { href: '/printed-ribbon-ireland', label: 'Custom Printed Ribbon', desc: 'Satin ribbon with your logo, on a roll or cut to length' },
           { href: '/luxury-magnetic-closure-boxes-ireland', label: 'Magnetic Closure Boxes', desc: 'Luxury rigid gift boxes' },
           { href: '/luxury-paper-bags-ireland', label: 'Luxury Paper Bags', desc: 'Premium die-cut carrier bags' },
           { href: '/twisted-handle-paper-bags-ireland', label: 'Twisted Handle Bags', desc: 'Premium retail paper bags' },
