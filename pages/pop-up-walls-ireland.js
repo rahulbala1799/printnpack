@@ -18,6 +18,8 @@ import {
   popupWallPreview,
 } from '../data/popup-walls';
 import PopupWallConfigurator from '../components/popup-walls/PopupWallConfigurator';
+import { zipperRelatedLinks } from '../data/zipper-walls';
+import { EXHIBITION_RELATED } from '../data/exhibition-stands';
 
 const PAGE_URL = `${SITE_URL}${POPUP_WALL_PATH}`;
 const FROM_PRICE = popupWallFromPrice().toFixed(2);
@@ -186,6 +188,8 @@ export default function PopupWallsIreland() {
                 <Link href="/fabric-banner-stands-ireland" className="text-blue-600 hover:underline">fabric banner stand</Link>
                 {' '}or a{' '}
                 <Link href="/roll-up-banners-ireland" className="text-blue-600 hover:underline">roll-up banner</Link>.
+                {' '}For an arch, a pillar, a U wall or a wave, see{' '}
+                <Link href="/zipper-walls-ireland" className="text-blue-600 hover:underline">zipper walls</Link>.
               </p>
               <figure className="mt-6">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-slate-100">
@@ -317,6 +321,7 @@ export default function PopupWallsIreland() {
       <RelatedSeoLinks
         title="Related banners, stands and frames"
         links={[
+          EXHIBITION_RELATED,
           { href: '/freestanding-led-frames-ireland', label: 'Freestanding LED frames', desc: 'Double-sided edge-lit frame' },
           { href: '/inhaker-stands-ireland', label: 'Exhibition walls', desc: 'Rigid printed panels, also called an inhaker stand' },
           { href: '/fabric-banner-stands-ireland', label: 'Fabric banner stands', desc: 'Stretch graphic on a tube frame' },
@@ -324,6 +329,8 @@ export default function PopupWallsIreland() {
           { href: '/roll-up-banners-ireland', label: 'Roll-up banners', desc: 'Narrow pull-up stands' },
           { href: '/banners-ireland', label: 'Banner printing Ireland', desc: 'PVC, roll-ups and displays' },
           { href: '/custom-table-covers-ireland', label: 'Custom table covers', desc: 'Printed throws for the stand' },
+          { href: '/zipper-walls-ireland', label: 'Zipper walls', desc: 'Arch, pillar, wave, U and curves' },
+          ...zipperRelatedLinks(),
         ]}
       />
     </Layout>

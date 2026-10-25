@@ -3,6 +3,8 @@ import { POPUP_WALL_GALLERY } from './popup-walls';
 import { LED_FRAME_GALLERY, ledFrameFromPrice } from './led-frames';
 import { INHAKER_GALLERY, inhakerFromPrice } from './inhaker-stands';
 import { beachFlagFromPrice } from './beach-flags';
+import { zipperCatalogProducts } from './zipper-walls';
+import { exhibitionCatalogProduct } from './exhibition-stands';
 import { VINYL_LETTER_GALLERY, VINYL_LETTER_IMAGE, vinylLetterFromPrice } from './vinyl-cut-letters';
 
 const products = [
@@ -933,6 +935,7 @@ const products = [
       'Retail and launch activations',
     ],
   },
+  exhibitionCatalogProduct(),
   {
     id: 'pop-up-walls-ireland',
     name: 'Best Pop-up Display Stands Ireland',
@@ -990,6 +993,7 @@ const products = [
       'Retail and launch events',
     ],
   },
+  ...zipperCatalogProducts(),
   {
     id: 'freestanding-led-frames-ireland',
     name: 'Freestanding LED Frames Ireland',

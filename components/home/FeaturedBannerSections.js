@@ -161,7 +161,7 @@ function ExhibitionSection({ onQuote }) {
       body="Use them together or on their own. The stretch wall holds the back of the stand. The roll-up travels with you."
       image="/images/home/exhibition-displays.webp"
       alt="A stretch display wall beside an extra wide roll-up banner"
-      href="/products?group=banners-stands-frames"
+      href="/exhibition-stands-ireland"
       cta="View displays"
       onQuote={onQuote}
     >

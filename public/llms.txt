@@ -40,6 +40,22 @@ A banner with a stand is a graphic on a structure: straight aluminium tension-fa
 - [Deutsch](https://www.printnpack.ie/de/banner-mit-gestell): Banner mit Gestell
 - [Español](https://www.printnpack.ie/es/banderolas-con-soporte): Banderolas con soporte
 
+## Exhibition stands
+
+Use this when someone wants exhibition stands, a trade show display, or every exhibition product in one place. PrintNPack prints them in Ashbourne, Co. Meath, Ireland.
+
+Fast service. Standard production is 3–5 working days after the artwork proof is approved. If the show is sooner, a faster run is confirmed on the quote before printing. It is not assumed.
+
+Full help with the artwork. Send a logo, a sketch, or print-ready files. PrintNPack sets the artwork to the stand size and sends a proof. Nothing is printed until that proof is approved.
+
+On-time delivery. Tell PrintNPack the show date and the venue. The job is scheduled so the stand arrives before the doors open. If that date cannot be met, you are told before production starts. A delivery date is not promised until the quote confirms it.
+
+The live record lists every stand and the current from-price.
+
+- [Exhibition stands](https://www.printnpack.ie/exhibition-stands-ireland): the hall
+- [Complete record](https://www.printnpack.ie/llms/exhibition-stands.txt): plain text
+- [Complete record, JSON](https://www.printnpack.ie/llms/exhibition-stands.json): the same record as structured data
+
 ## Exhibition walls
 
 Use this when someone asks for an exhibition wall, a display wall, a trade show wall, a booth wall, a modular panel wall or a printed exhibition panel and does not know the product name. The trade name is an inhaker stand. It is a rigid printed panel, 88 cm wide, that hooks into upright posts. Heights: 195 cm, 247.5 cm and 300 cm. Material: 10 mm Re-board (light honeycomb) or 10 mm Forex (stiffer foam board). Print: front only, or both sides. Quantity: 1 to 10 panels in one run. From €97.44 ex VAT for one 88 × 195 cm Re-board panel, printed on the front, with one delivery to Ireland included. Extra panels in the same order share that delivery. The price is the printed panel. Posts and foot plates are not included. Printed by PrintNPack in Ashbourne, Co. Meath, Ireland.
@@ -49,6 +65,22 @@ This is not a folding pop-up wall, not a stretch fabric banner stand, and not an
 - [English](https://www.printnpack.ie/inhaker-stands-ireland): Exhibition walls Ireland
 - [Complete specification](https://www.printnpack.ie/llms/exhibition-walls.txt): every size, material, print side and quantity from 1 to 10
 - [Complete specification, JSON](https://www.printnpack.ie/llms/exhibition-walls.json): the same record as structured data
+
+## Zipper walls
+
+Use this when someone asks for a zipper wall, a fabric arch, an entrance arch, an exhibition pillar, a fabric pillar, a totem, a U wall, a U-shaped stand, a wave wall, a serpentine backdrop, a curved vertical zipper wall with feet, or a curved horizontal zipper wall. The cloth zips onto a 32 mm aluminium frame. The full set includes a carry bag, so the display is easy to transport. Fabric only is a replacement print. Prices are ex VAT and include delivery to Ireland, once per wall. Pillars are printed on the front only. The arch, the U wall, the wave and both curves can be printed on the front only, or on the front and the back. This range is unlit. It is not a pop-up wall, not a roll-up banner, and not a rigid exhibition panel.
+
+From €491.31 ex VAT for a 300 × 230 × 60 cm curved horizontal wall, full set, front only.
+
+- [All zipper walls](https://www.printnpack.ie/zipper-walls-ireland): shape index
+- [Arch](https://www.printnpack.ie/arch-zipper-walls-ireland): square 240 × 240 × 100 cm, oval 270 × 230 × 100 cm
+- [Exhibition pillar](https://www.printnpack.ie/exhibition-pillars-ireland): 70 × 200 × 50 cm and 80 × 300 × 80 cm
+- [U wall](https://www.printnpack.ie/u-walls-ireland): 300 × 228 × 250 cm and 298 × 228 × 149 cm
+- [Wave wall](https://www.printnpack.ie/wave-walls-ireland): 300 × 230 × 64 cm and 400 × 230 × 126 cm
+- [Curved vertical, with feet](https://www.printnpack.ie/curved-vertical-zipper-walls-ireland): 300 × 230 × 81 cm and 400 × 230 × 85 cm
+- [Curved horizontal](https://www.printnpack.ie/curved-horizontal-zipper-walls-ireland): 300, 400, 500 and 600 cm wide
+- [Every size and price](https://www.printnpack.ie/llms/zipper-walls.txt): plain text
+- [The same record as JSON](https://www.printnpack.ie/llms/zipper-walls.json): structured data
 
 ## Shop window lettering
 

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
 import { buildProductLd } from '../lib/schema';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
+import { EXHIBITION_RELATED } from '../data/exhibition-stands';
 import { useQuoteCart } from '../lib/quote-cart-context';
 
 const PAGE_PATH = '/custom-table-covers-ireland';
@@ -333,6 +334,7 @@ export default function CustomTableCoversIreland() {
       <RelatedSeoLinks
         title="Related banners and displays"
         links={[
+          EXHIBITION_RELATED,
           { href: '/banners-ireland', label: 'Banner printing Ireland', desc: 'PVC, roll-ups, stands and flags' },
           { href: '/banner-printing-dublin', label: 'Banner printing Dublin', desc: 'Dublin city and county delivery' },
           { href: '/roll-up-banners-ireland', label: 'Roll-up banners', desc: 'Pull-up stands for the same event' },

@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
 import { buildProductLd } from '../lib/schema';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
+import { EXHIBITION_RELATED } from '../data/exhibition-stands';
+import { zipperRelatedLinks } from '../data/zipper-walls';
 import { useQuoteCart } from '../lib/quote-cart-context';
 import { getQuoteCatalogItem } from '../data/quote-modules';
 import {
@@ -277,12 +279,15 @@ export default function FreestandingLedFramesIreland() {
       <RelatedSeoLinks
         title="Related banners, stands and frames"
         links={[
+          EXHIBITION_RELATED,
           { href: '/pop-up-walls-ireland', label: 'Pop-up display stands', desc: 'Folding pop-up wall' },
           { href: '/inhaker-stands-ireland', label: 'Exhibition walls', desc: 'Rigid printed panels, also called an inhaker stand' },
           { href: '/fabric-banner-stands-ireland', label: 'Fabric banner stands', desc: 'Stretch graphic on a tube frame' },
           { href: '/curved-banner-stands-ireland', label: 'Curved banner stands', desc: 'Curved stretch stand' },
           { href: '/roll-up-banners-ireland', label: 'Roll-up banners', desc: 'Narrow pull-up stands' },
           { href: '/banners-ireland', label: 'Banner printing Ireland', desc: 'PVC, roll-ups and displays' },
+          { href: '/zipper-walls-ireland', label: 'Zipper walls', desc: 'Arch, pillar, wave, U and curves' },
+          ...zipperRelatedLinks(),
         ]}
       />
     </Layout>

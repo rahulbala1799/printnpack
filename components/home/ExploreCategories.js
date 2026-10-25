@@ -53,7 +53,7 @@ const CATEGORIES = [
   },
   {
     name: 'Exhibition',
-    href: '/products?group=banners-stands-frames',
+    href: '/exhibition-stands-ireland',
     image: '/images/banners/popup-walls/popup-wall-straight.jpg',
     alt: 'Pop-up exhibition display stand',
   },

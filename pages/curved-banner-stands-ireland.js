@@ -7,6 +7,8 @@ import { SITE_URL } from '../lib/site';
 import { buildProductLd } from '../lib/schema';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 import { useQuoteCart } from '../lib/quote-cart-context';
+import { zipperRelatedLinks } from '../data/zipper-walls';
+import { EXHIBITION_RELATED } from '../data/exhibition-stands';
 
 const PAGE_PATH = '/curved-banner-stands-ireland';
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
@@ -156,7 +158,11 @@ export default function CurvedBannerStandsIreland() {
                 The curve shows your brand from more angles than a flat fabric wall. Complete set or print only if you
                 already have the frame. Single or double sided. Standard sizes 300×230, 400×230 and 500×230 cm. Fabric
                 folds without creases and packs in a carry bag. About 10 minutes to assemble, no tools. Proofs before
-                print. Delivery from Ashbourne to Dublin and nationwide.
+                print. Delivery from Ashbourne to Dublin and nationwide. For a priced{' '}
+                <Link href="/curved-horizontal-zipper-walls-ireland" className="text-blue-600 hover:underline">curved horizontal zipper wall</Link>
+                {' '}or a{' '}
+                <Link href="/curved-vertical-zipper-walls-ireland" className="text-blue-600 hover:underline">curved vertical wall with feet</Link>
+                , use those pages.
               </p>
               <div className="flex flex-wrap gap-3">
                 <button
@@ -279,12 +285,15 @@ export default function CurvedBannerStandsIreland() {
       <RelatedSeoLinks
         title="Related banners, stands and frames"
         links={[
+          EXHIBITION_RELATED,
           { href: '/pop-up-walls-ireland', label: 'Pop-up display stands', desc: 'Folding pop-up wall' },
           { href: '/fabric-banner-stands-ireland', label: 'Fabric banner stands', desc: 'Straight banner with frame' },
           { href: '/banners-ireland', label: 'Banner printing Ireland', desc: 'PVC, roll-ups and displays' },
           { href: '/roll-up-banners-ireland', label: 'Roll-up banners', desc: 'Cassette pull-up stands' },
           { href: '/stage-backdrop-banners-ireland', label: 'Stage backdrop banners', desc: 'Huge hanging graphics' },
           { href: '/banner-faq-ireland', label: 'Banner FAQ Ireland', desc: 'Cost, materials and names' },
+          { href: '/zipper-walls-ireland', label: 'Zipper walls', desc: 'Arch, pillar, wave, U and curves' },
+          ...zipperRelatedLinks(),
         ]}
       />
     </Layout>

@@ -135,7 +135,7 @@ export default function BannersIreland() {
       <section className="py-12 lg:py-16 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Banners, stands and frames</h2>
-          <p className="text-gray-600 mb-8 max-w-2xl">PVC for outdoor use, roll-ups for portable displays, fabric banner stands (banner with frame), printed table covers, huge stage backdrops up to 50 m, and custom flags for clubs and events.</p>
+          <p className="text-gray-600 mb-8 max-w-2xl">PVC for outdoor use, roll-ups for portable displays, fabric banner stands (banner with frame), printed table covers, huge stage backdrops up to 50 m, and custom flags for clubs and events. <Link href="/exhibition-stands-ireland" className="font-semibold text-blue-600 hover:underline">Exhibition stands</Link> lays out every wall, frame and table cover as one show.</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <Link href="/vinyl-banners" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-blue-300 hover:shadow-lg transition-all">
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 mb-2">PVC Banners</h3>
@@ -186,6 +186,39 @@ export default function BannersIreland() {
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-green-700 mb-2">Flags</h3>
               <p className="text-gray-600 text-sm leading-relaxed mb-4">Beach flags and feather flags, plus custom flags for clubs and businesses.</p>
               <span className="text-green-700 font-semibold text-sm">View flags →</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 lg:py-16 bg-white border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Zipper walls</h2>
+          <p className="text-gray-600 mb-6 max-w-3xl">Stretch cloth that zips onto a frame and packs into a carry bag. Pick an arch, a pillar, a U wall, a wave, or a curve.</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <Link href="/arch-zipper-walls-ireland" className="group p-5 rounded-xl border border-gray-200 hover:border-blue-200 hover:shadow-md transition-all">
+              <h3 className="font-semibold text-gray-900 group-hover:text-blue-600">Arch zipper walls</h3>
+              <p className="text-sm text-gray-500 mt-1">Square or oval fabric arch</p>
+            </Link>
+            <Link href="/exhibition-pillars-ireland" className="group p-5 rounded-xl border border-gray-200 hover:border-blue-200 hover:shadow-md transition-all">
+              <h3 className="font-semibold text-gray-900 group-hover:text-blue-600">Exhibition pillars</h3>
+              <p className="text-sm text-gray-500 mt-1">Fabric pillar, easy to transport</p>
+            </Link>
+            <Link href="/u-walls-ireland" className="group p-5 rounded-xl border border-gray-200 hover:border-blue-200 hover:shadow-md transition-all">
+              <h3 className="font-semibold text-gray-900 group-hover:text-blue-600">U-shaped zipper walls</h3>
+              <p className="text-sm text-gray-500 mt-1">Three-sided booth wall</p>
+            </Link>
+            <Link href="/wave-walls-ireland" className="group p-5 rounded-xl border border-gray-200 hover:border-blue-200 hover:shadow-md transition-all">
+              <h3 className="font-semibold text-gray-900 group-hover:text-blue-600">Wave zipper walls</h3>
+              <p className="text-sm text-gray-500 mt-1">S-curve display wall</p>
+            </Link>
+            <Link href="/curved-vertical-zipper-walls-ireland" className="group p-5 rounded-xl border border-gray-200 hover:border-blue-200 hover:shadow-md transition-all">
+              <h3 className="font-semibold text-gray-900 group-hover:text-blue-600">Curved vertical zipper walls</h3>
+              <p className="text-sm text-gray-500 mt-1">Curve with feet</p>
+            </Link>
+            <Link href="/curved-horizontal-zipper-walls-ireland" className="group p-5 rounded-xl border border-gray-200 hover:border-blue-200 hover:shadow-md transition-all">
+              <h3 className="font-semibold text-gray-900 group-hover:text-blue-600">Curved horizontal zipper walls</h3>
+              <p className="text-sm text-gray-500 mt-1">3 m to 6 m wide</p>
             </Link>
           </div>
         </div>

@@ -3,6 +3,7 @@ import { resolveQuoteImage } from '../../data/quote-modules';
 import ClothingQuoteModule from './modules/ClothingQuoteModule';
 import GenericQuoteModule from './modules/GenericQuoteModule';
 import PopupWallQuoteModule from './modules/PopupWallQuoteModule';
+import ZipperWallQuoteModule from './modules/ZipperWallQuoteModule';
 import LedFrameQuoteModule from './modules/LedFrameQuoteModule';
 import InhakerStandQuoteModule from './modules/InhakerStandQuoteModule';
 import BeachFlagQuoteModule from './modules/BeachFlagQuoteModule';
@@ -75,6 +76,8 @@ export default function QuoteConfigurePanel({ selected, existing, onSave }) {
         <ClothingQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
       ) : selected.moduleId === 'popup-walls' ? (
         <PopupWallQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
+      ) : selected.moduleId === 'zipper-walls' ? (
+        <ZipperWallQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
       ) : selected.moduleId === 'led-frames' ? (
         <LedFrameQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
       ) : selected.moduleId === 'inhaker-stands' ? (

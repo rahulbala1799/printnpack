@@ -20,6 +20,7 @@ import { COASTER_BOARD, COASTER_SIDES, COASTER_SIZES, PRINTED_COASTER_MIN } from
 import { COCKTAIL_NAPKIN_PRODUCT } from './cocktail-napkins';
 import { PRINTED_NAPKIN_MIN, PRINTED_NAPKIN_PRINT, PRINTED_NAPKIN_SIZES, getNapkinLineTotal, getNapkinUnitPrice } from './printed-napkins';
 import { buildPopupWallQuoteLine } from './popup-walls';
+import { ZIPPER_FAMILIES, buildZipperWallQuoteLine, zipperFromPrice } from './zipper-walls';
 import { buildLedFrameQuoteLine, ledFrameFromPrice } from './led-frames';
 import { buildInhakerQuoteLine, inhakerFromPrice } from './inhaker-stands';
 import { beachFlagFromPrice, buildBeachFlagQuoteLine } from './beach-flags';
@@ -78,6 +79,15 @@ export const QUOTE_CATALOG = [
   withMedia({ id: 'fabric-banner-stands-ireland', name: 'Fabric Banner Stands', href: '/fabric-banner-stands-ireland', moduleId: 'fabric-banner-stands', configurable: true, group: 'Banners, Stands and Frames', price: 'Contact for quote' }),
   withMedia({ id: 'curved-banner-stands-ireland', name: 'Curved Banner Stands', href: '/curved-banner-stands-ireland', moduleId: 'curved-banner-stands', configurable: true, group: 'Banners, Stands and Frames', price: 'Contact for quote' }),
   withMedia({ id: 'pop-up-walls-ireland', name: 'Pop-up Display Stands', href: '/pop-up-walls-ireland', moduleId: 'popup-walls', configurable: true, group: 'Banners, Stands and Frames', price: 'From €511.65 ex VAT' }),
+  ...ZIPPER_FAMILIES.map((family) => withMedia({
+    id: family.id,
+    name: family.name,
+    href: family.path,
+    moduleId: 'zipper-walls',
+    configurable: true,
+    group: 'Banners, Stands and Frames',
+    price: `From €${zipperFromPrice(family.id).toFixed(2)} ex VAT`,
+  })),
   withMedia({ id: 'freestanding-led-frames-ireland', name: 'Freestanding LED Frames', href: '/freestanding-led-frames-ireland', moduleId: 'led-frames', configurable: true, group: 'Banners, Stands and Frames', price: `From €${ledFrameFromPrice().toFixed(2)} ex VAT` }),
   withMedia({ id: 'inhaker-stands-ireland', name: 'Exhibition Walls', href: '/inhaker-stands-ireland', moduleId: 'inhaker-stands', configurable: true, group: 'Banners, Stands and Frames', price: `From €${inhakerFromPrice().toFixed(2)} ex VAT` }),
   withMedia({ id: 'stage-backdrop-banners-ireland', name: 'Stage Backdrop Banners', href: '/stage-backdrop-banners-ireland', moduleId: 'stage-backdrops', configurable: false, group: 'Banners, Stands and Frames' }),
@@ -358,6 +368,9 @@ export function buildCatalogQuoteLine(catalogItem, options = {}) {
   if (catalogItem.moduleId === 'popup-walls') {
     return buildPopupWallQuoteLine(catalogItem, options);
   }
+  if (catalogItem.moduleId === 'zipper-walls') {
+    return buildZipperWallQuoteLine(catalogItem, options);
+  }
   if (catalogItem.moduleId === 'led-frames') {
     return buildLedFrameQuoteLine(catalogItem, options);
   }
@@ -548,6 +561,13 @@ export function repriceQuoteLine(line, qty) {
   }
   if (line.moduleId === 'popup-walls') {
     const next = buildPopupWallQuoteLine(
+      { id: line.productId, name: line.name, href: line.href, image: line.image, images: line.images },
+      { ...(line.options || {}), qty }
+    );
+    return next ? { ...next, id: line.id } : { ...line, qty };
+  }
+  if (line.moduleId === 'zipper-walls') {
+    const next = buildZipperWallQuoteLine(
       { id: line.productId, name: line.name, href: line.href, image: line.image, images: line.images },
       { ...(line.options || {}), qty }
     );

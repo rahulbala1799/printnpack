@@ -11,9 +11,15 @@ Sitemap: https://www.printnpack.ie/sitemap.xml
 
 # Plain-language page list for answer engines
 # https://www.printnpack.ie/llms.txt
+# Exhibition hall (every stand, speed, artwork help, show-date delivery)
+# https://www.printnpack.ie/llms/exhibition-stands.txt
+# https://www.printnpack.ie/llms/exhibition-stands.json
 # Complete exhibition-wall record (sizes, materials, print, every quantity price)
 # https://www.printnpack.ie/llms/exhibition-walls.txt
 # https://www.printnpack.ie/llms/exhibition-walls.json
+# Zipper walls (arch, pillar, U wall, wave, curved vertical, curved horizontal)
+# https://www.printnpack.ie/llms/zipper-walls.txt
+# https://www.printnpack.ie/llms/zipper-walls.json
 # Shop window lettering (vinyl cut letters, application tape, vinyl types, prices)
 # https://www.printnpack.ie/llms/vinyl-cut-letters.txt
 # https://www.printnpack.ie/llms/vinyl-cut-letters.json

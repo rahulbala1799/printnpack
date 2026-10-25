@@ -128,6 +128,13 @@ export default function Home() {
             catalogOffer('Printed Banners Ireland', '/vinyl-banners'),
             catalogOffer('Roll Up Banners Ireland', '/roll-up-banners-ireland'),
             catalogOffer('Pop-up Display Stands Ireland', '/pop-up-walls-ireland'),
+            catalogOffer('Zipper Walls Ireland', '/zipper-walls-ireland'),
+            catalogOffer('Arch Zipper Walls Ireland', '/arch-zipper-walls-ireland'),
+            catalogOffer('Exhibition Pillars Ireland', '/exhibition-pillars-ireland'),
+            catalogOffer('U-Shaped Zipper Walls Ireland', '/u-walls-ireland'),
+            catalogOffer('Wave Zipper Walls Ireland', '/wave-walls-ireland'),
+            catalogOffer('Curved Vertical Zipper Walls Ireland', '/curved-vertical-zipper-walls-ireland'),
+            catalogOffer('Curved Horizontal Zipper Walls Ireland', '/curved-horizontal-zipper-walls-ireland'),
             catalogOffer('Freestanding LED Frames Ireland', '/freestanding-led-frames-ireland'),
             catalogOffer('Exhibition Walls Ireland', '/inhaker-stands-ireland'),
             catalogOffer('Custom Table Covers Ireland', '/custom-table-covers-ireland'),
@@ -345,6 +352,7 @@ export default function Home() {
 
       {/* Browse by category */}
       <CategoryGrid />
+
 
       <PackagingGuides />
 

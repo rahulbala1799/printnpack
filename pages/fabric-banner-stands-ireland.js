@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
 import { buildProductLd } from '../lib/schema';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
+import { zipperRelatedLinks } from '../data/zipper-walls';
+import { EXHIBITION_RELATED } from '../data/exhibition-stands';
 import { HreflangLinks, LanguageBar, OgLocaleAlternates } from '../components/seo/LanguageAlternates';
 import { useQuoteCart } from '../lib/quote-cart-context';
 
@@ -260,6 +262,11 @@ export default function FabricBannerStandsIreland() {
             <p>
               A <strong>banner with frame</strong> (this page) is a free-standing stretch fabric wall. The graphic
               zips or slides over the aluminium structure like a pillowcase, so the print stays tight and wrinkle-free.
+              An{' '}
+              <Link href="/arch-zipper-walls-ireland" className="text-blue-600 hover:underline">arch</Link>, a{' '}
+              <Link href="/exhibition-pillars-ireland" className="text-blue-600 hover:underline">pillar</Link>, a{' '}
+              <Link href="/u-walls-ireland" className="text-blue-600 hover:underline">U wall</Link> or a{' '}
+              <Link href="/wave-walls-ireland" className="text-blue-600 hover:underline">wave</Link> is a separate zipper wall.
             </p>
             <p>
               A <Link href="/roll-up-banners-ireland" className="text-blue-600 hover:underline">roll-up banner</Link>{' '}
@@ -298,6 +305,7 @@ export default function FabricBannerStandsIreland() {
       <RelatedSeoLinks
         title="Related banners, stands and frames"
         links={[
+          EXHIBITION_RELATED,
           { href: '/curved-banner-stands-ireland', label: 'Curved banner stands', desc: 'Curved stretch stand / media wall' },
           { href: '/pop-up-walls-ireland', label: 'Pop-up display stands', desc: 'Folding pop-up wall' },
           { href: '/banners-ireland', label: 'Banner printing Ireland', desc: 'PVC, roll-ups and displays' },
@@ -306,6 +314,8 @@ export default function FabricBannerStandsIreland() {
           { href: '/stage-backdrop-banners-ireland', label: 'Stage backdrop banners', desc: 'Huge hanging graphics' },
           { href: '/custom-table-covers-ireland', label: 'Custom table covers', desc: 'Printed throws, every county' },
           { href: '/banner-faq-ireland', label: 'Banner FAQ Ireland', desc: 'Cost, materials and names' },
+          { href: '/zipper-walls-ireland', label: 'Zipper walls', desc: 'Arch, pillar, wave, U and curves' },
+          ...zipperRelatedLinks(),
         ]}
       />
     </Layout>
