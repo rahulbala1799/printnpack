@@ -9,7 +9,7 @@ import { beachFlagFromPrice } from './beach-flags';
 import { inhakerFromPrice } from './inhaker-stands';
 import { ledFrameFromPrice } from './led-frames';
 import { popupWallFromPrice } from './popup-walls';
-import { zipperFromPrice } from './zipper-walls';
+import { ARCH_ZIPPER_PHOTOS, CURVED_HORIZONTAL_GALLERY, CURVED_VERTICAL_GALLERY, PILLAR_GALLERY, U_WALL_GALLERY, WAVE_GALLERY, zipperFromPrice } from './zipper-walls';
 
 export const EXHIBITION_PATH = '/exhibition-stands-ireland';
 
@@ -113,36 +113,54 @@ export function exhibitionHall() {
           name: 'Arch zipper walls',
           href: '/arch-zipper-walls-ireland',
           summary: 'A square or oval fabric arch for an entrance. Full set with a carry bag, or the cloth only.',
+          image: ARCH_ZIPPER_PHOTOS.front.src,
+          imageAlt: ARCH_ZIPPER_PHOTOS.front.alt,
+          caption: 'Example print. Your own artwork goes on the fabric.',
         }, () => zipperFromPrice('arch-zipper-walls-ireland')),
         pricedStand({
           stand: 'B2',
           name: 'Exhibition pillars',
           href: '/exhibition-pillars-ireland',
           summary: 'A fabric zipper pillar, 2 m or 3 m tall, printed on the front. Easy to carry in the bag.',
+          image: PILLAR_GALLERY[0].src,
+          imageAlt: PILLAR_GALLERY[0].alt,
+          caption: 'Example print. Your own artwork goes on the fabric.',
         }, () => zipperFromPrice('exhibition-pillars-ireland')),
         pricedStand({
           stand: 'B3',
           name: 'U-shaped zipper walls',
           href: '/u-walls-ireland',
           summary: 'A three-sided booth. The cloth wraps the back and both returns.',
+          image: U_WALL_GALLERY[0].src,
+          imageAlt: U_WALL_GALLERY[0].alt,
+          caption: 'Example print. Your own artwork goes on the fabric.',
         }, () => zipperFromPrice('u-walls-ireland')),
         pricedStand({
           stand: 'B4',
           name: 'Wave zipper walls',
           href: '/wave-walls-ireland',
           summary: 'An S-curve wall. 300 cm or 400 cm wide.',
+          image: WAVE_GALLERY[0].src,
+          imageAlt: WAVE_GALLERY[0].alt,
+          caption: 'Example print. Your own artwork goes on the fabric.',
         }, () => zipperFromPrice('wave-walls-ireland')),
         pricedStand({
           stand: 'B5',
           name: 'Curved vertical zipper walls',
           href: '/curved-vertical-zipper-walls-ireland',
           summary: 'A tall curve that stands on its own feet. 300 cm or 400 cm wide. Not the separate curved banner stand.',
+          image: CURVED_VERTICAL_GALLERY[0].src,
+          imageAlt: CURVED_VERTICAL_GALLERY[0].alt,
+          caption: 'Example print. Your own artwork goes on the fabric.',
         }, () => zipperFromPrice('curved-vertical-zipper-walls-ireland')),
         pricedStand({
           stand: 'B6',
           name: 'Curved horizontal zipper walls',
           href: '/curved-horizontal-zipper-walls-ireland',
           summary: 'A wide curve, from 300 cm to 600 cm. Full set with a bag, or the cloth only.',
+          image: CURVED_HORIZONTAL_GALLERY[0].src,
+          imageAlt: CURVED_HORIZONTAL_GALLERY[0].alt,
+          caption: 'Example print. Your own artwork goes on the fabric.',
         }, () => zipperFromPrice('curved-horizontal-zipper-walls-ireland')),
       ],
     },

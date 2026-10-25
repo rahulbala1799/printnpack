@@ -2,10 +2,12 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { cn } from '../../lib/cn';
 import QuantityField from '../quote/QuantityField';
 import {
-  ZIPPER_PRINT_PHOTOS,
   normalizeZipperWall,
   priceZipperWall,
   zipperFamily,
+  zipperPreview,
+  zipperPrintPhotos,
+  zipperShapeOptions,
   zipperSizesFor,
 } from '../../data/zipper-walls';
 
@@ -96,6 +98,7 @@ export default function ZipperWallConfigurator({
   onChange,
   submitLabel = 'Add to quote',
   align = 'start',
+  previewClassName,
 }) {
   const family = zipperFamily(familyId);
   const [values, setValues] = useState(() => normalizeZipperWall({ ...(initial || {}), familyId }));
@@ -105,6 +108,9 @@ export default function ZipperWallConfigurator({
   };
 
   const priced = useMemo(() => priceZipperWall(values), [values]);
+  const preview = zipperPreview(values);
+  const shapeOptions = zipperShapeOptions(family?.id);
+  const printPhotos = zipperPrintPhotos(family?.id, values.shapeId);
   const sizes = zipperSizesFor(family, values.shapeId);
 
   useEffect(() => {
@@ -121,14 +127,34 @@ export default function ZipperWallConfigurator({
         if (priced) onSubmit(priced);
       }}
     >
+      {preview && (
+        <figure className={cn('text-left', previewClassName)}>
+          <div className="overflow-hidden rounded-xl bg-stone-100">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={preview.src} alt={preview.alt} className="aspect-square w-full object-cover" />
+          </div>
+          <figcaption className="mt-1.5 text-xs text-stone-500">
+            Example print. Your own artwork goes on the fabric.
+          </figcaption>
+        </figure>
+      )}
       {family.shapes.length > 0 && (
-        <Choice
-          label="Shape"
-          options={family.shapes}
-          value={values.shapeId}
-          onChange={(shapeId) => set({ shapeId })}
-          align={align}
-        />
+        shapeOptions.some((option) => option.image) ? (
+          <PictureChoice
+            label="Shape"
+            options={shapeOptions}
+            value={values.shapeId}
+            onChange={(shapeId) => set({ shapeId })}
+          />
+        ) : (
+          <Choice
+            label="Shape"
+            options={family.shapes}
+            value={values.shapeId}
+            onChange={(shapeId) => set({ shapeId })}
+            align={align}
+          />
+        )
       )}
       <Choice
         label="Size"
@@ -152,8 +178,8 @@ export default function ZipperWallConfigurator({
           label="Print"
           options={PRINTS.map((option) => ({
             ...option,
-            image: ZIPPER_PRINT_PHOTOS[option.id].src,
-            alt: ZIPPER_PRINT_PHOTOS[option.id].alt,
+            image: printPhotos[option.id].src,
+            alt: printPhotos[option.id].alt,
           }))}
           value={values.print}
           onChange={(print) => set({ print })}

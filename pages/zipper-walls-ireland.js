@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '../components/layout/Layout';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { SITE_URL } from '../lib/site';
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
@@ -9,6 +10,7 @@ import {
   ZIPPER_HUB_PATH,
   ZIPPER_NEIGHBOUR_LINKS,
   zipperFromPrice,
+  zipperGallery,
   zipperRangeFromPrice,
 } from '../data/zipper-walls';
 
@@ -91,13 +93,23 @@ export default function ZipperWallsIreland() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">Choose a shape</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {ZIPPER_FAMILIES.map((family) => (
-              <Link key={family.id} href={family.path} className="group rounded-2xl border border-gray-200 bg-white p-6 hover:border-blue-300 hover:shadow-md transition-all">
+            {ZIPPER_FAMILIES.map((family) => {
+              const photo = zipperGallery(family.id)[0];
+              return (
+              <Link key={family.id} href={family.path} className="group overflow-hidden rounded-2xl border border-gray-200 bg-white hover:border-blue-300 hover:shadow-md transition-all">
+                {photo ? (
+                  <span className="relative block aspect-square bg-slate-100">
+                    <Image src={photo.src} alt={photo.alt} fill className="object-cover" sizes="(max-width: 640px) 100vw, 33vw" />
+                  </span>
+                ) : null}
+                <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600">{family.linkLabel}</h3>
                 <p className="text-sm text-gray-600 mt-2 leading-relaxed">{family.linkDesc}</p>
                 <p className="text-sm font-semibold text-gray-900 mt-4">From €{zipperFromPrice(family.id).toFixed(2)} ex VAT</p>
+                </div>
               </Link>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import Layout from '../layout/Layout';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { SITE_URL } from '../../lib/site';
 import { buildProductLd } from '../../lib/schema';
@@ -14,6 +15,9 @@ import {
   zipperFaqs,
   zipperFamily,
   zipperFromPrice,
+  zipperGallery,
+  zipperGalleryCaption,
+  zipperPreview,
   zipperRelatedLinks,
 } from '../../data/zipper-walls';
 import ZipperWallConfigurator from './ZipperWallConfigurator';
@@ -22,6 +26,17 @@ export default function ZipperWallProductPage({ familyId }) {
   const family = zipperFamily(familyId);
   const { addItem } = useQuoteCart();
   const catalogItem = getQuoteCatalogItem(family.id);
+  const gallery = zipperGallery(family.id);
+  const [activeImage, setActiveImage] = useState(0);
+  const previewSrc = useRef(null);
+  const handlePreview = useCallback((priced) => {
+    const next = zipperPreview(priced);
+    if (!next || previewSrc.current === next.src) return;
+    previewSrc.current = next.src;
+    const index = gallery.findIndex((item) => item.src === next.src);
+    if (index >= 0) setActiveImage(index);
+  }, [gallery]);
+  const shown = gallery[activeImage] || gallery[0];
   const from = zipperFromPrice(family.id).toFixed(2);
   const faqs = zipperFaqs(family.id);
   const pageUrl = `${SITE_URL}${family.path}`;
@@ -30,6 +45,7 @@ export default function ZipperWallProductPage({ familyId }) {
   const productLd = buildProductLd({
     name: family.name,
     description,
+    image: gallery.length ? gallery.map((item) => `${SITE_URL}${item.src}`) : undefined,
     url: pageUrl,
     price: from,
     sku: family.id,
@@ -66,6 +82,7 @@ export default function ZipperWallProductPage({ familyId }) {
         <meta property="og:title" content={family.title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={pageUrl} />
+        {shown ? <meta property="og:image" content={`${SITE_URL}${shown.src}`} /> : null}
         {productLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ ...productLd, alternateName: family.alternateNames }) }} /> : null}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
@@ -112,11 +129,46 @@ export default function ZipperWallProductPage({ familyId }) {
                   </>
                 ) : null}
               </p>
+              {shown ? (
+                <figure className="mt-6">
+                  <div className="relative aspect-square overflow-hidden rounded-2xl bg-slate-100">
+                    <Image
+                      key={shown.src}
+                      src={shown.src}
+                      alt={shown.alt}
+                      fill
+                      className="object-cover"
+                      priority
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                    />
+                  </div>
+                  <div className="mt-3 grid grid-cols-4 gap-2">
+                    {gallery.map((item, index) => (
+                      <button
+                        key={item.src}
+                        type="button"
+                        onClick={() => setActiveImage(index)}
+                        className={`relative aspect-square overflow-hidden rounded-lg border ${
+                          activeImage === index ? 'border-blue-600 ring-2 ring-blue-200' : 'border-gray-200'
+                        }`}
+                        aria-label={item.alt}
+                      >
+                        <Image src={item.src} alt="" fill className="object-cover" sizes="120px" />
+                      </button>
+                    ))}
+                  </div>
+                  <figcaption className="mt-2 text-sm text-gray-500">
+                    {zipperGalleryCaption(family.id)}
+                  </figcaption>
+                </figure>
+              ) : null}
             </div>
             <div id="configure" className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm sm:p-6">
               <h2 className="mb-4 text-lg font-bold text-gray-900">Build your {family.alternateNames[0].toLowerCase()}</h2>
               <ZipperWallConfigurator
                 familyId={family.id}
+                previewClassName={shown ? 'lg:hidden' : undefined}
+                onChange={handlePreview}
                 onSubmit={(priced) => addItem(buildZipperWallQuoteLine(catalogItem, priced))}
               />
             </div>

@@ -6,8 +6,8 @@
  * Copies scale linearly. Confirmed at 2 copies for the 300 cm curved vertical
  * full set, the same wall as fabric only, and the 70 cm pillar full set.
  * Pillars reject a back print. Every other shape here allows front and back.
- * Prices are ex VAT. Product photos are not on the page yet.
- * The print choice uses a shared diagram so front and back is clear.
+ * Prices are ex VAT. Every shape here has example prints.
+ * The print choice uses a shared diagram so front and back is clear, except the arch, which uses its own photos.
  */
 
 export const ZIPPER_MARKUP = 1.45;
@@ -22,6 +22,159 @@ export const ZIPPER_PRINT_PHOTOS = {
     alt: 'Cloth printed on the front and the back.',
   },
 };
+
+/** Example prints. Oval is the curved arch. Square is the portal with straight sides. */
+export const ARCH_OVAL_PHOTOS = {
+  front: {
+    src: '/images/banners/zipper-walls/arch-zipper-wall-ireland-oval-front-only.jpg',
+    alt: 'Oval fabric exhibition arch printed on the front, with a plain inside',
+  },
+  both: {
+    src: '/images/banners/zipper-walls/arch-zipper-wall-ireland-oval-front-and-back.jpg',
+    alt: 'Oval fabric exhibition arch printed on the outside and the inside',
+  },
+};
+
+export const ARCH_SQUARE_PHOTOS = {
+  front: {
+    src: '/images/banners/zipper-walls/arch-zipper-wall-ireland-square-front-only.jpg',
+    alt: 'Square fabric exhibition arch printed on the front, with a plain inside',
+  },
+  both: {
+    src: '/images/banners/zipper-walls/arch-zipper-wall-ireland-square-front-and-back.jpg',
+    alt: 'Square fabric exhibition arch printed on the front and the inside',
+  },
+};
+
+export const ARCH_ZIPPER_PHOTOS = ARCH_OVAL_PHOTOS;
+
+const ARCH_OVAL_GALLERY = [
+  ARCH_OVAL_PHOTOS.front,
+  {
+    src: '/images/banners/zipper-walls/arch-zipper-wall-ireland-oval-front-only-purple.jpg',
+    alt: 'Oval fabric exhibition arch with a printed front and a plain white inside',
+  },
+  ARCH_OVAL_PHOTOS.both,
+  {
+    src: '/images/banners/zipper-walls/arch-zipper-wall-ireland-oval-front-and-back-tech.jpg',
+    alt: 'Oval fabric exhibition arch with a different print on the front and the inside',
+  },
+];
+
+const ARCH_SQUARE_GALLERY = [
+  ARCH_SQUARE_PHOTOS.front,
+  {
+    src: '/images/banners/zipper-walls/arch-zipper-wall-ireland-square-front-only-purple.jpg',
+    alt: 'Square fabric exhibition arch with a printed front and a plain white inside',
+  },
+  ARCH_SQUARE_PHOTOS.both,
+  {
+    src: '/images/banners/zipper-walls/arch-zipper-wall-ireland-square-front-and-back-green.jpg',
+    alt: 'Square fabric exhibition arch printed in one colour on the front and the inside',
+  },
+];
+
+export const ARCH_ZIPPER_GALLERY = [...ARCH_OVAL_GALLERY, ...ARCH_SQUARE_GALLERY];
+
+/** Each photo shows the 2 m pillar and the 3 m pillar together. They are example prints, not a size selector. */
+export const PILLAR_GALLERY = [
+  {
+    src: '/images/banners/zipper-walls/exhibition-pillar-ireland-technology.jpg',
+    alt: 'Printed fabric exhibition pillars, a 2 m pillar beside a 3 m pillar',
+  },
+  {
+    src: '/images/banners/zipper-walls/exhibition-pillar-ireland-botanical.jpg',
+    alt: 'Leaf-print fabric exhibition pillars, the shorter pillar beside the taller one',
+  },
+  {
+    src: '/images/banners/zipper-walls/exhibition-pillar-ireland-coffee.jpg',
+    alt: 'Coffee-print fabric exhibition pillars, a 2 m pillar beside a 3 m pillar',
+  },
+  {
+    src: '/images/banners/zipper-walls/exhibition-pillar-ireland-healthcare.jpg',
+    alt: 'Healthcare-print fabric exhibition pillars, the shorter pillar beside the taller one',
+  },
+];
+
+/** Example prints of one U wall. They do not split the deep and shallow sizes, or front-only and both sides. */
+export const U_WALL_GALLERY = [
+  {
+    src: '/images/banners/zipper-walls/u-zipper-wall-ireland-technology.jpg',
+    alt: 'U-shaped fabric exhibition wall with a printed back and returns',
+  },
+  {
+    src: '/images/banners/zipper-walls/u-zipper-wall-ireland-botanical.jpg',
+    alt: 'Leaf-print U-shaped fabric exhibition wall',
+  },
+  {
+    src: '/images/banners/zipper-walls/u-zipper-wall-ireland-coffee.jpg',
+    alt: 'Coffee-print U-shaped fabric exhibition wall',
+  },
+  {
+    src: '/images/banners/zipper-walls/u-zipper-wall-ireland-healthcare.jpg',
+    alt: 'Healthcare-print U-shaped fabric exhibition wall',
+  },
+];
+
+/** Example prints of one wide curve on a foot. They do not split the 300 to 600 cm widths, or front-only and both sides. */
+export const CURVED_HORIZONTAL_GALLERY = [
+  {
+    src: '/images/banners/zipper-walls/curved-horizontal-zipper-wall-ireland-technology.jpg',
+    alt: 'Wide curved fabric zipper wall on a foot, with a printed graphic',
+  },
+  {
+    src: '/images/banners/zipper-walls/curved-horizontal-zipper-wall-ireland-botanical.jpg',
+    alt: 'Leaf-print wide curved fabric zipper wall on a foot',
+  },
+  {
+    src: '/images/banners/zipper-walls/curved-horizontal-zipper-wall-ireland-coffee.jpg',
+    alt: 'Coffee-print wide curved fabric zipper wall on a foot',
+  },
+  {
+    src: '/images/banners/zipper-walls/curved-horizontal-zipper-wall-ireland-healthcare.jpg',
+    alt: 'Healthcare-print wide curved fabric zipper wall on a foot',
+  },
+];
+
+/** Example prints of one curve that stands on its feet. They do not split the 300 cm and 400 cm sizes, or front-only and both sides. */
+export const CURVED_VERTICAL_GALLERY = [
+  {
+    src: '/images/banners/zipper-walls/curved-vertical-zipper-wall-ireland-technology.jpg',
+    alt: 'Curved fabric zipper wall with feet and a printed graphic',
+  },
+  {
+    src: '/images/banners/zipper-walls/curved-vertical-zipper-wall-ireland-botanical.jpg',
+    alt: 'Leaf-print curved fabric zipper wall with feet',
+  },
+  {
+    src: '/images/banners/zipper-walls/curved-vertical-zipper-wall-ireland-coffee.jpg',
+    alt: 'Coffee-print curved fabric zipper wall with feet',
+  },
+  {
+    src: '/images/banners/zipper-walls/curved-vertical-zipper-wall-ireland-healthcare.jpg',
+    alt: 'Healthcare-print curved fabric zipper wall with feet',
+  },
+];
+
+/** Example prints of one S-curve wave. They do not split the shallow and deep sizes, or front-only and both sides. */
+export const WAVE_GALLERY = [
+  {
+    src: '/images/banners/zipper-walls/wave-zipper-wall-ireland-technology.jpg',
+    alt: 'S-curve fabric wave wall with a printed graphic',
+  },
+  {
+    src: '/images/banners/zipper-walls/wave-zipper-wall-ireland-botanical.jpg',
+    alt: 'Leaf-print S-curve fabric wave wall',
+  },
+  {
+    src: '/images/banners/zipper-walls/wave-zipper-wall-ireland-coffee.jpg',
+    alt: 'Coffee-print S-curve fabric wave wall',
+  },
+  {
+    src: '/images/banners/zipper-walls/wave-zipper-wall-ireland-healthcare.jpg',
+    alt: 'Healthcare-print S-curve fabric wave wall',
+  },
+];
 export const ZIPPER_HUB_PATH = '/zipper-walls-ireland';
 export const ZIPPER_EXAMPLE_CAPTION = 'Example print. Your own artwork goes on the fabric.';
 
@@ -385,6 +538,67 @@ export function priceZipperWall(input) {
   };
 }
 
+export function zipperShapeOptions(familyId) {
+  const family = zipperFamily(familyId);
+  if (!family) return [];
+  if (familyId !== 'arch-zipper-walls-ireland') return family.shapes;
+  return [
+    { id: 'square', label: 'Arch square', image: ARCH_SQUARE_PHOTOS.front.src, alt: ARCH_SQUARE_PHOTOS.front.alt },
+    { id: 'oval', label: 'Arch oval', image: ARCH_OVAL_PHOTOS.front.src, alt: ARCH_OVAL_PHOTOS.front.alt },
+  ];
+}
+
+export function zipperPrintPhotos(familyId, shapeId) {
+  if (familyId === 'arch-zipper-walls-ireland') {
+    return shapeId === 'square' ? ARCH_SQUARE_PHOTOS : ARCH_OVAL_PHOTOS;
+  }
+  return ZIPPER_PRINT_PHOTOS;
+}
+
+export function zipperGallery(familyId) {
+  if (familyId === 'arch-zipper-walls-ireland') return ARCH_ZIPPER_GALLERY;
+  if (familyId === 'exhibition-pillars-ireland') return PILLAR_GALLERY;
+  if (familyId === 'u-walls-ireland') return U_WALL_GALLERY;
+  if (familyId === 'wave-walls-ireland') return WAVE_GALLERY;
+  if (familyId === 'curved-vertical-zipper-walls-ireland') return CURVED_VERTICAL_GALLERY;
+  if (familyId === 'curved-horizontal-zipper-walls-ireland') return CURVED_HORIZONTAL_GALLERY;
+  return [];
+}
+
+export function zipperGalleryCaption(familyId) {
+  if (familyId === 'exhibition-pillars-ireland') {
+    return 'Example print. Your own artwork goes on the fabric. Each photo shows the 2 m pillar beside the 3 m pillar.';
+  }
+  if (familyId === 'arch-zipper-walls-ireland') {
+    return 'Example print. Your own artwork goes on the fabric. Square and oval are shown printed on the front, and printed on the front and the inside.';
+  }
+  if (familyId === 'u-walls-ireland') {
+    return 'Example print. Your own artwork goes on the fabric. The cloth wraps the back and both returns.';
+  }
+  if (familyId === 'wave-walls-ireland') {
+    return 'Example print. Your own artwork goes on the fabric. The wall is an S-curve.';
+  }
+  if (familyId === 'curved-vertical-zipper-walls-ireland') {
+    return 'Example print. Your own artwork goes on the fabric. The wall stands on its feet.';
+  }
+  if (familyId === 'curved-horizontal-zipper-walls-ireland') {
+    return 'Example print. Your own artwork goes on the fabric. The wall bends across its width.';
+  }
+  return 'Example print. Your own artwork goes on the fabric.';
+}
+
+export function zipperPreview(input) {
+  const selection = normalizeZipperWall(input);
+  if (selection.familyId === 'exhibition-pillars-ireland') return PILLAR_GALLERY[0];
+  if (selection.familyId === 'u-walls-ireland') return U_WALL_GALLERY[0];
+  if (selection.familyId === 'wave-walls-ireland') return WAVE_GALLERY[0];
+  if (selection.familyId === 'curved-vertical-zipper-walls-ireland') return CURVED_VERTICAL_GALLERY[0];
+  if (selection.familyId === 'curved-horizontal-zipper-walls-ireland') return CURVED_HORIZONTAL_GALLERY[0];
+  if (selection.familyId !== 'arch-zipper-walls-ireland') return null;
+  const photos = selection.shapeId === 'square' ? ARCH_SQUARE_PHOTOS : ARCH_OVAL_PHOTOS;
+  return selection.print === 'both' ? photos.both : photos.front;
+}
+
 export function zipperSummary(selection, size) {
   const parts = [size.label, KIT_LABEL[selection.kit], PRINT_LABEL[selection.print]];
   return parts.join(' · ');
@@ -453,8 +667,9 @@ export function zipperCatalogProducts() {
         { name: 'Minimum order', value: '1' },
         { name: 'Delivery', value: 'Included to Ireland, per wall, ex VAT' },
       ],
-      images: [],
-      imageSrc: '',
+      images: zipperGallery(family.id).map((item) => item.src),
+      imageAlts: zipperGallery(family.id).map((item) => item.alt),
+      imageSrc: zipperGallery(family.id)[0]?.src || '',
       price: `From €${from} ex VAT`,
       moq: 1,
       leadTime: 'Included in the quoted delivery',
@@ -485,13 +700,15 @@ export function buildZipperWallQuoteLine(catalogItem, raw) {
   const familyId = catalogItem?.id || raw?.familyId;
   const priced = priceZipperWall({ ...(raw || {}), familyId });
   if (!priced) return null;
+  const preview = zipperPreview(priced);
+  const gallery = zipperGallery(priced.familyId).map((item) => item.src);
   return {
     moduleId: 'zipper-walls',
     productId: catalogItem?.id || priced.familyId,
     name: catalogItem?.name || priced.family.name,
     href: catalogItem?.href || priced.family.path,
-    image: catalogItem?.image || null,
-    images: catalogItem?.images || [],
+    image: preview?.src || catalogItem?.image || null,
+    images: gallery.length ? gallery : (catalogItem?.images || []),
     qty: priced.qty,
     unitPrice: priced.unitPrice,
     lineTotal: priced.lineTotal,
