@@ -126,7 +126,7 @@ export default function NapkinLocalPage({ config }) {
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">{config.h1}</h1>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">{config.intro}</p>
               <div className="flex flex-wrap gap-3">
-                <Link href="/products/premium-linen-feel-napkins" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors">
+                <Link href="/custom-printed-napkins" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors">
                   Order Printed Napkins
                 </Link>
                 <a href="tel:+353894157369" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
@@ -147,8 +147,8 @@ export default function NapkinLocalPage({ config }) {
           <div className="grid md:grid-cols-3 gap-6">
             {[
               { title: 'Cocktail Napkins', desc: 'White 10 × 10 cm napkins, 20 × 40 cm open, printed with your logo. From 50.', href: '/products/cocktail-napkins' },
-              { title: 'Printed Paper Napkins', desc: '10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm, from 25.', href: '/products/premium-linen-feel-napkins' },
-              { title: 'Linen-Feel Napkins', desc: 'Premium airlaid napkins with cloth-like texture for upscale dining and weddings.', href: '/products/premium-linen-feel-napkins' },
+              { title: 'Printed Paper Napkins', desc: '10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm, from 25.', href: '/custom-printed-napkins' },
+              { title: 'Linen-Feel Napkins', desc: 'Premium airlaid napkins with cloth-like texture for upscale dining and weddings.', href: '/custom-printed-napkins' },
               { title: 'Plain Wholesale Napkins', desc: 'Bulk white napkins without printing — economical for high-volume catering.', href: '/plain-napkins-tableware-ireland' },
             ].map((item) => (
               <Link key={item.title} href={item.href} className="group bg-white rounded-2xl border border-gray-200 p-6 hover:border-amber-300 hover:shadow-lg transition-all">
@@ -209,7 +209,7 @@ export default function NapkinLocalPage({ config }) {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Ready to order branded napkins?</h2>
           <p className="text-amber-100 mb-6">Tell us your napkin size, quantity, and logo — we will help with artwork and pricing.</p>
           <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/products/premium-linen-feel-napkins" className="inline-flex items-center bg-white text-amber-600 font-semibold px-6 py-3 rounded-xl hover:bg-amber-50 transition-colors">Order Printed Napkins</Link>
+            <Link href="/custom-printed-napkins" className="inline-flex items-center bg-white text-amber-600 font-semibold px-6 py-3 rounded-xl hover:bg-amber-50 transition-colors">Order Printed Napkins</Link>
             <Link href="/napkin-faq-ireland" className="inline-flex items-center bg-amber-500 text-white font-semibold px-6 py-3 rounded-xl border border-amber-400 hover:bg-amber-400 transition-colors">Napkin FAQ</Link>
           </div>
         </div>
@@ -220,7 +220,7 @@ export default function NapkinLocalPage({ config }) {
         links={[
           { href: '/printing-ashbourne', label: 'Printing Ashbourne', desc: 'Local print shop — posters, flyers, stickers & more' },
           { href: '/napkins-ireland', label: 'Napkins Ireland', desc: 'Complete napkin printing hub' },
-          { href: '/products/premium-linen-feel-napkins', label: 'Printed Napkins', desc: 'Five sizes, from 25 napkins' },
+          { href: '/custom-printed-napkins', label: 'Printed Napkins', desc: 'Five sizes, from 25 napkins' },
           { href: '/blog/custom-napkins-uk-ireland-europe', label: 'Custom Napkins UK, Ireland & Europe', desc: 'Ireland, UK and EU delivery guide' },
           { href: '/blog/personalised-napkins-ireland-guide', label: 'Personalised Napkins Guide', desc: 'Sizes, materials & wedding tips' },
           { href: '/napkin-faq-ireland', label: 'Napkin FAQ', desc: '25+ instant answers' },

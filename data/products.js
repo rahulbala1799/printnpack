@@ -694,7 +694,7 @@ const products = [
     name: 'Custom Napkins',
     category: 'Hospitality Products',
     hidden: true,
-    url: '/products/premium-linen-feel-napkins',
+    url: '/custom-printed-napkins',
     description: 'Custom printed napkins in 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm. From 25 napkins.',
     moq: 25,
     leadTime: 'Quoted with the order'
@@ -2017,10 +2017,11 @@ const products = [
   },
   {
     id: 'premium-linen-feel-napkins',
-    name: 'Premium Linen-Feel Napkins',
+    name: 'Custom Printed Napkins',
     category: 'Hospitality Products',
-    url: '/products/premium-linen-feel-napkins',
-    description: 'Linen-feel napkins printed with your logo. 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm. From €0.24. The price depends on the quantity and the design.',
+    url: '/custom-printed-napkins',
+    searchAliases: ['custom printed napkins', 'printed napkins', 'personalised napkins', 'branded napkins', 'logo napkins', 'linen feel napkins', 'linen-feel napkins'],
+    description: 'Custom printed napkins in 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm. From 25 napkins, from €0.24. The price is confirmed on the quote.',
     features: [
       'From €0.24',
       '10 × 10 cm cocktail napkins',
@@ -2029,7 +2030,7 @@ const products = [
       'From 25 napkins',
       'Price depends on quantity and design',
     ],
-    detailedDescription: 'Our premium linen-feel napkins combine the elegance of cloth with the convenience of disposable napkins. The sophisticated texture and appearance create a high-end dining experience while maintaining practicality. Available in multiple sizes and colors to match your branding and decor. These napkins can be customized with your logo or design using high-quality printing methods that don\'t compromise the premium feel. Perfect for restaurants, hotels, catering, and special events where you want to make a memorable impression. Our weekly delivery service ensures you never run out of these essential items.',
+    detailedDescription: 'Custom printed napkins for restaurants, cafés and caterers. Choose 10 × 10 cm cocktail, 10 × 20 cm, 12 × 20 cm, 15 × 20 cm or 20 × 20 cm, then full colour or 1 colour. The minimum is 25 napkins. Add the order to a quote and we confirm the price before printing. The napkins are linen-feel airlaid, so they have a cloth-like feel, and they are printed with your logo.',
     specifications: [
       { name: 'Material', value: 'Linen-feel airlaid' },
       { name: 'Sizes', value: '10 × 10 cm cocktail, 10 × 20 cm, 12 × 20 cm, 15 × 20 cm, 20 × 20 cm' },
@@ -2046,11 +2047,11 @@ const products = [
       '/images/products/premium-linen-feel-napkins/airlaid-nova-dental-ireland.jpg',
     ],
     imageAlts: [
-      'White airlaid napkin printed with the Kinetic Labs logo',
-      'White airlaid napkin printed with the Oakline Partners oak leaf',
-      'White airlaid guest napkin printed with the Cavan Court Hotel and Events crest',
-      'White airlaid guest napkin printed with the Greenstone Property Group logo',
-      'White airlaid napkin printed with the Nova Dental logo',
+      'Custom printed napkin with the Kinetic Labs logo',
+      'Custom printed napkin with the Oakline Partners oak leaf',
+      'Custom printed napkin with the Cavan Court Hotel and Events crest',
+      'Custom printed napkin with the Greenstone Property Group logo',
+      'Custom printed napkin with the Nova Dental logo',
     ],
     imageSrc: '/images/products/premium-linen-feel-napkins/airlaid-kinetic-labs-ireland.jpg',
     price: 'From €0.24',
@@ -3116,7 +3117,7 @@ const products = [
     name: 'Printed Napkins',
     category: 'Branded Items',
     hidden: true,
-    url: '/products/premium-linen-feel-napkins',
+    url: '/custom-printed-napkins',
     description: 'Custom printed napkins in 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm. From 25 napkins. The price is confirmed on the quote.',
     features: [
       '10 × 10 cm cocktail napkins',

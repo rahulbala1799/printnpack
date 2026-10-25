@@ -8,6 +8,7 @@ import CocktailNapkinConfigurator from '../../components/napkins/CocktailNapkinC
 import PrintedNapkinConfigurator from '../../components/napkins/PrintedNapkinConfigurator';
 import RelatedSeoLinks from '../../components/seo/RelatedSeoLinks';
 import { NAPKIN_PRODUCT_SEO } from '../../data/napkin-product-seo';
+import { PRINTED_NAPKIN_PRICE_ROWS } from '../../data/printed-napkins';
 import { SITE_URL } from '../../lib/site';
 import { buildProductLd, parsePriceString } from '../../lib/schema';
 
@@ -33,7 +34,9 @@ const ProductDetail = ({ product, relatedProducts }) => {
   }
 
   const napkinSeo = NAPKIN_PRODUCT_SEO[product.id];
-  const productPath = `/products/${product.id}`;
+  const productPath = product.id === 'premium-linen-feel-napkins'
+    ? '/custom-printed-napkins'
+    : `/products/${product.id}`;
   const pageUrl = `${SITE_URL}${productPath}`;
   const ogImage = product.images?.[0]
     ? (product.images[0].startsWith('http') ? product.images[0] : `${SITE_URL}${product.images[0]}`)
@@ -125,8 +128,29 @@ const ProductDetail = ({ product, relatedProducts }) => {
             <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Custom printed napkins for restaurants and caterers</h2>
               <p className="text-gray-600 leading-relaxed mb-8">
-                Custom printed napkins for restaurants, cafés and caterers. Choose 10 × 10 cm cocktail, 10 × 20 cm, 12 × 20 cm, 15 × 20 cm or 20 × 20 cm, then full colour or 1 colour. The minimum is 25 napkins. Add the order to a quote and we confirm the price before printing. The napkins are linen-feel airlaid, so they have a cloth-like feel, and they are printed with your logo.
+                Custom printed napkins for restaurants, cafés and caterers. We print them in Ashbourne, Co. Meath, Ireland, and ship across Ireland and Europe. Choose 10 × 10 cm cocktail, 10 × 20 cm, 12 × 20 cm, 15 × 20 cm or 20 × 20 cm, then full colour or 1 colour. The minimum is 25 napkins. The napkins are linen-feel airlaid, printed with your logo. Delivery is confirmed on the quote. Usual print time is 3 to 5 working days after the artwork proof is approved.
               </p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">Prices, ex VAT</h3>
+              <div className="mb-8 overflow-x-auto rounded-xl border border-gray-200 bg-white">
+                <table className="min-w-full text-sm">
+                  <thead className="bg-slate-100 text-left text-gray-700">
+                    <tr>
+                      <th className="px-4 py-3 font-semibold">Quantity</th>
+                      <th className="px-4 py-3 font-semibold">10 × 20 cm and larger</th>
+                      <th className="px-4 py-3 font-semibold">10 × 10 cm cocktail</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {PRINTED_NAPKIN_PRICE_ROWS.map((row) => (
+                      <tr key={row.qty} className="border-t border-gray-200">
+                        <td className="px-4 py-3 font-medium text-gray-900">{row.qty.toLocaleString('en-IE')}</td>
+                        <td className="px-4 py-3 text-gray-700">€{row.standardTotal.toFixed(2)} (€{row.standardUnit.toFixed(2)} each)</td>
+                        <td className="px-4 py-3 text-gray-700">€{row.cocktailTotal.toFixed(2)} (€{row.cocktailUnit.toFixed(2)} each)</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
               <div className="grid gap-8 sm:grid-cols-2">
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-3">What's included</h3>
@@ -213,6 +237,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
 
 export async function getStaticPaths() {
   const paths = products
+    .filter((product) => product.id !== 'premium-linen-feel-napkins')
     .filter((product) => !product.url || product.url === `/products/${product.id}`)
     .map((product) => ({
       params: { slug: product.id },

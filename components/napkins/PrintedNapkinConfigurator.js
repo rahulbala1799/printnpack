@@ -72,7 +72,7 @@ export default function PrintedNapkinConfigurator() {
         <h1 className="mb-3 text-2xl font-bold text-slate-900 sm:text-3xl">Custom printed napkins</h1>
         <p className="mb-2 text-2xl font-bold text-slate-900">From €{LINEN_NAPKIN_FROM}</p>
         <p className="mb-6 leading-relaxed text-slate-600">
-          Custom printed napkins with your logo. Choose 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 or 20 × 20 cm, from {PRINTED_NAPKIN_MIN} napkins. Full colour or 1 colour. The napkins are linen-feel airlaid. Cocktail napkins are the 10 × 10 cm size, cut down from a larger napkin, so they cost a little more per unit. The price per unit drops as the quantity goes up, and we confirm it before printing.
+          Custom printed napkins with your logo. We print them in Ireland and ship across Ireland and Europe. Choose 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 or 20 × 20 cm, from {PRINTED_NAPKIN_MIN} napkins, full colour or 1 colour. The napkins are linen-feel airlaid. 500 napkins are €240 ex VAT for 10 × 20 cm and larger, or €260 ex VAT for the 10 × 10 cm cocktail size. Usual print time is 3 to 5 working days after the artwork proof is approved.
         </p>
 
         <fieldset className="mb-6">

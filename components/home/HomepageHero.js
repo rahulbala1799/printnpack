@@ -32,10 +32,10 @@ const PRODUCTS = [
     label: 'Napkins',
     points: ['Quick turnaround', 'Low MOQ', 'Cloth feel'],
     line: 'Printed airlaid napkins for restaurants, hotels and events.',
-    href: '/products/premium-linen-feel-napkins',
+    href: '/custom-printed-napkins',
     links: [
       { label: 'Cocktail napkins', href: '/products/cocktail-napkins' },
-      { label: 'Custom printed napkins', href: '/products/premium-linen-feel-napkins' },
+      { label: 'Custom printed napkins', href: '/custom-printed-napkins' },
       { label: 'All napkins', href: '/napkins-ireland' },
     ],
     panel: '#1a4550',

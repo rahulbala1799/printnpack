@@ -257,7 +257,12 @@ const nextConfig = {
       },
       {
         source: '/products/printed-napkins',
-        destination: '/products/premium-linen-feel-napkins',
+        destination: '/custom-printed-napkins',
+        permanent: true,
+      },
+      {
+        source: '/products/premium-linen-feel-napkins',
+        destination: '/custom-printed-napkins',
         permanent: true,
       },
       {

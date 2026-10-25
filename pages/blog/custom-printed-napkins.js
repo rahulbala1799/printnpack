@@ -345,7 +345,7 @@ export default function CustomPrintedNapkins() {
         </p>
         <p className="text-slate-600 leading-relaxed">
           Restaurant napkins in 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm start from 25 on the{' '}
-          <Link href="/products/premium-linen-feel-napkins" className="text-amber-700 hover:underline font-medium">
+          <Link href="/custom-printed-napkins" className="text-amber-700 hover:underline font-medium">
             printed napkins quote builder
           </Link>
           . This page is the short run: cocktail, wedding and kraft.

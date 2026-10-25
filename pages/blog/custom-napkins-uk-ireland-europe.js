@@ -247,9 +247,9 @@ export default function CustomNapkinsUkIrelandEurope() {
             <p className="text-gray-600 leading-relaxed">
               PrintNPack prints them in Ireland and delivers across the island, into the UK, and to EU addresses
               on request. If you already know the spec you need, start with{' '}
-              <Link href="/products/premium-linen-feel-napkins" className="text-amber-600 hover:underline">printed napkins</Link>
+              <Link href="/custom-printed-napkins" className="text-amber-600 hover:underline">printed napkins</Link>
               {' '}or{' '}
-              <Link href="/products/premium-linen-feel-napkins" className="text-amber-600 hover:underline">premium linen-feel napkins</Link>.
+              <Link href="/custom-printed-napkins" className="text-amber-600 hover:underline">premium linen-feel napkins</Link>.
             </p>
 
             <h2 id="sizes" className="text-2xl font-bold text-gray-900 mt-10 mb-4 scroll-mt-24">
@@ -339,7 +339,7 @@ export default function CustomNapkinsUkIrelandEurope() {
               <strong>Linen-feel napkins</strong> use airlaid paper with a cloth-like texture. They are thicker,
               more absorbent, and photograph like fabric — which is why hotels from Dublin to Amsterdam specify
               them for restaurants and events. They start from €0.24. The price depends on the quantity and the design.{' '}
-              <Link href="/products/premium-linen-feel-napkins" className="text-amber-600 hover:underline">
+              <Link href="/custom-printed-napkins" className="text-amber-600 hover:underline">
                 View linen-feel napkins
               </Link>
               .
@@ -559,7 +559,7 @@ export default function CustomNapkinsUkIrelandEurope() {
               Printed napkins from 25. We confirm the price before printing. Artwork support and delivery from Ashbourne.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link href="/products/premium-linen-feel-napkins" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors">
+              <Link href="/custom-printed-napkins" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors">
                 Order printed napkins
               </Link>
               <Link href="/napkins-ireland" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
@@ -577,9 +577,9 @@ export default function CustomNapkinsUkIrelandEurope() {
         title="Related napkin pages"
         links={[
           { href: '/napkins-ireland', label: 'Napkins Ireland', desc: 'Printed, linen-feel & wholesale hub' },
-          { href: '/products/premium-linen-feel-napkins', label: 'Printed Napkins', desc: 'Five sizes, from 25 napkins' },
+          { href: '/custom-printed-napkins', label: 'Printed Napkins', desc: 'Five sizes, from 25 napkins' },
           { href: '/wedding-kraft-napkins-ireland', label: 'Kraft Wedding Napkins', desc: 'Custom kraft napkins, delivered in Ireland, the UK and the EU' },
-          { href: '/products/premium-linen-feel-napkins', label: 'Linen-Feel Napkins', desc: 'Airlaid napkins for hotels & weddings' },
+          { href: '/custom-printed-napkins', label: 'Linen-Feel Napkins', desc: 'Airlaid napkins for hotels & weddings' },
           { href: '/blog/personalised-napkins-ireland-guide', label: 'Personalised Napkins Guide', desc: 'Sizes, materials & Irish wedding tips' },
           { href: '/napkin-faq-ireland', label: 'Napkin FAQ', desc: '25+ answers on price, sizes & delivery' },
           { href: '/napkin-printing-dublin', label: 'Napkin Printing Dublin', desc: 'Delivery across Dublin' },

@@ -114,8 +114,8 @@ export const QUOTE_CATALOG = [
   ),
   withMedia({
     id: 'premium-linen-feel-napkins',
-    name: 'Premium Linen-Feel Napkins',
-    href: '/products/premium-linen-feel-napkins',
+    name: 'Custom Printed Napkins',
+    href: '/custom-printed-napkins',
     moduleId: 'printed-napkins',
     configurable: false,
     group: 'Napkins',

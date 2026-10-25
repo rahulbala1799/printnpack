@@ -15,7 +15,7 @@ export const NAPKIN_FAQS = [
     q: 'How much do printed napkins cost in Ireland?',
     subtitle: 'Understanding napkin pricing for your budget',
     a: 'Linen-feel napkins start from €0.24. The price depends on the quantity and the design. The minimum is 25 napkins.',
-    link: { href: '/products/premium-linen-feel-napkins', label: 'Get a napkin quote' },
+    link: { href: '/custom-printed-napkins', label: 'Get a napkin quote' },
   },
   {
     id: 'min-order',
@@ -31,7 +31,7 @@ export const NAPKIN_FAQS = [
     q: 'How much do linen-feel napkins cost?',
     subtitle: 'Premium airlaid napkin pricing',
     a: 'Linen-feel napkins start from €0.24. The price depends on the quantity and the design. The minimum is 25 napkins, in 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm.',
-    link: { href: '/products/premium-linen-feel-napkins', label: 'View linen-feel napkins' },
+    link: { href: '/custom-printed-napkins', label: 'View linen-feel napkins' },
   },
   {
     id: 'price-factors',
@@ -65,7 +65,7 @@ export const NAPKIN_FAQS = [
     q: 'Do you offer weekly napkin delivery?',
     subtitle: 'Scheduled supply for restaurants and hotels',
     a: 'Yes. PrintNPack offers weekly scheduled delivery for hospitality businesses that need a consistent supply of branded napkins. We tailor the delivery schedule to your usage and can adjust quantities over time to reduce waste and storage needs.',
-    link: { href: '/products/premium-linen-feel-napkins', label: 'Premium napkins with delivery' },
+    link: { href: '/custom-printed-napkins', label: 'Premium napkins with delivery' },
   },
   {
     id: 'delivery',
@@ -99,7 +99,7 @@ export const NAPKIN_FAQS = [
     q: 'What is the difference between linen-feel and standard paper napkins?',
     subtitle: 'Premium vs everyday napkins',
     a: 'Standard paper napkins are economical and work well for everyday restaurant and takeaway use. Linen-feel napkins use premium airlaid paper with a cloth-like texture — more absorbent, softer, and visually upscale. Choose linen-feel for hotels, fine dining, and weddings; standard printed for high-volume casual dining.',
-    link: { href: '/products/premium-linen-feel-napkins', label: 'Premium linen-feel napkins' },
+    link: { href: '/custom-printed-napkins', label: 'Premium linen-feel napkins' },
   },
   {
     id: 'ply-options',
@@ -114,7 +114,7 @@ export const NAPKIN_FAQS = [
     q: 'What are branded napkins?',
     subtitle: 'Custom logo napkins for hospitality',
     a: 'Branded napkins are custom-printed napkins featuring your restaurant logo, business name, tagline, or event design. They reinforce brand identity at every table and are popular with restaurants, cafes, hotels, caterers, and wedding planners across Ireland.',
-    link: { href: '/products/premium-linen-feel-napkins', label: 'Order branded napkins' },
+    link: { href: '/custom-printed-napkins', label: 'Order branded napkins' },
   },
 
   // Design
@@ -148,7 +148,7 @@ export const NAPKIN_FAQS = [
     q: 'Can you print napkins for my restaurant?',
     subtitle: 'Branded napkins for Irish hospitality',
     a: 'Yes. We print custom napkins for restaurants, cafes, takeaways, pubs, and hotels across Ireland. Add your logo to cocktail, lunch, or dinner napkins — with optional weekly delivery so you never run short during service.',
-    link: { href: '/products/premium-linen-feel-napkins', label: 'Restaurant napkins' },
+    link: { href: '/custom-printed-napkins', label: 'Restaurant napkins' },
   },
   {
     id: 'cocktail-napkins',
@@ -214,7 +214,7 @@ export const NAPKIN_FAQS = [
     q: 'What is napkin printing?',
     subtitle: 'How custom napkins are made',
     a: 'Napkin printing applies your logo or design to paper or linen-feel napkins using flexographic or digital print methods. PrintNPack handles artwork setup, proofing, and production — send your design and we deliver ready-to-use branded napkins.',
-    link: { href: '/products/premium-linen-feel-napkins', label: 'Order printed napkins' },
+    link: { href: '/custom-printed-napkins', label: 'Order printed napkins' },
   },
   {
     id: 'paper-napkins',
@@ -222,7 +222,7 @@ export const NAPKIN_FAQS = [
     q: 'Do you supply paper napkins in Ireland?',
     subtitle: 'Standard and printed paper napkins',
     a: 'Yes. We supply both plain white paper napkins wholesale and custom printed paper napkins for Irish restaurants and caterers. Options include 1-ply and 2-ply in cocktail, lunch, and dinner sizes.',
-    link: { href: '/products/premium-linen-feel-napkins', label: 'Printed paper napkins' },
+    link: { href: '/custom-printed-napkins', label: 'Printed paper napkins' },
   },
 ];
 

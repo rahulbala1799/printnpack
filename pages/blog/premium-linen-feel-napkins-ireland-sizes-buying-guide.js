@@ -5,7 +5,7 @@ import Layout from '../../components/layout/Layout';
 import { SITE_URL as siteUrl } from '../../lib/site';
 
 const PAGE_URL = `${siteUrl}/blog/premium-linen-feel-napkins-ireland-sizes-buying-guide`;
-const HUB_HREF = '/products/premium-linen-feel-napkins';
+const HUB_HREF = '/custom-printed-napkins';
 const NAPKINS_HUB = '/napkins-ireland';
 const HERO_IMAGE = '/images/products/premium-linen-feel-napkins/airlaid-kinetic-labs-ireland.jpg';
 const CAVAN_IMAGE = '/images/products/premium-linen-feel-napkins/airlaid-cavan-court-ireland.jpg';

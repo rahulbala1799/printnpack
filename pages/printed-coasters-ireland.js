@@ -117,7 +117,7 @@ export default function PrintedCoastersIreland() {
         links={[
           { href: '/wedding-coasters-ireland', label: 'Wedding Coasters', desc: 'Names, a date or a monogram' },
           { href: '/business-cards-ireland', label: 'Business Cards', desc: '85 × 55 mm on 350 gsm' },
-          { href: '/products/premium-linen-feel-napkins', label: 'Printed Napkins', desc: 'Logo napkins for bars and cafés' },
+          { href: '/custom-printed-napkins', label: 'Printed Napkins', desc: 'Logo napkins for bars and cafés' },
           { href: '/products', label: 'All Products', desc: 'Print and packaging catalogue' },
         ]}
       />
