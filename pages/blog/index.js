@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'greaseproof-food-bags-ireland-sizes-buying-guide',
+    title: 'Greaseproof Food Bags Ireland: Lined Kraft & Chip Bag Sizes Buying Guide',
+    excerpt:
+      'How to buy plain greaseproof food bags in Ireland — lined kraft from 2lb to 4QT, 5×5″ and 1lb chip bags, case packs, and nationwide delivery from Ashbourne for chippers and takeaways.',
+    date: '2026-10-25',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/199990.webp',
+    imageAlt:
+      'Greaseproof food bags Ireland — 2lb lined kraft bags wholesale for Dublin chippers',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'inhaker-exhibition-walls-ireland-sizes-buying-guide',
     title: 'Exhibition Walls Ireland: Inhaker Panel Sizes 88×195–300 cm & Buying Guide',
     excerpt:
