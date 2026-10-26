@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'custom-printed-ribbon-ireland-widths-moq-buying-guide',
+    title:
+      'Custom Printed Ribbon Ireland: Widths 10–100 mm, Roll vs Cut & MOQ Buying Guide',
+    excerpt:
+      'How to buy custom printed satin ribbon in Ireland — 10–100 mm widths, roll vs cut pieces, 1–4 colour logos, from €125.75 ex VAT with Ireland delivery included from Ashbourne.',
+    date: '2026-10-26',
+    readTime: '8 min read',
+    image: '/images/products/printed-ribbon/printed-ribbon-white.jpg',
+    imageAlt:
+      'Custom printed ribbon Ireland — white satin roll with logo for Dublin gift packaging',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'greaseproof-food-bags-ireland-sizes-buying-guide',
     title: 'Greaseproof Food Bags Ireland: Lined Kraft & Chip Bag Sizes Buying Guide',
     excerpt:
