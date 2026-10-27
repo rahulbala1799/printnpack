@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'microwave-meal-boxes-ireland-sizes-buying-guide',
+    title:
+      'Microwave Meal Boxes Ireland: 12–34oz Black Sizes, Compartments & Wholesale Buying Guide',
+    excerpt:
+      'How to buy plain microwave meal boxes in Ireland — black 12oz to 34oz trays, 1-/2-/3-compartment options, matching lids and combos, clear 500–650ml packs, and nationwide delivery from Ashbourne for meal-prep and takeaways.',
+    date: '2026-10-27',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/CTC343.webp',
+    imageAlt:
+      'Microwave meal boxes Ireland — 34oz black 3-compartment tray wholesale for Dublin meal-prep',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'custom-printed-ribbon-ireland-widths-moq-buying-guide',
     title:
       'Custom Printed Ribbon Ireland: Widths 10–100 mm, Roll vs Cut & MOQ Buying Guide',
