@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'vinyl-cut-letters-ireland-sizes-buying-guide',
+    title:
+      'Vinyl Cut Letters Ireland: Shop Window Sizes 10–300 cm & Buying Guide',
+    excerpt:
+      'How to buy vinyl cut letters in Ireland — sizes from 10×10 cm to 300×120 cm, white/black/colour/gold/frosted Oracal film, 1–50 cuts, from €44.72 ex VAT with Ireland delivery included from Ashbourne.',
+    date: '2026-10-28',
+    readTime: '8 min read',
+    image: '/images/vinyl-cut-letters/vinyl-lettering-shop-window.jpg',
+    imageAlt:
+      'Vinyl cut letters Ireland — white shop name on a café window for Dublin high streets',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'microwave-meal-boxes-ireland-sizes-buying-guide',
     title:
       'Microwave Meal Boxes Ireland: 12–34oz Black Sizes, Compartments & Wholesale Buying Guide',
