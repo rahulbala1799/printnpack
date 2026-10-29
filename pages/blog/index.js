@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'noodle-boxes-ireland-sizes-buying-guide',
+    title:
+      'Noodle Boxes Ireland: 16oz & 26oz Spiritpak Sizes & Wholesale Buying Guide',
+    excerpt:
+      'How to buy plain white Spiritpak noodle boxes in Ireland — 16oz and 26oz heat-barrier round-base sizes, 10×50 case packs, and nationwide delivery from Ashbourne for Asian takeaways and noodle counters.',
+    date: '2026-10-29',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/120059.webp',
+    imageAlt:
+      'Noodle boxes Ireland — 26oz Spiritpak white round-base box wholesale for Dublin takeaways',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'vinyl-cut-letters-ireland-sizes-buying-guide',
     title:
       'Vinyl Cut Letters Ireland: Shop Window Sizes 10–300 cm & Buying Guide',
