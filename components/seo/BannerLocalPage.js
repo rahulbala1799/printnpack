@@ -131,6 +131,9 @@ export default function BannerLocalPage({ config }) {
                 <Link href={config.quoteHref || '/quote?product=Vinyl+Banners'} className="inline-flex items-center bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors">
                   {config.quoteLabel || 'Get a Free Quote'}
                 </Link>
+                <Link href="/fabric-banner-stands-ireland" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
+                  Fabric banner stands
+                </Link>
                 <a href="tel:+353894157369" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
                   Call +353 89 415 7369
                 </a>
@@ -147,6 +150,11 @@ export default function BannerLocalPage({ config }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">Banner types we print</h2>
           <div className="grid md:grid-cols-2 gap-6">
+            <Link href="/fabric-banner-stands-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 hover:border-indigo-300 hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold text-gray-900 group-hover:text-indigo-600 mb-2">Fabric Banner Stands</h3>
+              <p className="text-gray-600 text-sm leading-relaxed mb-3">Stretch fabric on a reusable aluminium frame. Also called a banner with frame or a fabric stand. Complete kit or graphic only.</p>
+              <span className="text-indigo-600 font-semibold text-sm">View fabric banner stands →</span>
+            </Link>
             <Link href="/vinyl-banners" className="group bg-white rounded-2xl border border-gray-200 p-6 hover:border-blue-300 hover:shadow-lg transition-all">
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 mb-2">PVC Banners</h3>
               <p className="text-gray-600 text-sm leading-relaxed mb-3">Outdoor and indoor PVC banners with eyelets, hems, mesh options, and custom sizes up to 5m wide.</p>
@@ -220,6 +228,7 @@ export default function BannerLocalPage({ config }) {
         links={[
           { href: '/printing-ashbourne', label: 'Printing Ashbourne', desc: 'Local print shop — posters, flyers, stickers & more' },
           { href: '/banners-ireland', label: 'Banners Ireland', desc: 'Complete banner printing hub' },
+          { href: '/fabric-banner-stands-ireland', label: 'Fabric banner stands', desc: 'Stretch fabric display with a reusable frame' },
           { href: '/blog/banner-sizes-ireland', label: 'Banner Sizes Guide', desc: '2×4, 3×6, 4×8 & roll-up dimensions' },
           { href: '/vinyl-banners', label: 'PVC Banners', desc: 'Outdoor & shop-front banners' },
           { href: '/roll-up-banners-ireland', label: 'Roll Up Banners Ireland', desc: 'Pull up & roller banners from €80' },

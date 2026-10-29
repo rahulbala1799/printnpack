@@ -116,11 +116,13 @@ export default function BannersIreland() {
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">Banner Printing Ireland — PVC Banners from €25</h1>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
                 Need a banner for a shop, school, event, sports club, restaurant, market or promotion? Print n Pack prints custom{' '}
-                <strong>PVC banners</strong>, <strong>roll-up banners</strong>, event banners and display graphics for customers across{' '}
-                <strong>Ashbourne, Dublin and Meath</strong>. We help with artwork, sizing, material choice and finishing options such as eyelets, hems and banner stands.
+                <strong>PVC banners</strong>, <strong>roll-up banners</strong>, and{' '}
+                <Link href="/fabric-banner-stands-ireland" className="font-semibold text-blue-600 hover:underline">fabric banner stands</Link>{' '}
+                for customers across <strong>Ashbourne, Dublin and Meath</strong>. We help with artwork, sizing, material choice and finishing options such as eyelets, hems and banner stands.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/quote?product=Vinyl+Banners" className="inline-flex items-center gap-2 bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors">Get a Free Quote</Link>
+                <Link href="/fabric-banner-stands-ireland" className="inline-flex items-center gap-2 bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">Fabric banner stands</Link>
                 <Link href="/vinyl-banners" className="inline-flex items-center gap-2 bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">PVC Banners</Link>
                 <Link href="/banner-faq-ireland" className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 font-medium px-2 py-3 transition-colors text-sm">Banner FAQ →</Link>
               </div>
@@ -135,8 +137,13 @@ export default function BannersIreland() {
       <section className="py-12 lg:py-16 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Banners, stands and frames</h2>
-          <p className="text-gray-600 mb-8 max-w-2xl">PVC for outdoor use, roll-ups for portable displays, fabric banner stands (banner with frame), printed table covers, huge stage backdrops up to 50 m, and custom flags for clubs and events. <Link href="/exhibition-stands-ireland" className="font-semibold text-blue-600 hover:underline">Exhibition stands</Link> lays out every wall, frame and table cover as one show.</p>
+          <p className="text-gray-600 mb-8 max-w-2xl">PVC for outdoor use, roll-ups for portable displays, <Link href="/fabric-banner-stands-ireland" className="font-semibold text-blue-600 hover:underline">fabric banner stands</Link> (banner with frame), printed table covers, huge stage backdrops up to 50 m, and custom flags for clubs and events. <Link href="/exhibition-stands-ireland" className="font-semibold text-blue-600 hover:underline">Exhibition stands</Link> lays out every wall, frame and table cover as one show.</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Link href="/fabric-banner-stands-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-indigo-300 hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold text-gray-900 group-hover:text-indigo-600 mb-2">Fabric Banner Stands</h3>
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">Banner with frame or structure — stretch fabric on a reusable aluminium stand. Complete kit or graphic only, 2.5–6 m, single or double sided.</p>
+              <span className="text-indigo-600 font-semibold text-sm">View fabric banner stands →</span>
+            </Link>
             <Link href="/vinyl-banners" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-blue-300 hover:shadow-lg transition-all">
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 mb-2">PVC Banners</h3>
               <p className="text-gray-600 text-sm leading-relaxed mb-4">Full-colour outdoor PVC banners with eyelets, hems, mesh options, and custom sizes. Shops, events, fences, and scaffolding.</p>
@@ -156,11 +163,6 @@ export default function BannersIreland() {
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-sky-700 mb-2">Freestanding LED Frames</h3>
               <p className="text-gray-600 text-sm leading-relaxed mb-4">Double-sided edge-lit frame, supplied unprinted. 80, 150 or 200 cm wide. Aluminium, black or white. Flat feet or wheels.</p>
               <span className="text-sky-700 font-semibold text-sm">View LED frames →</span>
-            </Link>
-            <Link href="/fabric-banner-stands-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-indigo-300 hover:shadow-lg transition-all">
-              <h3 className="text-xl font-bold text-gray-900 group-hover:text-indigo-600 mb-2">Fabric Banner Stands</h3>
-              <p className="text-gray-600 text-sm leading-relaxed mb-4">Banner with frame or structure — stretch fabric on a reusable aluminium stand. Complete kit or graphic only, 2.5–6 m, single or double sided.</p>
-              <span className="text-indigo-600 font-semibold text-sm">View fabric banner stands →</span>
             </Link>
             <Link href="/curved-banner-stands-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-violet-300 hover:shadow-lg transition-all">
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-violet-600 mb-2">Curved Banner Stands</h3>

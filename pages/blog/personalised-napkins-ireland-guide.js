@@ -133,8 +133,9 @@ export default function PersonalisedNapkinsIrelandGuide() {
           <p className="text-gray-600 leading-relaxed">
             <strong>Premium linen-feel napkins</strong> use airlaid paper with a cloth-like texture. They are softer, more absorbent,
             and look significantly more upscale — popular for hotels, fine dining, and wedding receptions.
-            Linen-feel napkins start from €0.24. The price depends on the quantity and the design.{' '}
-            <Link href="/custom-printed-napkins" className="text-amber-600 hover:underline">View linen-feel napkins</Link>.
+            Order them as{' '}
+            <Link href="/custom-printed-napkins" className="text-amber-600 hover:underline">personalised napkins</Link>.
+            From €0.24. 500 napkins are €240 ex VAT for 10 × 20 cm and larger, or €260 for the 10 × 10 cm cocktail size.
           </p>
 
           <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">Branded napkins for restaurants and cafes</h2>
@@ -168,9 +169,9 @@ export default function PersonalisedNapkinsIrelandGuide() {
 
           <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">How much do personalised napkins cost?</h2>
           <p className="text-gray-600 leading-relaxed">
-            Custom printed paper napkins are quoted from 25 pieces. Choose a size and a quantity and we confirm the price before printing.
-            Premium linen-feel napkins are quoted separately.
-            The price depends on size, print and quantity.
+            <Link href="/custom-printed-napkins" className="text-amber-600 hover:underline">Personalised napkins</Link> start from 25.
+            500 napkins are €240 ex VAT for 10 × 20 cm and larger, or €260 for the 10 × 10 cm cocktail size.
+            The price depends on size and quantity, and we confirm it before printing.
           </p>
 
           <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">How to order printed napkins in Ireland</h2>
@@ -194,7 +195,7 @@ export default function PersonalisedNapkinsIrelandGuide() {
           <h2 className="text-xl font-bold text-gray-900 mb-3">Ready to order personalised napkins?</h2>
           <p className="text-gray-600 mb-4">Printed napkins from 25. We confirm the price before printing, with artwork support and delivery from Ashbourne.</p>
           <div className="flex flex-wrap gap-3">
-            <Link href="/custom-printed-napkins" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors">Order Printed Napkins</Link>
+            <Link href="/custom-printed-napkins" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors">Order personalised napkins</Link>
             <Link href="/napkins-ireland" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">Napkins Ireland Hub</Link>
           </div>
         </section>
@@ -203,7 +204,7 @@ export default function PersonalisedNapkinsIrelandGuide() {
         title="Related napkins & packaging"
         links={[
           { href: '/napkins-ireland', label: 'Napkins Ireland', desc: 'Printed, linen-feel and plain wholesale' },
-          { href: '/custom-printed-napkins', label: 'Printed Napkins', desc: 'Five sizes, from 25 napkins' },
+          { href: '/custom-printed-napkins', label: 'Personalised napkins', desc: 'Custom printed napkins, five sizes, from 25' },
           { href: '/blog/custom-napkins-uk-ireland-europe', label: 'Custom Napkins UK & Europe', desc: 'Ireland, UK and EU delivery' },
           { href: '/paper-bags-ireland', label: 'Paper Bags Ireland', desc: 'Printed and plain takeaway bags' },
         ]}

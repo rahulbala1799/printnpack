@@ -53,6 +53,7 @@ const childPages = [
 const hubSections = [
   { title: 'Branded Paper Bags with Your Logo', body: 'Printed brown flat-handle bags start at €0.20 a bag at 5,000, and twisted-handle carriers start at €0.35. Flat handle orders start at 25 bags. That is the order most cafés, delis and shops in Ireland place when they want a logo on the bag rather than a plain kraft case.' },
   { title: 'Luxury Paper Bags for Premium Irish Brands', body: 'Die-cut luxury paper bags with built-in handles and bespoke foil, emboss and lamination finishes give luxury fashion, jewellery and hospitality brands packaging as premium as their product.', link: { href: '/luxury-paper-bags-ireland', label: 'luxury paper bags' } },
+  { title: 'Luxury Rope Handle Bags', body: 'Cotton rope handles on 170gsm white kraft, printed in one colour, two colours or full colour. Orders start at 250 bags. The price includes delivery to Ireland, and a larger run includes a higher delivery rate.', link: { href: '/luxury-rope-handle-bags-ireland', label: 'luxury rope handle bags' } },
   { title: 'Printed Paper Bags for Retail, Food and Events', body: 'From café pastries to boutique purchases and event giveaways, printed paper carrier bags keep your business name in customers\' hands after they leave.' },
   { title: 'Flat Handle vs Twisted Handle Paper Bags', body: 'Flat handle bags suit economical takeaway and food service. Twisted handle bags suit premium retail, gift shops and boutiques where presentation matters more.' },
   { title: 'Plain Brown, White and Kraft Paper Bags', body: 'Plain kraft SOS bags, MG food bags and handled carrier bags are available by the case for fast stock orders without a print run.' },
@@ -134,16 +135,16 @@ const itemListLd = {
 };
 
 export default function PaperBagsIreland() {
-  const title = 'Paper Bags Ireland | Branded Bags from €0.20 & Kraft Cases';
+  const title = 'Custom Paper Bags Ireland | Printed Shopping Bags from €0.20';
   const description =
-    'Paper bags Ireland for cafés and shops. Brown flat handle printed bags from 25 bags, from €0.20. Brown kraft SOS cases from €24.44. Delivery across Dublin and nationwide.';
+    'Custom paper bags and printed shopping bags for Irish cafés and shops. Brown flat handle bags from 25, from €0.20. Kraft cases from €24.44. Delivery across Dublin and nationwide.';
 
   return (
     <Layout>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="keywords" content="paper bags, paper bags Ireland, brown paper bags Ireland, branded paper bags, retail paper bags, paper bags Dublin, paper bags with logo, printed paper bags Ireland, wholesale paper bags, kraft paper bags, small paper bags" />
+        <meta name="keywords" content="custom paper bags, printed shopping bags, paper bags Ireland, brown paper bags Ireland, branded paper bags, retail paper bags, paper bags Dublin, paper bags with logo, printed paper bags Ireland, wholesale paper bags, kraft paper bags, small paper bags" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href={PAGE_URL} />
         <meta property="og:type" content="website" />
@@ -171,10 +172,10 @@ export default function PaperBagsIreland() {
             <div>
               <p className="text-sm font-semibold text-emerald-600 uppercase tracking-wider mb-3">Ireland&apos;s paper bag supplier</p>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">
-                Paper Bags Ireland — Branded Logo Bags, Kraft &amp; Wholesale
+                Custom Paper Bags Ireland
               </h1>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                <strong>Branded paper bags</strong> with your logo. Brown flat handle bags from 25 bags, from €0.20, plus brown kraft SOS cases from €24.44. Flat handle, twisted handle and wholesale bags, delivered across <strong>Dublin, Meath and nationwide</strong>.
+                <strong>Custom paper bags</strong> and <strong>printed shopping bags</strong> with your logo. Brown flat handle bags from 25 bags, from €0.20, plus brown kraft SOS cases from €24.44. Flat handle, twisted handle and wholesale bags, delivered across <strong>Dublin, Meath and nationwide</strong>.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/quote" className="inline-flex items-center gap-2 bg-emerald-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-emerald-700 transition-colors">
@@ -304,6 +305,7 @@ export default function PaperBagsIreland() {
         title="Related packaging for Irish food & retail"
         links={[
           { href: '/printed-flat-handle-bags-ireland', label: 'Printed Flat Handle Bags', desc: 'Brown kraft logo bags from 25 bags' },
+          { href: '/luxury-rope-handle-bags-ireland', label: 'Luxury Rope Handle Bags', desc: 'Cotton rope handles, from 250 bags' },
           { href: '/plain-paper-bags-ireland', label: 'Plain Paper Bags', desc: 'Brown kraft and SOS bags in bulk' },
           { href: '/wholesale-paper-bags-ireland', label: 'Wholesale Paper Bags', desc: 'Case pricing for retailers and cafés' },
           { href: '/pizza-boxes-ireland', label: 'Pizza Boxes Ireland', desc: 'Plain and printed pizza boxes' },

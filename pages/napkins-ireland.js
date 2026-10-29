@@ -12,9 +12,9 @@ const PAGE_URL = `${SITE_URL}/napkins-ireland`;
 const HERO_IMAGE = '/images/napkins/cocktail-napkin-salty-cod-ireland.webp';
 
 const napkinTypes = [
+  { title: 'Personalised Napkins', desc: 'Custom printed napkins for restaurants, cafés and weddings. 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm, from 25.', href: '/custom-printed-napkins', price: '0.24', priceLabel: 'From €0.24' },
   { title: 'Cocktail Napkins', desc: 'White logo napkins for restaurants, bars and cafés. 10 × 10 cm closed, 20 × 40 cm open.', href: '/products/cocktail-napkins', priceLabel: '10 × 10 cm' },
   { title: 'Luxury Tissue Paper', desc: 'Plain acid-free colour tissue, 500 × 750 mm. 480 sheets per case, 15 colours.', href: '/luxury-tissue-paper-ireland', price: '29.99', priceLabel: '€29.99 + VAT per case' },
-  { title: 'Custom Printed Napkins', desc: 'Logo napkins for restaurants, cafés and caterers. 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm, from 25.', href: '/custom-printed-napkins', price: '0.24', priceLabel: 'From €0.24' },
   { title: 'Plain Wholesale Napkins', desc: 'Bulk white napkins without printing — economical for high-volume catering.', href: '/plain-napkins-tableware-ireland', price: '0.03' },
 ];
 
@@ -62,9 +62,9 @@ const faqLd = {
 };
 
 export default function NapkinsIreland() {
-  const title = 'Napkins Ireland | Cocktail Napkin Printing, Weddings & Restaurants | Print n Pack';
+  const title = 'Personalised Napkins Ireland | Custom Printed Napkins | Print n Pack';
   const description =
-    'Cocktail napkin printing in Ireland — white 10 × 10 cm napkins, 20 × 40 cm open, for weddings, restaurants and bars. Plus linen-feel and wholesale napkins. Printed in Ashbourne, delivered nationwide.';
+    'Personalised napkins and custom printed napkins for restaurants, cafés and weddings. Printed in Ashbourne and shipped across Ireland and Europe. From 25 napkins, from €0.24.';
 
   return (
     <Layout>
@@ -104,18 +104,18 @@ export default function NapkinsIreland() {
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <div>
               <p className="text-sm font-semibold text-amber-600 uppercase tracking-wider mb-3">Custom napkin printing</p>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">Napkins Ireland</h1>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">Personalised Napkins Ireland</h1>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                Cocktail napkin printing for Irish weddings, restaurants, bars and cafés.
-                White napkins, 10 × 10 cm closed and 20 × 40 cm open, plus linen-feel and plain wholesale napkins.
-                Printed in Ashbourne and delivered nationwide.
+                <Link href="/custom-printed-napkins" className="font-semibold text-amber-700 hover:underline">Personalised napkins</Link> and custom printed napkins for restaurants, cafés, weddings and bars.
+                We print them in Ashbourne and ship them across Ireland and Europe.
+                Cocktail napkins, linen-feel napkins from 25, and plain wholesale napkins are all on this page.
               </p>
               <div className="flex flex-wrap gap-3">
-                <Link href="/products/cocktail-napkins" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors">
-                  Cocktail napkins
+                <Link href="/custom-printed-napkins" className="inline-flex items-center bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-amber-700 transition-colors">
+                  Personalised napkins
                 </Link>
-                <Link href="/custom-printed-napkins" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
-                  Custom printed napkins from €0.24
+                <Link href="/products/cocktail-napkins" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
+                  Cocktail napkins
                 </Link>
                 <Link href="/napkin-faq-ireland" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
                   Napkin FAQ
