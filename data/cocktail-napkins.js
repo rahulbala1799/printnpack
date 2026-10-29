@@ -19,11 +19,11 @@ export const COCKTAIL_NAPKIN_PRODUCT = {
   moduleId: 'cocktail-napkins',
   path: '/cocktail-napkins-ireland',
   name: 'Cocktail Napkins',
-  h1: 'Cocktail napkin printing Ireland',
+  h1: 'Personalised cocktail napkins',
   tagline: 'White napkins for weddings, restaurants and bars. 10 × 10 cm closed.',
-  metaTitle: 'Cocktail Napkins Ireland | Printed for Weddings & Restaurants',
+  metaTitle: 'Personalised Cocktail Napkins Ireland | Weddings & Restaurants',
   metaDescription:
-    'Cocktail napkin printing in Ireland. White napkins, 10 × 10 cm closed and 20 × 40 cm open, custom printed for weddings, restaurants and bars. From 50. Delivered nationwide.',
+    'Personalised cocktail napkins for weddings, restaurants and bars. White napkins, 10 × 10 cm closed and 20 × 40 cm open, printed with your logo. From 50. Delivered nationwide.',
   keywords: [
     'cocktail napkins ireland',
     'cocktail napkin printing ireland',

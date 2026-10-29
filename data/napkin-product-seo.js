@@ -33,14 +33,14 @@ export const NAPKIN_PRODUCT_SEO = {
     ],
   },
   'cocktail-napkins': {
-    title: 'Cocktail Napkins Ireland | Printed Logo Napkins for Restaurants',
+    title: 'Personalised Napkins Ireland | Cocktail Napkins with Your Logo | Print n Pack',
     description:
-      'Cocktail napkin printing in Ireland. White napkins, 10 × 10 cm closed and 20 × 40 cm open, custom printed for restaurants, bars and cafés. From 50. Delivered nationwide.',
+      'Personalised napkins for restaurants, bars and cafés. White cocktail napkins, 10 × 10 cm closed and 20 × 40 cm open, printed with your logo. From 50. Printed in Ashbourne and delivered across Ireland.',
     keywords:
-      'cocktail napkins ireland, cocktail napkin printing ireland, printed cocktail napkins, custom cocktail napkins, restaurant cocktail napkins, bar cocktail napkins, 10x10 cocktail napkins, logo napkins ireland, printed napkins ireland',
-    h1: 'Cocktail Napkins Ireland',
+      'personalised napkins ireland, personalised napkins, cocktail napkins ireland, cocktail napkin printing ireland, printed cocktail napkins, custom cocktail napkins, restaurant cocktail napkins, bar cocktail napkins, 10x10 cocktail napkins, logo napkins ireland, printed napkins ireland',
+    h1: 'Personalised Napkins',
     intro:
-      'White cocktail napkins printed with your logo for restaurants, bars and cafés. Closed, the napkin is 10 × 10 cm. Open, it is 20 × 40 cm. Order from 50 and we deliver across Ireland.',
+      'Personalised napkins for restaurants, bars and cafés. These are white cocktail napkins printed with your logo. Closed, the napkin is 10 × 10 cm. Open, it is 20 × 40 cm. Order from 50. We print in Ashbourne and deliver across Ireland.',
     productFaqs: [
       {
         q: 'What size are the cocktail napkins?',
@@ -70,7 +70,7 @@ export const NAPKIN_PRODUCT_SEO = {
     ],
   },
   'premium-linen-feel-napkins': {
-    title: 'Custom Printed Napkins | Ireland & Europe | Print n Pack',
+    title: 'Custom Printed Napkins | Personalised Napkins Ireland | Print n Pack',
     description:
       'Custom printed napkins, printed in Ireland and shipped across Ireland and Europe. 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm, from 25. 500 napkins from €240 ex VAT. Quote on this page.',
     keywords: 'custom printed napkins, custom printed napkins ireland, printed napkins ireland, personalised napkins ireland, branded napkins, cocktail napkins, napkin printing ireland, restaurant napkins, custom napkins europe, 500 napkins',

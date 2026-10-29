@@ -30,7 +30,7 @@ export default function CocktailNapkinConfigurator() {
   return (
     <section className="border-t border-gray-100 bg-white">
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-        <h2 className="mb-2 text-2xl font-bold text-gray-900">Build a cocktail napkin quote</h2>
+        <h2 className="mb-2 text-2xl font-bold text-gray-900">Build a personalised napkin quote</h2>
         <p className="mb-6 text-sm leading-relaxed text-gray-600">
           One white cocktail napkin. Closed it is 10 × 10 cm. Open it is 20 × 40 cm. Choose a quantity from 50.
         </p>
