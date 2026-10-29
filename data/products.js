@@ -7,6 +7,7 @@ import { zipperCatalogProducts } from './zipper-walls';
 import { exhibitionCatalogProduct } from './exhibition-stands';
 import { VINYL_LETTER_GALLERY, VINYL_LETTER_IMAGE, vinylLetterFromPrice } from './vinyl-cut-letters';
 import { ribbonFromPrice, RIBBON_GALLERY } from './ribbons';
+import { ropeBagFromPrice, ROPE_BAG_GALLERY } from './luxury-rope-handle-bags';
 
 const products = [
   {
@@ -292,6 +293,44 @@ const products = [
       }
     ],
     weeklyDelivery: 'Our weekly delivery service keeps flagship stores, boutiques and hospitality brands stocked with premium branded packaging without the need for large on-site storage. A dedicated account manager tailors your delivery schedule and monitors usage to recommend the right order quantities, protecting your brand image while simplifying inventory management.'
+  },
+  {
+    id: 'luxury-rope-handle-bags-ireland',
+    name: 'Luxury Rope Handle Bags',
+    url: '/luxury-rope-handle-bags-ireland',
+    category: 'Retail Packaging',
+    description: 'White kraft carrier bags with a cotton rope handle. 13 sizes, 1 colour, 2 colours or full colour, from 250 bags. Delivery to Ireland included.',
+    features: [
+      'Cotton rope handle, short or shoulder length',
+      '18 rope colours, same price',
+      '170gsm white kraft, with FSC at the same price',
+      '1 colour, 2 colours or full colour print',
+      'Optional gloss or matt lamination, foil, and closing ribbons',
+      'From 250 bags, delivery to Ireland included',
+    ],
+    detailedDescription: 'Luxury rope handle bags are white kraft carrier bags with a cotton rope. The rope is about 50 cm, held in the hand, or about 80 cm so the bag sits on the shoulder. There are 18 rope colours, and the colour does not change the price.\n\nThe paper is 170gsm white kraft, or the same paper with FSC at the same price. Print is 1 colour, 2 colours, or full colour. Gloss and matt lamination are the same price as each other. Gold and silver foil are the same price as each other. Closing ribbons are glued on so the bag can be tied shut, and they are not the handle.\n\nThere are 13 sizes, from a small vertical bag to a wine bag and a wide shopper. The smallest order is 250 bags. The price is ex VAT and includes delivery to Ireland. A bigger bag or a larger quantity includes a higher delivery rate.',
+    specifications: [
+      { name: 'Material', value: '170gsm white kraft, or FSC white kraft at the same price' },
+      { name: 'Handle', value: 'Cotton rope. Short, about 50 cm, or shoulder length, about 80 cm' },
+      { name: 'Rope colours', value: '18 colours. The colour does not change the price' },
+      { name: 'Sizes', value: '13 sizes, width × depth × height, from 15 × 8 × 20 cm to 54 × 14 × 45 cm' },
+      { name: 'Print', value: '1 colour, 2 colours, or full colour' },
+      { name: 'Finishes', value: 'Gloss or matt lamination, partial gloss, gold foil or silver foil' },
+      { name: 'Closing ribbons', value: 'None, white or black. Not the handle' },
+      { name: 'Minimum order', value: '250 bags' },
+      { name: 'Delivery', value: 'Included to Ireland. Price is ex VAT' },
+    ],
+    images: ROPE_BAG_GALLERY.map((item) => item.src),
+    imageSrc: ROPE_BAG_GALLERY[0]?.src || '',
+    price: `From €${ropeBagFromPrice().toFixed(2)} ex VAT`,
+    moq: 250,
+    leadTime: 'Standard production. Delivery to Ireland is included in the price.',
+    applications: [
+      'Boutiques and fashion',
+      'Gift shops',
+      'Beauty and cosmetics',
+      'Wine and hospitality',
+    ],
   },
   {
     id: 'custom-printed-coffee-cups-ireland',

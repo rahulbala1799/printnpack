@@ -26,6 +26,7 @@ import { buildInhakerQuoteLine, inhakerFromPrice } from './inhaker-stands';
 import { beachFlagFromPrice, buildBeachFlagQuoteLine } from './beach-flags';
 import { buildVinylLetterQuoteLine, vinylLetterFromPrice } from './vinyl-cut-letters';
 import { buildBrownFlatHandleQuoteLine, brownFlatHandleFromPrice } from './brown-flat-handle-bags';
+import { ROPE_BAG_ID, ROPE_BAG_PATH, buildRopeBagQuoteLine, ropeBagFromPrice } from './luxury-rope-handle-bags';
 import { RIBBON_ID, RIBBON_PATH, buildRibbonQuoteLine, repriceRibbonOrders, ribbonFromPrice } from './ribbons';
 import { WEDDING_PRODUCTS, weddingBoardSizeError, weddingModuleFields } from './wedding-products';
 
@@ -78,6 +79,7 @@ export const QUOTE_CATALOG = [
     price: `From €${ribbonFromPrice().toFixed(2)} ex VAT`,
   }),
   withMedia({ id: 'printed-flat-handle-bags-ireland', name: 'Brown Flat Handle Printed Bags', href: '/printed-flat-handle-bags-ireland', moduleId: 'brown-flat-handle', configurable: true, group: 'Packaging', price: `From €${brownFlatHandleFromPrice().toFixed(2)} ex VAT` }),
+  withMedia({ id: ROPE_BAG_ID, name: 'Luxury Rope Handle Bags', href: ROPE_BAG_PATH, moduleId: 'luxury-rope-bags', configurable: true, group: 'Packaging', price: `From €${ropeBagFromPrice().toFixed(2)} ex VAT` }),
   withMedia({ id: 'custom-pizza-boxes-ireland', name: 'Custom Pizza Boxes', href: '/custom-pizza-boxes-ireland', moduleId: 'pizza-boxes', configurable: false, group: 'Packaging', price: 'From 500 units' }),
   withMedia({ id: 'eco-bagasse-burger-boxes', name: 'Bagasse Burger Boxes', href: '/eco-bagasse-burger-boxes', moduleId: 'bagasse', configurable: false, group: 'Packaging' }),
   withMedia({ id: 'greaseproof-sheets-ireland', name: 'Greaseproof Sheets', href: '/greaseproof-sheets-ireland', moduleId: 'greaseproof', configurable: false, group: 'Packaging' }),
@@ -399,6 +401,9 @@ export function buildCatalogQuoteLine(catalogItem, options = {}) {
   if (catalogItem.moduleId === 'brown-flat-handle') {
     return buildBrownFlatHandleQuoteLine(catalogItem, options);
   }
+  if (catalogItem.moduleId === 'luxury-rope-bags') {
+    return buildRopeBagQuoteLine(catalogItem, options);
+  }
   if (catalogItem.moduleId === 'printed-napkins') {
     const entered = Number(options.qty);
     const qty = Math.max(PRINTED_NAPKIN_MIN, Number.isFinite(entered) && entered > 0 ? Math.round(entered) : PRINTED_NAPKIN_MIN);
@@ -570,6 +575,13 @@ export function repriceQuoteLine(line, qty) {
   }
   if (line.moduleId === 'brown-flat-handle') {
     const next = buildBrownFlatHandleQuoteLine(
+      { id: line.productId, name: line.name, href: line.href, image: line.image, images: line.images },
+      { ...(line.options || {}), qty }
+    );
+    return next ? { ...next, id: line.id } : { ...line, qty };
+  }
+  if (line.moduleId === 'luxury-rope-bags') {
+    const next = buildRopeBagQuoteLine(
       { id: line.productId, name: line.name, href: line.href, image: line.image, images: line.images },
       { ...(line.options || {}), qty }
     );

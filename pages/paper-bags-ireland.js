@@ -13,6 +13,14 @@ const HERO_IMAGE = '/images/products/flat-handle-bags/1.png';
 
 const childPages = [
   {
+    href: '/luxury-rope-handle-bags-ireland',
+    title: 'Luxury Rope Handle Bags',
+    desc: 'White kraft bags with a cotton rope handle, from 250 bags.',
+    image: '/images/products/luxury-rope-handle-bags/hero.jpg',
+    accent: 'amber',
+    badge: 'Luxury',
+  },
+  {
     href: '/luxury-paper-bags-ireland',
     title: 'Luxury Paper Bags',
     desc: 'Die-cut premium carrier bags with bespoke finishes for luxury brands.',
@@ -217,7 +225,7 @@ export default function PaperBagsIreland() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Choose your paper bag option</h2>
           <p className="text-gray-600 mb-8 max-w-2xl">Each page covers a different buying path — printed, plain stock, or wholesale bulk.</p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {childPages.map((page) => (
               <Link key={page.href} href={page.href} className="group relative bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md hover:border-emerald-200 transition-all">
                 {page.badge && (

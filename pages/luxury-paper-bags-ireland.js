@@ -478,6 +478,7 @@ export default function LuxuryPaperBagsIreland() {
           { href: '/custom-printed-tissue-paper-ireland', label: 'Custom Tissue Paper', desc: 'Branded logo tissue for luxury unboxing' },
           { href: '/luxury-magnetic-closure-boxes-ireland', label: 'Magnetic Closure Boxes', desc: 'Luxury rigid gift boxes with custom printing' },
           { href: '/paper-bags-ireland', label: 'Paper Bags Ireland', desc: 'Printed, plain & wholesale hub' },
+          { href: '/luxury-rope-handle-bags-ireland', label: 'Luxury Rope Handle Bags', desc: 'Cotton rope handles, from 250 bags' },
           { href: '/twisted-handle-paper-bags-ireland', label: 'Twisted Handle Bags', desc: 'Premium retail paper bags' },
           { href: '/printed-flat-handle-bags-ireland', label: 'Printed Flat Handle Bags', desc: 'Takeaway & café logo bags' },
           { href: '/plain-paper-bags-ireland', label: 'Plain Paper Bags', desc: 'Kraft SOS stock cases' },

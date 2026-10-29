@@ -25,10 +25,11 @@ export const HEADER_CATEGORIES = [
     name: 'Bags',
     href: '/paper-bags-ireland',
     summary: 'Printed carrier bags and grab bags',
-    match: ['/paper-bags', '/printed-flat-handle', '/luxury-paper-bags', '/twisted-handle-paper-bags', '/products/sos-grab-bags'],
+    match: ['/paper-bags', '/printed-flat-handle', '/luxury-paper-bags', '/luxury-rope-handle', '/twisted-handle-paper-bags', '/products/sos-grab-bags'],
     products: [
       { name: 'Flat handle paper bags', href: '/printed-flat-handle-bags-ireland' },
       { name: 'Twisted handle paper bags', href: '/twisted-handle-paper-bags-ireland' },
+      { name: 'Luxury rope handle bags', href: '/luxury-rope-handle-bags-ireland' },
       { name: 'Luxury die-cut paper bags', href: '/luxury-paper-bags-ireland' },
       { name: 'SOS grab bags', href: '/products/sos-grab-bags' },
     ],

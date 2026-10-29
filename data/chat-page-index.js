@@ -32,6 +32,7 @@ export const PUBLIC_PAGE_PATHS = [
   "/wholesale-paper-bags-ireland",
   "/twisted-handle-paper-bags-ireland",
   "/luxury-paper-bags-ireland",
+  "/luxury-rope-handle-bags-ireland",
   "/luxury-magnetic-closure-boxes-ireland",
   "/custom-printed-tissue-paper-ireland",
   "/custom-printed-napkins",

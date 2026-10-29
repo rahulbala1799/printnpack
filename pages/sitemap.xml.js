@@ -74,6 +74,7 @@ const staticPages = [
   { path: '/wholesale-paper-bags-ireland',   priority: '0.88', changefreq: 'weekly' },
   { path: '/twisted-handle-paper-bags-ireland', priority: '0.9', changefreq: 'weekly' },
   { path: '/luxury-paper-bags-ireland',      priority: '0.92', changefreq: 'weekly' },
+  { path: '/luxury-rope-handle-bags-ireland', priority: '0.92', changefreq: 'weekly' },
   { path: '/luxury-magnetic-closure-boxes-ireland', priority: '0.92', changefreq: 'weekly' },
   { path: '/custom-printed-tissue-paper-ireland', priority: '0.91', changefreq: 'weekly' },
   { path: '/printed-ribbon-ireland', priority: '0.91', changefreq: 'weekly' },

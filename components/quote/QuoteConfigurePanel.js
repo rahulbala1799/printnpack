@@ -11,6 +11,7 @@ import VinylCutLetterQuoteModule from './modules/VinylCutLetterQuoteModule';
 import BrownFlatHandleQuoteModule from './modules/BrownFlatHandleQuoteModule';
 import TissuePaperQuoteModule from './modules/TissuePaperQuoteModule';
 import RibbonQuoteModule from './modules/RibbonQuoteModule';
+import LuxuryRopeBagQuoteModule from './modules/LuxuryRopeBagQuoteModule';
 import QuoteProductImage from './QuoteProductImage';
 
 export default function QuoteConfigurePanel({ selected, existing, onSave }) {
@@ -93,6 +94,8 @@ export default function QuoteConfigurePanel({ selected, existing, onSave }) {
         <TissuePaperQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
       ) : selected.moduleId === 'ribbons' ? (
         <RibbonQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
+      ) : selected.moduleId === 'luxury-rope-bags' ? (
+        <LuxuryRopeBagQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
       ) : (
         <GenericQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
       )}

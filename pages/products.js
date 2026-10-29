@@ -135,6 +135,7 @@ const POPULAR_LINKS = [
   { label: 'Hot Cups', href: '/hot-cups-ireland' },
   { label: 'Custom Coffee Cups', href: '/custom-printed-coffee-cups-ireland' },
   { label: 'Luxury Paper Bags', href: '/luxury-paper-bags-ireland' },
+  { label: 'Rope Handle Bags', href: '/luxury-rope-handle-bags-ireland' },
   { label: 'Magnetic Gift Boxes', href: '/luxury-magnetic-closure-boxes-ireland' },
   { label: 'Tissue Paper', href: '/custom-printed-tissue-paper-ireland' },
   { label: 'Printed Ribbon', href: '/printed-ribbon-ireland' },
