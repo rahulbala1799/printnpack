@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'luxury-rope-handle-bags-ireland-sizes-moq-buying-guide',
+    title:
+      'Luxury Rope Handle Bags Ireland: 13 Sizes, Short vs Shoulder & MOQ Buying Guide',
+    excerpt:
+      'How to buy luxury rope handle paper bags in Ireland — 13 sizes from 15×8×20 cm to 54×14×45 cm, short vs shoulder cotton rope, 1–2 colour or full-colour print, MOQ from 250, with Ireland delivery included from Ashbourne.',
+    date: '2026-10-30',
+    readTime: '8 min read',
+    image: '/images/products/luxury-rope-handle-bags/hero.jpg',
+    imageAlt:
+      'Luxury rope handle bags Ireland — white kraft bag with black cotton rope for Dublin boutiques',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'vinyl-cut-letters-ireland-sizes-buying-guide',
     title:
       'Vinyl Cut Letters Ireland: Shop Window Sizes 10–300 cm & Buying Guide',
