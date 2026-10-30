@@ -19,6 +19,7 @@ const productLd = buildProductLd({
   image: `${SITE_URL}/images/apparel/TSHIRT MOCK UP 1.jpg`,
   url: PAGE_URL,
   price: '12.00',
+  shipping: { handlingMin: 3, handlingMax: 5, transitMin: 1, transitMax: 2 },
 });
 
 const clothingHubFaqs = CLOTHING_FAQS.slice(0, 6);

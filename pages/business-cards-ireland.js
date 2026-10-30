@@ -33,6 +33,7 @@ const productLd = buildProductLd({
   image: `${SITE_URL}${HERO_IMAGE}`,
   url: PAGE_URL,
   price: '35.00',
+  shipping: { handlingMin: 1, handlingMax: 2, transitMin: 1, transitMax: 4 },
 });
 
 const faqLd = {

@@ -10,7 +10,7 @@ import RelatedSeoLinks from '../../components/seo/RelatedSeoLinks';
 import { NAPKIN_PRODUCT_SEO } from '../../data/napkin-product-seo';
 import { PRINTED_NAPKIN_PRICE_ROWS } from '../../data/printed-napkins';
 import { SITE_URL } from '../../lib/site';
-import { buildProductLd, parsePriceString } from '../../lib/schema';
+import { buildProductLd, parsePriceString, shippingFromLeadTime } from '../../lib/schema';
 
 /**
  * Dynamic product page. Uses ProductPageTemplate for all products so every
@@ -54,6 +54,7 @@ const ProductDetail = ({ product, relatedProducts }) => {
     price: napkinSeo?.price || parsePriceString(product.price),
     lowPrice: napkinSeo?.lowPrice,
     highPrice: napkinSeo?.highPrice,
+    shipping: shippingFromLeadTime(product.leadTime),
   });
 
   const breadcrumbLd = napkinSeo ? {

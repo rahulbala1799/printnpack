@@ -7,7 +7,7 @@ import { getRelatedProducts } from '../../data/products';
 import ProductPageTemplate from '../../components/ProductPageTemplate';
 import RelatedSeoLinks from '../../components/seo/RelatedSeoLinks';
 import { SITE_URL } from '../../lib/site';
-import { buildProductLd, parsePriceString } from '../../lib/schema';
+import { buildProductLd, parsePriceString, shippingFromLeadTime } from '../../lib/schema';
 import { CLOTHING_FAQS } from '../../data/clothing-faq';
 
 export default function ClothingProductPage({ product, relatedProducts }) {
@@ -43,6 +43,7 @@ export default function ClothingProductPage({ product, relatedProducts }) {
     price: parsePriceString(product.price),
     sku: product.id,
     category: product.schemaCategory || product.category,
+    shipping: shippingFromLeadTime(product.leadTime),
   });
 
   const pageFaqs = (product.faqIds || [])

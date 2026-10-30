@@ -17,7 +17,7 @@ import {
 import PackagingIcon, { isPlaceholderImage } from '../../components/PackagingIcon';
 import RelatedSeoLinks from '../../components/seo/RelatedSeoLinks';
 import { getCategoryHubHref, getRelatedWholesaleLinks } from '../../data/wholesale-hub-links';
-import { buildProductLd } from '../../lib/schema';
+import { buildProductLd, STOCK_IRELAND_SHIPPING } from '../../lib/schema';
 import { getBioboxProductSeo } from '../../data/biobox-cluster';
 import {
   REFUSE_SACK_HUB_PATH,
@@ -106,6 +106,7 @@ function buildPlainProductLd(product, canonicalUrl) {
     price: basePrice,
     sku: product.code,
     category: product.category,
+    shipping: STOCK_IRELAND_SHIPPING,
   });
 }
 

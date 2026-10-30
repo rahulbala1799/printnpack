@@ -7,7 +7,7 @@ import ExtraWideRollUpBannerQuoteForm from '../components/ExtraWideRollUpBannerQ
 import RelatedSeoLinks from '../components/seo/RelatedSeoLinks';
 import { HreflangLinks, LanguageBar, OgLocaleAlternates } from '../components/seo/LanguageAlternates';
 import { SITE_URL } from '../lib/site';
-import { buildOffer } from '../lib/schema';
+import { buildIrelandShippingDetails, buildOffer } from '../lib/schema';
 import {
   EXTRA_WIDE_TITLE,
   EXTRA_WIDE_DESCRIPTION,
@@ -179,6 +179,7 @@ const productLd = {
     offerCount: String(sizeOptions.length),
     availability: 'https://schema.org/InStock',
     areaServed,
+    shippingDetails: buildIrelandShippingDetails(),
   },
 };
 
