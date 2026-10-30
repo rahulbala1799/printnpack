@@ -186,6 +186,7 @@ const staticPages = [
   { path: '/services/posters',  priority: '0.8', changefreq: 'monthly' },
   { path: '/services/vinyls',   priority: '0.8', changefreq: 'monthly' },
   { path: '/blog',              priority: '0.8', changefreq: 'weekly'  },
+  { path: '/blog/luxury-rope-handle-bags-ireland-sizes-moq-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/vinyl-cut-letters-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/microwave-meal-boxes-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/custom-printed-ribbon-ireland-widths-moq-buying-guide', priority: '0.88', changefreq: 'monthly' },
