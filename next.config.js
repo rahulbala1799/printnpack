@@ -657,6 +657,15 @@ const nextConfig = {
       },
     ];
   },
+
+  async rewrites() {
+    return [
+      {
+        source: '/feeds/local-inventory.txt',
+        destination: '/api/feeds/local-inventory',
+      },
+    ];
+  },
   
   // Enable image optimization with better settings for Vercel
   images: {
