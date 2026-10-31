@@ -5,6 +5,7 @@ export const PUBLIC_PAGE_PATHS = [
   "/biobox-containers-ireland",
   "/about",
   "/contact",
+  "/returns-policy",
   "/quote",
   "/pizza-boxes-ireland",
   "/custom-pizza-boxes-ireland",

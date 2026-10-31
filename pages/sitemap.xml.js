@@ -45,6 +45,7 @@ const staticPages = [
   { path: '/biobox-containers-ireland', priority: '0.88', changefreq: 'weekly' },
   { path: '/about',       priority: '0.7', changefreq: 'monthly' },
   { path: '/contact',     priority: '0.7', changefreq: 'monthly' },
+  { path: '/returns-policy', priority: '0.4', changefreq: 'yearly' },
   { path: '/quote',       priority: '0.8', changefreq: 'monthly' },
   // Pizza box hub — primary SEO target
   { path: '/pizza-boxes-ireland',          priority: '0.95', changefreq: 'weekly' },

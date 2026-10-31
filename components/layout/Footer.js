@@ -12,6 +12,7 @@ const QUICK_LINKS = [
   { label: 'Services', href: '/services' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
+  { label: 'Returns', href: '/returns-policy' },
 ];
 
 const PRODUCT_LINKS = [
@@ -216,6 +217,10 @@ const Footer = () => {
         <div className="border-t border-slate-800 py-4 sm:py-6 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-[10px] sm:text-xs text-slate-500">&copy; {new Date().getFullYear()} PrintNPack. All rights reserved.</p>
           <div className="flex items-center gap-3">
+            <Link href="/returns-policy" className="text-[10px] sm:text-xs text-slate-500 hover:text-slate-300 transition-colors">
+              Returns policy
+            </Link>
+            <span className="text-slate-700">·</span>
             <a href="tel:+353894157369" className="text-[10px] sm:text-xs text-slate-500 hover:text-slate-300 transition-colors hidden sm:inline">+353 89 415 7369</a>
             <span className="text-slate-700 hidden sm:inline">·</span>
             <a href="mailto:info@printnpack.ie" className="text-[10px] sm:text-xs text-slate-500 hover:text-slate-300 transition-colors hidden sm:inline">info@printnpack.ie</a>
