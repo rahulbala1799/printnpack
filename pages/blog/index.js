@@ -6,6 +6,20 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'custom-polo-shirts-ireland-sizes-moq-buying-guide',
+    title:
+      'Custom Polo Shirts Ireland: Sizes S–3XL, Embroidery vs Print & MOQ Buying Guide',
+    excerpt:
+      'How to buy custom polo shirts in Ireland — Fruit of the Loom 65/35, embroidery or print from €19, same price S–3XL, MOQ from 5, with nationwide delivery from Ashbourne for hospitality, events, golf clubs and workwear.',
+    date: '2026-11-01',
+    readTime: '8 min read',
+    image:
+      '/images/apparel/custom-polo-shirts-ireland-embroidered-events-uniform.jpg',
+    imageAlt:
+      'Custom polo shirts Ireland — black embroidered staff uniform for Dublin hospitality and events',
+    category: 'Apparel Guide',
+  },
+  {
     slug: 'noodle-boxes-ireland-sizes-buying-guide',
     title:
       'Noodle Boxes Ireland: 16oz & 26oz Spiritpak Sizes & Wholesale Buying Guide',
