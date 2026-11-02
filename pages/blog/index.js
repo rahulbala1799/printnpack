@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'white-cake-boxes-ireland-sizes-buying-guide',
+    title: 'White Cake Boxes Ireland: 6–12″ Sizes & Wholesale Buying Guide',
+    excerpt:
+      'How to buy plain white cake boxes in Ireland — 6×6×3″, 8×8×3″, 10×10×4″ and 12×12×4″ sizes, case packs, plain vs custom print, and nationwide delivery from Ashbourne for bakeries and cafés.',
+    date: '2026-11-02',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/230007.webp',
+    imageAlt:
+      'White cake boxes Ireland — 6×6×3 inch plain bakery box wholesale for Dublin bakeries',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'custom-polo-shirts-ireland-sizes-moq-buying-guide',
     title:
       'Custom Polo Shirts Ireland: Sizes S–3XL, Embroidery vs Print & MOQ Buying Guide',
