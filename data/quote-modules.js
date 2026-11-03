@@ -26,6 +26,13 @@ import { buildInhakerQuoteLine, inhakerFromPrice } from './inhaker-stands';
 import { beachFlagFromPrice, buildBeachFlagQuoteLine } from './beach-flags';
 import { buildVinylLetterQuoteLine, vinylLetterFromPrice } from './vinyl-cut-letters';
 import { buildBrownFlatHandleQuoteLine, brownFlatHandleFromPrice } from './brown-flat-handle-bags';
+import {
+  PRINTED_BAGASSE_BOXES,
+  PRINTED_BAGASSE_GALLERY,
+  buildPrintedBagasseQuoteLine,
+  printedBagassePath,
+  printedBagasseUnitPrice,
+} from './printed-bagasse-boxes';
 import { ROPE_BAG_ID, ROPE_BAG_PATH, buildRopeBagQuoteLine, ropeBagFromPrice } from './luxury-rope-handle-bags';
 import { RIBBON_ID, RIBBON_PATH, buildRibbonQuoteLine, repriceRibbonOrders, ribbonFromPrice } from './ribbons';
 import { WEDDING_PRODUCTS, weddingBoardSizeError, weddingModuleFields } from './wedding-products';
@@ -81,7 +88,18 @@ export const QUOTE_CATALOG = [
   withMedia({ id: 'printed-flat-handle-bags-ireland', name: 'Brown Flat Handle Printed Bags', href: '/printed-flat-handle-bags-ireland', moduleId: 'brown-flat-handle', configurable: true, group: 'Packaging', price: `From €${brownFlatHandleFromPrice().toFixed(2)} ex VAT` }),
   withMedia({ id: ROPE_BAG_ID, name: 'Luxury Rope Handle Bags', href: ROPE_BAG_PATH, moduleId: 'luxury-rope-bags', configurable: true, group: 'Packaging', price: `From €${ropeBagFromPrice().toFixed(2)} ex VAT` }),
   withMedia({ id: 'custom-pizza-boxes-ireland', name: 'Custom Pizza Boxes', href: '/custom-pizza-boxes-ireland', moduleId: 'pizza-boxes', configurable: false, group: 'Packaging', price: 'From 500 units' }),
-  withMedia({ id: 'eco-bagasse-burger-boxes', name: 'Bagasse Burger Boxes', href: '/eco-bagasse-burger-boxes', moduleId: 'bagasse', configurable: false, group: 'Packaging' }),
+  ...PRINTED_BAGASSE_BOXES.map((box) => withMedia({
+    id: box.catalogId,
+    name: box.name,
+    href: printedBagassePath(box),
+    image: box.image,
+    images: PRINTED_BAGASSE_GALLERY.map((item) => item.src),
+    moduleId: 'printed-bagasse',
+    sizeId: box.id,
+    configurable: true,
+    group: 'Packaging',
+    price: `€${printedBagasseUnitPrice(box, 100).toFixed(2)} ex VAT at 100`,
+  })),
   withMedia({ id: 'greaseproof-sheets-ireland', name: 'Greaseproof Sheets', href: '/greaseproof-sheets-ireland', moduleId: 'greaseproof', configurable: false, group: 'Packaging' }),
   withMedia({ id: 'labels-on-a-roll', name: 'Labels on a Roll', href: '/labels-on-a-roll', moduleId: 'labels', configurable: false, group: 'Stickers & Labels' }),
   withMedia({ id: 'vinyl-stickers', name: 'Vinyl Stickers', href: '/vinyl-stickers', moduleId: 'vinyl-stickers', configurable: false, group: 'Stickers & Labels' }),
@@ -401,6 +419,12 @@ export function buildCatalogQuoteLine(catalogItem, options = {}) {
   if (catalogItem.moduleId === 'brown-flat-handle') {
     return buildBrownFlatHandleQuoteLine(catalogItem, options);
   }
+  if (catalogItem.moduleId === 'printed-bagasse') {
+    return buildPrintedBagasseQuoteLine(catalogItem, {
+      ...options,
+      sizeId: options.sizeId || catalogItem.sizeId,
+    });
+  }
   if (catalogItem.moduleId === 'luxury-rope-bags') {
     return buildRopeBagQuoteLine(catalogItem, options);
   }
@@ -576,6 +600,13 @@ export function repriceQuoteLine(line, qty) {
   if (line.moduleId === 'brown-flat-handle') {
     const next = buildBrownFlatHandleQuoteLine(
       { id: line.productId, name: line.name, href: line.href, image: line.image, images: line.images },
+      { ...(line.options || {}), qty }
+    );
+    return next ? { ...next, id: line.id } : { ...line, qty };
+  }
+  if (line.moduleId === 'printed-bagasse') {
+    const next = buildPrintedBagasseQuoteLine(
+      { id: line.productId, name: line.name, href: line.href, image: line.image, images: line.images, sizeId: line.options?.sizeId },
       { ...(line.options || {}), qty }
     );
     return next ? { ...next, id: line.id } : { ...line, qty };

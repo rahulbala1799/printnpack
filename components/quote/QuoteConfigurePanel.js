@@ -9,6 +9,7 @@ import InhakerStandQuoteModule from './modules/InhakerStandQuoteModule';
 import BeachFlagQuoteModule from './modules/BeachFlagQuoteModule';
 import VinylCutLetterQuoteModule from './modules/VinylCutLetterQuoteModule';
 import BrownFlatHandleQuoteModule from './modules/BrownFlatHandleQuoteModule';
+import PrintedBagasseQuoteModule from './modules/PrintedBagasseQuoteModule';
 import TissuePaperQuoteModule from './modules/TissuePaperQuoteModule';
 import RibbonQuoteModule from './modules/RibbonQuoteModule';
 import LuxuryRopeBagQuoteModule from './modules/LuxuryRopeBagQuoteModule';
@@ -90,6 +91,8 @@ export default function QuoteConfigurePanel({ selected, existing, onSave }) {
         <VinylCutLetterQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
       ) : selected.moduleId === 'brown-flat-handle' ? (
         <BrownFlatHandleQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
+      ) : selected.moduleId === 'printed-bagasse' ? (
+        <PrintedBagasseQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
       ) : selected.moduleId === 'luxury-tissue' ? (
         <TissuePaperQuoteModule key={selected.id} catalogItem={selected} existing={existing} onSave={onSave} />
       ) : selected.moduleId === 'ribbons' ? (
