@@ -6,6 +6,20 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'custom-hiviz-workwear-ireland-sizes-moq-buying-guide',
+    title:
+      'Hi-Viz Workwear Ireland: EN ISO 20471 Class 2, Colours, Sizes S–3XL & MOQ Buying Guide',
+    excerpt:
+      'How to buy custom hi-viz workwear in Ireland — DMS tabards, EN ISO 20471 Class 2, yellow to black colours, print or embroidery from €12, same price S–3XL, MOQ from 5, with nationwide delivery from Ashbourne for sites, warehouses, road crews and events.',
+    date: '2026-11-03',
+    readTime: '8 min read',
+    image:
+      '/images/apparel/custom-hiviz-workwear-ireland-construction-site.jpg',
+    imageAlt:
+      'Custom hi-viz workwear Ireland — yellow printed safety vest on a Dublin construction site',
+    category: 'Apparel Guide',
+  },
+  {
     slug: 'white-cake-boxes-ireland-sizes-buying-guide',
     title: 'White Cake Boxes Ireland: 6–12″ Sizes & Wholesale Buying Guide',
     excerpt:
