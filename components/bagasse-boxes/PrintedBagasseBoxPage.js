@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -25,6 +25,11 @@ export default function PrintedBagasseBoxPage({ box }) {
   const { addItem } = useQuoteCart();
   const photos = box.gallery?.length ? box.gallery : [{ src: box.image, alt: box.name }];
   const [shown, setShown] = useState(photos[0].src);
+
+  useEffect(() => {
+    setShown(photos[0].src);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [box.id]);
   const pageUrl = `${SITE_URL}${printedBagassePath(box)}`;
   const low = box.prices[box.prices.length - 1].toFixed(2);
   const high = box.prices[0].toFixed(2);
@@ -151,16 +156,24 @@ export default function PrintedBagasseBoxPage({ box }) {
           <div id="configure" className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm sm:p-6">
             <h2 className="mb-4 text-lg font-bold text-gray-900">Price this box</h2>
             <PrintedBagasseConfigurator
+              key={box.id}
+              lockSize
               initial={{ sizeId: box.id }}
-              onChange={(priced) => {
-                setShown((current) => {
-                  if (priced.sizeId !== box.id) return priced.box.image;
-                  if (photos.some((item) => item.src === current)) return current;
-                  return photos[0].src;
-                });
-              }}
               onSubmit={(priced) => addItem(buildPrintedBagasseQuoteLine(null, priced))}
             />
+            <div className="mt-5 border-t border-gray-100 pt-4">
+              <p className="text-sm font-semibold text-gray-900">Other printed bagasse boxes</p>
+              <ul className="mt-2 space-y-1.5">
+                {others.map((item) => (
+                  <li key={item.id}>
+                    <Link href={printedBagassePath(item)} className="text-sm text-emerald-700 hover:underline">
+                      {item.short}
+                      <span className="text-gray-500"> · {euro(item.prices[0])} at 100</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -232,7 +245,7 @@ export default function PrintedBagasseBoxPage({ box }) {
           { href: PRINTED_BAGASSE_PATH, label: 'All printed bagasse boxes', desc: 'Eight sizes and the full price table' },
           { href: '/burger-boxes-ireland', label: 'Burger Boxes Ireland', desc: 'Plain and printed hub' },
           { href: '/plain-burger-boxes-ireland', label: 'Plain Burger Boxes', desc: 'Unprinted cases' },
-          { href: '/eco-bagasse-burger-boxes', label: 'Bagasse material', desc: 'Compostable sugarcane fibre' },
+          { href: '/plain-packaging?category=Bagasse+Meal+Box', label: 'Unprinted bagasse boxes', desc: 'Same shapes, sold by the case' },
           { href: '/burger-box-printing-dublin', label: 'Dublin delivery', desc: 'Printed boxes across Dublin' },
           { href: '/burger-box-faq-ireland', label: 'Burger Box FAQ', desc: 'Pricing and materials' },
         ]}

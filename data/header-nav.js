@@ -1,9 +1,43 @@
 /**
- * Desktop header categories. Printed products only.
+ * Desktop header categories.
  * Each item is a real product page. Hovering a category lists these links.
  */
 
+import { PRINTED_BAGASSE_BOXES, PRINTED_BAGASSE_PATH, printedBagassePath } from './printed-bagasse-boxes';
+
+const printedBurgerLinks = PRINTED_BAGASSE_BOXES.map((box) => ({
+  name: box.short,
+  href: printedBagassePath(box),
+}));
+
 export const HEADER_CATEGORIES = [
+  {
+    id: 'plain',
+    name: 'Plain Packaging',
+    href: '/plain-packaging',
+    summary: 'Wholesale food packaging, cups, gloves and catering supplies',
+    match: ['/plain-packaging', '/plain-', '/hot-cups-ireland', '/gloves-ireland', '/nitrile-gloves', '/vinyl-gloves', '/refuse-sacks', '/biobox-containers'],
+    products: [
+      { name: 'All plain packaging', href: '/plain-packaging' },
+      { name: 'Bagasse meal boxes', href: '/plain-packaging?category=Bagasse+Meal+Box' },
+      { name: 'Hot cups and lids', href: '/hot-cups-ireland' },
+      { name: 'Plain hot cups', href: '/plain-hot-cups-ireland' },
+      { name: 'Plain pizza boxes', href: '/plain-pizza-boxes-ireland' },
+      { name: 'Plain burger boxes', href: '/plain-burger-boxes-ireland' },
+      { name: 'Biobox containers', href: '/biobox-containers-ireland' },
+      { name: 'Napkins and tableware', href: '/plain-napkins-tableware-ireland' },
+      { name: 'Gloves', href: '/gloves-ireland' },
+      { name: 'Refuse sacks', href: '/refuse-sacks-ireland' },
+    ],
+  },
+  {
+    id: 'printed-burgers',
+    name: 'Printed Burger Boxes',
+    href: PRINTED_BAGASSE_PATH,
+    summary: 'Printed bagasse burger and meal boxes with a CMYK logo',
+    match: ['/custom-burger-boxes'],
+    products: printedBurgerLinks,
+  },
   {
     id: 'wedding',
     name: 'Wedding',
@@ -38,14 +72,12 @@ export const HEADER_CATEGORIES = [
     id: 'boxes',
     name: 'Boxes',
     href: '/pizza-boxes-ireland',
-    summary: 'Printed food boxes and rigid gift boxes',
-    match: ['/pizza-boxes', '/custom-pizza', '/custom-cake-boxes', '/burger-boxes', '/custom-burger', '/eco-bagasse', '/luxury-magnetic'],
+    summary: 'Printed pizza, cake and luxury boxes',
+    match: ['/pizza-boxes', '/custom-pizza', '/custom-cake-boxes', '/burger-boxes', '/luxury-magnetic'],
     products: [
       { name: 'Custom pizza boxes', href: '/custom-pizza-boxes-ireland' },
       { name: 'Custom cake boxes', href: '/custom-cake-boxes-ireland' },
-      { name: 'Custom burger boxes', href: '/custom-burger-boxes-ireland' },
       { name: 'Burger boxes', href: '/burger-boxes-ireland' },
-      { name: 'Bagasse burger box', href: '/eco-bagasse-burger-boxes' },
       { name: 'Luxury magnetic closure boxes', href: '/luxury-magnetic-closure-boxes-ireland' },
     ],
   },

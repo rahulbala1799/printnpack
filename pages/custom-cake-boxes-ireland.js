@@ -106,7 +106,7 @@ const seoSections = [
   {
     title: 'Eco-Friendly Cake Box Options',
     body: 'PrintNPack also offers eco-friendly cake packaging, including recyclable boards and responsibly sourced materials. We can help you select packaging that balances sustainability, food safety, durability and visual appeal without compromising your brand presentation.',
-    link: { href: '/eco-bagasse-burger-boxes', label: 'eco-friendly food packaging' },
+    link: { href: '/plain-packaging', label: 'plain packaging' },
   },
 ];
 

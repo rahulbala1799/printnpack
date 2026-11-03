@@ -102,7 +102,7 @@ export default function Home() {
             catalogOffer('Burger Boxes Ireland', '/burger-boxes-ireland'),
             catalogOffer('Plain Burger Boxes', '/plain-burger-boxes-ireland'),
             catalogOffer('Custom Burger Boxes', '/custom-burger-boxes-ireland'),
-            catalogOffer('Bagasse Burger Boxes', '/eco-bagasse-burger-boxes'),
+            catalogOffer('Printed Bagasse Burger Boxes', '/custom-burger-boxes-ireland'),
           ]),
         },
         {
@@ -345,6 +345,8 @@ export default function Home() {
 
       <ExploreCategories />
 
+      <PlainPackagingShowcase />
+
       <WeddingShowcase />
 
       <FeaturedBannerSections />
@@ -356,9 +358,6 @@ export default function Home() {
       <CategoryGrid />
 
       <PackagingGuides />
-
-      {/* Plain Packaging Wholesale Showcase */}
-      <PlainPackagingShowcase />
     </Layout>
   );
 }

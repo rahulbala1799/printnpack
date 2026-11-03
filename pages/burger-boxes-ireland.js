@@ -12,8 +12,8 @@ const HERO_IMAGE = '/images/products/bagasse-burger-box/1.png';
 
 const burgerTypes = [
   { title: 'Plain Burger Boxes', desc: 'Wholesale bagasse and corrugated clamshell burger boxes by the case.', href: '/plain-burger-boxes-ireland', price: '0.15' },
-  { title: 'Custom Printed Burger Boxes', desc: 'Branded compostable bagasse boxes with your logo from 500 units.', href: '/custom-burger-boxes-ireland', price: '0.22' },
-  { title: 'Bagasse Burger Boxes', desc: 'Eco-friendly sugarcane fibre boxes — compostable and oil-resistant.', href: '/eco-bagasse-burger-boxes', price: '0.22' },
+  { title: 'Printed Bagasse Boxes', desc: 'Eight compostable bagasse boxes with your logo, from 100.', href: '/custom-burger-boxes-ireland', price: '0.80' },
+  { title: '6 Inch Bagasse Burger Box', desc: 'The standard printed burger box, 15 × 15 cm, from €0.80 ex VAT at 100.', href: '/custom-burger-boxes/6-inch-bagasse-burger-box', price: '0.80' },
 ];
 
 const localPages = [

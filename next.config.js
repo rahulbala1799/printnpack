@@ -81,8 +81,13 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/eco-bagasse-burger-boxes',
+        destination: '/custom-burger-boxes-ireland',
+        permanent: true,
+      },
+      {
         source: '/products/eco-bagasse-burger-boxes',
-        destination: '/eco-bagasse-burger-boxes',
+        destination: '/custom-burger-boxes-ireland',
         permanent: true,
       },
       {

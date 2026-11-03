@@ -22,7 +22,7 @@ export const PLAIN_BURGER_CONFIG = {
     {
       title: 'Bagasse Burger Boxes — Compostable & Eco-Friendly',
       body: 'Our bagasse burger boxes are made from sugarcane fibre — compostable, oil-resistant, and microwave-safe. Popular with eco-conscious operators replacing plastic and foam containers.',
-      link: { href: '/eco-bagasse-burger-boxes', label: 'bagasse burger boxes' },
+      link: { href: '/custom-burger-boxes-ireland', label: 'printed bagasse burger boxes' },
     },
     {
       title: 'Corrugated Clamshell Burger Boxes',
@@ -30,7 +30,7 @@ export const PLAIN_BURGER_CONFIG = {
     },
     {
       title: 'Plain vs Custom Printed Burger Boxes',
-      body: 'Plain boxes suit fast wholesale orders. When you want your logo on every takeaway order, custom printed bagasse burger boxes start from 500 units.',
+      body: 'Plain boxes suit fast wholesale orders. When you want your logo on every takeaway order, printed bagasse burger boxes start from 100.',
       link: { href: '/custom-burger-boxes-ireland', label: 'custom printed burger boxes with logo' },
     },
   ],
@@ -49,7 +49,7 @@ export const PLAIN_BURGER_CONFIG = {
     },
     {
       q: 'Can I upgrade to printed burger boxes later?',
-      a: 'Yes. Custom printed bagasse burger boxes with your logo start from 500 units when you are ready for branded packaging.',
+      a: 'Yes. Printed bagasse burger boxes with your logo start from 100 when you are ready for branded packaging.',
     },
     {
       q: 'Do you deliver plain burger boxes across Ireland?',
@@ -69,7 +69,7 @@ export const CUSTOM_BURGER_CONFIG = {
     'Custom printed burger boxes with your logo for Irish burger restaurants, takeaways, food trucks, and catering brands. Compostable bagasse construction, full-colour print, MOQ from 500 units — turn every takeaway order into branded advertising.',
   keywords:
     'custom burger boxes Ireland, printed burger boxes, burger boxes with logo, branded burger boxes, personalised burger boxes, bagasse burger box printing',
-  primaryCta: { href: '/eco-bagasse-burger-boxes', label: 'Get a Custom Burger Box Quote' },
+  primaryCta: { href: '/custom-burger-boxes-ireland', label: 'Price printed bagasse boxes' },
   secondaryCta: { href: '/plain-burger-boxes-ireland', label: 'Need plain stock boxes?' },
   productFilter: null,
   sections: [
@@ -80,7 +80,7 @@ export const CUSTOM_BURGER_CONFIG = {
     {
       title: 'Compostable Bagasse — Eco-Friendly Branded Packaging',
       body: 'Our printed burger boxes use bagasse (sugarcane fibre) board — compostable, oil-resistant, and microwave-safe. Show customers you care about sustainability without sacrificing branding.',
-      link: { href: '/eco-bagasse-burger-boxes', label: 'bagasse burger box details' },
+      link: { href: '/custom-burger-boxes-ireland', label: 'printed bagasse boxes' },
     },
     {
       title: 'Minimum Order and Turnaround',

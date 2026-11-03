@@ -3,7 +3,7 @@ import { PRINTED_BAGASSE_BOXES, getPrintedBagasseBox } from '../../data/printed-
 
 export default function PrintedBagasseSlugPage({ slug }) {
   const box = getPrintedBagasseBox(slug);
-  return <PrintedBagasseBoxPage box={box} />;
+  return <PrintedBagasseBoxPage key={slug} box={box} />;
 }
 
 export function getStaticPaths() {

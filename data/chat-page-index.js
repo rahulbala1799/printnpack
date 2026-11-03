@@ -43,7 +43,6 @@ export const PUBLIC_PAGE_PATHS = [
   "/llms/printed-ribbon.txt",
   "/llms/printed-ribbon.json",
   "/luxury-tissue-paper-ireland",
-  "/eco-bagasse-burger-boxes",
   "/burger-boxes-ireland",
   "/plain-burger-boxes-ireland",
   "/custom-burger-boxes-ireland",

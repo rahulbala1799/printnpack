@@ -74,7 +74,7 @@ const breadcrumbLd = {
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
     { '@type': 'ListItem', position: 2, name: 'Burger Boxes Ireland', item: `${SITE_URL}/burger-boxes-ireland` },
-    { '@type': 'ListItem', position: 3, name: 'Custom Printed Burger Boxes', item: PAGE_URL },
+    { '@type': 'ListItem', position: 3, name: 'Printed Burger Boxes', item: PAGE_URL },
   ],
 };
 
@@ -150,7 +150,7 @@ export default function CustomBurgerBoxesIreland() {
             <li>/</li>
             <li><Link href="/burger-boxes-ireland" className="hover:text-gray-700">Burger Boxes Ireland</Link></li>
             <li>/</li>
-            <li className="font-medium text-gray-800">Custom Printed Boxes</li>
+            <li className="font-medium text-gray-800">Printed Burger Boxes</li>
           </ol>
         </div>
       </nav>
@@ -162,7 +162,7 @@ export default function CustomBurgerBoxesIreland() {
               Compostable bagasse · CMYK logo
             </p>
             <h1 className="mb-4 text-3xl font-bold leading-tight text-gray-900 sm:text-4xl lg:text-5xl">
-              Custom printed burger boxes
+              Printed burger boxes
             </h1>
             <p className="mb-4 text-lg leading-relaxed text-gray-600">
               Eight bagasse boxes with your logo, printed in Ireland. Orders start at 100.
@@ -196,25 +196,31 @@ export default function CustomBurgerBoxesIreland() {
 
       <section className="bg-white py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-3 text-2xl font-bold text-gray-900 sm:text-3xl">Eight printed bagasse boxes</h2>
+          <h2 className="mb-3 text-2xl font-bold text-gray-900 sm:text-3xl">Printed burger boxes</h2>
           <p className="mb-8 max-w-3xl text-gray-600">
-            Each size has its own page with the price at every quantity. Plain, unprinted cases of the same shapes are on{' '}
-            <Link href="/plain-burger-boxes-ireland" className="font-medium text-emerald-700 hover:underline">plain burger boxes</Link>.
+            Each size has its own page, with both photos and the price at every quantity.
           </p>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {PRINTED_BAGASSE_BOXES.map((box) => (
-              <Link key={box.id} href={printedBagassePath(box)} className="group overflow-hidden rounded-2xl border border-gray-200 bg-white hover:border-emerald-300 hover:shadow-md">
-                <div className="relative aspect-square bg-emerald-50">
-                  <Image src={box.image} alt={box.name} fill className="object-cover" sizes="240px" />
-                </div>
-                <div className="p-4">
-                  <h3 className="font-bold text-gray-900 group-hover:text-emerald-700">{box.short}</h3>
-                  <p className="mt-1 text-sm text-gray-500">{box.size}</p>
-                  <p className="mt-2 text-sm font-semibold text-gray-900">{euro(box.prices[0])} at 100</p>
-                  <p className="text-xs text-gray-500">{euro(box.prices[box.prices.length - 1])} at 5,000 · ex VAT</p>
-                </div>
-              </Link>
-            ))}
+          <div className="grid gap-6 sm:grid-cols-2">
+            {PRINTED_BAGASSE_BOXES.map((box) => {
+              const shots = box.gallery?.length ? box.gallery : [{ src: box.image, alt: box.name }];
+              return (
+                <Link key={box.id} href={printedBagassePath(box)} className="group overflow-hidden rounded-2xl border border-gray-200 bg-white hover:border-emerald-300 hover:shadow-md">
+                  <div className={`grid ${shots.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                    {shots.slice(0, 2).map((shot) => (
+                      <div key={shot.src} className="relative aspect-square bg-emerald-50">
+                        <Image src={shot.src} alt={shot.alt || box.name} fill className="object-cover" sizes="(max-width: 640px) 50vw, 25vw" />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-bold text-gray-900 group-hover:text-emerald-700">{box.name}</h3>
+                    <p className="mt-1 text-sm text-gray-500">{box.size}. {box.use}.</p>
+                    <p className="mt-2 text-sm font-semibold text-gray-900">{euro(box.prices[0])} at 100 · {euro(box.prices[box.prices.length - 1])} at 5,000</p>
+                    <p className="text-xs text-gray-500">Ex VAT · {PRINTED_BAGASSE_PRINT}</p>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -307,7 +313,7 @@ export default function CustomBurgerBoxesIreland() {
         links={[
           { href: '/burger-boxes-ireland', label: 'Burger Boxes Ireland', desc: 'Plain and printed hub' },
           { href: '/plain-burger-boxes-ireland', label: 'Plain Burger Boxes', desc: 'Unprinted cases' },
-          { href: '/eco-bagasse-burger-boxes', label: 'Bagasse Burger Boxes', desc: 'Compostable material' },
+          { href: '/plain-packaging?category=Bagasse+Meal+Box', label: 'Unprinted bagasse boxes', desc: 'Same shapes, sold by the case' },
           { href: '/burger-box-faq-ireland', label: 'Burger Box FAQ', desc: 'Pricing, sizes and delivery' },
           { href: '/burger-box-printing-dublin', label: 'Burger Boxes Dublin', desc: 'Delivery across Dublin' },
           { href: '/burger-box-printing-ashbourne', label: 'Burger Boxes Ashbourne', desc: 'Local collection in Meath' },

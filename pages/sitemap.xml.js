@@ -7,6 +7,7 @@ import { HOT_CUPS_PRODUCT_IDS } from '../data/hot-cups-seo';
 import { GLOVES_PRODUCT_IDS } from '../data/gloves-seo';
 import { SITE_URL } from '../lib/site';
 import { euSitemapEntries } from '../data/eu-language-pages';
+import { PRINTED_BAGASSE_BOXES, printedBagassePath } from '../data/printed-bagasse-boxes';
 
 // ── Pizza box cluster (page-1 priority) ─────────────────────────────────────
 const PIZZA_PLAIN_PRODUCT_IDS = new Set(
@@ -82,11 +83,11 @@ const staticPages = [
   { path: '/llms/printed-ribbon.txt', priority: '0.4', changefreq: 'weekly' },
   { path: '/llms/printed-ribbon.json', priority: '0.4', changefreq: 'weekly' },
   { path: '/luxury-tissue-paper-ireland', priority: '0.92', changefreq: 'weekly' },
-  { path: '/eco-bagasse-burger-boxes',    priority: '0.85', changefreq: 'weekly' },
   // Burger box cluster
   { path: '/burger-boxes-ireland',           priority: '0.9',  changefreq: 'weekly' },
   { path: '/plain-burger-boxes-ireland',     priority: '0.88', changefreq: 'weekly' },
-  { path: '/custom-burger-boxes-ireland',    priority: '0.88', changefreq: 'weekly' },
+  { path: '/custom-burger-boxes-ireland',    priority: '0.9',  changefreq: 'weekly' },
+  ...PRINTED_BAGASSE_BOXES.map((box) => ({ path: printedBagassePath(box), priority: '0.86', changefreq: 'weekly' })),
   { path: '/burger-box-faq-ireland',         priority: '0.88', changefreq: 'monthly' },
   { path: '/burger-box-printing-ashbourne',  priority: '0.88', changefreq: 'monthly' },
   { path: '/burger-box-printing-dublin',      priority: '0.88', changefreq: 'monthly' },

@@ -4,6 +4,18 @@ import Image from 'next/image';
 
 const CATEGORIES = [
   {
+    name: 'Plain Packaging',
+    href: '/plain-packaging',
+    image: '/images/plain-packaging/100396.webp',
+    alt: 'Plain wholesale hot cups for catering',
+  },
+  {
+    name: 'Printed Burger Boxes',
+    href: '/custom-burger-boxes-ireland',
+    image: '/images/products/bagasse-burger-box/ember-burger.jpg',
+    alt: 'Printed bagasse burger box with a logo',
+  },
+  {
     name: 'Wedding',
     href: '/wedding-printing-ireland',
     image: '/images/wedding/wedding-table-stationery-napkins-ireland.jpg',

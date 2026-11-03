@@ -7,7 +7,7 @@ const QUICK_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },
   { label: 'Products', href: '/products' },
-  { label: 'Plain', href: '/plain-packaging' },
+  { label: 'Plain Packaging', href: '/plain-packaging' },
   { label: 'Wedding', href: '/wedding-printing-ireland' },
   { label: 'Services', href: '/services' },
   { label: 'Blog', href: '/blog' },
@@ -16,6 +16,7 @@ const QUICK_LINKS = [
 ];
 
 const PRODUCT_LINKS = [
+  { label: 'Printed Burger Boxes', href: '/custom-burger-boxes-ireland' },
   { label: 'Pizza Boxes', href: '/pizza-boxes-ireland' },
   { label: 'Paper Bags', href: '/paper-bags-ireland' },
   { label: 'Banners & Roll-Ups', href: '/banners-ireland' },

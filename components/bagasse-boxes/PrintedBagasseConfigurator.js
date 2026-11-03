@@ -18,6 +18,7 @@ export default function PrintedBagasseConfigurator({
   onChange,
   submitLabel = 'Add to quote',
   align = 'start',
+  lockSize = false,
 }) {
   const [values, setValues] = useState(() => normalizePrintedBagasse(initial || {}));
 
@@ -39,39 +40,41 @@ export default function PrintedBagasseConfigurator({
         if (priced) onSubmit(priced);
       }}
     >
-      <fieldset className="border-0 p-0 text-left">
-        <legend className="mb-2 text-sm font-semibold text-stone-900">Box</legend>
-        <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-4">
-          {PRINTED_BAGASSE_BOXES.map((box) => {
-            const selected = box.id === values.sizeId;
-            return (
-              <button
-                key={box.id}
-                type="button"
-                aria-pressed={selected}
-                onClick={() => set({ sizeId: box.id })}
-                className={cn(
-                  'overflow-hidden rounded-lg border text-left',
-                  selected ? 'border-stone-900 ring-2 ring-stone-900' : 'border-stone-200 hover:border-stone-400'
-                )}
-              >
-                <span className="flex h-16 items-center justify-center bg-stone-100 p-1 sm:h-20">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={box.image} alt="" className="max-h-full max-w-full object-contain" />
-                </span>
-                <span
+      {!lockSize && (
+        <fieldset className="border-0 p-0 text-left">
+          <legend className="mb-2 text-sm font-semibold text-stone-900">Box</legend>
+          <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-4">
+            {PRINTED_BAGASSE_BOXES.map((box) => {
+              const selected = box.id === values.sizeId;
+              return (
+                <button
+                  key={box.id}
+                  type="button"
+                  aria-pressed={selected}
+                  onClick={() => set({ sizeId: box.id })}
                   className={cn(
-                    'block px-1 py-1 text-center text-[11px] font-medium leading-tight',
-                    selected ? 'bg-stone-900 text-white' : 'bg-white text-stone-800'
+                    'overflow-hidden rounded-lg border text-left',
+                    selected ? 'border-stone-900 ring-2 ring-stone-900' : 'border-stone-200 hover:border-stone-400'
                   )}
                 >
-                  {box.label}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-      </fieldset>
+                  <span className="flex h-16 items-center justify-center bg-stone-100 p-1 sm:h-20">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={box.image} alt="" className="max-h-full max-w-full object-contain" />
+                  </span>
+                  <span
+                    className={cn(
+                      'block px-1 py-1 text-center text-[11px] font-medium leading-tight',
+                      selected ? 'bg-stone-900 text-white' : 'bg-white text-stone-800'
+                    )}
+                  >
+                    {box.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </fieldset>
+      )}
 
       {priced && (
         <p className={cn('text-xs text-stone-500', align === 'center' && 'text-center')}>

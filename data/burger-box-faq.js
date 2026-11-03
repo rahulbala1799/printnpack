@@ -54,7 +54,7 @@ export const BURGER_BOX_FAQS = [
     q: 'What is a bagasse burger box?',
     subtitle: 'Sugarcane fibre packaging explained',
     a: 'A bagasse burger box is made from sugarcane fibre — a renewable by-product of sugar production. Bagasse boxes are compostable, oil-resistant, microwave-safe, and a popular eco-friendly alternative to plastic and foam burger containers in Ireland.',
-    link: { href: '/eco-bagasse-burger-boxes', label: 'Bagasse burger boxes' },
+    link: { href: '/custom-burger-boxes-ireland', label: 'Printed bagasse burger boxes' },
   },
   {
     id: 'biodegradable',
@@ -140,7 +140,7 @@ export const BURGER_BOX_FAQS = [
     q: 'Do you offer weekly burger box delivery?',
     subtitle: 'Scheduled supply for busy kitchens',
     a: 'Yes. Weekly scheduled delivery is available for hospitality businesses that need a consistent supply of plain or branded burger boxes. We tailor quantities to your usage over time.',
-    link: { href: '/eco-bagasse-burger-boxes', label: 'Bagasse burger boxes' },
+    link: { href: '/custom-burger-boxes-ireland', label: 'Printed bagasse burger boxes' },
   },
   {
     id: 'eco-friendly',

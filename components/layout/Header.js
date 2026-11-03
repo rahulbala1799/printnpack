@@ -19,6 +19,7 @@ const Header = () => {
   const { openBuilder } = useQuoteCart();
   const currentCategory = activeHeaderCategory(router.asPath || '');
   const [menuValue, setMenuValue] = useState('');
+  const [openMobileCategory, setOpenMobileCategory] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -69,11 +70,7 @@ const Header = () => {
   }, [isOpen]);
 
   const menuItems = [
-    { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
-    { name: 'Products', path: '/products' },
-    { name: 'Plain', path: '/plain-packaging' },
-    { name: 'Wedding', path: '/wedding-printing-ireland' },
     { name: 'Services', path: '/services' },
     { name: 'Blog', path: '/blog' },
     { name: 'Contact', path: '/contact' },
@@ -156,15 +153,15 @@ const Header = () => {
         delayDuration={80}
         className="site-header-nav relative z-30 hidden w-full border-b border-slate-200 bg-white lg:block"
       >
-        <NavigationMenu.List className="flex w-full list-none items-stretch justify-between px-4 sm:px-6 xl:px-10">
+        <NavigationMenu.List className="flex w-full list-none items-stretch justify-between overflow-x-auto px-2 sm:px-3 xl:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {HEADER_CATEGORIES.map((category) => {
             const active = currentCategory === category.id || menuValue === category.id;
             return (
-              <NavigationMenu.Item key={category.id} value={category.id} className="flex min-w-0 flex-1">
+              <NavigationMenu.Item key={category.id} value={category.id} className="flex shrink-0">
                 <NavigationMenu.Trigger asChild>
                   <Link
                     href={category.href}
-                    className={`relative flex h-11 w-full items-center justify-center whitespace-nowrap px-1 text-[13px] font-semibold tracking-tight xl:text-[15px] ${
+                    className={`relative flex h-11 items-center justify-center whitespace-nowrap px-1 text-[12px] font-semibold tracking-tight xl:px-2 xl:text-[13px] 2xl:px-2.5 2xl:text-[15px] ${
                       active ? 'text-blue-700' : 'text-slate-800 hover:text-blue-700'
                     }`}
                     aria-current={currentCategory === category.id ? 'page' : undefined}
@@ -228,6 +225,46 @@ const Header = () => {
       >
         <nav aria-label="Menu">
           <ul className="border-t border-slate-200">
+            {HEADER_CATEGORIES.map((category) => {
+              const open = openMobileCategory === category.id;
+              return (
+                <li key={category.id} className="border-b border-slate-100">
+                  <div className="flex items-stretch">
+                    <Link
+                      href={category.href}
+                      className="flex flex-1 items-center px-5 py-4 text-[17px] font-medium text-neutral-900 active:bg-slate-50"
+                      onClick={handleMenuItemClick}
+                    >
+                      {category.name}
+                    </Link>
+                    <button
+                      type="button"
+                      className="px-4 text-neutral-400"
+                      aria-expanded={open}
+                      aria-label={`${open ? 'Hide' : 'Show'} ${category.name}`}
+                      onClick={() => setOpenMobileCategory(open ? '' : category.id)}
+                    >
+                      <FaChevronRight className={`text-[11px] transition-transform ${open ? 'rotate-90' : ''}`} aria-hidden="true" />
+                    </button>
+                  </div>
+                  {open && (
+                    <ul className="bg-slate-50 pb-2">
+                      {category.products.map((product) => (
+                        <li key={product.href}>
+                          <Link
+                            href={product.href}
+                            className="block px-8 py-2.5 text-[15px] text-slate-700 active:bg-slate-100"
+                            onClick={handleMenuItemClick}
+                          >
+                            {product.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              );
+            })}
             {menuItems.map((item) => (
               <li key={item.path}>
                 <Link

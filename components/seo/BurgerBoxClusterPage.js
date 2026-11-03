@@ -189,9 +189,9 @@ export default function BurgerBoxClusterPage({ config }) {
         title="Related burger box pages"
         links={[
           { href: HUB, label: 'Burger Boxes Ireland', desc: 'Complete burger box hub' },
-          { href: '/custom-burger-boxes-ireland', label: 'Custom Printed Burger Boxes', desc: 'Branded bagasse from 500 units' },
+          { href: '/custom-burger-boxes-ireland', label: 'Printed Bagasse Boxes', desc: 'Eight sizes with a logo, from 100' },
           { href: '/plain-burger-boxes-ireland', label: 'Plain Burger Boxes', desc: 'Wholesale bagasse & corrugated' },
-          { href: '/eco-bagasse-burger-boxes', label: 'Bagasse Burger Boxes', desc: 'Compostable eco packaging' },
+          { href: '/custom-burger-boxes/6-inch-bagasse-burger-box', label: '6 Inch Bagasse Burger Box', desc: 'Printed 15 × 15 cm box' },
           { href: '/blog/burger-boxes-ireland-guide', label: 'Burger Boxes Guide', desc: 'Plain vs printed, materials' },
           { href: '/burger-box-faq-ireland', label: 'Burger Box FAQ', desc: '20+ instant answers' },
         ].filter((link) => link.href !== `/${config.slug}`)}

@@ -3,37 +3,17 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaSearch, FaTimes } from 'react-icons/fa';
-import products from '../../data/products';
-import { getPlainProductPath } from '../../lib/plain-product-urls';
+import { searchSite } from '../../lib/site-search';
 
 function isUsableImage(src) {
   return Boolean(src) && !src.includes('css-placeholder') && !src.includes('logos/logo');
 }
 
-function printedMatches(term) {
-  return products
-    .filter((product) => product && !product.hidden && product.name)
-    .filter((product) => {
-      const haystack = [
-        product.name,
-        product.category,
-        product.description,
-        ...(product.features || []),
-        ...(product.searchAliases || []),
-      ]
-        .filter(Boolean)
-        .join(' ')
-        .toLowerCase();
-      return haystack.includes(term);
-    })
-    .map((product) => ({
-      id: `print:${product.id}`,
-      name: product.name,
-      category: product.category || 'Custom print',
-      href: product.url || `/products/${product.id}`,
-      image: isUsableImage(product.imageSrc) ? product.imageSrc : '',
-      kind: 'Custom print',
-    }));
+function withImages(results) {
+  return results.map((result) => ({
+    ...result,
+    image: isUsableImage(result.image) ? result.image : '',
+  }));
 }
 
 const SearchBar = ({ isMobile = false, onClose, className = '', variant = 'default' }) => {
@@ -61,29 +41,8 @@ const SearchBar = ({ isMobile = false, onClose, className = '', variant = 'defau
       setSearchResults([]);
       return undefined;
     }
-    let cancelled = false;
-    const printed = printedMatches(term).slice(0, 5);
-    setSearchResults(printed);
-    import('../../data/plain-products').then(({ PLAIN_PRODUCTS }) => {
-      if (cancelled) return;
-      const plain = PLAIN_PRODUCTS.filter((product) => {
-        const haystack = `${product.name} ${product.code || ''} ${product.category || ''}`.toLowerCase();
-        return haystack.includes(term);
-      })
-        .slice(0, 4)
-        .map((product) => ({
-          id: `plain:${product.id}`,
-          name: product.name,
-          category: product.category || 'Plain stock',
-          href: getPlainProductPath(product),
-          image: isUsableImage(product.imageSrc) ? product.imageSrc : '',
-          kind: 'Plain stock',
-        }));
-      setSearchResults([...printed, ...plain]);
-    }).catch(() => {});
-    return () => {
-      cancelled = true;
-    };
+    setSearchResults(withImages(searchSite(term)).slice(0, 16));
+    return undefined;
   }, [searchTerm]);
   
   const handleSearch = (e) => {

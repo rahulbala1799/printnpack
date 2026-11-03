@@ -147,8 +147,8 @@ export default function BurgerBoxLocalPage({ config }) {
           <div className="grid md:grid-cols-3 gap-6">
             {[
               { title: 'Plain Burger Boxes', desc: 'Wholesale bagasse and corrugated clamshells by the case.', href: '/plain-burger-boxes-ireland' },
-              { title: 'Custom Printed Boxes', desc: 'Branded compostable bagasse boxes with your logo from 500 units.', href: '/custom-burger-boxes-ireland' },
-              { title: 'Bagasse Burger Boxes', desc: 'Eco-friendly sugarcane fibre boxes — compostable and oil-resistant.', href: '/eco-bagasse-burger-boxes' },
+              { title: 'Printed Bagasse Boxes', desc: 'Eight compostable bagasse boxes with your logo, from 100.', href: '/custom-burger-boxes-ireland' },
+              { title: '6 Inch Bagasse Burger Box', desc: 'The standard printed burger box, 15 × 15 cm.', href: '/custom-burger-boxes/6-inch-bagasse-burger-box' },
             ].map((item) => (
               <Link key={item.title} href={item.href} className="group bg-white rounded-2xl border border-gray-200 p-6 hover:border-emerald-300 hover:shadow-lg transition-all">
                 <h3 className="text-xl font-bold text-gray-900 group-hover:text-emerald-600 mb-2">{item.title}</h3>
