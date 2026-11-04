@@ -7,6 +7,7 @@
   // Configuration
   const ANALYTICS_ENDPOINT = '/api/analytics/track';
   const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
+  const GOOGLE_ADS_LEAD_SEND_TO = 'AW-17101649834/WakQCK-pt88aEKrv2do_';
   
   // Analytics state
   let sessionId = null;
@@ -23,7 +24,7 @@
       trackPageVisit();
       setupVisibilityTracking();
       setupBeforeUnloadTracking();
-      trackPhoneClicks();
+      trackContactClicks();
       watchQuoteSubmits();
     } catch (error) {
       console.error('Analytics initialization error:', error);
@@ -173,17 +174,117 @@
     return 'other';
   }
 
-  function trackPhoneClicks() {
+  function pushDataLayer(payload) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(payload);
+  }
+
+  function adsConsentGranted() {
+    try {
+      return localStorage.getItem('pnp_ads_consent') === 'granted';
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function toE164(phone) {
+    const raw = String(phone || '').trim();
+    if (!raw) return '';
+    const digits = raw.replace(/[^\d+]/g, '');
+    if (!digits) return '';
+    if (digits.startsWith('+')) return digits;
+    if (digits.startsWith('00')) return '+' + digits.slice(2);
+    if (digits.startsWith('353')) return '+' + digits;
+    if (digits.startsWith('0')) return '+353' + digits.slice(1);
+    return '+' + digits;
+  }
+
+  function leadDetailsFromRequest(init) {
+    try {
+      const raw = init && init.body;
+      if (typeof raw !== 'string') return { lead_type: 'contact_enquiry', product_category: 'general' };
+      const parsed = JSON.parse(raw);
+      const interest = String(parsed.productInterest || parsed.productType || parsed.source || '').slice(0, 80);
+      const isQuote = /quote/i.test(interest) || Boolean(parsed.productType) || Boolean(parsed.specifications);
+      return {
+        lead_type: isQuote ? 'quote_request' : 'contact_enquiry',
+        product_category: interest || 'general',
+        email: typeof parsed.email === 'string' ? parsed.email.slice(0, 200) : '',
+        phone: toE164(parsed.phone),
+      };
+    } catch (error) {
+      return { lead_type: 'contact_enquiry', product_category: 'general' };
+    }
+  }
+
+  function fireLeadConversion(details) {
+    pushDataLayer({
+      event: 'generate_lead',
+      lead_type: details.lead_type || 'quote_request',
+      product_category: details.product_category || 'general',
+    });
+
+    if (typeof window.gtag !== 'function') return;
+
+    if (adsConsentGranted()) {
+      const userData = {};
+      if (details.email) userData.email = details.email;
+      if (details.phone) userData.phone_number = details.phone;
+      if (userData.email || userData.phone_number) {
+        window.gtag('set', 'user_data', userData);
+      }
+    }
+
+    window.gtag('event', 'conversion', { send_to: GOOGLE_ADS_LEAD_SEND_TO });
+  }
+
+  function trackContactClicks() {
     document.addEventListener('click', (event) => {
-      const link = event.target.closest('a[href^="tel:"]');
+      const link = event.target.closest('a[href]');
       if (!link) return;
 
-      trackEvent('phone_click', {
-        phoneHref: link.getAttribute('href') || 'tel:unknown',
-        linkText: (link.textContent || '').trim().slice(0, 300) || 'unknown',
-        location: inferPhoneLinkLocation(link),
-        pagePath: window.location.pathname,
-      }, { useBeacon: true });
+      const href = link.getAttribute('href') || '';
+      const location = inferPhoneLinkLocation(link);
+      const linkText = (link.textContent || '').trim().slice(0, 300) || 'unknown';
+      const pagePath = window.location.pathname;
+
+      if (href.startsWith('tel:')) {
+        trackEvent('phone_click', {
+          phoneHref: href,
+          linkText: linkText,
+          location: location,
+          pagePath: pagePath,
+        }, { useBeacon: true });
+        pushDataLayer({
+          event: 'phone_click',
+          link_url: href,
+          link_location: location,
+        });
+        return;
+      }
+
+      if (href.indexOf('wa.me/') !== -1 || href.indexOf('api.whatsapp.com') !== -1) {
+        trackEvent('whatsapp_click', {
+          phoneHref: href,
+          linkText: linkText,
+          location: location,
+          pagePath: pagePath,
+        }, { useBeacon: true });
+        pushDataLayer({
+          event: 'whatsapp_click',
+          link_url: href,
+          link_location: location,
+        });
+        return;
+      }
+
+      if (href.startsWith('mailto:')) {
+        pushDataLayer({
+          event: 'email_click',
+          link_url: href.split('?')[0],
+          link_location: location,
+        });
+      }
     }, true);
   }
   
@@ -197,10 +298,13 @@
       const init = args[1] || {};
       const url = typeof input === 'string' ? input : (input && input.url) || '';
       const method = (init.method || (input && input.method) || 'GET').toUpperCase();
+      const leadDetails = leadDetailsFromRequest(init);
       const response = originalFetch.apply(this, args);
       if (method === 'POST' && String(url).indexOf('/api/contact') !== -1) {
         response.then((res) => {
-          if (res && res.ok) trackEvent('quote_submit', {}, { useBeacon: true });
+          if (!res || !res.ok) return;
+          trackEvent('quote_submit', {}, { useBeacon: true });
+          fireLeadConversion(leadDetails);
         }).catch(() => {});
       }
       return response;
@@ -211,7 +315,7 @@
     init: initAnalytics,
     pageview: trackPageVisit,
     trackEvent: trackEvent,
-    trackPhoneClicks: trackPhoneClicks,
+    trackPhoneClicks: trackContactClicks,
   };
 
   if (document.readyState === 'loading') {

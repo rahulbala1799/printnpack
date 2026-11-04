@@ -6,22 +6,22 @@ import Script from 'next/script';
 import { QuoteCartProvider } from '../lib/quote-cart-context';
 import SiteChatWidget from '../components/chat/SiteChatWidget';
 import AgentInvite from '../components/chat/AgentInvite';
+import CookieConsent from '../components/consent/CookieConsent';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
   useEffect(() => {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      'gtm.start': new Date().getTime(),
-      event: 'gtm.js'
-    });
-  }, []);
-
-  useEffect(() => {
-    const trackRoute = () => {
+    const trackRoute = (url) => {
       if (window.printNpackAnalytics && window.printNpackAnalytics.pageview) {
         window.printNpackAnalytics.pageview();
+      }
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'page_view', {
+          page_path: url || window.location.pathname,
+          page_location: window.location.href,
+          page_title: document.title,
+        });
       }
     };
     router.events.on('routeChangeComplete', trackRoute);
@@ -41,7 +41,7 @@ function MyApp({ Component, pageProps }) {
 
       {/* Analytics Script */}
       <Script
-        src="/analytics.js?v=2"
+        src="/analytics.js?v=3"
         strategy="afterInteractive"
       />
 
@@ -55,6 +55,7 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
         <AgentInvite />
         <SiteChatWidget />
+        <CookieConsent />
       </QuoteCartProvider>
     </>
   );

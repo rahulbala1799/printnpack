@@ -74,19 +74,6 @@ const ContactPage = () => {
     productInterest: Yup.string()
   });
 
-  // Function to track conversion
-  const trackConversion = () => {
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'conversion', {'send_to': 'AW-17101649834/WakQCK-pt88aEKrv2do_'});
-    }
-  };
-
-  // Function to handle WhatsApp click
-  const handleWhatsAppClick = () => {
-    trackConversion();
-    // The link will still open normally
-  };
-
   // Setup formik
   const formik = useFormik({
     initialValues: {
@@ -118,7 +105,6 @@ const ContactPage = () => {
         // Show success message
         setFormSubmitted(true);
         trackFunnel('contact', 'success');
-        trackConversion();
         
         // Reset form
         resetForm();
@@ -213,7 +199,6 @@ const ContactPage = () => {
                 href={SITE_WHATSAPP_URL} 
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={handleWhatsAppClick}
                 className="bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-6 rounded-lg transition-colors inline-flex items-center"
               >
                 WhatsApp Us
