@@ -15,7 +15,7 @@ const napkinTypes = [
   { title: 'Personalised Napkins', desc: 'Custom printed napkins for restaurants, cafés and weddings. 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm, from 25.', href: '/custom-printed-napkins', price: '0.24', priceLabel: 'From €0.24' },
   { title: 'Cocktail Napkins', desc: 'White logo napkins for restaurants, bars and cafés. 10 × 10 cm closed, 20 × 40 cm open.', href: '/products/cocktail-napkins', priceLabel: '10 × 10 cm' },
   { title: 'Luxury Tissue Paper', desc: 'Plain acid-free colour tissue, 500 × 750 mm. 480 sheets per case, 15 colours.', href: '/luxury-tissue-paper-ireland', price: '29.99', priceLabel: '€29.99 + VAT per case' },
-  { title: 'Plain Wholesale Napkins', desc: 'Bulk white napkins without printing — economical for high-volume catering.', href: '/plain-napkins-tableware-ireland', price: '0.03' },
+  { title: 'Plain Wholesale Napkins', desc: 'Bulk white napkins without printing, sold by the case.', href: '/plain-napkins-tableware-ireland', priceLabel: 'Priced by the case' },
 ];
 
 const localPages = [

@@ -14,7 +14,7 @@ const PRODUCTS = {
   cocktail: { href: '/products/cocktail-napkins', price: null, from: null },
   printed: { href: '/custom-printed-napkins', price: null, from: null },
   linen: { href: '/custom-printed-napkins', price: '0.24', from: '€0.24' },
-  plain: { href: '/plain-napkins-tableware-ireland', price: '0.03', from: '€0.03' },
+  plain: { href: '/plain-napkins-tableware-ireland', price: null, from: null },
   wedding: { href: '/wedding-napkins-ireland', price: null, from: null },
   kraft: { href: '/wedding-kraft-napkins-ireland', price: null, from: null },
 };
@@ -225,7 +225,7 @@ const COPY = {
         {
           heading: 'Restaurants, mariages et envoi',
           paragraphs: [
-            'Les serviettes effet lin partent de 25 pièces, dès 0,24 €. Le prix dépend de la quantité et du motif. Les serviettes blanches sans impression se commandent à la caisse, dès environ 0,03 €, pour les gros volumes. Le papier de soie couleur, 500 × 750 mm, est vendu par boîte de 480 feuilles.',
+            'Les serviettes effet lin partent de 25 pièces, dès 0,24 €. Le prix dépend de la quantité et du motif. Les serviettes blanches sans impression se commandent à la caisse, au prix du carton. Le papier de soie couleur, 500 × 750 mm, est vendu par boîte de 480 feuilles.',
             'Nous imprimons en Irlande et expédions en France, en Belgique et en Suisse. Comptez le transport dans le devis, surtout pour un mariage daté : passez commande trois à quatre semaines avant. Les fiches produit sont en anglais.',
           ],
         },
@@ -235,7 +235,7 @@ const COPY = {
         { label: 'Ouverte', value: '20 × 40 cm' },
         { label: 'Effet lin', value: 'Dès 0,24 €, dès 25' },
         { label: 'Quantité', value: 'Dès 25 pièces' },
-        { label: 'Sans impression', value: 'Dès environ 0,03 € à la caisse' },
+        { label: 'Sans impression', value: 'Au prix du carton' },
         { label: 'Déjeuner / dîner', value: '33 cm et 40 cm' },
         { label: 'Expédition', value: 'France, port au devis' },
       ],
@@ -243,7 +243,7 @@ const COPY = {
         cocktail: { title: 'Serviettes cocktail', desc: 'Blanches, 10 × 10 cm fermées. Logo ou faire-part. Dès 50.' },
         printed: { title: 'Serviettes papier logo', desc: '10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 et 20 × 20 cm. Dès 25 pièces, prix sur devis.' },
         linen: { title: 'Effet lin', desc: 'Dès 0,24 €. Le prix dépend de la quantité et du motif. Dès 25 pièces.' },
-        plain: { title: 'Serviettes en gros', desc: 'Blanches sans impression, à la caisse. Dès environ 0,03 €.' },
+        plain: { title: 'Serviettes en gros', desc: 'Blanches sans impression, vendues au carton.' },
         wedding: { title: 'Serviettes de mariage', desc: 'Prénoms, date ou monogramme sur papier ou effet lin.' },
         kraft: { title: 'Kraft mariage', desc: 'Papier écru non blanchi, noms ou monogramme.' },
       },
@@ -253,7 +253,7 @@ const COPY = {
         { q: 'Quel est le prix d’une serviette avec logo ?', a: 'Les serviettes effet lin partent de 0,24 €. Le prix dépend de la quantité et du motif. Minimum 25 pièces. Le cocktail personnalisé part de 50 pièces.' },
         { q: 'Quelle taille pour un restaurant ?', a: 'Le 33 cm 2 plis couvre le café et la brasserie. Le cocktail va sous le verre. Le 40 cm va à l’hôtel, à la gastronomie et au dîner de mariage.' },
         { q: 'Peut-on imprimer un mariage ?', a: 'Oui. Prénoms, date ou monogramme, sur papier blanc, effet lin ou kraft écru. Commandez trois à quatre semaines avant la date. Le port vers le lieu en France est au devis.' },
-        { q: 'Les serviettes sans logo existent-elles ?', a: 'Oui. Serviettes blanches en gros, à la caisse, dès environ 0,03 €, pour la restauration à fort volume.' },
+        { q: 'Les serviettes sans logo existent-elles ?', a: 'Oui. Serviettes blanches en gros, vendues au carton, pour la restauration à fort volume.' },
       ],
     },
     xxl: {
@@ -458,7 +458,7 @@ const COPY = {
         {
           heading: 'Gastronomie, Hochzeit, Versand',
           paragraphs: [
-            'Servietten in Leinenoptik starten bei 25 Stück, ab 0,24 €. Der Preis hängt von Menge und Motiv ab. Weiße Servietten ohne Druck gibt es im Karton, ab etwa 0,03 €, für hohe Mengen. Farbiges Seidenpapier, 500 × 750 mm, kommt mit 480 Bogen je Karton.',
+            'Servietten in Leinenoptik starten bei 25 Stück, ab 0,24 €. Der Preis hängt von Menge und Motiv ab. Weiße Servietten ohne Druck gibt es im Karton, zum Kartonpreis. Farbiges Seidenpapier, 500 × 750 mm, kommt mit 480 Bogen je Karton.',
             'Wir drucken in Irland und liefern nach Deutschland, Österreich und in die Schweiz. Die Fracht gehört ins Angebot, besonders bei einem festen Hochzeitstermin: drei bis vier Wochen vorher bestellen. Die Produktseiten sind auf Englisch.',
           ],
         },
@@ -468,7 +468,7 @@ const COPY = {
         { label: 'Offen', value: '20 × 40 cm' },
         { label: 'Leinenoptik', value: 'Ab 0,24 €, ab 25' },
         { label: 'Menge', value: 'Ab 25 Stück' },
-        { label: 'Unbedruckt', value: 'Ab etwa 0,03 € im Karton' },
+        { label: 'Unbedruckt', value: 'Zum Kartonpreis' },
         { label: 'Lunch / Dinner', value: '33 cm und 40 cm' },
         { label: 'Versand', value: 'Deutschland, Fracht im Angebot' },
       ],
@@ -476,7 +476,7 @@ const COPY = {
         cocktail: { title: 'Cocktailservietten', desc: 'Weiß, 10 × 10 cm geschlossen. Logo oder Namen. Ab 50.' },
         printed: { title: 'Papierservietten mit Logo', desc: '10 × 10 cm Cocktail, 10 × 20, 12 × 20, 15 × 20 und 20 × 20 cm. Ab 25 Stück, Preis auf Anfrage.' },
         linen: { title: 'Leinenoptik', desc: 'Ab 0,24 €. Der Preis hängt von Menge und Motiv ab. Ab 25 Stück.' },
-        plain: { title: 'Servietten im Karton', desc: 'Weiß, ohne Druck. Ab etwa 0,03 €.' },
+        plain: { title: 'Servietten im Karton', desc: 'Weiß, ohne Druck, zum Kartonpreis.' },
         wedding: { title: 'Hochzeitsservietten', desc: 'Namen, Datum oder Monogramm auf Papier oder Airlaid.' },
         kraft: { title: 'Kraft, Hochzeit', desc: 'Ungebleichtes Papier, Namen oder Monogramm.' },
       },
@@ -486,7 +486,7 @@ const COPY = {
         { q: 'Was kostet eine Serviette mit Logo?', a: 'Servietten in Leinenoptik beginnen bei 0,24 €. Der Preis hängt von Menge und Motiv ab. Minimum 25 Stück. Personalisierte Cocktailservietten gibt es ab 50 Stück.' },
         { q: 'Welche Größe für ein Restaurant?', a: '33 cm, 2-lagig, für Café und Alltag. Cocktail unter dem Glas. 40 cm für Hotel, Fine Dining und das Hochzeitsessen.' },
         { q: 'Geht eine Hochzeit?', a: 'Ja. Namen, Datum oder Monogramm auf Weiß, Leinenoptik oder Kraft. Drei bis vier Wochen vor dem Termin bestellen. Die Fracht zur Location in Deutschland wird angeboten.' },
-        { q: 'Gibt es Servietten ohne Logo?', a: 'Ja. Weiße Großmengen im Karton, ab etwa 0,03 €, für viel Frequenz in der Gastronomie.' },
+        { q: 'Gibt es Servietten ohne Logo?', a: 'Ja. Weiße Großmengen im Karton, zum Kartonpreis, für viel Frequenz in der Gastronomie.' },
       ],
     },
     xxl: {
@@ -691,7 +691,7 @@ const COPY = {
         {
           heading: 'Restaurantes, bodas y envío',
           paragraphs: [
-            'Las servilletas efecto lino empiezan en 25 unidades, desde 0,24 €. El precio depende de la cantidad y del diseño. Las blancas sin impresión se piden por caja, desde unos 0,03 €, para mucho volumen. El papel de seda de color, 500 × 750 mm, va en cajas de 480 hojas.',
+            'Las servilletas efecto lino empiezan en 25 unidades, desde 0,24 €. El precio depende de la cantidad y del diseño. Las blancas sin impresión se piden por caja, al precio de la caja. El papel de seda de color, 500 × 750 mm, va en cajas de 480 hojas.',
             'Imprimimos en Irlanda y enviamos a España. Cuente el transporte en el presupuesto, sobre todo si la boda tiene fecha: pida con tres o cuatro semanas. Las fichas de producto están en inglés.',
           ],
         },
@@ -701,7 +701,7 @@ const COPY = {
         { label: 'Abierta', value: '20 × 40 cm' },
         { label: 'Efecto lino', value: 'Desde 0,24 €, desde 25' },
         { label: 'Cantidad', value: 'Desde 25 unidades' },
-        { label: 'Sin impresión', value: 'Desde unos 0,03 € por caja' },
+        { label: 'Sin impresión', value: 'Al precio de la caja' },
         { label: 'Lunch / cena', value: '33 cm y 40 cm' },
         { label: 'Envío', value: 'España, porte en el presupuesto' },
       ],
@@ -709,7 +709,7 @@ const COPY = {
         cocktail: { title: 'Servilletas de cóctel', desc: 'Blancas, 10 × 10 cm cerradas. Logo o nombres. Desde 50.' },
         printed: { title: 'Papel con logo', desc: 'Cóctel 10 × 10 cm, 10 × 20, 12 × 20, 15 × 20 y 20 × 20 cm. Desde 25 unidades, precio bajo presupuesto.' },
         linen: { title: 'Efecto lino', desc: 'Desde 0,24 €. El precio depende de la cantidad y del diseño. Desde 25.' },
-        plain: { title: 'Servilletas al por mayor', desc: 'Blancas sin impresión, por caja. Desde unos 0,03 €.' },
+        plain: { title: 'Servilletas al por mayor', desc: 'Blancas sin impresión, al precio de la caja.' },
         wedding: { title: 'Servilletas de boda', desc: 'Nombres, fecha o monograma en papel o efecto lino.' },
         kraft: { title: 'Kraft de boda', desc: 'Papel crudo sin blanquear, nombres o monograma.' },
       },
@@ -719,7 +719,7 @@ const COPY = {
         { q: '¿Cuánto cuesta una servilleta con logo?', a: 'El efecto lino empieza en 0,24 €. El precio depende de la cantidad y del diseño. Mínimo 25 unidades. El cóctel personalizado sale desde 50 unidades.' },
         { q: '¿Qué tamaño para un restaurante?', a: '33 cm y 2 capas para cafetería y servicio diario. Cóctel bajo el vaso. 40 cm para hotel, alta cocina y cena de boda.' },
         { q: '¿Se puede imprimir una boda?', a: 'Sí. Nombres, fecha o monograma en blanco, efecto lino o kraft. Pida con tres o cuatro semanas. El porte al lugar en España va en el presupuesto.' },
-        { q: '¿Hay servilletas sin logo?', a: 'Sí. Blancas al por mayor, por caja, desde unos 0,03 €, para hostelería de mucho volumen.' },
+        { q: '¿Hay servilletas sin logo?', a: 'Sí. Blancas al por mayor, al precio de la caja, para hostelería de mucho volumen.' },
       ],
     },
     xxl: {

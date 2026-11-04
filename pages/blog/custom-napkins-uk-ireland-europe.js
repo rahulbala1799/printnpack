@@ -510,7 +510,7 @@ export default function CustomNapkinsUkIrelandEurope() {
                   </tr>
                   <tr className="bg-white">
                     <td className="px-4 py-3 font-medium text-gray-900">Plain wholesale napkins</td>
-                    <td className="px-4 py-3 text-gray-600">€0.03 / unit</td>
+                    <td className="px-4 py-3 text-gray-600">Priced by the case</td>
                     <td className="px-4 py-3 text-gray-600">Case packs</td>
                   </tr>
                 </tbody>
