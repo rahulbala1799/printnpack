@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'nested-kraft-takeaway-boxes-ireland-sizes-buying-guide',
+    title:
+      'Nested Kraft Takeaway Boxes Ireland: Small, Medium & Large Sizes Buying Guide',
+    excerpt:
+      'How to buy plain kraft nested takeaway boxes in Ireland — Small 117×75×60 mm, Medium 144×95×60 mm and Large 224.5×95×60 mm, 6×50 case packs, and nationwide delivery from Ashbourne for takeaways, delis and cafés.',
+    date: '2026-11-04',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/120227.webp',
+    imageAlt:
+      'Nested kraft takeaway boxes Ireland — large plain kraft carton wholesale for Dublin takeaways',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'custom-hiviz-workwear-ireland-sizes-moq-buying-guide',
     title:
       'Hi-Viz Workwear Ireland: EN ISO 20471 Class 2, Colours, Sizes S–3XL & MOQ Buying Guide',
