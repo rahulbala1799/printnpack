@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'custom-hoodies-ireland-sizes-moq-buying-guide',
+    title:
+      'Custom Hoodies Ireland: Classic vs Electric, Sizes S–3XL & MOQ Buying Guide',
+    excerpt:
+      'How to buy custom hoodies in Ireland — Fruit of the Loom Classic and AWDis Electric, print or embroidery from €36, same price S–3XL, MOQ from 5, with nationwide delivery from Ashbourne for merch, clubs and winter staff wear.',
+    date: '2026-11-05',
+    readTime: '8 min read',
+    image: '/images/apparel/HOODIE MOCK UP 1.jpg',
+    imageAlt:
+      'Custom hoodies Ireland — branded Fruit of the Loom pullover for Dublin merch shops',
+    category: 'Apparel Guide',
+  },
+  {
     slug: 'nested-kraft-takeaway-boxes-ireland-sizes-buying-guide',
     title:
       'Nested Kraft Takeaway Boxes Ireland: Small, Medium & Large Sizes Buying Guide',
