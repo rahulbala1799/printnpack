@@ -508,7 +508,7 @@ export default function SiteChatWidget() {
             style={{ paddingTop: 'max(0.75rem, env(safe-area-inset-top))' }}
           >
             <div className="min-w-0">
-              <p className="text-sm font-semibold">printNpack</p>
+              <img src="/logo.png" alt="Print n Pack" className="h-6 w-auto" />
               <p className="text-xs text-slate-300">
                 {mode === 'human' ? 'You are chatting with the team' : 'Live until 12 AM · we reply fast'}
               </p>

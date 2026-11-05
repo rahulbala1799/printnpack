@@ -64,11 +64,8 @@ export default function AdminLayout({ children, title = 'Admin' }) {
       >
         {/* Logo */}
         <div className="flex items-center gap-3 px-6 py-5 border-b border-slate-700/50">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shrink-0">
-            <span className="text-white font-extrabold text-sm">P</span>
-          </div>
+          <img src="/logo.png" alt="Print n Pack" className="h-7 w-auto" />
           <div>
-            <p className="text-white font-bold text-sm leading-none">PrintNPack</p>
             <p className="text-slate-400 text-xs mt-0.5">Admin Panel</p>
           </div>
         </div>

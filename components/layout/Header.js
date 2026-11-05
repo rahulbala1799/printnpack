@@ -87,10 +87,8 @@ const Header = () => {
       {/* Main navigation */}
       <div ref={barRef} className={`bg-white border-b border-slate-200 transition-all duration-200 ${scrolled ? 'py-2' : 'py-3'}`}>
         <div className="flex w-full items-center gap-4 px-4 sm:px-6 xl:px-10">
-          <Link href="/" className="flex shrink-0 items-center">
-            <span className="text-[1.35rem] font-extrabold tracking-tight text-slate-950">
-              print<span className="text-blue-600">N</span>pack
-            </span>
+          <Link href="/" className="flex shrink-0 items-center" aria-label="Print n Pack home">
+            <img src="/logo.png" alt="Print n Pack" className="h-8 w-auto sm:h-9" />
           </Link>
 
           <div className="hidden min-w-0 flex-1 px-6 lg:flex">

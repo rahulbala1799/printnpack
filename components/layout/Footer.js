@@ -95,8 +95,8 @@ const Footer = () => {
         <div className="hidden lg:grid lg:grid-cols-4 gap-8 py-12">
           {/* Brand */}
           <div>
-            <h3 className="text-lg font-bold mb-3">
-              print<span className="text-blue-400">N</span>pack
+            <h3 className="mb-3">
+              <img src="/logo.png" alt="Print n Pack" className="h-8 w-auto" />
             </h3>
             <p className="text-sm text-slate-400 leading-relaxed mb-4">
               Ireland&apos;s trusted printing and packaging specialist. Quality products, competitive pricing, reliable delivery.
@@ -160,8 +160,8 @@ const Footer = () => {
         <div className="lg:hidden">
           {/* Brand */}
           <div className="py-5 border-b border-slate-800">
-            <h3 className="text-lg font-bold mb-1.5">
-              print<span className="text-blue-400">N</span>pack
+            <h3 className="mb-1.5">
+              <img src="/logo.png" alt="Print n Pack" className="h-8 w-auto" />
             </h3>
             <p className="text-xs text-slate-400 leading-relaxed">
               Ireland&apos;s trusted printing and packaging specialist. Quality products, competitive pricing, reliable delivery.

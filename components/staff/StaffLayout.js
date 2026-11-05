@@ -87,14 +87,8 @@ export default function StaffLayout({ children, title = 'Staff', user }) {
     <div className="staff-dashboard flex flex-col min-h-screen">
       <header className="staff-topbar">
         <div className="staff-topbar-logo">
-          <div className="staff-logo-box">
-            <svg viewBox="0 0 15 15" width="15" height="15" fill="#fff">
-              <rect x="2" y="1" width="4" height="13" rx="1.2" />
-              <rect x="2" y="1" width="9" height="4" rx="1.2" />
-              <rect x="2" y="7" width="8" height="4" rx="1.2" />
-            </svg>
-          </div>
-          <span className="staff-logo-wordmark">PrintNPack <sup>Staff</sup></span>
+          <img src="/logo.png" alt="Print n Pack" className="h-7 w-auto" />
+          <span className="staff-logo-wordmark"><sup>Staff</sup></span>
         </div>
         <div className="staff-topbar-right">
           <div className="staff-topbar-pill">
