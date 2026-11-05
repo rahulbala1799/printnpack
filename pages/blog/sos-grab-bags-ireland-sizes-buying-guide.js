@@ -15,7 +15,7 @@ const jsonLd = {
   '@type': 'Article',
   headline: 'SOS Grab Bags Ireland: Sizes, Plain vs Printed & Wholesale Buying Guide',
   description:
-    'A practical buying guide to SOS grab bags in Ireland — kraft takeaway sizes, plain case packs vs custom print from 20 bags, tiered wholesale pricing, and delivery from Ashbourne to Dublin, Cork, Galway and nationwide.',
+    'A practical buying guide to SOS grab bags in Ireland — kraft takeaway sizes, plain case packs, with printed flat-handle bags from 25, tiered wholesale pricing, and delivery from Ashbourne to Dublin, Cork, Galway and nationwide.',
   image: `${siteUrl}${HERO_IMAGE}`,
   author: { '@type': 'Organization', name: 'PrintNPack Ireland', url: siteUrl },
   publisher: {
@@ -45,7 +45,7 @@ const faqLd = {
       name: 'Where can I buy SOS grab bags wholesale in Ireland?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'PrintNPack stocks plain kraft SOS takeaway bags by the case with tiered B2B pricing on the plain paper bags Ireland hub, and custom printed SOS grab bags from 20 bags. Delivery runs from Ashbourne, Co. Meath to Dublin, Cork, Galway and nationwide.',
+        text: 'PrintNPack stocks plain kraft SOS takeaway bags by the case with tiered B2B pricing on the plain paper bags Ireland hub. Logo printing for takeaway bags starts at 25 flat-handle bags. Delivery runs from Ashbourne, Co. Meath to Dublin, Cork, Galway and nationwide.',
       },
     },
     {
@@ -61,7 +61,7 @@ const faqLd = {
       name: 'Should I buy plain or custom printed SOS bags?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Plain kraft SOS bags are best for everyday high-volume takeaway — no artwork proof and fast restock by the case. Custom printed SOS grab bags suit brand-led cafés and retailers that want a logo on every bag; printed runs start from 20 bags with a typical 10–14 business day lead time.',
+        text: 'Plain kraft SOS bags are best for everyday high-volume takeaway — no artwork proof and fast restock by the case. Cafés that want a logo on the bag order printed flat-handle bags from 25.',
       },
     },
     {
@@ -143,7 +143,7 @@ const priceRows = [
 export default function SosGrabBagsIrelandSizesBuyingGuide() {
   const title = 'SOS Grab Bags Ireland: Sizes, Plain vs Printed & Wholesale Buying Guide';
   const description =
-    'How to buy SOS grab bags in Ireland — kraft takeaway sizes, plain case packs vs custom print from 20 bags, tiered wholesale pricing, and nationwide delivery from Ashbourne.';
+    'How to buy SOS grab bags in Ireland — kraft takeaway sizes, plain case packs, with printed flat-handle bags from 25, tiered wholesale pricing, and nationwide delivery from Ashbourne.';
   const keywords =
     'SOS grab bags Ireland, kraft SOS bags wholesale Ireland, plain takeaway bags Ireland, brown paper bags Dublin, SOS bags Cork, SOS bags Galway, custom printed SOS bags Ireland, plain paper bags Ireland, takeaway bags Ashbourne, wholesale SOS bags Ireland';
 
@@ -351,10 +351,10 @@ export default function SosGrabBagsIrelandSizesBuyingGuide() {
               </ul>
             </div>
             <div className="bg-amber-50 rounded-xl p-5 border border-amber-200">
-              <p className="font-bold text-slate-900 mb-3">Custom printed SOS</p>
+              <p className="font-bold text-slate-900 mb-3">Printed flat-handle bags</p>
               <ul className="space-y-2 text-sm text-slate-700">
                 <li className="flex gap-2">
-                  <span className="text-amber-600">→</span>MOQ from 20 bags
+                  <span className="text-amber-600">→</span>Minimum 25 bags
                 </li>
                 <li className="flex gap-2">
                   <span className="text-amber-600">→</span>Printed pricing from €0.25 per unit
@@ -458,7 +458,7 @@ export default function SosGrabBagsIrelandSizesBuyingGuide() {
           </h2>
           <ol className="list-decimal pl-6 text-slate-700 space-y-2 mb-8">
             <li>List your top takeaway builds and match each to a compact, medium or tall SOS size</li>
-            <li>Choose plain kraft for everyday volume, or printed SOS from 20 bags for branding</li>
+            <li>Choose plain kraft for everyday volume, or printed flat-handle bags from 25 for a logo</li>
             <li>Confirm case pack (250 or 500) fits your weekly bag count</li>
             <li>Order plain cases on the paper bags hub — watch the volume tiers</li>
             <li>Take nationwide delivery or collect from Ashbourne, Co. Meath</li>
@@ -467,8 +467,7 @@ export default function SosGrabBagsIrelandSizesBuyingGuide() {
           <div className="bg-slate-900 rounded-xl p-6 mb-8 text-white not-prose">
             <p className="font-semibold mb-1">Ready to restock SOS grab bags?</p>
             <p className="text-slate-400 text-sm mb-4">
-              Plain kraft takeaway bags by the case with tiered pricing — plus custom printed SOS from
-              20 bags — delivered across Ireland.
+              Plain kraft takeaway bags by the case with tiered pricing. Logo bags are printed flat-handle bags from 25, delivered across Ireland.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
@@ -501,7 +500,7 @@ export default function SosGrabBagsIrelandSizesBuyingGuide() {
               },
               {
                 q: 'Where can I buy SOS grab bags wholesale in Ireland?',
-                a: 'PrintNPack stocks plain kraft SOS takeaway bags by the case with tiered B2B pricing on the plain paper bags Ireland hub, and custom printed SOS grab bags from 20 bags. Delivery runs from Ashbourne, Co. Meath to Dublin, Cork, Galway and nationwide.',
+                a: 'PrintNPack stocks plain kraft SOS takeaway bags by the case with tiered B2B pricing on the plain paper bags Ireland hub. Logo printing for takeaway bags starts at 25 flat-handle bags. Delivery runs from Ashbourne, Co. Meath to Dublin, Cork, Galway and nationwide.',
               },
               {
                 q: 'What SOS bag sizes are available?',
@@ -509,7 +508,7 @@ export default function SosGrabBagsIrelandSizesBuyingGuide() {
               },
               {
                 q: 'Should I buy plain or custom printed SOS bags?',
-                a: 'Plain kraft SOS bags are best for everyday high-volume takeaway — no artwork proof and fast restock by the case. Custom printed SOS grab bags suit brand-led cafés and retailers that want a logo on every bag; printed runs start from 20 bags with a typical 10–14 business day lead time.',
+                a: 'Plain kraft SOS bags are best for everyday high-volume takeaway — no artwork proof and fast restock by the case. Cafés that want a logo on the bag order printed flat-handle bags from 25.',
               },
               {
                 q: 'Do you deliver SOS bags to Dublin, Cork and Galway?',

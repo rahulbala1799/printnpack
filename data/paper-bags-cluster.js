@@ -39,7 +39,7 @@ export const PLAIN_PAPER_BAGS_CONFIG = {
     },
     {
       title: 'Upgrade to Printed Bags with Logo',
-      body: 'When you are ready for branded packaging, custom printed paper bags with your logo start from 20 bags on flat handle and twisted handle styles.',
+      body: 'When you are ready for branded packaging, brown flat-handle bags start from 25. Twisted-handle bags are quoted from their own page.',
       link: { href: '/paper-bags-ireland', label: 'branded paper bags' },
     },
   ],
@@ -58,7 +58,7 @@ export const PLAIN_PAPER_BAGS_CONFIG = {
     },
     {
       q: 'Can I upgrade to printed paper bags with logo?',
-      a: 'Yes. Custom printed flat handle and twisted handle paper bags start from 20 bags with full-colour logo print.',
+      a: 'Yes. Custom printed flat-handle paper bags start from 25 bags. Twisted-handle bags are quoted from their own page.',
     },
     {
       q: 'Do you deliver plain paper bags to Dublin?',
@@ -75,7 +75,7 @@ export const WHOLESALE_PAPER_BAGS_CONFIG = {
   h1: 'Wholesale Paper Bags Ireland for Retail, Food and Events',
   heroLabel: 'Bulk supply · tiered case pricing',
   intro:
-    'Wholesale paper bags for Irish retailers, café groups, takeaways and event caterers who need reliable bulk supply. Order plain kraft cases online with tiered pricing, or plan custom printed runs from 20 bags on flat handle and twisted handle carrier bags.',
+    'Wholesale paper bags for Irish retailers, café groups, takeaways and event caterers who need reliable bulk supply. Order plain kraft cases online with tiered pricing, or printed flat-handle bags from 25.',
   keywords:
     'wholesale paper bags, paper bags wholesale Ireland, bulk paper bags, paper carrier bags wholesale, 3000 printed paper bags',
   primaryCta: { href: '/plain-packaging?category=SOS+Bags', label: 'Request Bulk Pricing' },
@@ -88,7 +88,7 @@ export const WHOLESALE_PAPER_BAGS_CONFIG = {
     },
     {
       title: 'Wholesale Printed Paper Bags',
-      body: 'Custom printed paper carrier bags with your logo start from 20 bags. Higher volumes such as 3,000+ bags reduce the per-unit cost for branded retail and takeaway packaging.',
+      body: 'Printed flat-handle bags with your logo start from 25. Higher volumes reduce the per-bag cost.',
       link: { href: '/printed-flat-handle-bags-ireland', label: 'printed flat handle bags' },
     },
     {
@@ -103,11 +103,11 @@ export const WHOLESALE_PAPER_BAGS_CONFIG = {
   faqs: [
     {
       q: 'Do you offer wholesale paper bags in Ireland?',
-      a: 'Yes. PrintNPack supplies wholesale paper bags in case quantities with tiered pricing, plus custom printed bulk orders from 20 bags.',
+      a: 'Yes. PrintNPack supplies wholesale paper bags in case quantities with tiered pricing, plus printed flat-handle bags from 25.',
     },
     {
       q: 'What is the minimum for printed wholesale paper bags?',
-      a: 'Custom printed flat handle and twisted handle paper bags start from 20 bags. Larger runs of 3,000+ bags typically reduce the per-unit price.',
+      a: 'Printed flat-handle paper bags start from 25. Larger runs reduce the price per bag.',
     },
     {
       q: 'Can I order both plain and printed wholesale bags?',
@@ -131,11 +131,11 @@ export const HUB_FAQS = [
   },
   {
     q: 'Can I get paper bags printed with my logo?',
-    a: 'Yes. Custom printed paper bags with your logo are available on flat handle and twisted handle styles from 20 bags.',
+    a: 'Yes. Printed flat-handle bags with your logo start from 25. Twisted-handle bags are quoted from their own page.',
   },
   {
     q: 'What is the minimum order for printed paper bags?',
-    a: 'Printed paper bags usually start from 20 bags. For smaller stock orders, plain paper bags are available by the case online.',
+    a: 'Printed flat-handle bags start from 25. For smaller stock orders, plain paper bags are available by the case online.',
   },
   {
     q: 'What is the difference between flat handle and twisted handle paper bags?',
@@ -143,7 +143,7 @@ export const HUB_FAQS = [
   },
   {
     q: 'Do you sell branded paper bags?',
-    a: 'Yes. Branded paper bags with your logo are available as printed flat handle and twisted handle carrier bags from 20 bags, plus luxury die-cut bags for premium brands. Plain kraft bags are available by the case if you do not need print yet.',
+    a: 'Printed flat-handle bags start from 25. Luxury rope-handle bags start from 250. Plain kraft bags are available by the case if you do not need print yet.',
   },
   {
     q: 'Do you supply retail paper bags and small paper bags?',

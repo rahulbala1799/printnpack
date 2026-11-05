@@ -367,7 +367,7 @@ export default function CustomNapkinsUkIrelandEurope() {
               <li>Full-colour artwork for openings, festivals and seasonal menus</li>
             </ul>
             <p className="text-gray-600 leading-relaxed mt-4">
-              Minimum order is typically 1,000. Many venues keep{' '}
+              The minimum order is 25 napkins. Many venues keep{' '}
               <Link href="/plain-napkins-tableware-ireland" className="text-amber-600 hover:underline">
                 plain wholesale napkins
               </Link>

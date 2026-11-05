@@ -8,13 +8,13 @@ export default function PaperBagsPromo() {
         <Link href="/printed-flat-handle-bags-ireland" className="text-blue-600 hover:underline font-medium">
           custom printed flat handle paper bags
         </Link>
-        {' '}with your logo from 20 bags.{' '}
+        {' '}with your logo from 25 bags.{' '}
         <Link href="/blog/paper-bags-with-logo-ireland" className="text-blue-600 hover:underline font-medium">
           Compare bag styles
         </Link>
         {' '}or{' '}
-        <Link href="/quote" className="text-blue-600 hover:underline font-medium">
-          get a free quote →
+        <Link href="/printed-flat-handle-bags-ireland" className="text-blue-600 hover:underline font-medium">
+          open the bag quote →
         </Link>
       </p>
     </div>

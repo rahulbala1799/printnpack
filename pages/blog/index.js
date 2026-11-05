@@ -502,7 +502,7 @@ const posts = [
     slug: 'flat-handle-paper-bags-ireland-sizes-buying-guide',
     title: 'Flat Handle Paper Bags Ireland: Sizes, MOQ & Café Buying Guide',
     excerpt:
-      'How to buy flat handle paper bags in Ireland — Small, Medium and Large sizes, 20-bag minimum, grease-proof lining, digital CMYK branding, and nationwide delivery from Ashbourne.',
+      'How to buy flat handle paper bags in Ireland — Small, Medium, Large and XL sizes, 25-bag minimum, grease-proof lining, digital CMYK branding, and nationwide delivery from Ashbourne.',
     date: '2026-09-25',
     readTime: '8 min read',
     image: '/images/products/flat-handle-bags/1.png',
@@ -622,7 +622,7 @@ const posts = [
     slug: 'sos-grab-bags-ireland-sizes-buying-guide',
     title: 'SOS Grab Bags Ireland: Sizes, Plain vs Printed & Wholesale Buying Guide',
     excerpt:
-      'How to buy SOS grab bags in Ireland — kraft takeaway sizes, plain case packs vs custom print from 20 bags, tiered wholesale pricing, and nationwide delivery from Ashbourne.',
+      'How to buy SOS grab bags in Ireland — kraft takeaway sizes, plain case packs, tiered wholesale pricing, and nationwide delivery from Ashbourne.',
     date: '2026-09-16',
     readTime: '8 min read',
     image: '/images/products/sos-bags/1.png',
@@ -633,7 +633,7 @@ const posts = [
     slug: 'kerala-cafe-printed-paper-bags-dublin',
     title: 'Kerala Cafe Dublin: How 1,000 Printed Paper Bags Were Enough for Branding',
     excerpt:
-      'PrintNPack printed 1,000 branded white paper bags for Kerala Cafe in Coolmine, Dublin — logo, Instagram QR and contact details. Custom paper bags now start from 20.',
+      'PrintNPack printed 1,000 branded white paper bags for Kerala Cafe in Coolmine, Dublin — logo, Instagram QR and contact details. Flat-handle bags start from 25.',
     date: '2026-09-15',
     readTime: '6 min read',
     image: '/images/blog/kerala-cafe/kerala-cafe-printed-paper-bag-dublin.jpg',

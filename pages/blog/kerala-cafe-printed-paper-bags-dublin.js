@@ -37,7 +37,7 @@ const faqLd = {
       name: 'Can I order only 1,000 printed paper bags in Ireland?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. PrintNPack prints custom paper bags from 20 bags, so a 1,000-bag run is a practical branding quantity for independent cafés and restaurants. Kerala Cafe in Coolmine, Dublin ordered 1,000 branded white paper bags for takeaway and retail use.',
+        text: 'Yes. PrintNPack prints flat-handle paper bags from 25, so a 1,000-bag run is a practical branding quantity for independent cafés and restaurants. Kerala Cafe in Coolmine, Dublin ordered 1,000 branded white paper bags for takeaway and retail use.',
       },
     },
     {
@@ -69,7 +69,7 @@ const faqLd = {
       name: 'How long do custom printed paper bags take?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Production is typically 10–14 business days after artwork approval. Send your logo, bag style, quantity and delivery county for a quote. Printed flat handle and twisted handle bags start from 20 bags.',
+        text: 'Production is typically 10–14 business days after artwork approval. Send your logo, bag style, quantity and delivery county for a quote. Printed flat-handle bags start from 25.',
       },
     },
   ],
@@ -150,7 +150,7 @@ export default function KeralaCafePrintedPaperBagsDublin() {
           <Link href="/paper-bags-ireland" className="text-emerald-700 hover:underline font-semibold">
             branded paper bags
           </Link>{' '}
-          from 20 bags.
+          from 25 flat-handle bags.
         </p>
 
         <div className="relative rounded-2xl overflow-hidden mb-8 border border-slate-100 bg-[#efeae3]">
@@ -315,7 +315,7 @@ export default function KeralaCafePrintedPaperBagsDublin() {
             <Link href="/printed-flat-handle-bags-ireland" className="text-blue-600 hover:underline font-medium">
               printed flat handle bags
             </Link>{' '}
-            — practical for food and pastries, from 20 bags, kraft or white. Boutiques and gift retail
+            — practical for food and pastries, from 25 bags, in brown kraft. Boutiques and gift retail
             often prefer{' '}
             <Link href="/twisted-handle-paper-bags-ireland" className="text-blue-600 hover:underline font-medium">
               twisted handle bags
@@ -330,7 +330,7 @@ export default function KeralaCafePrintedPaperBagsDublin() {
           <div className="bg-slate-900 rounded-xl p-6 mb-8 text-white not-prose">
             <p className="font-semibold mb-1">Want branded bags like Kerala Cafe?</p>
             <p className="text-slate-400 text-sm mb-4">
-              Custom printed paper bags from 20 bags — 1,000 is a typical café branding run. We
+              Custom printed flat-handle bags from 25 — 1,000 is a typical café branding run. We
               deliver across Dublin and all of Ireland from Ashbourne.
             </p>
             <div className="flex flex-wrap gap-3">
@@ -360,7 +360,7 @@ export default function KeralaCafePrintedPaperBagsDublin() {
             {[
               {
                 q: 'Can I order only 1,000 printed paper bags in Ireland?',
-                a: 'Yes. PrintNPack prints custom paper bags from 20 bags, so a 1,000-bag run is a practical branding quantity for independent cafés. That is exactly what we produced for Kerala Cafe in Coolmine.',
+                a: 'Yes. PrintNPack prints flat-handle paper bags from 25, so a 1,000-bag run is a practical branding quantity for independent cafés. That is exactly what we produced for Kerala Cafe in Coolmine.',
               },
               {
                 q: 'What did PrintNPack print for Kerala Cafe?',

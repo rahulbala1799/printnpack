@@ -414,7 +414,7 @@ export default function KraftCarriersIrelandSizesBuyingGuide() {
               <Link href="/blog/flat-handle-paper-bags-ireland-sizes-buying-guide" className="text-blue-600 hover:underline">
                 Flat handle paper bags
               </Link>{' '}
-              when you want digital CMYK branding from 20 bags
+              when you want digital CMYK branding from 25 bags
             </li>
             <li>
               <Link href="/blog/coffee-cups-ireland-guide" className="text-blue-600 hover:underline">
