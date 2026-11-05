@@ -7,6 +7,18 @@ class MyDocument extends Document {
     return (
     <Html lang={lang}>
       <Head>
+        {/* ChatGPT Ads measurement pixel. One setup script for every page. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              !function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");
+              try {
+                if (localStorage.getItem('pnp_ads_consent') === 'denied') oaiq('consent', false);
+              } catch (e) {}
+              oaiq("init",{pixelId:"8cML6J1g5nP9fNTQxK8Aom",debug:true});
+            `
+          }}
+        />
         {/* Consent Mode v2 must run before Google Tag Manager and the Google tag. */}
         <script
           dangerouslySetInnerHTML={{

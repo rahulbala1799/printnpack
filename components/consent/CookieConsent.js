@@ -3,13 +3,17 @@ import { useEffect, useState } from 'react';
 const STORAGE_KEY = 'pnp_ads_consent';
 
 function applyConsent(value) {
-  if (typeof window.gtag !== 'function') return;
-  window.gtag('consent', 'update', {
-    ad_storage: value,
-    ad_user_data: value,
-    ad_personalization: value,
-    analytics_storage: value,
-  });
+  if (typeof window.gtag === 'function') {
+    window.gtag('consent', 'update', {
+      ad_storage: value,
+      ad_user_data: value,
+      ad_personalization: value,
+      analytics_storage: value,
+    });
+  }
+  if (typeof window.oaiq === 'function') {
+    window.oaiq('consent', value === 'granted');
+  }
 }
 
 export default function CookieConsent() {

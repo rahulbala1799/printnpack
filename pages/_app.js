@@ -12,6 +12,19 @@ function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
   useEffect(() => {
+    const measureChatGptPage = (url) => {
+      if (typeof window.oaiq !== 'function') return;
+      const path = url || window.location.pathname;
+      window.oaiq('measure', 'page_viewed', {
+        type: 'contents',
+        contents: [{
+          id: path,
+          name: document.title || path,
+          content_type: 'page',
+        }],
+      });
+    };
+
     const trackRoute = (url) => {
       if (window.printNpackAnalytics && window.printNpackAnalytics.pageview) {
         window.printNpackAnalytics.pageview();
@@ -23,7 +36,9 @@ function MyApp({ Component, pageProps }) {
           page_title: document.title,
         });
       }
+      measureChatGptPage(url);
     };
+    measureChatGptPage(window.location.pathname);
     router.events.on('routeChangeComplete', trackRoute);
     return () => router.events.off('routeChangeComplete', trackRoute);
   }, [router.events]);
@@ -43,7 +58,7 @@ function MyApp({ Component, pageProps }) {
 
       {/* Analytics Script */}
       <Script
-        src="/analytics.js?v=3"
+        src="/analytics.js?v=4"
         strategy="afterInteractive"
       />
 

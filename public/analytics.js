@@ -217,12 +217,38 @@
     }
   }
 
+  function chatGptLeadAlreadySent() {
+    try {
+      return sessionStorage.getItem('pnp_oaiq_lead') === '1';
+    } catch (error) {
+      return false;
+    }
+  }
+
+  // One lead per browser session, whichever channel happens first.
+  function fireChatGptLead() {
+    if (typeof window.oaiq !== 'function') return;
+    if (shouldSkip(window.location.pathname)) return;
+    try {
+      if (localStorage.getItem('pnp_ads_consent') === 'denied') return;
+    } catch (error) {}
+    if (chatGptLeadAlreadySent()) return;
+    try {
+      sessionStorage.setItem('pnp_oaiq_lead', '1');
+    } catch (error) {}
+    window.oaiq('measure', 'lead_created', { type: 'customer_action' }, {
+      event_id: 'lead_' + (sessionId || 'anon'),
+    });
+  }
+
   function fireLeadConversion(details) {
     pushDataLayer({
       event: 'generate_lead',
       lead_type: details.lead_type || 'quote_request',
       product_category: details.product_category || 'general',
     });
+
+    fireChatGptLead();
 
     if (typeof window.gtag !== 'function') return;
 
@@ -260,6 +286,7 @@
           link_url: href,
           link_location: location,
         });
+        fireChatGptLead();
         return;
       }
 
@@ -275,6 +302,7 @@
           link_url: href,
           link_location: location,
         });
+        fireChatGptLead();
         return;
       }
 
@@ -305,6 +333,12 @@
           if (!res || !res.ok) return;
           trackEvent('quote_submit', {}, { useBeacon: true });
           fireLeadConversion(leadDetails);
+        }).catch(() => {});
+      }
+      if (method === 'POST' && /\/api\/chat(\/|$|\?)/.test(String(url))) {
+        response.then((res) => {
+          if (!res || !res.ok) return;
+          fireChatGptLead();
         }).catch(() => {});
       }
       return response;
