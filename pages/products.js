@@ -247,7 +247,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'What is the minimum order quantity?',
-    a: 'Brown flat-handle paper bags start from 25. Luxury rope-handle bags start from 250. Printed napkins start from 25. Pizza boxes start from 500. Banners and boards can be ordered as single pieces. Other products use the minimum shown on their quote.',
+    a: 'Brown flat-handle paper bags start from 25. Luxury rope-handle bags start from 250. Premium custom printed airlaid napkins are available from 25 pieces, with quantity discounts for larger orders. Pizza boxes start from 500. Banners and boards can be ordered as single pieces. Other products use the minimum shown on their quote.',
   },
   {
     q: 'How fast is delivery across Ireland?',
@@ -502,7 +502,7 @@ const ProductsPage = ({ initialGroup, initialCategory, initialProducts, catalogP
             our team handles design, full-colour print and delivery from a single supplier.
           </p>
           <p className="text-gray-600 max-w-3xl leading-relaxed">
-            Brown flat-handle paper bags start from 25 and printed napkins start from 25. Pizza boxes start from 500, with production usually 5–7 days, and we also
+            Brown flat-handle paper bags start from 25. Premium custom printed airlaid napkins are available from 25 pieces, with quantity discounts for larger orders. Pizza boxes start from 500, with production usually 5–7 days, and we also
             stock <Link href="/plain-packaging" className="text-blue-600 hover:underline font-medium">plain packaging</Link> for
             businesses that need volume pricing without artwork. For general business printing — posters,
             stickers, certificates and rubber stamps — see our{' '}
