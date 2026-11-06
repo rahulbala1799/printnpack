@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'kids-meal-boxes-animals-ireland-buying-guide',
+    title: 'Kids Meal Boxes Ireland: Animals Range Wholesale Buying Guide',
+    excerpt:
+      'How to buy Animals kids meal boxes in Ireland — 400 per case, themed children’s takeaway cartons, plain wholesale vs biobox and nested kraft, and nationwide delivery from Ashbourne for family restaurants and takeaways.',
+    date: '2026-11-06',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/12066516.webp',
+    imageAlt:
+      'Kids meal boxes Ireland — Animals range carton wholesale for Dublin family takeaways',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'custom-hoodies-ireland-sizes-moq-buying-guide',
     title:
       'Custom Hoodies Ireland: Classic vs Electric, Sizes S–3XL & MOQ Buying Guide',
