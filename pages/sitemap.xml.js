@@ -188,6 +188,7 @@ const staticPages = [
   { path: '/services/posters',  priority: '0.8', changefreq: 'monthly' },
   { path: '/services/vinyls',   priority: '0.8', changefreq: 'monthly' },
   { path: '/blog',              priority: '0.8', changefreq: 'weekly'  },
+  { path: '/blog/custom-sportswear-ireland-sizes-moq-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/kids-meal-boxes-animals-ireland-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/custom-hoodies-ireland-sizes-moq-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/nested-kraft-takeaway-boxes-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
