@@ -6,6 +6,20 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'custom-sportswear-ireland-sizes-moq-buying-guide',
+    title:
+      'Custom Sportswear Ireland: AWDis Cool T Sizes S–3XL & MOQ Buying Guide',
+    excerpt:
+      'How to buy custom sportswear in Ireland — AWDis Cool T moisture-wicking kits, nine stock colours, print or embroidery from €16.50, same price S–3XL, MOQ from 5, with nationwide delivery from Ashbourne for GAA, soccer, running clubs and gyms.',
+    date: '2026-11-07',
+    readTime: '8 min read',
+    image:
+      '/images/apparel/custom-printed-sportswear-ireland-dublin-running-club.jpg',
+    imageAlt:
+      'Custom sportswear Ireland — printed AWDis Cool T for Dublin running clubs',
+    category: 'Apparel Guide',
+  },
+  {
     slug: 'kids-meal-boxes-animals-ireland-buying-guide',
     title: 'Kids Meal Boxes Ireland: Animals Range Wholesale Buying Guide',
     excerpt:
