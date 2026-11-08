@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'mg-kraft-food-bags-ireland-sizes-buying-guide',
+    title:
+      'MG Kraft Food Bags Ireland: 2lb 7×9 & 10×12 Sizes Wholesale Buying Guide',
+    excerpt:
+      'How to buy plain MG kraft food bags in Ireland — 2lb 7×9 and 10×12 37gsm sizes, 1,000-bag case packs, tiered wholesale pricing, and nationwide delivery from Ashbourne for bakeries, delis and light retail.',
+    date: '2026-11-08',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/20001.webp',
+    imageAlt:
+      'MG kraft food bags Ireland — 2lb 7×9 plain kraft bags wholesale for Dublin bakeries',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'custom-sportswear-ireland-sizes-moq-buying-guide',
     title:
       'Custom Sportswear Ireland: AWDis Cool T Sizes S–3XL & MOQ Buying Guide',
