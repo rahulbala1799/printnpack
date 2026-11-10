@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'custom-sweatshirts-ireland-sizes-moq-buying-guide',
+    title:
+      'Custom Sweatshirts Ireland: Crew Neck, 17 Colours, Sizes S–3XL & MOQ Buying Guide',
+    excerpt:
+      'How to buy custom sweatshirts in Ireland — Fruit of the Loom Set-in Sweats crew neck, 17 stock colours, print or embroidery from €36, same price S–3XL, MOQ from 5, with nationwide delivery from Ashbourne for staff uniforms, merch and clubs.',
+    date: '2026-11-10',
+    readTime: '8 min read',
+    image: '/images/apparel/HOODIE MOCK UP 1.jpg',
+    imageAlt:
+      'Custom sweatshirts Ireland — branded Fruit of the Loom crew neck for Dublin staff uniforms',
+    category: 'Apparel Guide',
+  },
+  {
     slug: 'mg-kraft-food-bags-ireland-sizes-buying-guide',
     title:
       'MG Kraft Food Bags Ireland: 2lb 7×9 & 10×12 Sizes Wholesale Buying Guide',
