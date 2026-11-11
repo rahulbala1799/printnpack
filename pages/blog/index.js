@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'ice-cream-cups-ireland-sizes-buying-guide',
+    title:
+      'Ice Cream Cups Ireland: 4–12oz Chill, Mooch & Pastels Wholesale Buying Guide',
+    excerpt:
+      'How to buy plain ice cream cups in Ireland — Chill 4oz to 12oz, Mooch 8oz and 12oz, mix pastels and Swirly 8oz, case packs, tiered wholesale pricing, and nationwide delivery from Ashbourne for gelato bars, soft-serve counters and cafés.',
+    date: '2026-11-11',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/109551.webp',
+    imageAlt:
+      'Ice cream cups Ireland — 8oz Chill plain cups wholesale for Dublin gelato bars',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'custom-sweatshirts-ireland-sizes-moq-buying-guide',
     title:
       'Custom Sweatshirts Ireland: Crew Neck, 17 Colours, Sizes S–3XL & MOQ Buying Guide',
