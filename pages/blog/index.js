@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'custom-printed-tshirts-ireland-sizes-moq-buying-guide',
+    title:
+      'Custom Printed T-Shirts Ireland: Super Premium, 13 Colours, Sizes S–3XL & MOQ Buying Guide',
+    excerpt:
+      'How to buy custom printed t-shirts in Ireland — Fruit of the Loom Super Premium, 13 stock colours, screen or digital print from €15, same price S–3XL, MOQ from 5, with nationwide delivery from Ashbourne for events, staff uniforms, GAA clubs and giveaways.',
+    date: '2026-11-12',
+    readTime: '8 min read',
+    image: '/images/apparel/TSHIRT MOCK UP 1.jpg',
+    imageAlt:
+      'Custom printed t-shirts Ireland — branded Fruit of the Loom Super Premium for Dublin events',
+    category: 'Apparel Guide',
+  },
+  {
     slug: 'ice-cream-cups-ireland-sizes-buying-guide',
     title:
       'Ice Cream Cups Ireland: 4–12oz Chill, Mooch & Pastels Wholesale Buying Guide',
