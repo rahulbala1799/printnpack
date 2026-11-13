@@ -14,27 +14,42 @@ import {
 import { cn } from '../../lib/cn';
 import { useQuoteCart } from '../../lib/quote-cart-context';
 
-export default function PrintedNapkinConfigurator() {
+export default function PrintedNapkinConfigurator({
+  productId = 'premium-linen-feel-napkins',
+  eyebrow = 'Napkin printing',
+  heading = 'Custom printed napkins',
+  lead = 'Custom printed napkins with your logo. We print them in Ireland and ship across Ireland and Europe. Choose 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 or 20 × 20 cm, from 25 napkins, full colour or 1 colour. The napkins are linen-feel airlaid. 500 napkins are €240 ex VAT for 10 × 20 cm and larger, or €260 ex VAT for the 10 × 10 cm cocktail size. Usual print time is 3 to 5 working days after the artwork proof is approved.',
+  images = PRINTED_NAPKIN_IMAGES,
+  imageIndex: imageIndexProp,
+  onImageIndexChange,
+}) {
   const { addItem, openBuilder } = useQuoteCart();
   const [sizeId, setSizeId] = useState(PRINTED_NAPKIN_SIZES[0].id);
   const [print, setPrint] = useState(PRINTED_NAPKIN_PRINT[0]);
   const [qty, setQty] = useState(PRINTED_NAPKIN_MIN);
-  const [imageIndex, setImageIndex] = useState(0);
+  const [internalImageIndex, setInternalImageIndex] = useState(0);
   const [added, setAdded] = useState(false);
+  const imageIndex = imageIndexProp ?? internalImageIndex;
+  const setImageIndex = (index) => {
+    if (onImageIndexChange) onImageIndexChange(index);
+    else setInternalImageIndex(index);
+  };
 
   const size = PRINTED_NAPKIN_SIZES.find((item) => item.id === sizeId) || PRINTED_NAPKIN_SIZES[0];
   const quantity = Math.max(PRINTED_NAPKIN_MIN, Number(qty) || PRINTED_NAPKIN_MIN);
-  const image = PRINTED_NAPKIN_IMAGES[imageIndex];
+  const image = images[imageIndex] || images[0];
   const unitPrice = getNapkinUnitPrice(size.id, quantity);
   const lineTotal = getNapkinLineTotal(size.id, quantity);
 
   const addToQuote = () => {
-    const catalogItem = getQuoteCatalogItem('premium-linen-feel-napkins');
+    const catalogItem = getQuoteCatalogItem(productId);
     if (!catalogItem) return;
     addItem(buildCatalogQuoteLine(catalogItem, {
       sizePreset: size.chip,
       print,
       qty: quantity,
+      design: image.name || '',
+      image: image.web,
     }));
     setAdded(true);
   };
@@ -47,7 +62,7 @@ export default function PrintedNapkinConfigurator() {
           <img src={image.web} alt={image.alt} width={800} height={800} className="absolute inset-0 h-full w-full object-contain" />
         </div>
         <div className="mt-3 flex gap-2">
-          {PRINTED_NAPKIN_IMAGES.map((item, index) => (
+          {images.map((item, index) => (
             <button
               key={item.web}
               type="button"
@@ -68,12 +83,10 @@ export default function PrintedNapkinConfigurator() {
       </div>
 
       <div>
-        <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-blue-600">Napkin printing</p>
-        <h1 className="mb-3 text-2xl font-bold text-slate-900 sm:text-3xl">Custom printed napkins</h1>
+        <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-blue-600">{eyebrow}</p>
+        <h1 className="mb-3 text-2xl font-bold text-slate-900 sm:text-3xl">{heading}</h1>
         <p className="mb-2 text-2xl font-bold text-slate-900">From €{LINEN_NAPKIN_FROM}</p>
-        <p className="mb-6 leading-relaxed text-slate-600">
-          Custom printed napkins with your logo. We print them in Ireland and ship across Ireland and Europe. Choose 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 or 20 × 20 cm, from {PRINTED_NAPKIN_MIN} napkins, full colour or 1 colour. The napkins are linen-feel airlaid. 500 napkins are €240 ex VAT for 10 × 20 cm and larger, or €260 ex VAT for the 10 × 10 cm cocktail size. Usual print time is 3 to 5 working days after the artwork proof is approved.
-        </p>
+        <p className="mb-6 leading-relaxed text-slate-600">{lead}</p>
 
         <fieldset className="mb-6">
           <legend className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">Size</legend>
@@ -165,7 +178,7 @@ export default function PrintedNapkinConfigurator() {
             <button type="button" onClick={addToQuote} className="rounded-lg bg-white px-5 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-100">
               Add to quote
             </button>
-            <button type="button" onClick={() => openBuilder('premium-linen-feel-napkins')} className="text-sm font-semibold text-white underline underline-offset-4">
+            <button type="button" onClick={() => openBuilder(productId)} className="text-sm font-semibold text-white underline underline-offset-4">
               Open the quote builder
             </button>
           </div>

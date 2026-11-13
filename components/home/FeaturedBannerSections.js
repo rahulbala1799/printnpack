@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { HeroContactModal } from './HomepageHero';
+import { POCKET_NAPKIN_PATH, POCKET_NAPKIN_PRICE_ROWS, formatPocketEuro } from '../../data/pocket-napkins';
 
 const xxlSizes = [
   { id: 'xl', label: 'XL', detail: '200 cm wide', note: '€398.96', popular: true },
@@ -30,20 +31,20 @@ const exhibitionChoices = [
   },
 ];
 
-function PanelImage({ src, alt }) {
+function PanelImage({ src, alt, focus = 'object-[72%_center]', priority = false }) {
   return (
     <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-[#efeae2] sm:aspect-[5/4] lg:aspect-auto lg:min-h-[460px]">
-      <Image src={src} alt={alt} fill sizes="(max-width: 1024px) 92vw, 560px" quality={70} className="object-cover object-[72%_center]" />
+      <Image src={src} alt={alt} fill sizes="(max-width: 1024px) 92vw, 560px" quality={70} priority={priority} className={`object-cover ${focus}`} />
     </div>
   );
 }
 
-function SplitSection({ imageOnRight, surface = 'cream', eyebrow, title, body, image, alt, children, href, cta, onQuote }) {
+function SplitSection({ imageOnRight, surface = 'cream', eyebrow, title, body, image, alt, children, href, cta, onQuote, focus, priority }) {
   return (
     <section className={surface === 'white' ? 'bg-white' : 'bg-[#f6f3ee]'}>
       <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-10 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:py-16 lg:px-8">
         <div className={imageOnRight ? 'order-1 lg:order-2' : 'order-1'}>
-          <PanelImage src={image} alt={alt} />
+          <PanelImage src={image} alt={alt} focus={focus} priority={priority} />
         </div>
         <div className={imageOnRight ? 'order-2 lg:order-1' : 'order-2'}>
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-500">{eyebrow}</p>
@@ -83,6 +84,43 @@ function ChoiceButton({ selected, onClick, children }) {
     >
       {children}
     </button>
+  );
+}
+
+const pocketQuantities = [25, 100, 500, 1000];
+
+function PocketSection({ onQuote }) {
+  const [qty, setQty] = useState(500);
+  const row = POCKET_NAPKIN_PRICE_ROWS.find((item) => item.qty === qty) || POCKET_NAPKIN_PRICE_ROWS[0];
+
+  return (
+    <SplitSection
+      imageOnRight
+      eyebrow="Pocket napkins"
+      title="A pocket for the fork and knife"
+      body="Printed linen-feel napkins, folded so the cutlery sits in the pocket. The price is the cocktail napkin total plus 10%."
+      image="/images/pocket-napkins/pocket-napkin-riverdale-christmas-ireland.jpg"
+      alt="Printed pocket napkin holding a fork and knife on a restaurant table"
+      href={POCKET_NAPKIN_PATH}
+      cta="View pocket napkins"
+      onQuote={onQuote}
+      focus="object-center"
+      priority
+    >
+      <div className="flex flex-wrap gap-2" role="group" aria-label="Pocket napkin quantities">
+        {pocketQuantities.map((amount) => (
+          <ChoiceButton key={amount} selected={amount === qty} onClick={() => setQty(amount)}>
+            {amount.toLocaleString('en-IE')}
+            {amount === 500 ? ' · Popular' : ''}
+          </ChoiceButton>
+        ))}
+      </div>
+      <p className="mt-3 text-sm text-stone-700">
+        <span className="font-semibold text-neutral-950">{formatPocketEuro(row.total)} ex VAT</span>
+        <span className="text-stone-400"> · </span>
+        {qty.toLocaleString('en-IE')} napkins
+      </p>
+    </SplitSection>
   );
 }
 
@@ -186,6 +224,7 @@ export default function FeaturedBannerSections() {
 
   return (
     <div>
+      <PocketSection onQuote={() => setContact({ productName: 'Pocket napkins' })} />
       <XxlSection onQuote={() => setContact({ productName: 'XXL roll-up banners' })} />
       <StretchSection onQuote={() => setContact({ productName: 'Straight stretch stands' })} />
       <ExhibitionSection onQuote={() => setContact({ productName: 'Exhibition displays' })} />

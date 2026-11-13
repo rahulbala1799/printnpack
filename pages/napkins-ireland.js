@@ -13,6 +13,7 @@ const HERO_IMAGE = '/images/napkins/cocktail-napkin-salty-cod-ireland.webp';
 
 const napkinTypes = [
   { title: 'Personalised Napkins', desc: 'Custom printed napkins for restaurants, cafés and weddings. 10 × 10 cm cocktail, 10 × 20, 12 × 20, 15 × 20 and 20 × 20 cm, from 25.', href: '/custom-printed-napkins', price: '0.24', priceLabel: 'From €0.24' },
+  { title: 'Pocket Napkins', desc: 'Printed napkins folded for a fork and knife. Priced at the cocktail napkin total plus 10%. 500 are €286 ex VAT.', href: '/pocket-napkins-ireland', price: '0.29', priceLabel: '500 for €286' },
   { title: 'Cocktail Napkins', desc: 'White logo napkins for restaurants, bars and cafés. 10 × 10 cm closed, 20 × 40 cm open.', href: '/products/cocktail-napkins', priceLabel: '10 × 10 cm' },
   { title: 'Luxury Tissue Paper', desc: 'Plain acid-free colour tissue, 500 × 750 mm. 480 sheets per case, 15 colours.', href: '/luxury-tissue-paper-ireland', price: '29.99', priceLabel: '€29.99 + VAT per case' },
   { title: 'Plain Wholesale Napkins', desc: 'Bulk white napkins without printing, sold by the case.', href: '/plain-napkins-tableware-ireland', priceLabel: 'Priced by the case' },
@@ -162,7 +163,7 @@ export default function NapkinsIreland() {
       <section className="py-12 lg:py-16 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">Napkins and luxury tissue paper</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {napkinTypes.map((item) => (
               <Link key={item.title} href={item.href} className="group bg-white rounded-2xl border border-gray-200 p-6 hover:border-amber-300 hover:shadow-lg transition-all">
                 <h3 className="text-xl font-bold text-gray-900 group-hover:text-amber-600 mb-2">{item.title}</h3>

@@ -19,6 +19,7 @@ import { LUXURY_TISSUE_HREF, LUXURY_TISSUE_ID, repriceTissueLine } from './luxur
 import { COASTER_BOARD, COASTER_SIDES, COASTER_SIZES, PRINTED_COASTER_MIN } from './coasters-options';
 import { COCKTAIL_NAPKIN_PRODUCT } from './cocktail-napkins';
 import { PRINTED_NAPKIN_MIN, PRINTED_NAPKIN_PRINT, PRINTED_NAPKIN_SIZES, getNapkinLineTotal, getNapkinUnitPrice } from './printed-napkins';
+import { POCKET_NAPKIN_MIN, getPocketNapkinLineTotal, pocketQuantity } from './pocket-napkins';
 import { buildPopupWallQuoteLine } from './popup-walls';
 import { ZIPPER_FAMILIES, buildZipperWallQuoteLine, zipperFromPrice } from './zipper-walls';
 import { buildLedFrameQuoteLine, ledFrameFromPrice } from './led-frames';
@@ -150,6 +151,16 @@ export const QUOTE_CATALOG = [
     configurable: false,
     group: 'Napkins',
     price: 'From €0.24',
+  }),
+  withMedia({
+    id: 'pocket-napkins',
+    name: 'Pocket Napkins',
+    href: '/pocket-napkins-ireland',
+    image: '/images/pocket-napkins/pocket-napkin-riverdale-christmas-ireland.jpg',
+    moduleId: 'pocket-napkins',
+    configurable: false,
+    group: 'Napkins',
+    price: 'From €0.29',
   }),
   withMedia({
     id: COCKTAIL_NAPKIN_PRODUCT.id,
@@ -322,6 +333,10 @@ export const GENERIC_MODULE_FIELDS = {
     { key: 'print', label: 'Print', type: 'chips', options: PRINTED_NAPKIN_PRINT },
     { key: 'qty', label: 'Quantity', type: 'qty', min: PRINTED_NAPKIN_MIN },
   ],
+  'pocket-napkins': [
+    { key: 'print', label: 'Print', type: 'chips', options: PRINTED_NAPKIN_PRINT },
+    { key: 'qty', label: 'Quantity', type: 'qty', min: POCKET_NAPKIN_MIN },
+  ],
   'cocktail-napkin-print': [
     { key: 'sizePreset', label: 'Napkin', type: 'chips', options: ['10 × 10 cm closed'] },
     { key: 'open', label: 'Open size', type: 'chips', options: ['20 × 40 cm'] },
@@ -428,6 +443,24 @@ export function buildCatalogQuoteLine(catalogItem, options = {}) {
   if (catalogItem.moduleId === 'luxury-rope-bags') {
     return buildRopeBagQuoteLine(catalogItem, options);
   }
+  if (catalogItem.moduleId === 'pocket-napkins') {
+    const qty = pocketQuantity(options.qty);
+    const lineTotal = getPocketNapkinLineTotal(qty);
+    return {
+      moduleId: catalogItem.moduleId,
+      productId: catalogItem.id,
+      name: catalogItem.name,
+      href: catalogItem.href,
+      qty,
+      unitPrice: lineTotal / qty,
+      lineTotal,
+      image: options.image || catalogItem.image || null,
+      images: options.image ? [options.image] : (catalogItem.images || (catalogItem.image ? [catalogItem.image] : [])),
+      summary: ['Pocket napkin', options.print || PRINTED_NAPKIN_PRINT[0], options.design].filter(Boolean).join(' · '),
+      options: { ...options, qty },
+      fingerprint: `${catalogItem.moduleId}|${catalogItem.id}`,
+    };
+  }
   if (catalogItem.moduleId === 'printed-napkins') {
     const entered = Number(options.qty);
     const qty = Math.max(PRINTED_NAPKIN_MIN, Number.isFinite(entered) && entered > 0 ? Math.round(entered) : PRINTED_NAPKIN_MIN);
@@ -438,12 +471,12 @@ export function buildCatalogQuoteLine(catalogItem, options = {}) {
       productId: catalogItem.id,
       name: catalogItem.name,
       href: catalogItem.href,
-      image: catalogItem.image || null,
-      images: catalogItem.images || (catalogItem.image ? [catalogItem.image] : []),
       qty,
       unitPrice: unit,
       lineTotal: getNapkinLineTotal(size.id, qty),
-      summary: `${size.chip} · ${options.print || PRINTED_NAPKIN_PRINT[0]}`,
+      image: options.image || catalogItem.image || null,
+      images: options.image ? [options.image] : (catalogItem.images || (catalogItem.image ? [catalogItem.image] : [])),
+      summary: [size.chip, options.print || PRINTED_NAPKIN_PRINT[0], options.design].filter(Boolean).join(' · '),
       options: { ...options, qty },
       fingerprint: `${catalogItem.moduleId}|${catalogItem.id}`,
     };
@@ -631,6 +664,17 @@ export function repriceQuoteLine(line, qty) {
       { ...(line.options || {}), qty }
     );
     return next ? { ...next, id: line.id } : { ...line, qty };
+  }
+  if (line.moduleId === 'pocket-napkins') {
+    const nextQty = pocketQuantity(qty);
+    const lineTotal = getPocketNapkinLineTotal(nextQty);
+    return {
+      ...line,
+      id: line.id,
+      qty: nextQty,
+      unitPrice: lineTotal / nextQty,
+      lineTotal,
+    };
   }
   if (line.moduleId === 'business-cards') {
     const safeQty = Math.max(1, Number(qty) || 1);

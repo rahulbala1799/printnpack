@@ -96,9 +96,10 @@ export const HEADER_CATEGORIES = [
     name: 'Napkins',
     href: '/napkins-ireland',
     summary: 'Printed napkins for restaurants and cafés',
-    match: ['/napkins-ireland', '/custom-printed-napkins', '/products/cocktail-napkins', '/products/premium-linen'],
+    match: ['/napkins-ireland', '/custom-printed-napkins', '/pocket-napkins', '/products/cocktail-napkins', '/products/premium-linen'],
     products: [
       { name: 'Custom Printed Napkins', href: '/custom-printed-napkins' },
+      { name: 'Pocket napkins', href: '/pocket-napkins-ireland' },
       { name: 'Cocktail napkins', href: '/products/cocktail-napkins' },
     ],
   },

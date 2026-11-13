@@ -37,6 +37,7 @@ export const PUBLIC_PAGE_PATHS = [
   "/luxury-magnetic-closure-boxes-ireland",
   "/custom-printed-tissue-paper-ireland",
   "/custom-printed-napkins",
+  "/pocket-napkins-ireland",
   "/llms/custom-printed-napkins.txt",
   "/llms/custom-printed-napkins.json",
   "/printed-ribbon-ireland",

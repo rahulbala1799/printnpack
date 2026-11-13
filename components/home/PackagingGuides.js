@@ -243,6 +243,13 @@ const guides = [
     cta: 'Read the case study',
   },
   {
+    href: '/pocket-napkins-ireland',
+    title: 'Pocket Napkins',
+    description: 'Printed cutlery pocket napkins. 500 are €286 ex VAT, 10% above cocktail napkins.',
+    image: '/images/hero/napkin.svg',
+    cta: 'See pocket napkins',
+  },
+  {
     href: '/napkins-ireland',
     title: 'Napkins Ireland',
     description: 'Custom printed & linen-feel napkins — restaurants, weddings & catering.',

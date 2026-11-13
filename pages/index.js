@@ -149,6 +149,7 @@ export default function Home() {
             catalogOffer('Rubber Stamps Ireland', '/rubber-stamps-ireland'),
             catalogOffer('Napkins Ireland', '/napkins-ireland'),
             catalogOffer('Custom Printed Napkins', '/custom-printed-napkins'),
+            catalogOffer('Pocket Napkins', '/pocket-napkins-ireland'),
             catalogOffer('Luxury Tissue Paper Ireland', '/luxury-tissue-paper-ireland'),
             catalogOffer('Custom Printed Ribbon Ireland', '/printed-ribbon-ireland'),
             catalogOffer('Foamex Ireland', '/foamex-ireland'),

@@ -4,6 +4,7 @@ import { PRINTED_NAPKIN_FAQS } from './printed-napkins';
 const byId = (id) => NAPKIN_FAQS.find((faq) => faq.id === id);
 
 const SHARED_LINKS = [
+  { href: '/pocket-napkins-ireland', label: 'Pocket Napkins', desc: 'Cutlery pocket napkins, cocktail price plus 10%' },
   { href: '/napkins-ireland', label: 'Napkins Ireland', desc: 'Complete napkin printing hub' },
   { href: '/napkin-faq-ireland', label: 'Napkin FAQ', desc: '25+ instant answers' },
   { href: '/blog/custom-printed-napkins', label: 'Custom Printed Napkins', desc: '10 × 10 cm cocktail, wedding napkins and kraft, from 50' },
