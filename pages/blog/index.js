@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'compostable-burger-wraps-ireland-colours-buying-guide',
+    title:
+      'Compostable Burger Wraps Ireland: Red, Blue & Yellow 25×33cm Wholesale Buying Guide',
+    excerpt:
+      'How to buy plain compostable burger wraps in Ireland — red, blue and yellow 25×33cm sheets, 1,000 per case, vs greaseproof sheets and burger boxes, with nationwide delivery from Ashbourne for takeaways and burger counters.',
+    date: '2026-11-13',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/120525.webp',
+    imageAlt:
+      'Compostable burger wraps Ireland — red 25×33cm plain sheets wholesale for Dublin takeaways',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'custom-printed-tshirts-ireland-sizes-moq-buying-guide',
     title:
       'Custom Printed T-Shirts Ireland: Super Premium, 13 Colours, Sizes S–3XL & MOQ Buying Guide',
