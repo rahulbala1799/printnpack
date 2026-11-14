@@ -189,6 +189,7 @@ const staticPages = [
   { path: '/services/posters',  priority: '0.8', changefreq: 'monthly' },
   { path: '/services/vinyls',   priority: '0.8', changefreq: 'monthly' },
   { path: '/blog',              priority: '0.8', changefreq: 'weekly'  },
+  { path: '/blog/wedding-envelopes-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/compostable-burger-wraps-ireland-colours-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/custom-printed-tshirts-ireland-sizes-moq-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/ice-cream-cups-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },

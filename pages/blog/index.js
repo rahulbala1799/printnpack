@@ -6,6 +6,18 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'wedding-envelopes-ireland-sizes-buying-guide',
+    title: 'Wedding Envelopes Ireland: C6, C5 & DL Sizes Buying Guide',
+    excerpt:
+      'How to buy printed wedding envelopes in Ireland — C6, C5 and DL sizes, guest addressing and return address, MOQ from 25, with nationwide delivery from Ashbourne for Irish couples and planners.',
+    date: '2026-11-14',
+    readTime: '8 min read',
+    image: '/images/wedding/wedding-envelope-floral-address-ireland.jpg',
+    imageAlt:
+      'Wedding envelopes Ireland — floral guest-addressed C6 envelope for Dublin invitations',
+    category: 'Wedding Guide',
+  },
+  {
     slug: 'compostable-burger-wraps-ireland-colours-buying-guide',
     title:
       'Compostable Burger Wraps Ireland: Red, Blue & Yellow 25×33cm Wholesale Buying Guide',
