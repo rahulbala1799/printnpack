@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'paper-straws-ireland-sizes-wrapped-buying-guide',
+    title:
+      'Paper Straws Ireland: Sizes, Wrapped vs Unwrapped Wholesale Buying Guide',
+    excerpt:
+      'How to buy plain Greenspirit paper straws in Ireland — 5×140mm cocktail, 6×197mm and 8×197mm kraft sizes, wrapped vs unwrapped case packs, with nationwide delivery from Ashbourne for cafés, bars and takeaways.',
+    date: '2026-11-15',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/140044.webp',
+    imageAlt:
+      'Paper straws Ireland — 8×197mm kraft Greenspirit straws wholesale for Dublin cafés',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'wedding-envelopes-ireland-sizes-buying-guide',
     title: 'Wedding Envelopes Ireland: C6, C5 & DL Sizes Buying Guide',
     excerpt:
