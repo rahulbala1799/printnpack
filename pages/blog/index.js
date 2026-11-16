@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'zipper-walls-ireland-shapes-sizes-buying-guide',
+    title:
+      'Zipper Walls Ireland: Arch, U, Wave, Curve & Pillar Shapes Sizes Buying Guide',
+    excerpt:
+      'How to buy printed zipper walls in Ireland — arch, U-shaped, wave, curved vertical, curved horizontal and exhibition pillars, full set vs fabric only, from €491.31 ex VAT with Ireland delivery included from Ashbourne.',
+    date: '2026-11-16',
+    readTime: '8 min read',
+    image: '/images/banners/zipper-walls/curved-horizontal-zipper-wall-ireland-technology.jpg',
+    imageAlt:
+      'Zipper walls Ireland — curved horizontal fabric exhibition wall for Dublin trade shows',
+    category: 'Retail Guide',
+  },
+  {
     slug: 'paper-straws-ireland-sizes-wrapped-buying-guide',
     title:
       'Paper Straws Ireland: Sizes, Wrapped vs Unwrapped Wholesale Buying Guide',
