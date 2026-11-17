@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'luxury-tissue-paper-ireland-colours-buying-guide',
+    title:
+      'Luxury Tissue Paper Ireland: Colours, Case Packs & Wholesale Buying Guide',
+    excerpt:
+      'How to buy plain luxury colour tissue paper in Ireland — 500 × 750 mm sheets, 480 per case, 15 stock colours from €29.99 + VAT, 10% off from 5 cases and 20% off from 10, with nationwide delivery from Ashbourne for boutiques, gift shops and florists.',
+    date: '2026-11-17',
+    readTime: '8 min read',
+    image: '/images/products/luxury-tissue-paper/luxury-tissue-paper-ireland-blue.jpg',
+    imageAlt:
+      'Luxury tissue paper Ireland — blue colour tissue sheets wholesale for Dublin boutiques',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'zipper-walls-ireland-shapes-sizes-buying-guide',
     title:
       'Zipper Walls Ireland: Arch, U, Wave, Curve & Pillar Shapes Sizes Buying Guide',
