@@ -189,6 +189,7 @@ const staticPages = [
   { path: '/services/posters',  priority: '0.8', changefreq: 'monthly' },
   { path: '/services/vinyls',   priority: '0.8', changefreq: 'monthly' },
   { path: '/blog',              priority: '0.8', changefreq: 'weekly'  },
+  { path: '/blog/pocket-napkins-ireland-cutlery-moq-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/luxury-tissue-paper-ireland-colours-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/zipper-walls-ireland-shapes-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/paper-straws-ireland-sizes-wrapped-buying-guide', priority: '0.88', changefreq: 'monthly' },

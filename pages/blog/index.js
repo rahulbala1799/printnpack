@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'pocket-napkins-ireland-cutlery-moq-buying-guide',
+    title:
+      'Pocket Napkins Ireland: Cutlery Pocket Fold, MOQ & Price Buying Guide',
+    excerpt:
+      'How to buy printed pocket napkins in Ireland — linen-feel cutlery pocket fold, MOQ from 25, priced 10% above 10 × 10 cm cocktail napkins from €36.03 ex VAT, with nationwide delivery from Ashbourne for restaurants, hotels and Christmas tables.',
+    date: '2026-11-18',
+    readTime: '8 min read',
+    image: '/images/pocket-napkins/pocket-napkin-riverdale-christmas-ireland.jpg',
+    imageAlt:
+      'Pocket napkins Ireland — printed cutlery pocket napkin for Dublin restaurants',
+    category: 'Hospitality Guide',
+  },
+  {
     slug: 'luxury-tissue-paper-ireland-colours-buying-guide',
     title:
       'Luxury Tissue Paper Ireland: Colours, Case Packs & Wholesale Buying Guide',
