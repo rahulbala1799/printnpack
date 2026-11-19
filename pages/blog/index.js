@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'condiment-sachets-ireland-sugar-salt-pepper-buying-guide',
+    title:
+      'Condiment Sachets Ireland: Sugar, Salt, Pepper & Sauce Wholesale Buying Guide',
+    excerpt:
+      'How to buy plain sugar sachets and sticks, salt, pepper, vinegar and ketchup sachets in Ireland — 2.5g sugar from €10.85 ex VAT per 1,000, 5,000 salt/pepper packs and 200 sauce packs, with nationwide delivery from Ashbourne for cafés, hotels and takeaways.',
+    date: '2026-11-19',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/10500.webp',
+    imageAlt:
+      'Condiment sachets Ireland — white sugar sachets wholesale for Dublin cafés',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'pocket-napkins-ireland-cutlery-moq-buying-guide',
     title:
       'Pocket Napkins Ireland: Cutlery Pocket Fold, MOQ & Price Buying Guide',
