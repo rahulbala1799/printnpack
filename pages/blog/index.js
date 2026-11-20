@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'wedding-menus-place-cards-ireland-sizes-buying-guide',
+    title:
+      'Wedding Menus & Place Cards Ireland: A5, Tent, A6 & DL Sizes Buying Guide',
+    excerpt:
+      'How to buy printed wedding menu cards and place cards in Ireland — A5, A5 tent, A6 and DL menus, tent and flat place cards on 350 gsm, MOQ from 25, with nationwide delivery from Ashbourne for Irish couples and planners.',
+    date: '2026-11-20',
+    readTime: '8 min read',
+    image: '/images/wedding/wedding-menu-sage-dinner-ireland.jpg',
+    imageAlt:
+      'Wedding menus Ireland — sage dinner menu card for Dublin reception tables',
+    category: 'Wedding Guide',
+  },
+  {
     slug: 'condiment-sachets-ireland-sugar-salt-pepper-buying-guide',
     title:
       'Condiment Sachets Ireland: Sugar, Salt, Pepper & Sauce Wholesale Buying Guide',
