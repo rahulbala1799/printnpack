@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'paper-plates-ireland-sizes-greenspirit-buying-guide',
+    title:
+      'Paper Plates Ireland: 6″, 7″ & 9″ Greenspirit Sizes Wholesale Buying Guide',
+    excerpt:
+      'How to buy plain white paper plates in Ireland — Greenspirit 6″, 7″ and 9″ sizes, standard white 7″ and 9″ lines, case packs from €36.62 ex VAT, vs bagasse and foil plates, with nationwide delivery from Ashbourne for cafés, canteens and event caterers.',
+    date: '2026-11-21',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/110026.webp',
+    imageAlt:
+      'Paper plates Ireland — 7 inch white Greenspirit plates wholesale for Dublin cafés',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'wedding-menus-place-cards-ireland-sizes-buying-guide',
     title:
       'Wedding Menus & Place Cards Ireland: A5, Tent, A6 & DL Sizes Buying Guide',
