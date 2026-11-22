@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'wedding-boards-ireland-sizes-thickness-buying-guide',
+    title:
+      'Wedding Boards Ireland: Foamex Sizes, Thickness & Laminate Buying Guide',
+    excerpt:
+      'How to buy printed foamex wedding boards in Ireland — A2, A1, A0, 60×90 cm, 70×100 cm and 8×4 ft sizes, 3 mm to 10 mm thickness, laminated or unlaminated, MOQ from 1, with nationwide delivery from Ashbourne for Irish couples and planners.',
+    date: '2026-11-22',
+    readTime: '8 min read',
+    image: '/images/wedding/wedding-foamex-welcome-board-ireland.jpg',
+    imageAlt:
+      'Wedding boards Ireland — foamex welcome board for Dublin venue entrances',
+    category: 'Wedding Guide',
+  },
+  {
     slug: 'paper-plates-ireland-sizes-greenspirit-buying-guide',
     title:
       'Paper Plates Ireland: 6″, 7″ & 9″ Greenspirit Sizes Wholesale Buying Guide',
