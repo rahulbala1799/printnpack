@@ -184,6 +184,11 @@ export default function BannersIreland() {
               <p className="text-gray-600 text-sm leading-relaxed mb-4">Printed throws for exhibition and event tables. Standard sizes, or your own up to 1.5 m wide and 6 m long.</p>
               <span className="text-emerald-700 font-semibold text-sm">View table covers →</span>
             </Link>
+            <Link href="/signboards-shop-signs-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-stone-400 hover:shadow-lg transition-all">
+              <h3 className="text-xl font-bold text-gray-900 group-hover:text-stone-800 mb-2">Signboards and Shop Signs</h3>
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">Fascia boards, projecting signs, lightboxes, 3D letters and A-boards for a shop front. Send the size. The price comes back on the quote.</p>
+              <span className="text-stone-800 font-semibold text-sm">View shop signs →</span>
+            </Link>
             <Link href="/flags-ireland" className="group bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:border-green-300 hover:shadow-lg transition-all">
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-green-700 mb-2">Flags</h3>
               <p className="text-gray-600 text-sm leading-relaxed mb-4">Beach flags and feather flags, plus custom flags for clubs and businesses.</p>

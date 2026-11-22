@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { buildCatalogQuoteLine, getQuoteCatalogItem } from '../../data/quote-modules';
+import { getNapkinLineTotal, getNapkinUnitPrice } from '../../data/printed-napkins';
 import { weddingBoardSizeError } from '../../data/wedding-products';
 import { cn } from '../../lib/cn';
 import { useQuoteCart } from '../../lib/quote-cart-context';
@@ -51,6 +52,11 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
   const thickness = product.thicknesses?.find((item) => item.id === thicknessId) || product.thicknesses?.[0];
   const image = product.gallery[imageIndex] || product.gallery[0];
   const quantity = Math.max(product.minQty, Number(qty) || product.minQty);
+  const gbpSizeId = product.market === 'uk'
+    ? (product.napkinPrice === 'cocktail' ? '10x10' : product.napkinPrice === 'standard' ? '10x20' : null)
+    : null;
+  const gbpTotal = gbpSizeId ? getNapkinLineTotal(gbpSizeId, quantity) : null;
+  const gbpUnit = gbpSizeId ? getNapkinUnitPrice(gbpSizeId, quantity) : null;
   // Warm the cache for the other photos so switching is instant.
   useEffect(() => {
     const warm = () => product.gallery.forEach((item) => { const img = new window.Image(); img.src = item.web; });
@@ -109,6 +115,11 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
       product.fixed.forEach((item) => {
         options[item.key] = item.value;
       });
+    }
+    if (product.market === 'uk') {
+      options.market = 'uk';
+      options.href = product.path;
+      if (product.napkinPrice) options.napkinPrice = product.napkinPrice;
     }
     addItem(buildCatalogQuoteLine(catalogItem, options));
     setAdded(true);
@@ -446,6 +457,12 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
               product.board ? finish : '',
             ].filter(Boolean).join(' · ')}
           </p>
+          {gbpTotal != null && (
+            <p className="mt-2 text-2xl font-semibold">£{gbpTotal.toFixed(2)} <span className="text-sm font-normal text-[#d7e2d2]">ex VAT · £{gbpUnit.toFixed(2)} each · UK delivery extra</span></p>
+          )}
+          {product.market === 'uk' && gbpTotal == null && (
+            <p className="mt-2 text-sm text-[#d7e2d2]">Price confirmed in GBP. The quote email is marked UK Delivery.</p>
+          )}
           <div className="mt-4 flex flex-wrap items-center gap-4">
             <button
               type="button"
@@ -464,7 +481,9 @@ export default function WeddingProductConfigurator({ product, displayClass = '' 
           </div>
           {added && (
             <p className="mt-3 text-xs text-[#d7e2d2]">
-              {product.addedNote || 'Added. Add other wedding print from the Wedding category in the quote builder.'}
+              {product.market === 'uk'
+                ? `${gbpTotal != null ? `Added. £${gbpTotal.toFixed(2)} ex VAT. ` : 'Added. '}The quote email is marked UK Delivery.`
+                : (product.addedNote || 'Added. Add other wedding print from the Wedding category in the quote builder.')}
             </p>
           )}
         </div>

@@ -64,6 +64,12 @@ const CATEGORIES = [
     alt: 'Free standing fabric banner',
   },
   {
+    name: 'Shop signs',
+    href: '/signboards-shop-signs-ireland',
+    image: '/ifa/product/foamex/sign-boards-1000x1000.webp',
+    alt: 'Printed signboard for a shop front',
+  },
+  {
     name: 'Exhibition',
     href: '/exhibition-stands-ireland',
     image: '/images/banners/popup-walls/popup-wall-straight.jpg',

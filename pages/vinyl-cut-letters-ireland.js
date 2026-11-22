@@ -393,6 +393,7 @@ export default function VinylCutLettersIreland() {
           { href: '/vinyl-banners', label: 'Vinyl banners', desc: 'Printed PVC banners' },
           { href: '/labels-on-a-roll', label: 'Labels on a roll', desc: 'Product labels' },
           { href: '/banners-ireland', label: 'Banners Ireland', desc: 'PVC, roll-ups and displays' },
+          { href: '/signboards-shop-signs-ireland', label: 'Shop signs', desc: 'Fascia boards, projecting signs and lightboxes' },
         ]}
       />
     </Layout>

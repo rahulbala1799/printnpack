@@ -90,6 +90,18 @@ const ProductDetail = ({ product, relatedProducts }) => {
         <meta property="og:url" content={pageUrl} />
         <meta property="og:type" content="product" />
         <link rel="canonical" href={pageUrl} />
+        {product.id === 'premium-linen-feel-napkins' && (
+          <>
+            <link rel="alternate" hrefLang="en-ie" href={`${SITE_URL}/custom-printed-napkins`} />
+            <link rel="alternate" hrefLang="en-gb" href={`${SITE_URL}/custom-printed-napkins-uk`} />
+          </>
+        )}
+        {product.id === 'cocktail-napkins' && (
+          <>
+            <link rel="alternate" hrefLang="en-ie" href={`${SITE_URL}/products/cocktail-napkins`} />
+            <link rel="alternate" hrefLang="en-gb" href={`${SITE_URL}/cocktail-napkins-uk`} />
+          </>
+        )}
         {structuredData ? (
           <script
             type="application/ld+json"

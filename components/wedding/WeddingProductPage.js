@@ -7,6 +7,7 @@ import { WEDDING_PRODUCTS } from '../../data/wedding-products';
 import { WEDDING_PAGE_PATH } from '../../data/wedding-printing';
 import { buildProductLd } from '../../lib/schema';
 import { SITE_PHONE_DISPLAY, SITE_PHONE_TEL, SITE_URL, SITE_WHATSAPP_URL } from '../../lib/site';
+import UkNapkinFacts from '../napkins/UkNapkinFacts';
 import { display, text } from './wedding-fonts';
 import { useWeddingPageView } from './useWeddingPageView';
 
@@ -66,7 +67,16 @@ export default function WeddingProductPage({ product }) {
         <meta property="og:description" content={product.metaDescription} />
         <meta property="og:url" content={pageUrl} />
         {heroImage && <meta property="og:image" content={heroImage} />}
-        <meta property="og:locale" content="en_IE" />
+        <meta property="og:locale" content={product.market === 'uk' ? 'en_GB' : 'en_IE'} />
+        {product.market === 'uk' && product.iePath && (
+          <link rel="alternate" hrefLang="en-ie" href={`${SITE_URL}${product.iePath}`} />
+        )}
+        {(product.market === 'uk' ? product.path : product.ukPath) && (
+          <link rel="alternate" hrefLang="en-gb" href={`${SITE_URL}${product.market === 'uk' ? product.path : product.ukPath}`} />
+        )}
+        {product.ukPath && product.market !== 'uk' && (
+          <link rel="alternate" hrefLang="en-ie" href={pageUrl} />
+        )}
         {hero && <link rel="preload" as="image" href={hero.web} />}
         {productLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} /> : null}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
@@ -92,6 +102,21 @@ export default function WeddingProductPage({ product }) {
             {product.h1}
           </h1>
           <p className={`${display.className} mt-3 max-w-xl text-2xl italic text-[#3f4f3c]`}>{product.tagline}</p>
+          {product.ukPath && product.market !== 'uk' && (
+            <p className="mt-4 text-sm">
+              <Link href={product.ukPath} className="font-semibold text-[#3d4c3a] underline">UK delivery, prices in GBP</Link>
+            </p>
+          )}
+          {product.market === 'uk' && (
+            <div className="mt-8">
+              <UkNapkinFacts
+                moq={product.minQty}
+                sizes={(product.sizes || []).map((size) => size.chip || size.name)}
+                priceNote={product.ukPriceNote}
+                material={product.ukMaterial}
+              />
+            </div>
+          )}
           <div className="mt-8">
             <WeddingProductConfigurator product={product} displayClass={display.className} />
           </div>

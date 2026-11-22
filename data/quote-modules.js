@@ -19,6 +19,7 @@ import { LUXURY_TISSUE_HREF, LUXURY_TISSUE_ID, repriceTissueLine } from './luxur
 import { COASTER_BOARD, COASTER_SIDES, COASTER_SIZES, PRINTED_COASTER_MIN } from './coasters-options';
 import { COCKTAIL_NAPKIN_PRODUCT } from './cocktail-napkins';
 import { PRINTED_NAPKIN_MIN, PRINTED_NAPKIN_PRINT, PRINTED_NAPKIN_SIZES, getNapkinLineTotal, getNapkinUnitPrice } from './printed-napkins';
+import { UK_DELIVERY_EMAIL_BLOCK, isUkDeliveryQuote } from './napkin-uk';
 import { POCKET_NAPKIN_MIN, getPocketNapkinLineTotal, pocketQuantity } from './pocket-napkins';
 import { buildPopupWallQuoteLine } from './popup-walls';
 import { ZIPPER_FAMILIES, buildZipperWallQuoteLine, zipperFromPrice } from './zipper-walls';
@@ -37,6 +38,15 @@ import {
 import { ROPE_BAG_ID, ROPE_BAG_PATH, buildRopeBagQuoteLine, ropeBagFromPrice } from './luxury-rope-handle-bags';
 import { RIBBON_ID, RIBBON_PATH, buildRibbonQuoteLine, repriceRibbonOrders, ribbonFromPrice } from './ribbons';
 import { WEDDING_PRODUCTS, weddingBoardSizeError, weddingModuleFields } from './wedding-products';
+import {
+  SHOP_SIGN_FIXINGS,
+  SHOP_SIGN_ID,
+  SHOP_SIGN_IMAGE,
+  SHOP_SIGN_MATERIALS,
+  SHOP_SIGN_PATH,
+  SHOP_SIGN_SIDES,
+  SHOP_SIGN_TYPES,
+} from './shop-signs';
 
 function productMedia(id, href, fallbackImage) {
   const match = products.find((item) => item.id === id || item.url === href);
@@ -127,6 +137,15 @@ export const QUOTE_CATALOG = [
   withMedia({ id: 'beach-flags-ireland', name: 'Beach Flags', href: '/beach-flags-ireland', moduleId: 'beach-flags', configurable: true, group: 'Flags', price: `From €${beachFlagFromPrice().toFixed(2)} ex VAT` }),
   withMedia({ id: 'custom-printed-flags-ireland', name: 'Custom Printed Flags', href: '/custom-printed-flags-ireland', moduleId: 'flags', configurable: false, group: 'Flags' }),
   withMedia({ id: 'posters', name: 'Posters', href: '/posters', moduleId: 'posters', configurable: false, group: 'Wide Format' }),
+  withMedia({
+    id: SHOP_SIGN_ID,
+    name: 'Signboards and Shop Signs',
+    href: SHOP_SIGN_PATH,
+    image: SHOP_SIGN_IMAGE,
+    moduleId: 'shop-signs',
+    configurable: true,
+    group: 'Signboards and Shop Signs',
+  }),
   withMedia({ id: 'foamex-boards', name: 'Foamex Boards', href: '/foamex-boards', moduleId: 'foamex', configurable: false, group: 'Boards' }),
   withMedia({ id: 'correx-boards', name: 'Correx Boards', href: '/correx-boards', moduleId: 'correx', configurable: false, group: 'Boards' }),
   withMedia({ id: 'premium-leaflets-ireland', name: 'Premium Leaflets', href: '/premium-leaflets-ireland', moduleId: 'leaflets', configurable: false, group: 'Print' }),
@@ -313,6 +332,33 @@ export const GENERIC_MODULE_FIELDS = {
     DIMENSIONS_MM_IF_CUSTOM,
     { key: 'qty', label: 'Quantity', type: 'qty', min: 1 },
   ],
+  'shop-signs': [
+    {
+      key: 'signType',
+      label: 'Sign',
+      type: 'chips',
+      hint: 'Pick the closest type. Choose Not sure if you only know the size.',
+      options: SHOP_SIGN_TYPES.map((type) => type.label),
+    },
+    { key: 'material', label: 'Material', type: 'chips', options: SHOP_SIGN_MATERIALS },
+    { key: 'sides', label: 'Print', type: 'chips', options: SHOP_SIGN_SIDES },
+    { key: 'fixing', label: 'Fixing', type: 'chips', options: SHOP_SIGN_FIXINGS },
+    {
+      key: 'size',
+      label: 'Size',
+      type: 'dimensions',
+      unit: 'cm',
+      crossLabel: 'Height',
+      hint: 'Width and height of the whole sign, in centimetres. For letters, measure the whole word.',
+    },
+    { key: 'qty', label: 'Quantity', type: 'qty', min: 1 },
+    {
+      key: 'wording',
+      label: 'Wording',
+      type: 'textarea',
+      hint: 'Shop name, or anything else we should know. Optional.',
+    },
+  ],
   foamex: [
     { key: 'thickness', label: 'Thickness', type: 'chips', options: ['3 mm', '5 mm', '10 mm'] },
     DIMENSIONS_MM,
@@ -380,7 +426,8 @@ export function quoteOptionError(fields, values) {
     const width = Number(values.width);
     const length = Number(values.length);
     const unit = field.unit || 'mm';
-    if (!(width > 0) || !(length > 0)) return 'Enter both width and length.';
+    const cross = (field.crossLabel || 'length').toLowerCase();
+    if (!(width > 0) || !(length > 0)) return `Enter both width and ${cross}.`;
     if (field.widthMax != null && width > field.widthMax) {
       return `Width can be up to ${field.widthMax} ${unit}.`;
     }
@@ -407,6 +454,24 @@ function fieldSummary(field, options) {
     return `${width || length} ${unit}`;
   }
   return options[field.key] || null;
+}
+
+function applyQuoteMarket(line, options = {}) {
+  if (options.market !== 'uk') return line;
+  const next = {
+    ...line,
+    currency: 'GBP',
+    delivery: 'UK Delivery',
+    market: 'uk',
+    href: options.href || line.href,
+    options: { ...(line.options || {}), market: 'uk', delivery: 'UK Delivery' },
+  };
+  if (next.unitPrice == null && (options.napkinPrice === 'cocktail' || options.napkinPrice === 'standard')) {
+    const sizeId = options.napkinPrice === 'cocktail' ? '10x10' : '10x20';
+    next.unitPrice = getNapkinUnitPrice(sizeId, next.qty);
+    next.lineTotal = getNapkinLineTotal(sizeId, next.qty);
+  }
+  return next;
 }
 
 export function buildCatalogQuoteLine(catalogItem, options = {}) {
@@ -446,7 +511,7 @@ export function buildCatalogQuoteLine(catalogItem, options = {}) {
   if (catalogItem.moduleId === 'pocket-napkins') {
     const qty = pocketQuantity(options.qty);
     const lineTotal = getPocketNapkinLineTotal(qty);
-    return {
+    return applyQuoteMarket({
       moduleId: catalogItem.moduleId,
       productId: catalogItem.id,
       name: catalogItem.name,
@@ -459,14 +524,14 @@ export function buildCatalogQuoteLine(catalogItem, options = {}) {
       summary: ['Pocket napkin', options.print || PRINTED_NAPKIN_PRINT[0], options.design].filter(Boolean).join(' · '),
       options: { ...options, qty },
       fingerprint: `${catalogItem.moduleId}|${catalogItem.id}`,
-    };
+    }, options);
   }
   if (catalogItem.moduleId === 'printed-napkins') {
     const entered = Number(options.qty);
     const qty = Math.max(PRINTED_NAPKIN_MIN, Number.isFinite(entered) && entered > 0 ? Math.round(entered) : PRINTED_NAPKIN_MIN);
     const size = PRINTED_NAPKIN_SIZES.find((item) => item.chip === options.sizePreset) || PRINTED_NAPKIN_SIZES[0];
     const unit = getNapkinUnitPrice(size.id, qty);
-    return {
+    return applyQuoteMarket({
       moduleId: catalogItem.moduleId,
       productId: catalogItem.id,
       name: catalogItem.name,
@@ -479,7 +544,7 @@ export function buildCatalogQuoteLine(catalogItem, options = {}) {
       summary: [size.chip, options.print || PRINTED_NAPKIN_PRINT[0], options.design].filter(Boolean).join(' · '),
       options: { ...options, qty },
       fingerprint: `${catalogItem.moduleId}|${catalogItem.id}`,
-    };
+    }, options);
   }
   if (catalogItem.moduleId === 'business-cards') {
     const selectedQuantity = BUSINESS_CARD_QUANTITY_OPTIONS.find((option) => option === options.quantity)
@@ -520,7 +585,7 @@ export function buildCatalogQuoteLine(catalogItem, options = {}) {
     .filter(Boolean)
     .join(' · ');
 
-  return {
+  const line = {
     moduleId: catalogItem.moduleId,
     productId: catalogItem.id,
     name: catalogItem.name,
@@ -534,6 +599,24 @@ export function buildCatalogQuoteLine(catalogItem, options = {}) {
     options,
     fingerprint: `${catalogItem.moduleId}|${catalogItem.id}`,
   };
+
+  if (catalogItem.moduleId === 'shop-signs') {
+    const type = options.signType || 'Shop sign';
+    const spec = [
+      type,
+      options.material,
+      options.sides,
+      options.fixing,
+      options.width,
+      options.length,
+      String(options.wording || '').trim().slice(0, 80),
+    ].join('|');
+    line.name = `Shop sign — ${type}`;
+    line.productId = `shop-signs|${spec}`;
+    line.fingerprint = `shop-signs|${spec}`;
+  }
+
+  return applyQuoteMarket(line, options);
 }
 
 export function clothingDefaults(product) {
@@ -665,6 +748,26 @@ export function repriceQuoteLine(line, qty) {
     );
     return next ? { ...next, id: line.id } : { ...line, qty };
   }
+  if (line.market === 'uk' && line.moduleId === 'printed-napkins') {
+    const size = PRINTED_NAPKIN_SIZES.find((item) => item.chip === line.options?.sizePreset) || PRINTED_NAPKIN_SIZES[0];
+    const nextQty = Math.max(PRINTED_NAPKIN_MIN, Number(qty) || PRINTED_NAPKIN_MIN);
+    return {
+      ...line,
+      qty: nextQty,
+      unitPrice: getNapkinUnitPrice(size.id, nextQty),
+      lineTotal: getNapkinLineTotal(size.id, nextQty),
+    };
+  }
+  if (line.market === 'uk' && (line.options?.napkinPrice === 'standard' || line.options?.napkinPrice === 'cocktail')) {
+    const sizeId = line.options.napkinPrice === 'cocktail' ? '10x10' : '10x20';
+    const nextQty = Math.max(1, Number(qty) || 1);
+    return {
+      ...line,
+      qty: nextQty,
+      unitPrice: getNapkinUnitPrice(sizeId, nextQty),
+      lineTotal: getNapkinLineTotal(sizeId, nextQty),
+    };
+  }
   if (line.moduleId === 'pocket-napkins') {
     const nextQty = pocketQuantity(qty);
     const lineTotal = getPocketNapkinLineTotal(nextQty);
@@ -696,23 +799,52 @@ export function repriceQuoteLine(line, qty) {
   };
 }
 
+function quoteMoney(amount, currency) {
+  const symbol = currency === 'GBP' ? '£' : '€';
+  return `${symbol}${Number(amount).toFixed(2)}`;
+}
+
 export function formatQuoteMessage(items, notes) {
+  const uk = isUkDeliveryQuote(items);
   const lines = items.map((item, index) => {
-    const price = item.lineTotal != null ? `€${Number(item.lineTotal).toFixed(2)}` : 'Quote';
-    const unit = item.unitPrice != null ? `€${Number(item.unitPrice).toFixed(2)}` : '—';
+    const currency = item.currency === 'GBP' ? 'GBP' : 'EUR';
+    const detail = item.lineTotal != null
+      ? `Qty: ${item.qty} · Unit: ${item.unitPrice != null ? quoteMoney(item.unitPrice, currency) : '—'} · Line: ${quoteMoney(item.lineTotal, currency)}${currency === 'GBP' ? ' · UK Delivery' : ''}`
+      : `Qty: ${item.qty} · Price on reply${item.delivery === 'UK Delivery' ? ' · UK Delivery' : ''}`;
     return `${index + 1}. ${item.name}
    ${item.summary || ''}
-   Qty: ${item.qty} · Unit: ${unit} · Line: ${price}`;
+   ${detail}`;
   });
 
-  const subtotal = items.reduce((sum, item) => sum + (Number(item.lineTotal) || 0), 0);
+  const pricedItems = items.filter((item) => item.lineTotal != null);
+  const gbpItems = pricedItems.filter((item) => item.currency === 'GBP');
+  const eurItems = pricedItems.filter((item) => item.currency !== 'GBP');
+  const sum = (rows) => rows.reduce((total, item) => total + (Number(item.lineTotal) || 0), 0);
+  let totalLine;
+  if (pricedItems.length === 0) {
+    totalLine = uk
+      ? 'No napkin price on this quote. Reply with a GBP price. UK Delivery still applies.'
+      : 'No prices on this quote. Reply with a price.';
+  } else if (gbpItems.length && eurItems.length) {
+    totalLine = `Indicative GBP subtotal (ex VAT): ${quoteMoney(sum(gbpItems), 'GBP')}\nIndicative EUR subtotal (ex VAT): ${quoteMoney(sum(eurItems), 'EUR')}\nUK Delivery applies to the GBP lines. Delivery is not included in these totals.`;
+  } else if (gbpItems.length === items.length) {
+    totalLine = `Indicative subtotal (GBP, ex VAT): ${quoteMoney(sum(gbpItems), 'GBP')}\nUK Delivery is not included in this total.`;
+  } else if (gbpItems.length) {
+    totalLine = `Indicative subtotal for GBP lines (ex VAT): ${quoteMoney(sum(gbpItems), 'GBP')}\nOther lines: price on reply.\nUK Delivery is not included in this total.`;
+  } else if (pricedItems.length === items.length) {
+    totalLine = `Indicative subtotal (ex VAT): ${quoteMoney(sum(eurItems), 'EUR')}`;
+  } else {
+    totalLine = `Indicative subtotal for priced lines (ex VAT): ${quoteMoney(sum(eurItems), 'EUR')}\nOther lines: price on reply.`;
+  }
 
-  return `Quote basket (${items.length} line${items.length === 1 ? '' : 's'}):
+  const basket = `Quote basket (${items.length} line${items.length === 1 ? '' : 's'}):
 
 ${lines.join('\n\n')}
 
-Indicative subtotal (ex VAT): €${subtotal.toFixed(2)}
+${totalLine}
 
 Notes:
 ${notes || 'None'}`;
+
+  return uk ? `${UK_DELIVERY_EMAIL_BLOCK}\n\n${basket}` : basket;
 }

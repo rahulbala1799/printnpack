@@ -1,12 +1,14 @@
 import React from 'react';
+import { formatNapkinMoney } from '../../data/napkin-uk';
 import { POCKET_NAPKIN_PRICE_ROWS, formatPocketEuro } from '../../data/pocket-napkins';
 
-export default function PocketNapkinPriceTable() {
+export default function PocketNapkinPriceTable({ market = 'ie' }) {
+  const money = (value) => (market === 'uk' ? formatNapkinMoney(value, 'uk') : formatPocketEuro(value));
   return (
     <div className="overflow-x-auto rounded-2xl border border-slate-300 bg-white shadow-sm">
       <table className="min-w-full text-left text-sm">
         <caption className="border-b border-slate-200 bg-slate-950 px-4 py-4 text-left text-white">
-          <span className="block text-base font-semibold">Pocket napkin prices, ex VAT</span>
+          <span className="block text-base font-semibold">Pocket napkin prices, ex VAT{market === 'uk' ? ', GBP' : ''}</span>
           <span className="mt-1 block text-sm font-normal text-slate-300">
             The order total is the price. It is the 10 × 10 cm cocktail napkin total plus 10%.
           </span>
@@ -23,9 +25,9 @@ export default function PocketNapkinPriceTable() {
           {POCKET_NAPKIN_PRICE_ROWS.map((row, index) => (
             <tr key={row.qty} className={index % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
               <td className="px-4 py-3 font-semibold text-slate-950">{row.qty.toLocaleString('en-IE')}</td>
-              <td className="px-4 py-3 text-slate-600">{formatPocketEuro(row.cocktailTotal)}</td>
-              <td className="px-4 py-3 text-base font-bold text-slate-950">{formatPocketEuro(row.total)}</td>
-              <td className="px-4 py-3 text-slate-800">{formatPocketEuro(row.unit)}</td>
+              <td className="px-4 py-3 text-slate-600">{money(row.cocktailTotal)}</td>
+              <td className="px-4 py-3 text-base font-bold text-slate-950">{money(row.total)}</td>
+              <td className="px-4 py-3 text-slate-800">{money(row.unit)}</td>
             </tr>
           ))}
         </tbody>

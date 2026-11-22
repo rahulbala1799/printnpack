@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="White Christmas napkin with a ring of gold stars">
+  <rect width="800" height="800" fill="#f3efe6"/>
+  <rect x="118" y="132" width="564" height="548" rx="18" fill="#000" opacity="0.08"/>
+  <rect x="108" y="118" width="564" height="548" rx="16" fill="#fbfaf6" stroke="#e6e0d4"/>
+  <path d="M108 250h564M108 520h564" stroke="#efeae0" stroke-width="2"/>
+  <g fill="#b0893e" transform="translate(400 390)">
+    <polygon points="0,-16 4,-5 16,-5 6,3 10,15 0,8 -10,15 -6,3 -16,-5 -4,-5"/>
+    <g>
+      <polygon transform="translate(0 -108) scale(0.7)" points="0,-16 4,-5 16,-5 6,3 10,15 0,8 -10,15 -6,3 -16,-5 -4,-5"/>
+      <polygon transform="rotate(45) translate(0 -108) scale(0.55)" points="0,-16 4,-5 16,-5 6,3 10,15 0,8 -10,15 -6,3 -16,-5 -4,-5"/>
+      <polygon transform="rotate(90) translate(0 -108) scale(0.7)" points="0,-16 4,-5 16,-5 6,3 10,15 0,8 -10,15 -6,3 -16,-5 -4,-5"/>
+      <polygon transform="rotate(135) translate(0 -108) scale(0.55)" points="0,-16 4,-5 16,-5 6,3 10,15 0,8 -10,15 -6,3 -16,-5 -4,-5"/>
+      <polygon transform="rotate(180) translate(0 -108) scale(0.7)" points="0,-16 4,-5 16,-5 6,3 10,15 0,8 -10,15 -6,3 -16,-5 -4,-5"/>
+      <polygon transform="rotate(225) translate(0 -108) scale(0.55)" points="0,-16 4,-5 16,-5 6,3 10,15 0,8 -10,15 -6,3 -16,-5 -4,-5"/>
+      <polygon transform="rotate(270) translate(0 -108) scale(0.7)" points="0,-16 4,-5 16,-5 6,3 10,15 0,8 -10,15 -6,3 -16,-5 -4,-5"/>
+      <polygon transform="rotate(315) translate(0 -108) scale(0.55)" points="0,-16 4,-5 16,-5 6,3 10,15 0,8 -10,15 -6,3 -16,-5 -4,-5"/>
+    </g>
+  </g>
+  <text x="400" y="548" text-anchor="middle" fill="#1c3a2e" font-family="Georgia, serif" font-size="32">Joyeux Noël</text>
+</svg>

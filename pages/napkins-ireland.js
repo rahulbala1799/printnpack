@@ -75,6 +75,7 @@ export default function NapkinsIreland() {
         <meta name="keywords" content="cocktail napkins ireland, cocktail napkin printing ireland, printed cocktail napkins, wedding cocktail napkins, restaurant cocktail napkins, napkins ireland, printed napkins ireland, personalised napkins ireland, napkin printing ireland, wedding napkins ireland, custom napkins ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href={PAGE_URL} />
+        <link rel="alternate" hrefLang="en-gb" href={`${SITE_URL}/napkins-uk`} />
         <meta property="og:locale" content="en_IE" />
         <HreflangLinks cluster="napkins" />
         <OgLocaleAlternates cluster="napkins" currentOg="en_IE" />
@@ -120,6 +121,9 @@ export default function NapkinsIreland() {
                 </Link>
                 <Link href="/napkin-faq-ireland" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
                   Napkin FAQ
+                </Link>
+                <Link href="/custom-printed-napkins-uk" className="inline-flex items-center bg-white text-gray-800 font-semibold px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 transition-colors">
+                  UK prices in GBP
                 </Link>
               </div>
             </div>

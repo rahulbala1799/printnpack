@@ -73,6 +73,8 @@ export default function PocketNapkinsIreland() {
         <meta name="keywords" content="pocket napkins ireland, printed pocket napkins, cutlery pocket napkins, restaurant pocket napkins, christmas pocket napkins, napkin with fork and knife, branded pocket napkins ireland" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href={PAGE_URL} />
+        <link rel="alternate" hrefLang="en-ie" href={PAGE_URL} />
+        <link rel="alternate" hrefLang="en-gb" href={`${SITE_URL}/pocket-napkins-uk`} />
         <meta property="og:title" content={TITLE} />
         <meta property="og:description" content={DESCRIPTION} />
         <meta property="og:url" content={PAGE_URL} />
@@ -101,7 +103,7 @@ export default function PocketNapkinsIreland() {
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#1f6b45]">Pocket napkins</p>
             <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">Printed pocket napkins for the place setting</h1>
             <p className="mt-4 text-lg leading-relaxed text-slate-600">
-              A pocket napkin is folded so a fork and knife sit in the pocket, with your name on the front. Restaurants, hotels and Christmas tables use them in place of a loose napkin. We print them in Ashbourne, Co. Meath, and ship across Ireland and Europe.
+              A pocket napkin is folded so a fork and knife sit in the pocket, with your name on the front. Restaurants, hotels and Christmas tables use them in place of a loose napkin. We print them in Ashbourne, Co. Meath, and ship across Ireland and Europe. For UK delivery in pounds, use the <Link href="/pocket-napkins-uk" className="font-semibold text-[#1f6b45] underline">GBP pocket napkin page</Link>.
             </p>
             <p className="mt-4 text-lg leading-relaxed text-slate-600">
               The price is simple. Take the 10 × 10 cm cocktail napkin total for the same quantity and add 10%. {twentyFive.qty} pocket napkins are {formatPocketEuro(twentyFive.total)} ex VAT. 500 are {formatPocketEuro(fiveHundred.total)}. 1,000 are {formatPocketEuro(oneThousand.total)}.

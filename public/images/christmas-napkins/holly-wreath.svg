@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="White Christmas napkin with a green holly wreath">
+  <rect width="800" height="800" fill="#f3efe6"/>
+  <rect x="118" y="132" width="564" height="548" rx="18" fill="#000" opacity="0.08"/>
+  <rect x="108" y="118" width="564" height="548" rx="16" fill="#fbfaf6" stroke="#e6e0d4"/>
+  <path d="M108 250h564M108 520h564" stroke="#efeae0" stroke-width="2"/>
+  <g transform="translate(400 390)">
+    <circle r="118" fill="none" stroke="#1f6b45" stroke-width="14"/>
+    <g fill="#1f6b45">
+      <ellipse cx="0" cy="-132" rx="22" ry="12" transform="rotate(20)"/>
+      <ellipse cx="70" cy="-112" rx="22" ry="12" transform="rotate(70)"/>
+      <ellipse cx="118" cy="-48" rx="22" ry="12" transform="rotate(110)"/>
+      <ellipse cx="112" cy="40" rx="22" ry="12" transform="rotate(150)"/>
+      <ellipse cx="52" cy="108" rx="22" ry="12" transform="rotate(200)"/>
+      <ellipse cx="-28" cy="124" rx="22" ry="12" transform="rotate(240)"/>
+      <ellipse cx="-100" cy="78" rx="22" ry="12" transform="rotate(280)"/>
+      <ellipse cx="-128" cy="0" rx="22" ry="12" transform="rotate(320)"/>
+      <ellipse cx="-96" cy="-78" rx="22" ry="12" transform="rotate(350)"/>
+    </g>
+    <g fill="#b42318">
+      <circle cx="28" cy="-108" r="9"/>
+      <circle cx="96" cy="-62" r="9"/>
+      <circle cx="104" cy="18" r="9"/>
+      <circle cx="48" cy="92" r="9"/>
+      <circle cx="-36" cy="104" r="9"/>
+      <circle cx="-104" cy="36" r="9"/>
+      <circle cx="-92" cy="-58" r="9"/>
+      <circle cx="-18" cy="-118" r="9"/>
+    </g>
+    <text text-anchor="middle" y="14" fill="#1c3a2e" font-family="Georgia, serif" font-size="54" letter-spacing="4">NOEL</text>
+  </g>
+</svg>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { buildCatalogQuoteLine, getQuoteCatalogItem } from '../../data/quote-modules';
 import {
   LINEN_NAPKIN_FROM,
@@ -22,6 +23,8 @@ export default function PrintedNapkinConfigurator({
   images = PRINTED_NAPKIN_IMAGES,
   imageIndex: imageIndexProp,
   onImageIndexChange,
+  market = 'ie',
+  titleTag = 'h1',
 }) {
   const { addItem, openBuilder } = useQuoteCart();
   const [sizeId, setSizeId] = useState(PRINTED_NAPKIN_SIZES[0].id);
@@ -40,6 +43,8 @@ export default function PrintedNapkinConfigurator({
   const image = images[imageIndex] || images[0];
   const unitPrice = getNapkinUnitPrice(size.id, quantity);
   const lineTotal = getNapkinLineTotal(size.id, quantity);
+  const symbol = market === 'uk' ? '£' : '€';
+  const TitleTag = titleTag === 'h2' ? 'h2' : 'h1';
 
   const addToQuote = () => {
     const catalogItem = getQuoteCatalogItem(productId);
@@ -50,6 +55,7 @@ export default function PrintedNapkinConfigurator({
       qty: quantity,
       design: image.name || '',
       image: image.web,
+      ...(market === 'uk' ? { market: 'uk', href: '/custom-printed-napkins-uk' } : {}),
     }));
     setAdded(true);
   };
@@ -84,8 +90,15 @@ export default function PrintedNapkinConfigurator({
 
       <div>
         <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-blue-600">{eyebrow}</p>
-        <h1 className="mb-3 text-2xl font-bold text-slate-900 sm:text-3xl">{heading}</h1>
-        <p className="mb-2 text-2xl font-bold text-slate-900">From €{LINEN_NAPKIN_FROM}</p>
+        <TitleTag className="mb-3 text-2xl font-bold text-slate-900 sm:text-3xl">{heading}</TitleTag>
+        <p className="mb-2 text-2xl font-bold text-slate-900">From {symbol}{LINEN_NAPKIN_FROM}</p>
+        {market === 'uk' ? (
+          <p className="mb-4 text-sm font-semibold text-slate-800">Prices in GBP. The quote email is marked UK Delivery. Postage is extra.</p>
+        ) : (
+          <p className="mb-4 text-sm text-slate-600">
+            Ordering to the UK? <Link href="/custom-printed-napkins-uk" className="font-semibold text-blue-700 underline">See GBP prices and UK delivery</Link>.
+          </p>
+        )}
         <p className="mb-6 leading-relaxed text-slate-600">{lead}</p>
 
         <fieldset className="mb-6">
@@ -172,8 +185,8 @@ export default function PrintedNapkinConfigurator({
         <div className="rounded-2xl bg-slate-900 p-4 text-white">
           <p className="text-xs font-semibold uppercase tracking-wide text-slate-300">Your quote</p>
           <p className="mt-1 text-lg font-semibold">{size.chip} · {quantity} napkins</p>
-          <p className="mt-1 text-sm text-slate-300">{print} · €{unitPrice.toFixed(2)} per napkin</p>
-          <p className="mt-2 text-2xl font-bold">€{lineTotal.toFixed(2)} <span className="text-sm font-normal text-slate-300">ex VAT</span></p>
+          <p className="mt-1 text-sm text-slate-300">{print} · {symbol}{unitPrice.toFixed(2)} per napkin{market === 'uk' ? ' · GBP' : ''}</p>
+          <p className="mt-2 text-2xl font-bold">{symbol}{lineTotal.toFixed(2)} <span className="text-sm font-normal text-slate-300">ex VAT{market === 'uk' ? ' · UK delivery extra' : ''}</span></p>
           <div className="mt-4 flex flex-wrap items-center gap-4">
             <button type="button" onClick={addToQuote} className="rounded-lg bg-white px-5 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-100">
               Add to quote
@@ -182,7 +195,12 @@ export default function PrintedNapkinConfigurator({
               Open the quote builder
             </button>
           </div>
-          {added && <p className="mt-3 text-xs text-slate-300">Added — €{lineTotal.toFixed(2)} ex VAT for {quantity} napkins.</p>}
+          {added && (
+            <p className="mt-3 text-xs text-slate-300">
+              Added — {symbol}{lineTotal.toFixed(2)} ex VAT for {quantity} napkins.
+              {market === 'uk' ? ' The email is marked UK Delivery.' : ''}
+            </p>
+          )}
         </div>
       </div>
 
@@ -201,14 +219,17 @@ export default function PrintedNapkinConfigurator({
               {[...NAPKIN_PRICE_TIERS].reverse().map((tier, index) => (
                 <tr key={tier.minQty} className={index % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
                   <td className="px-4 py-3 font-medium text-slate-900">{tier.minQty === 0 ? `${PRINTED_NAPKIN_MIN}+` : `${tier.minQty.toLocaleString()}+`}</td>
-                  <td className="px-4 py-3 text-slate-700">€{(Math.round(tier.cocktailCents) / 100).toFixed(2)}</td>
-                  <td className="px-4 py-3 text-slate-700">€{(Math.round(tier.standardCents) / 100).toFixed(2)}</td>
+                  <td className="px-4 py-3 text-slate-700">{symbol}{(Math.round(tier.cocktailCents) / 100).toFixed(2)}</td>
+                  <td className="px-4 py-3 text-slate-700">{symbol}{(Math.round(tier.standardCents) / 100).toFixed(2)}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <p className="mt-2 text-xs text-slate-500">Prices are per napkin, ex VAT, for a single print colour or full colour design. Final price is confirmed when artwork is reviewed.</p>
+        <p className="mt-2 text-xs text-slate-500">
+          Prices are per napkin, ex VAT{market === 'uk' ? ', in GBP' : ''}, for a single print colour or full colour design.
+          {market === 'uk' ? ' UK delivery is extra and is written on the quote email.' : ' Final price is confirmed when artwork is reviewed.'}
+        </p>
       </div>
     </div>
   );

@@ -106,6 +106,7 @@ export const PUBLIC_PAGE_PATHS = [
   "/napkin-faq-ireland",
   "/napkin-printing-ashbourne",
   "/napkin-printing-dublin",
+  "/signboards-shop-signs-ireland",
   "/foamex-boards",
   "/foamex-ireland",
   "/foamex-faq-ireland",

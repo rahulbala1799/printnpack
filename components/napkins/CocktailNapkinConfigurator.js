@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { buildCatalogQuoteLine, getQuoteCatalogItem } from '../../data/quote-modules';
+import { getNapkinLineTotal, getNapkinUnitPrice } from '../../data/printed-napkins';
 import { cn } from '../../lib/cn';
 import { useQuoteCart } from '../../lib/quote-cart-context';
 
@@ -8,11 +10,13 @@ const MIN_QTY = 50;
 const CLOSED = '10 × 10 cm closed';
 const OPEN = '20 × 40 cm';
 
-export default function CocktailNapkinConfigurator() {
+export default function CocktailNapkinConfigurator({ market = 'ie' }) {
   const { addItem, openBuilder } = useQuoteCart();
   const [qty, setQty] = useState(MIN_QTY);
   const [added, setAdded] = useState(false);
   const quantity = Math.max(MIN_QTY, Number(qty) || MIN_QTY);
+  const unitPrice = market === 'uk' ? getNapkinUnitPrice('10x10', quantity) : null;
+  const lineTotal = market === 'uk' ? getNapkinLineTotal('10x10', quantity) : null;
 
   const addToQuote = () => {
     const catalogItem = getQuoteCatalogItem('cocktail-napkins');
@@ -23,6 +27,7 @@ export default function CocktailNapkinConfigurator() {
       paper: 'White',
       print: 'Custom print',
       qty: quantity,
+      ...(market === 'uk' ? { market: 'uk', napkinPrice: 'cocktail', href: '/cocktail-napkins-uk' } : {}),
     }));
     setAdded(true);
   };
@@ -32,7 +37,11 @@ export default function CocktailNapkinConfigurator() {
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
         <h2 className="mb-2 text-2xl font-bold text-gray-900">Build a personalised napkin quote</h2>
         <p className="mb-6 text-sm leading-relaxed text-gray-600">
-          One white cocktail napkin. Closed it is 10 × 10 cm. Open it is 20 × 40 cm. Choose a quantity from 50.
+          One white cocktail napkin. Closed it is 10 × 10 cm. Open it is 20 × 40 cm. The minimum is 50, not 1,000.
+          {market === 'uk'
+            ? ' The price is in GBP. UK delivery is extra, and the quote email says UK Delivery.'
+            : ' Ordering to the UK? '}
+          {market !== 'uk' && <Link href="/cocktail-napkins-uk" className="font-semibold text-blue-700 underline">See GBP prices and UK delivery</Link>}
         </p>
 
         <div className="mb-6 grid gap-3 sm:grid-cols-2">
@@ -95,6 +104,9 @@ export default function CocktailNapkinConfigurator() {
           <p className="text-xs font-semibold uppercase tracking-wide text-slate-300">Your selection</p>
           <p className="mt-1 text-lg font-semibold">{CLOSED} · {quantity} napkins</p>
           <p className="mt-1 text-sm text-slate-300">{OPEN} open · White · Custom print</p>
+          {lineTotal != null && (
+            <p className="mt-2 text-2xl font-bold">£{lineTotal.toFixed(2)} <span className="text-sm font-normal text-slate-300">ex VAT · £{unitPrice.toFixed(2)} each · UK delivery extra</span></p>
+          )}
           <div className="mt-4 flex flex-wrap items-center gap-4">
             <button type="button" onClick={addToQuote} className="rounded-lg bg-white px-5 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-100">
               Add to quote
@@ -103,7 +115,13 @@ export default function CocktailNapkinConfigurator() {
               Open the quote builder
             </button>
           </div>
-          {added && <p className="mt-3 text-xs text-slate-300">Added. We will price the cocktail napkins and confirm delivery.</p>}
+          {added && (
+            <p className="mt-3 text-xs text-slate-300">
+              {market === 'uk'
+                ? `Added. £${lineTotal.toFixed(2)} ex VAT. The email is marked UK Delivery.`
+                : 'Added. We will price the cocktail napkins and confirm delivery.'}
+            </p>
+          )}
         </div>
       </div>
     </section>

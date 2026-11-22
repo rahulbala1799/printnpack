@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useQuoteCart } from '../../lib/quote-cart-context';
+import { isUkDeliveryQuote } from '../../data/napkin-uk';
 import { formatQuoteMessage, resolveQuoteImage } from '../../data/quote-modules';
 import { isWeddingRef, trackFunnel, trackWedding } from '../../lib/track-funnel';
 import QuantityField from './QuantityField';
@@ -13,6 +14,12 @@ export default function QuoteCartDrawer() {
   const [error, setError] = useState('');
   const [sending, setSending] = useState(false);
   const [contact, setContact] = useState({ name: '', email: '', phone: '', company: '', notes: '' });
+  const [sentUk, setSentUk] = useState(false);
+  const ukDelivery = isUkDeliveryQuote(items);
+  const priced = items.filter((item) => item.lineTotal != null);
+  const gbpPriced = priced.filter((item) => item.currency === 'GBP');
+  const showGbpTotal = gbpPriced.length > 0 && gbpPriced.length === priced.length;
+  const mixedMoney = gbpPriced.length > 0 && gbpPriced.length !== priced.length;
 
   useEffect(() => {
     if (!open) return;
@@ -40,6 +47,7 @@ export default function QuoteCartDrawer() {
     setError('');
     try {
       const message = formatQuoteMessage(items, contact.notes);
+      const sendingUk = isUkDeliveryQuote(items);
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -49,8 +57,9 @@ export default function QuoteCartDrawer() {
           phone: contact.phone,
           company: contact.company,
           message,
-          productInterest: 'Quote basket',
-          source: 'Quote cart',
+          productInterest: sendingUk ? 'UK Delivery' : 'Quote basket',
+          source: sendingUk ? 'UK Delivery quote' : 'Quote cart',
+          subject: sendingUk ? 'UK Delivery quote' : undefined,
           quoteItems: items.map((item) => ({
             name: item.name,
             code: item.productId,
@@ -60,7 +69,7 @@ export default function QuoteCartDrawer() {
             unitPrice: item.unitPrice,
             lineTotal: item.lineTotal,
           })),
-          quoteSubtotal: subtotal,
+          quoteSubtotal: items.some((item) => item.lineTotal != null) ? subtotal : null,
           quoteNotes: contact.notes,
         }),
       });
@@ -69,6 +78,7 @@ export default function QuoteCartDrawer() {
       trackFunnel('quote_cart', 'success');
       trackFunnel('quote_builder', 'success');
       if (weddingMeta) trackWedding('success', weddingMeta);
+      setSentUk(sendingUk);
       clear();
       setStep('success');
     } catch (err) {
@@ -103,7 +113,9 @@ export default function QuoteCartDrawer() {
               We will get back to you within 2 hours.
             </p>
             <p className="mt-2 max-w-xs text-sm text-stone-500">
-              Check your email — we will send pricing and a proof if you need one.
+              {sentUk
+                ? 'This quote was emailed as UK Delivery. Prices are in GBP, and UK postage is written in the message.'
+                : 'Check your email — we will send pricing and a proof if you need one.'}
             </p>
             <button
               type="button"
@@ -116,6 +128,11 @@ export default function QuoteCartDrawer() {
         ) : step === 'details' ? (
           <form onSubmit={submit} className="flex min-h-0 flex-1 flex-col">
             <div className="flex-1 space-y-3 overflow-y-auto px-5 py-5">
+              {ukDelivery && (
+                <p className="rounded-xl border border-blue-200 bg-blue-50 px-3 py-2 text-sm text-blue-950">
+                  UK Delivery. Prices are in GBP. The email subject and the message both say UK Delivery, and UK postage is listed there.
+                </p>
+              )}
               <p className="text-center text-sm text-stone-500">
                 We reply to quote requests within <span className="font-semibold text-stone-800">2 hours</span>.
               </p>
@@ -173,8 +190,9 @@ export default function QuoteCartDrawer() {
                         className="w-16"
                       />
                     </label>
-                    <p className="text-sm font-semibold text-stone-900">
-                      {item.lineTotal != null ? `€${Number(item.lineTotal).toFixed(2)}` : 'On request'}
+                    <p className="text-right text-sm font-semibold text-stone-900">
+                      {item.lineTotal != null ? `${item.currency === 'GBP' ? '£' : '€'}${Number(item.lineTotal).toFixed(2)}` : 'On request'}
+                      {item.currency === 'GBP' && <span className="mt-0.5 block text-[10px] font-semibold uppercase tracking-wide text-blue-700">UK Delivery</span>}
                     </p>
                   </div>
                 </div>
@@ -190,11 +208,23 @@ export default function QuoteCartDrawer() {
             </div>
 
             <div className="space-y-3 border-t border-stone-200 bg-stone-50 px-5 py-4">
-              {items.length > 0 && (
+              {priced.length > 0 && !mixedMoney && (
                 <div className="flex justify-between text-sm">
-                  <span className="text-stone-500">Indicative total</span>
-                  <span className="font-bold text-stone-900">€{subtotal.toFixed(2)}</span>
+                  <span className="text-stone-500">
+                    {showGbpTotal ? 'Indicative total, GBP, ex VAT' : items.every((item) => item.lineTotal != null) ? 'Indicative total' : 'Priced lines'}
+                  </span>
+                  <span className="font-bold text-stone-900">
+                    {showGbpTotal
+                      ? `£${gbpPriced.reduce((sum, item) => sum + Number(item.lineTotal), 0).toFixed(2)}`
+                      : `€${subtotal.toFixed(2)}`}
+                  </span>
                 </div>
+              )}
+              {ukDelivery && (
+                <p className="text-center text-xs font-semibold text-blue-800">UK delivery is extra and is written on the quote email.</p>
+              )}
+              {items.some((item) => item.lineTotal == null) && (
+                <p className="text-center text-xs text-stone-500">Lines marked on request are priced when we reply.</p>
               )}
               <button
                 type="button"

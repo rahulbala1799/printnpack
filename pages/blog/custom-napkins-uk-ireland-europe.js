@@ -247,6 +247,8 @@ export default function CustomNapkinsUkIrelandEurope() {
             <p className="text-gray-600 leading-relaxed">
               PrintNPack prints them in Ireland and delivers across the island, into the UK, and to EU addresses
               on request. If you already know the spec you need, start with{' '}
+              <Link href="/custom-printed-napkins-uk" className="text-amber-600 hover:underline">UK napkin prices in GBP</Link>
+              {', '}
               <Link href="/custom-printed-napkins" className="text-amber-600 hover:underline">printed napkins</Link>
               {' '}or{' '}
               <Link href="/custom-printed-napkins" className="text-amber-600 hover:underline">premium linen-feel napkins</Link>.

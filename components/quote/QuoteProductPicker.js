@@ -1,4 +1,5 @@
 import React from 'react';
+import { gbpLabel, isUkNapkinPath } from '../../data/napkin-uk';
 import { cn } from '../../lib/cn';
 import QuoteProductImage from './QuoteProductImage';
 
@@ -38,7 +39,7 @@ export default function QuoteProductPicker({ items, selectedId, inQuote, onSelec
                     </div>
                     <p className="mt-0.5 text-[11px] text-stone-400">
                       {item.group}
-                      {item.price ? ` · ${item.price}` : ''}
+                      {item.price ? ` · ${typeof window !== 'undefined' && isUkNapkinPath(window.location.pathname) ? gbpLabel(item.price) : item.price}` : ''}
                     </p>
                   </div>
                 </div>

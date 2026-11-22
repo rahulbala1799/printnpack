@@ -229,6 +229,7 @@ const RELATED_LINKS = [
   { href: '/custom-printed-napkins', label: 'Custom Printed Napkins', desc: 'Logo napkins from 25, in linen-feel airlaid, from €0.24.' },
   { href: '/pocket-napkins-ireland', label: 'Pocket Napkins', desc: 'Cutlery pocket napkins. 500 are €286 ex VAT, 10% above cocktail napkins.' },
   { href: '/banners-ireland', label: 'Banners Ireland', desc: 'Vinyl banners, roll-ups and extra-wide stands.' },
+  { href: '/signboards-shop-signs-ireland', label: 'Signboards and Shop Signs', desc: 'Fascia boards, projecting signs and lightboxes. Size quote, no price on the page.' },
   { href: '/custom-printed-flags-ireland', label: 'Custom Printed Flags', desc: 'Full-colour flags for clubs & events, from 1 flag.' },
   { href: '/custom-table-covers-ireland', label: 'Custom Table Covers', desc: 'Printed exhibition throws, every county, up to 1.5 m × 6 m.' },
   { href: '/plain-packaging', label: 'Plain Packaging', desc: 'Stock cups, boxes, bags and gloves with volume pricing.' },

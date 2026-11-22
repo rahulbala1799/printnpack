@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { isUkNapkinPath, napkinQuoteMarketOptions } from '../../../data/napkin-uk';
 import { buildCatalogQuoteLine, getModuleFields, quoteOptionError } from '../../../data/quote-modules';
 import { cn } from '../../../lib/cn';
 import QuantityField from '../QuantityField';
@@ -19,7 +20,7 @@ export default function GenericQuoteModule({ catalogItem, existing, onSave }) {
         if (next.width == null) next.width = '';
         if (next.length == null) next.length = '';
       }
-      if (field.type === 'text' && next[field.key] == null) next[field.key] = '';
+      if ((field.type === 'text' || field.type === 'textarea') && next[field.key] == null) next[field.key] = '';
     });
     return next;
   });
@@ -42,7 +43,12 @@ export default function GenericQuoteModule({ catalogItem, existing, onSave }) {
       setError(message);
       return;
     }
-    onSave(buildCatalogQuoteLine(catalogItem, values));
+    let next = values;
+    if (typeof window !== 'undefined' && isUkNapkinPath(window.location.pathname)) {
+      const extra = napkinQuoteMarketOptions(catalogItem.moduleId);
+      if (extra) next = { ...extra, ...values, market: 'uk', href: window.location.pathname };
+    }
+    onSave(buildCatalogQuoteLine(catalogItem, next));
   };
 
   return (
@@ -111,7 +117,7 @@ export default function GenericQuoteModule({ catalogItem, existing, onSave }) {
                 </label>
                 <span className="mb-2 text-stone-400">×</span>
                 <label className="flex flex-col items-center gap-1">
-                  <span className="text-[11px] font-medium text-stone-500">Length</span>
+                  <span className="text-[11px] font-medium text-stone-500">{field.crossLabel || 'Length'}</span>
                   <input
                     type="text"
                     inputMode="decimal"
@@ -122,6 +128,20 @@ export default function GenericQuoteModule({ catalogItem, existing, onSave }) {
                   />
                 </label>
               </div>
+            </QuoteOptionField>
+          );
+        }
+
+        if (field.type === 'textarea') {
+          return (
+            <QuoteOptionField key={field.key} label={field.label}>
+              {field.hint && <p className="mb-2 max-w-sm text-xs text-stone-500">{field.hint}</p>}
+              <textarea
+                value={values[field.key] || ''}
+                onChange={(e) => setField(field.key, e.target.value)}
+                rows={3}
+                className="w-full max-w-sm rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 shadow-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+              />
             </QuoteOptionField>
           );
         }

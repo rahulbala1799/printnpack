@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { buildCatalogQuoteLine, getQuoteCatalogItem } from '../../data/quote-modules';
+import { formatNapkinMoney } from '../../data/napkin-uk';
 import {
   POCKET_NAPKIN_DESIGNS,
   POCKET_NAPKIN_MIN,
@@ -16,6 +17,7 @@ import { useQuoteCart } from '../../lib/quote-cart-context';
 export default function PocketNapkinQuote({
   imageIndex: imageIndexProp,
   onImageIndexChange,
+  market = 'ie',
 }) {
   const { addItem, openBuilder } = useQuoteCart();
   const [qty, setQty] = useState(500);
@@ -30,6 +32,7 @@ export default function PocketNapkinQuote({
   const quantity = pocketQuantity(qty);
   const lineTotal = getPocketNapkinLineTotal(quantity);
   const unitPrice = getPocketNapkinUnitPrice(quantity);
+  const money = (value) => (market === 'uk' ? formatNapkinMoney(value, 'uk') : formatPocketEuro(value));
 
   const addToQuote = () => {
     const catalogItem = getQuoteCatalogItem(POCKET_NAPKIN_PRODUCT_ID);
@@ -39,6 +42,7 @@ export default function PocketNapkinQuote({
       design: image.name,
       image: image.web,
       print: 'Full colour',
+      ...(market === 'uk' ? { market: 'uk', href: '/pocket-napkins-uk' } : {}),
     }));
     setAdded(true);
   };
@@ -46,9 +50,10 @@ export default function PocketNapkinQuote({
   return (
     <div id="quote-builder" className="scroll-mt-24 rounded-3xl border border-slate-200 bg-slate-950 p-5 text-white sm:p-8">
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#d9c398]">Your pocket napkin price</p>
-      <p className="mt-2 text-3xl font-semibold">{formatPocketEuro(lineTotal)} <span className="text-base font-normal text-slate-300">ex VAT</span></p>
+      <p className="mt-2 text-3xl font-semibold">{money(lineTotal)} <span className="text-base font-normal text-slate-300">ex VAT{market === 'uk' ? ' · GBP' : ''}</span></p>
       <p className="mt-1 text-sm text-slate-300">
-        {quantity.toLocaleString('en-IE')} pocket napkins · {formatPocketEuro(unitPrice)} each · {image.name}
+        {quantity.toLocaleString('en-IE')} pocket napkins · {money(unitPrice)} each · {image.name}
+        {market === 'uk' ? ' · UK delivery extra' : ''}
       </p>
       <div className="mt-5 flex flex-wrap gap-2">
         {POCKET_NAPKIN_QTY.map((value) => (
@@ -101,7 +106,12 @@ export default function PocketNapkinQuote({
           Open the quote builder
         </button>
       </div>
-      {added && <p className="mt-3 text-sm text-slate-300">Added — {formatPocketEuro(lineTotal)} ex VAT for {quantity.toLocaleString('en-IE')} pocket napkins.</p>}
+      {added && (
+        <p className="mt-3 text-sm text-slate-300">
+          Added — {money(lineTotal)} ex VAT for {quantity.toLocaleString('en-IE')} pocket napkins.
+          {market === 'uk' ? ' The email is marked UK Delivery.' : ''}
+        </p>
+      )}
     </div>
   );
 }

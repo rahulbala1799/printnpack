@@ -18,6 +18,7 @@ export const COCKTAIL_NAPKIN_PRODUCT = {
   id: 'cocktail-napkins-ireland',
   moduleId: 'cocktail-napkins',
   path: '/cocktail-napkins-ireland',
+  ukPath: '/cocktail-napkins-uk',
   name: 'Cocktail Napkins',
   h1: 'Personalised cocktail napkins',
   tagline: 'White napkins for weddings, restaurants and bars. 10 × 10 cm closed.',

@@ -3,6 +3,7 @@ import { Dialog } from '../ui/dialog';
 import { QUOTE_CATALOG, getQuoteCategories } from '../../data/quote-modules';
 import { useQuoteCart } from '../../lib/quote-cart-context';
 import { isWeddingRef, trackFunnel, trackWedding } from '../../lib/track-funnel';
+import { UK_DELIVERY_EMAIL_BLOCK, isUkNapkinPath } from '../../data/napkin-uk';
 import { SITE_PHONE_DISPLAY, SITE_PHONE_TEL, SITE_WHATSAPP_URL } from '../../lib/site';
 
 const OTHER = '__other';
@@ -76,6 +77,7 @@ export default function QuoteEnquiryModal() {
     if (!productLabel) return setError('Choose a product or type what you need.');
     if (!form.message.trim()) return setError('Please tell us what you want.');
 
+    const ukDelivery = isUkNapkinPath(window.location.pathname);
     setStatus('sending');
     trackFunnel('quote_enquiry', 'send', enquiryMeta);
     if (onWedding) trackWedding('send', enquiryMeta);
@@ -86,10 +88,10 @@ export default function QuoteEnquiryModal() {
         body: JSON.stringify({
           name: form.name.trim(),
           email: form.email.trim(),
-          message: form.message.trim(),
-          productInterest: productLabel,
-          source: 'Quote enquiry',
-          subject: `Quick enquiry - ${productLabel}`,
+          message: ukDelivery ? `${UK_DELIVERY_EMAIL_BLOCK}\n\nCustomer message:\n${form.message.trim()}` : form.message.trim(),
+          productInterest: ukDelivery ? `UK Delivery — ${productLabel}` : productLabel,
+          source: ukDelivery ? 'UK Delivery quote' : 'Quote enquiry',
+          subject: ukDelivery ? `UK Delivery quote - ${productLabel}` : `Quick enquiry - ${productLabel}`,
         }),
       });
       const data = await response.json().catch(() => ({}));

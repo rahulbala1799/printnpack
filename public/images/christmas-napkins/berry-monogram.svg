@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="White Christmas napkin with a berry monogram">
+  <rect width="800" height="800" fill="#f3efe6"/>
+  <rect x="118" y="132" width="564" height="548" rx="18" fill="#000" opacity="0.08"/>
+  <rect x="108" y="118" width="564" height="548" rx="16" fill="#fffdf8" stroke="#e6e0d4"/>
+  <path d="M108 250h564M108 520h564" stroke="#efeae0" stroke-width="2"/>
+  <g transform="translate(400 400)">
+    <circle r="108" fill="none" stroke="#1c3a2e" stroke-width="3"/>
+    <text text-anchor="middle" y="28" fill="#1c3a2e" font-family="Georgia, serif" font-size="92">A</text>
+    <g fill="#1f6b45">
+      <ellipse cx="-70" cy="-86" rx="26" ry="12" transform="rotate(-30)"/>
+      <ellipse cx="-96" cy="-58" rx="22" ry="10" transform="rotate(20)"/>
+    </g>
+    <g fill="#b42318">
+      <circle cx="-78" cy="-48" r="8"/>
+      <circle cx="-58" cy="-64" r="7"/>
+      <circle cx="-90" cy="-72" r="6"/>
+    </g>
+  </g>
+</svg>

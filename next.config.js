@@ -266,6 +266,16 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/products/printed-napkins-uk',
+        destination: '/custom-printed-napkins-uk',
+        permanent: true,
+      },
+      {
+        source: '/products/cocktail-napkins-uk',
+        destination: '/cocktail-napkins-uk',
+        permanent: true,
+      },
+      {
         source: '/products/premium-linen-feel-napkins',
         destination: '/custom-printed-napkins',
         permanent: true,

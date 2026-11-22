@@ -29,6 +29,14 @@ const categories = [
     productCount: 8,
   },
   {
+    name: 'Signboards and Shop Signs',
+    description: 'Fascia, projecting signs, lightboxes',
+    image: '/ifa/product/foamex/sign-boards-1000x1000.webp',
+    alt: 'Printed signboard for a shop front',
+    href: '/signboards-shop-signs-ireland',
+    productCount: 7,
+  },
+  {
     name: 'Banners, Stands and Frames',
     description: 'Vinyl, roll-ups, fabric stands',
     image: '/images/hero/month/fabric-banner.webp',
