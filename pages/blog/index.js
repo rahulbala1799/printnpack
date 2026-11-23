@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'coffee-cup-sleeves-carriers-ireland-buying-guide',
+    title:
+      'Coffee Cup Sleeves & Carriers Ireland: Greenspirit Hot Cup Extras Buying Guide',
+    excerpt:
+      'How to buy plain Greenspirit coffee cup sleeves and pulp carrier trays in Ireland — 8/9oz and 12/16/20oz sleeves from €32.47 ex VAT, 2-cup and 4-cup carriers, vs double-wall cups, with nationwide delivery from Ashbourne for cafés and takeaways.',
+    date: '2026-11-23',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/100315.webp',
+    imageAlt:
+      'Coffee cup carriers Ireland — 2-cup Greenspirit pulp tray wholesale for Dublin cafés',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'wedding-boards-ireland-sizes-thickness-buying-guide',
     title:
       'Wedding Boards Ireland: Foamex Sizes, Thickness & Laminate Buying Guide',
