@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'wedding-order-thank-you-cards-ireland-sizes-buying-guide',
+    title:
+      'Wedding Order of the Day & Thank-you Cards Ireland: A5, A6 & DL Sizes Buying Guide',
+    excerpt:
+      'How to buy printed wedding order of the day and thank-you cards in Ireland — A5, A6 and DL on 350 gsm, full colour both sides, MOQ from 25, with nationwide delivery from Ashbourne for Irish couples and planners.',
+    date: '2026-11-24',
+    readTime: '8 min read',
+    image: '/images/wedding/wedding-order-of-day-sage-table-ireland.jpg',
+    imageAlt:
+      'Wedding order of the day Ireland — sage programme card for Dublin reception tables',
+    category: 'Wedding Guide',
+  },
+  {
     slug: 'coffee-cup-sleeves-carriers-ireland-buying-guide',
     title:
       'Coffee Cup Sleeves & Carriers Ireland: Greenspirit Hot Cup Extras Buying Guide',
