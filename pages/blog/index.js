@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'compostable-greaseproof-sheets-ireland-sizes-buying-guide',
+    title:
+      'Compostable Greaseproof Sheets Ireland: 300×450 & 350×450 Sizes Wholesale Buying Guide',
+    excerpt:
+      'How to buy plain compostable greaseproof sheets in Ireland — 300×450mm and 350×450mm Greenspirit, plain and Food to go lines, 960 per case from €25.74 ex VAT, vs custom printed sheets, with nationwide delivery from Ashbourne for takeaways and chippers.',
+    date: '2026-11-25',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/1081426.webp',
+    imageAlt:
+      'Compostable greaseproof sheets Ireland — 350×450mm Food to go wholesale for Dublin takeaways',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'wedding-order-thank-you-cards-ireland-sizes-buying-guide',
     title:
       'Wedding Order of the Day & Thank-you Cards Ireland: A5, A6 & DL Sizes Buying Guide',
