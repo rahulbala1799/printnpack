@@ -189,6 +189,7 @@ const staticPages = [
   { path: '/services/posters',  priority: '0.8', changefreq: 'monthly' },
   { path: '/services/vinyls',   priority: '0.8', changefreq: 'monthly' },
   { path: '/blog',              priority: '0.8', changefreq: 'weekly'  },
+  { path: '/blog/compostable-greaseproof-sheets-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/wedding-order-thank-you-cards-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/coffee-cup-sleeves-carriers-ireland-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/wedding-boards-ireland-sizes-thickness-buying-guide', priority: '0.88', changefreq: 'monthly' },
