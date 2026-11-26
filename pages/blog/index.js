@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'wedding-napkins-ireland-sizes-buying-guide',
+    title:
+      'Wedding Napkins Ireland: 20×20 & 10×20 Airlaid Sizes Buying Guide',
+    excerpt:
+      'How to buy personalised wedding napkins in Ireland — white airlaid 20 × 20 cm and 10 × 20 cm, full colour from 50, vs kraft and cocktail sizes, with nationwide delivery from Ashbourne for Irish couples and planners.',
+    date: '2026-11-26',
+    readTime: '8 min read',
+    image: '/images/wedding/wedding-napkins-20x20-airlaid-bar-ireland.jpg',
+    imageAlt:
+      'Wedding napkins Ireland — white airlaid 20 × 20 cm wreath monogram for Dublin drinks receptions',
+    category: 'Wedding Guide',
+  },
+  {
     slug: 'compostable-greaseproof-sheets-ireland-sizes-buying-guide',
     title:
       'Compostable Greaseproof Sheets Ireland: 300×450 & 350×450 Sizes Wholesale Buying Guide',
