@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'food-freezer-bags-ireland-sizes-buying-guide',
+    title:
+      'Food & Freezer Bags Ireland: 1L vs 3.8L Hero Double Seal Wholesale Buying Guide',
+    excerpt:
+      'How to buy plain food and freezer bags in Ireland — 1L and 3.8L Hero Double Seal packs from €21.59 ex VAT, heat-seal bags 150×200mm, vs cling film and foil trays, with nationwide delivery from Ashbourne for cafés, caterers and meal-prep kitchens.',
+    date: '2026-11-27',
+    readTime: '8 min read',
+    image: '/images/plain-packaging/220024.webp',
+    imageAlt:
+      'Food and freezer bags Ireland — 1L Hero Double Seal wholesale for Dublin kitchens',
+    category: 'Wholesale Guide',
+  },
+  {
     slug: 'wedding-napkins-ireland-sizes-buying-guide',
     title:
       'Wedding Napkins Ireland: 20×20 & 10×20 Airlaid Sizes Buying Guide',
