@@ -6,6 +6,19 @@ import { SITE_URL as siteUrl } from '../../lib/site';
 
 const posts = [
   {
+    slug: 'wedding-coasters-ireland-9x9-moq-buying-guide',
+    title:
+      'Wedding Coasters Ireland: Round 9×9 cm, 8 Ply & MOQ Buying Guide',
+    excerpt:
+      'How to buy personalised wedding coasters in Ireland — round 9 × 9 cm on 8 ply board, full colour one or both sides, MOQ from 50, names date or monogram vs hospitality logo mats, with nationwide delivery from Ashbourne for Irish couples and planners.',
+    date: '2026-11-28',
+    readTime: '8 min read',
+    image: '/images/wedding/wedding-coaster-navy-oconnors-ireland.jpg',
+    imageAlt:
+      'Wedding coasters Ireland — round navy monogram 9 × 9 cm coaster for Dublin drinks receptions',
+    category: 'Wedding Guide',
+  },
+  {
     slug: 'food-freezer-bags-ireland-sizes-buying-guide',
     title:
       'Food & Freezer Bags Ireland: 1L vs 3.8L Hero Double Seal Wholesale Buying Guide',

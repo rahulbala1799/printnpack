@@ -198,6 +198,7 @@ const staticPages = [
   { path: '/services/posters',  priority: '0.8', changefreq: 'monthly' },
   { path: '/services/vinyls',   priority: '0.8', changefreq: 'monthly' },
   { path: '/blog',              priority: '0.8', changefreq: 'weekly'  },
+  { path: '/blog/wedding-coasters-ireland-9x9-moq-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/food-freezer-bags-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/wedding-napkins-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
   { path: '/blog/compostable-greaseproof-sheets-ireland-sizes-buying-guide', priority: '0.88', changefreq: 'monthly' },
